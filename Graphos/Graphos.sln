@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos", "Graphos\Graphos.vcxproj", "{2741E3C6-A331-47FB-B757-9747231419B8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project-192", "Project-192\Project-192.vcxproj", "{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2741E3C6-A331-47FB-B757-9747231419B8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2741E3C6-A331-47FB-B757-9747231419B8}.Debug|Win32.Build.0 = Debug|Win32
+		{2741E3C6-A331-47FB-B757-9747231419B8}.Release|Win32.ActiveCfg = Release|Win32
+		{2741E3C6-A331-47FB-B757-9747231419B8}.Release|Win32.Build.0 = Release|Win32
+		{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1}.Debug|Win32.Build.0 = Debug|Win32
+		{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1}.Release|Win32.ActiveCfg = Release|Win32
+		{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

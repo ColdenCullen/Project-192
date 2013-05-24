@@ -1,0 +1,64 @@
+{
+	"Name": "Ball",
+	
+	"Shader": "texture",
+	
+	"Texture": {
+		"Name": "Poop"
+	},
+	
+	"Mesh": {
+		"Name": "Sphere"
+	},
+	
+	"Transform": {
+		"Position": {
+			"x": -0.5,
+			"y": 0.0,
+			"z": 0.0
+		},
+		"Rotation": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"Scale": {
+			"x": 0.035,
+			"y": 0.035,
+			"z": 0.035
+		}
+	},
+
+	"Rigidbody": {
+		"LinearVelocity": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"AngularVelocity": {
+			"x": 0,
+			"y": 0,
+			"z": 0
+		},
+		"LinearDrag": 0.1,
+		"AngularDrag": 0.5,
+		"Constraints": {
+			"Position": {
+				"x": false,
+				"y": false,
+				"z": false
+			},
+			"Rotation": {
+				"x": false,
+				"y": false,
+				"z": false
+			}
+		}
+	},
+
+	"Collider": {
+		"Type": "Sphere",
+		"Radius": 0.125,
+		"Bounce": 1.0
+	}
+}
