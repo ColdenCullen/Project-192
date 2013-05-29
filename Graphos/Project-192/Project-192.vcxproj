@@ -43,7 +43,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)Project-192</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Graphos</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -63,6 +63,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Game.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Graphos\Graphos.vcxproj">
+      <Project>{2741e3c6-a331-47fb-b757-9747231419b8}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

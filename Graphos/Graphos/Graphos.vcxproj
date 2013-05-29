@@ -67,6 +67,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GraphosGame.cpp" />
+    <ClCompile Include="Time.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GraphosGame.h" />
+    <ClInclude Include="Ingredient.h" />
+    <ClInclude Include="Time.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
