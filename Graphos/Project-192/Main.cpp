@@ -1,14 +1,7 @@
-#include "Time.h"
-
-#include <chrono>
-#include <thread>
-#include <iostream>
-
-using namespace std;
-using namespace std::chrono;
-using namespace Graphos::Core;
+#include "Game.h"
 
 int main()
 {
-
+	Project192::Game game;
+	game.Run();
 }

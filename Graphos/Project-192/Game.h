@@ -1,6 +1,6 @@
 #ifndef __PROJECT_192
 #define __PROJECT_192
-/*
+
 #include "GraphosGame.h"
 
 namespace Project192
@@ -17,5 +17,5 @@ namespace Project192
 		virtual void Shutdown( void ) override;
 	};
 }
-*/
+
 #endif//__PROJECT_192
