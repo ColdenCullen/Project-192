@@ -1,7 +1,6 @@
 #include "Config.h"
 
-#define _USE_READ_FILE
-#include <Helpers.h>
+#include "File.h"
 
 #include <string>
 
@@ -12,7 +11,7 @@ bool Config::LoadSettings( void )
 {
 	Json::Reader reader;
 
-	if( !reader.parse( Helpers::ReadFile( "Resources/Config/Config.json" ), config ) )
+	if( !reader.parse( File::ReadFile( "Resources/Config/Config.json" ), config ) )
 		return false;
 
 	return true;

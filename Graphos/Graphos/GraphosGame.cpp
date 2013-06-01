@@ -1,13 +1,10 @@
-/*
 #include "GraphosGame.h"
-
-#define _USE_READ_FILE
-#define _USE_SCAN_DIR
-#include "Helpers.h"
 
 #include <vector>
 #include <string>
 #include <json/json.h>
+
+#include "File.h"
 
 #include "ScriptController.h"
 #include "RigidBody.h"
@@ -117,13 +114,14 @@ void GraphosGame::Run( void )
 
 void GraphosGame::DeleteObjects( void )
 {
-	if( objects != nullptr )
+	GameObject::GOMap& objects = GameObject::GetObjectsList();
+
+	if( objects.size() > 0 )
 	{
-		for( auto object = objects->begin(); object != objects->end(); ++object )
+		for( auto object = begin( objects ); object != end( objects ); ++object )
 			object->second.Shutdown();
 
 		GameObject::ClearObjects();
-		objects = nullptr;
 
 		objectsLoaded = false;
 	}
@@ -207,7 +205,7 @@ void GraphosGame::Stop( void )
 
 void GraphosGame::LoadObjects( void )
 {
-	unordered_map<string, string> files = Helpers::ScanDir( OBJECTS_PATH );
+	File::FileList fileList = File::ScanDir( OBJECTS_PATH );
 	Json::Reader reader;
 	Json::Value root;
 
@@ -219,9 +217,9 @@ void GraphosGame::LoadObjects( void )
 	// Map for parents, to be added after all objects are loaded
 	unordered_map<unsigned int, string> parentMap;
 
-	for( auto file = begin( files ); file != end( files ); ++file )
+	for( int fileIndex = 0; fileIndex < fileList.size(); ++fileIndex )
 	{
-		if( reader.parse( Helpers::ReadFile( string( OBJECTS_PATH ).append( file->second ).append( file->first ) ), root ) )
+		if( reader.parse( fileList[ fileIndex ].GetContents(), root ) )
 		{
 			if( ( current = root.get( "Name", root ) ) != root )
 			{
@@ -391,11 +389,10 @@ void GraphosGame::LoadObjects( void )
 		}
 	}
 
-	objects = &GameObject::GetObjectsList();
+	//objects = &GameObject::GetObjectsList();
 
 	for( auto parentPair = begin( parentMap ); parentPair != end( parentMap ); ++parentPair )
 		GameObject::GetGameObject( parentPair->first )->transform.parent = &GameObject::GetGameObject( parentPair->second )->transform;
 
 	objectsLoaded = true;
 }
-*/

@@ -3,10 +3,11 @@
 
 namespace Graphos
 {
-	class GameObject;
-
 	namespace Core
 	{
+		// Forward declaration
+		class GameObject;
+
 		class Ingredient
 		{
 		public:

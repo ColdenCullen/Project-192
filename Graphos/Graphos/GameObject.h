@@ -1,6 +1,6 @@
 #ifndef __GAME_OBJECT
 #define __GAME_OBJECT
-/*
+
 // Includes
 #include <string>
 #include <unordered_map>
@@ -23,11 +23,13 @@ namespace Graphos
 		{
 #pragma region Static Stuff
 		public:
+			// Type for use with object lists
+			typedef std::unordered_map<unsigned int, GameObject> GOMap;
+
 			// Access objects
 			static GameObject*	GetGameObject( string name );
 			static GameObject*	GetGameObject( unsigned int id );
-			static unordered_map<unsigned int, GameObject>&
-								GetObjectsList( void )
+			static GOMap&		GetObjectsList( void )
 			{
 				return objectList;
 			}
@@ -44,8 +46,7 @@ namespace Graphos
 			}
 
 		private:
-			static unordered_map<unsigned int, GameObject>
-								objectList;
+			static GOMap		objectList;
 			static unordered_map<string, unsigned int>
 								nameMap;
 
@@ -68,6 +69,10 @@ namespace Graphos
 			void				Draw( void );
 			virtual void		OnCollision( GameObject* other ) { }
 
+			// Getters and setters
+			Shader&				GetShader( void ) const { return *shader; }
+			void				SetShader( string newName ) { shader = &( ShaderController::Get().GetShader( newName ) ); }
+
 			// Add ingredient of type T
 			template<class T>
 			typename enable_if<is_base_of<Ingredient, T>::value, void>::type
@@ -89,10 +94,6 @@ namespace Graphos
 					return nullptr;
 			}
 
-			// Getters and setters
-			Shader&				GetShader( void ) const { return *shader; }
-			void				SetShader( string newName ) { shader = &( ShaderController::Get().GetShader( newName ) ); }
-
 		private:
 			unordered_map<size_t, Ingredient*>
 								recipe;
@@ -102,5 +103,5 @@ namespace Graphos
 		};
 	}
 }
-*/
+
 #endif//__GAME_OBJECT

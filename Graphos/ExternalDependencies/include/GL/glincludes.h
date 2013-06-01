@@ -12,7 +12,7 @@
 #elif defined( __APPLE__ )
  //#include <GL/glxew.h>
  #include <OpenGL/GL.h>
-//#include <AppKit/NSOpenGL.h>
+ //#include <AppKit/NSOpenGL.h>
 #endif//_WIN32
 
 #endif//__GLINCLUDES

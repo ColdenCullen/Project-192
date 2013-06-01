@@ -8,8 +8,6 @@
 
 #include "Vector3.h"
 
-using namespace Graphos::Math;
-
 namespace Graphos
 {
 	namespace Core
@@ -34,16 +32,17 @@ namespace Graphos
 			template<>
 			bool				GetData<bool>( std::string path );
 			template<>
-			string				GetData<string>( std::string path );
+			std::string			GetData<std::string>( std::string path );
 			template<>
 			const char*			GetData<const char*>( std::string path );
 			template<>
-			Vector3				GetData<Vector3>( std::string path );
+			Graphos::Math::Vector3
+			GetData<Graphos::Math::Vector3>( std::string path );
 #endif
 			#pragma endregion
 
 			template<typename T>
-			void				SetData( string path, T newValue )
+			void				SetData( std::string path, T newValue )
 			{
 				GetValueAtPath( path ) = newValue;
 
@@ -63,7 +62,7 @@ namespace Graphos
 		private:
 								Config( void ) { }
 								Config( const Config& );
-			void				operator=( const Config& );
+			Config&				operator=( const Config& );
 
 			Json::Value&		GetValueAtPath( std::string path );
 
@@ -74,7 +73,7 @@ namespace Graphos
 		#pragma region GetData
 #if defined( _WIN32 )
 		template<>
-		int Config::GetData<int>( string path )
+		int Config::GetData<int>( std::string path )
 		{
 			const Json::Value& val = GetValueAtPath( path );
 
@@ -88,7 +87,7 @@ namespace Graphos
 			}
 		}
 		template<>
-		unsigned int Config::GetData<unsigned int>( string path )
+		unsigned int Config::GetData<unsigned int>( std::string path )
 		{
 			const Json::Value& val = GetValueAtPath( path );
 
@@ -102,7 +101,7 @@ namespace Graphos
 			}
 		}
 		template<>
-		float Config::GetData<float>( string path )
+		float Config::GetData<float>( std::string path )
 		{
 			const Json::Value& val = GetValueAtPath( path );
 
@@ -120,7 +119,7 @@ namespace Graphos
 			}
 		}
 		template<>
-		bool Config::GetData<bool>( string path )
+		bool Config::GetData<bool>( std::string path )
 		{
 			const Json::Value& val = GetValueAtPath( path );
 
@@ -134,21 +133,21 @@ namespace Graphos
 			}
 		}
 		template<>
-		string Config::GetData<string>( string path )
+		std::string Config::GetData<std::string>( std::string path )
 		{
 			return GetValueAtPath( path ).asString();
 		}
 		template<>
-		const char* Config::GetData<const char*>( string path )
+		const char* Config::GetData<const char*>( std::string path )
 		{
 			return GetValueAtPath( path ).asCString();
 		}
 		template<>
-		Vector3	Config::GetData<Vector3>( string path )
+		Graphos::Math::Vector3 Config::GetData<Graphos::Math::Vector3>( std::string path )
 		{
 			Json::Value root = GetValueAtPath( path );
 
-			return Vector3(
+			return Graphos::Math::Vector3(
 				static_cast<float>( root.get( "x", root ).asDouble() ),
 				static_cast<float>( root.get( "y", root ).asDouble() ),
 				static_cast<float>( root.get( "z", root ).asDouble() )

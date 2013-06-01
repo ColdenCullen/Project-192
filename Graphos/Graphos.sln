@@ -8,8 +8,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Global Headers", "Global Headers", "{A1222875-32B0-4E87-B227-18D30A093CE7}"
 	ProjectSection(SolutionItems) = preProject
 		ExternalDependencies\include\GL\glincludes.h = ExternalDependencies\include\GL\glincludes.h
-		ExternalDependencies\include\Helpers.h = ExternalDependencies\include\Helpers.h
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{70DF5D62-07FA-4FF8-AE35-25946D6F95F6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphosMath", "GraphosMath\GraphosMath.vcxproj", "{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,8 +44,22 @@ Global
 		{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1}.Release|Win32.ActiveCfg = Release|Win32
 		{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1}.Release|Win32.Build.0 = Release|Win32
+		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Debug|Win32.Build.0 = Debug|Win32
+		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Release|Any CPU.ActiveCfg = Release|Win32
+		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Release|Win32.ActiveCfg = Release|Win32
+		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2741E3C6-A331-47FB-B757-9747231419B8} = {70DF5D62-07FA-4FF8-AE35-25946D6F95F6}
+		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414} = {70DF5D62-07FA-4FF8-AE35-25946D6F95F6}
 	EndGlobalSection
 EndGlobal
