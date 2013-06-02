@@ -34,6 +34,10 @@ namespace Graphos
 			const Matrix4			WorldMatrix( void )	const;
 			const Matrix4			RotationMatrix( void ) const;
 
+			const Vector3&			GetRight( void )	const { return right; }
+			const Vector3&			GetUp( void )		const { return up; }
+			const Vector3&			GetForward( void )	const { return forward; }
+
 		private:
 			Matrix4					matrix;
 
@@ -41,9 +45,15 @@ namespace Graphos
 			Vector3					rotation;
 			Vector3					scale;
 
+			Vector3					right;
+			Vector3					up;
+			Vector3					forward;
+
 			Matrix4					RotateX( const float angle ) const;
 			Matrix4					RotateY( const float angle ) const;
 			Matrix4					RotateZ( const float angle ) const;
+
+			void					UpdateLocalVectors( void );
 		};
 	}
 }

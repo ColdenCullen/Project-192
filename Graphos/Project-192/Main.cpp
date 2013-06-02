@@ -15,7 +15,7 @@ int main()
 
 	system( "pause" );
 
-	/* /
+	/*/
 
 	Project192::Game game;
 	game.Run();

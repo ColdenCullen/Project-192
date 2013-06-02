@@ -21,7 +21,7 @@ namespace Graphos
 			GameObject*	const	Owner( void ) const { return owner; }
 
 		protected:
-			GameObject* owner;
+			GameObject*			owner;
 		};
 	}
 }

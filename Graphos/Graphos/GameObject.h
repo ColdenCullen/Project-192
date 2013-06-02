@@ -12,7 +12,7 @@
 #include "Shader.h"
 
 using namespace std;
-using namespace Graphos::Content;
+using namespace Graphos::Core;
 using namespace Graphos::Graphics;
 
 namespace Graphos

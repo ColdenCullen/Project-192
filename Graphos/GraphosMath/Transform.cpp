@@ -5,7 +5,9 @@
 
 using namespace Graphos::Math;
 
-Transform::Transform( void ) : parent( nullptr ), matrix( Matrix4::Identity ), scale( Vector3( 1.0f, 1.0f, 1.0f ) ) { }
+Transform::Transform( void ) :
+	parent( nullptr ), matrix( Matrix4::Identity ), scale( 1.0f, 1.0f, 1.0f ),
+	right( Vector3::Right ), up( Vector3::Up ), forward( Vector3::Forward ) { }
 
 void Transform::Rotate( Quaternion rotation )
 {
@@ -35,6 +37,8 @@ void Transform::Rotate( const float x, const float y, const float z, const float
 	rotation.z += z;
 
 	Translate( oldCoord );
+
+	UpdateLocalVectors();
 }
 
 void Transform::Rotate( const float x, const float y, const float z )
@@ -52,6 +56,8 @@ void Transform::Rotate( const float x, const float y, const float z )
 	rotation.z += z;
 
 	Translate( oldCoord );
+
+	UpdateLocalVectors();
 }
 
 void Transform::Rotate( const Vector3& eulerAngles )
@@ -141,4 +147,11 @@ const Matrix4 Transform::RotationMatrix( void ) const
 {
 	Matrix4 x = RotateZ( rotation.z ) * RotateX( rotation.x ) * RotateY( rotation.y );
 	return RotateZ( rotation.z ) * RotateX( rotation.x ) * RotateY( rotation.y );
+}
+
+void Transform::UpdateLocalVectors( void )
+{
+	right = RotationMatrix() * right;
+	up = RotationMatrix() * up;
+	forward = RotationMatrix() * forward;
 }
