@@ -11,6 +11,11 @@ namespace Graphos
 		struct Vector3
 		{
 		public:
+			const static Vector3 Zero;
+			const static Vector3 Right;
+			const static Vector3 Up;
+			const static Vector3 Forward;
+
 			Vector3( const float values[ 3 ] ) : x( values[ 0 ] ), y( values[ 1 ] ), z( values[ 2 ] ) { }
 			Vector3( float x = 0.0f, float y = 0.0f, float z = 0.0f ) : x( x ), y( y ), z( z ) { }
 			Vector3( const Vector3& other ) : x( other.x ), y( other.y ), z( other.z ) { }
@@ -171,7 +176,7 @@ namespace Graphos
 			// Get perpendicular
 			/*inline Vector3 GetPerpendicular( const Vector3& pointTowards ) const
 			{
-				return Cross( pointTowards.Cross( AB ) );
+				return TripleProduct( *this, *this, pointTowards );
 			}*/
 
 			// Output values

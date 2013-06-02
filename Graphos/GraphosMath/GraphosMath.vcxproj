@@ -65,7 +65,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Matrix4.cpp" />
-    <ClCompile Include="Quaternion.cpp" />
+    <ClCompile Include="Statics.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
