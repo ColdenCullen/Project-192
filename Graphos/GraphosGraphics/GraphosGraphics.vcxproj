@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2741E3C6-A331-47FB-B757-9747231419B8}</ProjectGuid>
-    <RootNamespace>Graphos</RootNamespace>
+    <ProjectGuid>{84941C22-A8E5-4882-B260-EF2BE87039FF}</ProjectGuid>
+    <RootNamespace>GraphosGraphics</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -39,19 +39,17 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ExecutablePath>$(SolutionDir)ExternalDependencies\bin;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ExternalDependencies\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;</AdditionalIncludeDirectories>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)Graphos;$(SolutionDir)GraphosMath;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>winmm.lib;ws2_32.lib;v8_snapshot.lib;v8_base.ia32.lib;vld.lib;awesomium.lib;jsoncpp.lib;OpenGL32.lib;glew32.lib;FreeImage.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -60,6 +58,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -68,31 +67,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Config.cpp" />
-    <ClCompile Include="File.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GraphosGame.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Time.cpp" />
+    <None Include="GraphosGraphics.ico" />
+    <None Include="ReadMe.txt" />
+    <None Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Config.h" />
-    <ClInclude Include="File.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GraphosGame.h" />
-    <ClInclude Include="Ingredient.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Time.h" />
+    <ClInclude Include="GraphicsController.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShaderController.h" />
+    <ClInclude Include="WindowController.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GraphosGraphics\GraphosGraphics.vcxproj">
-      <Project>{84941c22-a8e5-4882-b260-ef2be87039ff}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\GraphosMath\GraphosMath.vcxproj">
-      <Project>{a4b68ca7-3701-4ec7-a5eb-fc75f8957414}</Project>
-    </ProjectReference>
+    <ClCompile Include="GraphicsController.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShaderController.cpp" />
+    <ClCompile Include="Win32Controller.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GraphosGraphics.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

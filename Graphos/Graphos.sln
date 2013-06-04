@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{70DF5D
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphosMath", "GraphosMath\GraphosMath.vcxproj", "{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphosGraphics", "GraphosGraphics\GraphosGraphics.vcxproj", "{84941C22-A8E5-4882-B260-EF2BE87039FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,16 @@ Global
 		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Release|Win32.ActiveCfg = Release|Win32
 		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}.Release|Win32.Build.0 = Release|Win32
+		{84941C22-A8E5-4882-B260-EF2BE87039FF}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{84941C22-A8E5-4882-B260-EF2BE87039FF}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{84941C22-A8E5-4882-B260-EF2BE87039FF}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{84941C22-A8E5-4882-B260-EF2BE87039FF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{84941C22-A8E5-4882-B260-EF2BE87039FF}.Debug|Win32.Build.0 = Debug|Win32
+		{84941C22-A8E5-4882-B260-EF2BE87039FF}.Release|Any CPU.ActiveCfg = Release|Win32
+		{84941C22-A8E5-4882-B260-EF2BE87039FF}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{84941C22-A8E5-4882-B260-EF2BE87039FF}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{84941C22-A8E5-4882-B260-EF2BE87039FF}.Release|Win32.ActiveCfg = Release|Win32
+		{84941C22-A8E5-4882-B260-EF2BE87039FF}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,5 +73,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2741E3C6-A331-47FB-B757-9747231419B8} = {70DF5D62-07FA-4FF8-AE35-25946D6F95F6}
 		{A4B68CA7-3701-4EC7-A5EB-FC75F8957414} = {70DF5D62-07FA-4FF8-AE35-25946D6F95F6}
+		{84941C22-A8E5-4882-B260-EF2BE87039FF} = {70DF5D62-07FA-4FF8-AE35-25946D6F95F6}
 	EndGlobalSection
 EndGlobal
