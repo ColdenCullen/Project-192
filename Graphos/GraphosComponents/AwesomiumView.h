@@ -1,0 +1,47 @@
+#ifndef __AWESOMIUM_VIEW
+#define __AWESOMIUM_VIEW
+
+#include <Awesomium\WebView.h>
+#include <Awesomium\BitmapSurface.h>
+
+#include <string>
+
+#include "Component.h"
+
+namespace Awesomium
+{
+	//class WebView;
+	//class BitmapSurface;
+}
+
+namespace Graphos
+{
+	namespace Core
+	{
+		class AwesomiumView : public Component
+		{
+		public:
+								AwesomiumView( void ) : webView( nullptr ), surface( nullptr ), buffer( nullptr ) { }
+								AwesomiumView( std::string url, unsigned int width, unsigned int height ) { Initialize( url, width, height ); }
+								~AwesomiumView( void ) { }
+
+			bool				Initialize( std::string url, unsigned int width, unsigned int height );
+			bool				Update( void );
+			void				Draw( void );
+			void				Shutdown( void );
+
+			unsigned int		textureID;
+
+			friend class		UserInterface;
+
+		//private:
+			Awesomium::WebView*	webView;
+			Awesomium::BitmapSurface*
+								surface;
+
+			unsigned char*		buffer;
+		};
+	}
+}
+
+#endif//__AWESOMIUM_VIEW

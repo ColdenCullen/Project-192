@@ -23,6 +23,7 @@ namespace Graphos
 #pragma region Not Static Stuff
 		public:
 			std::string			location;
+			std::string			localPath;
 			std::string			name;
 
 								File( std::string filePath );

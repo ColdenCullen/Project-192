@@ -23,7 +23,7 @@
 #define OBJECTS_PATH "Resources/Assets/Objects/"
 
 using namespace Graphos::Core;
-using namespace Graphos::Content;
+using namespace Graphos::Physics;
 
 void GraphosGame::Run( void )
 {
@@ -33,6 +33,8 @@ void GraphosGame::Run( void )
 
 	// Initialize values and controllers
 	bool isDone = Start();
+
+	GameObject::GOMap& objects = GameObject::GetObjectsList();
 
 	// Init time
 	Time::Get().Update();
@@ -60,11 +62,11 @@ void GraphosGame::Run( void )
 		isDone = !Update();
 
 		// Update physics
-		Physics::Get().Update();
+		Physics::Physics::Get().Update();
 
 		// Update the UI
 		if( CurrentState == GameState::Menu )
-			ui->Update( Time::Get().DeltaTime() );
+			ui->Update( Time::Get().GetDeltaTime() );
 
 		// Update objects in list
 		if( CurrentState == GameState::Game )
@@ -74,10 +76,10 @@ void GraphosGame::Run( void )
 
 			// Update camera
 			if( camera )
-				camera->Update( Time::Get().DeltaTime() );
+				camera->Update();
 
-			for( auto iterator = objects->begin(); iterator != objects->end(); ++iterator )
-				iterator->second.Update( Time::Get().DeltaTime() );	
+			for( auto iterator = begin( objects ); iterator != end( objects ); ++iterator )
+				iterator->second.Update( Time::Get().GetDeltaTime() );	
 		}
 
 		//////////////////////////////////////////////////////////////////////////
@@ -94,7 +96,7 @@ void GraphosGame::Run( void )
 			if( camera )
 				camera->Draw();
 
-			for( auto iterator = objects->begin(); iterator != objects->end(); ++iterator )
+			for( auto iterator = begin( objects ); iterator != end( objects ); ++iterator )
 				iterator->second.Draw();
 		}
 
@@ -140,14 +142,14 @@ void GraphosGame::Reset( void )
 
 	// Shutdown UI and controllers
 	delete ui;
-	Physics::Get().Shutdown();
+	Physics::Physics::Get().Shutdown();
 	AssetController::Get().Shutdown();
 	ScriptController::Get().Shutdown();
 
 	// Restart
 	ScriptController::Get().Initialize();
 	AssetController::Get().Initialize();
-	Physics::Get().Initialize();
+	Physics::Physics::Get().Initialize();
 	ui = new UserInterface( this );
 	Input::Get().ui = ui;
 
@@ -160,7 +162,6 @@ bool GraphosGame::Start( void )
 {
 	objectsLoaded = false;
 	CurrentState = GameState::Menu;
-	objects = nullptr;
 	camera = nullptr;
 
 	bool isDone = false;
@@ -174,7 +175,7 @@ bool GraphosGame::Start( void )
 	if( !isDone && !AssetController::Get().Initialize() )
 		isDone = true;
 
-	if( !isDone && !Physics::Get().Initialize() )
+	if( !isDone && !Physics::Physics::Get().Initialize() )
 		isDone = true;
 
 	if( !isDone );
@@ -198,7 +199,7 @@ void GraphosGame::Stop( void )
 
 	// Shutdown UI and controllers
 	delete ui;
-	Physics::Get().Shutdown();
+	Physics::Physics::Get().Shutdown();
 	AssetController::Get().Shutdown();
 	ScriptController::Get().Shutdown();
 }
@@ -237,7 +238,7 @@ void GraphosGame::LoadObjects( void )
 				// Set texture
 				if( ( current = root.get( "Texture", root ) ) != root )
 				{
-					newObj->AddIngredient(
+					newObj->AddComponent(
 						AssetController::Get().GetContent<Texture>( current[ "Name" ].asString() )
 					);
 				}
@@ -251,7 +252,7 @@ void GraphosGame::LoadObjects( void )
 				// Set physics Rigid Body object
 				if( ( current = root.get( "Rigidbody", root ) ) != root )
 				{
-					Rigidbody* rb = new Rigidbody( newObj );
+					RigidBody* rb = new RigidBody( newObj );
 
 					// Get rigid body's values
 					Json::Value currentRigidbody = current[ "LinearVelocity" ];
@@ -288,12 +289,12 @@ void GraphosGame::LoadObjects( void )
 						}
 					}
 
-					newObj->AddIngredient( rb );
+					newObj->AddComponent( rb );
 				}
 
 				// Add webview
 				if( ( current = root.get( "AwesomiumView", root ) ) != root && ii == 0 )
-					newObj->AddIngredient(
+					newObj->AddComponent(
 						new AwesomiumView(
 							current[ "url" ].asString(),
 							current[ "width" ].asUInt(),
@@ -303,7 +304,7 @@ void GraphosGame::LoadObjects( void )
 
 				// Add a script
 				if( ( current = root.get( "Script", root ) ) != root )
-					newObj->AddIngredient(
+					newObj->AddComponent(
 						ScriptController::Get().CreateObjectInstance(
 							current[ "Class" ].asString(),
 							id,
@@ -313,7 +314,7 @@ void GraphosGame::LoadObjects( void )
 
 				// Add a mesh
 				if( ( current = root.get( "Mesh", root ) ) != root )
-					newObj->AddIngredient(
+					newObj->AddComponent(
 						AssetController::Get().GetContent<Mesh>( current[ "Name" ].asString() )
 					);
 
@@ -382,8 +383,8 @@ void GraphosGame::LoadObjects( void )
 						col->bounce = currentCol.asDouble();
 					}
 
-					newObj->AddIngredient<Collider>( col );
-					Physics::Get().AddCollider( col );
+					newObj->AddComponent<Collider>( col );
+					Physics::Physics::Get().AddCollider( col );
 				}
 			}
 		}

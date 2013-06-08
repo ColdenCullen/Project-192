@@ -1,4 +1,4 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "Shader.h"
 
 #define MIN(x,y) (x < y ? x : y)

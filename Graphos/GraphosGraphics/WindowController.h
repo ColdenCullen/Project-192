@@ -2,7 +2,6 @@
 #define __WINDOW_CONTROLLER
 
 #include <GL/GLIncludes.h>
-//#include <..\ExternalDependencies\include\GL\glincludes.h>
 
 /*#ifdef _WIN32
  #include "Resource.h"
@@ -80,6 +79,9 @@ namespace Graphos
 			static
 			LRESULT CALLBACK	WndProc( HWND, UINT, WPARAM, LPARAM );
 		};
+#pragma endregion
+
+#pragma region OSXController
 #elif defined( __APPLE__ )
 		class OSXController : public PlatformWindowController
 		{

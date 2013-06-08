@@ -18,8 +18,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -47,12 +47,17 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GraphosComponents;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;$(SolutionDir)GraphosPhysics</AdditionalIncludeDirectories>
+      <BrowseInformation>true</BrowseInformation>
+      <ShowIncludes>true</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>winmm.lib;ws2_32.lib;v8_snapshot.lib;v8_base.ia32.lib;vld.lib;awesomium.lib;jsoncpp.lib;OpenGL32.lib;glew32.lib;FreeImage.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -82,16 +87,22 @@
     <ClInclude Include="File.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GraphosGame.h" />
-    <ClInclude Include="Ingredient.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GraphosComponents\GraphosComponents.vcxproj">
+      <Project>{02e806e5-de0d-4f0a-9b39-415476b4e4fd}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\GraphosGraphics\GraphosGraphics.vcxproj">
-      <Project>{84941c22-a8e5-4882-b260-ef2be87039ff}</Project>
+      <Project>{ed494e84-a159-471a-a205-60160b0824a8}</Project>
     </ProjectReference>
     <ProjectReference Include="..\GraphosMath\GraphosMath.vcxproj">
       <Project>{a4b68ca7-3701-4ec7-a5eb-fc75f8957414}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphosPhysics\GraphosPhysics.vcxproj">
+      <Project>{90871407-0b79-40a7-ba5c-f4fbeddcd570}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

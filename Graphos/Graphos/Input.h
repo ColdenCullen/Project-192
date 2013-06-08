@@ -55,7 +55,7 @@
 namespace Graphos
 {
 	// Forward declarations
-	namespace Content
+	namespace Core
 	{
 		class UserInterface;
 	}
@@ -79,7 +79,7 @@ namespace Graphos
 		class Input
 		{
 		public:
-			Graphos::Content::UserInterface*
+			Graphos::Core::UserInterface*
 								ui;
 
 			static Input& Get( void )

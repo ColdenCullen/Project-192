@@ -1,14 +1,11 @@
-#ifndef _SHADER_CONTROLLER_H_
-#define _SHADER_CONTROLLER_H_
+#ifndef __SHADER_CONTROLLER
+#define __SHADER_CONTROLLER
 
 // Includes
 #include <unordered_map>
 #include <string>
 
-#include "WindowController.h"
 #include "Shader.h"
-
-using namespace std;
 
 namespace Graphos
 {
@@ -18,10 +15,10 @@ namespace Graphos
 		{
 		public:
 			bool				Initialize();
-			Shader&				GetShader( string shaderName );
+			Shader&				GetShader( std::string shaderName );
 
 			template<typename T>
-			void				SetAllShadersUniform( string uniformName, T value )
+			void				SetAllShadersUniform( std::string uniformName, T value )
 			{
 				for( auto shader = begin( shaders ); shader != end( shaders ); ++shader )
 					shader->second.SetUniform( uniformName, value );
@@ -39,12 +36,12 @@ namespace Graphos
 								ShaderController( const ShaderController& );
 			void				operator=( const ShaderController& );
 
-			bool				AddShader( string path, string name );
+			bool				AddShader( std::string path, std::string name );
 
-			unordered_map<string, Shader>
+			std::unordered_map<std::string, Shader>
 								shaders;
 		};
 	}
 }
 
-#endif//_SHADER_CONTROLLER_H_
+#endif//__SHADER_CONTROLLER

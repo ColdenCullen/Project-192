@@ -1,23 +1,22 @@
-#ifndef _CAMERA_H_
-#define _CAMERA_H_
+#ifndef __CAMERA
+#define __CAMERA
 
 #include "GameObject.h"
-#include "Ingredient.h"
+#include "Component.h"
 #include "Matrix4.h"
 
-using namespace Graphos::Core;
 using namespace Graphos::Math;
 
 namespace Graphos
 {
-	namespace Content
+	namespace Core
 	{
-		class Camera : public Ingredient
+		class Camera : public Component
 		{
 		public:
 								Camera( GameObject* owner );
 			
-			bool				Update( float deltaTime );
+			bool				Update( void );
 			void				Draw( void );
 			void				Shutdown( void );
 
@@ -27,4 +26,4 @@ namespace Graphos
 	}
 }
 
-#endif//_CAMERA_H_
+#endif//__CAMERA

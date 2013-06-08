@@ -1,21 +1,19 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 
 // Windows ONLY
 #ifdef _WIN32
 
-#include "WindowController.h"
-#include "resource.h"
-
 #define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#include <winuser.h>
+//#include <Windows.h>
+#include "Resource.h"
+
+#include "WindowController.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
 
 using namespace Graphos::Core;
 using namespace Graphos::Math;
-using namespace Graphos::Content;
 using namespace Graphos::Graphics;
 
 // Window styles
@@ -64,13 +62,13 @@ bool Win32Controller::Initialize( void )
 	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
 	wcex.lpszMenuName	= NULL;
-	wcex.lpszClassName	= "Graphos";
+	wcex.lpszClassName	= L"Graphos";
 	wcex.hIconSm		= LoadIcon( hInstance, MAKEINTRESOURCE( IDI_SMALL ) );
 
 	RegisterClassEx( &wcex );
 
 	// Perform application initialization:
-	hWnd = CreateWindow( "Graphos", "Graphos", fullScreen ? GWS_FULLSCREEN : GWS_WINDOWED,
+	hWnd = CreateWindow( L"Graphos", L"Graphos", fullScreen ? GWS_FULLSCREEN : GWS_WINDOWED,
 		( screenWidth - this->width ) / 2, ( screenHeight - this->height ) / 2, this->width, this->height,
 		NULL, NULL, hInstance, NULL );
 	if( !hWnd )
@@ -101,7 +99,7 @@ bool Win32Controller::Initialize( void )
 	Shutdown();
 
 	// Create new permanent window
-	hWnd = CreateWindow( "Graphos", "Graphos", fullScreen ? GWS_FULLSCREEN : GWS_WINDOWED,
+	hWnd = CreateWindow( L"Graphos", L"Graphos", fullScreen ? GWS_FULLSCREEN : GWS_WINDOWED,
 		( screenWidth - this->width ) / 2, ( screenHeight - this->height ) / 2, this->width, this->height,
 		NULL, NULL, hInstance, NULL );
 	if( !hWnd )

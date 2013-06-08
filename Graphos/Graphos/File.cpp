@@ -110,6 +110,7 @@ void File::Initialize( string p, string n )
 	realpath( path.c_str(), abspath );
 #endif
 
+	localPath = n;
 	location = abspath;
 	name = n;
 }

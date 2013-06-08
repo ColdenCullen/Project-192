@@ -1,9 +1,9 @@
-//#include "StdAfx.h"
+#include "StdAfx.h"
 #include "GraphicsController.h"
 #include "ShaderController.h"
 #include "Config.h"
 
-using namespace Graphos::Content;
+using namespace Graphos::Core;
 using namespace Graphos::Graphics;
 
 bool GraphicsController::Initialize( void )

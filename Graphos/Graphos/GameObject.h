@@ -6,13 +6,11 @@
 #include <unordered_map>
 #include <type_traits>
 
-#include "Ingredient.h"
+#include "Component.h"
 #include "Transform.h"
 #include "ShaderController.h"
 #include "Shader.h"
 
-using namespace std;
-using namespace Graphos::Core;
 using namespace Graphos::Graphics;
 
 namespace Graphos
@@ -27,7 +25,7 @@ namespace Graphos
 			typedef std::unordered_map<unsigned int, GameObject> GOMap;
 
 			// Access objects
-			static GameObject*	GetGameObject( string name );
+			static GameObject*	GetGameObject( std::string name );
 			static GameObject*	GetGameObject( unsigned int id );
 			static GOMap&		GetObjectsList( void )
 			{
@@ -35,8 +33,8 @@ namespace Graphos
 			}
 
 			// Add object
-			static unsigned int	CreateObject( string name, Shader* shader );
-			static unsigned int CreateObject( string name, GameObject newObj );
+			static unsigned int	CreateObject( std::string name, Shader* shader );
+			static unsigned int CreateObject( std::string name, GameObject newObj );
 
 			// Remove objects
 			static void			ClearObjects( void )
@@ -47,7 +45,7 @@ namespace Graphos
 
 		private:
 			static GOMap		objectList;
-			static unordered_map<string, unsigned int>
+			static std::unordered_map<std::string, unsigned int>
 								nameMap;
 
 			static unsigned int	currentId;
@@ -71,32 +69,32 @@ namespace Graphos
 
 			// Getters and setters
 			Shader&				GetShader( void ) const { return *shader; }
-			void				SetShader( string newName ) { shader = &( ShaderController::Get().GetShader( newName ) ); }
+			void				SetShader( std::string newName ) { shader = &( ShaderController::Get().GetShader( newName ) ); }
 
 			// Add ingredient of type T
 			template<class T>
-			typename enable_if<is_base_of<Ingredient, T>::value, void>::type
-								AddIngredient( T* newIngredient )
+			typename std::enable_if<std::is_base_of<Component, T>::value, void>::type
+								AddComponent( T* newIngredient )
 			{
-				recipe[ typeid(T).hash_code() ] = newIngredient;
+				componentList[ typeid(T).hash_code() ] = newIngredient;
 			}
 
 			// Get ingredient of type T
 			template<class T>
-			typename enable_if<is_base_of<Ingredient, T>::value, T*>::type
-								GetIngredient( void )
+			typename std::enable_if<std::is_base_of<Component, T>::value, T*>::type
+								GetComponent( void )
 			{
-				auto itr = recipe.find( typeid(T).hash_code() );
+				auto itr = componentList.find( typeid(T).hash_code() );
 
-				if( itr != end( recipe ) )
+				if( itr != end( componentList ) )
 					return static_cast<T*>( itr->second );
 				else
 					return nullptr;
 			}
 
 		private:
-			unordered_map<size_t, Ingredient*>
-								recipe;
+			std::unordered_map<size_t, Component*>
+								componentList;
 
 			Shader*				shader;
 #pragma endregion

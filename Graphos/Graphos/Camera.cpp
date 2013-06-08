@@ -3,11 +3,11 @@
 #include "ShaderController.h"
 
 using namespace Graphos::Core;
-using namespace Graphos::Content;
+using namespace Graphos::Math;
 
-Camera::Camera( GameObject* owner ) : Ingredient( owner ), viewMatrix( Matrix4::Identity ) { }
+Camera::Camera( GameObject* owner ) : Component( owner ), viewMatrix( Matrix4::Identity ) { }
 
-bool Camera::Update( float deltaTime )
+bool Camera::Update( void )
 {
 	const Vector3& position = owner->transform.Position();
 

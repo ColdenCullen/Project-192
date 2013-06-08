@@ -1,6 +1,7 @@
-//#include "StdAfx.h"
+#include "StdAfx.h"
 #include "ShaderController.h"
 
+#include "WindowController.h"
 #include "File.h"
 
 #include <iostream>
