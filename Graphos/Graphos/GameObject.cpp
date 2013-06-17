@@ -5,57 +5,7 @@
 using namespace std;
 using namespace Graphos::Core;
 
-GameObject* GameObject::GetGameObject( string name )
-{
-	auto it = nameMap.find( name );
-
-	if( it != end( nameMap ) )
-		return &objectList[ it->second ];
-	else
-		return nullptr;
-}
-
-GameObject* GameObject::GetGameObject( unsigned int id )
-{
-	auto object = objectList.find( id );
-
-	if( object != end( objectList ) )
-		return &object->second;
-	else
-		return nullptr;
-}
-
-unsigned int GameObject::CreateObject( string name, Shader* shader )
-{
-	if( nameMap.find( name ) == end( nameMap ) )
-	{
-		objectList[ currentId ] = GameObject( shader );
-		nameMap[ name ] = currentId;
-
-		return currentId++;
-	}
-	else
-	{
-		return -1;
-	}
-}
-
-unsigned int GameObject::CreateObject( string name, GameObject newObj )
-{
-	if( nameMap.find( name ) == end( nameMap ) )
-	{
-		objectList[ currentId ] = newObj;
-		nameMap[ name ] = currentId;
-
-		return currentId++;
-	}
-	else
-	{
-		return -1;
-	}
-}
-
-bool GameObject::Update( float deltaTime )
+void GameObject::Update( void )
 {
 	bool result = true;
 
@@ -63,7 +13,7 @@ bool GameObject::Update( float deltaTime )
 		if( !ingredient->second->Update() )
 			result = false;
 
-	return result;
+	//return result;
 }
 
 void GameObject::Draw( void )
@@ -87,11 +37,11 @@ void GameObject::Shutdown( void )
 		}
 	}
 
-	objectList.clear();
+	componentList.clear();
 }
 
 // Initializes map
-unordered_map<unsigned int, GameObject> GameObject::objectList;
-unordered_map<string, unsigned int>		GameObject::nameMap;
-
-unsigned int GameObject::currentId = 0;
+//unordered_map<unsigned int, GameObject> GameObject::objectList;
+//unordered_map<string, unsigned int>		GameObject::nameMap;
+//
+//unsigned int GameObject::currentId = 0;

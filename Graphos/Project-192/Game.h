@@ -2,19 +2,23 @@
 #define __GAME
 
 #include "GraphosGame.h"
+#include "GameObjectCollection.h"
 
 namespace Project192
 {
 	class Game : public Graphos::Core::GraphosGame
 	{
 	public:
-		Game( void );
-		~Game( void );
+							Game( void );
+							~Game( void );
 
-		virtual bool Initialize( void ) override;
-		virtual bool Update( void ) override;
-		virtual void Draw( void ) override;
-		virtual void Shutdown( void ) override;
+		Graphos::Core::GameObjectCollection
+							objects;
+
+		virtual void		Initialize( void ) override;
+		virtual bool		Update( void ) override;
+		virtual void		Draw( void ) override;
+		virtual void		Shutdown( void ) override;
 	};
 }
 

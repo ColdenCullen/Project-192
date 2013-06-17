@@ -58,25 +58,25 @@ Handle<Value> GetTransform(Local<String> property, const AccessorInfo& info)
 	Handle<Object> global = info.GetIsolate()->GetCurrentContext()->Global();
 
 	// Get owner
-	GameObject* owner = GameObject::GetGameObject( self->Get( String::New( "id" ) )->Uint32Value() );
+//	GameObject* owner = GameObject::GetGameObject( self->Get( String::New( "id" ) )->Uint32Value() );
 
 	// Create position
 	Handle<Object> position = Handle<Function>::Cast( global->Get( String::New( "Vector3" ) ) )->CallAsConstructor( 0, nullptr )->ToObject();
-	position->Set( String::New( "x" ), Number::New( owner->transform.Position().x ) );
-	position->Set( String::New( "y" ), Number::New( owner->transform.Position().y ) );
-	position->Set( String::New( "z" ), Number::New( owner->transform.Position().z ) );
+	//position->Set( String::New( "x" ), Number::New( owner->transform.Position().x ) );
+	//position->Set( String::New( "y" ), Number::New( owner->transform.Position().y ) );
+	//position->Set( String::New( "z" ), Number::New( owner->transform.Position().z ) );
 
 	// Create rotation
 	Handle<Object> rotation = Handle<Function>::Cast( global->Get( String::New( "Vector3" ) ) )->CallAsConstructor( 0, nullptr )->ToObject();
-	rotation->Set( String::New( "x" ), Number::New( owner->transform.Rotation().x ) );
-	rotation->Set( String::New( "y" ), Number::New( owner->transform.Rotation().y ) );
-	rotation->Set( String::New( "z" ), Number::New( owner->transform.Rotation().z ) );
+	//rotation->Set( String::New( "x" ), Number::New( owner->transform.Rotation().x ) );
+	//rotation->Set( String::New( "y" ), Number::New( owner->transform.Rotation().y ) );
+	//rotation->Set( String::New( "z" ), Number::New( owner->transform.Rotation().z ) );
 
 	// Create scale
 	Handle<Object> scale = Handle<Function>::Cast( global->Get( String::New( "Vector3" ) ) )->CallAsConstructor( 0, nullptr )->ToObject();
-	scale->Set( String::New( "x" ), Number::New( owner->transform.Scale().x ) );
-	scale->Set( String::New( "y" ), Number::New( owner->transform.Scale().y ) );
-	scale->Set( String::New( "z" ), Number::New( owner->transform.Scale().z ) );
+	//scale->Set( String::New( "x" ), Number::New( owner->transform.Scale().x ) );
+	//scale->Set( String::New( "y" ), Number::New( owner->transform.Scale().y ) );
+	//scale->Set( String::New( "z" ), Number::New( owner->transform.Scale().z ) );
 
 	// Link them all
 	Handle<Object> transform = Object::New();
@@ -113,7 +113,7 @@ bool ScriptController::Initialize( void )
 	globalObjectTemplate->Set( "Input", input );
 
 	// Create the context for initializing the scripts
-	context = Context::New( nullptr, globalObjectTemplate );
+	//context = Context::New( nullptr, globalObjectTemplate );
 
 	// Scope for created variables
 	Context::Scope contextScope( context );

@@ -2,7 +2,6 @@
 #define __INPUT
 
 #ifdef _WIN32
-//#include "stdafx.h"
 
 #pragma region Keys
 #define VK_0 0x30
@@ -45,8 +44,10 @@
 #pragma endregion
 #endif
 
-#include <stdint.h>
+#include "UserInterface.h"
 #include "Vector2.h"
+
+#include <stdint.h>
 
 #define TOTAL_SIZE 256
 #define SPLIT 4
@@ -57,7 +58,7 @@ namespace Graphos
 	// Forward declarations
 	namespace Core
 	{
-		class UserInterface;
+		//class UserInterface;
 	}
 
 	namespace Graphics

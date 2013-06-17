@@ -1,12 +1,13 @@
 #ifndef _CONFIGCONTROLLER_H_
 #define _CONFIGCONTROLLER_H_
 
+#include "GraphosGame.h"
+#include "Vector3.h"
+
 #include <string>
 #include <ostream>
 #include <fstream>
 #include <json/json.h>
-
-#include "Vector3.h"
 
 namespace Graphos
 {
@@ -36,8 +37,10 @@ namespace Graphos
 			template<>
 			const char*			GetData<const char*>( std::string path );
 			template<>
+			GameState			GetData<GameState>( std::string path );
+			template<>
 			Graphos::Math::Vector3
-			GetData<Graphos::Math::Vector3>( std::string path );
+								GetData<Graphos::Math::Vector3>( std::string path );
 #endif
 			#pragma endregion
 
@@ -141,6 +144,23 @@ namespace Graphos
 		const char* Config::GetData<const char*>( std::string path )
 		{
 			return GetValueAtPath( path ).asCString();
+		}
+		template<>
+		GameState Config::GetData<GameState>( std::string path )
+		{
+			const Json::Value& val = GetValueAtPath( path );
+
+			#define ENUM_TO_STRING(enum) (#enum)
+
+			for( int state = 0; state <= static_cast<int>( GameState::Reseting ); ++state )
+			{
+				string stringValue = ENUM_TO_STRING( static_cast<GameState>( state ) );
+
+				if( val.asString() == stringValue )
+					return static_cast<GameState>( state );
+			}
+
+			#undef ENUM_TO_STRING
 		}
 		template<>
 		Graphos::Math::Vector3 Config::GetData<Graphos::Math::Vector3>( std::string path )

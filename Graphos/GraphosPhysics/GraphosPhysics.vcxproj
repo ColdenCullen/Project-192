@@ -46,7 +46,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Graphos;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Graphos;$(SolutionDir)GraphosComponents;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>

@@ -1,6 +1,7 @@
 #include "Game.h"
 
 using namespace Project192;
+using namespace Graphos::Core;
 
 Game::Game( void )
 {
@@ -12,22 +13,52 @@ Game::~Game( void )
 
 }
 
-bool Game::Initialize( void )
+void Game::Initialize( void )
 {
-	throw std::exception("The method or operation is not implemented.");
+	objects.LoadObjects( "" );
 }
 
 bool Game::Update( void )
 {
-	throw std::exception("The method or operation is not implemented.");
+	switch( CurrentState )
+	{
+	case GameState::Menu:
+		{
+			ui->Update();
+
+			break;
+		}
+	case GameState::Game:
+		{
+			objects.CallFunction( &GameObject::Update );
+
+			break;
+		}
+	}
+
+	return true;
 }
 
 void Game::Draw( void )
 {
-	throw std::exception("The method or operation is not implemented.");
+	switch( CurrentState )
+	{
+	case GameState::Menu:
+		{
+			ui->Draw();
+
+			break;
+		}
+	case GameState::Game:
+		{
+			objects.CallFunction( &GameObject::Draw );
+
+			break;
+		}
+	}
 }
 
 void Game::Shutdown( void )
 {
-	throw std::exception("The method or operation is not implemented.");
+	objects.ClearObjects();
 }

@@ -1,5 +1,9 @@
 
 {
+	"Game" :
+	{
+		"DefaultState" : "Menu"
+	},
 	"display" : 
 	{
 		"fullscreen" : false,

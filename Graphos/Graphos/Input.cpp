@@ -1,6 +1,4 @@
-//#include "stdafx.h"
 #include "Input.h"
-#include "UserInterface.h"
 #include "WindowController.h"
 #include "Config.h"
 
@@ -112,7 +110,7 @@ Vector2 Input::GetMousePos( /*Transform& camera, float zPlane*/ ) const
 	ScreenToClient( WindowController::Get().GetHWnd(), &i );
 
 	// Adjust for border
-	if( !Content::Config::Get().GetData<bool>( "display.fullscreen" ) )
+	if( !Graphos::Core::Config::Get().GetData<bool>( "display.fullscreen" ) )
 		i.x -= GetSystemMetrics( SM_CYBORDER );
 
 	//i.y -= GetSystemMetrics( /*SM_CYCAPTION*/SM_CYBORDER );

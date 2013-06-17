@@ -49,7 +49,6 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(SolutionDir)GraphosComponents;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;$(SolutionDir)GraphosPhysics</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
-      <ShowIncludes>true</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -58,6 +57,10 @@
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
+    <Lib>
+      <TargetMachine>
+      </TargetMachine>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -77,6 +80,7 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectCollection.cpp" />
     <ClCompile Include="GraphosGame.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Time.cpp" />
@@ -86,6 +90,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="File.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectCollection.h" />
     <ClInclude Include="GraphosGame.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Input.h" />

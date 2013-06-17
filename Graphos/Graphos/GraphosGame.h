@@ -1,11 +1,10 @@
 #ifndef __GRAPHOS_GAME
 #define __GRAPHOS_GAME
 
-#include <unordered_map>
-
-#include "Camera.h"
-#include "GameObject.h"
 #include "UserInterface.h"
+#include "Camera.h"
+
+//#include <unordered_map>
 
 namespace Graphos
 {
@@ -22,19 +21,15 @@ namespace Graphos
 			void				Reset( void );
 	
 		protected:
-			virtual bool		Initialize( void ) = 0;
+			virtual void		Initialize( void ) = 0;
 			virtual bool		Update( void ) = 0;
 			virtual void		Draw( void ) = 0;
 			virtual void		Shutdown( void ) = 0;
 
-			//GameObject::GOMap*	objects;
-	
-			bool				objectsLoaded;
+			//std::unordered_map<std::string, GameObjectCollection> GOCList;
+
 			UserInterface*		ui;
 			Camera*				camera;
-	
-			void				LoadObjects( void );
-			void				DeleteObjects( void );
 	
 		private:
 			bool				Start( void );

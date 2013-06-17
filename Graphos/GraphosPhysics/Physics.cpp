@@ -25,12 +25,12 @@ void Physics::Update( void )
 	// Iterate through each collider
 	for( auto outsideCollider = begin( colliders ); outsideCollider != end( colliders ); ++outsideCollider )
 	{
-		//*
+		/*
 		Collider* insideTemp = GameObject::GetGameObject( "Ball" )->GetComponent<Collider>();
 		Collider** insideCollider = &insideTemp;
 		/*/
 		// Iterate through each collider after it
-		//for( auto inside = outside + 1; inside != end( colliders ); ++inside )
+		for( auto insideCollider = outsideCollider + 1; insideCollider != end( colliders ); ++insideCollider )
 		//*/
 		if( *outsideCollider != *insideCollider )
 		{

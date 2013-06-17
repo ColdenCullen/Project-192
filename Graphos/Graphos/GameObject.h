@@ -19,39 +19,6 @@ namespace Graphos
 	{
 		class GameObject
 		{
-#pragma region Static Stuff
-		public:
-			// Type for use with object lists
-			typedef std::unordered_map<unsigned int, GameObject> GOMap;
-
-			// Access objects
-			static GameObject*	GetGameObject( std::string name );
-			static GameObject*	GetGameObject( unsigned int id );
-			static GOMap&		GetObjectsList( void )
-			{
-				return objectList;
-			}
-
-			// Add object
-			static unsigned int	CreateObject( std::string name, Shader* shader );
-			static unsigned int CreateObject( std::string name, GameObject newObj );
-
-			// Remove objects
-			static void			ClearObjects( void )
-			{
-				objectList.clear();
-				nameMap.clear();
-			}
-
-		private:
-			static GOMap		objectList;
-			static std::unordered_map<std::string, unsigned int>
-								nameMap;
-
-			static unsigned int	currentId;
-#pragma endregion
-
-#pragma region Not Static Stuff
 		public:
 			Transform			transform;
 
@@ -63,7 +30,7 @@ namespace Graphos
 			void				Shutdown( void );
 
 			// Game logic
-			bool				Update( float deltaTime );
+			void				Update( void );
 			void				Draw( void );
 			virtual void		OnCollision( GameObject* other ) { }
 
@@ -97,7 +64,6 @@ namespace Graphos
 								componentList;
 
 			Shader*				shader;
-#pragma endregion
 		};
 	}
 }

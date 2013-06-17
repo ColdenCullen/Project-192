@@ -15,9 +15,6 @@
 #include <fstream>
 #include <sstream>
 
-// For error checking
-#include <assert.h>
-
 using namespace std;
 using namespace Graphos::Core;
 
@@ -25,7 +22,8 @@ string File::ReadFile( string filePath )
 {
 	ifstream fileStream( filePath.c_str() );
 
-	assert( fileStream );
+	//if( !fileStream )
+	//	throw new exception( "File/path is broken." );
 
 	stringstream shaderData;
 	shaderData << fileStream.rdbuf();
@@ -52,7 +50,8 @@ File::FileList File::ScanDir( string dirPath )
 		directories.pop();
 
 		// Open directory and check for validity
-		assert( ( dir = opendir( string( dirPath + current ).c_str() ) ) != NULL );
+		if( ( dir = opendir( string( dirPath + current ).c_str() ) ) == NULL )
+			throw new exception( "Directory specified is broken." );
 
 		// Iterate through contents
 		while( ( ent = readdir( dir ) ) != NULL )

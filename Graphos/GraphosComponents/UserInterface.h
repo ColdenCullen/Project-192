@@ -22,7 +22,7 @@ namespace Graphos
 								UserInterface( GraphosGame* owner );
 								~UserInterface();
 
-			bool				Update( float deltaTime );
+			bool				Update( void );
 			void				Draw( void );
 			void				KeyPress( unsigned int key );
 

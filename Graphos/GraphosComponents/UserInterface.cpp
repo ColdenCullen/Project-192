@@ -100,7 +100,7 @@ UserInterface::~UserInterface()
 	}
 }
 
-bool UserInterface::Update( float deltaTime )
+bool UserInterface::Update( void )
 {
 	Vector2 cursor = Input::Get().GetMousePos();
 
