@@ -3,6 +3,8 @@
 #include "Vector3.h"
 #include "File.h"
 
+#include <GL/GLIncludes.h>
+
 #include <sstream>
 #include <vector>
 

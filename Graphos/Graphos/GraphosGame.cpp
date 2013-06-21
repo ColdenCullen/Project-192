@@ -102,11 +102,9 @@ bool GraphosGame::Start( void )
 	CurrentState = GameState::Menu;
 	camera = nullptr;
 
-	if( !Config::Get().LoadSettings() )
-		return false;
+	Config::Get().LoadSettings();
 
-	if( !GraphicsController::Get().Initialize() )
-		return false;
+	GraphicsController::Get().Initialize();
 
 	if( !AssetController::Get().Initialize() )
 		return false;
@@ -114,8 +112,7 @@ bool GraphosGame::Start( void )
 	if( !Physics::Physics::Get().Initialize() )
 		return false;
 
-	if( !ScriptController::Get().Initialize() )
-		return false;
+	//ScriptController::Get().Initialize();
 
 	Input::Get().ui = ui = new UserInterface( this );
 

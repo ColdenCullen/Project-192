@@ -13,7 +13,7 @@ namespace Graphos
 			// GL functions to call from outside project
 			enum				GLFunctions : int { BEGIN, END };
 
-			bool				Initialize( void );
+			void				Initialize( void );
 			// Resizes display with given values
 			void				Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 );
 			// Reloads display based on config settings

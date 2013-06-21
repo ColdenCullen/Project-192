@@ -208,12 +208,12 @@ void GameObjectCollection::LoadObjects( string assetPath )
 			}
 			else
 			{
-				throw new exception( "Invalid object: no 'Name' property." );
+				throw exception( "Invalid object: no 'Name' property." );
 			}
 		}
 		else
 		{
-			throw new exception( "Invalid object: invalid JSON." );
+			throw exception( "Invalid object: invalid JSON." );
 		}
 	}
 
@@ -225,7 +225,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 unsigned int GameObjectCollection::CreateObject( string name, Shader* shader )
 {
 	if( nameMap.find( name ) == end( nameMap ) )
-		throw new exception( "Name given has already been used" );
+		throw exception( "Name given has already been used" );
 
 	objectList[ currentId ] = GameObject( shader );
 	nameMap[ name ] = currentId;

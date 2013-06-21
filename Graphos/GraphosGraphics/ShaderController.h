@@ -14,7 +14,7 @@ namespace Graphos
 		class ShaderController
 		{
 		public:
-			bool				Initialize();
+			void				Initialize();
 			Shader&				GetShader( std::string shaderName );
 
 			template<typename T>
@@ -36,7 +36,7 @@ namespace Graphos
 								ShaderController( const ShaderController& );
 			void				operator=( const ShaderController& );
 
-			bool				AddShader( std::string path, std::string name );
+			void				AddShader( std::string path, std::string name );
 
 			std::unordered_map<std::string, Shader>
 								shaders;

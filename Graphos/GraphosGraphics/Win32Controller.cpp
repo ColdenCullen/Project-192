@@ -20,7 +20,7 @@ using namespace Graphos::Graphics;
 #define GWS_FULLSCREEN ( WS_POPUP | WS_SYSMENU )
 #define GWS_WINDOWED ( WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU )
 
-bool Win32Controller::Initialize( void )
+void Win32Controller::Initialize( void )
 {
 	screenWidth = GetSystemMetrics( SM_CXSCREEN );
 	screenHeight = GetSystemMetrics( SM_CYSCREEN );
@@ -41,7 +41,7 @@ bool Win32Controller::Initialize( void )
 	}
 
 	if( !fullScreen && ( width <= 0 || height <= 0 ) )
-		return false;
+		throw exception( "Display settings invalid" );
 
 	unsigned int formatCount;
 	int pixelFormat[1];
@@ -72,25 +72,25 @@ bool Win32Controller::Initialize( void )
 		( screenWidth - this->width ) / 2, ( screenHeight - this->height ) / 2, this->width, this->height,
 		NULL, NULL, hInstance, NULL );
 	if( !hWnd )
-		return false;
+		throw exception( "Error opening init window." );
 
 	ShowWindow( hWnd, SW_HIDE );
 
 	// Get device context
 	deviceContext = GetDC( hWnd );
 	if( !deviceContext )
-		return false;
+		throw exception( "Error getting device context." );
 
 	// Set the pixel format
 	if( !SetPixelFormat( deviceContext, 1, &pixelFormatDescriptor ) )
-		return false;
+		throw exception( "Error setting pixel format." );
 
 	renderContext = wglCreateContext( deviceContext );
 	if( !renderContext )
-		return false;
+		throw exception( "Error getting render context." );
 
 	if( !wglMakeCurrent( deviceContext, renderContext ) )
-		return false;
+		throw exception( "Error setting contexts." );
 
 	glewExperimental = GL_TRUE;
 	GLenum result = glewInit();
@@ -103,7 +103,7 @@ bool Win32Controller::Initialize( void )
 		( screenWidth - this->width ) / 2, ( screenHeight - this->height ) / 2, this->width, this->height,
 		NULL, NULL, hInstance, NULL );
 	if( !hWnd )
-		return false;
+		throw exception( "Error opening window." );
 
 	// Set attributes list
 	int attributeList[ 19 ] = {
@@ -129,24 +129,24 @@ bool Win32Controller::Initialize( void )
 	// Get new Device Context
 	deviceContext = GetDC( hWnd );
 	if( !deviceContext )
-		return false;
+		throw exception( "Error getting device context." );
 
 	// Query pixel format
 	if( wglChoosePixelFormatARB( deviceContext, attributeList, NULL, 1, pixelFormat, &formatCount ) == -1 )
-		return false;
+		throw exception( "Error getting pixel format." );
 
 	// Set the pixel format
 	if( SetPixelFormat( deviceContext, *pixelFormat, &pixelFormatDescriptor ) == -1 )
-		return false;
+		throw exception( "Error setting pixel format." );
 
 	// Create OpenGL rendering context
 	renderContext = wglCreateContextAttribsARB( deviceContext, NULL, versionInfo );
 	if( !renderContext )
-		return false;
+		throw exception( "Error getting render context." );
 
 	// Set current context
 	if( !wglMakeCurrent( deviceContext, renderContext ) )
-		return false;
+		throw exception( "Error setting contexts." );
 
 	// Set depth buffer
 	glClearDepth( 1.0f );
@@ -164,8 +164,6 @@ bool Win32Controller::Initialize( void )
 	Reload();
 
 	glClearColor( 0.5f, 0.5f, 0.5f, 1.0f );
-
-	return true;
 }
 
 void Win32Controller::Shutdown( void )

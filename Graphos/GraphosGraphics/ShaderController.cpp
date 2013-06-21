@@ -72,7 +72,7 @@ void OutputShaderErrorMessage( HWND hwnd, unsigned int shaderId, const char* sha
 #endif
 #pragma endregion
 
-bool ShaderController::Initialize( void )
+void ShaderController::Initialize( void )
 {
 	char abspath[ 256 ];
 #ifdef WIN32
@@ -94,22 +94,19 @@ bool ShaderController::Initialize( void )
 			{
 				string name = string( ent->d_name ).substr( 0, ent->d_namlen - 6 );
 
-				if( !AddShader( abspath, name ) )
-					return false;
+				AddShader( abspath, name );
 			}
 		}
 
 		// Close dir
 		closedir( dir );
-
-		return true;
 	}
 	else
 	{
-		return false;
+		throw exception( "Error reading shader dir." );
 	}
 #else
-	return false;
+	throw exception( "Unsupported platform" );
 #endif
 }
 
@@ -118,7 +115,7 @@ Shader& ShaderController::GetShader( string shaderName )
 	return shaders.at( shaderName );
 }
 
-bool ShaderController::AddShader( string path, string name )	
+void ShaderController::AddShader( string path, string name )	
 {
 	// Load shader text
 	string vertexShaderBuffer = File::ReadFile( path + name + ".vs.gl" );
@@ -151,7 +148,7 @@ bool ShaderController::AddShader( string path, string name )
 			OutputShaderErrorMessage( WindowController::Get().GetHWnd(), newShader.vertexShaderID, name.c_str() );
 #endif
 
-			return false;
+			throw exception( "Error compiling vertex shader." );
 		}
 
 		glCompileShader( newShader.fragmentShaderID );
@@ -163,7 +160,7 @@ bool ShaderController::AddShader( string path, string name )
 			OutputShaderErrorMessage( WindowController::Get().GetHWnd(), newShader.fragmentShaderID, name.c_str() );
 #endif
 			
-			return false;
+			throw exception( "Error compiling fragment shader." );
 		}
 
 		// Attach shaders to program
@@ -176,16 +173,14 @@ bool ShaderController::AddShader( string path, string name )
 		// Check completeness
 		glGetProgramiv( newShader.programID, GL_LINK_STATUS, &compileStatus );
 		if( compileStatus != GL_TRUE )
-			return false;
+			throw exception( "Error linking shader program." );
 
 		// Set shader variables
 		newShader.Initialize( vertexShaderBuffer );
 
 		// Add shader to map
 		shaders[ name ] = newShader;
-
-		return true;
 	}
 	else
-		return false;
+		throw exception( "Error reading files." );
 }

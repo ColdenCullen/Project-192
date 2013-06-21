@@ -17,7 +17,7 @@ namespace Graphos
 		{
 		public:
 			// Initialize the settings controller
-			bool				LoadSettings( void );
+			void				LoadSettings( void );
 
 			#pragma region GetData
 			// Get value from settings

@@ -2,7 +2,6 @@
 #define _MODEL_H_
 
 #include <string>
-#include <GL/GLIncludes.h>
 
 #include "Component.h"
 

@@ -22,7 +22,7 @@ namespace Graphos
 		class PlatformWindowController
 		{
 		public:
-			virtual bool		Initialize( void ) = 0;
+			virtual void		Initialize( void ) = 0;
 			virtual void		Shutdown( void ) = 0;
 			virtual void		Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 ) = 0;
 			virtual void		Reload( void ) = 0;
@@ -53,7 +53,7 @@ namespace Graphos
 		class Win32Controller : public PlatformWindowController
 		{
 		public:
-			bool				Initialize( void );
+			void				Initialize( void );
 			void				Shutdown( void );
 			void				Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 );
 			void				Reload( void );

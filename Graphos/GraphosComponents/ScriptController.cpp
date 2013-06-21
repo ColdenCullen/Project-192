@@ -100,7 +100,7 @@ void SetTransform(Local<String> property, Local<Value> value, const AccessorInfo
 #pragma endregion
 #pragma endregion
 
-bool ScriptController::Initialize( void )
+void ScriptController::Initialize( void )
 {
 	// Create global object template, add function handlers
 	Handle<ObjectTemplate> globalObjectTemplate = ObjectTemplate::New();
@@ -117,6 +117,7 @@ bool ScriptController::Initialize( void )
 
 	// Scope for created variables
 	Context::Scope contextScope( context );
+	//Context::Scope contextScope( Context::New() );
 
 	// Load and compile script
 	v8::Script::Compile(
@@ -129,8 +130,6 @@ bool ScriptController::Initialize( void )
 
 	// Get the "global" object
 	globalObject = context->Global();
-
-	return true;
 }
 
 void ScriptController::Shutdown( void )

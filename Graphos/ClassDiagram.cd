@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Graphos::Core::Component">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgAACAAAAAggAAAAAAAQAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Component.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::GameObject" Collapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAIAgAAAAAABQAAAAAEAAAAJABAAEIIAAA=</HashCode>
+      <FileName>GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::Camera">
+    <Position X="7.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAAAAAgAAAAAAAwAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::Config" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAABEgAAAIBAAAAAAAAgAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Config.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::GameObjectCollection" Collapsed="true">
+    <Position X="21.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>gameobjectcollection.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::GraphosGame" Collapsed="true">
+    <Position X="18.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>graphosgame.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::Time" Collapsed="true">
+    <Position X="20" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAAEAAQBAAAEAAAAAAQAAACEAAABgAAAAAQA=</HashCode>
+      <FileName>Time.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Graphics::Input" Collapsed="true">
+    <Position X="20" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAQBAAEAAAAAkABAAAgAAAAAEAAQCAAABAAgQAAAAAA=</HashCode>
+      <FileName>Input.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::AssetController" Collapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphoscomponents\assetcontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::AwesomiumView">
+    <Position X="9.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAQAAQAAAAABABAAAABAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphoscomponents\awesomiumview.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::Mesh">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAgAAAAgAAAAAAAQAAABAAAAgAAAAAAAAAUAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphoscomponents\mesh.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::Script">
+    <Position X="11.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAACAgAAAAAAAQAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphoscomponents\script.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::ScriptController" Collapsed="true">
+    <Position X="16.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphoscomponents\scriptcontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::Texture">
+    <Position X="14" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgQAQAAAAAAAAAAAABAAAAAAAAAAEAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphoscomponents\texture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Core::UserInterface" Collapsed="true">
+    <Position X="21.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphoscomponents\userinterface.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Graphics::PlatformWindowController">
+    <Position X="9.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosgraphics\windowcontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Graphics::GraphicsController" Collapsed="true">
+    <Position X="16.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosgraphics\graphicscontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Graphics::OSXController">
+    <Position X="10.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosgraphics\windowcontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Graphics::ShaderController" Collapsed="true">
+    <Position X="18.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosgraphics\shadercontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Graphics::Win32Controller">
+    <Position X="8" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosgraphics\windowcontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Graphics::WindowController" Collapsed="true">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosgraphics\windowcontroller.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Physics::Collider">
+    <Position X="4" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAQAAAAAAgAAAAAAAAAAABEAAAAQAQAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosphysics\collider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Physics::BoxCollider">
+    <Position X="2.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosphysics\boxcollider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Physics::SphereCollider">
+    <Position X="5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosphysics\spherecollider.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphos::Physics::Physics" Collapsed="true">
+    <Position X="21.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosphysics\physics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Graphos::Graphics::InputState" Collapsed="true">
+    <Position X="16.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAABAEAAAAAAAAAAAEAAAAAAAIgAAAAAAA=</HashCode>
+      <FileName>Input.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Graphos::Graphics::Shader" Collapsed="true">
+    <Position X="21.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosgraphics\shader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Graphos::Math::Matrix4" Collapsed="true">
+    <Position X="18.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosmath\matrix4.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Graphos::Math::Quaternion" Collapsed="true">
+    <Position X="20" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosmath\quaternion.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Graphos::Math::Transform" Collapsed="true">
+    <Position X="16.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosmath\transform.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Graphos::Math::Vector2" Collapsed="true">
+    <Position X="18.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosmath\vector2.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Graphos::Math::Vector3" Collapsed="true">
+    <Position X="20" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosmath\vector3.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="Graphos::Core::GameState" Collapsed="true">
+    <Position X="20.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgoAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GraphosGame.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Graphos::Physics::ColliderType" Collapsed="true">
+    <Position X="16.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>d:\documents\192\project-192\graphos\graphosphysics\collider.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

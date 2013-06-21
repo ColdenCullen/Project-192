@@ -14,7 +14,7 @@ namespace Graphos
 		class ScriptController
 		{
 		public:
-			bool				Initialize( void );
+			void				Initialize( void );
 			void				Shutdown( void );
 
 			Script*				CreateObjectInstance( std::string className, unsigned int ownerID, GameObject* owner = nullptr );

@@ -6,15 +6,11 @@
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
 
-bool GraphicsController::Initialize( void )
+void GraphicsController::Initialize( void )
 {
-	if( !WindowController::Get().Initialize() )
-		return false;
+	WindowController::Get().Initialize();
 
-	if( !ShaderController::Get().Initialize() )
-		return false;
-
-	return true;
+	ShaderController::Get().Initialize();
 }
 
 void GraphicsController::Resize( bool fullScreen, unsigned int newWidth, unsigned int newHeight )

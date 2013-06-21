@@ -22,8 +22,8 @@ string File::ReadFile( string filePath )
 {
 	ifstream fileStream( filePath.c_str() );
 
-	//if( !fileStream )
-	//	throw new exception( "File/path is broken." );
+	if( !fileStream )
+		throw exception( "File/path is broken." );
 
 	stringstream shaderData;
 	shaderData << fileStream.rdbuf();
@@ -32,6 +32,14 @@ string File::ReadFile( string filePath )
 	return shaderData.str();
 }
 
+//************************************
+// Method:    ScanDir
+// FullName:  Graphos::Core::File::ScanDir
+// Access:    public static 
+// Returns:   File::FileList
+// Qualifier:
+// Parameter: string dirPath
+//************************************
 File::FileList File::ScanDir( string dirPath )
 {
 	FileList files;
@@ -51,7 +59,7 @@ File::FileList File::ScanDir( string dirPath )
 
 		// Open directory and check for validity
 		if( ( dir = opendir( string( dirPath + current ).c_str() ) ) == NULL )
-			throw new exception( "Directory specified is broken." );
+			throw exception( "Directory specified is broken." );
 
 		// Iterate through contents
 		while( ( ent = readdir( dir ) ) != NULL )

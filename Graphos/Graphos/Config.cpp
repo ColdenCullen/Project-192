@@ -7,14 +7,12 @@
 using namespace std;
 using namespace Graphos::Core;
 
-bool Config::LoadSettings( void )
+void Config::LoadSettings( void )
 {
 	Json::Reader reader;
 
 	if( !reader.parse( File::ReadFile( "Resources/Config/Config.json" ), config ) )
-		return false;
-
-	return true;
+		throw exception( "Error reading JSON" );
 }
 
 Json::Value& Config::GetValueAtPath( std::string path )

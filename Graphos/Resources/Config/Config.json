@@ -1,0 +1,40 @@
+
+{
+	"Game" :
+	{
+		"DefaultState" : "Menu"
+	},
+	"display" : 
+	{
+		"fullscreen" : false,
+		"height" : 720,
+		"width" : 1280
+	},
+	"graphics" : 
+	{
+		"backfaceculling" : false,
+		"vsync" : false
+	},
+	"physics" : 
+	{
+		"gravity" : 
+		{
+			"x" : 0.0,
+			"y" : -1.0,
+			"z" : 0.0
+		}
+	},
+	"scripts" : 
+	{
+		"mainPath" : "Resources/Scripts/Cube.js"
+	},
+	"ui" : 
+	{
+		"filePath" : "Resources/UIs/index.html",
+		"scale" : 
+		{
+			"x" : 1.0,
+			"y" : 1.0
+		}
+	}
+}
