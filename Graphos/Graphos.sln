@@ -20,11 +20,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphosComponents", "Grapho
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphosGraphics", "GraphosGraphics\GraphosGraphics.vcxproj", "{ED494E84-A159-471A-A205-60160B0824A8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture", "Architecture", "{2A0DFE79-6015-4FB7-8C55-1AA20F635746}"
-	ProjectSection(SolutionItems) = preProject
-		AssemblyDependencies.dgml = AssemblyDependencies.dgml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +100,5 @@ Global
 		{90871407-0B79-40A7-BA5C-F4FBEDDCD570} = {70DF5D62-07FA-4FF8-AE35-25946D6F95F6}
 		{02E806E5-DE0D-4F0A-9B39-415476B4E4FD} = {70DF5D62-07FA-4FF8-AE35-25946D6F95F6}
 		{ED494E84-A159-471A-A205-60160B0824A8} = {70DF5D62-07FA-4FF8-AE35-25946D6F95F6}
-		{2A0DFE79-6015-4FB7-8C55-1AA20F635746} = {70DF5D62-07FA-4FF8-AE35-25946D6F95F6}
 	EndGlobalSection
 EndGlobal

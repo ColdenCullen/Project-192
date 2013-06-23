@@ -1,9 +1,5 @@
 #include "GraphosGame.h"
 
-#include <vector>
-#include <string>
-#include <json/json.h>
-
 #include "File.h"
 
 #include "GameObject.h"
@@ -15,6 +11,11 @@
 #include "Input.h"
 #include "Time.h"
 
+#include <vector>
+#include <string>
+#include <json/json.h>
+#include <cstdlib>
+
 using namespace Graphos::Core;
 using namespace Graphos::Physics;
 
@@ -25,13 +26,15 @@ void GraphosGame::Run( void )
 	//////////////////////////////////////////////////////////////////////////
 
 	// Initialize values and controllers
-	bool isOnFire = !Start();
+	quit = false;
+
+	Start();
 
 	// Init time
 	Time::Get().Update();
 
 	// Loop until there is a quit message from the window or the user.
-	while( !isOnFire )
+	while( !quit )
 	{
 		if( CurrentState == GameState::Reseting )
 			Reset();
@@ -53,7 +56,7 @@ void GraphosGame::Run( void )
 		Physics::Physics::Get().Update();
 
 		// Do the updating of the child class.
-		isOnFire = !Update();
+		Update();
 
 		//////////////////////////////////////////////////////////////////////////
 		// Draw
@@ -69,7 +72,7 @@ void GraphosGame::Run( void )
 		GraphicsController::Get().CallGLFunction( GraphicsController::END );
 	}
 
-	Stop();
+	Exit();
 }
 
 void GraphosGame::Reset( void )
@@ -97,7 +100,12 @@ void GraphosGame::Reset( void )
 	Initialize();
 }
 
-bool GraphosGame::Start( void )
+void GraphosGame::Exit( void )
+{
+	quit = true;
+}
+
+void GraphosGame::Start( void )
 {
 	CurrentState = GameState::Menu;
 	camera = nullptr;
@@ -107,18 +115,16 @@ bool GraphosGame::Start( void )
 	GraphicsController::Get().Initialize();
 
 	if( !AssetController::Get().Initialize() )
-		return false;
+		throw exception( "Error initializing Asset Controller." );
 
 	if( !Physics::Physics::Get().Initialize() )
-		return false;
+		throw exception( "Error initializing Physics Controller." );
 
-	//ScriptController::Get().Initialize();
+	ScriptController::Get().Initialize();
 
 	Input::Get().ui = ui = new UserInterface( this );
 
 	Initialize();
-
-	return true;
 }
 
 void GraphosGame::Stop( void )

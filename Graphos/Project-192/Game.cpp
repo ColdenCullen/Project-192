@@ -1,17 +1,8 @@
 #include "Game.h"
+#include "Input.h"
 
 using namespace Project192;
 using namespace Graphos::Core;
-
-Game::Game( void )
-{
-
-}
-
-Game::~Game( void )
-{
-
-}
 
 void Game::Initialize( void )
 {
@@ -35,6 +26,9 @@ bool Game::Update( void )
 			break;
 		}
 	}
+
+	if( Input::Get().IsKeyDown( VK_ESCAPE ) )
+		Exit();
 
 	return true;
 }

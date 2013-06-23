@@ -19,6 +19,7 @@ namespace Graphos
 	
 			void				Run( void );
 			void				Reset( void );
+			void				Exit( void );
 	
 		protected:
 			virtual void		Initialize( void ) = 0;
@@ -32,7 +33,9 @@ namespace Graphos
 			Camera*				camera;
 	
 		private:
-			bool				Start( void );
+			bool				quit;
+
+			void				Start( void );
 			void				Stop( void );
 		};
 	}

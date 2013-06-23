@@ -14,6 +14,14 @@ namespace Graphos
 		class ScriptController
 		{
 		public:
+			//************************************
+			// Method:    Initialize
+			// FullName:  Graphos::Core::ScriptController::Initialize
+			// Access:    public 
+			// Returns:   void
+			// Qualifier:
+			// Parameter: void
+			//************************************
 			void				Initialize( void );
 			void				Shutdown( void );
 
@@ -27,15 +35,16 @@ namespace Graphos
 			}
 		
 		private:
-								ScriptController( void ) : isInitialized( false ) { }
+								ScriptController( void ) : isInitialized( false ), isolate( v8::Isolate::GetCurrent() ), handleScope( v8::Isolate::GetCurrent() ) { }
 								ScriptController( const ScriptController& );
 			void				operator=( const ScriptController& );
 
 			v8::HandleScope		handleScope;
-			v8::Persistent<v8::Context>
+			v8::Local<v8::Context>
 								context;
 			v8::Local<v8::Object>
 								globalObject;
+			v8::Isolate*		isolate;
 
 			bool				isInitialized;
 		};

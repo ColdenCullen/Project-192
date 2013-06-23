@@ -111,6 +111,21 @@ const char* Config::GetData<const char*>( string path )
 	return GetValueAtPath( path ).asCString();
 }
 template<>
+string* Config::GetData<string*>( std::string path )
+{
+	Json::Value& node = GetValueAtPath( path );
+
+	if( node.isArray() )
+	{
+		string* toReturn = new string[ node.size() ];
+
+		for( int ii = 0; ii < node.size(); ++ii )
+			toReturn[ ii ] = node[ ii ].asString();
+
+		return toReturn;
+	}
+}
+template<>
 Vector3	Config::GetData<Vector3>( string path )
 {
 	Json::Value root = GetValueAtPath( path );

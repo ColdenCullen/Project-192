@@ -1,5 +1,4 @@
 /// <reference path="Graphos.ts" />
-include("Resources/Scripts/Graphos.js");
 
 // Class
 class Cube extends GameObject

@@ -37,6 +37,8 @@ namespace Graphos
 			template<>
 			const char*			GetData<const char*>( std::string path );
 			template<>
+			string*				GetData<string*>( std::string path );
+			template<>
 			GameState			GetData<GameState>( std::string path );
 			template<>
 			Graphos::Math::Vector3
@@ -144,6 +146,21 @@ namespace Graphos
 		const char* Config::GetData<const char*>( std::string path )
 		{
 			return GetValueAtPath( path ).asCString();
+		}
+		template<>
+		string* Config::GetData<string*>( std::string path )
+		{
+			Json::Value& node = GetValueAtPath( path );
+
+			if( node.isArray() )
+			{
+				string* toReturn = new string[ node.size() ];
+
+				for( int ii = 0; ii < node.size(); ++ii )
+					toReturn[ ii ] = node[ ii ].asString();
+
+				return toReturn;
+			}
 		}
 		template<>
 		GameState Config::GetData<GameState>( std::string path )

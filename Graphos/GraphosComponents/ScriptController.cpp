@@ -113,20 +113,20 @@ void ScriptController::Initialize( void )
 	globalObjectTemplate->Set( "Input", input );
 
 	// Create the context for initializing the scripts
-	//context = Context::New( nullptr, globalObjectTemplate );
+	context = Context::New( isolate, nullptr, globalObjectTemplate );
 
 	// Scope for created variables
 	Context::Scope contextScope( context );
-	//Context::Scope contextScope( Context::New() );
 
-	// Load and compile script
-	v8::Script::Compile(
-		String::New(
-			File::ReadFile(
-				Config::Get().GetData<string>( "scripts.mainPath" )
-			).c_str()
-		)
-	)->Run();
+	// Load and compile scripts
+	for( auto file : File::ScanDir( Config::Get().GetData<string>( "Scripts.Path" ) ) )
+	{
+		v8::Script::Compile(
+			String::New(
+				file.GetContents().c_str()
+			)
+		);
+	}
 
 	// Get the "global" object
 	globalObject = context->Global();
@@ -136,8 +136,7 @@ void ScriptController::Shutdown( void )
 {
 	if( isInitialized )
 	{
-		//handleScope.~HandleScope();
-		//context.Dispose();
+		//context->Dispose();
 
 		isInitialized = false;
 	}

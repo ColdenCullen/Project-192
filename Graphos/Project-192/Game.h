@@ -9,9 +9,6 @@ namespace Project192
 	class Game : public Graphos::Core::GraphosGame
 	{
 	public:
-							Game( void );
-							~Game( void );
-
 		Graphos::Core::GameObjectCollection
 							objects;
 

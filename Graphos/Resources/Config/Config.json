@@ -24,9 +24,9 @@
 			"z" : 0.0
 		}
 	},
-	"scripts" : 
+	"Scripts" : 
 	{
-		"mainPath" : "Resources/Scripts/Cube.js"
+		"Path" : "Resources/Scripts/"
 	},
 	"ui" : 
 	{
