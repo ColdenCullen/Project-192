@@ -118,15 +118,15 @@ void ScriptController::Initialize( void )
 	// Scope for created variables
 	Context::Scope contextScope( context );
 
+	string scripts = "";
+
 	// Load and compile scripts
 	for( auto file : File::ScanDir( Config::Get().GetData<string>( "Scripts.Path" ) ) )
 	{
-		v8::Script::Compile(
-			String::New(
-				file.GetContents().c_str()
-			)
-		);
+		scripts = scripts.append( file.GetContents() ).append( "\n" );
 	}
+
+	v8::Script::Compile( String::New( scripts.c_str() ) );
 
 	// Get the "global" object
 	globalObject = context->Global();
