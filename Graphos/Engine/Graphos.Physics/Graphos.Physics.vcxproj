@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{90871407-0B79-40A7-BA5C-F4FBEDDCD570}</ProjectGuid>
     <RootNamespace>GraphosPhysics</RootNamespace>
+    <ProjectName>Graphos.Physics</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -46,7 +47,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Graphos;$(SolutionDir)GraphosComponents;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Graphos;$(SolutionDir)Engine\Graphos.Components;$(SolutionDir)Engine\Graphos.Math;$(SolutionDir)Engine\Graphos.Graphics;</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>

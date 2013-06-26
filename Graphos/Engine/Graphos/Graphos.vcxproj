@@ -45,7 +45,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)GraphosScripting;$(SolutionDir)GraphosComponents;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;$(SolutionDir)GraphosPhysics</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Graphos.Scripting;$(SolutionDir)Engine\Graphos.Components;$(SolutionDir)Engine\Graphos.Math;$(SolutionDir)Engine\Graphos.Graphics;$(SolutionDir)Engine\Graphos.Physics</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -101,16 +101,16 @@
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GraphosComponents\GraphosComponents.vcxproj">
+    <ProjectReference Include="..\Graphos.Components\Graphos.Components.vcxproj">
       <Project>{02e806e5-de0d-4f0a-9b39-415476b4e4fd}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\GraphosGraphics\GraphosGraphics.vcxproj">
+    <ProjectReference Include="..\Graphos.Graphics\Graphos.Graphics.vcxproj">
       <Project>{ed494e84-a159-471a-a205-60160b0824a8}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\GraphosMath\GraphosMath.vcxproj">
+    <ProjectReference Include="..\Graphos.Math\Graphos.Math.vcxproj">
       <Project>{a4b68ca7-3701-4ec7-a5eb-fc75f8957414}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\GraphosPhysics\GraphosPhysics.vcxproj">
+    <ProjectReference Include="..\Graphos.Physics\Graphos.Physics.vcxproj">
       <Project>{90871407-0b79-40a7-ba5c-f4fbeddcd570}</Project>
     </ProjectReference>
     <ProjectReference Include="..\GraphosScripting\GraphosScripting.vcxproj">
