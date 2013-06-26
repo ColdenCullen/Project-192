@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos", "Graphos\Graphos.vcxproj", "{2741E3C6-A331-47FB-B757-9747231419B8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos", "Engine\Graphos\Graphos.vcxproj", "{2741E3C6-A331-47FB-B757-9747231419B8}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project-192", "Project-192\Project-192.vcxproj", "{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1}"
 EndProject
@@ -12,13 +12,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Global Headers", "Global He
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{70DF5D62-07FA-4FF8-AE35-25946D6F95F6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphosMath", "GraphosMath\GraphosMath.vcxproj", "{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Math", "Engine\Graphos.Math\Graphos.Math.vcxproj", "{A4B68CA7-3701-4EC7-A5EB-FC75F8957414}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphosPhysics", "GraphosPhysics\GraphosPhysics.vcxproj", "{90871407-0B79-40A7-BA5C-F4FBEDDCD570}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Physics", "Engine\Graphos.Physics\Graphos.Physics.vcxproj", "{90871407-0B79-40A7-BA5C-F4FBEDDCD570}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphosComponents", "GraphosComponents\GraphosComponents.vcxproj", "{02E806E5-DE0D-4F0A-9B39-415476B4E4FD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Components", "Engine\Graphos.Components\Graphos.Components.vcxproj", "{02E806E5-DE0D-4F0A-9B39-415476B4E4FD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphosGraphics", "GraphosGraphics\GraphosGraphics.vcxproj", "{ED494E84-A159-471A-A205-60160B0824A8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Graphics", "Engine\Graphos.Graphics\Graphos.Graphics.vcxproj", "{ED494E84-A159-471A-A205-60160B0824A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

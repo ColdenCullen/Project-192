@@ -46,7 +46,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>$(SolutionDir)Graphos;$(SolutionDir)GraphosGraphics;$(SolutionDir)GraphosPhysics;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosComponents</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Graphos;$(SolutionDir)Engine\Graphos.Graphics;$(SolutionDir)Engine\Graphos.Physics;$(SolutionDir)Engine\Graphos.Math;$(SolutionDir)Engine\Graphos.Components</AdditionalIncludeDirectories>
       <ShowIncludes>true</ShowIncludes>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
@@ -80,7 +80,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Graphos\Graphos.vcxproj">
+    <ProjectReference Include="..\Engine\Graphos\Graphos.vcxproj">
       <Project>{2741e3c6-a331-47fb-b757-9747231419b8}</Project>
     </ProjectReference>
   </ItemGroup>

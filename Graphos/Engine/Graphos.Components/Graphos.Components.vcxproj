@@ -11,8 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{90871407-0B79-40A7-BA5C-F4FBEDDCD570}</ProjectGuid>
-    <RootNamespace>GraphosPhysics</RootNamespace>
+    <ProjectGuid>{02E806E5-DE0D-4F0A-9B39-415476B4E4FD}</ProjectGuid>
+    <RootNamespace>GraphosComponents</RootNamespace>
+    <ProjectName>Graphos.Components</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -46,7 +47,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Graphos;$(SolutionDir)GraphosComponents;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Graphos;$(SolutionDir)Engine\Graphos.Math;$(SolutionDir)Engine\Graphos.Graphics</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -71,18 +73,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoxCollider.cpp" />
-    <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="Physics.cpp" />
-    <ClCompile Include="RigidBody.cpp" />
-    <ClCompile Include="SphereCollider.cpp" />
+    <ClCompile Include="AssetController.cpp" />
+    <ClCompile Include="AwesomiumView.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Script.cpp" />
+    <ClCompile Include="ScriptController.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoxCollider.h" />
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="Physics.h" />
-    <ClInclude Include="RigidBody.h" />
-    <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="AssetController.h" />
+    <ClInclude Include="AwesomiumView.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Script.h" />
+    <ClInclude Include="ScriptController.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
