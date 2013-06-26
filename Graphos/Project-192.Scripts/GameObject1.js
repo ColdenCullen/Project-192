@@ -4,14 +4,15 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-var Cube = (function (_super) {
-    __extends(Cube, _super);
-    function Cube() {
+/// <reference path="Graphos.ts" />
+// Interface
+var GameObject1 = (function (_super) {
+    __extends(GameObject1, _super);
+    function GameObject1() {
         _super.apply(this, arguments);
     }
-    Cube.prototype.Update = function (deltaTime) {
-        if (Input.IsKeyDown(Keys["space"]))
-            log(this.transform.position.x);
+    GameObject1.prototype.Update = function () {
     };
-    return Cube;
+    return GameObject1;
 })(GameObject);
+//@ sourceMappingURL=GameObject1.js.map

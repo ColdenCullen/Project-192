@@ -132,10 +132,12 @@ void ScriptController::Initialize( void )
 		scripts = scripts.append( file.GetContents() ).append( "\n" );
 	}
 
-	v8::Script::Compile( String::New( scripts.c_str() ) );
+	v8::Script::Compile( String::New( scripts.c_str() ) )->Run();
 
 	// Get the "global" object
 	globalObject = context->Global();
+
+	isInitialized = true;
 }
 
 void ScriptController::Shutdown( void )
@@ -156,8 +158,13 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 	// Create a scope
 	Context::Scope contextScope( context );
 
+	char* output = new char[ 250 ];
+	globalObject->GetPropertyNames()->ToString()->WriteUtf8( output );
+
+	auto has = globalObject->Get( String::New( "GameObject" ) )->IsUndefined();
+
 	// Get an instance of the class
-	Local<Function> ctor = Local<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
+	Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
 
 	// Return object
 	if( !ctor.IsEmpty() )

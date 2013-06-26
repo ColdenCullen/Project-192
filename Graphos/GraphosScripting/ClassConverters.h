@@ -6,6 +6,7 @@
 #include "Vector3.h"
 
 #include <cvv8\ClassCreator.hpp>
+#include <cvv8\v8-convert.hpp>
 
 using namespace Graphos::Math;
 
@@ -63,6 +64,20 @@ namespace cvv8
 	void BindGraphosTypes( v8::Handle<v8::Object> dest )
 	{
 		//TODO: Explore options, use this? https://code.google.com/p/v8-juice/wiki/V8Convert_ClassCreator
+
+		typedef ClassCreator<Transform> TransformCC;
+		TransformCC& tcc(TransformCC::Instance());
+		if( tcc.IsSealed() ) { // the binding was already initialized.
+			tcc.AddClassTo( TypeName<Transform>::Value, dest );
+			return;
+		}
+		// Else initialize the bindings...
+		tcc
+			( "destroy", TransformCC::DestroyObjectCallback )
+			( "Position", MethodToInCa<Transform, Vector3 (void) const, &Transform::Position>::Call )
+			( "Rotation", MethodToInCa<Transform, Vector3 (void) const, &Transform::Rotation>::Call )
+			( "Scale", MethodToInCa<Transform, Vector3 (void) const, &Transform::Scale>::Call )
+			.AddClassTo( TypeName<Transform>::Value, dest );
 	}
 }
 

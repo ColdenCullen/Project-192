@@ -1,0 +1,9 @@
+{
+	"Name": "Ball",
+	
+	"Shader": "texture",
+
+	"Script": {
+		"Class": "GameObject1"
+	}
+}

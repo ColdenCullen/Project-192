@@ -224,7 +224,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 
 unsigned int GameObjectCollection::CreateObject( string name, Shader* shader )
 {
-	if( nameMap.find( name ) == end( nameMap ) )
+	if( nameMap.find( name ) != end( nameMap ) )
 		throw exception( "Name given has already been used" );
 
 	objectList[ currentId ] = GameObject( shader );

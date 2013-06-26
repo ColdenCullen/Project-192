@@ -59,6 +59,12 @@
       <TargetMachine>
       </TargetMachine>
     </Lib>
+    <PreBuildEvent>
+      <Command>xcopy "$(SolutionDir)Resources" "$(SolutionDir)$(Configuration)\Resources" /e /y /i /r</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Copy Resources to output.</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

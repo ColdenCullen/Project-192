@@ -1,13 +1,47 @@
+// Interface for Vectors
+interface Vector3
+{
+    x: Number;
+    y: Number;
+    z: Number;
+}
+
+// Interface for object transforms
+interface Transform
+{
+    position: Vector3;
+    rotation: Vector3;
+    scale: Vector3;
+}
+
 // Class with variables and functions
-var GameObject = (function () {
-    function GameObject() {
-    }
+class GameObject
+{
+    // ID of owner object
+    public id: string;
+
+    // Transform object
+    public transform: Transform;
+
     // Abstract method for updating object
-    GameObject.prototype.Update = function (deltaTime) {
-        throw new Error("Implement your own damn Update!");
-    };
-    return GameObject;
-})();
+    public Update( deltaTime: number ): void
+    {
+        throw new Error( "Implement your own damn Update!" );
+    }
+}
+
+// Interface that allows GameObjects to check for input
+interface Input
+{
+    IsKeyDown( key: number ): bool;
+}
+declare var Input: Input;
+
+// Print function
+declare function log(toPrint: any): void;
+
+// Include function
+declare function include(path: string): void;
 
 var Keys = {
     "backspace": 8,
@@ -110,5 +144,4 @@ var Keys = {
     "\\": 220,
     "]": 221,
     "'": 222
-};
-//@ sourceMappingURL=Graphos.js.map
+}
