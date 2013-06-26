@@ -1,5 +1,5 @@
-#ifndef _SCRIPTCONTROLLER_H_
-#define _SCRIPTCONTROLLER_H_
+#ifndef __SCRIPT_CONTROLLER
+#define __SCRIPT_CONTROLLER
 
 #include <string>
 #include <v8.h>
@@ -51,4 +51,4 @@ namespace Graphos
 	}
 }
 
-#endif//_SCRIPTCONTROLLER_H_
+#endif//__SCRIPT_CONTROLLER

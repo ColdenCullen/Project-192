@@ -39,15 +39,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ExecutablePath>$(SolutionDir)ExternalDependencies\bin;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)ExternalDependencies\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)GraphosComponents;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;$(SolutionDir)GraphosPhysics</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GraphosScripting;$(SolutionDir)GraphosComponents;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;$(SolutionDir)GraphosPhysics</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -108,6 +106,9 @@
     </ProjectReference>
     <ProjectReference Include="..\GraphosPhysics\GraphosPhysics.vcxproj">
       <Project>{90871407-0b79-40a7-ba5c-f4fbeddcd570}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\GraphosScripting\GraphosScripting.vcxproj">
+      <Project>{518b4710-8c49-4bdf-97f2-e204c70728e7}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

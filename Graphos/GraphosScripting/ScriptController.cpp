@@ -1,14 +1,20 @@
-#include <iostream>
-
 #include "ScriptController.h"
 #include "Input.h"
 #include "Config.h"
 #include "File.h"
 
+//#include "Vector2.h"
+//#include "Vector3.h"
+//#include "Transform.h"
+
+#include <iostream>
+#include <cvv8\ClassCreator.hpp>
+
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
 using namespace v8;
+namespace cv = cvv8;
 
 #pragma region Handlers
 #pragma region Helpers

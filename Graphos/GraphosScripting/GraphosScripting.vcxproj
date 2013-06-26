@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{02E806E5-DE0D-4F0A-9B39-415476B4E4FD}</ProjectGuid>
-    <RootNamespace>GraphosComponents</RootNamespace>
+    <ProjectGuid>{518B4710-8C49-4BDF-97F2-E204C70728E7}</ProjectGuid>
+    <RootNamespace>GraphosScripting</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -46,16 +46,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)Graphos;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <BrowseInformation>true</BrowseInformation>
+      <AdditionalIncludeDirectories>$(SolutionDir)Graphos;$(SolutionDir)GraphosMath;$(SolutionDir)GraphosGraphics;$(SolutionDir)GraphosComponents;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Bscmake>
-      <PreserveSbr>true</PreserveSbr>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -72,20 +67,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AssetController.cpp" />
-    <ClCompile Include="AwesomiumView.cpp" />
-    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Script.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="ScriptController.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AssetController.h" />
-    <ClInclude Include="AwesomiumView.h" />
-    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="ClassConverters.h" />
     <ClInclude Include="Script.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="ScriptController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
