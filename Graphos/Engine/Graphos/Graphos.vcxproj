@@ -33,9 +33,11 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\GraphosEngine.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\GraphosEngine.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -45,7 +47,6 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Graphos.Scripting;$(SolutionDir)Engine\Graphos.Components;$(SolutionDir)Engine\Graphos.Math;$(SolutionDir)Engine\Graphos.Graphics;$(SolutionDir)Engine\Graphos.Physics</AdditionalIncludeDirectories>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -60,7 +61,7 @@
       </TargetMachine>
     </Lib>
     <PreBuildEvent>
-      <Command>xcopy "$(SolutionDir)Resources" "$(SolutionDir)$(Configuration)\Resources" /e /y /i /r</Command>
+      <Command>xcopy "$(SolutionDir)Resources" "$(SolutionDir)Output\Final\$(Configuration)\Resources" /e /y /i /r</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Copy Resources to output.</Message>
@@ -113,7 +114,7 @@
     <ProjectReference Include="..\Graphos.Physics\Graphos.Physics.vcxproj">
       <Project>{90871407-0b79-40a7-ba5c-f4fbeddcd570}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\GraphosScripting\GraphosScripting.vcxproj">
+    <ProjectReference Include="..\Graphos.Scripting\Graphos.Scripting.vcxproj">
       <Project>{518b4710-8c49-4bdf-97f2-e204c70728e7}</Project>
     </ProjectReference>
   </ItemGroup>

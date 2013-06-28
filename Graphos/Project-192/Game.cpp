@@ -7,6 +7,8 @@ using namespace Graphos::Core;
 void Game::Initialize( void )
 {
 	objects.LoadObjects( "" );
+
+	CurrentState = GameState::Game;
 }
 
 bool Game::Update( void )

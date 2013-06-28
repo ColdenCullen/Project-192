@@ -26,7 +26,7 @@
 	},
 	"Scripts" : 
 	{
-		"Path" : "Resources/Scripts/"
+		"Path" : "Resources/Scripts/__output.js"
 	},
 	"ui" : 
 	{

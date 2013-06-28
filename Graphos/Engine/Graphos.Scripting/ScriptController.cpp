@@ -124,15 +124,18 @@ void ScriptController::Initialize( void )
 	// Scope for created variables
 	Context::Scope contextScope( context );
 
-	string scripts = "";
+	// Compile
+	auto compiled = v8::Script::Compile(
+		String::New( 
+				File::ReadFile( Config::Get().GetData<string>( "Scripts.Path" ) ).c_str()
+			)
+		);
 
-	// Load and compile scripts
-	for( auto file : File::ScanDir( Config::Get().GetData<string>( "Scripts.Path" ) ) )
-	{
-		scripts = scripts.append( file.GetContents() ).append( "\n" );
-	}
+	if( compiled.IsEmpty() )
+		throw exception( "Error compiling JS." );
 
-	v8::Script::Compile( String::New( scripts.c_str() ) )->Run();
+	// Run!
+	compiled->Run();
 
 	// Get the "global" object
 	globalObject = context->Global();
@@ -161,7 +164,7 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 	char* output = new char[ 250 ];
 	globalObject->GetPropertyNames()->ToString()->WriteUtf8( output );
 
-	auto has = globalObject->Get( String::New( "GameObject" ) )->IsUndefined();
+	auto has = globalObject->Get( String::New( "poopenPantsen" ) )->IsUndefined();
 
 	// Get an instance of the class
 	Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
@@ -182,7 +185,9 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 		return new Graphos::Core::Script( instance, owner );
 	}
 	else
-		return nullptr;
+	{
+		throw exception( "Invalid Class Name." );
+	}
 }
 
 /*

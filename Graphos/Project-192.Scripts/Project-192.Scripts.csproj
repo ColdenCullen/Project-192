@@ -46,16 +46,18 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptTarget>ES3</TypeScriptTarget>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptIncludeComments>true</TypeScriptIncludeComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptOutFile>__output.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES3</TypeScriptTarget>
     <TypeScriptIncludeComments>false</TypeScriptIncludeComments>
     <TypeScriptSourceMap>false</TypeScriptSourceMap>
     <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptOutFile>__output.js</TypeScriptOutFile>
   </PropertyGroup>
   <ItemGroup>
     <TypeScriptCompile Include="GameObject1.ts" />
@@ -80,10 +82,16 @@
       <DependentUpon>GameObject1.ts</DependentUpon>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Graphos.js.map">
+      <DependentUpon>Graphos.ts</DependentUpon>
+    </Content>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)*.js" "$(SolutionDir)\Resources\Scripts" /e /y /i /r
-del "$(SolutionDir)\Resources\Scripts\*.min.js"
-rd "$(SolutionDir)\Resources\Scripts\bin" "$(SolutionDir)\Resources\Scripts\obj"</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)__output.js" "$(SolutionDir)\Resources\Scripts" /y /i /r</PostBuildEvent>
   </PropertyGroup>
 </Project>
