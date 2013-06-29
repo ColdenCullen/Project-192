@@ -40,9 +40,6 @@ declare var Input: Input;
 // Print function
 declare function log(toPrint: any): void;
 
-// Include function
-declare function include(path: string): void;
-
 enum Keys
 {
     Backspace = 8,

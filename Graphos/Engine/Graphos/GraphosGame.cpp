@@ -72,7 +72,7 @@ void GraphosGame::Run( void )
 		GraphicsController::Get().CallGLFunction( GraphicsController::END );
 	}
 
-	Exit();
+	Stop();
 }
 
 void GraphosGame::Reset( void )

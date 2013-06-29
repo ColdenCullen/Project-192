@@ -34,7 +34,7 @@ namespace Graphos
 			//friend class		Physics;
 
 		protected:
-			Collider( ColliderType colliderType, Graphos::Core::GameObject* owner );
+								Collider( ColliderType colliderType, Graphos::Core::GameObject* owner );
 
 		private:
 			ColliderType		type;

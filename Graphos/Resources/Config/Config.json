@@ -2,7 +2,7 @@
 {
 	"Game" :
 	{
-		"DefaultState" : "Menu"
+		"DefaultState" : "Game"
 	},
 	"display" : 
 	{

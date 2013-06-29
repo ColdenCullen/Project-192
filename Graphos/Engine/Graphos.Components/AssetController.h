@@ -13,6 +13,13 @@ namespace Graphos
 		class AssetController
 		{
 		public:
+			static
+			AssetController&	Get( void )
+			{
+				static AssetController instance;
+				return instance;
+			}
+
 			bool				Initialize( void );
 			void				Shutdown( void );
 
@@ -22,13 +29,6 @@ namespace Graphos
 								GetContent( std::string name )
 			{
 				return dynamic_cast<T*>( ingredientShelf[ name ] );
-			}
-
-			static
-			AssetController&	Get( void )
-			{
-				static AssetController instance;
-				return instance;
 			}
 
 		private:
