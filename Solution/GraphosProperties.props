@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <RootDir>$(SolutionDir)..\</RootDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>$(RootDir)Output\Final\$(Configuration)\</OutDir>
+    <IntDir>$(RootDir)Output\Intermediary\$(Configuration)\</IntDir>
+    <IncludePath>$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <AdditionalIncludeDirectories>$(RootDir)Engine\Graphos;$(RootDir)Engine\Graphos.Components;$(RootDir)Engine\Graphos.Graphics;$(RootDir)Engine\Graphos.Math;$(RootDir)Engine\Graphos.Physics;$(RootDir)Engine\Graphos.Scripting</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="RootDir">
+      <Value>$(RootDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
