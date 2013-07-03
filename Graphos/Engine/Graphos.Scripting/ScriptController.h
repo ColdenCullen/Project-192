@@ -2,7 +2,7 @@
 #define __SCRIPT_CONTROLLER
 
 #include <string>
-#include <v8.h>
+#include <v8\v8.h>
 
 #include "Script.h"
 #include "GameObject.h"
@@ -14,14 +14,6 @@ namespace Graphos
 		class ScriptController
 		{
 		public:
-			//************************************
-			// Method:    Initialize
-			// FullName:  Graphos::Core::ScriptController::Initialize
-			// Access:    public 
-			// Returns:   void
-			// Qualifier:
-			// Parameter: void
-			//************************************
 			void				Initialize( void );
 			void				Shutdown( void );
 

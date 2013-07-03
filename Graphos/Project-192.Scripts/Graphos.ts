@@ -1,5 +1,5 @@
 // Interface for Vectors
-interface Vector3
+declare class Vector3
 {
     x: Number;
     y: Number;
@@ -7,7 +7,7 @@ interface Vector3
 }
 
 // Interface for object transforms
-interface Transform
+declare class Transform
 {
     position: Vector3;
     rotation: Vector3;
@@ -24,10 +24,7 @@ class GameObject
     public transform: Transform;
 
     // Abstract method for updating object
-    public Update( deltaTime: number ): void
-    {
-        throw new Error( "Implement your own damn Update!" );
-    }
+    public Update( deltaTime: number ): void { }
 }
 
 // Interface that allows GameObjects to check for input

@@ -122,11 +122,14 @@ var __extends = this.__extends || function (d, b) {
 var GameObject1 = (function (_super) {
     __extends(GameObject1, _super);
     function GameObject1() {
-        _super.apply(this, arguments);
+        _super.call(this);
+
+        this.vec = new Vector3();
+        this.vec.x = 5.0;
     }
     GameObject1.prototype.Update = function () {
         if (Input.IsKeyDown(Keys.Space))
-            log("Testing Update");
+            log("Vec.x: " + this.vec.x);
     };
     return GameObject1;
 })(GameObject);

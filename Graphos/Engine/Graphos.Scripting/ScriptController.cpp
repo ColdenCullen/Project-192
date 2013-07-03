@@ -8,13 +8,12 @@
 //#include "Transform.h"
 
 #include <iostream>
-#include <cvv8\ClassCreator.hpp>
+#include "ClassConverters.h"
 
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
 using namespace v8;
-namespace cv = cvv8;
 
 #pragma region Handlers
 #pragma region Helpers
@@ -140,6 +139,9 @@ void ScriptController::Initialize( void )
 	// Get the "global" object
 	globalObject = context->Global();
 
+	// Bind types
+	cvv8::BindGraphosTypes( globalObject );
+
 	isInitialized = true;
 }
 
@@ -164,7 +166,7 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 	char* output = new char[ 250 ];
 	globalObject->GetPropertyNames()->ToString()->WriteUtf8( output );
 
-	auto has = globalObject->Get( String::New( "poopenPantsen" ) )->IsUndefined();
+	auto has = globalObject->Get( String::New( "Vector3" ) )->IsUndefined();
 
 	// Get an instance of the class
 	Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );

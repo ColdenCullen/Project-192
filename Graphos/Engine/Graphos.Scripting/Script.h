@@ -2,7 +2,7 @@
 #define _SCRIPT_H_
 
 #include <string>
-#include <v8.h>
+#include <v8\v8.h>
 
 #include "Component.h"
 
