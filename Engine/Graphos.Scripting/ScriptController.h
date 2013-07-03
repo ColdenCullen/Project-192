@@ -2,7 +2,7 @@
 #define __SCRIPT_CONTROLLER
 
 #include <string>
-#include <v8.h>
+#include <v8\v8.h>
 
 #include "Script.h"
 #include "GameObject.h"
