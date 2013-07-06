@@ -27,16 +27,16 @@ namespace Graphos
 			}
 		
 		private:
-								ScriptController( void ) : isInitialized( false ), isolate( v8::Isolate::GetCurrent() ), handleScope( v8::Isolate::GetCurrent() ) { }
+								ScriptController( void ) : isInitialized( false ), /*isolate( v8::Isolate::GetCurrent() ),*/ handleScope() { }
 								ScriptController( const ScriptController& );
 			void				operator=( const ScriptController& );
 
 			v8::HandleScope		handleScope;
-			v8::Local<v8::Context>
+			v8::Persistent<v8::Context>
 								context;
 			v8::Local<v8::Object>
 								globalObject;
-			v8::Isolate*		isolate;
+			//v8::Isolate*		isolate;
 
 			bool				isInitialized;
 		};

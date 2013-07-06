@@ -9,6 +9,9 @@ var GameObject1 = (function (_super) {
     function GameObject1() {
         _super.apply(this, arguments);
     }
+    GameObject1.prototype.GameObject1 = function () {
+    };
+
     GameObject1.prototype.Update = function () {
         if (Input.IsKeyDown(Keys.Space))
             log("Testing Update");

@@ -55,12 +55,11 @@
 // Setup for Linux shared library export. There is no need to distinguish
 // between building or using the V8 shared library, but we should not
 // export symbols when we are building a static library.
-#if defined(__GNUC__) && ((__GNUC__ >= 4) || \
-    (__GNUC__ == 3 && __GNUC_MINOR__ >= 3)) && defined(V8_SHARED)
+#if defined(__GNUC__) && (__GNUC__ >= 4) && defined(V8_SHARED)
 #define V8EXPORT __attribute__ ((visibility("default")))
-#else
+#else  // defined(__GNUC__) && (__GNUC__ >= 4)
 #define V8EXPORT
-#endif
+#endif  // defined(__GNUC__) && (__GNUC__ >= 4)
 
 #endif  // _WIN32
 
@@ -114,7 +113,5 @@ PreParserData V8EXPORT Preparse(UnicodeInputStream* input,
                                 size_t max_stack_size);
 
 }  // namespace v8.
-
-#undef V8EXPORT
 
 #endif  // PREPARSER_H
