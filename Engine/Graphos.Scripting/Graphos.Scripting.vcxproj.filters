@@ -13,12 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\ClassCreators">
+      <UniqueIdentifier>{058b5126-e124-4eeb-8c1d-65e71bddda40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ClassCreators">
+      <UniqueIdentifier>{016e69ab-49d9-469b-ae05-3197e6e406dc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ScriptController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Script.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Vector3.cpp">
+      <Filter>Source Files\ClassCreators</Filter>
+    </ClCompile>
+    <ClCompile Include="ClassMapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,7 +41,10 @@
     <ClInclude Include="Script.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClassConverters.h">
+    <ClInclude Include="CC-Vector3.h">
+      <Filter>Header Files\ClassCreators</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassMapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

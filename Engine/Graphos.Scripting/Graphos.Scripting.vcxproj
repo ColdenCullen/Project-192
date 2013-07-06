@@ -52,6 +52,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -68,11 +69,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CC-Vector3.cpp" />
+    <ClCompile Include="ClassMapper.cpp" />
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptController.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClassConverters.h" />
+    <ClInclude Include="CC-Vector3.h" />
+    <ClInclude Include="ClassMapper.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
   </ItemGroup>
