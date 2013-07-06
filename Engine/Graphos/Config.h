@@ -39,8 +39,6 @@ namespace Graphos
 			template<>
 			string*				GetData<string*>( std::string path );
 			template<>
-			GameState			GetData<GameState>( std::string path );
-			template<>
 			Graphos::Math::Vector3
 								GetData<Graphos::Math::Vector3>( std::string path );
 #endif
@@ -161,23 +159,6 @@ namespace Graphos
 
 				return toReturn;
 			}
-		}
-		template<>
-		GameState Config::GetData<GameState>( std::string path )
-		{
-			const Json::Value& val = GetValueAtPath( path );
-
-			#define ENUM_TO_STRING(enum) (#enum)
-
-			for( int state = 0; state <= static_cast<int>( GameState::Reseting ); ++state )
-			{
-				string stringValue = ENUM_TO_STRING( static_cast<GameState>( state ) );
-
-				if( val.asString() == stringValue )
-					return static_cast<GameState>( state );
-			}
-
-			#undef ENUM_TO_STRING
 		}
 		template<>
 		Graphos::Math::Vector3 Config::GetData<Graphos::Math::Vector3>( std::string path )

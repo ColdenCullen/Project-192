@@ -2,16 +2,14 @@
 #include "Input.h"
 #include "Config.h"
 #include "File.h"
-
-//#include "Vector2.h"
-//#include "Vector3.h"
-//#include "Transform.h"
+#include "ClassMapper.h"
 
 #include <iostream>
 
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace Graphos::Scripting;
 using namespace v8;
 
 #pragma region Handlers
@@ -53,54 +51,54 @@ Handle<Value> PrintHandler( const Arguments& args )
 #pragma endregion
 
 #pragma region Transform
-// Access transform
-Handle<Value> GetTransform(Local<String> property, const AccessorInfo& info)
-{
-	// Get object holder
-	Local<Object> self = info.Holder();
-
-	Handle<Object> global = info.GetIsolate()->GetCurrentContext()->Global();
-
-	// Get owner
-//	GameObject* owner = GameObject::GetGameObject( self->Get( String::New( "id" ) )->Uint32Value() );
-
-	// Create position
-	Handle<Object> position = Handle<Function>::Cast( global->Get( String::New( "Vector3" ) ) )->CallAsConstructor( 0, nullptr )->ToObject();
-	//position->Set( String::New( "x" ), Number::New( owner->transform.Position().x ) );
-	//position->Set( String::New( "y" ), Number::New( owner->transform.Position().y ) );
-	//position->Set( String::New( "z" ), Number::New( owner->transform.Position().z ) );
-
-	// Create rotation
-	Handle<Object> rotation = Handle<Function>::Cast( global->Get( String::New( "Vector3" ) ) )->CallAsConstructor( 0, nullptr )->ToObject();
-	//rotation->Set( String::New( "x" ), Number::New( owner->transform.Rotation().x ) );
-	//rotation->Set( String::New( "y" ), Number::New( owner->transform.Rotation().y ) );
-	//rotation->Set( String::New( "z" ), Number::New( owner->transform.Rotation().z ) );
-
-	// Create scale
-	Handle<Object> scale = Handle<Function>::Cast( global->Get( String::New( "Vector3" ) ) )->CallAsConstructor( 0, nullptr )->ToObject();
-	//scale->Set( String::New( "x" ), Number::New( owner->transform.Scale().x ) );
-	//scale->Set( String::New( "y" ), Number::New( owner->transform.Scale().y ) );
-	//scale->Set( String::New( "z" ), Number::New( owner->transform.Scale().z ) );
-
-	// Link them all
-	Handle<Object> transform = Object::New();
-	transform->Set( String::New( "position" ), position );
-	transform->Set( String::New( "rotation" ), rotation );
-	transform->Set( String::New( "scale" ), scale );
-
-	return transform;
-}
-
-/*
-// Change transform
-void SetTransform(Local<String> property, Local<Value> value, const AccessorInfo& info)
-{
-	Local<Object> self = info.Holder();
-	Local<External> wrap = Local<External>::Cast(self->GetInternalField(0));
-	void* ptr = wrap->Value();
-	static_cast<Point*>(ptr)->x_ = value->Int32Value();
-}
-*/
+//// Access transform
+//Handle<Value> GetTransform(Local<String> property, const AccessorInfo& info)
+//{
+//	// Get object holder
+//	Local<Object> self = info.Holder();
+//
+//	Handle<Object> global = info.GetIsolate()->GetCurrentContext()->Global();
+//
+//	// Get owner
+////	GameObject* owner = GameObject::GetGameObject( self->Get( String::New( "id" ) )->Uint32Value() );
+//
+//	// Create position
+//	Handle<Object> position = Handle<Function>::Cast( global->Get( String::New( "Vector3" ) ) )->CallAsConstructor( 0, nullptr )->ToObject();
+//	//position->Set( String::New( "x" ), Number::New( owner->transform.Position().x ) );
+//	//position->Set( String::New( "y" ), Number::New( owner->transform.Position().y ) );
+//	//position->Set( String::New( "z" ), Number::New( owner->transform.Position().z ) );
+//
+//	// Create rotation
+//	Handle<Object> rotation = Handle<Function>::Cast( global->Get( String::New( "Vector3" ) ) )->CallAsConstructor( 0, nullptr )->ToObject();
+//	//rotation->Set( String::New( "x" ), Number::New( owner->transform.Rotation().x ) );
+//	//rotation->Set( String::New( "y" ), Number::New( owner->transform.Rotation().y ) );
+//	//rotation->Set( String::New( "z" ), Number::New( owner->transform.Rotation().z ) );
+//
+//	// Create scale
+//	Handle<Object> scale = Handle<Function>::Cast( global->Get( String::New( "Vector3" ) ) )->CallAsConstructor( 0, nullptr )->ToObject();
+//	//scale->Set( String::New( "x" ), Number::New( owner->transform.Scale().x ) );
+//	//scale->Set( String::New( "y" ), Number::New( owner->transform.Scale().y ) );
+//	//scale->Set( String::New( "z" ), Number::New( owner->transform.Scale().z ) );
+//
+//	// Link them all
+//	Handle<Object> transform = Object::New();
+//	transform->Set( String::New( "position" ), position );
+//	transform->Set( String::New( "rotation" ), rotation );
+//	transform->Set( String::New( "scale" ), scale );
+//
+//	return transform;
+//}
+//
+//*
+//// Change transform
+//void SetTransform(Local<String> property, Local<Value> value, const AccessorInfo& info)
+//{
+//	Local<Object> self = info.Holder();
+//	Local<External> wrap = Local<External>::Cast(self->GetInternalField(0));
+//	void* ptr = wrap->Value();
+//	static_cast<Point*>(ptr)->x_ = value->Int32Value();
+//}
+//*/
 #pragma endregion
 #pragma endregion
 
@@ -108,7 +106,7 @@ void ScriptController::Initialize( void )
 {
 	// Create global object template, add function handlers
 	Handle<ObjectTemplate> globalObjectTemplate = ObjectTemplate::New();
-	globalObjectTemplate->Set( "include", FunctionTemplate::New( IncludeHandler ) );
+	//globalObjectTemplate->Set( "include", FunctionTemplate::New( FunctionCallback( IncludeHandler ) ) );
 	globalObjectTemplate->Set( "log", FunctionTemplate::New( PrintHandler ) );
 
 	// Setup Input
@@ -117,7 +115,7 @@ void ScriptController::Initialize( void )
 	globalObjectTemplate->Set( "Input", input );
 
 	// Create the context for initializing the scripts
-	context = Context::New( isolate, nullptr, globalObjectTemplate );
+	context = Context::New( /*isolate,*/ nullptr, globalObjectTemplate );
 
 	// Scope for created variables
 	Context::Scope contextScope( context );
@@ -137,6 +135,9 @@ void ScriptController::Initialize( void )
 
 	// Get the "global" object
 	globalObject = context->Global();
+
+	// Bind types
+	ClassMapper::BindGraphosTypes( globalObject );
 
 	isInitialized = true;
 }
@@ -158,11 +159,6 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 
 	// Create a scope
 	Context::Scope contextScope( context );
-
-	char* output = new char[ 250 ];
-	globalObject->GetPropertyNames()->ToString()->WriteUtf8( output );
-
-	auto has = globalObject->Get( String::New( "GameObject1" ) )->IsUndefined();
 
 	// Get an instance of the class
 	Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
