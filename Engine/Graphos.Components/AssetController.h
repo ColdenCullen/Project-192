@@ -4,13 +4,14 @@
 #include <unordered_map>
 #include <string>
 
-#include "Component.h"
+#include "IComponent.h"
+#include "IController.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class AssetController
+		class AssetController : public IController
 		{
 		public:
 			static
@@ -20,12 +21,12 @@ namespace Graphos
 				return instance;
 			}
 
-			bool				Initialize( void );
-			void				Shutdown( void );
+			virtual void		Initialize( void ) override;
+			virtual void		Shutdown( void ) override;
 
 			// Returns content of the given type with the given name
 			template<class T>
-			typename std::enable_if<std::is_base_of<Component, T>::value, T*>::type
+			typename std::enable_if<std::is_base_of<IComponent, T>::value, T*>::type
 								GetContent( std::string name )
 			{
 				return dynamic_cast<T*>( ingredientShelf[ name ] );
@@ -36,7 +37,7 @@ namespace Graphos
 								AssetController( const AssetController& other );
 			AssetController&	operator=( const AssetController& other );
 
-			std::unordered_map<std::string, Component*>
+			std::unordered_map<std::string, IComponent*>
 								ingredientShelf;
 		};
 	}

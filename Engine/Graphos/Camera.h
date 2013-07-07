@@ -2,16 +2,14 @@
 #define __CAMERA
 
 #include "GameObject.h"
-#include "Component.h"
+#include "IComponent.h"
 #include "Matrix4.h"
-
-using namespace Graphos::Math;
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class Camera : public Component
+		class Camera : public IComponent
 		{
 		public:
 								Camera( GameObject* owner );
@@ -21,7 +19,7 @@ namespace Graphos
 			void				Shutdown( void );
 
 		private:
-			Matrix4				viewMatrix;
+			Math::Matrix4		viewMatrix;
 		};
 	}
 }

@@ -39,8 +39,7 @@ namespace Graphos
 			template<>
 			string*				GetData<string*>( std::string path );
 			template<>
-			Graphos::Math::Vector3
-								GetData<Graphos::Math::Vector3>( std::string path );
+			Math::Vector3		GetData<Math::Vector3>( std::string path );
 #endif
 			#pragma endregion
 
@@ -161,11 +160,11 @@ namespace Graphos
 			}
 		}
 		template<>
-		Graphos::Math::Vector3 Config::GetData<Graphos::Math::Vector3>( std::string path )
+		Math::Vector3 Config::GetData<Math::Vector3>( std::string path )
 		{
 			Json::Value root = GetValueAtPath( path );
 
-			return Graphos::Math::Vector3(
+			return Math::Vector3(
 				static_cast<float>( root.get( "x", root ).asDouble() ),
 				static_cast<float>( root.get( "y", root ).asDouble() ),
 				static_cast<float>( root.get( "z", root ).asDouble() )

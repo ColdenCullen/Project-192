@@ -4,6 +4,7 @@
 
 #define BIT_AT_KEY_STATE( pos ) ( 1 << ( pos % SIZE ) )
 
+using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 

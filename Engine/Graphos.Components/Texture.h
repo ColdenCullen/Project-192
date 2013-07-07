@@ -2,13 +2,13 @@
 #define __TEXTURE
 
 #include <string>
-#include "Component.h"
+#include "IComponent.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class Texture : public Component
+		class Texture : public IComponent
 		{
 		public:
 								Texture( void ) { }

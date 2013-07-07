@@ -1,5 +1,6 @@
 #include "SphereCollider.h"
 
+using namespace Graphos::Math;
 using namespace Graphos::Physics;
 
 SphereCollider::SphereCollider( Graphos::Core::GameObject* owner ) : Collider( Sphere, owner ) { }

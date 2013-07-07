@@ -13,6 +13,7 @@ using namespace Awesomium;
 
 using namespace Graphos;
 using namespace Graphos::Core;
+using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 
 UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )

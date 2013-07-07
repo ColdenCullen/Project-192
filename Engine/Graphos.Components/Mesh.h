@@ -3,13 +3,13 @@
 
 #include <string>
 
-#include "Component.h"
+#include "IComponent.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class Mesh : public Component
+		class Mesh : public IComponent
 		{
 		public:
 								Mesh( void ) { }

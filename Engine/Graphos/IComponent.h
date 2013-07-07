@@ -8,11 +8,11 @@ namespace Graphos
 		// Forward declaration
 		class GameObject;
 
-		class Component
+		class IComponent
 		{
 		public:
-								Component( GameObject* owner = nullptr ) : owner( owner ) { }
-			virtual				~Component( void ) { }
+								IComponent( GameObject* owner = nullptr ) : owner( owner ) { }
+			virtual				~IComponent( void ) { }
 
 			virtual bool		Update( void ) = 0;
 			virtual void		Draw( void ) = 0;

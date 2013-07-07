@@ -11,19 +11,18 @@
 #include "Config.h"
 #include "Input.h"
 #include "Matrix4.h"
-
-using namespace Graphos::Math;
+#include "IController.h"
 
 namespace Graphos
 {
 	namespace Graphics
 	{
 #pragma region PlatformWindowController
-		class PlatformWindowController
+		class PlatformWindowController : Core::IController
 		{
 		public:
-			virtual void		Initialize( void ) = 0;
-			virtual void		Shutdown( void ) = 0;
+			virtual void		Initialize( void ) override = 0;
+			virtual void		Shutdown( void ) override = 0;
 			virtual void		Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 ) = 0;
 			virtual void		Reload( void ) = 0;
 			virtual void		MessageLoop( void ) = 0;
@@ -33,16 +32,16 @@ namespace Graphos
 			unsigned int		GetHeight( void )	{ return height; }
 			//GLDeviceContext&		GetDeviceContext( void ) { return deviceContext; }
 			GLRenderContext&	RenderContext( void ) { return renderContext; }
-			Matrix4&			PerspectiveMatrix( void ) { return perspectiveMatrix; }
-			Matrix4&			OrthogonalMatrix( void ) { return orthogonalMatrix; }
+			Math::Matrix4&		PerspectiveMatrix( void ) { return perspectiveMatrix; }
+			Math::Matrix4&		OrthogonalMatrix( void ) { return orthogonalMatrix; }
 
 		protected:
 			unsigned int		width, screenWidth;
 			unsigned int		height, screenHeight;
 			bool				fullScreen;
 
-			Matrix4				perspectiveMatrix;
-			Matrix4				orthogonalMatrix;
+			Math::Matrix4		perspectiveMatrix;
+			Math::Matrix4		orthogonalMatrix;
 			//GLDeviceContext	deviceContext;
 			GLRenderContext		renderContext;
 		};
@@ -53,8 +52,8 @@ namespace Graphos
 		class Win32Controller : public PlatformWindowController
 		{
 		public:
-			void				Initialize( void );
-			void				Shutdown( void );
+			void				Initialize( void ) override;
+			void				Shutdown( void ) override;
 			void				Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 );
 			void				Reload( void );
 			void				MessageLoop( void );
@@ -86,8 +85,8 @@ namespace Graphos
 		class OSXController : public PlatformWindowController
 		{
 		public:
-			bool				Initialize( void );
-			void				Shutdown( void );
+			bool				Initialize( void ) override;
+			void				Shutdown( void ) override;
 			void				Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 );
 			void				Reload( void );
 			void				MessageLoop( void );

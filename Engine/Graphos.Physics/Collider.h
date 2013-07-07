@@ -1,7 +1,7 @@
 #ifndef __COLLIDER
 #define __COLLIDER
 
-#include "Component.h"
+#include "IComponent.h"
 #include "Vector3.h"
 #include "GameObject.h"
 
@@ -12,7 +12,7 @@ namespace Graphos
 		// Enum for what type of collider this is
 		enum ColliderType : unsigned char { Sphere, Box };
 
-		class Collider : public Graphos::Core::Component
+		class Collider : public Graphos::Core::IComponent
 		{
 		public:
 			virtual bool		Update( void ) { return true; }

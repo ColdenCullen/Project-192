@@ -20,7 +20,9 @@
 
 using namespace std;
 using namespace Graphos::Core;
+using namespace Graphos::Math;
 using namespace Graphos::Physics;
+using namespace Graphos::Graphics;
 
 #pragma region Load Objects
 void GameObjectCollection::LoadObjects( string assetPath )

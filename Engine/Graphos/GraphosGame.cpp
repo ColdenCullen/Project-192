@@ -18,6 +18,7 @@
 
 using namespace Graphos::Core;
 using namespace Graphos::Physics;
+using namespace Graphos::Graphics;
 
 void GraphosGame::Run( void )
 {
@@ -114,11 +115,9 @@ void GraphosGame::Start( void )
 
 	GraphicsController::Get().Initialize();
 
-	if( !AssetController::Get().Initialize() )
-		throw exception( "Error initializing Asset Controller." );
+	AssetController::Get().Initialize();
 
-	if( !Physics::Physics::Get().Initialize() )
-		throw exception( "Error initializing Physics Controller." );
+	Physics::Physics::Get().Initialize();
 
 	ScriptController::Get().Initialize();
 

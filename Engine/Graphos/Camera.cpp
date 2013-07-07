@@ -4,8 +4,9 @@
 
 using namespace Graphos::Core;
 using namespace Graphos::Math;
+using namespace Graphos::Graphics;
 
-Camera::Camera( GameObject* owner ) : Component( owner ), viewMatrix( Matrix4::Identity ) { }
+Camera::Camera( GameObject* owner ) : IComponent( owner ), viewMatrix( Matrix4::Identity ) { }
 
 bool Camera::Update( void )
 {

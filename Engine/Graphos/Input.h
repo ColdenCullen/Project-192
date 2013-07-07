@@ -55,13 +55,7 @@
 
 namespace Graphos
 {
-	// Forward declarations
 	namespace Core
-	{
-		//class UserInterface;
-	}
-
-	namespace Graphics
 	{
 		// Struct to store key-states
 		struct InputState
@@ -80,8 +74,8 @@ namespace Graphos
 		class Input
 		{
 		public:
-			Graphos::Core::UserInterface*
-								ui;
+			UserInterface*
+				ui;
 
 			static Input& Get( void )
 			{
@@ -97,12 +91,11 @@ namespace Graphos
 			bool				IsKeyDown( unsigned int input, const bool checkPrevious = false );
 			bool				IsKeyUp( unsigned int input, const bool checkPrevious = false );
 
-			Graphos::Math::Vector2
-								GetMousePos( /*Transform& camera, float zPlane*/ ) const;
+			Math::Vector2		GetMousePos( /*Transform& camera, float zPlane*/ ) const;
 
 		private:
-								Input( void ) { }
-								Input( Input& other );
+			Input( void ) { }
+			Input( Input& other );
 			void				operator=( Input& other );
 
 			InputState			keyState;

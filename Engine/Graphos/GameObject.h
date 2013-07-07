@@ -6,12 +6,10 @@
 #include <unordered_map>
 #include <type_traits>
 
-#include "Component.h"
+#include "IComponent.h"
 #include "Transform.h"
 #include "ShaderController.h"
 #include "Shader.h"
-
-using namespace Graphos::Graphics;
 
 namespace Graphos
 {
@@ -20,11 +18,11 @@ namespace Graphos
 		class GameObject
 		{
 		public:
-			Transform			transform;
+			Math::Transform		transform;
 
 			// Constructors
 			GameObject( void ) : shader( nullptr ) { }
-			GameObject( Shader* shader ) : shader( shader ) { }
+			GameObject( Graphics::Shader* shader ) : shader( shader ) { }
 
 			// Shutdown memory
 			void				Shutdown( void );
@@ -35,12 +33,12 @@ namespace Graphos
 			virtual void		OnCollision( GameObject* other ) { }
 
 			// Getters and setters
-			Shader&				GetShader( void ) const { return *shader; }
-			void				SetShader( std::string newName ) { shader = &( ShaderController::Get().GetShader( newName ) ); }
+			Graphics::Shader&	GetShader( void ) const { return *shader; }
+			void				SetShader( std::string newName ) { shader = &( Graphics::ShaderController::Get().GetShader( newName ) ); }
 
 			// Add ingredient of type T
 			template<class T>
-			typename std::enable_if<std::is_base_of<Component, T>::value, void>::type
+			typename std::enable_if<std::is_base_of<IComponent, T>::value, void>::type
 								AddComponent( T* newIngredient )
 			{
 				componentList[ typeid(T).hash_code() ] = newIngredient;
@@ -48,7 +46,7 @@ namespace Graphos
 
 			// Get ingredient of type T
 			template<class T>
-			typename std::enable_if<std::is_base_of<Component, T>::value, T*>::type
+			typename std::enable_if<std::is_base_of<IComponent, T>::value, T*>::type
 								GetComponent( void )
 			{
 				auto itr = componentList.find( typeid(T).hash_code() );
@@ -60,10 +58,10 @@ namespace Graphos
 			}
 
 		private:
-			std::unordered_map<size_t, Component*>
+			std::unordered_map<size_t, IComponent*>
 								componentList;
 
-			Shader*				shader;
+			Graphics::Shader*	shader;
 		};
 	}
 }

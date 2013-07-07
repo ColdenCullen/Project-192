@@ -6,7 +6,7 @@
 
 #include <string>
 
-#include "Component.h"
+#include "IComponent.h"
 
 namespace Awesomium
 {
@@ -18,7 +18,7 @@ namespace Graphos
 {
 	namespace Core
 	{
-		class AwesomiumView : public Component
+		class AwesomiumView : public IComponent
 		{
 		public:
 								AwesomiumView( void ) : webView( nullptr ), surface( nullptr ), buffer( nullptr ) { }

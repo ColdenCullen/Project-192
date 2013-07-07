@@ -27,7 +27,7 @@ namespace Graphos
 			void				Use( void ) const;
 			bool				SetUniform( std::string name, int value ) const;
 			bool				SetUniform( std::string name, float value ) const;
-			bool				SetUniform( std::string name, Graphos::Math::Matrix4 value ) const;
+			bool				SetUniform( std::string name, Math::Matrix4 value ) const;
 
 		private:
 			std::unordered_map<std::string, unsigned int>

@@ -10,7 +10,7 @@
 using namespace std;
 using namespace Graphos::Core;
 
-bool AssetController::Initialize( void )
+void AssetController::Initialize( void )
 {
 	File::FileList files = File::ScanDir( CONTENT_PATH );
 
@@ -29,8 +29,6 @@ bool AssetController::Initialize( void )
 			ingredientShelf[ name ] = new Texture( file->GetFullPath() );
 		}
 	}
-
-	return true;
 }
 
 void AssetController::Shutdown( void )

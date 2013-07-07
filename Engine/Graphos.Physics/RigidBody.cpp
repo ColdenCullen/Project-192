@@ -2,9 +2,10 @@
 #include "Time.h"
 
 using namespace Graphos::Core;
+using namespace Graphos::Math;
 using namespace Graphos::Physics;
 
-RigidBody::RigidBody( GameObject* owner ) : Component( owner ), linearVelocity(), angularVelocity(), linearDrag( 0.0f ), angularDrag( 0.0f ), positionConstraints(), rotationConstraints() { }
+RigidBody::RigidBody( GameObject* owner ) : IComponent( owner ), linearVelocity(), angularVelocity(), linearDrag( 0.0f ), angularDrag( 0.0f ), positionConstraints(), rotationConstraints() { }
 
 bool RigidBody::Update( void )
 {

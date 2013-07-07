@@ -6,15 +6,18 @@
 #include <string>
 
 #include "Shader.h"
+#include "IController.h"
 
 namespace Graphos
 {
 	namespace Graphics
 	{
-		class ShaderController
+		class ShaderController : Core::IController
 		{
 		public:
-			void				Initialize();
+			void				Initialize( void ) override;
+			//TODO: Should probably implement
+			void				Shutdown( void ) override { }
 			Shader&				GetShader( std::string shaderName );
 
 			template<typename T>

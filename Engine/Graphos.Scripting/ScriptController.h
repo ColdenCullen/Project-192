@@ -6,16 +6,17 @@
 
 #include "Script.h"
 #include "GameObject.h"
+#include "IController.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class ScriptController
+		class ScriptController : Core::IController
 		{
 		public:
-			void				Initialize( void );
-			void				Shutdown( void );
+			virtual void		Initialize( void ) override;
+			virtual void		Shutdown( void ) override;
 
 			Script*				CreateObjectInstance( std::string className, unsigned int ownerID, GameObject* owner = nullptr );
 

@@ -5,16 +5,17 @@
 
 #include "Vector3.h"
 #include "Collider.h"
+#include "IController.h"
 
 namespace Graphos
 {
 	namespace Physics
 	{
-		class Physics
+		class Physics : Core::IController
 		{
 		public:
-			bool				Initialize( void );
-			void				Shutdown( void );
+			virtual void		Initialize( void ) override;
+			virtual void		Shutdown( void ) override;
 
 			void				AddCollider( Collider* col );
 			void				Update( void );
@@ -25,7 +26,7 @@ namespace Graphos
 				return instance;
 			}
 
-			Graphos::Math::Vector3
+			Math::Vector3
 								gravity;
 
 		private:
@@ -34,15 +35,15 @@ namespace Graphos
 			public:
 				Simplex( void ) : size( 0 ) { }
 
-				Graphos::Math::Vector3
+				Math::Vector3
 								points[ 4 ];
 				unsigned char	size;
 
-				/*const*/ Graphos::Math::Vector3&
+				/*const*/ Math::Vector3&
 								GetLast( void );// const;
-				void			Add( const Graphos::Math::Vector3& newPoint );
-				void			Remove( const Graphos::Math::Vector3& target );
-				bool			ContainsOrigin( Graphos::Math::Vector3& direction );
+				void			Add( const Math::Vector3& newPoint );
+				void			Remove( const Math::Vector3& target );
+				bool			ContainsOrigin( Math::Vector3& direction );
 			};
 
 			Physics( void );
@@ -50,7 +51,7 @@ namespace Graphos
 			void				operator=( const Physics& );
 
 			// Get point in Minkowski Difference furthest in direction
-			Vector3				Support( Collider* shape1, Collider* shape2, Graphos::Math::Vector3& direction );
+			Math::Vector3		Support( Collider* shape1, Collider* shape2, Math::Vector3& direction );
 
 			bool				CheckGJK( Collider* shape1, Collider* shape2 );
 

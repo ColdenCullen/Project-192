@@ -9,6 +9,8 @@
 
 #include "cvv8\ClassCreator.hpp"
 
+using namespace Graphos::Math;
+
 namespace cvv8
 {
 	CVV8_TypeName_DECL((Vector3));
