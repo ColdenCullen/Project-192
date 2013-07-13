@@ -123,14 +123,15 @@ var GameObject1 = (function (_super) {
     function GameObject1() {
         _super.call(this);
 
-        this.vec = new Vector3();
-        this.vec.x = 5.0;
+        this.vec1 = new Vector3();
+        this.vec1.x = 5.0;
+
+        this.vec2 = new Vector3();
+        this.vec2.y = 5.0;
     }
     GameObject1.prototype.Update = function () {
-        log("Update");
-
         if (Input.IsKeyDown(Keys.Space))
-            log("Vec.x: " + this.vec.x);
+            log("Vec.z: " + this.vec1.Cross(this.vec2).z);
     };
     return GameObject1;
 })(GameObject);

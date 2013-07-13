@@ -4,6 +4,8 @@ declare class Vector3
     x: Number;
     y: Number;
     z: Number;
+
+    Cross(other: Vector3): Vector3;
 }
 
 // Interface for object transforms

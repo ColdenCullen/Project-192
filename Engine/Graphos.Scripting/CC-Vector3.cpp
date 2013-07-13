@@ -3,9 +3,11 @@
 #include "cvv8\XTo.hpp"
 #include "cvv8\properties.hpp"
 
+using namespace v8;
+
 namespace cvv8
 {
-	CVV8_TypeName_IMPL((Vector3),"Vector3");
+	CVV8_TypeName_IMPL((Vector3), "Vector3");
 
 #if 0 /* needed? */
 	template <>
@@ -16,29 +18,31 @@ namespace cvv8
 	{
 		return;
 	}
-	void ClassCreator_WeakWrap<Vector3>::Wrap( v8::Persistent<v8::Object> const &, NativeHandle )
+	void ClassCreator_WeakWrap<Vector3>::Wrap( v8::Persistent<v8::Object> const& jsSelf, TypeInfo<Vector3>::NativeHandle nativeSelf )
 	{
-		return;
+		//jsSelf->SetInternalField( 0, External::New( nativeSelf ) );
 	}
-	void ClassCreator_WeakWrap<Vector3>::Unwrap( v8::Handle<v8::Object> const &, NativeHandle )
+	void ClassCreator_WeakWrap<Vector3>::Unwrap( v8::Handle<v8::Object> const &, TypeInfo<Vector3>::NativeHandle )
 	{
 		return;
 	}
 
 	Vector3* ClassCreator_Factory<Vector3>::Create( v8::Persistent<v8::Object>& jsSelf, v8::Arguments const& argv )
 	{
-		Vector3* b = CtorArityDispatcher<BoundNativeVector3Ctors>::Call( argv );
-		if( b ) NativeToJSMap<Vector3>::Insert( jsSelf, b );
+		Vector3* b = CtorArityDispatcher<Vector3Ctors>::Call( argv );
+		//if( b ) NativeToJSMap<Vector3>::Insert( jsSelf, b );
+		//jsSelf->SetInternalField( 0, External::New( b ) );
 
 		return b;
 	}
 
 	void ClassCreator_Factory<Vector3 >::Delete( Vector3* obj )
 	{
-		if(obj) delete obj;
+		if( obj )
+			delete obj;
 	}
 
-	void ClassCreator_SetupBindings<Vector3>::Initialize( v8::Handle<v8::Object> const & target )
+	void ClassCreator_SetupBindings<Vector3>::Initialize( Handle<v8::Object> const & target )
 	{
 		ClassCreator<Vector3>& Vector3cc( ClassCreator<Vector3>::Instance() );
 		if( Vector3cc.IsSealed() )
@@ -46,8 +50,6 @@ namespace cvv8
 			Vector3cc.AddClassTo( TypeName<Vector3>::Value, target );
 			return;
 		}
-
-#define CATCHER InCaCatcher_std /* convenience macro */
 
 		Vector3cc
 			( "destroy", ClassCreator<Vector3>::DestroyObjectCallback )
@@ -75,11 +77,8 @@ namespace cvv8
 		v8::Handle<v8::Function> ctor( Vector3cc.CtorFunction() );
 		// then use ctor->Set() and friends.
 		// These MUST come after your prototype-level bindings (don't ask me why
-		
 #endif
-#undef CATCHER
-			Vector3cc.AddClassTo( TypeName<Vector3>::Value, target );
-		return;
 
+		Vector3cc.AddClassTo( TypeName<Vector3>::Value, target );
 	};
 } /* namespace */

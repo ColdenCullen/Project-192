@@ -37,40 +37,47 @@ void GraphosGame::Run( void )
 	// Loop until there is a quit message from the window or the user.
 	while( !quit )
 	{
-		if( CurrentState == GameState::Reseting )
-			Reset();
+		try
+		{
+			if( CurrentState == GameState::Reseting )
+				Reset();
 
-		//////////////////////////////////////////////////////////////////////////
-		// Update
-		//////////////////////////////////////////////////////////////////////////
-		
-		// Platform specific program stuff
-		GraphicsController::Get().MessageLoop();
+			//////////////////////////////////////////////////////////////////////////
+			// Update
+			//////////////////////////////////////////////////////////////////////////
 
-		// Update time
-		Time::Get().Update();
+			// Platform specific program stuff
+			GraphicsController::Get().MessageLoop();
 
-		// Update input
-		Input::Get().Update();
+			// Update time
+			Time::Get().Update();
 
-		// Update physics
-		Physics::Physics::Get().Update();
+			// Update input
+			Input::Get().Update();
 
-		// Do the updating of the child class.
-		Update();
+			// Update physics
+			Physics::Physics::Get().Update();
 
-		//////////////////////////////////////////////////////////////////////////
-		// Draw
-		//////////////////////////////////////////////////////////////////////////
+			// Do the updating of the child class.
+			Update();
 
-		// Begin drawing
-		GraphicsController::Get().CallGLFunction( GraphicsController::BEGIN );
+			//////////////////////////////////////////////////////////////////////////
+			// Draw
+			//////////////////////////////////////////////////////////////////////////
 
-		// Draw in child class
-		Draw();
+			// Begin drawing
+			GraphicsController::Get().CallGLFunction( GraphicsController::BEGIN );
 
-		// End drawing
-		GraphicsController::Get().CallGLFunction( GraphicsController::END );
+			// Draw in child class
+			Draw();
+
+			// End drawing
+			GraphicsController::Get().CallGLFunction( GraphicsController::END );
+		}
+		catch (exception e)
+		{
+			WindowController::Get().DisplayMessage( e.what() );
+		}
 	}
 
 	Stop();
