@@ -26,6 +26,7 @@ namespace Graphos
 			virtual void		Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 ) = 0;
 			virtual void		Reload( void ) = 0;
 			virtual void		MessageLoop( void ) = 0;
+			virtual void		DisplayMessage( std::string message ) = 0;
 
 			// Getters
 			unsigned int		GetWidth( void )	{ return width; }
@@ -57,6 +58,7 @@ namespace Graphos
 			void				Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 );
 			void				Reload( void );
 			void				MessageLoop( void );
+			virtual void		DisplayMessage( std::string message ) override;
 
 			// Getters
 			HWND				GetHWnd( void ) { return hWnd; }
