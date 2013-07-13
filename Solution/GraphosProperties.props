@@ -8,6 +8,7 @@
     <OutDir>$(RootDir)Output\Final\$(Configuration)\</OutDir>
     <IntDir>$(RootDir)Output\Intermediary\$(Configuration)\</IntDir>
     <IncludePath>$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(RootDir)ExternalDependencies\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

@@ -253,6 +253,10 @@ void Win32Controller::MessageLoop( void )
 		DispatchMessage(&msg);
 	}
 }
+void Win32Controller::DisplayMessage( std::string message )
+{
+	MessageBox( hWnd, std::wstring( message.begin(), message.end() ).c_str(), L"Graphos Error", MB_OK );
+}
 
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
