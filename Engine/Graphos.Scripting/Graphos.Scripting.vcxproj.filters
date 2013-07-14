@@ -33,6 +33,12 @@
     <ClCompile Include="ClassMapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CC-Transform.cpp">
+      <Filter>Source Files\ClassCreators</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Time.cpp">
+      <Filter>Source Files\ClassCreators</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ScriptController.h">
@@ -46,6 +52,12 @@
     </ClInclude>
     <ClInclude Include="ClassMapper.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CC-Transform.h">
+      <Filter>Header Files\ClassCreators</Filter>
+    </ClInclude>
+    <ClInclude Include="CC-Time.h">
+      <Filter>Header Files\ClassCreators</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

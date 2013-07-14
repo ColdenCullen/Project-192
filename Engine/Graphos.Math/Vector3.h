@@ -11,10 +11,19 @@ namespace Graphos
 		struct Vector3
 		{
 		public:
+			#pragma region Statics
 			const static Vector3 Zero;
 			const static Vector3 Right;
 			const static Vector3 Up;
 			const static Vector3 Forward;
+			static Vector3 TripleProduct( const Vector3& a, const Vector3& b, const Vector3& c )
+			{
+				//return ( b * a.Dot( c ) ) - ( a * b.Dot( c ) );
+
+				float z = ( a.x * b.y ) - ( a.y * b.x );
+				return Vector3( -z * c.y, z * c.x, 0.0f );
+			}
+			#pragma endregion
 
 			Vector3( const float values[ 3 ] ) : x( values[ 0 ] ), y( values[ 1 ] ), z( values[ 2 ] ) { }
 			Vector3( float x = 0.0f, float y = 0.0f, float z = 0.0f ) : x( x ), y( y ), z( z ) { }
@@ -37,15 +46,25 @@ namespace Graphos
 				return *this;
 			}
 
-			bool operator==( const Vector3& other )
+			inline bool Equals( const Vector3& other ) const
 			{
 				return x == other.x && y == other.y && z == other.z;
 			}
 
+			inline bool operator==( const Vector3& other ) const
+			{
+				return Equals( other );
+			}
+
 			// Arithmetic
-			inline Vector3 operator+( const Vector3& other ) const
+			inline Vector3 Add( const Vector3& other ) const
 			{
 				return Vector3( x + other.x, y + other.y, z + other.z );
+			}
+
+			inline Vector3 operator+( const Vector3& other ) const
+			{
+				return Add( other );
 			}
 
 			Vector3& operator+=( const Vector3& other )
@@ -188,14 +207,6 @@ namespace Graphos
 			}
 
 			float x, y, z;
-
-			static Vector3 TripleProduct( const Vector3& a, const Vector3& b, const Vector3& c )
-			{
-				//return ( b * a.Dot( c ) ) - ( a * b.Dot( c ) );
-
-				float z = ( a.x * b.y ) - ( a.y * b.x );
-				return Vector3( -z * c.y, z * c.x, 0.0f );
-			}
 		};
 	}
 }

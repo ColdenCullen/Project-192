@@ -77,6 +77,7 @@ void GraphosGame::Run( void )
 		catch (exception e)
 		{
 			WindowController::Get().DisplayMessage( e.what() );
+			break;
 		}
 	}
 

@@ -1,8 +1,6 @@
 #ifndef __CC_VECTOR3
 #define __CC_VECTOR3
 
-#include "Transform.h"
-#include "Vector2.h"
 #include "Vector3.h"
 
 #include <v8\v8.h>
@@ -23,26 +21,21 @@ namespace cvv8
 		)> Vector3Ctors;
 
 	template <>
-	struct ClassCreator_InternalFields<Vector3>	: ClassCreator_InternalFields_Base<Vector3> { };
+	struct ClassCreator_InternalFields<Vector3>	: public ClassCreator_InternalFields_Base<Vector3> { };
 
 	template <>
-	struct ClassCreator_SearchPrototypeForThis<Vector3> : Opt_Bool<true> { };
+	struct ClassCreator_SearchPrototypeForThis<Vector3> : public Opt_Bool<true> { };
 
 	template <>
 	class ClassCreator_Factory<Vector3>
-		: public ClassCreator_Factory_Dispatcher<Vector3, CtorArityDispatcher<Vector3Ctors>>
-	{
-	public:
-		static Vector3* Create( v8::Persistent<v8::Object> & jsSelf, v8::Arguments const & argv );
-		static void Delete( Vector3* obj );
-	};
+		: public ClassCreator_Factory_NativeToJSMap<Vector3, CtorArityDispatcher<Vector3Ctors>> { };
 
 	template <>
 	struct ClassCreator_WeakWrap<Vector3>
 	{
-		static void PreWrap( v8::Persistent<v8::Object> const &, v8::Arguments const & );
-		static void Wrap( v8::Persistent<v8::Object> const &, TypeInfo<Vector3>::NativeHandle );
-		static void Unwrap( v8::Handle<v8::Object> const &, TypeInfo<Vector3>::NativeHandle );
+		static void PreWrap( v8::Persistent<v8::Object> const &, v8::Arguments const & ) { }
+		static void Wrap( v8::Persistent<v8::Object> const &, TypeInfo<Vector3>::NativeHandle ) { }
+		static void Unwrap( v8::Handle<v8::Object> const &, TypeInfo<Vector3>::NativeHandle ) { }
 	};
 
 	template <>
@@ -53,33 +46,13 @@ namespace cvv8
 
 
 	template <>
-	struct JSToNative<Vector3> : JSToNative_ClassCreator<Vector3> { };
+	struct JSToNative<Vector3> : public JSToNative_ClassCreator<Vector3> { };
 
 	template <>
-	struct NativeToJS<Vector3> : NativeToJSMap<Vector3>
+	struct NativeToJS<Vector3> : public NativeToJSMap<Vector3>
 	{
-		v8::Handle<v8::Value> operator()( const Vector3& v ) const
-		{
-			v8::Handle<v8::Value> params[] =
-			{
-				v8::NumberObject::New( v.x ),
-				v8::NumberObject::New( v.y ),
-				v8::NumberObject::New( v.z )
-			};
-
-			Vector3* test;
-
-			auto result = ClassCreator<Vector3>::Instance().NewInstance( 3, params, test )->ToObject();
-
-			if( !( *test == v ) )
-				throw exception( "VEC3'S CAST'S BROKE YO" );
-
-			//result->SetInternalField( ClassCreator_InternalFields<Vector3>::NativeIndex, v8::External::New( (void*)&v ) );
-
-			return result;
-		}
+		v8::Handle<v8::Value> operator()( const Vector3& v ) const;
 	};
-
-} /* namespace */
+}
 
 #endif//__CC_VECTOR3

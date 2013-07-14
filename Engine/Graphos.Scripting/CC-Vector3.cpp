@@ -9,39 +9,6 @@ namespace cvv8
 {
 	CVV8_TypeName_IMPL((Vector3), "Vector3");
 
-#if 0 /* needed? */
-	template <>
-	const void * ClassCreator_TypeID<Vector3>::Value = TypeName<Vector3 >::Value;
-#endif
-
-	void ClassCreator_WeakWrap<Vector3>::PreWrap( v8::Persistent<v8::Object> const &, v8::Arguments const & )
-	{
-		return;
-	}
-	void ClassCreator_WeakWrap<Vector3>::Wrap( v8::Persistent<v8::Object> const& jsSelf, TypeInfo<Vector3>::NativeHandle nativeSelf )
-	{
-		//jsSelf->SetInternalField( 0, External::New( nativeSelf ) );
-	}
-	void ClassCreator_WeakWrap<Vector3>::Unwrap( v8::Handle<v8::Object> const &, TypeInfo<Vector3>::NativeHandle )
-	{
-		return;
-	}
-
-	Vector3* ClassCreator_Factory<Vector3>::Create( v8::Persistent<v8::Object>& jsSelf, v8::Arguments const& argv )
-	{
-		Vector3* b = CtorArityDispatcher<Vector3Ctors>::Call( argv );
-		//if( b ) NativeToJSMap<Vector3>::Insert( jsSelf, b );
-		//jsSelf->SetInternalField( 0, External::New( b ) );
-
-		return b;
-	}
-
-	void ClassCreator_Factory<Vector3 >::Delete( Vector3* obj )
-	{
-		if( obj )
-			delete obj;
-	}
-
 	void ClassCreator_SetupBindings<Vector3>::Initialize( Handle<v8::Object> const & target )
 	{
 		ClassCreator<Vector3>& Vector3cc( ClassCreator<Vector3>::Instance() );
@@ -53,9 +20,10 @@ namespace cvv8
 
 		Vector3cc
 			( "destroy", ClassCreator<Vector3>::DestroyObjectCallback )
-			//( "Dot", MethodToInCa<const Vector3, float (const Vector3&), &Vector3::Dot>::Call )
-			( "Cross", MethodToInCa<const Vector3, Vector3 (const Vector3&), &Vector3::Cross>::Call )
-			//( "Equals", ConstMethodToInCa<const Vector3, bool (const Vector3&), &Vector3::operator==>::Call )
+			( "Equals", ConstMethodToInCa<const Vector3, bool (const Vector3&), &Vector3::Equals>::Call )
+			( "Dot", ConstMethodToInCa<const Vector3, float (const Vector3&), &Vector3::Dot>::Call )
+			( "Cross", ConstMethodToInCa<const Vector3, Vector3 (const Vector3&), &Vector3::Cross>::Call )
+			( "Add", ConstMethodToInCa<const Vector3, Vector3 (const Vector3&), &Vector3::Add>::Call )
 			;
 
 		// Proxy accessor/mutator functions as JS properties
@@ -72,13 +40,31 @@ namespace cvv8
 				MemberToAccessors<const Vector3, float, &Vector3::z>::Set )
 			;
 
-#if 0
-		// Set up properties on the ctor...
-		v8::Handle<v8::Function> ctor( Vector3cc.CtorFunction() );
-		// then use ctor->Set() and friends.
-		// These MUST come after your prototype-level bindings (don't ask me why
-#endif
+		// Set static methods
+		Handle<Function> ctor( Vector3cc.CtorFunction() );
+		ctor->Set( String::New( "TrippleProduct" ), FunctionTemplate::New( FunctionToInCa<Vector3 (const Vector3&, const Vector3&, const Vector3&), &Vector3::TripleProduct>::Call )->GetFunction() );
 
 		Vector3cc.AddClassTo( TypeName<Vector3>::Value, target );
 	};
+
+	Handle<Value> NativeToJS<Vector3>::operator()( const Vector3& v ) const
+	{
+		Handle<Object> toReturn;
+
+		if( !( toReturn = GetJSObject( (void*)&v ) ).IsEmpty() )
+		{	// If the object exists, return it
+			return toReturn;
+		}
+		else
+		{	// If object does not exist in the JSMap, create it
+			Handle<Value> params[] =
+			{
+				Number::New( v.x ),
+				Number::New( v.y ),
+				Number::New( v.z )
+			};
+
+			return ClassCreator<Vector3>::Instance().NewInstance( 3, params )->ToObject();
+		}
+	}
 } /* namespace */
