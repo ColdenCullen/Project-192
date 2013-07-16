@@ -53,7 +53,7 @@ namespace cvv8
 
 		if( !( toReturn = GetJSObject( (void*)&v ) ).IsEmpty() )
 		{	// If the object exists, return it
-			return toReturn;
+			
 		}
 		else
 		{	// If object does not exist in the JSMap, create it
@@ -64,7 +64,9 @@ namespace cvv8
 				Number::New( v.z )
 			};
 
-			return ClassCreator<Vector3>::Instance().NewInstance( 3, params )->ToObject();
+			toReturn = ClassCreator<Vector3>::Instance().NewInstance( 3, params )->ToObject();
 		}
+
+		return toReturn;
 	}
 } /* namespace */

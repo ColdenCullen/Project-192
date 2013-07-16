@@ -4,7 +4,6 @@
 #include "Vector3.h"
 
 #include <v8\v8.h>
-
 #include "cvv8\ClassCreator.hpp"
 
 using namespace Graphos::Math;

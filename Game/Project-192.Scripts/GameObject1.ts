@@ -20,10 +20,10 @@ class GameObject1 extends GameObject
 
         if (Input.IsKeyDown(Keys.Space))
         {
-            log(Time.DeltaTime);
+            //log(Time.DeltaTime);
             //this.Transform.Translate(new Vector3(1.0, 1.0, 0.0));
-            //this.Transform.Translate( 1.0, 1.0, 1.0 );
-            //log(this.Transform.Position.x);
+            this.Transform.Translate( 1.0, 1.0, 1.0 );
+            log(this.Transform.Position.x);
         }
     }
 }

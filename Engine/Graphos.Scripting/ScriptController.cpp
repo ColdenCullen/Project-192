@@ -5,7 +5,8 @@
 #include "ClassMapper.h"
 
 // Class Creators
-//#include "CC-Vector3.h"
+//#include "CC-Transform.h"
+#include <cvv8\ClassCreator.hpp>
 
 #include <iostream>
 

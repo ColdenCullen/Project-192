@@ -1,5 +1,4 @@
 #include "CC-Transform.h"
-
 #include "CC-Vector3.h"
 
 #include <cvv8\XTo.hpp>
@@ -96,14 +95,14 @@ namespace cvv8
 
 		if( !( toReturn = GetJSObject( (void*)&v ) ).IsEmpty() )
 		{	// If the object exists, return it
-			return toReturn;
+			
 		}
 		else
 		{	// If object does not exist in the JSMap, create it
 			toReturn = ClassCreator<Transform>::Instance().NewInstance( 0, NULL )->ToObject();
 			toReturn->Set( String::New( "Position" ), CastToJS( v.Position() ) );
-
-			return toReturn;
 		}
+
+		return toReturn;
 	}
 } /* namespace */
