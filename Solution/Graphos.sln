@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{70DF5D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{1B86C4C1-FDD5-4F8D-8199-6AE0CE3AD6EA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos", "..\Engine\Graphos\Graphos.vcxproj", "{2741E3C6-A331-47FB-B757-9747231419B8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{57CB670E-CDC4-4349-AB23-6028E106A692}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Components", "..\Engine\Graphos.Components\Graphos.Components.vcxproj", "{02E806E5-DE0D-4F0A-9B39-415476B4E4FD}"
@@ -23,11 +21,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Physics", "..\Engine\Graphos.Physics\Graphos.Physics.vcxproj", "{90871407-0B79-40A7-BA5C-F4FBEDDCD570}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Scripting", "..\Engine\Graphos.Scripting\Graphos.Scripting.vcxproj", "{518B4710-8C49-4BDF-97F2-E204C70728E7}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project-192", "..\Game\Project-192\Project-192.vcxproj", "{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1}"
-	ProjectSection(ProjectDependencies) = postProject
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E} = {62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project-192.Scripts", "..\Game\Project-192.Scripts\Project-192.Scripts.csproj", "{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}"
 EndProject
@@ -53,9 +46,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{BBA9
 		..\Game\Resources\Shaders\texture.vs.gl = ..\Game\Resources\Shaders\texture.vs.gl
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v8", "v8", "{69E4E72F-6BE7-4078-9E36-11049DB619AF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Core", "..\Engine\Graphos.Core\Graphos.Core.vcxproj", "{2741E3C6-A331-47FB-B757-9747231419B8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v8_base_graphos", "..\..\..\Libraries\v8-3.8\tools\gyp\v8_base_graphos.vcxproj", "{0365B47C-0806-2D4C-C633-BFFE035A6182}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project-192.Core", "..\Game\Project-192.Core\Project-192.Core.vcxproj", "{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,16 +140,6 @@ Global
 		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Release|Win32.ActiveCfg = Release|Any CPU
-		{0365B47C-0806-2D4C-C633-BFFE035A6182}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{0365B47C-0806-2D4C-C633-BFFE035A6182}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{0365B47C-0806-2D4C-C633-BFFE035A6182}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{0365B47C-0806-2D4C-C633-BFFE035A6182}.Debug|Win32.ActiveCfg = Debug|Win32
-		{0365B47C-0806-2D4C-C633-BFFE035A6182}.Debug|Win32.Build.0 = Debug|Win32
-		{0365B47C-0806-2D4C-C633-BFFE035A6182}.Release|Any CPU.ActiveCfg = Release|Win32
-		{0365B47C-0806-2D4C-C633-BFFE035A6182}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{0365B47C-0806-2D4C-C633-BFFE035A6182}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{0365B47C-0806-2D4C-C633-BFFE035A6182}.Release|Win32.ActiveCfg = Release|Win32
-		{0365B47C-0806-2D4C-C633-BFFE035A6182}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
