@@ -122,15 +122,14 @@ var GameObject1 = (function (_super) {
     __extends(GameObject1, _super);
     function GameObject1() {
         _super.call(this);
-
-        this.vec = new Vector3();
-        this.vec.x = 5.0;
     }
     GameObject1.prototype.Update = function () {
-        log("Update");
-
-        if (Input.IsKeyDown(Keys.Space))
-            log("Vec.x: " + this.vec.x);
+        if (Input.IsKeyDown(Keys.Space)) {
+            //log(Time.DeltaTime);
+            //this.Transform.Translate(new Vector3(1.0, 1.0, 0.0));
+            this.Transform.Translate(1.0, 1.0, 1.0);
+            log(this.Transform.Position.x);
+        }
     };
     return GameObject1;
 })(GameObject);
