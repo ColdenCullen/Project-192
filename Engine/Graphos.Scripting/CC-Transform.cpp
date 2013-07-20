@@ -93,7 +93,7 @@ namespace cvv8
 	{
 		v8::Handle<v8::Object> toReturn;
 
-		if( !( toReturn = GetJSObject( (void*)&v ) ).IsEmpty() )
+		if( ( toReturn = GetJSObject( (void*)&v ) ).IsEmpty() )
 		{	// If object does not exist in the JSMap, create it
 			toReturn = ClassCreator<Transform>::Instance().NewInstance( 0, NULL )->ToObject();
 			toReturn->Set( String::New( "Position" ), CastToJS( v.Position() ) );
