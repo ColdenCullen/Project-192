@@ -15,7 +15,7 @@ namespace cvv8
 	// Define Constructors
 	typedef Signature<Vector3 (
 		CtorForwarder<Vector3*()>,
-		CtorForwarder<Vector3*( float, float, float)>,
+		CtorForwarder<Vector3*( float, float, float )>,
 		CtorForwarder<Vector3*( const Vector3& )>
 		)> Vector3Ctors;
 

@@ -14,7 +14,7 @@ declare class Vector3
     public Cross(other: Vector3): Vector3;
     public Add(other: Vector3): Vector3;
 
-    public static TrippleProduct(a: Vector3, b: Vector3, c: Vector3): Vector3;
+    public static TripleProduct(a: Vector3, b: Vector3, c: Vector3): Vector3;
 }
 
 // Interface for object transforms

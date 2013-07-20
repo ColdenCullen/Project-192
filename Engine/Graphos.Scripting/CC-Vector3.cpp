@@ -51,11 +51,7 @@ namespace cvv8
 	{
 		Handle<Object> toReturn;
 
-		if( !( toReturn = GetJSObject( (void*)&v ) ).IsEmpty() )
-		{	// If the object exists, return it
-			
-		}
-		else
+		if( ( toReturn = GetJSObject( (void*)&v ) ).IsEmpty() )
 		{	// If object does not exist in the JSMap, create it
 			Handle<Value> params[] =
 			{
