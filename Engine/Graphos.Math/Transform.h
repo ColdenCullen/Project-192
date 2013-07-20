@@ -17,7 +17,7 @@ namespace Graphos
 
 									Transform( void );
 
-			void					Rotate( Quaternion rotation );
+			void					Rotate( const Quaternion& rotation );
 			void					Rotate( const float x, const float y, const float z, const float w );
 			void					Rotate( const Vector3& eulerAngles );
 			void					Rotate( const float x, const float y, const float z );
