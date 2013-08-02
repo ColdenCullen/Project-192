@@ -13,7 +13,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(RootDir)Engine\Graphos;$(RootDir)Engine\Graphos.Components;$(RootDir)Engine\Graphos.Graphics;$(RootDir)Engine\Graphos.Math;$(RootDir)Engine\Graphos.Physics;$(RootDir)Engine\Graphos.Scripting</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(RootDir)Engine\Graphos.Core;$(RootDir)Engine\Graphos.Components;$(RootDir)Engine\Graphos.Graphics;$(RootDir)Engine\Graphos.Math;$(RootDir)Engine\Graphos.Physics;$(RootDir)Engine\Graphos.Scripting</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
