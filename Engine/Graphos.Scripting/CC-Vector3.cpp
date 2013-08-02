@@ -42,7 +42,7 @@ namespace cvv8
 
 		// Set static methods
 		Handle<Function> ctor( Vector3cc.CtorFunction() );
-		ctor->Set( String::New( "TrippleProduct" ), FunctionTemplate::New( FunctionToInCa<Vector3 (const Vector3&, const Vector3&, const Vector3&), &Vector3::TripleProduct>::Call )->GetFunction() );
+		ctor->Set( String::New( "TripleProduct" ), FunctionTemplate::New( FunctionToInCa<Vector3 (const Vector3&, const Vector3&, const Vector3&), &Vector3::TripleProduct>::Call )->GetFunction() );
 
 		Vector3cc.AddClassTo( TypeName<Vector3>::Value, target );
 	};
