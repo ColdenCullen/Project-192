@@ -27,21 +27,19 @@ namespace Graphos
 			virtual void		Shutdown( void );
 
 			const int&			GetThreadCount( void )			{ return numThreads; }
-			const int&			GetActiveThreadCount( void )	{ return workers.size(); }
+			const int&			GetActiveThreadCount( void )	{ return runningThreads; }
 
 			void				AddTask( Task task );
 			void				WaitForCompletion( void );
 
-			// DO NOT CALL!! For internal use only
-			void				Monitor( void );
+			void				ExecuteTask( Task task, int index );
 
 		private:
 			int					numThreads;
-			bool				running;
+			int					runningThreads;
 			std::deque<Task>	tasksWaiting;
-			std::deque<std::thread>
-				workers;
-			std::thread*		monitorThread;
+			std::thread*		workers;
+			bool*				workerAvailablibility;
 			std::mutex			monitorMutex;
 
 			TaskManager( void ) { }
