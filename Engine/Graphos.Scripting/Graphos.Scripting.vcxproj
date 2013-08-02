@@ -90,11 +90,6 @@
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Libraries\v8-3.8\tools\gyp\v8_base_graphos.vcxproj">
-      <Project>{0365b47c-0806-2d4c-c633-bffe035a6182}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
