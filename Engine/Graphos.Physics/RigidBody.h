@@ -15,9 +15,9 @@ namespace Graphos
 		public:
 								RigidBody( Graphos::Core::GameObject* owner );
 			
-			bool				Update( void );
+			void				Update( void );
 			void				Draw( void ) { }
-			void				Shutdown( void );
+			void				Shutdown( void ) { }
 
 			void				AddForce( const Graphos::Math::Vector3& force );
 			void				AddForce( float x, float y, float z );

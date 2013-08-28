@@ -14,9 +14,9 @@ namespace Graphos
 								Texture( void ) { }
 								Texture( std::string filePath ) { LoadFromFile( filePath ); }
 			
-			bool				LoadFromFile( std::string filePath );
+			void				LoadFromFile( std::string filePath );
 
-			bool				Update( void ) { return true; }
+			void				Update( void ) {  }
 			void				Draw( void );
 			void				Shutdown( void );
 

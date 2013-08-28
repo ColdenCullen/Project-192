@@ -15,7 +15,7 @@ namespace Graphos
 		class Collider : public Graphos::Core::IComponent
 		{
 		public:
-			virtual bool		Update( void ) { return true; }
+			virtual void		Update( void ) { }
 			virtual void		Draw( void ) { }
 			virtual void		Shutdown( void ) { }
 

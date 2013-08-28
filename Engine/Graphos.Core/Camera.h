@@ -14,7 +14,7 @@ namespace Graphos
 		public:
 								Camera( GameObject* owner );
 			
-			bool				Update( void );
+			void				Update( void );
 			void				Draw( void );
 			void				Shutdown( void );
 

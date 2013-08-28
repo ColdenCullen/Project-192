@@ -7,7 +7,7 @@ using namespace Graphos::Physics;
 
 RigidBody::RigidBody( GameObject* owner ) : IComponent( owner ), linearVelocity(), angularVelocity(), linearDrag( 0.0f ), angularDrag( 0.0f ), positionConstraints(), rotationConstraints() { }
 
-bool RigidBody::Update( void )
+void RigidBody::Update( void )
 {
 	// Update velocities with drag
 	//linearVelocity *= ( ( 1 - linearDrag ) * deltaTime );
@@ -36,13 +36,6 @@ bool RigidBody::Update( void )
 	// Update object
 	owner->transform.Translate( linearVelocity * deltaTime );
 	owner->transform.Rotate( angularVelocity * deltaTime );
-
-	return true;
-}
-
-void RigidBody::Shutdown( void )
-{
-
 }
 
 void RigidBody::AddForce( const Vector3& force )

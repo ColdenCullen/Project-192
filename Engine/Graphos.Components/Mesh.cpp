@@ -12,7 +12,7 @@ using namespace std;
 using namespace Graphos::Math;
 using namespace Graphos::Core;
 
-bool Mesh::LoadFromFile( string filePath )
+void Mesh::LoadFromFile( string filePath )
 {
 	vector<Vector3> vertices;
 	vector<Vector2> uvs;
@@ -24,7 +24,7 @@ bool Mesh::LoadFromFile( string filePath )
 	string line;
 
 	if( !file )
-		return false;
+		throw exception( string( "Failed to read object file " + filePath + "." ).c_str() );
 
 	while( getline( file, line ) )
 	{
@@ -116,8 +116,6 @@ bool Mesh::LoadFromFile( string filePath )
 	glBindVertexArray( NULL );
 
 	delete[] indices;
-
-	return true;
 }
 
 void Mesh::Draw( void )

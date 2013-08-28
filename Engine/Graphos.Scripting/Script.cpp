@@ -7,10 +7,8 @@
 using namespace v8;
 using namespace std;
 
-bool Graphos::Core::Script::Update( void )
+void Graphos::Core::Script::Update( void )
 {
-	//instance.InvokeAsync( WSLit( "UpdateTransformS" ), JSArray() );
-
 	Handle<Value> args[ 1 ];
 	args[ 0 ] = Number::New( Time::Get().GetDeltaTime() );
 
@@ -19,8 +17,4 @@ bool Graphos::Core::Script::Update( void )
 
 	//if( tc.HasCaught() )
 	//	throw runtime_error( string( "An exception has been thrown in JavaScript: " + string( *String::AsciiValue( tc.Message()->GetSourceLine() ) ) + "\nStack trace:\n" + string( *String::AsciiValue( tc.StackTrace()->ToString() ) ) ) );
-
-	//instance.InvokeAsync( WSLit( "Update" ), args );
-
-	return true;
 }

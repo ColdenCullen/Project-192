@@ -8,7 +8,7 @@ using namespace Graphos::Graphics;
 
 Camera::Camera( GameObject* owner ) : IComponent( owner ), viewMatrix( Matrix4::Identity ) { }
 
-bool Camera::Update( void )
+void Camera::Update( void )
 {
 	const Vector3& position = owner->transform.Position();
 
@@ -42,8 +42,6 @@ bool Camera::Update( void )
 	viewMatrix.dataArray[ 13 ] = -yAxis.Dot( position );
 	viewMatrix.dataArray[ 14 ] = -zAxis.Dot( position );
 	viewMatrix.dataArray[ 15 ] = 1.0f;
-
-	return true;
 }
 
 void Camera::Draw( void )
