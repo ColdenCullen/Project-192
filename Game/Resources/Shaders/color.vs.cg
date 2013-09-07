@@ -1,0 +1,15 @@
+struct ColorV_Output
+{
+	Float4 position : POSITION;
+	Float4 color	: COLOR;
+};
+
+ColorV_Output ColorVertex( Float3 position : POSITION )
+{
+	ColorV_Output OUT;
+
+	OUT.position = Float4( position, 1 );
+	OUT.color	 = Float4( 0, 1, 0, 1 );
+
+	return OUT;
+}

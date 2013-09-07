@@ -75,10 +75,10 @@ void OutputShaderErrorMessage( HWND hwnd, unsigned int shaderId, const char* sha
 void ShaderController::Initialize( void )
 {
 	char abspath[ 256 ];
-#ifdef WIN32
-	_fullpath( abspath, "Resources\\Shaders\\", MAX_PATH );
+#ifdef _WIN32
+	_fullpath( abspath, ShaderPath.c_str(), MAX_PATH );
 #else
-	realpath( "Resources\\Shaders\\", abspath );
+	realpath( ShaderPath.c_str(), abspath );
 #endif
 
 #ifdef _WIN32
@@ -110,7 +110,7 @@ void ShaderController::Initialize( void )
 #endif
 }
 
-Shader& ShaderController::GetShader( string shaderName )
+GlShader& ShaderController::GetShader( string shaderName )
 {
 	return shaders.at( shaderName );
 }
@@ -120,67 +120,15 @@ void ShaderController::AddShader( string path, string name )
 	// Load shader text
 	string vertexShaderBuffer = File::ReadFile( path + name + ".vs.gl" );
 	string fragmentShaderBuffer = File::ReadFile( path + name + ".fs.gl" );
-	int vertexShaderLength = vertexShaderBuffer.size();
-	int fragmentShaderLength = fragmentShaderBuffer.size();
 
 	// If text is valid
 	if( !vertexShaderBuffer.empty() && !fragmentShaderBuffer.empty() )
 	{
-		// Create shader
-		Shader newShader( glCreateShader( GL_VERTEX_SHADER ), glCreateShader( GL_FRAGMENT_SHADER ), glCreateProgram() );
-
-		// Load the source
-		const char* vertexShaderCString = vertexShaderBuffer.c_str();
-		const char* fragmentShaderCString = fragmentShaderBuffer.c_str();
-
-		glShaderSource( newShader.vertexShaderID, 1, &vertexShaderCString, &vertexShaderLength );
-		glShaderSource( newShader.fragmentShaderID, 1, &fragmentShaderCString, &fragmentShaderLength );
-
-		// Compile shaders, check for errors
-		int compileStatus = GL_TRUE;
-
-		glCompileShader( newShader.vertexShaderID );
-		glGetShaderiv( newShader.vertexShaderID, GL_COMPILE_STATUS, &compileStatus );
-		if( compileStatus != GL_TRUE )
-		{
-#ifdef _WIN32
-			// Output error
-			OutputShaderErrorMessage( WindowController::Get().GetHWnd(), newShader.vertexShaderID, name.c_str() );
-#endif
-
-			throw exception( "Error compiling vertex shader." );
-		}
-
-		glCompileShader( newShader.fragmentShaderID );
-		glGetShaderiv( newShader.fragmentShaderID, GL_COMPILE_STATUS, &compileStatus );
-		if( compileStatus != GL_TRUE )
-		{
-#ifdef _WIN32
-			// Output error
-			OutputShaderErrorMessage( WindowController::Get().GetHWnd(), newShader.fragmentShaderID, name.c_str() );
-#endif
-			
-			throw exception( "Error compiling fragment shader." );
-		}
-
-		// Attach shaders to program
-		glAttachShader( newShader.programID, newShader.vertexShaderID );
-		glAttachShader( newShader.programID, newShader.fragmentShaderID );
-
-		// Link everything
-		glLinkProgram( newShader.programID );
-
-		// Check completeness
-		glGetProgramiv( newShader.programID, GL_LINK_STATUS, &compileStatus );
-		if( compileStatus != GL_TRUE )
-			throw exception( "Error linking shader program." );
-
-		// Set shader variables
-		newShader.Initialize( vertexShaderBuffer );
-
 		// Add shader to map
-		shaders[ name ] = newShader;
+		shaders[ name ] = GlShader().Initialize( vertexShaderBuffer, fragmentShaderBuffer );
 	}
 	else
+	{
 		throw exception( "Error reading files." );
+	}
 }

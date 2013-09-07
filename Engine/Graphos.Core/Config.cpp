@@ -7,7 +7,7 @@
 using namespace std;
 using namespace Graphos::Core;
 
-void Config::LoadSettings( void )
+void Config::Initialize( void )
 {
 	Json::Reader reader;
 

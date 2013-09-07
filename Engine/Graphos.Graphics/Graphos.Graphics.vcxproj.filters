@@ -24,9 +24,6 @@
     <ClInclude Include="GraphicsController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ShaderController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -42,12 +39,18 @@
     <ClInclude Include="Resource.h">
       <Filter>Windows Files</Filter>
     </ClInclude>
+    <ClInclude Include="GlShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CgShader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShaderController.cpp">
@@ -58,6 +61,15 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Windows Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GlShader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CgShader.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

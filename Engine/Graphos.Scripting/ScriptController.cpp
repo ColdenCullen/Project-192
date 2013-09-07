@@ -22,7 +22,7 @@ using namespace cvv8;
 #pragma region Handlers
 Handle<Value> IsKeyDown( const Arguments& args )
 {
-	return Boolean::New( Input::Get().IsKeyDown( args[ 0 ]->Int32Value() ) );
+	return Boolean::New( ISingleton<Input>::Get().IsKeyDown( args[ 0 ]->Int32Value() ) );
 }
 
 Handle<Value> PrintHandler( const Arguments& args )
@@ -57,7 +57,7 @@ void ScriptController::Initialize( void )
 	// Compile
 	auto compiled = v8::Script::Compile(
 		String::New( 
-				File::ReadFile( Config::Get().GetData<string>( "Scripts.Path" ) ).c_str()
+				File::ReadFile( ISingleton<Config>::Get().GetData<string>( "Scripts.Path" ) ).c_str()
 			)
 		);
 

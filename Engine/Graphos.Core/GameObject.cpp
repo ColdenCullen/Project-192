@@ -8,7 +8,7 @@ using namespace Graphos::Core;
 void GameObject::Update( void )
 {
 	for( auto ingredient = begin( componentList ); ingredient != end( componentList ); ++ingredient )
-		!ingredient->second->Update();
+		ingredient->second->Update();
 }
 
 void GameObject::Draw( void )

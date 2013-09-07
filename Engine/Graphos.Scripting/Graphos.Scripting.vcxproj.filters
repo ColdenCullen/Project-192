@@ -30,9 +30,6 @@
     <ClCompile Include="CC-Vector3.cpp">
       <Filter>Source Files\ClassCreators</Filter>
     </ClCompile>
-    <ClCompile Include="ClassMapper.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CC-Transform.cpp">
       <Filter>Source Files\ClassCreators</Filter>
     </ClCompile>

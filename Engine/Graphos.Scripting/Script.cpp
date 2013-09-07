@@ -9,12 +9,19 @@ using namespace std;
 
 void Graphos::Core::Script::Update( void )
 {
-	Handle<Value> args[ 1 ];
-	args[ 0 ] = Number::New( Time::Get().GetDeltaTime() );
-
+	//Handle<Value> args[ 1 ];
+	//args[ 0 ] = Number::New( ISingleton<Time>::Get().GetDeltaTime() );
+	
 	TryCatch tc;
-	updateFunction->Call( instance, 1, args );
+	updateFunction->Call( instance, 0, NULL );
 
-	//if( tc.HasCaught() )
-	//	throw runtime_error( string( "An exception has been thrown in JavaScript: " + string( *String::AsciiValue( tc.Message()->GetSourceLine() ) ) + "\nStack trace:\n" + string( *String::AsciiValue( tc.StackTrace()->ToString() ) ) ) );
+	/*
+	if( tc.HasCaught() )
+	{
+		string exceptionName = string( *String::AsciiValue( tc.Message()->GetSourceLine() ) );
+		string stackTrace = string( *String::AsciiValue( tc.StackTrace()->ToString() ) );
+		string message = string( "An exception has been thrown in JavaScript: " + exceptionName + "\nStack trace:\n" + stackTrace );
+		throw runtime_error( message );
+	}
+	*/
 }

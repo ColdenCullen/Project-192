@@ -82,7 +82,6 @@
     <ClCompile Include="CC-Time.cpp" />
     <ClCompile Include="CC-Transform.cpp" />
     <ClCompile Include="CC-Vector3.cpp" />
-    <ClCompile Include="ClassMapper.cpp" />
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptController.cpp" />
   </ItemGroup>

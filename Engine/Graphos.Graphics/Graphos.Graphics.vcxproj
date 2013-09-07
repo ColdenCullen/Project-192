@@ -65,7 +65,7 @@
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;FreeImage.lib;glew32.lib;</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;FreeImage.lib;glew32.lib;cg.lib;cgGL.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -93,8 +93,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CgShader.h" />
     <ClInclude Include="GraphicsController.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="GlShader.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderController.h" />
     <ClInclude Include="stdafx.h" />
@@ -102,7 +104,9 @@
     <ClInclude Include="WindowController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CgShader.cpp" />
     <ClCompile Include="GraphicsController.cpp" />
+    <ClCompile Include="GlShader.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderController.cpp" />
     <ClCompile Include="stdafx.cpp">

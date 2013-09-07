@@ -71,5 +71,8 @@
     <ClInclude Include="IController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ISingleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

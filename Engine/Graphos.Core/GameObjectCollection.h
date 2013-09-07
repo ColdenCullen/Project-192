@@ -2,7 +2,7 @@
 #define __GAME_OBJECT_COLLECTION
 
 #include "GameObject.h"
-#include "Shader.h"
+#include "GlShader.h"
 
 #include <string>
 #include <unordered_map>
@@ -21,7 +21,7 @@ namespace Graphos
 			void				LoadObjects( std::string assetPath );
 
 			// Add object
-			unsigned int		CreateObject( std::string name, Graphics::Shader* shader );
+			unsigned int		CreateObject( std::string name, Graphics::GlShader* shader );
 
 			// Access objects
 			GameObject*			GetObjectById( unsigned int id );

@@ -6,6 +6,7 @@
 
 #include "IComponent.h"
 #include "IController.h"
+#include "ISingleton.h"
 
 namespace Graphos
 {
@@ -14,13 +15,6 @@ namespace Graphos
 		class AssetController : public IController
 		{
 		public:
-			static
-			AssetController&	Get( void )
-			{
-				static AssetController instance;
-				return instance;
-			}
-
 			virtual void		Initialize( void ) override;
 			virtual void		Shutdown( void ) override;
 
@@ -39,6 +33,8 @@ namespace Graphos
 
 			std::unordered_map<std::string, IComponent*>
 								ingredientShelf;
+
+			friend class		Core::ISingleton<AssetController>;
 		};
 	}
 }

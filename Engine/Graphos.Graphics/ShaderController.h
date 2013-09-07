@@ -5,44 +5,42 @@
 #include <unordered_map>
 #include <string>
 
-#include "Shader.h"
+#include "GlShader.h"
 #include "IController.h"
+#include "ISingleton.h"
 
 namespace Graphos
 {
 	namespace Graphics
 	{
-		class ShaderController : Core::IController
+		class ShaderController : public Core::IController
 		{
 		public:
+			const std::string	ShaderPath;
+
 			void				Initialize( void ) override;
 			//TODO: Should probably implement
 			void				Shutdown( void ) override { }
-			Shader&				GetShader( std::string shaderName );
+			GlShader&			GetShader( std::string shaderName );
 
 			template<typename T>
 			void				SetAllShadersUniform( std::string uniformName, T value )
 			{
-				for( auto shader = begin( shaders ); shader != end( shaders ); ++shader )
-					shader->second.SetUniform( uniformName, value );
-			}
-
-			static
-			ShaderController&	Get( void )
-			{
-				static ShaderController instance;
-				return instance;
+				for( auto shader : shaders )
+					shader.second.SetUniform( uniformName, value );
 			}
 
 		private:
-								ShaderController( void ) { }
-								ShaderController( const ShaderController& );
+								ShaderController( void ) : ShaderPath( "Resources\\Shaders\\" ) { }
+								ShaderController( const ShaderController& ) : ShaderPath( "Resources\\Shaders\\" ) { }
 			void				operator=( const ShaderController& );
 
 			void				AddShader( std::string path, std::string name );
 
-			std::unordered_map<std::string, Shader>
+			std::unordered_map<std::string, GlShader>
 								shaders;
+
+			friend class		Core::ISingleton<ShaderController>;
 		};
 	}
 }

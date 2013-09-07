@@ -99,7 +99,7 @@ void Physics::Update( void )
 
 void Physics::Initialize( void )
 {
-	gravity = Config::Get().GetData<Vector3>( "physics.gravity" );
+	gravity = ISingleton<Config>::Get().GetData<Vector3>( "physics.gravity" );
 }
 
 void Physics::Shutdown( void )

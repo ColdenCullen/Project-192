@@ -28,10 +28,10 @@ void RigidBody::Update( void )
 		angularVelocity.z *= rotationConstraints.z;
 	}
 
-	float deltaTime = Time::Get().GetDeltaTime();
+	float deltaTime = ISingleton<Time>::Get().GetDeltaTime();
 
 	// Add gravity
-	linearVelocity += Physics::Get().gravity * deltaTime;
+	linearVelocity += ISingleton<Physics>::Get().gravity * deltaTime;
 
 	// Update object
 	owner->transform.Translate( linearVelocity * deltaTime );

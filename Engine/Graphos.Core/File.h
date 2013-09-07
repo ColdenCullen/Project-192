@@ -22,18 +22,21 @@ namespace Graphos
 
 #pragma region Not Static Stuff
 		public:
-			std::string			location;
-			std::string			localPath;
-			std::string			name;
-
 								File( std::string filePath );
-								File( std::string path, std::string name );
+								File( std::string fullPath, std::string name );
+								File( std::string path, std::string localPath, std::string name );
 
-			const std::string	GetFullPath( void ) const;
-			const std::string	GetContents( void ) const;
+			const std::string	GetFileName( void ) const { return fileName; }
+			const std::string	GetFullPath( void ) const { return fullPath + fileName; }
+			const std::string	GetLocalPath( void )const { return localPath; }
+			const std::string	GetContents( void ) const { return File::ReadFile( GetFullPath() ); }
 
 		private:
-			void				Initialize( std::string p, std::string n );
+			std::string			fullPath;
+			std::string			localPath;
+			std::string			fileName;
+
+			void				Initialize( std::string p, std::string lp, std::string n );
 #pragma endregion
 		};
 	}

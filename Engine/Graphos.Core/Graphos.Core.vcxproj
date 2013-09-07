@@ -99,6 +99,7 @@
     <ClInclude Include="GraphosGame.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="ISingleton.h" />
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
