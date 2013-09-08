@@ -195,3 +195,4 @@ Icon
 .Spotlight-V100
 .Trashes
 Game/*.Scripts/*.js*
+ExternalDependencies/lib/

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:GraphosProperties.xcconfig">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "Engine">
+      <FileRef
+         location = "group:../Engine/Graphos.Core/Graphos.Core.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:../Engine/Graphos.Components/Graphos.Components.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:../Engine/Graphos.Graphics/Graphos.Graphics.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:../Engine/Graphos.Math/Graphos.Math.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:../Engine/Graphos.Physics/Graphos.Physics.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:../Engine/Graphos.Scripting/Graphos.Scripting.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Game">
+      <FileRef
+         location = "group:../Game/Project-192.Core/Project-192.Core.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:../Game/Project-192.OSX/Project-192.OSX.xcodeproj">
+      </FileRef>
+   </Group>
+</Workspace>

@@ -11,8 +11,8 @@
 #include "Config.h"
 #include "Input.h"
 #include "Matrix4.h"
-
-using namespace Graphos::Math;
+#include "IController.h"
+#include "ISingleton.h"
 
 namespace Graphos
 {
@@ -22,27 +22,26 @@ namespace Graphos
 		class PlatformWindowController
 		{
 		public:
-			virtual void		Initialize( void ) = 0;
-			virtual void		Shutdown( void ) = 0;
 			virtual void		Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 ) = 0;
 			virtual void		Reload( void ) = 0;
 			virtual void		MessageLoop( void ) = 0;
+			virtual void		DisplayMessage( std::string message ) = 0;
 
 			// Getters
 			unsigned int		GetWidth( void )	{ return width; }
 			unsigned int		GetHeight( void )	{ return height; }
 			//GLDeviceContext&		GetDeviceContext( void ) { return deviceContext; }
 			GLRenderContext&	RenderContext( void ) { return renderContext; }
-			Matrix4&			PerspectiveMatrix( void ) { return perspectiveMatrix; }
-			Matrix4&			OrthogonalMatrix( void ) { return orthogonalMatrix; }
+			Math::Matrix4&		PerspectiveMatrix( void ) { return perspectiveMatrix; }
+			Math::Matrix4&		OrthogonalMatrix( void ) { return orthogonalMatrix; }
 
 		protected:
 			unsigned int		width, screenWidth;
 			unsigned int		height, screenHeight;
 			bool				fullScreen;
 
-			Matrix4				perspectiveMatrix;
-			Matrix4				orthogonalMatrix;
+			Math::Matrix4		perspectiveMatrix;
+			Math::Matrix4		orthogonalMatrix;
 			//GLDeviceContext	deviceContext;
 			GLRenderContext		renderContext;
 		};
@@ -50,14 +49,15 @@ namespace Graphos
 
 #pragma region Win32Controller
 #if defined( _WIN32 )
-		class Win32Controller : public PlatformWindowController
+		class Win32Controller : public PlatformWindowController, public Core::IController
 		{
 		public:
-			void				Initialize( void );
-			void				Shutdown( void );
+			void				Initialize( void ) override;
+			void				Shutdown( void ) override;
 			void				Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 );
 			void				Reload( void );
 			void				MessageLoop( void );
+			virtual void		DisplayMessage( std::string message ) override;
 
 			// Getters
 			HWND				GetHWnd( void ) { return hWnd; }
@@ -78,20 +78,24 @@ namespace Graphos
 
 			static
 			LRESULT CALLBACK	WndProc( HWND, UINT, WPARAM, LPARAM );
+
+			friend class		Core::ISingleton<Win32Controller>;
 		};
 #pragma endregion
 
 #pragma region OSXController
 #elif defined( __APPLE__ )
-		class OSXController : public PlatformWindowController
+		class OSXController : public PlatformWindowController, public Core::IController
 		{
 		public:
-			bool				Initialize( void );
-			void				Shutdown( void );
+			bool				Initialize( void ) override;
+			void				Shutdown( void ) override;
 			void				Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 );
 			void				Reload( void );
 			void				MessageLoop( void );
-			//private:
+
+		private:
+			friend class		Core::ISingleton<Win32Controller>;
 		};
 #endif//_WIN32||__APPLE__
 #pragma endregion
@@ -104,15 +108,13 @@ namespace Graphos
 			static
 			Win32Controller&	Get( void )
 			{
-				static Win32Controller instance;
-				return instance;
+				return Core::ISingleton<Win32Controller>::Get();
 			}
 #elif defined( __APPLE__ )
 			static
 			OSXController&		Get( void )
 			{
-				static OSXController instance;
-				return instance;
+				return Core::IController<OSXController>::Get();
 			}
 #endif//_WIN32||__APPLE__
 

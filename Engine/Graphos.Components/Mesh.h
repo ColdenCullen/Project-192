@@ -3,21 +3,21 @@
 
 #include <string>
 
-#include "Component.h"
+#include "IComponent.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class Mesh : public Component
+		class Mesh : public IComponent
 		{
 		public:
 								Mesh( void ) { }
 								Mesh( std::string filePath ) { LoadFromFile( filePath ); }
 
-			bool				LoadFromFile( std::string filePath );
+			void				LoadFromFile( std::string filePath );
 
-			bool				Update( void ) { return true; } 
+			void				Update( void ) { } 
 			void				Draw( void );
 			void				Shutdown( void );
 

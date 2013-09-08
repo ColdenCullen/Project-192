@@ -13,20 +13,21 @@ using namespace Awesomium;
 
 using namespace Graphos;
 using namespace Graphos::Core;
+using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 
 UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 {
 	char abspath[ 256 ];
 #ifdef WIN32
-	_fullpath( abspath, Config::Get().GetData<std::string>( "ui.filePath" ).c_str(), MAX_PATH );
+	_fullpath( abspath, ISingleton<Config>::Get().GetData<std::string>( "ui.filePath" ).c_str(), MAX_PATH );
 #else
 	realpath( url.c_str(), abspath );
 #endif
 
 	// Get dimensions
-	width = Config::Get().GetData<unsigned int>( "display.width" );
-	height = Config::Get().GetData<unsigned int>( "display.height" );
+	width = ISingleton<Config>::Get().GetData<unsigned int>( "display.width" );
+	height = ISingleton<Config>::Get().GetData<unsigned int>( "display.height" );
 
 	// Generate mesh
 	numElements = 6;
@@ -77,13 +78,13 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	graphosGame.SetCustomMethod( WSLit( "SetConfig" ), false );
 	graphosGame.SetCustomMethod( WSLit( "Reset" ), false );
 
-	width	= static_cast<float>( width )  * Config::Get().GetData<float>( "ui.scale.x" );
-	height	= static_cast<float>( height ) * Config::Get().GetData<float>( "ui.scale.y" );
+	width	= static_cast<float>( width )  * ISingleton<Config>::Get().GetData<float>( "ui.scale.x" );
+	height	= static_cast<float>( height ) * ISingleton<Config>::Get().GetData<float>( "ui.scale.y" );
 
 	// Scale to fix Awesomium issue
 	transform.Scale(
-		Config::Get().GetData<float>( "ui.scale.x" ),
-		-Config::Get().GetData<float>( "ui.scale.y" ),
+		ISingleton<Config>::Get().GetData<float>( "ui.scale.x" ),
+		-ISingleton<Config>::Get().GetData<float>( "ui.scale.y" ),
 		1.0f
 	);
 
@@ -102,7 +103,7 @@ UserInterface::~UserInterface()
 
 bool UserInterface::Update( void )
 {
-	Vector2 cursor = Input::Get().GetMousePos();
+	Vector2 cursor = ISingleton<Input>::Get().GetMousePos();
 
 	// Transform for scale
 	view->webView->InjectMouseMove(
@@ -110,11 +111,11 @@ bool UserInterface::Update( void )
 		( height / 2 ) + ( ( ( height / 2 ) - cursor.y ) * transform.Scale().y )
 	);
 
-	if( Input::Get().IsKeyDown( VK_LBUTTON, true ) )
+	if( ISingleton<Input>::Get().IsKeyDown( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseDown( kMouseButton_Left );
 	}
-	else if( Input::Get().IsKeyUp( VK_LBUTTON, true ) )
+	else if( ISingleton<Input>::Get().IsKeyUp( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseUp( kMouseButton_Left );
 	}
@@ -126,10 +127,10 @@ bool UserInterface::Update( void )
 
 void UserInterface::Draw( void )
 {
-	ShaderController::Get().GetShader( "texture" ).Use();
-	ShaderController::Get().GetShader( "texture" ).SetUniform( "modelMatrix", transform.WorldMatrix() );
-	ShaderController::Get().GetShader( "texture" ).SetUniform( "shaderTexture", 0 );
-	ShaderController::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().OrthogonalMatrix() );
+	ISingleton<ShaderController>::Get().GetShader( "texture" ).Use();
+	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "modelMatrix", transform.WorldMatrix() );
+	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "shaderTexture", 0 );
+	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().OrthogonalMatrix() );
 
 	view->Draw();
 
@@ -139,7 +140,7 @@ void UserInterface::Draw( void )
 
 	glDrawElements( GL_TRIANGLES, numElements, GL_UNSIGNED_INT, NULL );
 
-	ShaderController::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().PerspectiveMatrix() );
+	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().PerspectiveMatrix() );
 }
 
 void UserInterface::KeyPress( unsigned int key )
@@ -187,13 +188,13 @@ void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, unsigned i
 		else if( methodName == WSLit( "SetConfig" ) && args.size() == 2 )
 		{
 			if( args[ 1 ].IsBoolean() )
-				Config::Get().SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToBoolean() );
+				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToBoolean() );
 			else if( args[ 1 ].IsInteger() )
-				Config::Get().SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToInteger() );
+				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToInteger() );
 			else if( args[ 1 ].IsDouble() )
-				Config::Get().SetData( ToString( args[ 0 ].ToString() ), static_cast<float>( args[ 1 ].ToDouble() ) );
+				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), static_cast<float>( args[ 1 ].ToDouble() ) );
 			else if( args[ 1 ].IsString() )
-				Config::Get().SetData( ToString( args[ 0 ].ToString() ), ToString( args[ 1 ].ToString() ) );
+				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), ToString( args[ 1 ].ToString() ) );
 		}
 		else if( methodName == WSLit( "Reset" ) && args.size() == 0 )
 		{

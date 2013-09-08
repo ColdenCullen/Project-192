@@ -1,13 +1,12 @@
 #ifndef __CC_VECTOR3
 #define __CC_VECTOR3
 
-#include "Transform.h"
-#include "Vector2.h"
 #include "Vector3.h"
 
 #include <v8\v8.h>
-
 #include "cvv8\ClassCreator.hpp"
+
+using namespace Graphos::Math;
 
 namespace cvv8
 {
@@ -18,33 +17,24 @@ namespace cvv8
 		CtorForwarder<Vector3*()>,
 		CtorForwarder<Vector3*( float, float, float )>,
 		CtorForwarder<Vector3*( const Vector3& )>
-		)> BoundNativeVector3Ctors;
+		)> Vector3Ctors;
 
 	template <>
-	struct ClassCreator_InternalFields<Vector3>
-		: ClassCreator_InternalFields_Base<Vector3>
-	{};
+	struct ClassCreator_InternalFields<Vector3>	: public ClassCreator_InternalFields_Base<Vector3> { };
 
 	template <>
-	struct ClassCreator_SearchPrototypeForThis<Vector3> : Opt_Bool<true>
-	{};
+	struct ClassCreator_SearchPrototypeForThis<Vector3> : public Opt_Bool<true> { };
 
 	template <>
 	class ClassCreator_Factory<Vector3>
-		: public ClassCreator_Factory_Dispatcher<Vector3, CtorArityDispatcher<BoundNativeVector3Ctors>>
-	{
-	public:
-		static Vector3* Create( v8::Persistent<v8::Object> & jsSelf, v8::Arguments const & argv );
-		static void Delete( Vector3* obj );
-	};
+		: public ClassCreator_Factory_NativeToJSMap<Vector3, CtorArityDispatcher<Vector3Ctors>> { };
 
 	template <>
 	struct ClassCreator_WeakWrap<Vector3>
 	{
-		typedef TypeInfo<Vector3>::NativeHandle NativeHandle;
-		static void PreWrap( v8::Persistent<v8::Object> const &, v8::Arguments const & );
-		static void Wrap( v8::Persistent<v8::Object> const &, NativeHandle );
-		static void Unwrap( v8::Handle<v8::Object> const &, NativeHandle );
+		static void PreWrap( v8::Persistent<v8::Object> const &, v8::Arguments const & ) { }
+		static void Wrap( v8::Persistent<v8::Object> const &, TypeInfo<Vector3>::NativeHandle ) { }
+		static void Unwrap( v8::Handle<v8::Object> const &, TypeInfo<Vector3>::NativeHandle ) { }
 	};
 
 	template <>
@@ -55,12 +45,13 @@ namespace cvv8
 
 
 	template <>
-	struct JSToNative<Vector3>
-		: JSToNative_ClassCreator<Vector3> { };
+	struct JSToNative<Vector3> : public JSToNative_ClassCreator<Vector3> { };
 
 	template <>
-	struct NativeToJS<Vector3> : NativeToJSMap<Vector3>::NativeToJSImpl { };
-
-} /* namespace */
+	struct NativeToJS<Vector3> : public NativeToJSMap<Vector3>
+	{
+		v8::Handle<v8::Value> operator()( const Vector3& v ) const;
+	};
+}
 
 #endif//__CC_VECTOR3

@@ -4,19 +4,19 @@
 #include <string>
 #include <v8\v8.h>
 
-#include "Component.h"
+#include "IComponent.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class Script : public Component
+		class Script : public IComponent
 		{
 		public:
 								Script( v8::Local<v8::Object> instance, GameObject* owner = nullptr )
-									: instance( instance ), Component( owner ), updateFunction( v8::Handle<v8::Function>::Cast( instance->Get( v8::String::New( "Update" ) ) ) ) { }
+									: instance( instance ), IComponent( owner ), updateFunction( v8::Handle<v8::Function>::Cast( instance->Get( v8::String::New( "Update" ) ) ) ) { }
 
-			bool				Update( void );
+			void				Update( void );
 			void				Draw( void ) { }
 			void				Shutdown( void ) { }
 

@@ -1,6 +1,7 @@
 #include "BoxCollider.h"
 
 using namespace Graphos::Core;
+using namespace Graphos::Math;
 using namespace Graphos::Physics;
 
 BoxCollider::BoxCollider( GameObject* owner ) : Collider( Box, owner ) { }

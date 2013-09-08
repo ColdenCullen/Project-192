@@ -10,7 +10,7 @@ void GraphicsController::Initialize( void )
 {
 	WindowController::Get().Initialize();
 
-	ShaderController::Get().Initialize();
+	ISingleton<ShaderController>::Get().Initialize();
 }
 
 void GraphicsController::Resize( bool fullScreen, unsigned int newWidth, unsigned int newHeight )
