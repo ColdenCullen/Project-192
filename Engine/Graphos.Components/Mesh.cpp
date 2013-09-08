@@ -8,6 +8,31 @@
 #include <sstream>
 #include <vector>
 
+//#define USE_GL_SHADERS
+#define USE_CG_SHADERS
+//#define USE_DX_SHADERS
+
+#if defined( USE_GL_SHADERS )
+
+#define POSITION_ATTRIBUTE 0
+#define UV_ATTRIBUTE 1
+#define NORMAL_ATTRIBUTE 2
+
+#elif defined( USE_CG_SHADERS )
+
+#define POSITION_ATTRIBUTE 0
+#define UV_ATTRIBUTE 1
+// Will be 2
+#define NORMAL_ATTRIBUTE 3
+
+#elif defined( USE_DX_SHADERS )
+
+#define POSITION_ATTRIBUTE 0
+#define UV_ATTRIBUTE 1
+#define NORMAL_ATTRIBUTE 2
+
+#endif
+
 using namespace std;
 using namespace Graphos::Math;
 using namespace Graphos::Core;
@@ -96,13 +121,13 @@ void Mesh::LoadFromFile( string filePath )
 
 	// Connect the position to the inputPosition attribute of the vertex shader
 	glEnableVertexAttribArray( 0 );
-	glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), NULL );
-	// Connect color to the textureCoordinate attribute of the vertex shader
+	glVertexAttribPointer( POSITION_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), NULL );
+	// Connect uv to the textureCoordinate attribute of the vertex shader
 	glEnableVertexAttribArray( 1 );
-	glVertexAttribPointer( 1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (unsigned char*)NULL + ( sizeof(GLfloat) * 3 ) );
+	glVertexAttribPointer( UV_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (unsigned char*)NULL + ( sizeof(GLfloat) * 3 ) );
 	// Connect color to the shaderPosition attribute of the vertex shader
 	glEnableVertexAttribArray( 2 );
-	glVertexAttribPointer( 2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (unsigned char*)NULL + ( sizeof(GLfloat) * 5 ) );
+	glVertexAttribPointer( NORMAL_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (unsigned char*)NULL + ( sizeof(GLfloat) * 5 ) );
 
 	// Generate index buffer
 	glGenBuffers( 1, &indexBuffer );

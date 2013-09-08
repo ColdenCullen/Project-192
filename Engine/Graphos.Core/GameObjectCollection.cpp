@@ -224,7 +224,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 }
 #pragma endregion
 
-unsigned int GameObjectCollection::CreateObject( string name, GlShader* shader )
+unsigned int GameObjectCollection::CreateObject( string name, Shader* shader )
 {
 	if( nameMap.find( name ) != end( nameMap ) )
 		throw exception( "Name given has already been used" );

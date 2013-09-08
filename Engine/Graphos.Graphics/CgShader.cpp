@@ -1,17 +1,34 @@
 #include "stdafx.h"
 #include "CgShader.h"
 
+#include "Matrix4.h"
+
 #include <Cg\cgGL.h>
 #ifdef _WIN32
 #include <Cg\cgD3D11.h>
 #endif//_WIN32
 
 using namespace std;
+using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 
 CgShader& CgShader::Initialize( std::string filePath )
 {
-	InitializeForGl( filePath );
+	//cgSetErrorHandler( &CgErrorHandler, NULL );
+
+	if( !cgContext )
+	{
+		cgContext = cgCreateContext();
+
+		InitializeForGl( filePath );
+	}
+
+	cgEffect = cgCreateEffectFromFile( cgContext, filePath.c_str(), NULL );
+
+	cgTechnique = cgGetFirstTechnique( cgEffect );
+
+	modelViewMatrix = cgGetNamedEffectParameter( cgEffect, "ModelViewProjectionMatrix" );
+
 #if _WIN32
 	//InitializeForDx( name );
 #endif
@@ -19,32 +36,37 @@ CgShader& CgShader::Initialize( std::string filePath )
 	return *this;
 }
 
-void Graphos::Graphics::CgShader::InitializeForGl( std::string filePath )
+void CgShader::InitializeForGl( std::string filePath )
 {
-	if( !( cgContext = cgCreateContext() ) )
-		throw exception( "Error creating CG Context" );
-
-	if( ( cgVertexProfile = cgGLGetLatestProfile( CG_GL_VERTEX ) ) == CG_PROFILE_UNKNOWN )
-		throw exception( "Error getting CG GL profile" );
-
-	if( !( cgProgram = cgCreateProgramFromFile( cgContext, CG_SOURCE, filePath.c_str(), cgVertexProfile, "main", 0 ) ) )
-		throw exception( "Error creating CG program." );
-
-	cgGLLoadProgram( cgProgram );
+	cgGLRegisterStates( cgContext );
+	cgGLSetManageTextureParameters( cgContext, CG_TRUE );
 }
 
 #ifdef _WIN32
 void CgShader::InitializeForDx( std::string filePath )
 {
-	if( !( cgContext = cgCreateContext() ) )
-		throw exception( "Error creating CG Context" );
 
-	if( ( cgVertexProfile = cgGLGetLatestProfile( CG_GL_VERTEX ) ) == CG_PROFILE_UNKNOWN )
-		throw exception( "Error getting CG GL profile" );
-
-	if( !( cgProgram = cgCreateProgramFromFile( cgContext, CG_SOURCE, filePath.c_str(), cgVertexProfile, "main", 0 ) ) )
-		throw exception( "Error creating CG program." );
-
-	//( cgProgram );
 }
 #endif//_WIN32
+
+void CgShader::Use( void ) const 
+{
+
+}
+
+void CgShader::SetUniform( string name, int value ) const 
+{
+	cgSetParameter1i( cgGetNamedEffectParameter( cgEffect, name.c_str() ), value );
+}
+
+void CgShader::SetUniform( string name, float value ) const 
+{
+	cgSetParameter1f( cgGetNamedEffectParameter( cgEffect, name.c_str() ), value );
+}
+
+void CgShader::SetUniform( string name, const Matrix4& value ) const 
+{
+	cgSetParameterValuefc( modelViewMatrix, 16, value.dataArray );
+}
+
+CGcontext CgShader::cgContext;

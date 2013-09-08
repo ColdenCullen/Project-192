@@ -9,6 +9,7 @@
     <ClCompile Include="GraphosGame.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="OutputController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -22,5 +23,6 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="ISingleton.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="OutputController.h" />
   </ItemGroup>
 </Project>

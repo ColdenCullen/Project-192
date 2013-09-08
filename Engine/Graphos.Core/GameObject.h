@@ -23,7 +23,7 @@ namespace Graphos
 
 			// Constructors
 			GameObject( void ) : shader( nullptr ) { }
-			GameObject( Graphics::GlShader* shader ) : shader( shader ) { }
+			GameObject( Graphics::Shader* shader ) : shader( shader ) { }
 
 			// Shutdown memory
 			void				Shutdown( void );
@@ -34,7 +34,7 @@ namespace Graphos
 			virtual void		OnCollision( GameObject* other ) { }
 
 			// Getters and setters
-			Graphics::GlShader&	GetShader( void ) const { return *shader; }
+			Graphics::Shader&	GetShader( void ) const { return *shader; }
 			void				SetShader( std::string newName ) { shader = &( ISingleton<Graphics::ShaderController>::Get().GetShader( newName ) ); }
 
 			// Add ingredient of type T
@@ -62,7 +62,7 @@ namespace Graphos
 			std::unordered_map<size_t, IComponent*>
 								componentList;
 
-			Graphics::GlShader*	shader;
+			Graphics::Shader*	shader;
 		};
 	}
 }

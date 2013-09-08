@@ -33,7 +33,6 @@
     <ClCompile Include="CgShader.cpp" />
     <ClCompile Include="GlShader.cpp" />
     <ClCompile Include="GraphicsController.cpp" />
-    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderController.cpp" />
     <ClCompile Include="Win32Controller.cpp" />
   </ItemGroup>

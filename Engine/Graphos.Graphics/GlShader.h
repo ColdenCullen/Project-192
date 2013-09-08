@@ -23,12 +23,12 @@ namespace Graphos
 								GlShader( unsigned int vertex, unsigned int fragment, unsigned int program )
 									: vertexShaderID( vertex ), fragmentShaderID( fragment ), programID( program ) { }
 
-			GlShader&			Initialize( std::string vertexBody, std::string fragmentBody );
+			GlShader&			Initialize( std::string vertexPath, std::string fragmentPath );
 
-			void				Use( void ) const;
-			bool				SetUniform( std::string name, int value ) const;
-			bool				SetUniform( std::string name, float value ) const;
-			bool				SetUniform( std::string name, Math::Matrix4 value ) const;
+			void				Use( void ) const override;
+			void				SetUniform( std::string name, int value ) const override;
+			void				SetUniform( std::string name, float value ) const override;
+			void				SetUniform( std::string name, const Math::Matrix4& value ) const override;
 
 		private:
 			std::unordered_map<std::string, unsigned int>

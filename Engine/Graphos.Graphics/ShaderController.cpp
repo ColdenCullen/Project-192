@@ -4,6 +4,9 @@
 #include "WindowController.h"
 #include "File.h"
 
+#include "GlShader.h"
+#include "CgShader.h"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -81,7 +84,6 @@ void ShaderController::Initialize( void )
 	realpath( ShaderPath.c_str(), abspath );
 #endif
 
-#ifdef _WIN32
 	DIR* dir;
 	dirent* ent;
 	// Open directory
@@ -90,11 +92,23 @@ void ShaderController::Initialize( void )
 		// Iterate through contents
 		while( ( ent = readdir( dir ) ) != NULL )
 		{
-			if( ent->d_namlen > 5 && ent->d_name[ ent->d_namlen - 5 ] == 'f' )
+			// Check shader type
+			if( string( ent->d_name ).substr( ent->d_namlen - 2 ) == "gl" )
 			{
-				string name = string( ent->d_name ).substr( 0, ent->d_namlen - 6 );
+				if( ent->d_name[ ent->d_namlen - 5 ] == 'f' )
+				{
+					string name = string( ent->d_name ).substr( 0, ent->d_namlen - 6 );
+					string path = abspath;
 
-				AddShader( abspath, name );
+					shaders[ name ] = &(new GlShader())->Initialize( path + name + ".vs.gl", path + name + ".fs.gl" );
+				}
+			}
+			else if( string( ent->d_name ).substr( ent->d_namlen - 5 ) == ".cgfx" )
+			{
+				string name = string( ent->d_name ).substr( 0, ent->d_namlen - 5 );
+				auto newShader = new CgShader();
+				newShader->Initialize( string( abspath ) + string( ent->d_name ) );
+				shaders[ name ] = newShader;
 			}
 		}
 
@@ -105,30 +119,18 @@ void ShaderController::Initialize( void )
 	{
 		throw exception( "Error reading shader dir." );
 	}
-#else
-	throw exception( "Unsupported platform" );
-#endif
 }
 
-GlShader& ShaderController::GetShader( string shaderName )
+Shader& ShaderController::GetShader( string shaderName )
 {
-	return shaders.at( shaderName );
+	return *shaders.at( shaderName );
 }
 
-void ShaderController::AddShader( string path, string name )	
+void ShaderController::Shutdown( void )
 {
-	// Load shader text
-	string vertexShaderBuffer = File::ReadFile( path + name + ".vs.gl" );
-	string fragmentShaderBuffer = File::ReadFile( path + name + ".fs.gl" );
-
-	// If text is valid
-	if( !vertexShaderBuffer.empty() && !fragmentShaderBuffer.empty() )
+	for( auto shader : shaders )
 	{
-		// Add shader to map
-		shaders[ name ] = GlShader().Initialize( vertexShaderBuffer, fragmentShaderBuffer );
+		delete shader.second;
 	}
-	else
-	{
-		throw exception( "Error reading files." );
-	}
+	shaders.clear();
 }

@@ -21,7 +21,7 @@ namespace Graphos
 			void				LoadObjects( std::string assetPath );
 
 			// Add object
-			unsigned int		CreateObject( std::string name, Graphics::GlShader* shader );
+			unsigned int		CreateObject( std::string name, Graphics::Shader* shader );
 
 			// Access objects
 			GameObject*			GetObjectById( unsigned int id );

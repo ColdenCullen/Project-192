@@ -39,9 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Objects", "Objects", "{A76D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{BBA92DFB-EAF8-4819-B2E8-4C406C24F578}"
 	ProjectSection(SolutionItems) = preProject
-		..\Game\Resources\Shaders\color.fs.cg = ..\Game\Resources\Shaders\color.fs.cg
 		..\Game\Resources\Shaders\color.fs.gl = ..\Game\Resources\Shaders\color.fs.gl
-		..\Game\Resources\Shaders\color.vs.cg = ..\Game\Resources\Shaders\color.vs.cg
 		..\Game\Resources\Shaders\color.vs.gl = ..\Game\Resources\Shaders\color.vs.gl
 		..\Game\Resources\Shaders\light.fs.gl = ..\Game\Resources\Shaders\light.fs.gl
 		..\Game\Resources\Shaders\light.vs.gl = ..\Game\Resources\Shaders\light.vs.gl

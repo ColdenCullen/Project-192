@@ -6,22 +6,27 @@
 #include <string>
 #include <Cg\cg.h>
 
-
 namespace Graphos
 {
 	namespace Graphics
 	{
-		class CgShader : Shader
+		class CgShader : public Shader
 		{
 		public:
 			CgShader&			Initialize( std::string filePath );
 
-		private:
-			CGcontext			cgContext;
-			CGprogram			cgProgram;
-			CGprofile			cgVertexProfile;
+			void				Use( void ) const override;
+			void				SetUniform( std::string name, int value ) const override;
+			void				SetUniform( std::string name, float value ) const override;
+			void				SetUniform( std::string name, const Math::Matrix4& value ) const override;
 
-			CGparameter			position, color, modelViewMatrix, wave;
+		private:
+			static
+			CGcontext			cgContext;
+			CGeffect			cgEffect;
+			CGtechnique			cgTechnique;
+
+			CGparameter			modelViewMatrix;
 
 			void				InitializeForGl( std::string filePath );
 			void				InitializeForDx( std::string filePath );

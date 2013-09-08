@@ -2,7 +2,8 @@
 {
 	"Game" :
 	{
-		"DefaultState" : "Game"
+		"DefaultState" : "Game",
+		"Verbosity" : "High"
 	},
 	"display" : 
 	{

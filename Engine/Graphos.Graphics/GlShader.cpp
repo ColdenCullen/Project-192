@@ -1,14 +1,18 @@
 #include "stdafx.h"
 #include "GlShader.h"
+#include "File.h"
 
 #define MIN(x,y) (x < y ? x : y)
 
 using namespace std;
+using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 
-GlShader& GlShader::Initialize( string vertexBody, string fragmentBody )
+GlShader& GlShader::Initialize( string vertexPath, string fragmentPath )
 {
+	string vertexBody = File::ReadFile( vertexPath );
+	string fragmentBody = File::ReadFile( fragmentPath );
 	Compile( vertexBody, fragmentBody );
 	ScanForVars( vertexBody );
 	return *this;
@@ -19,40 +23,28 @@ void GlShader::Use( void ) const
 	glUseProgram( programID );
 }
 
-bool GlShader::SetUniform( string name, int value ) const
+void GlShader::SetUniform( string name, int value ) const
 {
 	auto currentUniform = uniforms.find( name );
 
 	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
 		glUniform1i( currentUniform->second, value );
-	else
-		return false;
-
-	return true;
 }
 
-bool GlShader::SetUniform( string name, float value ) const
+void GlShader::SetUniform( string name, float value ) const
 {
 	auto currentUniform = uniforms.find( name );
 
 	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
 		glUniform1f( currentUniform->second, value );
-	else
-		return false;
-
-	return true;
 }
 
-bool GlShader::SetUniform( string name, Matrix4 value ) const
+void GlShader::SetUniform( string name, const Matrix4& value ) const
 {
 	auto currentUniform = uniforms.find( name );
 
 	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
 		glUniformMatrix4fv( currentUniform->second, 1, false, value.dataArray );
-	else
-		return false;
-
-	return true;
 }
 
 void GlShader::ScanForVars( string vertexBody )

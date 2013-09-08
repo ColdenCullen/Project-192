@@ -27,9 +27,5 @@
 			"y": 0.5,
 			"z": 0.5
 		}
-	},
-
-	"Script": {
-		"Class": "GameObject1"
 	}
 }
