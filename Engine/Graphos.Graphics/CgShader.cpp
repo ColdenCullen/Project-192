@@ -7,10 +7,33 @@
 #ifdef _WIN32
 #include <Cg\cgD3D11.h>
 #endif//_WIN32
+#include <sstream>
+#include "ISingleton.h"
+#include "OutputController.h"
 
 using namespace std;
+using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+
+void CgErrorHandler( CGcontext context, CGerror error, void* appData )
+{
+	if( error != CG_NO_ERROR )
+	{	// If there is an error, print it
+		string strError;
+
+		if( error == CG_COMPILER_ERROR )
+		{	// If error is a compiler error, output it
+			strError = cgGetLastListing( context );
+		}
+		else
+		{	// If not compiler error, print error
+			strError = cgGetErrorString( error );
+		}
+
+		ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_ERROR, string( "Cg Error: \n" ) + strError );
+	}
+}
 
 CgShader& CgShader::Initialize( std::string filePath )
 {
@@ -21,13 +44,13 @@ CgShader& CgShader::Initialize( std::string filePath )
 		cgContext = cgCreateContext();
 
 		InitializeForGl( filePath );
+
+		cgSetErrorHandler( &CgErrorHandler, NULL );
 	}
 
 	cgEffect = cgCreateEffectFromFile( cgContext, filePath.c_str(), NULL );
 
 	cgTechnique = cgGetFirstTechnique( cgEffect );
-
-	modelViewMatrix = cgGetNamedEffectParameter( cgEffect, "ModelViewProjectionMatrix" );
 
 #if _WIN32
 	//InitializeForDx( name );
@@ -66,7 +89,7 @@ void CgShader::SetUniform( string name, float value ) const
 
 void CgShader::SetUniform( string name, const Matrix4& value ) const 
 {
-	cgSetParameterValuefc( modelViewMatrix, 16, value.dataArray );
+	cgSetParameterValuefc( cgGetNamedEffectParameter( cgEffect, name.c_str() ), 16, value.dataArray );
 }
 
 CGcontext CgShader::cgContext;

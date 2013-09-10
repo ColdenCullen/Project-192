@@ -92,10 +92,14 @@ void ShaderController::Initialize( void )
 		// Iterate through contents
 		while( ( ent = readdir( dir ) ) != NULL )
 		{
+			// If the selected file name is less than 3 characters long, skip it.
+			if( ent->d_namlen < 3 )
+				continue;
+
 			// Check shader type
-			if( string( ent->d_name ).substr( ent->d_namlen - 2 ) == "gl" )
+			if( string( ent->d_name ).substr( ent->d_namlen - 6 ) == ".fs.gl" )
 			{
-				if( ent->d_name[ ent->d_namlen - 5 ] == 'f' )
+				//if( ent->d_name[ ent->d_namlen - 5 ] == 'f' )
 				{
 					string name = string( ent->d_name ).substr( 0, ent->d_namlen - 6 );
 					string path = abspath;

@@ -26,8 +26,6 @@ namespace Graphos
 			CGeffect			cgEffect;
 			CGtechnique			cgTechnique;
 
-			CGparameter			modelViewMatrix;
-
 			void				InitializeForGl( std::string filePath );
 			void				InitializeForDx( std::string filePath );
 		};

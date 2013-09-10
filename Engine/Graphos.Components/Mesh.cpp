@@ -148,6 +148,7 @@ void Mesh::Draw( void )
 	// Bind all of the buffers
 	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
 	glBindVertexArray( vertexArrayObject );
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
 
 	// Draw
 	glDrawElements( GL_TRIANGLES, numElements, GL_UNSIGNED_INT, 0 );

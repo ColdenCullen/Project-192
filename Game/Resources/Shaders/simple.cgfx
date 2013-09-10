@@ -2,21 +2,25 @@ struct Vertex
 {
 	in float3 Position : POSITION;
 	in float3 Color : COLOR;
-}
+};
 
 struct VertexToFragment
 {
 	float4 Position : POSITION;
 	float4 Color : COLOR;
-}
+};
 
-float4x4 ModelViewProjection;
+float4x4 projectionMatrix;
+float4x4 cameraMatrix;
+float4x4 modelMatrix;
+int shaderTexture;
 
-VertexToFragment mainVP( Vertex IN, uniform float4x4 modelViewProjection )
+VertexToFragment mainVP( Vertex IN, uniform float4x4 projection, uniform float4x4 camera, uniform float4x4 model )
 {
 	VertexToFragment OUT;
 
-	OUT.Position = mul( modelViewProjection, float4( IN.Position, 1.0 ) );
+	OUT.Position = mul( projectionMatrix, mul( cameraMatrix, mul( modelMatrix, float4( IN.Position, 1.0f ) ) ) );
+	//OUT.Position = mul( modelViewProjection, float4( IN.Position, 1.0 ) );
 	//For DX:
 	//OUT.Position = mul( float4( IN.Position, 1.0 ), modelViewProjection );
 	
@@ -27,14 +31,14 @@ VertexToFragment mainVP( Vertex IN, uniform float4x4 modelViewProjection )
 
 float4 mainFP( VertexToFragment IN ) : COLOR
 {
-	return IN.Color;
+	return float4( 1.0, 0.0, 0.0, 1.0 );//IN.Color;
 }
 
 technique t0
 {
 	pass p0
 	{
-		VertexProgram = compile gp4vp mainVP( ModelViewProjection );
+		VertexProgram = compile gp4vp mainVP( projectionMatrix, cameraMatrix, modelMatrix );
 		FragmentProgram = compile gp4fp mainFP();
 	}
 }
