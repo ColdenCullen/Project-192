@@ -5,17 +5,23 @@
 #include <iostream>
 
 using namespace v8;
+using namespace std;
 
-bool Graphos::Core::Script::Update( void )
+void Graphos::Core::Script::Update( void )
 {
-	//instance.InvokeAsync( WSLit( "UpdateTransformS" ), JSArray() );
+	//Handle<Value> args[ 1 ];
+	//args[ 0 ] = Number::New( ISingleton<Time>::Get().GetDeltaTime() );
+	
+	TryCatch tc;
+	updateFunction->Call( instance, 0, NULL );
 
-	Handle<Value> args[ 1 ];
-	args[ 0 ] = Number::New( Time::Get().GetDeltaTime() );
-
-	updateFunction->Call( instance, 1, args );
-
-	//instance.InvokeAsync( WSLit( "Update" ), args );
-
-	return true;
+	/*
+	if( tc.HasCaught() )
+	{
+		string exceptionName = string( *String::AsciiValue( tc.Message()->GetSourceLine() ) );
+		string stackTrace = string( *String::AsciiValue( tc.StackTrace()->ToString() ) );
+		string message = string( "An exception has been thrown in JavaScript: " + exceptionName + "\nStack trace:\n" + stackTrace );
+		throw runtime_error( message );
+	}
+	*/
 }

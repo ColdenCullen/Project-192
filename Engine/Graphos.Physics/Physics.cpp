@@ -8,6 +8,7 @@
 #include "GameObject.h"
 
 using namespace Graphos::Core;
+using namespace Graphos::Math;
 using namespace Graphos::Physics;
 
 Physics::Physics( void ) : gravity() { }
@@ -96,11 +97,9 @@ void Physics::Update( void )
 	}
 }
 
-bool Physics::Initialize( void )
+void Physics::Initialize( void )
 {
-	gravity = Config::Get().GetData<Vector3>( "physics.gravity" );
-
-	return true;
+	gravity = ISingleton<Config>::Get().GetData<Vector3>( "physics.gravity" );
 }
 
 void Physics::Shutdown( void )

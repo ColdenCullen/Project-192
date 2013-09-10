@@ -33,7 +33,7 @@ namespace Graphos
 			unsigned int		width;
 			unsigned int		height;
 
-			Transform			transform;
+			Math::Transform		transform;
 
 			GraphosGame*		owner;
 

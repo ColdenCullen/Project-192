@@ -9,7 +9,7 @@ Transform::Transform( void ) :
 	parent( nullptr ), matrix( Matrix4::Identity ), scale( 1.0f, 1.0f, 1.0f ),
 	right( Vector3::Right ), up( Vector3::Up ), forward( Vector3::Forward ) { }
 
-void Transform::Rotate( Quaternion rotation )
+void Transform::Rotate( const Quaternion& rotation )
 {
 	Rotate( rotation.x, rotation.y, rotation.z, rotation.w );
 

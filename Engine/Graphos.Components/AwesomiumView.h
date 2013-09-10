@@ -6,7 +6,7 @@
 
 #include <string>
 
-#include "Component.h"
+#include "IComponent.h"
 
 namespace Awesomium
 {
@@ -18,7 +18,7 @@ namespace Graphos
 {
 	namespace Core
 	{
-		class AwesomiumView : public Component
+		class AwesomiumView : public IComponent
 		{
 		public:
 								AwesomiumView( void ) : webView( nullptr ), surface( nullptr ), buffer( nullptr ) { }
@@ -26,7 +26,7 @@ namespace Graphos
 								~AwesomiumView( void ) { }
 
 			bool				Initialize( std::string url, unsigned int width, unsigned int height );
-			bool				Update( void );
+			void				Update( void );
 			void				Draw( void );
 			void				Shutdown( void );
 

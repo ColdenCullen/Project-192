@@ -1,17 +1,38 @@
 // Interface for Vectors
 declare class Vector3
 {
-    x: Number;
-    y: Number;
-    z: Number;
+    public x: Number;
+    public y: Number;
+    public z: Number;
+
+    constructor();
+    constructor(x: number, y: number, z: number);
+    constructor(other: Vector3);
+
+    public Equals(other: Vector3): boolean;
+    public Dot(other: Vector3): number;
+    public Cross(other: Vector3): Vector3;
+    public Add(other: Vector3): Vector3;
+
+    public static TripleProduct(a: Vector3, b: Vector3, c: Vector3): Vector3;
 }
 
 // Interface for object transforms
 declare class Transform
 {
-    position: Vector3;
-    rotation: Vector3;
-    scale: Vector3;
+    public Position: Vector3;
+    public Rotation: Vector3;
+    //public Scale: Vector3;
+    public Right: Vector3;
+    public Up: Vector3;
+    public Forward: Vector3;
+
+    public Rotate(rotation: Vector3): void;
+    public Rotate(x: number, y: number, z: number): void;
+    public Translate(displacement: Vector3): void;
+    public Translate(x: number, y: number, z: number): void;
+    public Scale(scale: Vector3): void;
+    public Scale(x: number, y: number, z: number): void;
 }
 
 // Class with variables and functions
@@ -21,18 +42,22 @@ class GameObject
     public id: string;
 
     // Transform object
-    public transform: Transform;
+    public Transform: Transform;
 
     // Abstract method for updating object
     public Update( deltaTime: number ): void { }
 }
 
-// Interface that allows GameObjects to check for input
-interface Input
+declare class Time
 {
-    IsKeyDown( key: number ): bool;
+    public static DeltaTime: number;
 }
-declare var Input: Input;
+
+// Interface that allows GameObjects to check for input
+declare class Input
+{
+    static IsKeyDown(key: number): boolean;
+}
 
 // Print function
 declare function log(toPrint: any): void;

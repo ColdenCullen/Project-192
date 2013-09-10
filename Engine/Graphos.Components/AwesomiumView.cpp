@@ -44,7 +44,7 @@ bool AwesomiumView::Initialize( string url, unsigned int width, unsigned int hei
 	return true;
 }
 
-bool AwesomiumView::Update( void )
+void AwesomiumView::Update( void )
 {
 	if( WebCore::instance() )
 	{
@@ -54,8 +54,6 @@ bool AwesomiumView::Update( void )
 		// Get the surface
 		surface = static_cast<BitmapSurface*>( webView->surface() );
 	}
-
-	return true;
 }
 
 void AwesomiumView::Draw( void )

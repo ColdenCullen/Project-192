@@ -10,7 +10,7 @@
 using namespace std;
 using namespace Graphos::Core;
 
-bool AssetController::Initialize( void )
+void AssetController::Initialize( void )
 {
 	File::FileList files = File::ScanDir( CONTENT_PATH );
 
@@ -18,19 +18,17 @@ bool AssetController::Initialize( void )
 
 	for( auto file = begin( files ); file != end( files ); ++file )
 	{
-		name = file->name.substr( 0, file->name.find( "." ) );
+		name = file->GetFileName().substr( 0, file->GetFileName().find( "." ) );
 
-		if( file->localPath == "Meshes/" )
+		if( file->GetLocalPath() == "Meshes/" )
 		{
 			ingredientShelf[ name ] = new Mesh( file->GetFullPath() );
 		}
-		else if( file->localPath == "Textures/" )
+		else if( file->GetLocalPath() == "Textures/" )
 		{
 			ingredientShelf[ name ] = new Texture( file->GetFullPath() );
 		}
 	}
-
-	return true;
 }
 
 void AssetController::Shutdown( void )

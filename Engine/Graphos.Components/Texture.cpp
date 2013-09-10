@@ -3,9 +3,10 @@
 #include <GL/GLIncludes.h>
 #include <FreeImage.h>
 
+using namespace std;
 using namespace Graphos::Core;
 
-bool Texture::LoadFromFile( std::string filePath )
+void Texture::LoadFromFile( std::string filePath )
 {
 	// Load and convert to 32 bits
 	FIBITMAP* imageData = FreeImage_ConvertTo32Bits( FreeImage_Load( FreeImage_GetFileType( filePath.c_str(), 0 ), filePath.c_str() ) );
@@ -21,13 +22,11 @@ bool Texture::LoadFromFile( std::string filePath )
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 
 	if( glGetError() )
-		return false;
+		throw exception( "Failed to buffer texture." );
 
 	FreeImage_Unload( imageData );
 
 	glBindTexture( GL_TEXTURE_2D, NULL );
-
-	return true;
 }
 
 void Texture::Draw( void )

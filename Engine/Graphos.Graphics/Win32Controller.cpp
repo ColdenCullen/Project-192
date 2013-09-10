@@ -25,19 +25,19 @@ void Win32Controller::Initialize( void )
 	screenWidth = GetSystemMetrics( SM_CXSCREEN );
 	screenHeight = GetSystemMetrics( SM_CYSCREEN );
 
-	fullScreen = Config::Get().GetData<bool>( "display.fullscreen" );
+	fullScreen = ISingleton<Config>::Get().GetData<bool>( "display.fullscreen" );
 	if( fullScreen )
 	{
 		width	= screenWidth;
 		height	= screenHeight;
 
-		Config::Get().SetData( "display.width", screenWidth );
-		Config::Get().SetData( "display.height", screenHeight );
+		ISingleton<Config>::Get().SetData( "display.width", screenWidth );
+		ISingleton<Config>::Get().SetData( "display.height", screenHeight );
 	}
 	else
 	{
-		width	= Config::Get().GetData<unsigned int>( "display.width" );
-		height	= Config::Get().GetData<unsigned int>( "display.height" );
+		width	= ISingleton<Config>::Get().GetData<unsigned int>( "display.width" );
+		height	= ISingleton<Config>::Get().GetData<unsigned int>( "display.height" );
 	}
 
 	if( !fullScreen && ( width <= 0 || height <= 0 ) )
@@ -198,8 +198,8 @@ void Win32Controller::Resize( bool fullScreen, unsigned int newWidth, unsigned i
 		style |= GWS_FULLSCREEN;
 
 		// Update config
-		Config::Get().SetData( "display.width", screenWidth );
-		Config::Get().SetData( "display.height", screenHeight );
+		ISingleton<Config>::Get().SetData( "display.width", screenWidth );
+		ISingleton<Config>::Get().SetData( "display.height", screenHeight );
 	}
 	else
 	{
@@ -221,19 +221,19 @@ void Win32Controller::Resize( bool fullScreen, unsigned int newWidth, unsigned i
 void Win32Controller::Reload( void )
 {
 	Resize(
-		Config::Get().GetData<bool>( "display.fullscreen" ),
-		Config::Get().GetData<unsigned int>( "display.width" ),
-		Config::Get().GetData<unsigned int>( "display.height" ) );
+		ISingleton<Config>::Get().GetData<bool>( "display.fullscreen" ),
+		ISingleton<Config>::Get().GetData<unsigned int>( "display.width" ),
+		ISingleton<Config>::Get().GetData<unsigned int>( "display.height" ) );
 
 	// Enable back face culling
-	if( Config::Get().GetData<bool>( "graphics.backfaceculling" ) )
+	if( ISingleton<Config>::Get().GetData<bool>( "graphics.backfaceculling" ) )
 	{
 		glEnable( GL_CULL_FACE );
 		glCullFace( GL_BACK );
 	}
 
 	// Turn on of off the vsync
-	if( Config::Get().GetData<bool>( "graphics.vsync" ) )
+	if( ISingleton<Config>::Get().GetData<bool>( "graphics.vsync" ) )
 		wglSwapIntervalEXT( true );
 	else
 		wglSwapIntervalEXT( false );
@@ -252,6 +252,10 @@ void Win32Controller::MessageLoop( void )
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+}
+void Win32Controller::DisplayMessage( std::string message )
+{
+	MessageBox( hWnd, std::wstring( message.begin(), message.end() ).c_str(), L"Graphos Error", MB_OK );
 }
 
 //
@@ -272,27 +276,27 @@ LRESULT CALLBACK Win32Controller::WndProc( HWND hWnd, UINT message, WPARAM wPara
 		break;
 		// If key down, send it to input
 	case WM_KEYDOWN:
-		Input::Get().KeyDown( (unsigned int)wParam );
+		ISingleton<Input>::Get().KeyDown( (unsigned int)wParam );
 		return 0;
 		// If key up, send it to input
 	case WM_KEYUP:
-		Input::Get().KeyUp( (unsigned int)wParam );
+		ISingleton<Input>::Get().KeyUp( (unsigned int)wParam );
 		return 0;
 		// On Mouse Event
 	case WM_RBUTTONDOWN:
-		Input::Get().KeyDown( VK_RBUTTON );
+		ISingleton<Input>::Get().KeyDown( VK_RBUTTON );
 		return 0;
 		// On Mouse Event
 	case WM_RBUTTONUP:
-		Input::Get().KeyUp( VK_RBUTTON );
+		ISingleton<Input>::Get().KeyUp( VK_RBUTTON );
 		return 0;
 		// On Mouse Event
 	case WM_LBUTTONDOWN:
-		Input::Get().KeyDown( VK_LBUTTON );
+		ISingleton<Input>::Get().KeyDown( VK_LBUTTON );
 		return 0;
 		// On Mouse Event
 	case WM_LBUTTONUP:
-		Input::Get().KeyUp( VK_LBUTTON );
+		ISingleton<Input>::Get().KeyUp( VK_LBUTTON );
 		return 0;
 		// If no change, send to default windows handler
 	default:

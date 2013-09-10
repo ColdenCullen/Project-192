@@ -107,31 +107,33 @@ var Keys;
     Keys[Keys["OpenSquareBrace"] = 219] = "OpenSquareBrace";
     Keys[Keys["BackSlash"] = 220] = "BackSlash";
     Keys[Keys["CloseSquareBrace"] = 221] = "CloseSquareBrace";
-
     Keys[Keys["SingleQuote"] = 222] = "SingleQuote";
 })(Keys || (Keys = {}));
+/// <reference path="Graphos.ts" />
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-/// <reference path="Graphos.ts" />
 // Interface
 var GameObject1 = (function (_super) {
     __extends(GameObject1, _super);
     function GameObject1() {
         _super.call(this);
-
-        this.vec = new Vector3();
-        this.vec.x = 5.0;
+        //this.vec1 = new Vector3();
+        //this.vec1.x = 5.0;
+        //this.vec2 = new Vector3();
+        //this.vec2.y = 5.0;
     }
     GameObject1.prototype.Update = function () {
-        log("Update");
-
-        if (Input.IsKeyDown(Keys.Space))
-            log("Vec.x: " + this.vec.x);
+        if (Input.IsKeyDown(Keys.Space)) {
+            //log(this.Transform.Position);
+            //this.Transform.Translate(new Vector3(1.0, 1.0, 0.0));
+            //this.Transform.Rotate( 1.0, 1.0, 0.0 );
+            //log(this.Transform.Rotation.x);
+        }
     };
     return GameObject1;
 })(GameObject);
-//@ sourceMappingURL=__output.js.map
+//# sourceMappingURL=__output.js.map

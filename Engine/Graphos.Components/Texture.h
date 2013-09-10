@@ -2,21 +2,21 @@
 #define __TEXTURE
 
 #include <string>
-#include "Component.h"
+#include "IComponent.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class Texture : public Component
+		class Texture : public IComponent
 		{
 		public:
 								Texture( void ) { }
 								Texture( std::string filePath ) { LoadFromFile( filePath ); }
 			
-			bool				LoadFromFile( std::string filePath );
+			void				LoadFromFile( std::string filePath );
 
-			bool				Update( void ) { return true; }
+			void				Update( void ) {  }
 			void				Draw( void );
 			void				Shutdown( void );
 

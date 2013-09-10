@@ -2,11 +2,12 @@
 #include "Time.h"
 
 using namespace Graphos::Core;
+using namespace Graphos::Math;
 using namespace Graphos::Physics;
 
-RigidBody::RigidBody( GameObject* owner ) : Component( owner ), linearVelocity(), angularVelocity(), linearDrag( 0.0f ), angularDrag( 0.0f ), positionConstraints(), rotationConstraints() { }
+RigidBody::RigidBody( GameObject* owner ) : IComponent( owner ), linearVelocity(), angularVelocity(), linearDrag( 0.0f ), angularDrag( 0.0f ), positionConstraints(), rotationConstraints() { }
 
-bool RigidBody::Update( void )
+void RigidBody::Update( void )
 {
 	// Update velocities with drag
 	//linearVelocity *= ( ( 1 - linearDrag ) * deltaTime );
@@ -27,21 +28,14 @@ bool RigidBody::Update( void )
 		angularVelocity.z *= rotationConstraints.z;
 	}
 
-	float deltaTime = Time::Get().GetDeltaTime();
+	float deltaTime = ISingleton<Time>::Get().GetDeltaTime();
 
 	// Add gravity
-	linearVelocity += Physics::Get().gravity * deltaTime;
+	linearVelocity += ISingleton<Physics>::Get().gravity * deltaTime;
 
 	// Update object
 	owner->transform.Translate( linearVelocity * deltaTime );
 	owner->transform.Rotate( angularVelocity * deltaTime );
-
-	return true;
-}
-
-void RigidBody::Shutdown( void )
-{
-
 }
 
 void RigidBody::AddForce( const Vector3& force )
