@@ -4,7 +4,8 @@
 #include "Vector3.h"
 
 #include <v8\v8.h>
-#include "cvv8\ClassCreator.hpp"
+#include <cvv8\ClassCreator.hpp>
+#include "NativeToJSMap_Graphos.h"
 
 using namespace Graphos::Math;
 
@@ -43,15 +44,11 @@ namespace cvv8
 		static void Initialize( v8::Handle<v8::Object> const & target );
 	};
 
-
 	template <>
 	struct JSToNative<Vector3> : public JSToNative_ClassCreator<Vector3> { };
 
 	template <>
-	struct NativeToJS<Vector3> : public NativeToJSMap<Vector3>
-	{
-		v8::Handle<v8::Value> operator()( const Vector3& v ) const;
-	};
+	struct NativeToJS<Vector3> : public NativeToJSMap_Graphos<Vector3> { };
 }
 
 #endif//__CC_VECTOR3

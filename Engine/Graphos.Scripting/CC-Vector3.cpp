@@ -46,25 +46,4 @@ namespace cvv8
 
 		Vector3cc.AddClassTo( TypeName<Vector3>::Value, target );
 	};
-
-	Handle<Value> NativeToJS<Vector3>::operator()( const Vector3& v ) const
-	{
-		Handle<Object> toReturn;
-
-		if( ( toReturn = GetJSObject( (void*)&v ) ).IsEmpty() )
-		{	// If object does not exist in the JSMap, create it
-			//Handle<Value> params[] =
-			//{
-			//	Number::New( v.x ),
-			//	Number::New( v.y ),
-			//	Number::New( v.z )
-			//};
-
-			//toReturn = ClassCreator<Vector3>::Instance().NewInstance( 3, params )->ToObject();
-			toReturn = ClassCreator<Vector3>::Instance().NewInstance( 0, NULL )->ToObject();
-			toReturn->SetInternalField( 0, External::New( (void*)&v ) );
-		}
-
-		return toReturn;
-	}
 } /* namespace */

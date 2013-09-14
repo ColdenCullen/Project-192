@@ -16,13 +16,12 @@ class GameObject1 extends GameObject
 
     public Update(): void
     {
-        //log("Update");
-
+        this.Transform.Position = new Vector3();
         if (Input.IsKeyDown(Keys.Space))
         {
-            log(this.Transform.Position);
+            log(this.Transform.Rotation.x);
             //this.Transform.Translate(new Vector3(1.0, 1.0, 0.0));
-            //this.Transform.Rotate( 1.0, 1.0, 0.0 );
+            this.Transform.Rotate( 0.1, 0.1, 0.0 );
             //log(this.Transform.Rotation.x);
         }
     }

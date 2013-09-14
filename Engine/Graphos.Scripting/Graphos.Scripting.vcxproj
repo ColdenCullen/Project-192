@@ -90,6 +90,7 @@
     <ClInclude Include="CC-Transform.h" />
     <ClInclude Include="CC-Vector3.h" />
     <ClInclude Include="ClassMapper.h" />
+    <ClInclude Include="NativeToJSMap_Graphos.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
   </ItemGroup>

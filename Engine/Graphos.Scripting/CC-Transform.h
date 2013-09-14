@@ -1,11 +1,12 @@
-#ifndef __CC_Transform
-#define __CC_Transform
+#ifndef __CC_TRANSFORM
+#define __CC_TRANSFORM
 
 #include "Transform.h"
 
 #include <v8\v8.h>
 
-#include "cvv8\ClassCreator.hpp"
+#include <cvv8\ClassCreator.hpp>
+#include "NativeToJSMap_Graphos.h"
 
 using namespace Graphos::Math;
 
@@ -19,7 +20,7 @@ namespace cvv8
 		)> TransformCtors;
 
 	template <>
-	struct ClassCreator_InternalFields<Transform>	: ClassCreator_InternalFields_Base<Transform> { };
+	struct ClassCreator_InternalFields<Transform> : ClassCreator_InternalFields_Base<Transform> { };
 
 	template <>
 	struct ClassCreator_SearchPrototypeForThis<Transform> : Opt_Bool<true> { };
@@ -46,10 +47,7 @@ namespace cvv8
 	struct JSToNative<Transform> : JSToNative_ClassCreator<Transform> { };
 
 	template <>
-	struct NativeToJS<Transform> : NativeToJSMap<Transform>
-	{
-		v8::Handle<v8::Value> operator()( const Transform& v ) const;
-	};
+	struct NativeToJS<Transform> : NativeToJSMap_Graphos<Transform> { };
 }
 
-#endif//__CC_Transform
+#endif//__CC_TRANSFORM

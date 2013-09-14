@@ -123,16 +123,6 @@ void GameObjectCollection::LoadObjects( string assetPath )
 						)
 					);
 
-				// Add a script
-				if( ( current = root.get( "Script", root ) ) != root )
-					newObj->AddComponent(
-						ISingleton<ScriptController>::Get().CreateObjectInstance(
-							current[ "Class" ].asString(),
-							id,
-							newObj
-						)
-					);
-
 				// Add a mesh
 				if( ( current = root.get( "Mesh", root ) ) != root )
 					newObj->AddComponent(
@@ -163,6 +153,16 @@ void GameObjectCollection::LoadObjects( string assetPath )
 							currentTransform[ "z" ].asDouble()
 						);
 				}
+
+				// Add a script
+				if( ( current = root.get( "Script", root ) ) != root )
+					newObj->AddComponent(
+						ISingleton<ScriptController>::Get().CreateObjectInstance(
+							current[ "Class" ].asString(),
+							id,
+							newObj
+						)
+					);
 
 				// Setup collider
 				if( ( current = root.get( "Collider", root ) ) != root )
