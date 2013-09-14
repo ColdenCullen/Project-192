@@ -11,6 +11,7 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include "CgShader.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Math;
@@ -94,6 +95,8 @@ void Win32Controller::Initialize( void )
 
 	glewExperimental = GL_TRUE;
 	GLenum result = glewInit();
+
+	CgShader::InitCg();
 
 	// Delete temp window
 	Shutdown();

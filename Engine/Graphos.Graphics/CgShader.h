@@ -13,21 +13,29 @@ namespace Graphos
 		class CgShader : public Shader
 		{
 		public:
-			CgShader&			Initialize( std::string filePath );
+								CgShader( std::string effectPath );
+								CgShader( std::string vertexPath, std::string fragmentPath );
 
-			void				Use( void ) const override;
+			static void			InitCg( void );
+
+			void				Draw( const Core::Mesh& mesh ) const override;
+
 			void				SetUniform( std::string name, int value ) const override;
 			void				SetUniform( std::string name, float value ) const override;
 			void				SetUniform( std::string name, const Math::Matrix4& value ) const override;
 
 		private:
-			static
-			CGcontext			cgContext;
+			static CGcontext	cgContext;
+
+			// For Programs
+			static CGprofile	cgVertexProfile;
+			static CGprofile	cgFragmentProfile;
+			CGprogram			cgVertexProgram;
+			CGprogram			cgFragmentProgram;
+
+			// For Effects
 			CGeffect			cgEffect;
 			CGtechnique			cgTechnique;
-
-			void				InitializeForGl( std::string filePath );
-			void				InitializeForDx( std::string filePath );
 		};
 	}
 }
