@@ -8,10 +8,12 @@
     <ClCompile Include="GameObjectCollection.cpp" />
     <ClCompile Include="GraphosGame.cpp" />
     <ClCompile Include="Input.cpp" />
+	<ClCompile Include="TaskManager.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="OutputController.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="TaskManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="File.h" />
