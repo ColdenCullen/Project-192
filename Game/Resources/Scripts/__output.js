@@ -127,7 +127,6 @@ var GameObject1 = (function (_super) {
         //this.vec2.y = 5.0;
     }
     GameObject1.prototype.Update = function () {
-        this.Transform.Position = new Vector3();
         if (Input.IsKeyDown(Keys.Space)) {
             log(this.Transform.Rotation.x);
 

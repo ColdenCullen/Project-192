@@ -1,5 +1,7 @@
 #include "CC-Vector3.h"
 
+using namespace Graphos::Math;
+
 #include "cvv8\XTo.hpp"
 #include "cvv8\properties.hpp"
 

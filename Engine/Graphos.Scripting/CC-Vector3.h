@@ -21,22 +21,8 @@ namespace cvv8
 		)> Vector3Ctors;
 
 	template <>
-	struct ClassCreator_InternalFields<Vector3>	: public ClassCreator_InternalFields_Base<Vector3> { };
-
-	template <>
-	struct ClassCreator_SearchPrototypeForThis<Vector3> : public Opt_Bool<true> { };
-
-	template <>
 	class ClassCreator_Factory<Vector3>
 		: public ClassCreator_Factory_NativeToJSMap<Vector3, CtorArityDispatcher<Vector3Ctors>> { };
-
-	template <>
-	struct ClassCreator_WeakWrap<Vector3>
-	{
-		static void PreWrap( v8::Persistent<v8::Object> const &, v8::Arguments const & ) { }
-		static void Wrap( v8::Persistent<v8::Object> const &, TypeInfo<Vector3>::NativeHandle ) { }
-		static void Unwrap( v8::Handle<v8::Object> const &, TypeInfo<Vector3>::NativeHandle ) { }
-	};
 
 	template <>
 	struct ClassCreator_SetupBindings<Vector3>

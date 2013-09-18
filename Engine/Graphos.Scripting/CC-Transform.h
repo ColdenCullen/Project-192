@@ -19,23 +19,10 @@ namespace cvv8
 		CtorForwarder<Transform*()>
 		)> TransformCtors;
 
-	template <>
-	struct ClassCreator_InternalFields<Transform> : ClassCreator_InternalFields_Base<Transform> { };
-
-	template <>
-	struct ClassCreator_SearchPrototypeForThis<Transform> : Opt_Bool<true> { };
 
 	template <>
 	class ClassCreator_Factory<Transform>
 		: public ClassCreator_Factory_NativeToJSMap<Transform, CtorArityDispatcher<TransformCtors>> { };
-
-	template <>
-	struct ClassCreator_WeakWrap<Transform>
-	{
-		static void PreWrap( v8::Persistent<v8::Object> const &, v8::Arguments const & ) { }
-		static void Wrap( v8::Persistent<v8::Object> const &, TypeInfo<Transform>::NativeHandle ) { }
-		static void Unwrap( v8::Handle<v8::Object> const &, TypeInfo<Transform>::NativeHandle ) { }
-	};
 
 	template <>
 	struct ClassCreator_SetupBindings<Transform>

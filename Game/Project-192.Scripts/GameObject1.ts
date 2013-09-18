@@ -16,7 +16,6 @@ class GameObject1 extends GameObject
 
     public Update(): void
     {
-        this.Transform.Position = new Vector3();
         if (Input.IsKeyDown(Keys.Space))
         {
             log(this.Transform.Rotation.x);

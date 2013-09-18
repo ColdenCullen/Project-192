@@ -8,6 +8,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{68d6b9bb-8320-4980-ac4e-1d9612db5bc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -19,22 +22,36 @@
     <ClInclude Include="Resource.h">
       <Filter>Windows Files</Filter>
     </ClInclude>
-    <ClInclude Include="CgShader.h" />
-    <ClInclude Include="GlShader.h" />
     <ClInclude Include="GraphicsController.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="ShaderController.h" />
     <ClInclude Include="WindowController.h" />
+    <ClInclude Include="CgShader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="GlShader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderController.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Windows Files</Filter>
     </ClCompile>
-    <ClCompile Include="CgShader.cpp" />
-    <ClCompile Include="GlShader.cpp" />
     <ClCompile Include="GraphicsController.cpp" />
-    <ClCompile Include="ShaderController.cpp" />
     <ClCompile Include="Win32Controller.cpp" />
+    <ClCompile Include="CgShader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="GlShader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderController.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GraphosGraphics.rc">
