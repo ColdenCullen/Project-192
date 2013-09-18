@@ -11,6 +11,8 @@ namespace Project192
 	public:
 		Graphos::Core::GameObjectCollection
 							objects;
+		Graphos::Core::GameObject*
+							cube;
 
 		virtual void		Initialize( void ) override;
 		virtual bool		Update( void ) override;

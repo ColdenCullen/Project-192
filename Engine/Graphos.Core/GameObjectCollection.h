@@ -2,7 +2,7 @@
 #define __GAME_OBJECT_COLLECTION
 
 #include "GameObject.h"
-#include "Shader.h"
+#include "GlShader.h"
 
 #include <string>
 #include <unordered_map>

@@ -47,7 +47,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 			{
 				// Create object, get pointer to it
 				string name = current.asString();
-				unsigned int id = CreateObject( name, &( ShaderController::Get().GetShader( root[ "Shader" ].asString() ) ) );
+				unsigned int id = CreateObject( name, &( ISingleton<ShaderController>::Get().GetShader( root[ "Shader" ].asString() ) ) );
 				GameObject* newObj = GetObjectById( id );
 
 				// Get parent
@@ -60,7 +60,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 				if( ( current = root.get( "Texture", root ) ) != root )
 				{
 					newObj->AddComponent(
-						AssetController::Get().GetContent<Texture>( current[ "Name" ].asString() )
+						ISingleton<AssetController>::Get().GetContent<Texture>( current[ "Name" ].asString() )
 					);
 				}
 
@@ -126,7 +126,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 				// Add a script
 				if( ( current = root.get( "Script", root ) ) != root )
 					newObj->AddComponent(
-						ScriptController::Get().CreateObjectInstance(
+						ISingleton<ScriptController>::Get().CreateObjectInstance(
 							current[ "Class" ].asString(),
 							id,
 							newObj
@@ -136,7 +136,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 				// Add a mesh
 				if( ( current = root.get( "Mesh", root ) ) != root )
 					newObj->AddComponent(
-						AssetController::Get().GetContent<Mesh>( current[ "Name" ].asString() )
+						ISingleton<AssetController>::Get().GetContent<Mesh>( current[ "Name" ].asString() )
 					);
 
 				// Transform object
@@ -205,7 +205,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 					}
 
 					newObj->AddComponent<Collider>( col );
-					Physics::Physics::Get().AddCollider( col );
+					ISingleton<Physics::Physics>::Get().AddCollider( col );
 				}
 			}
 			else

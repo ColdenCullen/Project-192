@@ -7,9 +7,10 @@
 #include <type_traits>
 
 #include "IComponent.h"
+#include "ISingleton.h"
 #include "Transform.h"
 #include "ShaderController.h"
-#include "Shader.h"
+#include "GlShader.h"
 
 namespace Graphos
 {
@@ -34,7 +35,7 @@ namespace Graphos
 
 			// Getters and setters
 			Graphics::Shader&	GetShader( void ) const { return *shader; }
-			void				SetShader( std::string newName ) { shader = &( Graphics::ShaderController::Get().GetShader( newName ) ); }
+			void				SetShader( std::string newName ) { shader = &( ISingleton<Graphics::ShaderController>::Get().GetShader( newName ) ); }
 
 			// Add ingredient of type T
 			template<class T>

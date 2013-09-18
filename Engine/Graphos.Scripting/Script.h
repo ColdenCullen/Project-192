@@ -16,7 +16,7 @@ namespace Graphos
 								Script( v8::Local<v8::Object> instance, GameObject* owner = nullptr )
 									: instance( instance ), IComponent( owner ), updateFunction( v8::Handle<v8::Function>::Cast( instance->Get( v8::String::New( "Update" ) ) ) ) { }
 
-			bool				Update( void );
+			void				Update( void );
 			void				Draw( void ) { }
 			void				Shutdown( void ) { }
 

@@ -6,12 +6,13 @@
 #include "Vector3.h"
 #include "Collider.h"
 #include "IController.h"
+#include "ISingleton.h"
 
 namespace Graphos
 {
 	namespace Physics
 	{
-		class Physics : Core::IController
+		class Physics : public Core::IController
 		{
 		public:
 			virtual void		Initialize( void ) override;
@@ -19,12 +20,6 @@ namespace Graphos
 
 			void				AddCollider( Collider* col );
 			void				Update( void );
-
-			static Physics&		Get( void )
-			{
-				static Physics instance;
-				return instance;
-			}
 
 			Math::Vector3
 								gravity;
@@ -57,6 +52,8 @@ namespace Graphos
 
 			std::vector<Collider*>
 								colliders;
+
+			friend class		Core::ISingleton<Physics>;
 		};
 	}
 }

@@ -46,6 +46,8 @@
 
 #include "UserInterface.h"
 #include "Vector2.h"
+#include "IController.h"
+#include "ISingleton.h"
 
 #include <stdint.h>
 
@@ -71,17 +73,10 @@ namespace Graphos
 			uint64_t			bits[ SPLIT ];
 		};
 
-		class Input
+		class Input : public IController
 		{
 		public:
-			UserInterface*
-				ui;
-
-			static Input& Get( void )
-			{
-				static Input instance;
-				return instance;
-			}
+			UserInterface*		ui;
 
 			void				Update( void );
 
@@ -102,6 +97,8 @@ namespace Graphos
 			InputState			prevKeyState;
 			InputState			stage;
 			bool				lmbDown, rmbDown;
+
+			friend class		ISingleton<Input>;
 		};
 	}
 }

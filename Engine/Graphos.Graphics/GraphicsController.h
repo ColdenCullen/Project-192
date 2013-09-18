@@ -3,12 +3,13 @@
 
 #include "WindowController.h"
 #include "IController.h"
+#include "ISingleton.h"
 
 namespace Graphos
 {
 	namespace Graphics
 	{
-		class GraphicsController : Core::IController
+		class GraphicsController : public Core::IController
 		{
 		public:
 			// GL functions to call from outside project
@@ -25,17 +26,12 @@ namespace Graphos
 
 			void				MessageLoop( void ) { WindowController::Get().MessageLoop(); }
 
-			static
-			GraphicsController&	Get( void )
-			{
-				static GraphicsController instance;
-				return instance;
-			}
-
 		private:
 								GraphicsController( void ) { }
 								GraphicsController( const GraphicsController& );
 			void				operator=( const GraphicsController& );
+
+			friend class		Core::ISingleton<GraphicsController>;
 		};
 	}
 }

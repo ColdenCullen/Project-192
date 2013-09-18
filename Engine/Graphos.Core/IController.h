@@ -1,5 +1,5 @@
-#ifndef __INGREDIENT_CONTROLLER
-#define __INGREDIENT_CONTROLLER
+#ifndef __ICONTROLLER
+#define __ICONTROLLER
 
 namespace Graphos
 {
@@ -8,10 +8,10 @@ namespace Graphos
 		class IController
 		{
 		public:
-			virtual void		Initialize( void ) = 0;
-			virtual void		Shutdown( void ) = 0;
+			virtual void		Initialize( void ) { }
+			virtual void		Shutdown( void ) { }
 		};
 	}
 }
 
-#endif//__INGREDIENT_CONTROLLER
+#endif//__ICONTROLLER

@@ -88,6 +88,7 @@
     <ClCompile Include="GraphosGame.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="TaskManager.cpp" />
+    <ClCompile Include="OutputController.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -100,7 +101,12 @@
     <ClInclude Include="GraphosGame.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="Input.h" />
+<<<<<<< HEAD
     <ClInclude Include="TaskManager.h" />
+=======
+    <ClInclude Include="ISingleton.h" />
+    <ClInclude Include="OutputController.h" />
+>>>>>>> develop
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>

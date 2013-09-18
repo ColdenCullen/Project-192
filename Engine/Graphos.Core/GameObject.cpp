@@ -7,13 +7,8 @@ using namespace Graphos::Core;
 
 void GameObject::Update( void )
 {
-	bool result = true;
-
 	for( auto ingredient = begin( componentList ); ingredient != end( componentList ); ++ingredient )
-		if( !ingredient->second->Update() )
-			result = false;
-
-	//return result;
+		ingredient->second->Update();
 }
 
 void GameObject::Draw( void )

@@ -111,7 +111,7 @@ Vector2 Input::GetMousePos( /*Transform& camera, float zPlane*/ ) const
 	ScreenToClient( WindowController::Get().GetHWnd(), &i );
 
 	// Adjust for border
-	if( !Graphos::Core::Config::Get().GetData<bool>( "display.fullscreen" ) )
+	if( !ISingleton<Graphos::Core::Config>::Get().GetData<bool>( "display.fullscreen" ) )
 		i.x -= GetSystemMetrics( SM_CYBORDER );
 
 	//i.y -= GetSystemMetrics( /*SM_CYCAPTION*/SM_CYBORDER );

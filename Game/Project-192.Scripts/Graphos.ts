@@ -56,7 +56,7 @@ declare class Time
 // Interface that allows GameObjects to check for input
 declare class Input
 {
-    static IsKeyDown( key: number ): bool;
+    static IsKeyDown(key: number): boolean;
 }
 
 // Print function

@@ -12,17 +12,16 @@
 #include "Input.h"
 #include "Matrix4.h"
 #include "IController.h"
+#include "ISingleton.h"
 
 namespace Graphos
 {
 	namespace Graphics
 	{
 #pragma region PlatformWindowController
-		class PlatformWindowController : Core::IController
+		class PlatformWindowController
 		{
 		public:
-			virtual void		Initialize( void ) override = 0;
-			virtual void		Shutdown( void ) override = 0;
 			virtual void		Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 ) = 0;
 			virtual void		Reload( void ) = 0;
 			virtual void		MessageLoop( void ) = 0;
@@ -50,7 +49,7 @@ namespace Graphos
 
 #pragma region Win32Controller
 #if defined( _WIN32 )
-		class Win32Controller : public PlatformWindowController
+		class Win32Controller : public PlatformWindowController, public Core::IController
 		{
 		public:
 			void				Initialize( void ) override;
@@ -79,12 +78,14 @@ namespace Graphos
 
 			static
 			LRESULT CALLBACK	WndProc( HWND, UINT, WPARAM, LPARAM );
+
+			friend class		Core::ISingleton<Win32Controller>;
 		};
 #pragma endregion
 
 #pragma region OSXController
 #elif defined( __APPLE__ )
-		class OSXController : public PlatformWindowController
+		class OSXController : public PlatformWindowController, public Core::IController
 		{
 		public:
 			bool				Initialize( void ) override;
@@ -92,7 +93,9 @@ namespace Graphos
 			void				Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 );
 			void				Reload( void );
 			void				MessageLoop( void );
-			//private:
+
+		private:
+			friend class		Core::ISingleton<Win32Controller>;
 		};
 #endif//_WIN32||__APPLE__
 #pragma endregion
@@ -105,15 +108,13 @@ namespace Graphos
 			static
 			Win32Controller&	Get( void )
 			{
-				static Win32Controller instance;
-				return instance;
+				return Core::ISingleton<Win32Controller>::Get();
 			}
 #elif defined( __APPLE__ )
 			static
 			OSXController&		Get( void )
 			{
-				static OSXController instance;
-				return instance;
+				return Core::IController<OSXController>::Get();
 			}
 #endif//_WIN32||__APPLE__
 

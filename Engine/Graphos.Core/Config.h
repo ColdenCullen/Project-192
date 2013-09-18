@@ -1,6 +1,8 @@
 #ifndef _CONFIGCONTROLLER_H_
 #define _CONFIGCONTROLLER_H_
 
+#include "IController.h"
+#include "ISingleton.h"
 #include "GraphosGame.h"
 #include "Vector3.h"
 
@@ -13,11 +15,11 @@ namespace Graphos
 {
 	namespace Core
 	{
-		class Config
+		class Config : public IController
 		{
 		public:
 			// Initialize the settings controller
-			void				LoadSettings( void );
+			void				Initialize( void );
 
 			#pragma region GetData
 			// Get value from settings
@@ -55,12 +57,6 @@ namespace Graphos
 				outfile.close();
 			}
 
-			static Config&		Get( void )
-			{
-				static Config instance;
-				return instance;
-			}
-
 		private:
 								Config( void ) { }
 								Config( const Config& );
@@ -70,6 +66,8 @@ namespace Graphos
 
 			// JSON values
 			Json::Value			config;
+
+			friend class		ISingleton<Config>;
 		};
 
 		#pragma region GetData

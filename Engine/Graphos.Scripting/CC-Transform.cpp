@@ -96,7 +96,8 @@ namespace cvv8
 		if( ( toReturn = GetJSObject( (void*)&v ) ).IsEmpty() )
 		{	// If object does not exist in the JSMap, create it
 			toReturn = ClassCreator<Transform>::Instance().NewInstance( 0, NULL )->ToObject();
-			toReturn->Set( String::New( "Position" ), CastToJS( v.Position() ) );
+			toReturn->SetInternalField( 0, External::New( (void*)&v ) );
+			//toReturn->Set( String::New( "Position" ), CastToJS( v.Position() ) );
 		}
 
 		return toReturn;

@@ -26,7 +26,7 @@ namespace Graphos
 								~AwesomiumView( void ) { }
 
 			bool				Initialize( std::string url, unsigned int width, unsigned int height );
-			bool				Update( void );
+			void				Update( void );
 			void				Draw( void );
 			void				Shutdown( void );
 
