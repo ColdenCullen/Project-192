@@ -1,13 +1,15 @@
 
 
 struct vs_input {
-		float3 position: POSITION;
+		float3 position : POSITION;
 		float2 texCoord : TEXCOORD0;
+		//float4 color : COLOR;
 };
 
 struct vs_output {
   float4 position : POSITION;
   float2 texCoord : TEXCOORD0;
+ // float4 color : COLOR;
 };
 
 vs_output demo( vs_input IN )
@@ -16,6 +18,7 @@ vs_output demo( vs_input IN )
 
   OUT.position = float4(IN.position, 1);
   OUT.texCoord = IN.texCoord;
+ //OUT.color = IN.color;
 
   return OUT;	
 }

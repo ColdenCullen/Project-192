@@ -12,6 +12,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cmdLine, in
 
 	if( !game.Init() )
 		return 0;
+
+	
 	
 	return game.run();
 
@@ -28,6 +30,8 @@ DemoGame::~DemoGame(void)
 {
 	ReleaseCOMobjMacro( vertexLayout );
 	ReleaseCOMobjMacro( vertexBuffer );
+	ballTexture->Shutdown();
+	delete ballTexture;
 }
 
 bool DemoGame::Init()
@@ -35,6 +39,7 @@ bool DemoGame::Init()
 	if( !DXGame::Init() )
 		return false;
 	LoadCgShaders();
+	LoadTextures();
 	CreateVertexBuffer();
 	return true;
 }
@@ -70,7 +75,7 @@ void DemoGame::LoadCgShaders()
     const D3D11_INPUT_ELEMENT_DESC layout[] =
     {
         { "POSITION",  0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
     };
 
     pVSBuf = cgD3D11GetCompiledProgram( myCgVertexProgram );
@@ -95,20 +100,23 @@ void DemoGame::LoadCgShaders()
 
     cgD3D11LoadProgram( myCgFragmentProgram, 0 );
     checkForCgError("loading fragment program");
+
+	
+
 }
 
 void DemoGame::CreateVertexBuffer()
 {
 
-	XMFLOAT4 red	= XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
-	XMFLOAT4 green	= XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
-	XMFLOAT4 blue	= XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f);
+//	XMFLOAT4 red	= XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f);
+//	XMFLOAT4 green	= XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f);
+//	XMFLOAT4 blue	= XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f);
 
 	Vertex triangleVertices[] = 
 	{
-		{ XMFLOAT3(-0.8f, +0.8f, +0.0f), red },
-		{ XMFLOAT3(+0.8f, +0.8f, +0.0f), green },
-		{ XMFLOAT3(+0.0f, -0.8f, +0.0f), blue },
+		{ XMFLOAT3(-0.8f, +0.8f, +0.0f), XMFLOAT2(+0.0f, +0.0f) },
+		{ XMFLOAT3(+0.8f, +0.8f, +0.0f), XMFLOAT2(+1.0f, +0.0f) },
+		{ XMFLOAT3(+0.0f, -0.8f, +0.0f), XMFLOAT2(+0.5f, +1.0f) },
 	};
 
 	// Create the vertex buffer
@@ -125,13 +133,18 @@ void DemoGame::CreateVertexBuffer()
 	HR( device->CreateBuffer( &vbDesc, &initialVertexData, &vertexBuffer ) );
 }
 
+void DemoGame::LoadTextures()
+{
+	ballTexture = new Texture( "balls.jpg", device );
+}
+
 void DemoGame::DrawScene()
 {
 	UINT strides[1] = { sizeof( Vertex ) };
     UINT offsets[1] = { 0 };
     ID3D11Buffer* buffers[1] = { vertexBuffer };
 
-	float ClearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // RGBA
+	float ClearColor[4] = { 100.0f/255.0f, 149.0f/255.0f, 237.0f/255.0f, 1.0f }; // RGBA
     // Clear the back buffer        
     deviceContext->ClearRenderTargetView( renderTargetView, ClearColor );
     deviceContext->ClearDepthStencilView( depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0, 0 );
@@ -145,6 +158,8 @@ void DemoGame::DrawScene()
 
     cgD3D11BindProgram( myCgVertexProgram );
     cgD3D11BindProgram( myCgFragmentProgram );
+
+	ballTexture->Draw( &myCgFragmentProgram );
 
     deviceContext->Draw( 3, 0 ); // numVertices, startVertex
      

@@ -57,6 +57,7 @@ DXGame::~DXGame(void)
 	// clean up Cg stuff
 	CleanUpCg();
 
+
 	// Release the DX stuff
 	ReleaseCOMobjMacro(renderTargetView);
 	ReleaseCOMobjMacro(depthStencilView);

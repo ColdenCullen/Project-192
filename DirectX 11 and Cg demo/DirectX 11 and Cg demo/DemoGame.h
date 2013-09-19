@@ -20,7 +20,7 @@ using namespace Graphos::Core;
 struct Vertex
 {
 	XMFLOAT3 Position;
-	XMFLOAT4 Color;
+	XMFLOAT2 TexCoord;
 };
 
 
@@ -39,11 +39,10 @@ public:
 private:
 	void LoadCgShaders();
 	void CreateVertexBuffer();
+	void LoadTextures();
 
 	Texture* ballTexture;
-	CGparameter myCgFragmentParam_decal;
-	CGparameter myCgFragmentParam_state;
-
+	
 	ID3D11InputLayout* vertexLayout;
 	ID3D11Buffer* vertexBuffer;
 
