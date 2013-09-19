@@ -4,6 +4,7 @@
 #include <string>
 
 #include "IComponent.h"
+#include "Shader.h"
 
 namespace Graphos
 {
@@ -17,9 +18,13 @@ namespace Graphos
 
 			void				LoadFromFile( std::string filePath );
 
-			void				Update( void ) { } 
-			void				Draw( void );
-			void				Shutdown( void );
+			void				Update( void ) override { }
+			void				Draw( Graphics::Shader* shader ) override;
+			void				Shutdown( void ) override;
+
+			unsigned int 		GetNumElements( void ) const { return numElements; }
+			unsigned int		GetVAO( void ) const { return vertexArrayObject; }
+			unsigned int		GetIndexBuffer( void ) const { return indexBuffer; }
 
 		private:
 			unsigned int		vertexBufferObject;

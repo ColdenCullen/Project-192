@@ -128,7 +128,7 @@ var GameObject1 = (function (_super) {
     }
     GameObject1.prototype.Update = function () {
         if (Input.IsKeyDown(Keys.Space)) {
-            //log(this.Transform.Position);
+            log(this.Transform.Position);
             //this.Transform.Translate(new Vector3(1.0, 1.0, 0.0));
             //this.Transform.Rotate( 1.0, 1.0, 0.0 );
             //log(this.Transform.Rotation.x);
