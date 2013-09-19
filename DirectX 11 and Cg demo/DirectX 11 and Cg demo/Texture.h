@@ -19,12 +19,12 @@ namespace Graphos
 		{
 		public:
 		Texture( void ) { }
-		Texture( std::string filePath, ID3D11Device* device ) { LoadFromFile( filePath, device ); }
+		Texture( std::string filePath, ID3D11Device* device, CGprogram& myCgFragmentProgram ) { LoadFromFile( filePath, device, myCgFragmentProgram ); }
 
-		void	LoadFromFile( std::string filePath, ID3D11Device* device );
+		void	LoadFromFile( std::string filePath, ID3D11Device* device, CGprogram& myCgFragmentProgram );
 
 		void	Update( void ) { }
-		void	Draw( CGprogram* myCgFragmentProgram );
+		void	Draw( void );
 		void	Shutdown( void );
 
 		private:

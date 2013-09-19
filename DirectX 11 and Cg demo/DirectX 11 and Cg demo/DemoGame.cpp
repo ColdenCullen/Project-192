@@ -135,7 +135,7 @@ void DemoGame::CreateVertexBuffer()
 
 void DemoGame::LoadTextures()
 {
-	ballTexture = new Texture( "balls.jpg", device );
+	ballTexture = new Texture( "balls.jpg", device, myCgFragmentProgram );
 }
 
 void DemoGame::DrawScene()
@@ -159,7 +159,7 @@ void DemoGame::DrawScene()
     cgD3D11BindProgram( myCgVertexProgram );
     cgD3D11BindProgram( myCgFragmentProgram );
 
-	ballTexture->Draw( &myCgFragmentProgram );
+	ballTexture->Draw();
 
     deviceContext->Draw( 3, 0 ); // numVertices, startVertex
      
