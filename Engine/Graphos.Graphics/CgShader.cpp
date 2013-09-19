@@ -42,27 +42,24 @@ void CgErrorHandler( CGcontext context, CGerror error, void* appData )
 
 void CgShader::InitCg( void )
 {
-//	cgGLRegisterStates( cgContext );
-//	cgGLSetManageTextureParameters( cgContext, CG_TRUE );
-
 	cgSetErrorHandler( &CgErrorHandler, NULL );
 
 	cgContext = cgCreateContext();
+
+//#ifndef _DEBUG
+	cgGLSetDebugMode( CG_FALSE );
+//#endif
+
 	cgSetParameterSettingMode( cgContext, CG_DEFERRED_PARAMETER_SETTING );
-	//cgSetContextBehavior( cgContext, CG_BEHAVIOR_3100 );
 
 #if defined( USE_GL )
 
-	//cgGLRegisterStates( cgContext );
-	//cgGLSetManageTextureParameters( cgContext, CG_TRUE );
-
 	cgVertexProfile = cgGLGetLatestProfile( CG_GL_VERTEX );
 	cgGLSetOptimalOptions( cgVertexProfile );
+	cgGLEnableProfile( cgVertexProfile );
 
 	cgFragmentProfile = cgGLGetLatestProfile( CG_GL_FRAGMENT );
 	cgGLSetOptimalOptions( cgFragmentProfile );
-
-	cgGLEnableProfile( cgVertexProfile );
 	cgGLEnableProfile( cgFragmentProfile );
 
 #elif defined( USE_DX )
@@ -148,15 +145,7 @@ void CgShader::Draw( const Mesh& mesh ) const
 	glBindVertexArray( mesh.GetVAO() );
 	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
 
-	//CGpass pass = cgGetFirstPass( cgTechnique );
-	//while( pass )
-	//{
-	//	cgSetPassState( pass );
-		glDrawElements( GL_TRIANGLES, mesh.GetNumElements(), GL_UNSIGNED_INT, NULL );
-	//	cgResetPassState( pass );
-
-	//	pass = cgGetNextPass( pass );
-	//}
+	glDrawElements( GL_TRIANGLES, mesh.GetNumElements(), GL_UNSIGNED_INT, NULL );
 
 	cgGLDisableProfile(cgVertexProfile);
 	

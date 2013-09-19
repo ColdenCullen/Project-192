@@ -1,8 +1,8 @@
 struct BufferData
 {
-	float3 position : POSITION;
-	float2 uv : TEXCOORD0;
-	float3 normal : NORMAL;
+	float3 position : ATTR0;
+	float2 uv : ATTR1;
+	float3 normal : ATTR2;
 };
 
 struct VertexToFragment
@@ -18,7 +18,7 @@ VertexToFragment main( BufferData IN,
 {
 	VertexToFragment OUT;
 
-	OUT.position = mul( projectionMatrix, mul( cameraMatrix, mul( modelMatrix, float4( IN.position, 1.0 ) ) ) );
+	OUT.position = float4( IN.position / 2, 1.0 );//mul( projectionMatrix, mul( cameraMatrix, mul( modelMatrix, float4( IN.position, 1.0 ) ) ) );
 	OUT.uv = IN.uv;
 
 	return OUT;
