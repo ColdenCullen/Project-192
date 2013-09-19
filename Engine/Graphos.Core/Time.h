@@ -15,11 +15,11 @@ namespace Graphos
 		{
 		public:
 			void				Update( void );
-			const float			GetDeltaTime( void ) const { return static_cast<float>( deltaTime.count() ) / std::nano::den; }
-			const float			TotalTime( void ) const { return static_cast<float>( totalTime.count() ) / std::nano::den; }
+			const float			GetDeltaTime( void ) const { return 0.016f; }//return static_cast<float>( deltaTime.count() ) / std::nano::den; }
+			const float			TotalTime( void ) const { return 1.0f; }//return static_cast<float>( totalTime.count() ) / std::nano::den; }
 
 		private:
-			std::chrono::high_resolution_clock::time_point
+			/*std::chrono::high_resolution_clock::time_point
 								cur;
 			std::chrono::high_resolution_clock::time_point
 								prev;
@@ -31,6 +31,7 @@ namespace Graphos
 
 			std::chrono::nanoseconds
 								secondTime;
+			*/
 
 								Time( void );
 								Time( const Time& );

@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="IController.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="File.h" />
@@ -101,12 +102,9 @@
     <ClInclude Include="GraphosGame.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="Input.h" />
-<<<<<<< HEAD
     <ClInclude Include="TaskManager.h" />
-=======
     <ClInclude Include="ISingleton.h" />
     <ClInclude Include="OutputController.h" />
->>>>>>> develop
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
