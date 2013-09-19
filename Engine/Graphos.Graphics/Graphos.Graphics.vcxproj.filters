@@ -22,9 +22,9 @@
     <ClInclude Include="CgShader.h" />
     <ClInclude Include="GlShader.h" />
     <ClInclude Include="GraphicsController.h" />
-    <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderController.h" />
     <ClInclude Include="WindowController.h" />
+    <ClInclude Include="IShader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

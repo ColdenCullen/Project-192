@@ -47,7 +47,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 			{
 				// Create object, get pointer to it
 				string name = current.asString();
-				unsigned int id = CreateObject( name, &( ISingleton<ShaderController>::Get().GetShader( root[ "Shader" ].asString() ) ) );
+				unsigned int id = CreateObject( name, ISingleton<ShaderController>::Get().GetShader( root[ "Shader" ].asString() ) );
 				GameObject* newObj = GetObjectById( id );
 
 				// Get parent
@@ -224,7 +224,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 }
 #pragma endregion
 
-unsigned int GameObjectCollection::CreateObject( string name, Shader* shader )
+unsigned int GameObjectCollection::CreateObject( string name, IShader* shader )
 {
 	if( nameMap.find( name ) != end( nameMap ) )
 		throw exception( "Name given has already been used" );

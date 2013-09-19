@@ -4,7 +4,7 @@
 #include <string>
 
 #include "IComponent.h"
-#include "Shader.h"
+#include "IShader.h"
 
 namespace Graphos
 {
@@ -19,7 +19,7 @@ namespace Graphos
 			void				LoadFromFile( std::string filePath );
 
 			void				Update( void ) override { }
-			void				Draw( Graphics::Shader* shader ) override;
+			void				Draw( Graphics::IShader* shader ) override;
 			void				Shutdown( void ) override;
 
 			unsigned int 		GetNumElements( void ) const { return numElements; }

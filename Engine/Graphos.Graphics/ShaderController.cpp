@@ -72,9 +72,9 @@ void ShaderController::Initialize( void )
 	}
 }
 
-Shader& ShaderController::GetShader( string shaderName )
+IShader* ShaderController::GetShader( string shaderName )
 {
-	return *shaders.at( shaderName );
+	return shaders.at( shaderName );
 }
 
 void ShaderController::Shutdown( void )

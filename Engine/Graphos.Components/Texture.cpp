@@ -2,7 +2,7 @@
 
 #include <GL/GLIncludes.h>
 #include <FreeImage.h>
-#include "Shader.h"
+#include "IShader.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -33,9 +33,10 @@ void Texture::LoadFromFile( std::string filePath )
 	glBindTexture( GL_TEXTURE_2D, NULL );
 }
 
-void Texture::Draw( Shader* shader )
+void Texture::Draw( IShader* shader )
 {
-	glBindTexture( GL_TEXTURE_2D, textureID );
+	
+	shader->BindTexture( *this );
 }
 
 void Texture::Shutdown( void )

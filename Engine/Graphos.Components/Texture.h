@@ -16,8 +16,10 @@ namespace Graphos
 			
 			void				LoadFromFile( std::string filePath );
 
-			void				Draw( Graphics::Shader* shader ) override;
+			void				Draw( Graphics::IShader* shader ) override;
 			void				Shutdown( void ) override;
+
+			unsigned int		GetTextureId( void ) const { return textureID; }
 
 		private:
 			unsigned int		textureID;

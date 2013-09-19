@@ -15,6 +15,7 @@
 #endif//USE_GL/USE_DX
 
 #include "OutputController.h"
+#include "Texture.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -130,28 +131,36 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 
 void CgShader::Draw( const Mesh& mesh ) const
 {
-	CGparameter cgFragmentParam_decal = cgGetNamedParameter( cgFragmentProgram, "texture" );
+	CGparameter cgFragmentParam_decal = cgGetNamedParameter( cgFragmentProgram, "decal" );
 
+	SetUniform( "modelViewProjection", modelMatrix * viewMatrix * projectionMatrix );
+
+	// Bind programs and profiles
 	cgGLBindProgram( cgVertexProgram );
-	
 	cgGLEnableProfile( cgVertexProfile );
-	
 	cgGLBindProgram( cgFragmentProgram );
-	
 	cgGLEnableProfile( cgFragmentProfile );
 	
-	cgGLEnableTextureParameter(cgFragmentParam_decal);
+	// Enable the texture parameter
+	cgGLEnableTextureParameter( cgFragmentParam_decal );
 
+	// Bind the mesh elements
 	glBindVertexArray( mesh.GetVAO() );
 	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
 
+	// Draw the elements
 	glDrawElements( GL_TRIANGLES, mesh.GetNumElements(), GL_UNSIGNED_INT, NULL );
 
+	// Disable profiles
 	cgGLDisableProfile(cgVertexProfile);
-	
 	cgGLDisableProfile(cgFragmentProfile);
 	
 	cgGLDisableTextureParameter(cgFragmentParam_decal);
+}
+
+void CgShader::BindTexture( const Texture& text ) const
+{
+	cgGLSetTextureParameter( cgGetNamedParameter( cgFragmentProgram, "decal" ), text.GetTextureId() );
 }
 
 void CgShader::SetUniform( string name, int value ) const 
@@ -167,6 +176,7 @@ void CgShader::SetUniform( string name, float value ) const
 void CgShader::SetUniform( string name, const Matrix4& value ) const 
 {
 	//cgSetParameterValuefc( cgGetNamedEffectParameter( cgEffect, name.c_str() ), 16, value.dataArray );
+	cgSetParameterValuefc( cgGetNamedParameter( cgVertexProgram, name.c_str() ), 16, value.dataArray );
 }
 
 CGcontext CgShader::cgContext;

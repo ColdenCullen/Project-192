@@ -1,25 +1,25 @@
 struct BufferData
 {
 	float3 position : ATTR0;
-	float2 uv : ATTR1;
-	float3 normal : ATTR2;
+	float2 texCoord : ATTR1;
+	//float4 color : COLOR;
 };
 
 struct VertexToFragment
 {
 	float4 position : POSITION;
-	float2 uv : TEXCOORD0;
+	float2 texCoord : TEXCOORD0;
+	//float4 color	: COLOR;
 };
 
 VertexToFragment main( BufferData IN,
-					   uniform float4x4 projectionMatrix,
-					   uniform float4x4 cameraMatrix,
-					   uniform float4x4 modelMatrix )
-{
+					   uniform float4x4 modelViewProjection )
+{	
 	VertexToFragment OUT;
-
-	OUT.position = float4( IN.position / 2, 1.0 );//mul( projectionMatrix, mul( cameraMatrix, mul( modelMatrix, float4( IN.position, 1.0 ) ) ) );
-	OUT.uv = IN.uv;
-
-	return OUT;
+	
+	OUT.position = mul( modelViewProjection, float4( IN.position, 1.0 ) ); // float4( IN.position / 2, 1.0 ); // 
+	OUT.texCoord = IN.texCoord;
+	//OUT.color = IN.color;
+	
+	return OUT;	
 }
