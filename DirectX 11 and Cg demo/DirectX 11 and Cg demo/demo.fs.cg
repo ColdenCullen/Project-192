@@ -1,0 +1,18 @@
+
+
+struct vs_output {
+  float4 position : POSITION;
+  float2 texCoord : TEXCOORD0; 
+};
+
+struct fs_output {  
+  float4 color : COLOR;
+};
+
+fs_output demo( vs_output IN,
+				uniform sampler2D decal : TEX0 )
+{
+  fs_output OUT;
+  OUT.color = tex2D(textureFile, IN.texCoord);
+  return OUT;
+}

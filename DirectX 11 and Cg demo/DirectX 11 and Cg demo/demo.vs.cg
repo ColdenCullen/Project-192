@@ -1,0 +1,21 @@
+
+
+struct vs_input {
+		float3 position: POSITION;
+		float2 texCoord : TEXCOORD0;
+};
+
+struct vs_output {
+  float4 position : POSITION;
+  float2 texCoord : TEXCOORD0;
+};
+
+vs_output demo( vs_input IN )
+{	
+  vs_output OUT;
+
+  OUT.position = float4(IN.position, 1);
+  OUT.texCoord = IN.texCoord;
+
+  return OUT;	
+}
