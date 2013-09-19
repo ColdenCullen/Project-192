@@ -20,13 +20,13 @@ void Texture::LoadFromFile( std::string filePath,ID3D11Device* device, CGprogram
 	CreateTexture( device, img, 1, metaData, &myDecalTexture );
 	
 	myCgFragmentParam_decal = cgGetNamedParameter( myCgFragmentProgram, "decal" );
-
+	
+	cgD3D11SetTextureParameter( myCgFragmentParam_decal, myDecalTexture );
 }
 
 void Texture::Draw( )
 {
-
-    cgD3D11SetTextureParameter( myCgFragmentParam_decal, myDecalTexture );
+	
     cgD3D11SetSamplerStateParameter( myCgFragmentParam_decal, NULL ); // NULL == default states
 }
 
