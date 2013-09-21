@@ -101,12 +101,9 @@
     <ClInclude Include="GraphosGame.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="Input.h" />
-<<<<<<< HEAD
     <ClInclude Include="TaskManager.h" />
-=======
     <ClInclude Include="ISingleton.h" />
     <ClInclude Include="OutputController.h" />
->>>>>>> develop
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
