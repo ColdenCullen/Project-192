@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "GlShader.h"
 #include "File.h"
+#include "Mesh.h"
+#include "Texture.h"
 
 #define MIN(x,y) (x < y ? x : y)
 
@@ -16,11 +18,6 @@ GlShader& GlShader::Initialize( string vertexPath, string fragmentPath )
 	Compile( vertexBody, fragmentBody );
 	ScanForVars( vertexBody );
 	return *this;
-}
-
-void GlShader::Use( void ) const
-{
-	glUseProgram( programID );
 }
 
 void GlShader::SetUniform( string name, int value ) const
@@ -123,4 +120,22 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 	glGetProgramiv( programID, GL_LINK_STATUS, &compileStatus );
 	if( compileStatus != GL_TRUE )
 		throw exception( "Error linking shader program." );
+}
+
+void GlShader::Draw( const Mesh& mesh ) const 
+{
+	SetUniform( "modelViewProjection", modelViewProjection );
+
+	glUseProgram( programID );
+
+	glBindVertexArray( mesh.GetVAO() );
+	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
+
+	// Draw
+	glDrawElements( GL_TRIANGLES, mesh.GetNumElements(), GL_UNSIGNED_INT, 0 );
+}
+
+void GlShader::BindTexture( const Texture& text ) const
+{
+	glBindTexture( GL_TEXTURE_2D, text.GetTextureId() );
 }

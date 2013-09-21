@@ -1,72 +1,184 @@
 #include "stdafx.h"
 #include "CgShader.h"
 
-#include "Matrix4.h"
+#define USE_GL
+//#define USE_DX
 
+#include "Matrix4.h"
+#include "Mesh.h"
+
+#if defined( USE_GL )
+#include <GL\glincludes.h>
 #include <Cg\cgGL.h>
-#ifdef _WIN32
+#elif defined( USE_DX )
 #include <Cg\cgD3D11.h>
-#endif//_WIN32
+#endif//USE_GL/USE_DX
+
+#include "OutputController.h"
+#include "Texture.h"
 
 using namespace std;
+using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 
-CgShader& CgShader::Initialize( std::string filePath )
+void CgErrorHandler( CGcontext context, CGerror error, void* appData )
 {
-	//cgSetErrorHandler( &CgErrorHandler, NULL );
+	if( error != CG_NO_ERROR )
+	{	// If there is an error, print it
+		string strError;
 
-	if( !cgContext )
-	{
-		cgContext = cgCreateContext();
+		if( error == CG_COMPILER_ERROR )
+		{	// If error is a compiler error, output it
+			strError = string( "Compile Error:\n" ) + cgGetLastListing( context );
+		}
+		else
+		{	// If not compiler error, print error
+			strError = cgGetErrorString( error );
+		}
 
-		InitializeForGl( filePath );
+		ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_ERROR, string( "Cg Error: " ) + strError );
 	}
+}
 
-	cgEffect = cgCreateEffectFromFile( cgContext, filePath.c_str(), NULL );
+void CgShader::InitCg( void )
+{
+	cgSetErrorHandler( &CgErrorHandler, NULL );
 
+	cgContext = cgCreateContext();
+
+//#ifndef _DEBUG
+	cgGLSetDebugMode( CG_FALSE );
+//#endif
+
+	cgSetParameterSettingMode( cgContext, CG_DEFERRED_PARAMETER_SETTING );
+
+#if defined( USE_GL )
+
+	cgVertexProfile = cgGLGetLatestProfile( CG_GL_VERTEX );
+	cgGLSetOptimalOptions( cgVertexProfile );
+	cgGLEnableProfile( cgVertexProfile );
+
+	cgFragmentProfile = cgGLGetLatestProfile( CG_GL_FRAGMENT );
+	cgGLSetOptimalOptions( cgFragmentProfile );
+	cgGLEnableProfile( cgFragmentProfile );
+
+#elif defined( USE_DX )
+
+
+
+#endif//USE_GL/USE_DX
+}
+
+CgShader::CgShader( string effectPath )
+{
+	cgEffect = cgCreateEffectFromFile( cgContext, effectPath.c_str(), NULL );
 	cgTechnique = cgGetFirstTechnique( cgEffect );
 
-	modelViewMatrix = cgGetNamedEffectParameter( cgEffect, "ModelViewProjectionMatrix" );
+	while( ( cgTechnique && cgValidateTechnique( cgTechnique ) ) == CG_FALSE )
+	{
+		if( !cgTechnique )
+		{
+			ISingleton<OutputController>::Get().PrintMessage(
+				OutputType::OT_ERROR,
+				string( "No valid techniques found." )
+				);
 
-#if _WIN32
-	//InitializeForDx( name );
-#endif
+			break;
+		}
 
-	return *this;
+		if( cgValidateTechnique( cgTechnique ) == CG_FALSE )
+		{
+			ISingleton<OutputController>::Get().PrintMessage(
+				OutputType::OT_WARNING,
+				string( "Technique " ) + string( cgGetTechniqueName( cgTechnique ) ) + string( " did not validate. Skipping." )
+				);
+
+			cgTechnique = cgGetNextTechnique( cgTechnique );
+		}
+	}
 }
 
-void CgShader::InitializeForGl( std::string filePath )
+CgShader::CgShader( string vertexPath, string fragmentPath )
 {
-	cgGLRegisterStates( cgContext );
-	cgGLSetManageTextureParameters( cgContext, CG_TRUE );
+	cgVertexProgram = cgCreateProgramFromFile(
+		cgContext,
+		CG_SOURCE,
+		vertexPath.c_str(),
+		cgVertexProfile,
+		"main",
+		NULL );
+
+	cgFragmentProgram = cgCreateProgramFromFile(
+		cgContext,
+		CG_SOURCE,
+		fragmentPath.c_str(),
+		cgFragmentProfile,
+		"main",
+		NULL );
+
+#if defined( USE_GL )
+
+	cgGLLoadProgram( cgVertexProgram );
+	cgGLLoadProgram( cgFragmentProgram );
+
+#elif defined( USE_DX )
+
+
+
+#endif//USE_GL/USE_DX
 }
 
-#ifdef _WIN32
-void CgShader::InitializeForDx( std::string filePath )
+void CgShader::Draw( const Mesh& mesh ) const
 {
+	CGparameter cgFragmentParam_decal = cgGetNamedParameter( cgFragmentProgram, "decal" );
 
+	SetUniform( "modelViewProjection", modelMatrix * viewMatrix * projectionMatrix );
+
+	// Bind programs and profiles
+	cgGLBindProgram( cgVertexProgram );
+	cgGLEnableProfile( cgVertexProfile );
+	cgGLBindProgram( cgFragmentProgram );
+	cgGLEnableProfile( cgFragmentProfile );
+	
+	// Enable the texture parameter
+	cgGLEnableTextureParameter( cgFragmentParam_decal );
+
+	// Bind the mesh elements
+	glBindVertexArray( mesh.GetVAO() );
+	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
+
+	// Draw the elements
+	glDrawElements( GL_TRIANGLES, mesh.GetNumElements(), GL_UNSIGNED_INT, NULL );
+
+	// Disable profiles
+	cgGLDisableProfile(cgVertexProfile);
+	cgGLDisableProfile(cgFragmentProfile);
+	
+	cgGLDisableTextureParameter(cgFragmentParam_decal);
 }
-#endif//_WIN32
 
-void CgShader::Use( void ) const 
+void CgShader::BindTexture( const Texture& text ) const
 {
-
+	cgGLSetTextureParameter( cgGetNamedParameter( cgFragmentProgram, "decal" ), text.GetTextureId() );
 }
 
 void CgShader::SetUniform( string name, int value ) const 
 {
-	cgSetParameter1i( cgGetNamedEffectParameter( cgEffect, name.c_str() ), value );
+	//cgSetParameter1i( cgGetNamedEffectParameter( cgEffect, name.c_str() ), value );
 }
 
 void CgShader::SetUniform( string name, float value ) const 
 {
-	cgSetParameter1f( cgGetNamedEffectParameter( cgEffect, name.c_str() ), value );
+	//cgSetParameter1f( cgGetNamedEffectParameter( cgEffect, name.c_str() ), value );
 }
 
 void CgShader::SetUniform( string name, const Matrix4& value ) const 
 {
-	cgSetParameterValuefc( modelViewMatrix, 16, value.dataArray );
+	//cgSetParameterValuefc( cgGetNamedEffectParameter( cgEffect, name.c_str() ), 16, value.dataArray );
+	cgSetParameterValuefc( cgGetNamedParameter( cgVertexProgram, name.c_str() ), 16, value.dataArray );
 }
 
 CGcontext CgShader::cgContext;
+CGprofile CgShader::cgVertexProfile;
+CGprofile CgShader::cgFragmentProfile;

@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <string>
 
-#include "Shader.h"
+#include "IShader.h"
 #include "IController.h"
 #include "ISingleton.h"
 
@@ -21,13 +21,13 @@ namespace Graphos
 			void				Initialize( void ) override;
 			//TODO: Should probably implement
 			void				Shutdown( void ) override;
-			Shader&				GetShader( std::string shaderName );
+			IShader*			GetShader( std::string shaderName );
 
 			template<typename T>
 			void				SetAllShadersUniform( std::string uniformName, T value )
 			{
-				for( auto shader : shaders )
-					shader.second->SetUniform( uniformName, value );
+				//for( auto shader : shaders )
+					//shader.second->SetUniform( uniformName, value );
 			}
 
 		private:
@@ -35,7 +35,7 @@ namespace Graphos
 								ShaderController( const ShaderController& ) : ShaderPath( "Resources\\Shaders\\" ) { }
 			void				operator=( const ShaderController& );
 
-			std::unordered_map<std::string, Shader*>
+			std::unordered_map<std::string, IShader*>
 								shaders;
 
 			friend class		Core::ISingleton<ShaderController>;
