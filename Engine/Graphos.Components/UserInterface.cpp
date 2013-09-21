@@ -44,28 +44,28 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	};
 
 	// Setup GL buffers
-	glGenVertexArrays( 1, &vertexArrayObject );
-
-	glBindVertexArray( vertexArrayObject );
-
-	glGenBuffers( 1, &vertexBufferObject );
-
-	glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	glBufferData( GL_ARRAY_BUFFER, 6/*4*/ * 5 * sizeof( GLfloat ), vertices, GL_STATIC_DRAW );
-
-	glEnableVertexAttribArray( 0 );// Position
-	glEnableVertexAttribArray( 1 );// UV
-
-	glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	glVertexAttribPointer( 0, 3, GL_FLOAT, false, 5 * sizeof( GLfloat ), 0 );
-
-	glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	glVertexAttribPointer( 1, 2, GL_FLOAT, false, 5 * sizeof( GLfloat ), (unsigned char*)NULL + ( 3 * sizeof( GLfloat ) ) );
-
-	glGenBuffers( 1, &indexBuffer );
-
-	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
-	glBufferData( GL_ELEMENT_ARRAY_BUFFER, numElements * sizeof( unsigned int ), indices, GL_STATIC_DRAW );
+	//glGenVertexArrays( 1, &vertexArrayObject );
+	//
+	//glBindVertexArray( vertexArrayObject );
+	//
+	//glGenBuffers( 1, &vertexBufferObject );
+	//
+	//glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
+	//glBufferData( GL_ARRAY_BUFFER, 6/*4*/ * 5 * sizeof( GLfloat ), vertices, GL_STATIC_DRAW );
+	//
+	//glEnableVertexAttribArray( 0 );// Position
+	//glEnableVertexAttribArray( 1 );// UV
+	//
+	//glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
+	//glVertexAttribPointer( 0, 3, GL_FLOAT, false, 5 * sizeof( GLfloat ), 0 );
+	//
+	//glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
+	//glVertexAttribPointer( 1, 2, GL_FLOAT, false, 5 * sizeof( GLfloat ), (unsigned char*)NULL + ( 3 * sizeof( GLfloat ) ) );
+	//
+	//glGenBuffers( 1, &indexBuffer );
+	//
+	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
+	//glBufferData( GL_ELEMENT_ARRAY_BUFFER, numElements * sizeof( unsigned int ), indices, GL_STATIC_DRAW );
 
 	view = new AwesomiumView( abspath, width, height );
 	view->webView->set_js_method_handler( new JavaScriptHandler( this ) );
@@ -127,12 +127,12 @@ bool UserInterface::Update( void )
 
 void UserInterface::Draw( void )
 {
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).Use();
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "modelMatrix", transform.WorldMatrix() );
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "shaderTexture", 0 );
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().OrthogonalMatrix() );
+	//ISingleton<ShaderController>::Get().GetShader( "texture" ).Use();
+	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetModelMatrix( transform.WorldMatrix() );
+	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetUniform( "shaderTexture", 0 );
+	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().OrthogonalMatrix() );
 
-	view->Draw();
+	view->Draw( nullptr );
 
 	// Bind and draw buffer
 	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
@@ -140,7 +140,7 @@ void UserInterface::Draw( void )
 
 	glDrawElements( GL_TRIANGLES, numElements, GL_UNSIGNED_INT, NULL );
 
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().PerspectiveMatrix() );
+	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
 }
 
 void UserInterface::KeyPress( unsigned int key )

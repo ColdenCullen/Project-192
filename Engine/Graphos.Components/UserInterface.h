@@ -33,6 +33,8 @@ namespace Graphos
 			unsigned int		width;
 			unsigned int		height;
 
+			Mesh				uiMesh();
+
 			Math::Transform		transform;
 
 			GraphosGame*		owner;

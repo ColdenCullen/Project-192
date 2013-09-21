@@ -1,11 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Global Headers", "Global Headers", "{A1222875-32B0-4E87-B227-18D30A093CE7}"
-	ProjectSection(SolutionItems) = preProject
-		ExternalDependencies\include\GL\glincludes.h = ExternalDependencies\include\GL\glincludes.h
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Engine", "Engine", "{70DF5D62-07FA-4FF8-AE35-25946D6F95F6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{1B86C4C1-FDD5-4F8D-8199-6AE0CE3AD6EA}"
@@ -39,10 +34,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Objects", "Objects", "{A76D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{BBA92DFB-EAF8-4819-B2E8-4C406C24F578}"
 	ProjectSection(SolutionItems) = preProject
-		..\Game\Resources\Shaders\color.fs.gl = ..\Game\Resources\Shaders\color.fs.gl
-		..\Game\Resources\Shaders\color.vs.gl = ..\Game\Resources\Shaders\color.vs.gl
-		..\Game\Resources\Shaders\light.fs.gl = ..\Game\Resources\Shaders\light.fs.gl
-		..\Game\Resources\Shaders\light.vs.gl = ..\Game\Resources\Shaders\light.vs.gl
+		..\Game\Resources\Shaders\cgeffect.cgfx = ..\Game\Resources\Shaders\cgeffect.cgfx
+		..\Game\Resources\Shaders\simple.fs.cg = ..\Game\Resources\Shaders\simple.fs.cg
+		..\Game\Resources\Shaders\simple.vs.cg = ..\Game\Resources\Shaders\simple.vs.cg
 		..\Game\Resources\Shaders\texture.fs.gl = ..\Game\Resources\Shaders\texture.fs.gl
 		..\Game\Resources\Shaders\texture.vs.gl = ..\Game\Resources\Shaders\texture.vs.gl
 	EndProjectSection
@@ -59,6 +53,57 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Textures", "Textures", "{50546C82-F0A2-49EF-8A6B-509648BA3FBC}"
 	ProjectSection(SolutionItems) = preProject
 		..\Game\Resources\Assets\Textures\Poop.png = ..\Game\Resources\Assets\Textures\Poop.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UIs", "UIs", "{6A7AE5F1-41C4-4C38-8814-DA01FB2543EC}"
+	ProjectSection(SolutionItems) = preProject
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\index.html = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\index.html
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\LICENSE.txt = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\LICENSE.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{B4E9A131-E792-47D1-BDA0-D80240595890}"
+	ProjectSection(SolutionItems) = preProject
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\ie8.css = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\ie8.css
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\noscript.css = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\noscript.css
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\skel-noscript.css = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\skel-noscript.css
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\style-desktop.css = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\style-desktop.css
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\style-mobile.css = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\style-mobile.css
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\style.css = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\style.css
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fonts", "fonts", "{95D85816-E155-4521-A0B9-47F91183A547}"
+	ProjectSection(SolutionItems) = preProject
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\fonts\SourceSansPro-Regular.ttf = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\fonts\SourceSansPro-Regular.ttf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{DAAA7918-4F6C-41F0-A8EA-E760F44628F9}"
+	ProjectSection(SolutionItems) = preProject
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\js\config.js = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\js\config.js
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\js\html5shiv.js = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\js\html5shiv.js
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\js\jquery-1.9.1.min.js = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\js\jquery-1.9.1.min.js
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\js\skel.min.js = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\js\skel.min.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{6A1E53CC-4776-4B37-BDDA-76865D8F47A4}"
+	ProjectSection(SolutionItems) = preProject
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\images\colden.png = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\images\colden.png
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\images\daniel.png = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\images\daniel.png
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\images\home.png = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\images\home.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "fonts", "fonts", "{E7F063D8-5EC9-4209-BE7E-AE6583E81EC7}"
+	ProjectSection(SolutionItems) = preProject
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\fonts\LigatureSymbols-2.11.eot = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\fonts\LigatureSymbols-2.11.eot
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\fonts\LigatureSymbols-2.11.svg = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\fonts\LigatureSymbols-2.11.svg
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\fonts\LigatureSymbols-2.11.ttf = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\fonts\LigatureSymbols-2.11.ttf
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\fonts\LigatureSymbols-2.11.woff = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\fonts\LigatureSymbols-2.11.woff
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{C847C5AB-EDB8-4E98-9EC9-BC1C68FD1564}"
+	ProjectSection(SolutionItems) = preProject
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\images\bg.jpg = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\images\bg.jpg
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\images\overlay.png = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\images\overlay.png
+		\\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\images\tick-sprite.png = \\banner.main.ad.rit.edu\students\dpj7414\IGMProfile\Documents\Projects\192\Game\Resources\UIs\css\images\tick-sprite.png
 	EndProjectSection
 EndProject
 Global
@@ -165,11 +210,18 @@ Global
 		{1B86C4C1-FDD5-4F8D-8199-6AE0CE3AD6EA} = {57CB670E-CDC4-4349-AB23-6028E106A692}
 		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E} = {57CB670E-CDC4-4349-AB23-6028E106A692}
 		{A7D67F2C-9986-44FF-BBDF-0A47E9D9EFA1} = {57CB670E-CDC4-4349-AB23-6028E106A692}
+		{6A7AE5F1-41C4-4C38-8814-DA01FB2543EC} = {57CB670E-CDC4-4349-AB23-6028E106A692}
 		{8D627A2C-0534-4E91-AC2F-18EF7249EF84} = {1B86C4C1-FDD5-4F8D-8199-6AE0CE3AD6EA}
 		{FD52740D-BB11-4623-8959-2B1C2266E9B1} = {1B86C4C1-FDD5-4F8D-8199-6AE0CE3AD6EA}
 		{BBA92DFB-EAF8-4819-B2E8-4C406C24F578} = {1B86C4C1-FDD5-4F8D-8199-6AE0CE3AD6EA}
 		{A76D5EBA-2BF3-467A-BBE2-B51E0BB2D8F1} = {FD52740D-BB11-4623-8959-2B1C2266E9B1}
 		{45E37A88-1081-4B53-A78F-15BD26B4B450} = {FD52740D-BB11-4623-8959-2B1C2266E9B1}
 		{50546C82-F0A2-49EF-8A6B-509648BA3FBC} = {FD52740D-BB11-4623-8959-2B1C2266E9B1}
+		{B4E9A131-E792-47D1-BDA0-D80240595890} = {6A7AE5F1-41C4-4C38-8814-DA01FB2543EC}
+		{95D85816-E155-4521-A0B9-47F91183A547} = {6A7AE5F1-41C4-4C38-8814-DA01FB2543EC}
+		{DAAA7918-4F6C-41F0-A8EA-E760F44628F9} = {6A7AE5F1-41C4-4C38-8814-DA01FB2543EC}
+		{6A1E53CC-4776-4B37-BDDA-76865D8F47A4} = {6A7AE5F1-41C4-4C38-8814-DA01FB2543EC}
+		{E7F063D8-5EC9-4209-BE7E-AE6583E81EC7} = {B4E9A131-E792-47D1-BDA0-D80240595890}
+		{C847C5AB-EDB8-4E98-9EC9-BC1C68FD1564} = {B4E9A131-E792-47D1-BDA0-D80240595890}
 	EndGlobalSection
 EndGlobal

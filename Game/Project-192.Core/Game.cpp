@@ -25,6 +25,9 @@ bool Game::Update( void )
 		{
 			ui->Update();
 
+			//switch to game with F1
+			if( ISingleton<Input>::Get().IsKeyDown( VK_F1 ) )
+				CurrentState = GameState::Game;
 			break;
 		}
 	case GameState::Game:
@@ -34,6 +37,11 @@ bool Game::Update( void )
 			float rotation = 5.0f * ISingleton<Time>::Get().GetDeltaTime();
 
 			cube->transform.Rotate( rotation, rotation, 0.0f );
+
+			//switch to menu with escape
+			if( ISingleton<Input>::Get().IsKeyDown( VK_F5 ) )
+				CurrentState = GameState::Menu;
+
 
 			break;
 		}
@@ -57,8 +65,8 @@ void Game::Draw( void )
 		}
 	case GameState::Game:
 		{
-			ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "cameraMatrix", /*camera->transform.WorldMatrix()*/Matrix4::Identity );
-			ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().PerspectiveMatrix() );
+			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetViewMatrix( Matrix4::Identity );
+			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
 
 			//camera->Draw();
 			objects.CallFunction( &GameObject::Draw );
