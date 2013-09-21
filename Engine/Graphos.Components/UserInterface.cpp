@@ -127,12 +127,12 @@ bool UserInterface::Update( void )
 
 void UserInterface::Draw( void )
 {
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).Use();
+	//ISingleton<ShaderController>::Get().GetShader( "texture" ).Use();
 	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "modelMatrix", transform.WorldMatrix() );
 	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "shaderTexture", 0 );
 	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().OrthogonalMatrix() );
 
-	view->Draw();
+	view->Draw( nullptr );
 
 	// Bind and draw buffer
 	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );

@@ -11,6 +11,10 @@
 		"Name": "Cube"
 	},
 
+	"Script": {
+		"Class": "GameObject1"
+	},
+
 	"Transform": {
 		"Position": {
 			"x": 0.0,

@@ -32,7 +32,7 @@ void Transform::Rotate( const float x, const float y, const float z, const float
 	if( x != 0.0f ) matrix *= RotateX( x );
 	if( y != 0.0f ) matrix *= RotateY( y );
 
-	rotation.x += x;
+	rotation.x = rotation.x + x;
 	rotation.y += y;
 	rotation.z += z;
 

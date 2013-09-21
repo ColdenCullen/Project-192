@@ -9,6 +9,7 @@
     <IntDir>$(RootDir)Output\Intermediary\$(Configuration)\</IntDir>
     <IncludePath>$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(RootDir)ExternalDependencies\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(RootDir)ExternalDependencies\bin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
