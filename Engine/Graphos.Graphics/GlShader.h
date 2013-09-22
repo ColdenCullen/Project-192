@@ -25,7 +25,8 @@ namespace Graphos
 
 			GlShader&			Initialize( std::string vertexPath, std::string fragmentPath );
 
-			void				Use( void ) const override;
+			void				Draw( const Core::Mesh& mesh ) const override;
+
 			void				SetUniform( std::string name, int value ) const override;
 			void				SetUniform( std::string name, float value ) const override;
 			void				SetUniform( std::string name, const Math::Matrix4& value ) const override;

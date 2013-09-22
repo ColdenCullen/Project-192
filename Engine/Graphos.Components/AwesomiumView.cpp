@@ -5,10 +5,12 @@
 #include <Awesomium\WebCore.h>
 //#include <Awesomium\WebView.h>
 #include <Awesomium\STLHelpers.h>
+#include "Shader.h"
 //#include <Awesomium\BitmapSurface.h>
 
 using namespace std;
 using namespace Graphos::Core;
+using namespace Graphos::Graphics;
 using namespace Awesomium;
 
 bool AwesomiumView::Initialize( string url, unsigned int width, unsigned int height )
@@ -56,7 +58,7 @@ void AwesomiumView::Update( void )
 	}
 }
 
-void AwesomiumView::Draw( void )
+void AwesomiumView::Draw( Shader* shader )
 {
 	if( WebCore::instance() )
 	{
