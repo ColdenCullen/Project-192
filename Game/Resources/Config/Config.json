@@ -13,6 +13,7 @@
 	},
 	"graphics" : 
 	{
+		"Adapter": "OpenGL",
 		"backfaceculling" : false,
 		"vsync" : false
 	},

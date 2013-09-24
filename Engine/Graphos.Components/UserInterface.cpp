@@ -8,6 +8,7 @@
 #include <Awesomium/WebCore.h>
 #include <Awesomium/STLHelpers.h>
 #include <GL/GLIncludes.h>
+#include "Config.h"
 
 using namespace Awesomium;
 
@@ -128,9 +129,9 @@ bool UserInterface::Update( void )
 void UserInterface::Draw( void )
 {
 	//ISingleton<ShaderController>::Get().GetShader( "texture" ).Use();
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "modelMatrix", transform.WorldMatrix() );
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "shaderTexture", 0 );
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().OrthogonalMatrix() );
+	ISingleton<ShaderController>::Get().GetShader( "texture" )->SetModelMatrix( transform.WorldMatrix() );
+	ISingleton<ShaderController>::Get().GetShader( "texture" )->SetUniform( "shaderTexture", 0 );
+	ISingleton<ShaderController>::Get().GetShader( "texture" )->SetProjectionMatrix( WindowController::Get().OrthogonalMatrix() );
 
 	view->Draw( nullptr );
 
@@ -140,7 +141,7 @@ void UserInterface::Draw( void )
 
 	glDrawElements( GL_TRIANGLES, numElements, GL_UNSIGNED_INT, NULL );
 
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().PerspectiveMatrix() );
+	ISingleton<ShaderController>::Get().GetShader( "texture" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
 }
 
 void UserInterface::KeyPress( unsigned int key )
