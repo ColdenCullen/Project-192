@@ -7,9 +7,10 @@
 
 #include <sstream>
 #include <vector>
+#include "GameObject.h"
 
-//#define USE_GL_SHADERS
-#define USE_CG_SHADERS
+#define USE_GL_SHADERS
+//#define USE_CG_SHADERS
 //#define USE_DX_SHADERS
 
 #if defined( USE_GL_SHADERS )
@@ -36,6 +37,7 @@
 using namespace std;
 using namespace Graphos::Math;
 using namespace Graphos::Core;
+using namespace Graphos::Graphics;
 
 void Mesh::LoadFromFile( string filePath )
 {
@@ -143,14 +145,9 @@ void Mesh::LoadFromFile( string filePath )
 	delete[] indices;
 }
 
-void Mesh::Draw( void )
+void Mesh::Draw( IShader* shader )
 {
-	// Bind all of the buffers
-	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
-	glBindVertexArray( vertexArrayObject );
-
-	// Draw
-	glDrawElements( GL_TRIANGLES, numElements, GL_UNSIGNED_INT, 0 );
+	shader->Draw( *this );
 }
 
 void Mesh::Shutdown( void )

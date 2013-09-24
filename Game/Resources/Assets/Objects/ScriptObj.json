@@ -1,14 +1,18 @@
 {
 	"Name": "Cube",
 	
-	"Shader": "texture",
+	"Shader": "simple",
 
 	"Texture": {
-		"Name": "Poop"
+		"Name": "balls"
 	},
 
 	"Mesh": {
 		"Name": "Cube"
+	},
+
+	"Script": {
+		"Class": "GameObject1"
 	},
 
 	"Transform": {
@@ -23,9 +27,9 @@
 			"z": 0
 		},
 		"Scale": {
-			"x": 0.5,
-			"y": 0.5,
-			"z": 0.5
+			"x": 0.25,
+			"y": 0.25,
+			"z": 0.25
 		}
 	}
 }

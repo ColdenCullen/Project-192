@@ -2,6 +2,7 @@
 #define __TEXTURE
 
 #include <string>
+#include <DirectX\DirectXIncludes.h>
 #include "IComponent.h"
 
 namespace Graphos
@@ -16,12 +17,18 @@ namespace Graphos
 			
 			void				LoadFromFile( std::string filePath );
 
-			void				Update( void ) {  }
-			void				Draw( void );
-			void				Shutdown( void );
+			void				Draw( Graphics::IShader* shader ) override;
+			void				Shutdown( void ) override;
+
+			unsigned int		GetGlTextureId( void ) const { return glTextureId; }
 
 		private:
-			unsigned int		textureID;
+			// OpenGL Texture ID
+			unsigned int		glTextureId;
+
+			// DirectX Texture Reference
+			ID3D11Resource*		dxTexture;
+
 			unsigned int		width;
 			unsigned int		height;
 		};

@@ -151,7 +151,7 @@ namespace Graphos
 			{
 				string* toReturn = new string[ node.size() ];
 
-				for( int ii = 0; ii < node.size(); ++ii )
+				for( unsigned int ii = 0; ii < node.size(); ++ii )
 					toReturn[ ii ] = node[ ii ].asString();
 
 				return toReturn;

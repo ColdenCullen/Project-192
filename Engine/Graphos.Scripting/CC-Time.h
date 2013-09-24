@@ -15,7 +15,6 @@
 //	// Define Constructors
 //	typedef Signature<Time (
 //		CtorForwarder<Time*()>,
-//		CtorForwarder<Time*( float, float, float )>,
 //		CtorForwarder<Time*( const Time& )>
 //		)> TimeCtors;
 //

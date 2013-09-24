@@ -31,7 +31,6 @@ namespace Graphos
 								context;
 			v8::Local<v8::Object>
 								globalObject;
-			//v8::Isolate*		isolate;
 
 			bool				isInitialized;
 

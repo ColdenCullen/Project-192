@@ -47,7 +47,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 			{
 				// Create object, get pointer to it
 				string name = current.asString();
-				unsigned int id = CreateObject( name, &( ISingleton<ShaderController>::Get().GetShader( root[ "Shader" ].asString() ) ) );
+				unsigned int id = CreateObject( name, ISingleton<ShaderController>::Get().GetShader( root[ "Shader" ].asString() ) );
 				GameObject* newObj = GetObjectById( id );
 
 				// Get parent
@@ -123,16 +123,6 @@ void GameObjectCollection::LoadObjects( string assetPath )
 						)
 					);
 
-				// Add a script
-				if( ( current = root.get( "Script", root ) ) != root )
-					newObj->AddComponent(
-						ISingleton<ScriptController>::Get().CreateObjectInstance(
-							current[ "Class" ].asString(),
-							id,
-							newObj
-						)
-					);
-
 				// Add a mesh
 				if( ( current = root.get( "Mesh", root ) ) != root )
 					newObj->AddComponent(
@@ -163,6 +153,16 @@ void GameObjectCollection::LoadObjects( string assetPath )
 							currentTransform[ "z" ].asDouble()
 						);
 				}
+
+				// Add a script
+				if( ( current = root.get( "Script", root ) ) != root )
+					newObj->AddComponent(
+						ISingleton<ScriptController>::Get().CreateObjectInstance(
+							current[ "Class" ].asString(),
+							id,
+							newObj
+						)
+					);
 
 				// Setup collider
 				if( ( current = root.get( "Collider", root ) ) != root )
@@ -224,7 +224,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 }
 #pragma endregion
 
-unsigned int GameObjectCollection::CreateObject( string name, Shader* shader )
+unsigned int GameObjectCollection::CreateObject( string name, IShader* shader )
 {
 	if( nameMap.find( name ) != end( nameMap ) )
 		throw exception( "Name given has already been used" );

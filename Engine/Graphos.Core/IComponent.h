@@ -3,6 +3,11 @@
 
 namespace Graphos
 {
+	namespace Graphics
+	{
+		class IShader;
+	}
+
 	namespace Core
 	{
 		// Forward declaration
@@ -14,9 +19,9 @@ namespace Graphos
 								IComponent( GameObject* owner = nullptr ) : owner( owner ) { }
 			virtual				~IComponent( void ) { }
 
-			virtual void		Update( void ) = 0;
-			virtual void		Draw( void ) = 0;
-			virtual void		Shutdown( void ) = 0;
+			virtual void		Update( void ) { };
+			virtual void		Draw( Graphics::IShader* shader ) { };
+			virtual void		Shutdown( void ) { };
 
 			GameObject*	const	Owner( void ) const { return owner; }
 

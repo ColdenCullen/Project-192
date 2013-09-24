@@ -26,9 +26,9 @@ namespace Graphos
 								~AwesomiumView( void ) { }
 
 			bool				Initialize( std::string url, unsigned int width, unsigned int height );
-			void				Update( void );
-			void				Draw( void );
-			void				Shutdown( void );
+			void				Update( void ) override;
+			void				Draw( Graphics::IShader* shader ) override;
+			void				Shutdown( void ) override;
 
 			unsigned int		textureID;
 

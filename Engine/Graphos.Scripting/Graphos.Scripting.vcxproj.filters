@@ -31,5 +31,6 @@
     <ClInclude Include="ClassMapper.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
+    <ClInclude Include="NativeToJSMap_Graphos.h" />
   </ItemGroup>
 </Project>

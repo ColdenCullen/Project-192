@@ -38,9 +38,6 @@ declare class Transform
 // Class with variables and functions
 class GameObject
 {
-    // ID of owner object
-    public id: string;
-
     // Transform object
     public Transform: Transform;
 

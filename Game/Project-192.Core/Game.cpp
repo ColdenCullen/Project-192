@@ -57,8 +57,8 @@ void Game::Draw( void )
 		}
 	case GameState::Game:
 		{
-			ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "cameraMatrix", /*camera->transform.WorldMatrix()*/Matrix4::Identity );
-			ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().PerspectiveMatrix() );
+			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetViewMatrix( Matrix4::Identity );
+			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
 
 			//camera->Draw();
 			objects.CallFunction( &GameObject::Draw );
