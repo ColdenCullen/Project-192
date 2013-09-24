@@ -5,13 +5,13 @@
 #include <string>
 #include <Gl/GLIncludes.h>
 #include "Matrix4.h"
-#include "Shader.h"
+#include "IShader.h"
 
 namespace Graphos
 {
 	namespace Graphics
 	{
-		struct GlShader : Shader
+		struct GlShader : public IShader
 		{
 		public:
 			unsigned int		vertexShaderID;
@@ -26,10 +26,11 @@ namespace Graphos
 			GlShader&			Initialize( std::string vertexPath, std::string fragmentPath );
 
 			void				Draw( const Core::Mesh& mesh ) const override;
+			void				BindTexture( const Core::Texture& text ) const override;
 
 			void				SetUniform( std::string name, int value ) const override;
 			void				SetUniform( std::string name, float value ) const override;
-			void				SetUniform( std::string name, const Math::Matrix4& value ) const override;
+			void				SetUniform( std::string name, const Math::Matrix4& value ) const;// override;
 
 		private:
 			std::unordered_map<std::string, unsigned int>
@@ -37,6 +38,7 @@ namespace Graphos
 
 			void				ScanForVars( std::string vertexBody );
 			void				Compile( std::string vertexBody, std::string fragmentBody );
+
 		};
 	}
 }

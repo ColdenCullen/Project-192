@@ -1,7 +1,6 @@
-#ifndef _GRAPHICS_CONTROLLER_H_
-#define _GRAPHICS_CONTROLLER_H_
+#ifndef __GRAPHICS_CONTROLLER
+#define __GRAPHICS_CONTROLLER
 
-#include "WindowController.h"
 #include "IController.h"
 #include "ISingleton.h"
 
@@ -9,31 +8,35 @@ namespace Graphos
 {
 	namespace Graphics
 	{
+		enum class				GraphicsAdapter { OpenGL, DirectX };
+
 		class GraphicsController : public Core::IController
 		{
 		public:
-			// GL functions to call from outside project
-			enum				GLFunctions : int { BEGIN, END };
-
 			void				Initialize( void ) override;
 			//TODO: Should probably implement this
 			void				Shutdown( void ) override { }
 			// Resizes display with given values
-			void				Resize( bool fullScreen, unsigned int newWidth = 0, unsigned int newHeight = 0 );
+			void				Resize( void );
 			// Reloads display based on config settings
 			void				Reload( void );
-			void				CallGLFunction( GLFunctions function );
 
-			void				MessageLoop( void ) { WindowController::Get().MessageLoop(); }
+			GraphicsAdapter		GetActiveAdapter( void ) const { return activeAdapter; }
+
+			void				MessageLoop( void );
 
 		private:
+			GraphicsAdapter		activeAdapter;
+
 								GraphicsController( void ) { }
 								GraphicsController( const GraphicsController& );
 			void				operator=( const GraphicsController& );
+
+			void				UpdateGraphicsAdapter( void );
 
 			friend class		Core::ISingleton<GraphicsController>;
 		};
 	}
 }
 
-#endif//_GRAPHICS_CONTROLLER_H_
+#endif//__GRAPHICS_CONTROLLER

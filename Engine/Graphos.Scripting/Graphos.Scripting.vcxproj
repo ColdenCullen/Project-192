@@ -79,14 +79,16 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CC-Time.cpp" />
+    <ClCompile Include="CC-CgShader.cpp" />
+    <ClCompile Include="CC-GameObject.cpp" />
     <ClCompile Include="CC-Transform.cpp" />
     <ClCompile Include="CC-Vector3.cpp" />
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptController.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CC-Time.h" />
+    <ClInclude Include="CC-CgShader.h" />
+    <ClInclude Include="CC-GameObject.h" />
     <ClInclude Include="CC-Transform.h" />
     <ClInclude Include="CC-Vector3.h" />
     <ClInclude Include="ClassMapper.h" />

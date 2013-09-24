@@ -3,6 +3,8 @@
 
 #include "CC-Transform.h"
 #include "CC-Vector3.h"
+#include "CC-CgShader.h"
+#include "CC-GameObject.h"
 
 #include <v8\v8.h>
 
@@ -17,6 +19,8 @@ namespace Graphos
 			{
 				cvv8::ClassCreator<Transform>::SetupBindings( dest );
 				cvv8::ClassCreator<Vector3>::SetupBindings( dest );
+				cvv8::ClassCreator<CgShader>::SetupBindings( dest );
+				cvv8::ClassCreator<GameObject>::SetupBindings( dest );
 			}
 		};
 	}

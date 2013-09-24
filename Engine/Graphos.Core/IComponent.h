@@ -5,7 +5,7 @@ namespace Graphos
 {
 	namespace Graphics
 	{
-		class Shader;
+		class IShader;
 	}
 
 	namespace Core
@@ -20,7 +20,7 @@ namespace Graphos
 			virtual				~IComponent( void ) { }
 
 			virtual void		Update( void ) { };
-			virtual void		Draw( Graphics::Shader* shader ) { };
+			virtual void		Draw( Graphics::IShader* shader ) { };
 			virtual void		Shutdown( void ) { };
 
 			GameObject*	const	Owner( void ) const { return owner; }
