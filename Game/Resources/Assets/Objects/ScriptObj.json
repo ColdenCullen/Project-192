@@ -4,7 +4,7 @@
 	"Shader": "simple",
 
 	"Texture": {
-		"Name": "Poop"
+		"Name": "balls"
 	},
 
 	"Mesh": {

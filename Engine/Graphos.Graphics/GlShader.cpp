@@ -137,5 +137,5 @@ void GlShader::Draw( const Mesh& mesh ) const
 
 void GlShader::BindTexture( const Texture& text ) const
 {
-	glBindTexture( GL_TEXTURE_2D, text.GetTextureId() );
+	glBindTexture( GL_TEXTURE_2D, text.GetGlTextureId() );
 }

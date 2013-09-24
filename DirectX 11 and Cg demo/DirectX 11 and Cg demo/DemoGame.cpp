@@ -12,8 +12,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance, PSTR cmdLine, in
 
 	if( !game.Init() )
 		return 0;
-
-	
 	
 	return game.run();
 

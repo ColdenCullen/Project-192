@@ -44,6 +44,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(DXSDK_DIR)\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -65,7 +66,7 @@
       <PreserveSbr>true</PreserveSbr>
     </Bscmake>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;FreeImage.lib;glew32.lib;cg.lib;cgGL.lib;cgD3D11.lib</AdditionalDependencies>
+      <AdditionalDependencies>DirectXTex.lib;opengl32.lib;glu32.lib;FreeImage.lib;glew32.lib;cg.lib;cgGL.lib;cgD3D11.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -93,20 +94,29 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdapterController.h" />
     <ClInclude Include="CgShader.h" />
+    <ClInclude Include="DirectXController.h" />
+    <ClInclude Include="IGraphicsAdapterController.h" />
     <ClInclude Include="GraphicsController.h" />
+    <ClInclude Include="IPlatformWindowController.h" />
+    <ClInclude Include="OpenGlController.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="GlShader.h" />
     <ClInclude Include="IShader.h" />
     <ClInclude Include="ShaderController.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Win32Controller.h" />
     <ClInclude Include="WindowController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AdapterController.cpp" />
     <ClCompile Include="CgShader.cpp" />
+    <ClCompile Include="DirectXController.cpp" />
     <ClCompile Include="GraphicsController.cpp" />
     <ClCompile Include="GlShader.cpp" />
+    <ClCompile Include="OpenGlController.cpp" />
     <ClCompile Include="ShaderController.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

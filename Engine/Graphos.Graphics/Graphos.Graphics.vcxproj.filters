@@ -8,6 +8,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Graphics Adapters">
+      <UniqueIdentifier>{c4dd191f-19da-4b83-bd31-f35a066c3e2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{e3ca8cad-537f-4e7e-9ace-f3c1b57e52eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window Controllers">
+      <UniqueIdentifier>{2d6fcf2b-3116-4c12-8aab-b18ddb55422d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -19,22 +28,67 @@
     <ClInclude Include="Resource.h">
       <Filter>Windows Files</Filter>
     </ClInclude>
-    <ClInclude Include="CgShader.h" />
-    <ClInclude Include="GlShader.h" />
     <ClInclude Include="GraphicsController.h" />
-    <ClInclude Include="ShaderController.h" />
-    <ClInclude Include="WindowController.h" />
-    <ClInclude Include="IShader.h" />
+    <ClInclude Include="IGraphicsAdapterController.h">
+      <Filter>Graphics Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXController.h">
+      <Filter>Graphics Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGlController.h">
+      <Filter>Graphics Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="CgShader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="GlShader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderController.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="IShader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowController.h">
+      <Filter>Window Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32Controller.h">
+      <Filter>Window Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlatformWindowController.h">
+      <Filter>Window Controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="AdapterController.h">
+      <Filter>Graphics Adapters</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Windows Files</Filter>
     </ClCompile>
-    <ClCompile Include="CgShader.cpp" />
-    <ClCompile Include="GlShader.cpp" />
     <ClCompile Include="GraphicsController.cpp" />
-    <ClCompile Include="ShaderController.cpp" />
-    <ClCompile Include="Win32Controller.cpp" />
+    <ClCompile Include="CgShader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="GlShader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderController.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32Controller.cpp">
+      <Filter>Window Controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGlController.cpp">
+      <Filter>Graphics Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXController.cpp">
+      <Filter>Graphics Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="AdapterController.cpp">
+      <Filter>Graphics Adapters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GraphosGraphics.rc">
