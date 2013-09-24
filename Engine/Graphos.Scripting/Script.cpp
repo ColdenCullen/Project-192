@@ -1,5 +1,4 @@
 #include "Script.h"
-#include "GameObject.h"
 #include "Time.h"
 
 #include <iostream>

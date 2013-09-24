@@ -5,7 +5,7 @@
 #include <Awesomium\WebCore.h>
 //#include <Awesomium\WebView.h>
 #include <Awesomium\STLHelpers.h>
-#include "Shader.h"
+#include "IShader.h"
 //#include <Awesomium\BitmapSurface.h>
 
 using namespace std;
@@ -58,7 +58,7 @@ void AwesomiumView::Update( void )
 	}
 }
 
-void AwesomiumView::Draw( Shader* shader )
+void AwesomiumView::Draw( IShader* shader )
 {
 	if( WebCore::instance() )
 	{

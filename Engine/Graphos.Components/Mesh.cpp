@@ -145,7 +145,7 @@ void Mesh::LoadFromFile( string filePath )
 	delete[] indices;
 }
 
-void Mesh::Draw( Shader* shader )
+void Mesh::Draw( IShader* shader )
 {
 	shader->Draw( *this );
 }
