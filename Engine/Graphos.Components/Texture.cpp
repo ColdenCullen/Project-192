@@ -1,11 +1,11 @@
 
 
-#include <GL\GLIncludes.h>
+#include <GL/GLIncludes.h>
 #include <FreeImage.h>
 #include "IShader.h"
 #include "Config.h"
 #include "GraphicsController.h"
-#include <DirectX\DirectXTex.h>
+#include <DirectX/DirectXTex.h>
 
 #include "Texture.h"
 

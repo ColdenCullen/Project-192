@@ -2,7 +2,7 @@
 #define __TEXTURE
 
 #include <string>
-#include <DirectX\DirectXIncludes.h>
+#include <DirectX/DirectXIncludes.h>
 #include "IComponent.h"
 
 namespace Graphos
