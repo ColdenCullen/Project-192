@@ -3,7 +3,7 @@
 
 #include "IGraphicsAdapterController.h"
 
-#include <DirectX\DirectXIncludes.h>
+#include <DirectX/DirectXIncludes.h>
 
 namespace Graphos
 {

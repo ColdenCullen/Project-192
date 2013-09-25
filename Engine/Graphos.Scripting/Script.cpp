@@ -1,5 +1,5 @@
 #include "Script.h"
-#include "Time.h"
+#include "TimeController.h"
 
 #include <iostream>
 #include "OutputController.h"
