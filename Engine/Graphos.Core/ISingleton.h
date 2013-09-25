@@ -8,8 +8,7 @@ namespace Graphos
 {
 	namespace Core
 	{
-		//, typename = std::enable_if<std::is_base_of<IController, TController>::value>::type
-		template<typename TController>
+		template<typename TController>//, typename = std::enable_if<std::is_base_of<IController, TController>::value>::type>
 		class ISingleton
 		{
 		public:

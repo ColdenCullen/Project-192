@@ -26,7 +26,6 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -45,7 +44,6 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
@@ -72,6 +70,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
+      <ShowIncludes>true</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -89,7 +88,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="TaskManager.cpp" />
     <ClCompile Include="OutputController.cpp" />
-    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="TimeController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
@@ -104,7 +103,7 @@
     <ClInclude Include="TaskManager.h" />
     <ClInclude Include="ISingleton.h" />
     <ClInclude Include="OutputController.h" />
-    <ClInclude Include="Time.h" />
+    <ClInclude Include="TimeController.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Graphos.Components\Graphos.Components.vcxproj">

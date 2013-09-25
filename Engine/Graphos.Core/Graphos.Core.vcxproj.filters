@@ -8,9 +8,9 @@
     <ClCompile Include="GameObjectCollection.cpp" />
     <ClCompile Include="GraphosGame.cpp" />
     <ClCompile Include="Input.cpp" />
-	<ClCompile Include="TaskManager.cpp" />
-    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="TaskManager.cpp" />
     <ClCompile Include="OutputController.cpp" />
+    <ClCompile Include="TimeController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TaskManager.h" />
@@ -24,7 +24,7 @@
     <ClInclude Include="IController.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="ISingleton.h" />
-    <ClInclude Include="Time.h" />
     <ClInclude Include="OutputController.h" />
+    <ClInclude Include="TimeController.h" />
   </ItemGroup>
 </Project>

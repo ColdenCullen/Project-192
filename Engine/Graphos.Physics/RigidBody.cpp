@@ -1,5 +1,5 @@
 #include "RigidBody.h"
-#include "Time.h"
+#include "TimeController.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Math;

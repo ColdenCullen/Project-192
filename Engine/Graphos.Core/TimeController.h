@@ -4,8 +4,9 @@
 #include "IController.h"
 #include "ISingleton.h"
 
-#include <ratio>
 #include <chrono>
+
+using namespace std::chrono;
 
 namespace Graphos
 {

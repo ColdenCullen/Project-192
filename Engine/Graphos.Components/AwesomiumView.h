@@ -1,8 +1,8 @@
 #ifndef __AWESOMIUM_VIEW
 #define __AWESOMIUM_VIEW
 
-#include <Awesomium\WebView.h>
-#include <Awesomium\BitmapSurface.h>
+#include <Awesomium/WebView.h>
+#include <Awesomium/BitmapSurface.h>
 
 #include <string>
 
@@ -27,7 +27,7 @@ namespace Graphos
 
 			bool				Initialize( std::string url, unsigned int width, unsigned int height );
 			void				Update( void ) override;
-			void				Draw( Graphics::Shader* shader ) override;
+			void				Draw( Graphics::IShader* shader ) override;
 			void				Shutdown( void ) override;
 
 			unsigned int		textureID;

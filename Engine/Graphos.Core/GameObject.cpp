@@ -14,7 +14,7 @@ void GameObject::Update( void )
 void GameObject::Draw( void )
 {
 	//shader->Use();
-	shader->SetUniform( "modelMatrix", transform.WorldMatrix() );
+	shader->SetModelMatrix( transform.WorldMatrix() );
 	shader->SetUniform( "shaderTexture", 0 );
 
 	for( auto ingredient = begin( componentList ); ingredient != end( componentList ); ++ingredient )

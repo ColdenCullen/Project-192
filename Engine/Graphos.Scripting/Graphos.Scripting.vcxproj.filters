@@ -6,9 +6,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CC-Time.cpp">
-      <Filter>ClassCreators</Filter>
-    </ClCompile>
     <ClCompile Include="CC-Transform.cpp">
       <Filter>ClassCreators</Filter>
     </ClCompile>
@@ -25,11 +22,9 @@
     <ClInclude Include="CC-Transform.h">
       <Filter>ClassCreators</Filter>
     </ClInclude>
-    <ClInclude Include="CC-Time.h">
-      <Filter>ClassCreators</Filter>
-    </ClInclude>
     <ClInclude Include="ClassMapper.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
+    <ClInclude Include="NativeToJSMap_Graphos.h" />
   </ItemGroup>
 </Project>
