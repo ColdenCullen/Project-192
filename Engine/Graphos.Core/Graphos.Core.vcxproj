@@ -92,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="IController.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="File.h" />

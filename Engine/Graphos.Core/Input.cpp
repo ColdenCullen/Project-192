@@ -52,6 +52,16 @@ void Input::Update( void )
 	//stage.Reset();
 }
 
+void Input::AddKeyEvent( unsigned int key, KeyEvent::Delegate func )
+{
+	auto keyEvent = keyEvents.find( key );
+
+	if( keyEvent == end( keyEvents ) )
+		keyEvent->second = KeyEvent();
+
+	keyEvent->second.AddFunction( func );
+}
+
 // Called when keys are down
 void Input::KeyDown( unsigned int input )
 {
