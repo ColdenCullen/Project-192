@@ -6,10 +6,10 @@
 #include "Texture.h"
 #include "GraphicsController.h"
 
-#include <GL\glincludes.h>
-#include <Cg\cgGL.h>
+#include <GL/glincludes.h>
+#include <Cg/cgGL.h>
 #ifdef _WIN32
-#include <Cg\cgD3D11.h>
+#include <Cg/cgD3D11.h>
 #endif//_WIN32
 
 using namespace std;
