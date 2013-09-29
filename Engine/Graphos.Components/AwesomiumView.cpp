@@ -4,7 +4,7 @@
 //#include <Awesomium\WebView.h>
 #include <Awesomium\STLHelpers.h>
 #include "IShader.h"
-//#include <Awesomium\BitmapSurface.h>
+//#include <Awesomium/BitmapSurface.h>
 
 #define NO_NAMESPACE
 #include <GL\GLIncludes.h>

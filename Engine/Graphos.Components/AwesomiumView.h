@@ -1,8 +1,8 @@
 #ifndef __AWESOMIUM_VIEW
 #define __AWESOMIUM_VIEW
 
-#include <Awesomium\WebView.h>
-#include <Awesomium\BitmapSurface.h>
+#include <Awesomium/WebView.h>
+#include <Awesomium/BitmapSurface.h>
 
 #include <string>
 

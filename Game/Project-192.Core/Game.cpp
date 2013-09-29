@@ -1,6 +1,6 @@
 #include "Game.h"
 #include "Input.h"
-#include "Time.h"
+#include "TimeController.h"
 #include "ShaderController.h"
 #include "WindowController.h"
 #include "Matrix4.h"

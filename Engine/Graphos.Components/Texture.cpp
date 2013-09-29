@@ -1,6 +1,8 @@
+
 #include "IShader.h"
 #include "Config.h"
 #include "GraphicsController.h"
+
 #include "Texture.h"
 #include <GL\GLIncludes.h>
 

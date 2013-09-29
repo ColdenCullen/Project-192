@@ -13,7 +13,7 @@ using namespace OpenGL;
 using namespace DirectX;
 #include <Cg\cgGL.h>
 #ifdef _WIN32
-#include <Cg\cgD3D11.h>
+#include <Cg/cgD3D11.h>
 #endif//_WIN32
 
 using namespace std;
@@ -131,7 +131,6 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		cgD3D11LoadProgram( cgVertexProgram, NULL );
-
 	}
 #endif//_WIN32
 }

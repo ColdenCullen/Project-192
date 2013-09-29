@@ -25,7 +25,8 @@ namespace Graphos
 			virtual void		EndDraw( void );
 
 		private:
-			bool				enable4xMsaa;
+			BOOL				enable4xMsaa;
+
 			UINT				msaa4xQuality;
 			
 			

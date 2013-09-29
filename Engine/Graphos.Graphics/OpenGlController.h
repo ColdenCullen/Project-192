@@ -3,7 +3,7 @@
 
 #include "IGraphicsAdapterController.h"
 
-#include <GL\glincludes.h>
+#include <GL/glincludes.h>
 
 namespace Graphos
 {

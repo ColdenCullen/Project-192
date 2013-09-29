@@ -5,6 +5,7 @@
 
 #include "CgShader.h"
 
+using namespace Graphos::Core;
 using namespace Graphos::Graphics;
 using namespace DirectX;
 
@@ -117,10 +118,10 @@ void DirectXController::Initialize( void )
 void DirectXController::Shutdown( void )
 {
 	// Release the DX stuff
-	ReleaseCOMobjMacro(renderTargetView);
-	ReleaseCOMobjMacro(depthStencilView);
-	ReleaseCOMobjMacro(swapChain);
-	ReleaseCOMobjMacro(depthStencilBuffer);
+	ReleaseCOMobjMacro( renderTargetView );
+	ReleaseCOMobjMacro( depthStencilView );
+	ReleaseCOMobjMacro( swapChain );
+	ReleaseCOMobjMacro( depthStencilBuffer );
 
 	// Restore default device settings
 	if( deviceContext.dxDeviceContext )
@@ -132,6 +133,11 @@ void DirectXController::Shutdown( void )
 }
 
 void DirectXController::Resize( void )
+{
+
+}
+
+void DirectXController::Reload( void )
 {
 	// release old views
 	ReleaseCOMobjMacro(renderTargetView);
@@ -191,20 +197,17 @@ void DirectXController::Resize( void )
 	viewport.Height		= (float)WindowController::Get().GetHeight();
 	viewport.MinDepth	= 0.0f;
 	viewport.MaxDepth	= 1.0f;
+
 	deviceContext.dxDeviceContext->RSSetViewports(1, &viewport);
 }
 
-void DirectXController::Reload( void )
-{
-	
-}
 
 void DirectXController::BeginDraw( void )
 {
-	
+
 }
 
 void DirectXController::EndDraw( void )
 {
-	
+
 }
