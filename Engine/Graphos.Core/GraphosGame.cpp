@@ -1,15 +1,16 @@
 #include "GraphosGame.h"
 
 #include "File.h"
-
-#include "GameObject.h"
-#include "ScriptController.h"
 #include "Physics.h"
 #include "GraphicsController.h"
-#include "AssetController.h"
+#include "AdapterController.h"
 #include "ShaderController.h"
+#include "AssetController.h"
+#include "ScriptController.h"
 #include "Input.h"
 #include "Time.h"
+#include "Config.h"
+#include "OutputController.h"
 
 #include <vector>
 #include <string>
@@ -66,17 +67,17 @@ void GraphosGame::Run( void )
 			//////////////////////////////////////////////////////////////////////////
 
 			// Begin drawing
-			ISingleton<GraphicsController>::Get().CallGLFunction( GraphicsController::BEGIN );
+			AdapterController::Get()->BeginDraw();
 
 			// Draw in child class
 			Draw();
 
 			// End drawing
-			ISingleton<GraphicsController>::Get().CallGLFunction( GraphicsController::END );
+			AdapterController::Get()->EndDraw();
 		}
 		catch (exception e)
 		{
-			WindowController::Get().DisplayMessage( e.what() );
+			ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_ERROR, e.what() );
 			break;
 		}
 	}

@@ -38,6 +38,7 @@ using namespace std;
 using namespace Graphos::Math;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace OpenGL;
 
 void Mesh::LoadFromFile( string filePath )
 {
@@ -45,7 +46,7 @@ void Mesh::LoadFromFile( string filePath )
 	vector<Vector2> uvs;
 	vector<Vector3> normals;
 
-	vector<GLfloat>	outputData;
+	vector<float>	outputData;
 
 	istringstream file( File::ReadFile( filePath ) );
 	string line;
@@ -145,7 +146,7 @@ void Mesh::LoadFromFile( string filePath )
 	delete[] indices;
 }
 
-void Mesh::Draw( Shader* shader )
+void Mesh::Draw( IShader* shader )
 {
 	shader->Draw( *this );
 }

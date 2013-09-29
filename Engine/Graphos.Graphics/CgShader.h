@@ -1,7 +1,7 @@
 #ifndef __CG_SHADER
 #define __CG_SHADER
 
-#include "Shader.h"
+#include "IShader.h"
 
 #include <string>
 #include <Cg\cg.h>
@@ -10,7 +10,7 @@ namespace Graphos
 {
 	namespace Graphics
 	{
-		class CgShader : public Shader
+		class CgShader : public IShader
 		{
 		public:
 								CgShader( std::string effectPath );
@@ -19,10 +19,12 @@ namespace Graphos
 			static void			InitCg( void );
 
 			void				Draw( const Core::Mesh& mesh ) const override;
+			void				BindTexture( const Core::Texture& text ) const override;
 
 			void				SetUniform( std::string name, int value ) const override;
 			void				SetUniform( std::string name, float value ) const override;
-			void				SetUniform( std::string name, const Math::Matrix4& value ) const override;
+			void				SetUniform( std::string name, const Math::Matrix4& value ) const;// override;
+
 
 		private:
 			static CGcontext	cgContext;

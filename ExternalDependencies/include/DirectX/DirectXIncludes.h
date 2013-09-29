@@ -1,7 +1,17 @@
+
 #if !defined( __DX_INCLUDES ) && defined( _WIN32 )
 #define __DX_INCLUDES
 
-#include <D3D11.h>
+#ifndef NO_NAMESPACE
+namespace DirectX
+{
+#endif//NO_NAMESPACE
+
+	#include <d3d11.h>
+
+#ifndef NO_NAMESPACE
+}
+#endif//NO_NAMESPACE
 
 #ifndef ReleaseCOMobjMacro
  #define ReleaseCOMobjMacro( x ) { if( x ){  x->Release(); x = nullptr; } }

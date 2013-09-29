@@ -1,22 +1,26 @@
 #include "stdafx.h"
 #include "CgShader.h"
-
 #include "Matrix4.h"
 #include "Mesh.h"
+#include "OutputController.h"
+#include "Texture.h"
+#include "GraphicsController.h"
+#include "AdapterController.h"
+
 
 #include <GL\glincludes.h>
+using namespace OpenGL;
+using namespace DirectX;
 #include <Cg\cgGL.h>
 #ifdef _WIN32
 #include <Cg\cgD3D11.h>
 #endif//_WIN32
 
-#include "OutputController.h"
-#include "GraphicsController.h"
-
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+
 
 void CgErrorHandler( CGcontext context, CGerror error, void* appData )
 {
@@ -39,14 +43,11 @@ void CgErrorHandler( CGcontext context, CGerror error, void* appData )
 
 void CgShader::InitCg( void )
 {
-//	cgGLRegisterStates( cgContext );
-//	cgGLSetManageTextureParameters( cgContext, CG_TRUE );
-
 	cgSetErrorHandler( &CgErrorHandler, NULL );
 
 	cgContext = cgCreateContext();
+
 	cgSetParameterSettingMode( cgContext, CG_DEFERRED_PARAMETER_SETTING );
-	//cgSetContextBehavior( cgContext, CG_BEHAVIOR_3100 );
 
 	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
@@ -67,8 +68,9 @@ void CgShader::InitCg( void )
 #ifdef _WIN32
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
+		cgD3D11SetDevice( cgContext, AdapterController::Get()->GetDevice().dxDevice );
 		cgVertexProfile = cgD3D11GetLatestVertexProfile();
-		cgFragmentProfile = cgD3D11GetLatestPixelProfile();
+
 	}
 #endif//_WIN32
 }
@@ -128,69 +130,53 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 #ifdef _WIN32
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
-		ID3DBlob* pVSBuf = nullptr;
-		//ID3DBlob* pPSBuf = nullptr;
-		//ID3DBlob* pErrBuf = nullptr;
-		const char ** profileOpts = nullptr;
+		cgD3D11LoadProgram( cgVertexProgram, NULL );
 
-		/* Determine the best profile once a device to be set. */
-
-		profileOpts = cgD3D11GetOptimalOptions(cgVertexProfile);
-
-		cgD3D11LoadProgram( cgVertexProgram, 0 );
-
-		// Create vertex input layout
-		const D3D11_INPUT_ELEMENT_DESC layout[] =
-		{
-			{ "POSITION",  0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
-			{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
-		};
-
-		pVSBuf = cgD3D11GetCompiledProgram( cgVertexProgram );
-
-		HR( device->CreateInputLayout( layout, 2, pVSBuf->GetBufferPointer(), pVSBuf->GetBufferSize(), &vertexLayout ) ); 
-
-		cgFragmentProfile = cgD3D11GetLatestPixelProfile();
-
-		profileOpts = cgD3D11GetOptimalOptions( cgFragmentProfile );
-
-		cgD3D11LoadProgram( cgFragmentProgram, 0 );
 	}
 #endif//_WIN32
 }
 
 void CgShader::Draw( const Mesh& mesh ) const
 {
-	CGparameter cgFragmentParam_decal = cgGetNamedParameter( cgFragmentProgram, "texture" );
+	CGparameter cgFragmentParam_decal = cgGetNamedParameter( cgFragmentProgram, "decal" );
 
+	SetUniform( "modelViewProjection", modelViewProjection );
+
+	// Bind programs and profiles
 	cgGLBindProgram( cgVertexProgram );
-	
 	cgGLEnableProfile( cgVertexProfile );
-	
 	cgGLBindProgram( cgFragmentProgram );
-	
 	cgGLEnableProfile( cgFragmentProfile );
 	
-	cgGLEnableTextureParameter(cgFragmentParam_decal);
+	// Enable the texture parameter
+	cgGLEnableTextureParameter( cgFragmentParam_decal );
 
+	// Bind the mesh elements
 	glBindVertexArray( mesh.GetVAO() );
 	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
 
-	//CGpass pass = cgGetFirstPass( cgTechnique );
-	//while( pass )
-	//{
-	//	cgSetPassState( pass );
-		glDrawElements( GL_TRIANGLES, mesh.GetNumElements(), GL_UNSIGNED_INT, NULL );
-	//	cgResetPassState( pass );
+	// Draw the elements
+	glDrawElements( GL_TRIANGLES, mesh.GetNumElements(), GL_UNSIGNED_INT, NULL );
 
-	//	pass = cgGetNextPass( pass );
-	//}
-
+	// Disable profiles
 	cgGLDisableProfile(cgVertexProfile);
-	
 	cgGLDisableProfile(cgFragmentProfile);
 	
 	cgGLDisableTextureParameter(cgFragmentParam_decal);
+}
+
+void CgShader::BindTexture( const Texture& text ) const
+{
+	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	{
+		cgGLSetTextureParameter( cgGetNamedParameter( cgFragmentProgram, "decal" ), text.GetGlTextureId() );
+	}
+#ifdef _WIN32
+	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	{
+
+	}
+#endif//_WIN32
 }
 
 void CgShader::SetUniform( string name, int value ) const 
@@ -206,6 +192,7 @@ void CgShader::SetUniform( string name, float value ) const
 void CgShader::SetUniform( string name, const Matrix4& value ) const 
 {
 	//cgSetParameterValuefc( cgGetNamedEffectParameter( cgEffect, name.c_str() ), 16, value.dataArray );
+	cgSetParameterValuefc( cgGetNamedParameter( cgVertexProgram, name.c_str() ), 16, value.dataArray );
 }
 
 CGcontext CgShader::cgContext;

@@ -3,6 +3,10 @@
 
 #include "IGraphicsAdapterController.h"
 
+#ifdef NO_NAMESPACE
+#pragma message( "NO_NAMESPACE" )
+#endif
+
 #include <DirectX\DirectXIncludes.h>
 
 namespace Graphos
@@ -21,16 +25,16 @@ namespace Graphos
 			virtual void		EndDraw( void );
 
 		private:
-			BOOL				enable4xMsaa;
+			bool				enable4xMsaa;
 			UINT				msaa4xQuality;
-			ID3D11Device*		device;
-			ID3D11DeviceContext* deviceContext;
-			IDXGISwapChain*		swapChain;
-			ID3D11Texture2D*	depthStencilBuffer;
-			ID3D11RenderTargetView* renderTargetView;
-			ID3D11DepthStencilView* depthStencilView;
-			D3D11_VIEWPORT		viewport;
-			D3D_DRIVER_TYPE		driverType;
+			
+			
+			DirectX::IDXGISwapChain*	swapChain;
+			DirectX::ID3D11Texture2D*	depthStencilBuffer;
+			DirectX::ID3D11RenderTargetView* renderTargetView;
+			DirectX::ID3D11DepthStencilView* depthStencilView;
+			DirectX::D3D11_VIEWPORT		viewport;
+			DirectX::D3D_DRIVER_TYPE	driverType;
 
 								DirectXController( void ) { }
 								DirectXController( const DirectXController& );

@@ -2,6 +2,7 @@
 #include "GlShader.h"
 #include "File.h"
 #include "Mesh.h"
+#include "Texture.h"
 
 #define MIN(x,y) (x < y ? x : y)
 
@@ -9,6 +10,7 @@ using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace OpenGL;
 
 GlShader& GlShader::Initialize( string vertexPath, string fragmentPath )
 {
@@ -123,6 +125,8 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 
 void GlShader::Draw( const Mesh& mesh ) const 
 {
+	SetUniform( "modelViewProjection", modelViewProjection );
+
 	glUseProgram( programID );
 
 	glBindVertexArray( mesh.GetVAO() );
@@ -130,4 +134,9 @@ void GlShader::Draw( const Mesh& mesh ) const
 
 	// Draw
 	glDrawElements( GL_TRIANGLES, mesh.GetNumElements(), GL_UNSIGNED_INT, 0 );
+}
+
+void GlShader::BindTexture( const Texture& text ) const
+{
+	glBindTexture( GL_TEXTURE_2D, text.GetGlTextureId() );
 }

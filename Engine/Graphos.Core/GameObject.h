@@ -10,7 +10,6 @@
 #include "ISingleton.h"
 #include "Transform.h"
 #include "ShaderController.h"
-#include "GlShader.h"
 
 namespace Graphos
 {
@@ -23,7 +22,7 @@ namespace Graphos
 
 			// Constructors
 			GameObject( void ) : shader( nullptr ) { }
-			GameObject( Graphics::Shader* shader ) : shader( shader ) { }
+			GameObject( Graphics::IShader* shader ) : shader( shader ) { }
 
 			// Shutdown memory
 			void				Shutdown( void );
@@ -34,8 +33,8 @@ namespace Graphos
 			virtual void		OnCollision( GameObject* other ) { }
 
 			// Getters and setters
-			Graphics::Shader&	GetShader( void ) const { return *shader; }
-			void				SetShader( std::string newName ) { shader = &( ISingleton<Graphics::ShaderController>::Get().GetShader( newName ) ); }
+			Graphics::IShader*	GetShader( void ) const { return shader; }
+			void				SetShader( std::string newName ) { shader = ISingleton<Graphics::ShaderController>::Get().GetShader( newName ); }
 
 			// Add ingredient of type T
 			template<class T>
@@ -62,7 +61,7 @@ namespace Graphos
 			std::unordered_map<size_t, IComponent*>
 								componentList;
 
-			Graphics::Shader*	shader;
+			Graphics::IShader*	shader;
 		};
 	}
 }
