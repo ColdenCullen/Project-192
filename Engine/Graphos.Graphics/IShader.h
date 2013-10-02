@@ -23,15 +23,18 @@ namespace Graphos
 			virtual void		SetUniform( std::string name, float value ) const = 0;
 			virtual void		SetUniform( std::string name, const Math::Matrix4& value ) const = 0;
 
-			virtual void		SetModelMatrix( const Math::Matrix4& value ) { modelMatrix = value; modelViewProjection = projectionMatrix * viewMatrix * modelMatrix; }
-			virtual void		SetViewMatrix( const Math::Matrix4& value ) { viewMatrix = value; modelViewProjection = projectionMatrix * viewMatrix * modelMatrix; }
-			virtual void		SetProjectionMatrix( const Math::Matrix4& value ) { projectionMatrix = value; modelViewProjection = projectionMatrix * viewMatrix * modelMatrix; }
+			void				SetModelMatrix( const Math::Matrix4& value ) { modelMatrix = value; UpdateMVPMatrix(); }
+			void				SetViewMatrix( const Math::Matrix4& value ) { viewMatrix = value; UpdateMVPMatrix(); }
+			void				SetProjectionMatrix( const Math::Matrix4& value ) { projectionMatrix = value; UpdateMVPMatrix(); }
 
 		protected:
 			Math::Matrix4		modelMatrix;
 			Math::Matrix4		viewMatrix;
 			Math::Matrix4		projectionMatrix;
 			Math::Matrix4		modelViewProjection;
+
+		private:
+			void				UpdateMVPMatrix( void ) { modelViewProjection = modelMatrix * viewMatrix * projectionMatrix; }
 		};
 	}
 }

@@ -89,17 +89,16 @@ namespace cvv8
 		Transformcc.AddClassTo( TypeName<Transform>::Value, target );
 	};
 
-	Handle<Value> NativeToJS<Transform>::operator()( const Transform& v ) const
-	{
-		v8::Handle<v8::Object> toReturn;
+	//Handle<Value> NativeToJS<Transform>::operator()( const Transform& v ) const
+	//{
+	//	v8::Handle<v8::Object> toReturn;
 
-		if( ( toReturn = GetJSObject( (void*)&v ) ).IsEmpty() )
-		{	// If object does not exist in the JSMap, create it
-			toReturn = ClassCreator<Transform>::Instance().NewInstance( 0, NULL )->ToObject();
-			toReturn->SetInternalField( 0, External::New( (void*)&v ) );
-			//toReturn->Set( String::New( "Position" ), CastToJS( v.Position() ) );
-		}
+	//	if( ( toReturn = GetJSObject( (void*)&v ) ).IsEmpty() )
+	//	{	// If object does not exist in the JSMap, create it
+	//		toReturn = ClassCreator<Transform>::Instance().NewInstance( 0, NULL )->ToObject();
+	//		toReturn->SetInternalField( ClassCreator_InternalFields<Transform>::NativeIndex, External::New( (void*)&v ) );
+	//	}
 
-		return toReturn;
-	}
+	//	return toReturn;
+	//}
 } /* namespace */

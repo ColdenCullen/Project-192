@@ -8,6 +8,7 @@
 #include <Awesomium/WebCore.h>
 #include <Awesomium/STLHelpers.h>
 #include <GL/GLIncludes.h>
+#include "Config.h"
 
 using namespace Awesomium;
 

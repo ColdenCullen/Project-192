@@ -4,11 +4,15 @@
 	"Shader": "simple",
 
 	"Texture": {
-		"Name": "Poop"
+		"Name": "balls"
 	},
 
 	"Mesh": {
 		"Name": "Cube"
+	},
+
+	"Script": {
+		"Class": "GameObject1"
 	},
 
 	"Transform": {

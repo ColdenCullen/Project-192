@@ -103,9 +103,6 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 		// Get object
 		Local<Object> instance = ctor->CallAsConstructor( 0, nullptr )->ToObject();
 
-		// Set id
-		instance->Set( String::New( "id" ), Int32::New( ownerID ) );
-
 		instance->Set( String::New( "Transform" ), CastToJS( owner->transform ) );
 		// Return new script
 		return new Graphos::Core::Script( instance, owner );

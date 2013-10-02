@@ -4,7 +4,7 @@
 #include "IShader.h"
 
 #include <string>
-#include <Cg\cg.h>
+#include <Cg/cg.h>
 
 namespace Graphos
 {
