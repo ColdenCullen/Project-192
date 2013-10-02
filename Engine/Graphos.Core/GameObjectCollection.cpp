@@ -176,7 +176,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 						col = new SphereCollider( newObj );
 						static_cast<SphereCollider*>( col )->radius = static_cast<float>( current[ "Radius" ].asDouble() );
 					}
-					else if( type == "Box" )
+					else// if( type == "Box" )
 					{
 						col = new BoxCollider( newObj );
 
