@@ -40,7 +40,9 @@
     <Import Project="..\..\Solution\GraphosProperties.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(RootDir)ExternalDependencies\submodules\bullet;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -78,6 +80,17 @@
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ExternalDependencies\submodules\bullet\BulletCollision\BulletCollision.vcxproj">
+      <Project>{5e9c8d62-5ac6-774a-99e8-f778bccdeed2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ExternalDependencies\submodules\bullet\BulletDynamics\BulletDynamics.vcxproj">
+      <Project>{8f5c9bdf-ac6f-f64f-af86-4da030f93a58}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ExternalDependencies\submodules\bullet\LinearMath\LinearMath.vcxproj">
+      <Project>{2a35e0c0-b05f-324d-8233-8dc92198f05b}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
