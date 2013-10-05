@@ -1,19 +1,33 @@
-
-#include "IShader.h"
-#include "Config.h"
 #include "GraphicsController.h"
+#include "IShader.h"
 
+#include <DirectX/DirectXTex.h>
 #include "Texture.h"
-#include <GL\GLIncludes.h>
+
+#include <GL/GLIncludes.h>
+using namespace OpenGL;
+#include <FreeImage.h>
+
+#include "AdapterController.h"
+
+////using namespace DirectX;
+////#include <DirectX/DirectXIncludes.h>
+//
+////#include <DDSTextureLoader/DDSTextureLoader.h>
+////#include <WICTextureLoader/WICTextureLoader.h>
+//
+//namespace OpenGL
+//{
+//#include <GL/glew.h>
+//}
+//#include "GraphicsController.h"
 
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
-using namespace DirectX;
-using namespace OpenGL;
 
-#include <FreeImage.h>
-#include <DirectX\DirectXTex.h>
+//using namespace DirectX;
+//using namespace OpenGL;
 
 void Texture::LoadFromFile( string filePath )
 {
@@ -41,14 +55,19 @@ void Texture::LoadFromFile( string filePath )
 	{
 		wstring wFilePath( filePath.begin(), filePath.end() );
 
-		TexMetadata metaData;
+		DirectX::TexMetadata metaData;
 		GetMetadataFromWICFile( wFilePath.c_str(), NULL, metaData );
 
-		ScratchImage scratchImg;
-		LoadFromWICFile( wFilePath.c_str(), WIC_FLAGS_NONE, &metaData, scratchImg );
+		DirectX::ScratchImage scratchImg;
+		LoadFromWICFile( wFilePath.c_str(), DirectX::WIC_FLAGS_NONE, &metaData, scratchImg );
+		
+#define CHANGE_TYPE(type, value) static_cast<type>( static_cast<void*>( value ) )
 
-		const Image* img = scratchImg.GetImage( 0, 0, 0 );
-		//CreateTexture( device, img, 1, metaData, &dxTexture );
+		const DirectX::Image* img = scratchImg.GetImage( 0, 0, 0 );
+		auto tempDevice = AdapterController::Get()->GetDevice().dxDevice;
+		auto tex = CHANGE_TYPE(ID3D11Resource*, dxTexture);
+		CreateTexture( CHANGE_TYPE(ID3D11Device*, tempDevice), img, 1, metaData, &tex );
+		
 	}
 #endif//_WIN32
 }
@@ -68,7 +87,7 @@ void Texture::Shutdown( void )
 #if defined( _WIN32 )
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
-		ReleaseCOMobjMacro( dxTexture );
+		//ReleaseCOMobjMacro( dxTexture );
 	}
 #endif//_WIN32
 }

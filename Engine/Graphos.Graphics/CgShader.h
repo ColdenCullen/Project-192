@@ -2,9 +2,11 @@
 #define __CG_SHADER
 
 #include "IShader.h"
+#include <DirectX/DirectXIncludes.h>
 
 #include <string>
 #include <Cg/cg.h>
+
 
 namespace Graphos
 {
@@ -17,6 +19,7 @@ namespace Graphos
 								CgShader( std::string vertexPath, std::string fragmentPath );
 
 			static void			InitCg( void );
+			void				Shutdown( void );
 
 			void				Draw( const Core::Mesh& mesh ) const override;
 			void				BindTexture( const Core::Texture& text ) const override;
@@ -38,6 +41,8 @@ namespace Graphos
 			// For Effects
 			CGeffect			cgEffect;
 			CGtechnique			cgTechnique;
+
+			DirectX::ID3D11InputLayout*  vertexLayout;
 		};
 	}
 }

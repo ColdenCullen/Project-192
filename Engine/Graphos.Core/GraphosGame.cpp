@@ -75,7 +75,7 @@ void GraphosGame::Run( void )
 			// End drawing
 			AdapterController::Get()->EndDraw();
 		}
-		catch (exception e)
+		catch (std::exception e)
 		{
 			ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_ERROR, e.what() );
 			break;
@@ -94,7 +94,7 @@ void GraphosGame::Reset( void )
 	Shutdown();
 
 	// Shutdown UI and controllers
-	delete ui;
+	//delete ui;
 	ISingleton<Physics::Physics>::Get().Shutdown();
 	ISingleton<AssetController>::Get().Shutdown();
 	ISingleton<ScriptController>::Get().Shutdown();
@@ -103,7 +103,7 @@ void GraphosGame::Reset( void )
 	ISingleton<ScriptController>::Get().Initialize();
 	ISingleton<AssetController>::Get().Initialize();
 	ISingleton<Physics::Physics>::Get().Initialize();
-	ISingleton<Input>::Get().ui = ui = new UserInterface( this );
+	//ISingleton<Input>::Get().ui = ui = new UserInterface( this );
 
 	CurrentState = GameState::Menu;
 
@@ -130,7 +130,7 @@ void GraphosGame::Start( void )
 
 	ISingleton<ScriptController>::Get().Initialize();
 
-	ISingleton<Input>::Get().ui = ui = new UserInterface( this );
+	//ISingleton<Input>::Get().ui = ui = new UserInterface( this );
 
 	Initialize();
 }
@@ -141,7 +141,7 @@ void GraphosGame::Stop( void )
 	Shutdown();
 
 	// Shutdown UI and controllers
-	delete ui;
+	//delete ui;
 	ISingleton<ShaderController>::Get().Shutdown();
 	ISingleton<Physics::Physics>::Get().Shutdown();
 	ISingleton<AssetController>::Get().Shutdown();

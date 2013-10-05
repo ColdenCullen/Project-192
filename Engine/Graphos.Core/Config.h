@@ -3,7 +3,7 @@
 
 #include "IController.h"
 #include "ISingleton.h"
-#include "GraphosGame.h"
+//#include "GraphosGame.h"
 #include "Vector3.h"
 
 #include <string>
@@ -39,7 +39,7 @@ namespace Graphos
 			template<>
 			const char*			GetData<const char*>( std::string path );
 			template<>
-			string*				GetData<string*>( std::string path );
+			std::string*				GetData<std::string*>( std::string path );
 			template<>
 			Math::Vector3		GetData<Math::Vector3>( std::string path );
 #endif
@@ -143,13 +143,13 @@ namespace Graphos
 			return GetValueAtPath( path ).asCString();
 		}
 		template<>
-		string* Config::GetData<string*>( std::string path )
+		std::string* Config::GetData<std::string*>( std::string path )
 		{
 			Json::Value& node = GetValueAtPath( path );
 
 			if( node.isArray() )
 			{
-				string* toReturn = new string[ node.size() ];
+				std::string* toReturn = new std::string[ node.size() ];
 
 				for( unsigned int ii = 0; ii < node.size(); ++ii )
 					toReturn[ ii ] = node[ ii ].asString();

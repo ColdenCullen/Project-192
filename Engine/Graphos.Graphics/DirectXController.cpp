@@ -134,11 +134,6 @@ void DirectXController::Shutdown( void )
 
 void DirectXController::Resize( void )
 {
-
-}
-
-void DirectXController::Reload( void )
-{
 	// release old views
 	ReleaseCOMobjMacro(renderTargetView);
 	ReleaseCOMobjMacro(depthStencilView);
@@ -201,13 +196,21 @@ void DirectXController::Reload( void )
 	deviceContext.dxDeviceContext->RSSetViewports(1, &viewport);
 }
 
+void DirectXController::Reload( void )
+{
+	
+}
+
 
 void DirectXController::BeginDraw( void )
 {
-
+	float ClearColor[4] = { 100.0f/255.0f, 149.0f/255.0f, 237.0f/255.0f, 1.0f }; // RGBA
+	// Clear the back buffer        
+	deviceContext.dxDeviceContext->ClearRenderTargetView( renderTargetView, ClearColor );
+	deviceContext.dxDeviceContext->ClearDepthStencilView( depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0, 0 );
 }
 
 void DirectXController::EndDraw( void )
 {
-
+	swapChain->Present( 0, 0 );
 }
