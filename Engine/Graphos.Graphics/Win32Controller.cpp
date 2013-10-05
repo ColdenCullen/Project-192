@@ -43,7 +43,7 @@ void Win32Controller::Initialize( void )
 	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
 	wcex.lpszMenuName	= NULL;
-	wcex.lpszClassName	= L"Graphos";
+	wcex.lpszClassName	= _T("Graphos");
 	wcex.hIconSm		= LoadIcon( hInstance, MAKEINTRESOURCE( IDI_SMALL ) );
 
 	RegisterClassEx( &wcex );

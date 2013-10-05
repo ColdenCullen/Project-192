@@ -1,18 +1,19 @@
 
-
-#include <GL/GLIncludes.h>
-#include <FreeImage.h>
 #include "IShader.h"
 #include "Config.h"
 #include "GraphicsController.h"
-#include <DirectX/DirectXTex.h>
 
 #include "Texture.h"
+#include <GL\GLIncludes.h>
 
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
 using namespace DirectX;
+using namespace OpenGL;
+
+#include <FreeImage.h>
+#include <DirectX\DirectXTex.h>
 
 void Texture::LoadFromFile( string filePath )
 {

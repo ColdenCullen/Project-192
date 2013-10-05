@@ -27,7 +27,7 @@ namespace Graphos
 			unsigned int		glTextureId;
 
 			// DirectX Texture Reference
-			ID3D11Resource*		dxTexture;
+			DirectX::ID3D11Resource*		dxTexture;
 
 			unsigned int		width;
 			unsigned int		height;

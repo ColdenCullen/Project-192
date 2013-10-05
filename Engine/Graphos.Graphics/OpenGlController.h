@@ -19,12 +19,10 @@ namespace Graphos
 			virtual void		BeginDraw( void );
 			virtual void		EndDraw( void );
 
-			GLDeviceContext&	GetDeviceContext( void )	{ return deviceContext; }
-			GLRenderContext&	RenderContext( void )		{ return renderContext; }
+			OpenGL::GLRenderContext&	RenderContext( void )		{ return renderContext; }
 
 		private:
-			GLDeviceContext		deviceContext;
-			GLRenderContext		renderContext;
+			OpenGL::GLRenderContext		renderContext;
 
 			friend class		AdapterController;
 		};

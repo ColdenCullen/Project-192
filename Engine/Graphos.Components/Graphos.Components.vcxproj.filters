@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AssetController.cpp" />
-    <ClCompile Include="AwesomiumView.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="UserInterface.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AssetController.h" />
-    <ClInclude Include="AwesomiumView.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="AssetController.h" />
+    <ClInclude Include="AwesomiumView.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="AssetController.cpp" />
+    <ClCompile Include="AwesomiumView.cpp" />
+    <ClCompile Include="Mesh.cpp" />
   </ItemGroup>
 </Project>

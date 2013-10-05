@@ -10,6 +10,7 @@ using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace OpenGL;
 
 GlShader& GlShader::Initialize( string vertexPath, string fragmentPath )
 {

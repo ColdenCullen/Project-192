@@ -8,6 +8,7 @@
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace OpenGL;
 
 void OpenGlController::Initialize( void )
 {
@@ -20,19 +21,19 @@ void OpenGlController::Initialize( void )
 	PIXELFORMATDESCRIPTOR pixelFormatDescriptor;
 
 	// Get device context
-	deviceContext = GetDC( WindowController::Get().GetHWnd() );
-	if( !deviceContext )
+	deviceContext.glDeviceContext = GetDC( WindowController::Get().GetHWnd() );
+	if( !deviceContext.glDeviceContext )
 		throw exception( "Error getting device context." );
 
 	// Set the pixel format
-	if( !SetPixelFormat( deviceContext, 1, &pixelFormatDescriptor ) )
+	if( !SetPixelFormat( deviceContext.glDeviceContext, 1, &pixelFormatDescriptor ) )
 		throw exception( "Error setting pixel format." );
 
-	renderContext = wglCreateContext( deviceContext );
+	renderContext = wglCreateContext( deviceContext.glDeviceContext );
 	if( !renderContext )
 		throw exception( "Error getting render context." );
 
-	if( !wglMakeCurrent( deviceContext, renderContext ) )
+	if( !wglMakeCurrent( deviceContext.glDeviceContext, renderContext ) )
 		throw exception( "Error setting contexts." );
 
 	glewExperimental = GL_TRUE;
@@ -65,25 +66,25 @@ void OpenGlController::Initialize( void )
 	};
 
 	// Get new Device Context
-	deviceContext = GetDC( WindowController::Get().GetHWnd() );
-	if( !deviceContext )
+	deviceContext.glDeviceContext = GetDC( WindowController::Get().GetHWnd() );
+	if( !deviceContext.glDeviceContext )
 		throw exception( "Error getting device context." );
 
 	// Query pixel format
-	if( wglChoosePixelFormatARB( deviceContext, attributeList, NULL, 1, pixelFormat, &formatCount ) == -1 )
+	if( wglChoosePixelFormatARB( deviceContext.glDeviceContext, attributeList, NULL, 1, pixelFormat, &formatCount ) == -1 )
 		throw exception( "Error getting pixel format." );
 
 	// Set the pixel format
-	if( SetPixelFormat( deviceContext, *pixelFormat, &pixelFormatDescriptor ) == -1 )
+	if( SetPixelFormat( deviceContext.glDeviceContext, *pixelFormat, &pixelFormatDescriptor ) == -1 )
 		throw exception( "Error setting pixel format." );
 
 	// Create OpenGL rendering context
-	renderContext = wglCreateContextAttribsARB( deviceContext, NULL, versionInfo );
+	renderContext = wglCreateContextAttribsARB( deviceContext.glDeviceContext, NULL, versionInfo );
 	if( !renderContext )
 		throw exception( "Error getting render context." );
 
 	// Set current context
-	if( !wglMakeCurrent( deviceContext, renderContext ) )
+	if( !wglMakeCurrent( deviceContext.glDeviceContext, renderContext ) )
 		throw exception( "Error setting contexts." );
 
 	// Set depth buffer
@@ -111,7 +112,7 @@ void OpenGlController::BeginDraw( void )
 
 void OpenGlController::EndDraw( void )
 {
-	SwapBuffers( deviceContext );
+	SwapBuffers( deviceContext.glDeviceContext );
 }
 
 void OpenGlController::Shutdown( void )
@@ -120,8 +121,8 @@ void OpenGlController::Shutdown( void )
 	wglMakeCurrent( NULL, NULL );
 	wglDeleteContext( renderContext );
 	renderContext = NULL;
-	ReleaseDC( WindowController::Get().GetHWnd(), deviceContext );
-	deviceContext = NULL;
+	ReleaseDC( WindowController::Get().GetHWnd(), deviceContext.glDeviceContext );
+	deviceContext.glDeviceContext = NULL;
 }
 
 void OpenGlController::Resize( void )
