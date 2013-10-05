@@ -1,23 +1,12 @@
 #include "Mesh.h"
-
-
 #include "GraphicsController.h"
-
-
 #include "File.h"
 #include "Vector2.h"
 #include "Vector3.h"
-
-//#include <GL/GLIncludes.h>
 #include "AdapterController.h"
 
-
-
-
 #include <sstream>
-#include <vector> //in File.h
-//#include "GameObject.h"
-
+#include <vector>
 
 #define POSITION_ATTRIBUTE 0
 #define UV_ATTRIBUTE 8
@@ -31,7 +20,6 @@ using namespace DirectX;
 using namespace OpenGL;
 
 #include <DirectX/DirectXIncludes.h>
-
 
 void Mesh::LoadFromFile( std::string filePath )
 {

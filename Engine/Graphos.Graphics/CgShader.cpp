@@ -138,8 +138,8 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 
 		const D3D11_INPUT_ELEMENT_DESC layout[] =
 		{
-/*POS*/		{ "ATTR",  0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
-/*UV*/		{ "ATTR", 8, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+/*POS*/		{ "ATTR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+/*UV*/		{ "ATTR", 1, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 /*NORMAL*/	{ "ATTR", 2, DXGI_FORMAT_R32G32B32_FLOAT, 0, 20, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 		};
 
@@ -214,8 +214,6 @@ void CgShader::Draw( const Mesh& mesh ) const
 		cgD3D11SetSamplerStateParameter( cgFragmentParam_decal, NULL ); // NULL == default states
 
 		deviceContext->Draw( mesh.GetNumVertices(), 0 );
-
-		
 
 	}
 #endif//_WIN32
