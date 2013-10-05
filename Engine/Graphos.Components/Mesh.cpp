@@ -1,23 +1,12 @@
 #include "Mesh.h"
-
-
 #include "GraphicsController.h"
-
-
 #include "File.h"
 #include "Vector2.h"
 #include "Vector3.h"
-
-//#include <GL/GLIncludes.h>
 #include "AdapterController.h"
 
-
-
-
 #include <sstream>
-#include <vector> //in File.h
-//#include "GameObject.h"
-
+#include <vector>
 
 #define POSITION_ATTRIBUTE 0
 #define UV_ATTRIBUTE 1
@@ -31,7 +20,6 @@ using namespace DirectX;
 using namespace OpenGL;
 
 #include <DirectX/DirectXIncludes.h>
-
 
 void Mesh::LoadFromFile( std::string filePath )
 {
@@ -118,13 +106,13 @@ void Mesh::LoadFromFile( std::string filePath )
 		glBufferData( GL_ARRAY_BUFFER, outputData.size() * sizeof(GLfloat), &outputData[ 0 ], GL_STATIC_DRAW );
 
 		// Connect the position to the inputPosition attribute of the vertex shader
-		glEnableVertexAttribArray( 0 );
+		glEnableVertexAttribArray( POSITION_ATTRIBUTE );
 		glVertexAttribPointer( POSITION_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), NULL );
 		// Connect uv to the textureCoordinate attribute of the vertex shader
-		glEnableVertexAttribArray( 1 );
+		glEnableVertexAttribArray( UV_ATTRIBUTE );
 		glVertexAttribPointer( UV_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (unsigned char*)NULL + ( sizeof(GLfloat) * 3 ) );
 		// Connect color to the shaderPosition attribute of the vertex shader
-		glEnableVertexAttribArray( 2 );
+		glEnableVertexAttribArray( NORMAL_ATTRIBUTE );
 		glVertexAttribPointer( NORMAL_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (unsigned char*)NULL + ( sizeof(GLfloat) * 5 ) );
 
 		// Generate index buffer

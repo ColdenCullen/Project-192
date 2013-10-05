@@ -42,6 +42,9 @@ bool Game::Update( void )
 	if( ISingleton<Input>::Get().IsKeyDown( VK_ESCAPE ) )
 		Exit();
 
+	if( ISingleton<Input>::Get().IsKeyDown( VK_F5 ) )
+		Reset();
+
 	return true;
 }
 

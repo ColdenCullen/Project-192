@@ -6,12 +6,6 @@
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="AssetController.h" />
     <ClInclude Include="AwesomiumView.h" />
-    <ClInclude Include="DDSTextureLoader\DDSTextureLoader.h">
-      <Filter>DDSTextureLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="WICTextureLoader\WICTextureLoader.h">
-      <Filter>WICTextureLoader</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Texture.cpp" />
@@ -19,19 +13,5 @@
     <ClCompile Include="AssetController.cpp" />
     <ClCompile Include="AwesomiumView.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="DDSTextureLoader\DDSTextureLoader.cpp">
-      <Filter>DDSTextureLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="WICTextureLoader\WICTextureLoader.cpp">
-      <Filter>WICTextureLoader</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="DDSTextureLoader">
-      <UniqueIdentifier>{3a0e3473-4206-4a0a-9dbe-8022275d1bc7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="WICTextureLoader">
-      <UniqueIdentifier>{b03abe41-1390-404c-bc6b-12636f76a287}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
 </Project>
