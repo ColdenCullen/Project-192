@@ -2,14 +2,13 @@ struct BufferData
 {
 	float3 position : ATTR0;
 	float2 texCoord : ATTR1;
-	//float4 color : COLOR;
+	float3 normal	: ATTR2;
 };
 
 struct VertexToFragment
 {
 	float4 position : POSITION;
 	float2 texCoord : TEXCOORD0;
-	//float4 color	: COLOR;
 };
 
 VertexToFragment main( BufferData IN,

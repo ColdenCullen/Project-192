@@ -5,6 +5,7 @@
 #include <string>
 #include <unordered_map>
 #include <type_traits>
+#include <json\json.h>
 
 #include "IComponent.h"
 #include "ISingleton.h"
@@ -23,6 +24,9 @@ namespace Graphos
 			// Constructors
 			GameObject( void ) : shader( nullptr ) { }
 			GameObject( Graphics::IShader* shader ) : shader( shader ) { }
+			
+			// Factory for creating game objects from json
+			static GameObject*	CreateFromJson( Json::Value object );
 
 			// Shutdown memory
 			void				Shutdown( void );

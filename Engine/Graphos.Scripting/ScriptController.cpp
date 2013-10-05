@@ -86,7 +86,7 @@ void ScriptController::Shutdown( void )
 	}
 }
 
-Graphos::Core::Script* ScriptController::CreateObjectInstance( string className, unsigned int ownerID, GameObject* owner /*= nullptr */ )
+Graphos::Core::Script* ScriptController::CreateObjectInstance( string className, GameObject* owner /*= nullptr*/ )
 {
 	if( !isInitialized )
 		Initialize();
@@ -103,7 +103,9 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 		// Get object
 		Local<Object> instance = ctor->CallAsConstructor( 0, nullptr )->ToObject();
 
-		instance->Set( String::New( "Transform" ), CastToJS( owner->transform ) );
+		// Make script and game object one and the same
+		instance->SetInternalField( ClassCreator_InternalFields<GameObject>::NativeIndex, External::New( owner ) );
+
 		// Return new script
 		return new Graphos::Core::Script( instance, owner );
 	}
