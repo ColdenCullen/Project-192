@@ -117,6 +117,12 @@ void DirectXController::Initialize( void )
 
 void DirectXController::Shutdown( void )
 {
+#if defined(_DEBUG) || defined(DEBUG)
+	ID3D11Debug* debugDev;
+	device.dxDevice->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debugDev));
+	debugDev->ReportLiveDeviceObjects( D3D11_RLDO_DETAIL );
+#endif
+	
 	// Release the DX stuff
 	ReleaseCOMobjMacro( renderTargetView );
 	ReleaseCOMobjMacro( depthStencilView );

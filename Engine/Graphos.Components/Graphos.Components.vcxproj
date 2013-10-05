@@ -46,7 +46,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <ShowIncludes>true</ShowIncludes>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -72,20 +72,16 @@
   <ItemGroup>
     <ClInclude Include="AssetController.h" />
     <ClInclude Include="AwesomiumView.h" />
-    <ClInclude Include="DDSTextureLoader\DDSTextureLoader.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="UserInterface.h" />
-    <ClInclude Include="WICTextureLoader\WICTextureLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetController.cpp" />
     <ClCompile Include="AwesomiumView.cpp" />
-    <ClCompile Include="DDSTextureLoader\DDSTextureLoader.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="UserInterface.cpp" />
-    <ClCompile Include="WICTextureLoader\WICTextureLoader.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

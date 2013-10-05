@@ -10,24 +10,11 @@ using namespace OpenGL;
 
 #include "AdapterController.h"
 
-////using namespace DirectX;
-////#include <DirectX/DirectXIncludes.h>
-//
-////#include <DDSTextureLoader/DDSTextureLoader.h>
-////#include <WICTextureLoader/WICTextureLoader.h>
-//
-//namespace OpenGL
-//{
-//#include <GL/glew.h>
-//}
-//#include "GraphicsController.h"
 
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
 
-//using namespace DirectX;
-//using namespace OpenGL;
 
 void Texture::LoadFromFile( string filePath )
 {
@@ -65,9 +52,9 @@ void Texture::LoadFromFile( string filePath )
 
 		const DirectX::Image* img = scratchImg.GetImage( 0, 0, 0 );
 		auto tempDevice = AdapterController::Get()->GetDevice().dxDevice;
-		auto tex = CHANGE_TYPE(ID3D11Resource*, dxTexture);
-		CreateTexture( CHANGE_TYPE(ID3D11Device*, tempDevice), img, 1, metaData, &tex );
-		
+		ID3D11Resource* tex;
+		HRESULT result = CreateTexture( CHANGE_TYPE(ID3D11Device*, tempDevice), img, 1, metaData, &tex );
+		dxTexture = CHANGE_TYPE(DirectX::ID3D11Resource*,tex);
 	}
 #endif//_WIN32
 }
@@ -87,7 +74,8 @@ void Texture::Shutdown( void )
 #if defined( _WIN32 )
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
-		//ReleaseCOMobjMacro( dxTexture );
+	//	ReleaseCOMobjMacro( dxTexture );
+
 	}
 #endif//_WIN32
 }

@@ -1,8 +1,8 @@
 struct BufferData
 {
-	float3 position : POSITION;
-	float2 uv : TEXCOORD0;
-	float3 normal   : NORMAL;
+	float3 position : ATTR0;
+	float2 uv : ATTR8;
+	float3 normal   : ATTR2;
 	//float4 color : COLOR;
 };
 
