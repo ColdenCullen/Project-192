@@ -1,4 +1,6 @@
 #include "CC-CgShader.h"
+#include "CC-Mesh.h"
+#include "CC-Texture.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
@@ -23,8 +25,8 @@ namespace cvv8
 
 		cgShadercc
 			( "destroy", ClassCreator<CgShader>::DestroyObjectCallback )
-			( "Draw", ConstMethodToInCa<const CgShader, void (const Mesh&), &CgShader::Draw>::Call )
-			( "BindTexture", ConstMethodToInCa<const CgShader, void (const Texture&), &CgShader::BindTexture>::Call )
+			//( "Draw", ConstMethodToInCa<const CgShader, void (const Mesh&), &CgShader::Draw>::Call )
+			//( "BindTexture", ConstMethodToInCa<const CgShader, void (const Texture&), &CgShader::BindTexture>::Call )
 			//( "Cross", ConstMethodToInCa<const CgShader, CgShader (const CgShader&), &CgShader::Cross>::Call )
 			//( "Add", ConstMethodToInCa<const CgShader, CgShader (const CgShader&), &CgShader::Add>::Call )
 			;

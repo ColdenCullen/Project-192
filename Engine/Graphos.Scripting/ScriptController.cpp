@@ -5,12 +5,10 @@
 #include "ClassMapper.h"
 
 // Class Creators
-//#include "CC-Transform.h"
+#include "CC-GameObject.h"
 #include <cvv8\ClassCreator.hpp>
 
 #include <iostream>
-
-#include <cvv8\v8-convert.hpp>
 
 using namespace std;
 using namespace Graphos::Core;
@@ -97,6 +95,8 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 	// Get an instance of the class
 	Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
 
+	//ObjectTemplate::New()->SetInternalFieldCount( ClassCreator_InternalFields<GameObject>::Count );
+
 	// Return object
 	if( !ctor.IsEmpty() )
 	{
@@ -104,7 +104,7 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 		Local<Object> instance = ctor->CallAsConstructor( 0, nullptr )->ToObject();
 
 		// Make script and game object one and the same
-		instance->SetInternalField( ClassCreator_InternalFields<GameObject>::NativeIndex, External::New( owner ) );
+		instance->SetPointerInInternalField( ClassCreator_InternalFields<GameObject>::NativeIndex, owner );
 
 		// Return new script
 		return new Graphos::Core::Script( instance, owner );

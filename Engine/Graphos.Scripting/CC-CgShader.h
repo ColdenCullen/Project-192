@@ -32,10 +32,10 @@ namespace cvv8
 	};
 
 	template <>
-	struct JSToNative<CgShader> : JSToNative_ClassCreator<CgShader> { };
+	struct JSToNative<CgShader> : public JSToNative_ClassCreator<CgShader> { };
 
 	template <>
-	struct NativeToJS<CgShader> : NativeToJSMap_Graphos<CgShader> { };
+	struct NativeToJS<CgShader> : public NativeToJSMap_Graphos<CgShader> { };
 }
 
 #endif//__CC_CG_SHADER

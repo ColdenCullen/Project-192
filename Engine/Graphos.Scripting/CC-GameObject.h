@@ -32,10 +32,10 @@ namespace cvv8
 	};
 
 	template <>
-	struct JSToNative<GameObject> : JSToNative_ClassCreator<GameObject> { };
+	struct JSToNative<GameObject> : public JSToNative_ClassCreator<GameObject> { };
 
 	template <>
-	struct NativeToJS<GameObject> : NativeToJSMap_Graphos<GameObject> { };
+	struct NativeToJS<GameObject> : public NativeToJSMap_Graphos<GameObject> { };
 }
 
 #endif//__CC_GAME_OBJECT
