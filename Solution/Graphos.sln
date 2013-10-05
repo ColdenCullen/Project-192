@@ -20,6 +20,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project-192.Scripts", "..\Game\Project-192.Scripts\Project-192.Scripts.csproj", "{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project-192.Core", "..\Game\Project-192.Core\Project-192.Core.vcxproj", "{1742CE04-C11E-4295-A8A3-C69FD9EE991F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E} = {62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resourses", "Resourses", "{C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4}"
 EndProject

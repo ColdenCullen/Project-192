@@ -95,19 +95,22 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 	// Get an instance of the class
 	Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
 
-	//ObjectTemplate::New()->SetInternalFieldCount( ClassCreator_InternalFields<GameObject>::Count );
-
 	// Return object
 	if( !ctor.IsEmpty() )
 	{
-		// Get object
-		Local<Object> instance = ctor->CallAsConstructor( 0, nullptr )->ToObject();
+		auto gameObject = CastToJS( *owner )->ToObject();
+		gameObject->SetPointerInInternalField( ClassCreator_InternalFields<GameObject>::NativeIndex, owner );
+		auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
 
-		// Make script and game object one and the same
-		instance->SetPointerInInternalField( ClassCreator_InternalFields<GameObject>::NativeIndex, owner );
+		for( int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
+		{
+			auto name = inst->GetPropertyNames()->Get( ii );
+			if( !gameObject->Has( name->ToString() ) )
+				gameObject->Set( name, inst->Get( name ) );
+		}
 
 		// Return new script
-		return new Graphos::Core::Script( instance, owner );
+ 		return new Graphos::Core::Script( gameObject, owner );
 	}
 	else
 	{

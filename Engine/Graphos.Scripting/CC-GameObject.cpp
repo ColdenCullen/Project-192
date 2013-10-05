@@ -1,6 +1,8 @@
 #include "CC-GameObject.h"
+#include "CC-Transform.h"
 
 using namespace Graphos::Core;
+using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 
 #include "cvv8\XTo.hpp"
@@ -23,10 +25,17 @@ namespace cvv8
 
 		gameObjectcc
 			( "destroy", ClassCreator<GameObject>::DestroyObjectCallback )
-			( "Update", MethodToInCa<GameObject, void (void), &GameObject::Update>::Call )
-			( "Draw", MethodToInCa<GameObject, void (void), &GameObject::Draw>::Call )
+			//( "Update", MethodToInCa<GameObject, void (void), &GameObject::Update>::Call )
+			//( "Draw", MethodToInCa<GameObject, void (void), &GameObject::Draw>::Call )
 			//( "Cross", ConstMethodToInCa<const CgShader, CgShader (const CgShader&), &CgShader::Cross>::Call )
 			//( "Add", ConstMethodToInCa<const CgShader, CgShader (const CgShader&), &CgShader::Add>::Call )
+			;
+
+		AccessorAdder gameObjectacc( gameObjectcc.Prototype() );
+		gameObjectacc
+			( "Transform",
+			MemberToAccessors<GameObject, Transform, &GameObject::transform>::Get,
+			ThrowingSetter::Set )
 			;
 
 		// Set static methods

@@ -27,7 +27,9 @@
     <ClInclude Include="CC-Texture.h">
       <Filter>Class Wrapers</Filter>
     </ClInclude>
-    <ClInclude Include="CC-IShader.h" />
+    <ClInclude Include="CC-IShader.h">
+      <Filter>Class Wrapers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ScriptController.cpp" />
@@ -50,7 +52,9 @@
     <ClCompile Include="CC-Texture.cpp">
       <Filter>Class Wrapers</Filter>
     </ClCompile>
-    <ClCompile Include="CC-IShader.cpp" />
+    <ClCompile Include="CC-IShader.cpp">
+      <Filter>Class Wrapers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Class Wrapers">
