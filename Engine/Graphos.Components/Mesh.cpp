@@ -9,35 +9,15 @@
 #include <vector>
 #include "GameObject.h"
 
-#define USE_GL_SHADERS
-//#define USE_CG_SHADERS
-//#define USE_DX_SHADERS
-
-#if defined( USE_GL_SHADERS )
-
 #define POSITION_ATTRIBUTE 0
 #define UV_ATTRIBUTE 1
 #define NORMAL_ATTRIBUTE 2
-
-#elif defined( USE_CG_SHADERS )
-
-#define POSITION_ATTRIBUTE 0
-#define UV_ATTRIBUTE 1
-// Will be 2
-#define NORMAL_ATTRIBUTE 3
-
-#elif defined( USE_DX_SHADERS )
-
-#define POSITION_ATTRIBUTE 0
-#define UV_ATTRIBUTE 1
-#define NORMAL_ATTRIBUTE 2
-
-#endif
 
 using namespace std;
 using namespace Graphos::Math;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace OpenGL;
 
 void Mesh::LoadFromFile( string filePath )
 {
@@ -45,7 +25,7 @@ void Mesh::LoadFromFile( string filePath )
 	vector<Vector2> uvs;
 	vector<Vector3> normals;
 
-	vector<GLfloat>	outputData;
+	vector<float>	outputData;
 
 	istringstream file( File::ReadFile( filePath ) );
 	string line;

@@ -1,18 +1,16 @@
 #include "GraphosGame.h"
 
 #include "File.h"
-
-#include "GameObject.h"
-#include "ScriptController.h"
 #include "Physics.h"
 #include "GraphicsController.h"
-#include "AssetController.h"
+#include "AdapterController.h"
 #include "ShaderController.h"
+#include "AssetController.h"
+#include "ScriptController.h"
 #include "Input.h"
 #include "TimeController.h"
 #include "Config.h"
 #include "OutputController.h"
-#include "AdapterController.h"
 
 #include <vector>
 #include <string>

@@ -42,7 +42,7 @@ class GameObject
     public Transform: Transform;
 
     // Abstract method for updating object
-    public Update( deltaTime: number ): void { }
+    public Update(deltaTime: number): void { }
 }
 
 declare class Time

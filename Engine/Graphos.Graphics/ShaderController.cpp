@@ -12,6 +12,7 @@
 #elif defined( __APPLE__ )
 #include <dirent.h>
 #endif
+#include "GraphicsController.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -43,7 +44,8 @@ void ShaderController::Initialize( void )
 			string fileName = ent->d_name;
 
 			// Check shader type
-			if( fileName.substr( ent->d_namlen - 6 ) == ".fs.gl" )
+			if( fileName.substr( ent->d_namlen - 6 ) == ".fs.gl" &&
+				ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
 			{
 				string name = fileName.substr( 0, ent->d_namlen - 6 );
 

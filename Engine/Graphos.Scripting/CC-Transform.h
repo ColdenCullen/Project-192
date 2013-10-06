@@ -31,10 +31,10 @@ namespace cvv8
 	};
 
 	template <>
-	struct JSToNative<Transform> : JSToNative_ClassCreator<Transform> { };
+	struct JSToNative<Transform> : public JSToNative_ClassCreator<Transform> { };
 
 	template <>
-	struct NativeToJS<Transform> : NativeToJSMap_Graphos<Transform> { };
+	struct NativeToJS<Transform> : public NativeToJSMap_Graphos<Transform> { };
 }
 
 #endif//__CC_TRANSFORM

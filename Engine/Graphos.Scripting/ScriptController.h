@@ -19,7 +19,7 @@ namespace Graphos
 			virtual void		Initialize( void ) override;
 			virtual void		Shutdown( void ) override;
 
-			Script*				CreateObjectInstance( std::string className, unsigned int ownerID, GameObject* owner = nullptr );
+			Script*				CreateObjectInstance( std::string className, GameObject* owner = nullptr );
 		
 		private:
 								ScriptController( void ) : isInitialized( false ), /*isolate( v8::Isolate::GetCurrent() ),*/ handleScope() { }

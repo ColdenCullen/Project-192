@@ -5,9 +5,13 @@
 #include "OutputController.h"
 #include "Texture.h"
 #include "GraphicsController.h"
+#include "AdapterController.h"
 
-#include <GL/glincludes.h>
-#include <Cg/cgGL.h>
+
+#include <GL\glincludes.h>
+using namespace OpenGL;
+using namespace DirectX;
+#include <Cg\cgGL.h>
 #ifdef _WIN32
 #include <Cg/cgD3D11.h>
 #endif//_WIN32
@@ -16,6 +20,7 @@ using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+
 
 void CgErrorHandler( CGcontext context, CGerror error, void* appData )
 {
@@ -63,6 +68,8 @@ void CgShader::InitCg( void )
 #ifdef _WIN32
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
+		cgD3D11SetDevice( cgContext, AdapterController::Get()->GetDevice().dxDevice );
+		cgVertexProfile = cgD3D11GetLatestVertexProfile();
 
 	}
 #endif//_WIN32
@@ -123,7 +130,7 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 #ifdef _WIN32
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
-
+		cgD3D11LoadProgram( cgVertexProgram, NULL );
 	}
 #endif//_WIN32
 }

@@ -1,12 +1,13 @@
 #include "AwesomiumView.h"
 
-#include <GL/GLIncludes.h>
-
-#include <Awesomium/WebCore.h>
-//#include <Awesomium/WebView.h>
-#include <Awesomium/STLHelpers.h>
+#include <Awesomium\WebCore.h>
+//#include <Awesomium\WebView.h>
+#include <Awesomium\STLHelpers.h>
 #include "IShader.h"
 //#include <Awesomium/BitmapSurface.h>
+
+#define NO_NAMESPACE
+#include <GL\GLIncludes.h>
 
 using namespace std;
 using namespace Graphos::Core;
