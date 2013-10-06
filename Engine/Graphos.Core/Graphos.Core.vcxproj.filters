@@ -27,5 +27,6 @@
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IController.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="GraphosGlobal.h" />
   </ItemGroup>
 </Project>

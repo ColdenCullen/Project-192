@@ -94,7 +94,7 @@ void GraphosGame::Reset( void )
 	Shutdown();
 
 	// Shutdown UI and controllers
-	delete ui;
+	delete_s( ui );
 	ISingleton<Physics::Physics>::Get().Shutdown();
 	ISingleton<AssetController>::Get().Shutdown();
 	ISingleton<ScriptController>::Get().Shutdown();
@@ -141,7 +141,7 @@ void GraphosGame::Stop( void )
 	Shutdown();
 
 	// Shutdown UI and controllers
-	delete ui;
+	delete_s( ui );
 	ISingleton<ShaderController>::Get().Shutdown();
 	ISingleton<Physics::Physics>::Get().Shutdown();
 	ISingleton<AssetController>::Get().Shutdown();

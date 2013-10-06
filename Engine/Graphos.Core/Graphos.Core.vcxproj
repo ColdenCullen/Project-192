@@ -90,6 +90,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectCollection.h" />
     <ClInclude Include="GraphosGame.h" />
+    <ClInclude Include="GraphosGlobal.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IController.h" />
     <ClInclude Include="Input.h" />
