@@ -9,7 +9,7 @@
 #include <vector>
 
 #define POSITION_ATTRIBUTE 0
-#define UV_ATTRIBUTE 8
+#define UV_ATTRIBUTE 1
 #define NORMAL_ATTRIBUTE 2
 
 //using namespace std;
