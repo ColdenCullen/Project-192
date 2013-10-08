@@ -29,44 +29,13 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	width = ISingleton<Config>::Get().GetData<unsigned int>( "display.width" );
 	height = ISingleton<Config>::Get().GetData<unsigned int>( "display.height" );
 
-	// Generate mesh
-	numElements = 6;
-	unsigned int indices[] = { 0, 1, 2, 0, 2, 3 };
+	// Initialize mesh
+	//uiMesh = new Mesh("Resources/Assets/Meshes/UI.obj");
+	//uiMesh().LoadFromFile("Resources/Assets/Meshes/UI.obj");
+	objects.LoadObjects( "" );
+	uiMesh = objects.GetObjectByName( "UI" );
 
-	GLfloat floatWidth = static_cast<GLfloat>( width );
-	GLfloat floatHeight = static_cast<GLfloat>( height );
-
-	GLfloat vertices[] = {
-		-floatWidth / 2.0f,	floatHeight / 2.0f,	DEPTH, 0.0f, 1.0f,
-		-floatWidth / 2.0f,	-floatHeight / 2.0f,DEPTH, 0.0f, 0.0f,
-		floatWidth / 2.0f,	-floatHeight / 2.0f,DEPTH, 1.0f, 0.0f,
-		floatWidth / 2.0f,	floatHeight / 2.0f,	DEPTH, 1.0f, 1.0f
-	};
-
-	// Setup GL buffers
-	//glGenVertexArrays( 1, &vertexArrayObject );
-	//
-	//glBindVertexArray( vertexArrayObject );
-	//
-	//glGenBuffers( 1, &vertexBufferObject );
-	//
-	//glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	//glBufferData( GL_ARRAY_BUFFER, 6/*4*/ * 5 * sizeof( GLfloat ), vertices, GL_STATIC_DRAW );
-	//
-	//glEnableVertexAttribArray( 0 );// Position
-	//glEnableVertexAttribArray( 1 );// UV
-	//
-	//glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	//glVertexAttribPointer( 0, 3, GL_FLOAT, false, 5 * sizeof( GLfloat ), 0 );
-	//
-	//glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	//glVertexAttribPointer( 1, 2, GL_FLOAT, false, 5 * sizeof( GLfloat ), (unsigned char*)NULL + ( 3 * sizeof( GLfloat ) ) );
-	//
-	//glGenBuffers( 1, &indexBuffer );
-	//
-	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
-	//glBufferData( GL_ELEMENT_ARRAY_BUFFER, numElements * sizeof( unsigned int ), indices, GL_STATIC_DRAW );
-
+	// Initialize Awesomium view
 	view = new AwesomiumView( abspath, width, height );
 	view->webView->set_js_method_handler( new JavaScriptHandler( this ) );
 
@@ -101,6 +70,7 @@ UserInterface::~UserInterface()
 	}
 }
 
+/// Get input from the mouse
 bool UserInterface::Update( void )
 {
 	Vector2 cursor = ISingleton<Input>::Get().GetMousePos();
@@ -127,18 +97,16 @@ bool UserInterface::Update( void )
 
 void UserInterface::Draw( void )
 {
-	//ISingleton<ShaderController>::Get().GetShader( "texture" ).Use();
 	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetModelMatrix( transform.WorldMatrix() );
 	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetUniform( "shaderTexture", 0 );
 	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().OrthogonalMatrix() );
 
+	// Draw Awesomium
 	view->Draw( nullptr );
 
-	// Bind and draw buffer
-	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
-	glBindVertexArray( vertexArrayObject );
-
-	glDrawElements( GL_TRIANGLES, numElements, GL_UNSIGNED_INT, NULL );
+	// Draw mesh
+	//uiMesh->Draw(ISingleton<ShaderController>::Get().GetShader( "simple" ));
+	uiMesh->Draw();
 
 	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
 }
