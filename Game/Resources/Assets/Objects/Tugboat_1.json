@@ -4,11 +4,11 @@
 	"Shader": "simple",
 
 	"Texture": {
-		"Name": "balls"
+		"Name": "Poop"
 	},
 
 	"Mesh": {
-		"Name": "Cube"
+		"Name": "Tugboat_1"
 	},
 
 	"Script": {
@@ -27,9 +27,9 @@
 			"z": 0
 		},
 		"Scale": {
-			"x": 0.25,
-			"y": 0.25,
-			"z": 0.25
+			"x": 1,
+			"y": 1,
+			"z": 1
 		}
 	}
 }
