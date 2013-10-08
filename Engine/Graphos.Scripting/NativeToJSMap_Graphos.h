@@ -2,21 +2,54 @@
 #define __NATIVE_TO_JS_MAP_GRAPHOS
 
 #include <v8\v8.h>
-
-#include "cvv8\ClassCreator.hpp"
+#include <cvv8\ClassCreator.hpp>
+#include <unordered_map>
 
 namespace cvv8
 {
 	template<typename T>
 	struct NativeToJSMap_Graphos : NativeToJSMap<T>
 	{
+	public:
 		v8::Handle<v8::Value> operator()( T const& val ) const
 		{
-			// If object does not exist in the JSMap, create it
-			v8::Handle<v8::Object> toReturn = ClassCreator<T>::Instance().NewInstance( 0, NULL );
-			toReturn->SetPointerInInternalField( ClassCreator_InternalFields<T>::NativeIndex, (void*)&val );
+			v8::Handle<v8::Object> toReturn = GetObject( &val );
+
+			if( toReturn.IsEmpty() )
+			{
+				// If object does not exist in the JSMap, create it
+				toReturn = ClassCreator<T>::Instance().NewInstance( 0, NULL );
+				toReturn->SetPointerInInternalField( ClassCreator_InternalFields<T>::NativeIndex, (void*)&val );
+				AddObject( &val, toReturn );
+			}
 
 			return toReturn;
+		}
+
+	private:
+		typedef std::unordered_map<T const *, v8::Handle<v8::Object>> HandleMap;
+
+		static
+		HandleMap& Map()
+		{
+			static HandleMap instance;
+			return instance;
+		}
+
+		static
+		v8::Handle<v8::Object> GetObject( T const * ptr )
+		{
+			auto obj = Map().find( ptr );
+
+			if( obj == Map().end() )
+				return v8::Handle<v8::Object>();
+			else
+				return obj->second;
+		}
+		static
+		void AddObject( T const * ptr, v8::Handle<v8::Object> obj )
+		{
+			Map()[ ptr ] = obj;
 		}
 	};
 }

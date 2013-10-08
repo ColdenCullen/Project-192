@@ -50,7 +50,8 @@
       <AdditionalDependencies>ws2_32.lib;winmm.lib;vld.lib;</AdditionalDependencies>
     </Lib>
     <PreLinkEvent>
-      <Command>xcopy "$(RootDir)\ExternalDependencies\bin" "$(OutDir)" /d /r</Command>
+      <Command>
+      </Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
