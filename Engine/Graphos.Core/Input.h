@@ -48,8 +48,11 @@
 #include "Vector2.h"
 #include "IController.h"
 #include "ISingleton.h"
+#include "Event.h"
 
-#include <stdint.h>
+#include <cstdint>
+#include <functional>
+#include <unordered_map>
 
 #define TOTAL_SIZE 256
 #define SPLIT 4
@@ -76,9 +79,13 @@ namespace Graphos
 		class Input : public IController
 		{
 		public:
+			typedef Event<void(unsigned int)> KeyEvent;
+
 			UserInterface*		ui;
 
 			void				Update( void );
+
+			void				AddKeyEvent( unsigned int key, KeyEvent::Delegate func );
 
 			void				KeyDown( unsigned int input );
 			void				KeyUp( unsigned int input );
@@ -92,6 +99,9 @@ namespace Graphos
 			Input( void ) { }
 			Input( Input& other );
 			void				operator=( Input& other );
+
+			std::unordered_map<unsigned int, KeyEvent>
+								keyEvents;
 
 			InputState			keyState;
 			InputState			prevKeyState;

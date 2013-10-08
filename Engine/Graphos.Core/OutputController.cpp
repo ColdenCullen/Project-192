@@ -8,7 +8,6 @@ using namespace Graphos::Core;
 
 void OutputController::PrintMessage( OutputType type, string message )
 {
-	string verbosity = ISingleton<Config>::Get().GetData<string>( "Game.Verbosity" );
 	if( GetWhetherPrint( type ) )
 	{
 		cout << GetOutputHeader( type ) << " " << message << endl;

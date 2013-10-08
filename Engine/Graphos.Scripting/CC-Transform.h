@@ -1,11 +1,12 @@
-#ifndef __CC_Transform
-#define __CC_Transform
+#ifndef __CC_TRANSFORM
+#define __CC_TRANSFORM
 
 #include "Transform.h"
 
 #include <v8\v8.h>
 
-#include "cvv8\ClassCreator.hpp"
+#include <cvv8\ClassCreator.hpp>
+#include "NativeToJSMap_Graphos.h"
 
 using namespace Graphos::Math;
 
@@ -18,23 +19,10 @@ namespace cvv8
 		CtorForwarder<Transform*()>
 		)> TransformCtors;
 
-	template <>
-	struct ClassCreator_InternalFields<Transform>	: ClassCreator_InternalFields_Base<Transform> { };
-
-	template <>
-	struct ClassCreator_SearchPrototypeForThis<Transform> : Opt_Bool<true> { };
 
 	template <>
 	class ClassCreator_Factory<Transform>
 		: public ClassCreator_Factory_NativeToJSMap<Transform, CtorArityDispatcher<TransformCtors>> { };
-
-	template <>
-	struct ClassCreator_WeakWrap<Transform>
-	{
-		static void PreWrap( v8::Persistent<v8::Object> const &, v8::Arguments const & ) { }
-		static void Wrap( v8::Persistent<v8::Object> const &, TypeInfo<Transform>::NativeHandle ) { }
-		static void Unwrap( v8::Handle<v8::Object> const &, TypeInfo<Transform>::NativeHandle ) { }
-	};
 
 	template <>
 	struct ClassCreator_SetupBindings<Transform>
@@ -43,13 +31,10 @@ namespace cvv8
 	};
 
 	template <>
-	struct JSToNative<Transform> : JSToNative_ClassCreator<Transform> { };
+	struct JSToNative<Transform> : public JSToNative_ClassCreator<Transform> { };
 
 	template <>
-	struct NativeToJS<Transform> : NativeToJSMap<Transform>
-	{
-		v8::Handle<v8::Value> operator()( const Transform& v ) const;
-	};
+	struct NativeToJS<Transform> : public NativeToJSMap_Graphos<Transform> { };
 }
 
-#endif//__CC_Transform
+#endif//__CC_TRANSFORM

@@ -7,7 +7,7 @@
 #include "Mesh.h"
 #include "GameObjectCollection.h"
 
-#include <Awesomium\JSObject.h>
+#include <Awesomium/JSObject.h>
 
 #define DEPTH 1.0f
 

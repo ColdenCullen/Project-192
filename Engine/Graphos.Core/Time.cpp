@@ -26,4 +26,4 @@ void Time::Update( void )
 	//}
 }
 
-Time::Time( void ) { }// : cur( high_resolution_clock::now() ), prev( high_resolution_clock::now() ), totalTime( 0 ), frameCount( 0 ), secondTime( 0 ) { }
+Time::Time( void ) { }//: cur( high_resolution_clock::now() ), prev( high_resolution_clock::now() ), totalTime( 0 ), frameCount( 0 ), secondTime( 0 ) { }

@@ -1,57 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Windows Files">
-      <UniqueIdentifier>{6989076f-0804-4e28-86b4-8976491a6569}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Windows Files\Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Windows Files</Filter>
+    <ClInclude Include="GraphicsController.h" />
+    <ClInclude Include="CgShader.h">
+      <Filter>Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Windows Files</Filter>
+    <ClInclude Include="GlShader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="IShader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderController.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="AdapterController.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXController.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGlController.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="IGraphicsAdapterController.h">
+      <Filter>Adapters</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32Controller.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowController.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlatformWindowController.h">
+      <Filter>Windows</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Windows Files</Filter>
+      <Filter>Windows</Filter>
     </ClInclude>
-    <ClInclude Include="CgShader.h" />
-    <ClInclude Include="GlShader.h" />
-    <ClInclude Include="GraphicsController.h" />
-    <ClInclude Include="ShaderController.h" />
-    <ClInclude Include="WindowController.h" />
-    <ClInclude Include="IShader.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Windows Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CgShader.cpp" />
-    <ClCompile Include="GlShader.cpp" />
     <ClCompile Include="GraphicsController.cpp" />
-    <ClCompile Include="ShaderController.cpp" />
-    <ClCompile Include="Win32Controller.cpp" />
+    <ClCompile Include="CgShader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="GlShader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderController.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="AdapterController.cpp">
+      <Filter>Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXController.cpp">
+      <Filter>Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGlController.cpp">
+      <Filter>Adapters</Filter>
+    </ClCompile>
+    <ClCompile Include="Win32Controller.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="GraphosGraphics.rc">
-      <Filter>Windows Files\Resource Files</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>Windows Files\Resource Files</Filter>
-    </Image>
-    <Image Include="GraphosGraphics.ico">
-      <Filter>Windows Files\Resource Files</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt">
-      <Filter>Windows Files</Filter>
-    </Text>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{6dba1a46-aa17-434f-8d8a-0a2fd8d556b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Adapters">
+      <UniqueIdentifier>{c63afcb7-fe5a-40ad-8a4f-330cab26971f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{8931460e-87be-4e37-b7d2-7171200e0dec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

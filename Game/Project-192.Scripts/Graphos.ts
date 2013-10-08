@@ -38,14 +38,11 @@ declare class Transform
 // Class with variables and functions
 class GameObject
 {
-    // ID of owner object
-    public id: string;
-
     // Transform object
     public Transform: Transform;
 
     // Abstract method for updating object
-    public Update( deltaTime: number ): void { }
+    public Update(deltaTime: number): void { }
 }
 
 declare class Time

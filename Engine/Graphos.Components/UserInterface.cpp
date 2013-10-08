@@ -3,10 +3,13 @@
 #include "WindowController.h"
 #include "ShaderController.h"
 #include "Input.h"
+#include "Config.h"
 
 #include <string>
 #include <Awesomium/WebCore.h>
 #include <Awesomium/STLHelpers.h>
+
+#define NO_NAMESPACE
 #include <GL/GLIncludes.h>
 
 using namespace Awesomium;

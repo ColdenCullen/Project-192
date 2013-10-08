@@ -1,8 +1,9 @@
 #include "AssetController.h"
+
+#include "AwesomiumView.h"
 #include "Mesh.h"
 #include "Texture.h"
 #include "File.h"
-#include "AwesomiumView.h"
 #include "Script.h"
 
 #define CONTENT_PATH "Resources/Assets/"

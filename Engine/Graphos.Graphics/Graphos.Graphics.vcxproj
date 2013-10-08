@@ -11,10 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{ED494E84-A159-471A-A205-60160B0824A8}</ProjectGuid>
-    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{F2D275FD-32BA-43D1-B155-E17988EEC88C}</ProjectGuid>
     <RootNamespace>GraphosGraphics</RootNamespace>
-    <ProjectName>Graphos.Graphics</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -33,93 +31,68 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\Solution\GraphosProperties.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Solution\GraphosProperties.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(DXSDK_DIR)\Include;$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Bscmake>
-      <PreserveSbr>true</PreserveSbr>
-    </Bscmake>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;FreeImage.lib;glew32.lib;cg.lib;cgGL.lib;cgD3D11.lib</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;glew32.lib;FreeImage.lib;cg.lib;cgGL.lib;cgD3D11.lib;D3D11.lib;DirectXTex.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Lib>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;glew32.lib;FreeImage.lib;cg.lib;cgGL.lib;cgD3D11.lib;D3D11.lib;DirectXTex.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="AdapterController.h" />
     <ClInclude Include="CgShader.h" />
-    <ClInclude Include="GraphicsController.h" />
-    <ClInclude Include="Resource.h" />
+    <ClInclude Include="DirectXController.h" />
     <ClInclude Include="GlShader.h" />
+    <ClInclude Include="GraphicsController.h" />
+    <ClInclude Include="IGraphicsAdapterController.h" />
+    <ClInclude Include="IPlatformWindowController.h" />
     <ClInclude Include="IShader.h" />
+    <ClInclude Include="OpenGlController.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="ShaderController.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Win32Controller.h" />
     <ClInclude Include="WindowController.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AdapterController.cpp" />
     <ClCompile Include="CgShader.cpp" />
-    <ClCompile Include="GraphicsController.cpp" />
+    <ClCompile Include="DirectXController.cpp" />
     <ClCompile Include="GlShader.cpp" />
+    <ClCompile Include="GraphicsController.cpp" />
+    <ClCompile Include="OpenGlController.cpp" />
     <ClCompile Include="ShaderController.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="Win32Controller.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="GraphosGraphics.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="GraphosGraphics.ico" />
-    <Image Include="small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
