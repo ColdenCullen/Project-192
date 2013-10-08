@@ -55,8 +55,8 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 
 	// Scale to fix Awesomium issue
 	transform.Scale(
-		ISingleton<Config>::Get().GetData<float>( "ui.scale.x" ),
-		-ISingleton<Config>::Get().GetData<float>( "ui.scale.y" ),
+		width,//ISingleton<Config>::Get().GetData<float>( "ui.scale.x" ),
+		-1 * height,//-ISingleton<Config>::Get().GetData<float>( "ui.scale.y" ),
 		1.0f
 	);
 
