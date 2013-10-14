@@ -15,6 +15,21 @@
     <ClInclude Include="NativeToJSMap_Graphos.h">
       <Filter>Class Wrapers</Filter>
     </ClInclude>
+    <ClInclude Include="CC-CgShader.h">
+      <Filter>Class Wrapers</Filter>
+    </ClInclude>
+    <ClInclude Include="CC-GameObject.h">
+      <Filter>Class Wrapers</Filter>
+    </ClInclude>
+    <ClInclude Include="CC-Mesh.h">
+      <Filter>Class Wrapers</Filter>
+    </ClInclude>
+    <ClInclude Include="CC-Texture.h">
+      <Filter>Class Wrapers</Filter>
+    </ClInclude>
+    <ClInclude Include="CC-IShader.h">
+      <Filter>Class Wrapers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ScriptController.cpp" />
@@ -23,6 +38,21 @@
       <Filter>Class Wrapers</Filter>
     </ClCompile>
     <ClCompile Include="CC-Vector3.cpp">
+      <Filter>Class Wrapers</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-CgShader.cpp">
+      <Filter>Class Wrapers</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-GameObject.cpp">
+      <Filter>Class Wrapers</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Mesh.cpp">
+      <Filter>Class Wrapers</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Texture.cpp">
+      <Filter>Class Wrapers</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-IShader.cpp">
       <Filter>Class Wrapers</Filter>
     </ClCompile>
   </ItemGroup>

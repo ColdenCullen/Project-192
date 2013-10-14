@@ -1,3 +1,7 @@
+#include <iostream>
+#include <cvv8/ClassCreator.hpp>
+#include <v8/v8-debug.h>
+
 #include "ScriptController.h"
 #include "Input.h"
 #include "Config.h"
@@ -5,12 +9,7 @@
 #include "ClassMapper.h"
 
 // Class Creators
-//#include "CC-Transform.h"
-#include <cvv8\ClassCreator.hpp>
-
-#include <iostream>
-
-#include <cvv8\v8-convert.hpp>
+#include "CC-GameObject.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -54,6 +53,10 @@ void ScriptController::Initialize( void )
 	// Scope for created variables
 	Context::Scope contextScope( context );
 
+#ifdef _DEBUG
+	v8::Debug::EnableAgent( "Graphos", 5858, false );
+#endif
+
 	// Compile
 	auto compiled = v8::Script::Compile(
 		String::New( 
@@ -86,7 +89,7 @@ void ScriptController::Shutdown( void )
 	}
 }
 
-Graphos::Core::Script* ScriptController::CreateObjectInstance( string className, unsigned int ownerID, GameObject* owner /*= nullptr */ )
+Graphos::Core::Script* ScriptController::CreateObjectInstance( string className, GameObject* owner /*= nullptr*/ )
 {
 	if( !isInitialized )
 		Initialize();
@@ -100,12 +103,19 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 	// Return object
 	if( !ctor.IsEmpty() )
 	{
-		// Get object
-		Local<Object> instance = ctor->CallAsConstructor( 0, nullptr )->ToObject();
+		auto gameObject = CastToJS( *owner )->ToObject();
+		gameObject->SetPointerInInternalField( ClassCreator_InternalFields<GameObject>::NativeIndex, owner );
+		auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
 
-		instance->Set( String::New( "Transform" ), CastToJS( owner->transform ) );
+		for( int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
+		{
+			auto name = inst->GetPropertyNames()->Get( ii );
+			if( !gameObject->Has( name->ToString() ) )
+				gameObject->Set( name, inst->Get( name ) );
+		}
+
 		// Return new script
-		return new Graphos::Core::Script( instance, owner );
+ 		return new Graphos::Core::Script( gameObject, owner );
 	}
 	else
 	{

@@ -22,7 +22,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -31,11 +31,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\Solution\GraphosProperties.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Solution\GraphosProperties.props" />
   </ImportGroup>
@@ -46,6 +42,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <ShowIncludes>true</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -67,20 +64,33 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Lib>
+      <AdditionalDependencies>v8_base.lib;v8_snapshot.lib;</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CC-CgShader.cpp" />
+    <ClCompile Include="CC-GameObject.cpp" />
+    <ClCompile Include="CC-IShader.cpp" />
+    <ClCompile Include="CC-Mesh.cpp" />
+    <ClCompile Include="CC-Texture.cpp" />
+    <ClCompile Include="CC-Transform.cpp" />
+    <ClCompile Include="CC-Vector3.cpp" />
+    <ClCompile Include="Script.cpp" />
+    <ClCompile Include="ScriptController.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CC-CgShader.h" />
+    <ClInclude Include="CC-GameObject.h" />
+    <ClInclude Include="CC-IShader.h" />
+    <ClInclude Include="CC-Mesh.h" />
+    <ClInclude Include="CC-Texture.h" />
     <ClInclude Include="CC-Transform.h" />
     <ClInclude Include="CC-Vector3.h" />
     <ClInclude Include="ClassMapper.h" />
     <ClInclude Include="NativeToJSMap_Graphos.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CC-Transform.cpp" />
-    <ClCompile Include="CC-Vector3.cpp" />
-    <ClCompile Include="Script.cpp" />
-    <ClCompile Include="ScriptController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

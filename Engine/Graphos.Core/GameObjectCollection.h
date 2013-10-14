@@ -14,9 +14,6 @@ namespace Graphos
 		class GameObjectCollection
 		{
 		public:
-			// Type for use with object lists
-			typedef std::unordered_map<unsigned int, GameObject> GOMap;
-
 			// Load object from resources folder
 			void				LoadObjects( std::string assetPath );
 
@@ -36,7 +33,8 @@ namespace Graphos
 			void				CallFunction( void (GameObject::*func)( void ) );
 
 		private:
-			GOMap				objectList;
+			std::unordered_map<unsigned int, GameObject*>
+								objectList;
 			std::unordered_map<std::string, unsigned int>
 								nameMap;
 

@@ -1,35 +1,63 @@
-{
-	"Name": "Cube",
+[
+	{
+		"Name": "Cube",
 	
-	"Shader": "light",
+		"Shader": "simple",
 
-	"Texture": {
-		"Name": "Poop"
-	},
-
-	"Mesh": {
-		"Name": "Tugboat_1"
-	},
-
-	"Script": {
-		"Class": "GameObject1"
-	},
-
-	"Transform": {
-		"Position": {
-			"x": 0.0,
-			"y": 0.0,
-			"z": 3.0
+		"Texture": {
+			"Name": "balls"
 		},
-		"Rotation": {
-			"x": 0,
-			"y": 0,
-			"z": 0
+
+		"Mesh": {
+			"Name": "Cube"
 		},
-		"Scale": {
-			"x": 1,
-			"y": 1,
-			"z": 1
+
+		"Script": {
+			"Class": "GameObject1"
+		},
+
+		"Transform": {
+			"Position": {
+				"x": 0.0,
+				"y": 0.0,
+				"z": 3.0
+			},
+			"Rotation": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"Scale": {
+				"x": 0.25,
+				"y": 0.25,
+				"z": 0.25
+			}
 		}
-	}
-}
+	},
+	{ 
+		"Name": "Thang",
+
+		"Shader": "simple",
+
+		"Texture": { 
+			"Name": "Poop"
+		},
+		
+		"Mesh": { 
+			"Name": "Cube"  
+		}, 
+
+		"Transform": {
+			"Position": {
+				"x": -1.0,
+				"y": 0.0,
+				"z": 3.0
+			},
+			"Scale": {
+				"x": 0.25,
+				"y": 0.25,
+				"z": 0.25
+			}
+		}
+	} 
+]

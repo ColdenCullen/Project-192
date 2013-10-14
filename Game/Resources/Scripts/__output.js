@@ -120,37 +120,61 @@ var __extends = this.__extends || function (d, b) {
 var GameObject1 = (function (_super) {
     __extends(GameObject1, _super);
     function GameObject1() {
-        _super.call(this);
-        //this.vec1 = new Vector3();
-        //this.vec1.x = 5.0;
-        //this.vec2 = new Vector3();
-        //this.vec2.y = 5.0;
+        _super.apply(this, arguments);
     }
     GameObject1.prototype.Update = function () {
-        if (Input.IsKeyDown(Keys.Space)) {
-            log(this.Transform.Rotation.x);
-
-            //this.Transform.Translate(new Vector3(1.0, 1.0, 0.0));
-            this.Transform.Rotate(0.1, 0.1, 0.0);
-            //log(this.Transform.Rotation.x);
-        }
-
+        //if (Input.IsKeyDown(Keys.Up))
+        //{
+        //    this.Transform.Translate(0.0, 0.001, 0.0);
+        //}
+        //if (Input.IsKeyDown(Keys.Down))
+        //{
+        //    this.Transform.Translate(0.0, -0.001, 0.0);
+        //}
+        //if (Input.IsKeyDown(Keys.Left))
+        //{
+        //    this.Transform.Translate(-0.001, 0.0, 0.0);
+        //}
+        //if (Input.IsKeyDown(Keys.Right))
+        //{
+        //    this.Transform.Translate(0.001, 0.0, 0.0);
+        //}
+    };
+    return GameObject1;
+})(GameObject);
+/// <reference path="Graphos.ts" />
+var Camera = (function (_super) {
+    __extends(Camera, _super);
+    function Camera() {
+        _super.apply(this, arguments);
+    }
+    Camera.prototype.Update = function () {
         if (Input.IsKeyDown(Keys.W)) {
-            this.Transform.Translate(0.0, 0.001, 0.0);
+            this.Transform.Translate(0.0, 0.0, 0.001);
         }
-
-        if (Input.IsKeyDown(Keys.S)) {
-            this.Transform.Translate(0.0, -0.001, 0.0);
-        }
-
         if (Input.IsKeyDown(Keys.A)) {
             this.Transform.Translate(-0.001, 0.0, 0.0);
         }
-
+        if (Input.IsKeyDown(Keys.S)) {
+            this.Transform.Translate(0.0, 0.0, -0.001);
+        }
         if (Input.IsKeyDown(Keys.D)) {
             this.Transform.Translate(0.001, 0.0, 0.0);
         }
+
+        if (Input.IsKeyDown(Keys.Up)) {
+            this.Transform.Rotate(0.001, 0.0, 0.0);
+        }
+        if (Input.IsKeyDown(Keys.Down)) {
+            this.Transform.Rotate(-0.001, 0.0, 0.0);
+        }
+        if (Input.IsKeyDown(Keys.Left)) {
+            this.Transform.Rotate(0.0, -0.001, 0.0);
+        }
+        if (Input.IsKeyDown(Keys.Right)) {
+            this.Transform.Rotate(0.0, 0.001, 0.0);
+        }
     };
-    return GameObject1;
+    return Camera;
 })(GameObject);
 //# sourceMappingURL=__output.js.map

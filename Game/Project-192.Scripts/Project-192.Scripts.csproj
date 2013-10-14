@@ -63,6 +63,7 @@
     <TypeScriptCompile Include="GameObject1.ts" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Camera.ts" />
     <Content Include="GameObject1.js">
       <DependentUpon>GameObject1.ts</DependentUpon>
     </Content>

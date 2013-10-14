@@ -2,11 +2,14 @@
 #define __CG_SHADER
 
 #include "IShader.h"
-#include <DirectX/DirectXIncludes.h>
 
 #include <string>
 #include <Cg/cg.h>
 
+namespace DirectX
+{
+	struct ID3D11InputLayout;
+}
 
 namespace Graphos
 {

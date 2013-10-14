@@ -7,7 +7,7 @@
 #include "GraphicsController.h"
 #include "AdapterController.h"
 
-
+#include <DirectX/DirectXIncludes.h>
 #include <GL\glincludes.h>
 using namespace OpenGL;
 using namespace DirectX;
