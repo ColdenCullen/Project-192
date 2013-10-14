@@ -47,3 +47,8 @@ void GraphicsController::MessageLoop( void )
 {
 	WindowController::Get().MessageLoop();
 }
+
+void GraphicsController::Shutdown( void )
+{
+	AdapterController::Get()->Shutdown();
+}
