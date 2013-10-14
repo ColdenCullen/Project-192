@@ -34,6 +34,8 @@ bool Game::Update( void )
 			//float rotation = 5.0f * ISingleton<Time>::Get().GetDeltaTime();
 			//cube->transform.Rotate( rotation, rotation, 0.0f );
 
+			camera->Update();
+
 			break;
 		}
 	}
@@ -59,9 +61,9 @@ void Game::Draw( void )
 		}
 	case GameState::Game:
 		{
-			ISingleton<ShaderController>::Get().GetShader( "light" )->SetViewMatrix( Matrix4::Identity );
+			ISingleton<ShaderController>::Get().GetShader( "light" )->SetViewMatrix( camera->GetViewMatrix() );//Matrix4::Identity );
 			ISingleton<ShaderController>::Get().GetShader( "light" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
-			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetViewMatrix( Matrix4::Identity );
+			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetViewMatrix( camera->GetViewMatrix() );
 			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
 
 			//camera->Draw();
