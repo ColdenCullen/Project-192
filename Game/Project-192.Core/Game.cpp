@@ -60,6 +60,8 @@ void Game::Draw( void )
 		}
 	case GameState::Game:
 		{
+			ISingleton<ShaderController>::Get().GetShader( "light" )->SetViewMatrix( Matrix4::Identity );
+			ISingleton<ShaderController>::Get().GetShader( "light" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
 			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetViewMatrix( Matrix4::Identity );
 			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
 

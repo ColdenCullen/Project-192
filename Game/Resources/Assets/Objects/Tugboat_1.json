@@ -1,7 +1,7 @@
 {
 	"Name": "Cube",
 	
-	"Shader": "simple",
+	"Shader": "light",
 
 	"Texture": {
 		"Name": "Poop"
