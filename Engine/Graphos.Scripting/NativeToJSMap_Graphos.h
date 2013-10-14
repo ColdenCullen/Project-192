@@ -19,6 +19,7 @@ namespace cvv8
 			{
 				// If object does not exist in the JSMap, create it
 				toReturn = ClassCreator<T>::Instance().NewInstance( 0, NULL );
+				delete toReturn->GetPointerFromInternalField( ClassCreator_InternalFields<T>::NativeIndex );
 				toReturn->SetPointerInInternalField( ClassCreator_InternalFields<T>::NativeIndex, (void*)&val );
 				AddObject( &val, toReturn );
 			}
@@ -39,12 +40,16 @@ namespace cvv8
 		static
 		v8::Handle<v8::Object> GetObject( T const * ptr )
 		{
+			/*
 			auto obj = Map().find( ptr );
 
 			if( obj == Map().end() )
 				return v8::Handle<v8::Object>();
 			else
 				return obj->second;
+			/*/
+			return v8::Handle<v8::Object>();
+			//*/
 		}
 		static
 		void AddObject( T const * ptr, v8::Handle<v8::Object> obj )
