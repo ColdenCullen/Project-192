@@ -18,6 +18,7 @@ namespace Graphos
 		class IShader
 		{
 		public:
+			virtual void		Shutdown( void ) = 0;
 			virtual void		Draw( const Core::Mesh& mesh ) const = 0;
 			virtual void		BindTexture( const Core::Texture& text) const = 0;
 			

@@ -47,14 +47,13 @@ void Texture::LoadFromFile( string filePath )
 
 		DirectX::ScratchImage scratchImg;
 		LoadFromWICFile( wFilePath.c_str(), DirectX::WIC_FLAGS_NONE, &metaData, scratchImg );
-		
-#define CHANGE_TYPE(type, value) static_cast<type>( static_cast<void*>( value ) )
 
 		const DirectX::Image* img = scratchImg.GetImage( 0, 0, 0 );
 		auto tempDevice = AdapterController::Get()->GetDevice().dxDevice;
 		ID3D11Resource* tex;
-		HRESULT result = CreateTexture( CHANGE_TYPE(ID3D11Device*, tempDevice), img, 1, metaData, &tex );
-		dxTexture = CHANGE_TYPE(DirectX::ID3D11Resource*,tex);
+		HRESULT result = CreateTexture( reinterpret_cast<ID3D11Device*>(tempDevice), img, 1, metaData, &tex );
+		dxTexture = reinterpret_cast<DirectX::ID3D11Resource*>(tex);
+		
 	}
 #endif//_WIN32
 }
@@ -74,7 +73,13 @@ void Texture::Shutdown( void )
 #if defined( _WIN32 )
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
-	//	ReleaseCOMobjMacro( dxTexture );
+	//#define CHANGE_TYPE(type, value) static_cast<type>( static_cast<void*>( value ) )	
+		if(dxTexture)
+		{
+			reinterpret_cast<ID3D11Resource*>(dxTexture)->Release();
+			dxTexture = nullptr;
+		}
+		//ReleaseCOMobjMacro( dxTexture );
 
 	}
 #endif//_WIN32

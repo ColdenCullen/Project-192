@@ -15,11 +15,11 @@ namespace Graphos
 		class CgShader : public IShader
 		{
 		public:
-								CgShader( std::string effectPath );
 								CgShader( std::string vertexPath, std::string fragmentPath );
 
 			static void			InitCg( void );
-			void				Shutdown( void );
+			static void			ShutdownCg( void );
+			void				Shutdown( void ) override;
 
 			void				Draw( const Core::Mesh& mesh ) const override;
 			void				BindTexture( const Core::Texture& text ) const override;
@@ -37,10 +37,6 @@ namespace Graphos
 			static CGprofile	cgFragmentProfile;
 			CGprogram			cgVertexProgram;
 			CGprogram			cgFragmentProgram;
-
-			// For Effects
-			CGeffect			cgEffect;
-			CGtechnique			cgTechnique;
 
 			DirectX::ID3D11InputLayout*  vertexLayout;
 		};

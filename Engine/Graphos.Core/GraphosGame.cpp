@@ -74,6 +74,7 @@ void GraphosGame::Run( void )
 
 			// End drawing
 			AdapterController::Get()->EndDraw();
+			//quit = true;
 		}
 		catch (std::exception e)
 		{
@@ -146,4 +147,6 @@ void GraphosGame::Stop( void )
 	ISingleton<Physics::Physics>::Get().Shutdown();
 	ISingleton<AssetController>::Get().Shutdown();
 	ISingleton<ScriptController>::Get().Shutdown();
+	ISingleton<GraphicsController>::Get().Shutdown();
+	
 }

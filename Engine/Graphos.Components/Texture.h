@@ -4,6 +4,7 @@
 #include "IComponent.h"
 #include <string>
 
+
 namespace DirectX
 {
 	struct ID3D11Resource;

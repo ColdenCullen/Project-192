@@ -117,12 +117,8 @@ void DirectXController::Initialize( void )
 
 void DirectXController::Shutdown( void )
 {
-#if defined(_DEBUG) || defined(DEBUG)
-	ID3D11Debug* debugDev;
-	device.dxDevice->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debugDev));
-	debugDev->ReportLiveDeviceObjects( D3D11_RLDO_DETAIL );
-#endif
-	
+	CgShader::ShutdownCg();
+
 	// Release the DX stuff
 	ReleaseCOMobjMacro( renderTargetView );
 	ReleaseCOMobjMacro( depthStencilView );
@@ -135,7 +131,15 @@ void DirectXController::Shutdown( void )
 
 	// Release the context and finally the device
 	ReleaseCOMobjMacro(deviceContext.dxDeviceContext);
+
+		
+#if defined(_DEBUG) || defined(DEBUG)
+	ID3D11Debug* debugDev;
+	device.dxDevice->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debugDev));
+	debugDev->ReportLiveDeviceObjects( D3D11_RLDO_DETAIL );
+#endif
 	ReleaseCOMobjMacro(device.dxDevice);
+
 }
 
 void DirectXController::Resize( void )
@@ -204,7 +208,7 @@ void DirectXController::Resize( void )
 
 void DirectXController::Reload( void )
 {
-	
+	Resize();
 }
 
 

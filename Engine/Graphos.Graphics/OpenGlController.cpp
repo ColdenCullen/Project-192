@@ -117,12 +117,14 @@ void OpenGlController::EndDraw( void )
 
 void OpenGlController::Shutdown( void )
 {
+	CgShader::ShutdownCg();
 	// Release contexts
 	wglMakeCurrent( NULL, NULL );
 	wglDeleteContext( renderContext );
 	renderContext = NULL;
 	ReleaseDC( WindowController::Get().GetHWnd(), deviceContext.glDeviceContext );
 	deviceContext.glDeviceContext = NULL;
+
 }
 
 void OpenGlController::Resize( void )

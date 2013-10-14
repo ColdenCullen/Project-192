@@ -77,36 +77,6 @@ void CgShader::InitCg( void )
 }
 
 
-
-CgShader::CgShader( string effectPath )
-{
-	cgEffect = cgCreateEffectFromFile( cgContext, effectPath.c_str(), NULL );
-	cgTechnique = cgGetFirstTechnique( cgEffect );
-
-	while( ( cgTechnique && cgValidateTechnique( cgTechnique ) ) == CG_FALSE )
-	{
-		if( !cgTechnique )
-		{
-			ISingleton<OutputController>::Get().PrintMessage(
-				OutputType::OT_ERROR,
-				string( "No valid techniques found." )
-				);
-
-			break;
-		}
-
-		if( cgValidateTechnique( cgTechnique ) == CG_FALSE )
-		{
-			ISingleton<OutputController>::Get().PrintMessage(
-				OutputType::OT_WARNING,
-				string( "Technique " ) + string( cgGetTechniqueName( cgTechnique ) ) + string( " did not validate. Skipping." )
-				);
-
-			cgTechnique = cgGetNextTechnique( cgTechnique );
-		}
-	}
-}
-
 CgShader::CgShader( string vertexPath, string fragmentPath )
 {
 	cgVertexProgram = cgCreateProgramFromFile(
@@ -152,18 +122,37 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 #endif//_WIN32
 }
 
-void CgShader::Shutdown( void )
+void CgShader::ShutdownCg( void )
 {
-	cgDestroyProgram( cgVertexProgram );
-	cgDestroyProgram( cgFragmentProgram );
 #ifdef _WIN32
 	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
-		ReleaseCOMobjMacro( vertexLayout );
 		cgD3D11SetDevice( cgContext, NULL );
 	}
-#endif//_WIN32
+#endif
 	cgDestroyContext( cgContext );
+}
+
+void CgShader::Shutdown( void )
+{
+	
+	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	{
+		cgGLUnloadProgram( cgVertexProgram );
+		cgGLUnloadProgram( cgFragmentProgram);
+	}
+#ifdef _WIN32
+	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	{
+		ReleaseCOMobjMacro( vertexLayout );
+		cgD3D11UnloadProgram( cgVertexProgram );
+		cgD3D11UnloadProgram( cgFragmentProgram );
+	}
+#endif//_WIN32
+	cgDestroyProgram( cgVertexProgram );
+	cgDestroyProgram( cgFragmentProgram );
+	
+	
 }
 
 void CgShader::Draw( const Mesh& mesh ) const
@@ -215,6 +204,9 @@ void CgShader::Draw( const Mesh& mesh ) const
 
 		deviceContext->Draw( mesh.GetNumVertices(), 0 );
 
+		cgD3D11UnbindProgram( cgVertexProgram );
+		cgD3D11UnbindProgram( cgFragmentProgram );
+		
 	}
 #endif//_WIN32
 }
