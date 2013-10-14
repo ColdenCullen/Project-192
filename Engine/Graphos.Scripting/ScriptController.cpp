@@ -9,6 +9,7 @@
 #include <cvv8\ClassCreator.hpp>
 
 #include <iostream>
+#include <v8/v8-debug.h>
 
 using namespace std;
 using namespace Graphos::Core;
@@ -51,6 +52,10 @@ void ScriptController::Initialize( void )
 
 	// Scope for created variables
 	Context::Scope contextScope( context );
+
+#ifdef _DEBUG
+	v8::Debug::EnableAgent( "Graphos", 5858, false );
+#endif
 
 	// Compile
 	auto compiled = v8::Script::Compile(
