@@ -7,8 +7,8 @@ VertexToFragment main( InputData IN, uniform float4x4 modelViewProjection )
 	OUT.position = mul( modelViewProjection, float4( IN.position, 1.0 ) );
 	OUT.uv = IN.uv;
 	OUT.normal = normalize( mul( modelViewProjection, float4( IN.normal, 1.0 ) ) ).xyz;
-	OUT.light.direction = float3( 0.0, 1.0, 1.0 );
-	OUT.light.color = float4( 1.0, 1.0, 1.0, 1.0 );
+	OUT.lights[0].direction = float3( 0.0, 1.0, 1.0 );
+	OUT.lights[0].color = float4( 1.0, 1.0, 1.0, 1.0 );
 	
 	return OUT;	
 }

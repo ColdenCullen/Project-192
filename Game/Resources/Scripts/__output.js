@@ -134,6 +134,22 @@ var GameObject1 = (function (_super) {
             this.Transform.Rotate(0.1, 0.1, 0.0);
             //log(this.Transform.Rotation.x);
         }
+
+        if (Input.IsKeyDown(Keys.W)) {
+            this.Transform.Translate(0.0, 0.001, 0.0);
+        }
+
+        if (Input.IsKeyDown(Keys.S)) {
+            this.Transform.Translate(0.0, -0.001, 0.0);
+        }
+
+        if (Input.IsKeyDown(Keys.A)) {
+            this.Transform.Translate(-0.001, 0.0, 0.0);
+        }
+
+        if (Input.IsKeyDown(Keys.D)) {
+            this.Transform.Translate(0.001, 0.0, 0.0);
+        }
     };
     return GameObject1;
 })(GameObject);

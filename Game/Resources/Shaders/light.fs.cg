@@ -5,9 +5,9 @@ float4 main( VertexToFragment IN,
 {
 	float4 texdiffuse = tex2D(decal, IN.uv);
 
-	float ndotl = max( 0.0, dot( IN.normal, IN.light.direction ) );
+	float ndotl = max( 0.0, dot( IN.normal, IN.lights[0].direction ) );
 
-	float4 diffuse = texdiffuse * IN.light.color;
+	float4 diffuse = texdiffuse * IN.lights[0].color;
 	float4 color = ndotl * diffuse;
 
 	return float4( color.xyz, 1.0 );

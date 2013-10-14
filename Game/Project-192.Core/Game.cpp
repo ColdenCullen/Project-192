@@ -31,9 +31,8 @@ bool Game::Update( void )
 		{
 			objects.CallFunction( &GameObject::Update );
 
-			float rotation = 5.0f * ISingleton<Time>::Get().GetDeltaTime();
-
-			cube->transform.Rotate( rotation, rotation, 0.0f );
+			//float rotation = 5.0f * ISingleton<Time>::Get().GetDeltaTime();
+			//cube->transform.Rotate( rotation, rotation, 0.0f );
 
 			break;
 		}
