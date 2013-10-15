@@ -48,6 +48,7 @@ class GameObject
 declare class Time
 {
     public static DeltaTime: number;
+    public static TotalTime: number;
 }
 
 // Interface that allows GameObjects to check for input

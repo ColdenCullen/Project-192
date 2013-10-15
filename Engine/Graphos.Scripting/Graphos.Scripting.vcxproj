@@ -73,6 +73,7 @@
     <ClCompile Include="CC-IShader.cpp" />
     <ClCompile Include="CC-Mesh.cpp" />
     <ClCompile Include="CC-Texture.cpp" />
+    <ClCompile Include="CC-Time.cpp" />
     <ClCompile Include="CC-Transform.cpp" />
     <ClCompile Include="CC-Vector3.cpp" />
     <ClCompile Include="Script.cpp" />
@@ -84,6 +85,7 @@
     <ClInclude Include="CC-IShader.h" />
     <ClInclude Include="CC-Mesh.h" />
     <ClInclude Include="CC-Texture.h" />
+    <ClInclude Include="CC-Time.h" />
     <ClInclude Include="CC-Transform.h" />
     <ClInclude Include="CC-Vector3.h" />
     <ClInclude Include="ClassMapper.h" />

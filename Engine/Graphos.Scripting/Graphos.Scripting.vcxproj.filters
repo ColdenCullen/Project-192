@@ -30,6 +30,9 @@
     <ClInclude Include="CC-IShader.h">
       <Filter>Class Wrapers</Filter>
     </ClInclude>
+    <ClInclude Include="CC-Time.h">
+      <Filter>Class Wrapers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ScriptController.cpp" />
@@ -53,6 +56,9 @@
       <Filter>Class Wrapers</Filter>
     </ClCompile>
     <ClCompile Include="CC-IShader.cpp">
+      <Filter>Class Wrapers</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Time.cpp">
       <Filter>Class Wrapers</Filter>
     </ClCompile>
   </ItemGroup>
