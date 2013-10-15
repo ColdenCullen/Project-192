@@ -5,9 +5,9 @@ class GameObject1 extends GameObject
 {
     public Update(): void
     {
-        if (Input.IsKeyDown(Keys.Space))
+        if( Input.IsKeyDown( Keys.Space ) )
         {
-            log(Time.DeltaTime);
+            log( Time.DeltaTime );
         }
     }
 }

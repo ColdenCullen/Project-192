@@ -1,9 +1,6 @@
 #ifndef __TIME
 #define __TIME
 
-#include "IController.h"
-#include "ISingleton.h"
-
 #include <chrono>
 
 using namespace std::chrono;

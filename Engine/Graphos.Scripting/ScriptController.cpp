@@ -5,7 +5,6 @@
 #include "ClassMapper.h"
 
 // Class Creators
-#include "CC-GameObject.h"
 #include <cvv8\ClassCreator.hpp>
 
 #include <iostream>

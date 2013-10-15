@@ -42,7 +42,28 @@ class GameObject
     public Transform: Transform;
 
     // Abstract method for updating object
-    public Update(deltaTime: number): void { }
+    public Update(): void { }
+}
+
+class GraphosGame
+{
+    CurrentState: GameState;
+
+    // DO NOT OVERRIDE
+    public Reset(): void { }
+    public Exit(): void { }
+
+    // To be overridden
+    public Initialize(): void { }
+    public Update(): void { }
+    public Draw(): void { }
+    public Shutdown(): void { }
+}
+
+enum GameState
+{
+    Menu = 0,
+    Game = 1
 }
 
 declare class Time

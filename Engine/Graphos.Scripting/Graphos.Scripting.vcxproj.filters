@@ -3,34 +3,13 @@
   <ItemGroup>
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
-    <ClInclude Include="CC-Transform.h">
-      <Filter>Class Wrapers</Filter>
-    </ClInclude>
-    <ClInclude Include="CC-Vector3.h">
-      <Filter>Class Wrapers</Filter>
-    </ClInclude>
     <ClInclude Include="ClassMapper.h">
       <Filter>Class Wrapers</Filter>
     </ClInclude>
     <ClInclude Include="NativeToJSMap_Graphos.h">
       <Filter>Class Wrapers</Filter>
     </ClInclude>
-    <ClInclude Include="CC-CgShader.h">
-      <Filter>Class Wrapers</Filter>
-    </ClInclude>
-    <ClInclude Include="CC-GameObject.h">
-      <Filter>Class Wrapers</Filter>
-    </ClInclude>
-    <ClInclude Include="CC-Mesh.h">
-      <Filter>Class Wrapers</Filter>
-    </ClInclude>
-    <ClInclude Include="CC-Texture.h">
-      <Filter>Class Wrapers</Filter>
-    </ClInclude>
-    <ClInclude Include="CC-IShader.h">
-      <Filter>Class Wrapers</Filter>
-    </ClInclude>
-    <ClInclude Include="CC-Time.h">
+    <ClInclude Include="ClassWrapper.h">
       <Filter>Class Wrapers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,9 +32,6 @@
       <Filter>Class Wrapers</Filter>
     </ClCompile>
     <ClCompile Include="CC-Texture.cpp">
-      <Filter>Class Wrapers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-IShader.cpp">
       <Filter>Class Wrapers</Filter>
     </ClCompile>
     <ClCompile Include="CC-Time.cpp">

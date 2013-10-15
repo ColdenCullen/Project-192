@@ -1,14 +1,37 @@
 #ifndef __CLASS_MAPPER
 #define __CLASS_MAPPER
 
-#include "CC-Transform.h"
-#include "CC-Vector3.h"
-#include "CC-IShader.h"
-#include "CC-CgShader.h"
-#include "CC-GameObject.h"
-#include "CC-Time.h"
+#include "ClassWrapper.h"
 
-#include <v8\v8.h>
+#include "Transform.h"
+#include "CgShader.h"
+#include "GameObject.h"
+#include "Mesh.h"
+#include "TimeController.h"
+#include "Vector3.h"
+
+using namespace Graphos::Core;
+using namespace Graphos::Math;
+using namespace Graphos::Graphics;
+
+WRAP_CLASS(Time, Signature<Time()>)
+WRAP_CLASS(Transform, Signature<Transform(
+	CtorForwarder<Transform*( void )>
+)>)
+WRAP_CLASS(CgShader, Signature<CgShader(
+	CtorForwarder<CgShader*( std::string, std::string )>
+)>)
+WRAP_CLASS(GameObject, Signature<GameObject(
+	CtorForwarder<GameObject*( void )>
+)>)
+WRAP_CLASS(Mesh, Signature<Mesh(
+	CtorForwarder<Mesh*( std::string )>
+)>)
+WRAP_CLASS(Vector3, Signature<Vector3(
+	CtorForwarder<Vector3*()>,
+	CtorForwarder<Vector3*( float, float, float )>,
+	CtorForwarder<Vector3*( const Vector3& )>
+)>)
 
 namespace Graphos
 {

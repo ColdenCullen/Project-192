@@ -1,14 +1,14 @@
 #ifndef __NATIVE_TO_JS_MAP_GRAPHOS
 #define __NATIVE_TO_JS_MAP_GRAPHOS
 
-#include <v8\v8.h>
-#include <cvv8\ClassCreator.hpp>
+#include <v8/v8.h>
+#include <cvv8/ClassCreator.hpp>
 #include <unordered_map>
 
 namespace cvv8
 {
 	template<typename T>
-	struct NativeToJSMap_Graphos : NativeToJSMap<T>
+	struct NativeToJSMap_Graphos : public NativeToJSMap<T>
 	{
 	public:
 		v8::Handle<v8::Value> operator()( T const& val ) const

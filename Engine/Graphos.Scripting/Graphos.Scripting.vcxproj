@@ -70,7 +70,6 @@
   <ItemGroup>
     <ClCompile Include="CC-CgShader.cpp" />
     <ClCompile Include="CC-GameObject.cpp" />
-    <ClCompile Include="CC-IShader.cpp" />
     <ClCompile Include="CC-Mesh.cpp" />
     <ClCompile Include="CC-Texture.cpp" />
     <ClCompile Include="CC-Time.cpp" />
@@ -80,15 +79,8 @@
     <ClCompile Include="ScriptController.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CC-CgShader.h" />
-    <ClInclude Include="CC-GameObject.h" />
-    <ClInclude Include="CC-IShader.h" />
-    <ClInclude Include="CC-Mesh.h" />
-    <ClInclude Include="CC-Texture.h" />
-    <ClInclude Include="CC-Time.h" />
-    <ClInclude Include="CC-Transform.h" />
-    <ClInclude Include="CC-Vector3.h" />
     <ClInclude Include="ClassMapper.h" />
+    <ClInclude Include="ClassWrapper.h" />
     <ClInclude Include="NativeToJSMap_Graphos.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
