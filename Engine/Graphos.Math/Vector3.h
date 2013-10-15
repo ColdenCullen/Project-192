@@ -88,20 +88,6 @@ namespace Graphos
 
 				return *this;
 			}
-			
-			inline Vector3 operator-( float other ) const
-			{
-				return Vector3( x - other, y - other, z - other );
-			}
-
-			Vector3& operator-=( float other )
-			{
-				x -= other;
-				y -= other;
-				z -= other;
-
-				return *this;
-			}
 
 			// Inverse
 			inline Vector3 Inverse( void ) const
