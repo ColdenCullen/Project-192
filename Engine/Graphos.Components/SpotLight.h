@@ -11,8 +11,8 @@ namespace Graphos
 		class SpotLight : public DirectionalLight
 		{
 		public:
-								SpotLight(void);
-								~SpotLight(void);
+								SpotLight( void );
+								~SpotLight( void );
 
 			Math::Vector3		position;
 			float				innerAngle;

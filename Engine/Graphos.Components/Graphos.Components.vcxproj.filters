@@ -6,9 +6,6 @@
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="AssetController.h" />
     <ClInclude Include="AwesomiumView.h" />
-    <ClInclude Include="ILight.h">
-      <Filter>Lights</Filter>
-    </ClInclude>
     <ClInclude Include="DirectionalLight.h">
       <Filter>Lights</Filter>
     </ClInclude>
@@ -16,6 +13,9 @@
       <Filter>Lights</Filter>
     </ClInclude>
     <ClInclude Include="SpotLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="AmbientLight.h">
       <Filter>Lights</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,6 +32,9 @@
       <Filter>Lights</Filter>
     </ClCompile>
     <ClCompile Include="SpotLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="AmbientLight.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,18 +1,18 @@
 #ifndef __POINT_LIGHT
 #define __POINT_LIGHT
 
-#include "ILight.h"
+#include "AmbientLight.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
 
-		class PointLight : public ILight
+		class PointLight : public AmbientLight
 		{
 		public:
-								PointLight(void);
-								~PointLight(void);
+								PointLight( void );
+								~PointLight( void );
 
 			Math::Vector3		position;
 			float				fallOffRadius;

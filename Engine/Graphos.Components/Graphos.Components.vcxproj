@@ -69,10 +69,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AmbientLight.h" />
     <ClInclude Include="AssetController.h" />
     <ClInclude Include="AwesomiumView.h" />
     <ClInclude Include="DirectionalLight.h" />
-    <ClInclude Include="ILight.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="SpotLight.h" />
@@ -80,6 +80,7 @@
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AmbientLight.cpp" />
     <ClCompile Include="AssetController.cpp" />
     <ClCompile Include="AwesomiumView.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
