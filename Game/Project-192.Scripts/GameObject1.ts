@@ -7,7 +7,7 @@ class GameObject1 extends GameObject
     {
         if( Input.IsKeyDown( Keys.Space ) )
         {
-            log( Time.DeltaTime );
+            this.Transform.Forward.Add( this.Transform.Position );
         }
     }
 }

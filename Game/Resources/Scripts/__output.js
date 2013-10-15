@@ -151,7 +151,7 @@ var GameObject1 = (function (_super) {
     }
     GameObject1.prototype.Update = function () {
         if (Input.IsKeyDown(Keys.Space)) {
-            log(Time.DeltaTime);
+            this.Transform.Forward.Add(this.Transform.Position);
         }
     };
     return GameObject1;

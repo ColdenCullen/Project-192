@@ -14,24 +14,14 @@ using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 
-WRAP_CLASS(Time, Signature<Time()>)
-WRAP_CLASS(Transform, Signature<Transform(
-	CtorForwarder<Transform*( void )>
-)>)
-WRAP_CLASS(CgShader, Signature<CgShader(
-	CtorForwarder<CgShader*( std::string, std::string )>
-)>)
-WRAP_CLASS(GameObject, Signature<GameObject(
-	CtorForwarder<GameObject*( void )>
-)>)
-WRAP_CLASS(Mesh, Signature<Mesh(
-	CtorForwarder<Mesh*( std::string )>
-)>)
-WRAP_CLASS(Vector3, Signature<Vector3(
-	CtorForwarder<Vector3*()>,
-	CtorForwarder<Vector3*( float, float, float )>,
-	CtorForwarder<Vector3*( const Vector3& )>
-)>)
+WRAP_CLASS(Time,())
+WRAP_CLASS(Transform,(CtorForwarder<Transform*( void )>))
+WRAP_CLASS(CgShader,(CtorForwarder<CgShader*( std::string, std::string )>))
+WRAP_CLASS(GameObject,(CtorForwarder<GameObject*( void )>))
+WRAP_CLASS(Mesh,(CtorForwarder<Mesh*( std::string )>))
+WRAP_CLASS(Vector3,(CtorForwarder<Vector3*()>,
+					CtorForwarder<Vector3*( float, float, float )>,
+					CtorForwarder<Vector3*( const Vector3& )>))
 
 namespace Graphos
 {

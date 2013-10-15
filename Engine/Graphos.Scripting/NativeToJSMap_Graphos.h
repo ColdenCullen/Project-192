@@ -13,15 +13,16 @@ namespace cvv8
 	public:
 		v8::Handle<v8::Value> operator()( T const& val ) const
 		{
-			v8::Handle<v8::Object> toReturn = GetObject( &val );
+			v8::Handle<v8::Value> const & toReturn( GetObject( &val ) );
 
 			if( toReturn.IsEmpty() )
 			{
 				// If object does not exist in the JSMap, create it
-				toReturn = ClassCreator<T>::Instance().NewInstance( 0, NULL );
-				delete toReturn->GetPointerFromInternalField( ClassCreator_InternalFields<T>::NativeIndex );
-				toReturn->SetPointerInInternalField( ClassCreator_InternalFields<T>::NativeIndex, (void*)&val );
-				AddObject( &val, toReturn );
+				v8::Handle<v8::Object> newToReturn = ClassCreator<T>::Instance().NewInstance( 0, NULL );
+				delete newToReturn->GetPointerFromInternalField( ClassCreator_InternalFields<T>::NativeIndex );
+				newToReturn->SetPointerInInternalField( ClassCreator_InternalFields<T>::NativeIndex, (void*)&val );
+				AddObject( &val, newToReturn );
+				return newToReturn;
 			}
 
 			return toReturn;
