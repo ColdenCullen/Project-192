@@ -44,12 +44,12 @@ void ShaderController::Initialize( void )
 			string fileName = ent->d_name;
 
 			// Check shader type
-			if( fileName.substr( ent->d_namlen - 6 ) == ".fs.gl" &&
+			if( fileName.substr( ent->d_namlen - 8 ) == ".fs.glsl" &&
 				ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
 			{
-				string name = fileName.substr( 0, ent->d_namlen - 6 );
+				string name = fileName.substr( 0, ent->d_namlen - 8 );
 
-				shaders[ name ] = &( new GlShader() )->Initialize( absPath + name + ".vs.gl", absPath + name + ".fs.gl" );
+				shaders[ name ] = &( new GlShader() )->Initialize( absPath + name + ".vs.glsl", absPath + name + ".fs.glsl" );
 			}
 			else if( fileName.substr( ent->d_namlen - 6 ) == ".fs.cg" )
 			{
