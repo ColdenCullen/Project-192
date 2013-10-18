@@ -4,6 +4,7 @@ float4 main( VertexToFragment IN,
 			 uniform sampler2D decal : TEX0 ) : COLOR
 {
 	float4 texdiffuse = tex2D(decal, IN.uv);
+	IN.normal = normalize( IN.normal );
 
 	float ndotl = max( 0.0, dot( IN.normal, IN.lights[0].direction ) );
 

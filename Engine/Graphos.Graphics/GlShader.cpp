@@ -21,30 +21,6 @@ GlShader& GlShader::Initialize( string vertexPath, string fragmentPath )
 	return *this;
 }
 
-void GlShader::SetUniform( string name, int value ) const
-{
-	auto currentUniform = uniforms.find( name );
-
-	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
-		glUniform1i( currentUniform->second, value );
-}
-
-void GlShader::SetUniform( string name, float value ) const
-{
-	auto currentUniform = uniforms.find( name );
-
-	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
-		glUniform1f( currentUniform->second, value );
-}
-
-void GlShader::SetUniform( string name, const Matrix4& value ) const
-{
-	auto currentUniform = uniforms.find( name );
-
-	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
-		glUniformMatrix4fv( currentUniform->second, 1, false, value.dataArray );
-}
-
 void GlShader::ScanForVars( string vertexBody )
 {
 	// Init uniform values
@@ -125,7 +101,7 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 
 void GlShader::Draw( const Mesh& mesh ) const 
 {
-	SetUniform( "modelViewProjection", modelViewProjection );
+	SetUniform( "modelViewProjection", modelViewProjection.dataArray, 16, ShaderType::VERTEX );
 
 	glUseProgram( programID );
 

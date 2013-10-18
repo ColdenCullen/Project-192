@@ -37,7 +37,7 @@
 	{ 
 		"Name": "Thang",
 
-		"Shader": "simple",
+		"Shader": "light",
 
 		"Texture": { 
 			"Name": "Poop"

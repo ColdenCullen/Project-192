@@ -195,7 +195,9 @@ void GameObject::Draw( void )
 {
 	//shader->Use();
 	shader->SetModelMatrix( transform.WorldMatrix() );
-	shader->SetUniform( "shaderTexture", 0 );
+	// TODO...what did/does this do?...
+	// this SetUniform was removed...needs refactoring?
+//	shader->SetUniform( "shaderTexture", 0 );
 
 	for( auto ingredient = begin( componentList ); ingredient != end( componentList ); ++ingredient )
 		ingredient->second->Draw( shader );
