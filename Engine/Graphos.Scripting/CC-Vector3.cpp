@@ -26,6 +26,8 @@ namespace cvv8
 			( "Dot", ConstMethodToInCa<const Vector3, float (const Vector3&), &Vector3::Dot>::Call )
 			( "Cross", ConstMethodToInCa<const Vector3, Vector3 (const Vector3&), &Vector3::Cross>::Call )
 			( "Add", ConstMethodToInCa<const Vector3, Vector3 (const Vector3&), &Vector3::Add>::Call )
+			( "Multiply", ConstMethodToInCa<const Vector3, Vector3 (const float), &Vector3::operator*>::Call )
+			( "Negate", ConstMethodToInCa<const Vector3, Vector3 (void), &Vector3::operator- >::Call )
 			;
 
 		// Proxy accessor/mutator functions as JS properties

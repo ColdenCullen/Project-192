@@ -54,7 +54,7 @@ namespace cvv8
 		static
 		void AddObject( T const * ptr, v8::Handle<v8::Object> obj )
 		{
-			Map()[ ptr ] = obj;
+			//Map()[ ptr ] = obj;
 		}
 	};
 }
