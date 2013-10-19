@@ -16,5 +16,5 @@ struct VertexToFragment
 	float4 position	: POSITION;
 	float2 uv;
 	float3 normal;
-	DirectionLight lights[ 3 ];
+	DirectionLight light;
 };

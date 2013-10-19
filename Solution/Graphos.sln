@@ -42,11 +42,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{E1E674
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{13C4CBF4-109C-4A8B-8A7F-139E88805C21}"
 	ProjectSection(SolutionItems) = preProject
-		..\Game\Resources\Shaders\cgeffect.cgfx-asdf = ..\Game\Resources\Shaders\cgeffect.cgfx-asdf
 		..\Game\Resources\Shaders\light.fs.cg = ..\Game\Resources\Shaders\light.fs.cg
 		..\Game\Resources\Shaders\light.vs.cg = ..\Game\Resources\Shaders\light.vs.cg
 		..\Game\Resources\Shaders\simple.fs.cg = ..\Game\Resources\Shaders\simple.fs.cg
 		..\Game\Resources\Shaders\simple.vs.cg = ..\Game\Resources\Shaders\simple.vs.cg
+		..\Game\Resources\Shaders\structs.cg = ..\Game\Resources\Shaders\structs.cg
 		..\Game\Resources\Shaders\texture.fs.gl = ..\Game\Resources\Shaders\texture.fs.gl
 		..\Game\Resources\Shaders\texture.vs.gl = ..\Game\Resources\Shaders\texture.vs.gl
 	EndProjectSection
