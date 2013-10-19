@@ -12,13 +12,14 @@ using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 using namespace OpenGL;
 
-GlShader& GlShader::Initialize( string vertexPath, string fragmentPath )
+GlShader::GlShader( std::string vertexPath, std::string fragmentPath )
+	: vertexShaderID( 0 ), fragmentShaderID( 0 ), programID( 0 )
 {
+
 	string vertexBody = File::ReadFile( vertexPath );
 	string fragmentBody = File::ReadFile( fragmentPath );
 	Compile( vertexBody, fragmentBody );
 	ScanForVars( vertexBody );
-	return *this;
 }
 
 void GlShader::ScanForVars( string vertexBody )
@@ -101,7 +102,7 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 
 void GlShader::Draw( const Mesh& mesh ) const 
 {
-	SetUniform( "modelViewProjection", modelViewProjection.dataArray, 16, ShaderType::VERTEX );
+	SetUniformArray( "modelViewProjection", modelViewProjection.dataArray, 16, ShaderType::VERTEX );
 
 	glUseProgram( programID );
 

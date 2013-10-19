@@ -159,8 +159,8 @@ void CgShader::Draw( const Mesh& mesh ) const
 {
 	CGparameter cgFragmentParam_decal = cgGetNamedParameter( cgFragmentProgram, "decal" );
 
-	SetUniform( "modelViewProjection", modelViewProjection.dataArray, 16, ShaderType::VERTEX );
-	SetUniform( "modelMatrix", modelMatrix.dataArray, 16, ShaderType::VERTEX );
+	SetUniformArray( "modelViewProjection", modelViewProjection.dataArray, 16, ShaderType::VERTEX );
+	SetUniformArray( "modelMatrix", modelMatrix.dataArray, 16, ShaderType::VERTEX );
 
 	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
@@ -207,7 +207,6 @@ void CgShader::Draw( const Mesh& mesh ) const
 
 		cgD3D11UnbindProgram( cgVertexProgram );
 		cgD3D11UnbindProgram( cgFragmentProgram );
-		
 	}
 #endif//_WIN32
 }
@@ -226,7 +225,37 @@ void CgShader::BindTexture( const Texture& text ) const
 #endif//_WIN32
 }
 
-void CgShader::SetUniform( string name, const float* value, const int size, ShaderType type ) const
+void CgShader::SetUniform( std::string name, const float value, ShaderType type ) const
+{
+	switch( type )
+	{
+	case ShaderType::VERTEX:
+		cgSetParameter1f( cgGetNamedParameter( cgVertexProgram, name.c_str() ), value );
+		break;
+	case ShaderType::FRAGMENT:
+		cgSetParameter1f( cgGetNamedParameter( cgFragmentProgram, name.c_str() ), value );
+		break;
+	default:
+		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
+	}
+}
+
+void CgShader::SetUniform( std::string name, const int value, ShaderType type ) const
+{
+	switch( type )
+	{
+	case ShaderType::VERTEX:
+		cgSetParameter1i( cgGetNamedParameter( cgVertexProgram, name.c_str() ), value );
+		break;
+	case ShaderType::FRAGMENT:
+		cgSetParameter1i( cgGetNamedParameter( cgFragmentProgram, name.c_str() ), value );
+		break;
+	default:
+		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
+	}
+}
+
+void CgShader::SetUniformArray( string name, const float* value, const int size, ShaderType type ) const
 {
 	switch( type )
 	{
@@ -241,7 +270,7 @@ void CgShader::SetUniform( string name, const float* value, const int size, Shad
 	}
 }
 
-void CgShader::SetUniform( string name, const int* value, const int size, ShaderType type ) const
+void CgShader::SetUniformArray( string name, const int* value, const int size, ShaderType type ) const
 {
 	switch( type )
 	{
@@ -255,7 +284,6 @@ void CgShader::SetUniform( string name, const int* value, const int size, Shader
 		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
 	}
 }
-
 
 CGcontext CgShader::cgContext;
 CGprofile CgShader::cgVertexProfile;

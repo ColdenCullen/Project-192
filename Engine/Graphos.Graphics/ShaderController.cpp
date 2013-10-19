@@ -49,7 +49,7 @@ void ShaderController::Initialize( void )
 			{
 				string name = fileName.substr( 0, ent->d_namlen - 8 );
 
-				shaders[ name ] = &( new GlShader() )->Initialize( absPath + name + ".vs.glsl", absPath + name + ".fs.glsl" );
+				shaders[ name ] = new GlShader( absPath + name + ".vs.glsl", absPath + name + ".fs.glsl" );
 			}
 			else if( fileName.substr( ent->d_namlen - 6 ) == ".fs.cg" )
 			{
