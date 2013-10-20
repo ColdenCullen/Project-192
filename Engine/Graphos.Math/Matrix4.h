@@ -26,18 +26,22 @@ namespace Graphos
 			}
 
 			Matrix4				operator*( const Matrix4& other ) const;
+			Matrix4				Mul( const Matrix4& other ) const;
 
 			Matrix4				operator+( const Matrix4& other ) const;
+			Matrix4				Add( const Matrix4& other ) const;
 
 			Matrix4&			operator*=( const Matrix4& other );
 
 			Matrix4&			operator+=( const Matrix4& other );
 
 			bool				operator==( const Matrix4& other ) const;
+			bool				Equals( const Matrix4& other ) const;
 
 			Matrix4				Inverse( void ) const;
 
 			Vector3				operator*( const Vector3& vec ) const;
+			Vector3				Mul( const Vector3& vec ) const;
 
 			static Matrix4		BuildPerspective( const float fov, const float screenAspect, const float near, const float depth );
 			static Matrix4		BuildOrthogonal( const float width, const float height, const float near, const float far );
