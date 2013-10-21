@@ -1,14 +1,15 @@
-#include "ScriptController.h"
-#include "Input.h"
-#include "Config.h"
-#include "File.h"
-#include "ClassMapper.h"
-
 // Class Creators
 #include <cvv8\ClassCreator.hpp>
 
 #include <iostream>
 #include <v8/v8-debug.h>
+
+#include "OutputController.h"
+#include "ScriptController.h"
+#include "Input.h"
+#include "Config.h"
+#include "File.h"
+#include "ClassMapper.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -102,8 +103,8 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 	// Return object
 	if( !ctor.IsEmpty() )
 	{
-		auto gameObject = CastToJS( *owner )->ToObject();
-		gameObject->SetPointerInInternalField( ClassCreator_InternalFields<GameObject>::NativeIndex, owner );
+		// Create basic gameobject as well as instance of new class
+		auto gameObject = CastToJS( owner )->ToObject();
 		auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
 
 		for( int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
@@ -113,11 +114,25 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 				gameObject->Set( name, inst->Get( name ) );
 		}
 
+		string props = "";
+		for( int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
+			props += string( *String::AsciiValue( inst->GetPropertyNames()->Get( ii ) ) ) + ", ";
+
+		ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_INFO, "Found the following properties on inst:\n" + props );
+
+		props = "";
+		for( int ii = 0; ii < gameObject->GetPropertyNames()->Length(); ++ii )
+			props += string( *String::AsciiValue( gameObject->GetPropertyNames()->Get( ii ) ) ) + ", ";
+
+		ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_INFO, "Found the following properties on newobj:\n" + props );
+
+		//auto trans = CastFromJS<Transform>( gameObject->Get( v8::String::NewSymbol( "Transform" ) ) );
+
 		// Return new script
  		return new Graphos::Core::Script( gameObject, owner );
 	}
 	else
 	{
-		throw exception( "Invalid Class Name." );
+		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR, "Invalid Class Name." );
 	}
 }
