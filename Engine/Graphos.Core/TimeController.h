@@ -1,9 +1,6 @@
 #ifndef __TIME
 #define __TIME
 
-#include "IController.h"
-#include "ISingleton.h"
-
 #include <chrono>
 
 using namespace std::chrono;
@@ -12,32 +9,31 @@ namespace Graphos
 {
 	namespace Core
 	{
-		class Time : public IController
+		class Time
 		{
 		public:
-			void				Update( void );
-			const float			GetDeltaTime( void ) const { return static_cast<float>( deltaTime.count() ) / std::nano::den; }
-			const float			TotalTime( void ) const { return static_cast<float>( totalTime.count() ) / std::nano::den; }
+			static void			Initialize( void );
+			static void			Update( void );
+			static const float	GetDeltaTime( void ) { return static_cast<float>( deltaTime.count() ) / std::nano::den; }
+			static const float	GetTotalTime( void ) { return static_cast<float>( totalTime.count() ) / std::nano::den; }
 
 		private:
-			std::chrono::high_resolution_clock::time_point
+			static std::chrono::high_resolution_clock::time_point
 								cur;
-			std::chrono::high_resolution_clock::time_point
+			static std::chrono::high_resolution_clock::time_point
 								prev;
-			std::chrono::nanoseconds
+			static std::chrono::nanoseconds
 								deltaTime;
-			std::chrono::nanoseconds
+			static std::chrono::nanoseconds
 								totalTime;
-			unsigned int		frameCount;
+			static unsigned int	frameCount;
 
-			std::chrono::nanoseconds
+			static std::chrono::nanoseconds
 								secondTime;
 
 								Time( void );
 								Time( const Time& );
 			void				operator=( const Time& );
-
-			friend class		ISingleton<Time>;
 		};
 	}
 }

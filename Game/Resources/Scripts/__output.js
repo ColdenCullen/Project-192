@@ -3,10 +3,37 @@ var GameObject = (function () {
     function GameObject() {
     }
     // Abstract method for updating object
-    GameObject.prototype.Update = function (deltaTime) {
+    GameObject.prototype.Update = function () {
     };
     return GameObject;
 })();
+
+var GraphosGame = (function () {
+    function GraphosGame() {
+    }
+    // DO NOT OVERRIDE
+    GraphosGame.prototype.Reset = function () {
+    };
+    GraphosGame.prototype.Exit = function () {
+    };
+
+    // To be overridden
+    GraphosGame.prototype.Initialize = function () {
+    };
+    GraphosGame.prototype.Update = function () {
+    };
+    GraphosGame.prototype.Draw = function () {
+    };
+    GraphosGame.prototype.Shutdown = function () {
+    };
+    return GraphosGame;
+})();
+
+var GameState;
+(function (GameState) {
+    GameState[GameState["Menu"] = 0] = "Menu";
+    GameState[GameState["Game"] = 1] = "Game";
+})(GameState || (GameState = {}));
 
 var Keys;
 (function (Keys) {
@@ -120,19 +147,12 @@ var __extends = this.__extends || function (d, b) {
 var GameObject1 = (function (_super) {
     __extends(GameObject1, _super);
     function GameObject1() {
-        _super.call(this);
-        //this.vec1 = new Vector3();
-        //this.vec1.x = 5.0;
-        //this.vec2 = new Vector3();
-        //this.vec2.y = 5.0;
+        _super.apply(this, arguments);
     }
     GameObject1.prototype.Update = function () {
         if (Input.IsKeyDown(Keys.Space)) {
-            log(this.Transform.Rotation.x);
-
-            //this.Transform.Translate(new Vector3(1.0, 1.0, 0.0));
-            this.Transform.Rotate(0.1, 0.1, 0.0);
-            //log(this.Transform.Rotation.x);
+            //log( this.Transform.Forward.x );
+            this.Transform.Translate(this.Transform.Forward);
         }
     };
     return GameObject1;

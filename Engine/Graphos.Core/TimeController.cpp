@@ -25,5 +25,19 @@ void Time::Update( void )
 		frameCount = 0;
 	}
 }
+void Graphos::Core::Time::Initialize( void )
+{
+	cur = high_resolution_clock::now();
+	prev = high_resolution_clock::now();
+	totalTime = nanoseconds::zero();
+	frameCount = 0;
+	secondTime = nanoseconds::zero();
+}
 
-Time::Time( void ) : cur( high_resolution_clock::now() ), prev( high_resolution_clock::now() ), totalTime( 0 ), frameCount( 0 ), secondTime( 0 ) { }
+// Statics
+unsigned int Time::frameCount;
+nanoseconds Time::secondTime;
+nanoseconds Time::totalTime;
+nanoseconds Time::deltaTime;
+high_resolution_clock::time_point Time::prev;
+high_resolution_clock::time_point Time::cur;
