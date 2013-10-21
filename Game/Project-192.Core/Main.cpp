@@ -7,6 +7,13 @@ using namespace std;
 
 int main()
 {
+	auto scope = new Graphos::Memory::Scope();
+
+	auto test = gnew<Project192::Game>();
+	( *test).Run();
+
+	delete scope;
+	
 	/*
 
 	Graphos::Core::File test( "Herpaderp/derpderp.txt" );
@@ -17,8 +24,8 @@ int main()
 
 	/*/
 
-	Project192::Game game;
-	game.Run();
+	//Project192::Game game;
+	//game.Run();
 
 	//*/
 }

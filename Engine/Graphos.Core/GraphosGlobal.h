@@ -2,6 +2,8 @@
 #define __GRAPHOS_GLOBAL
 // Code that can be accessed from anywhere
 
+#include "GraphosMemory.h"
+
 /// <summary>
 /// Titanic_casts the specified pointer.
 /// </summary>
