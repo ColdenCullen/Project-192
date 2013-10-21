@@ -86,7 +86,7 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 		cgVertexProfile,
 		"main",
 		NULL );
-
+	
 	cgFragmentProgram = cgCreateProgramFromFile(
 		cgContext,
 		CG_SOURCE,
@@ -94,7 +94,7 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 		cgFragmentProfile,
 		"main",
 		NULL );
-
+	
 	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		cgGLLoadProgram( cgVertexProgram );
@@ -103,6 +103,7 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 #ifdef _WIN32
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
+		
 		cgD3D11LoadProgram( cgVertexProgram, NULL );
 		cgD3D11LoadProgram( cgFragmentProgram, NULL );
 
@@ -195,8 +196,10 @@ void CgShader::Draw( const Mesh& mesh ) const
     
 		deviceContext->IASetVertexBuffers( 0, 1, buffers, strides, offsets );
 		deviceContext->IASetInputLayout( vertexLayout );    
-		deviceContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );   
+		deviceContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST ); 
 
+		ID3DBlob* shader = cgD3D11GetCompiledProgram( cgVertexProgram );
+		
 		cgD3D11BindProgram( cgVertexProgram );
 		cgD3D11BindProgram( cgFragmentProgram );
 
@@ -206,6 +209,7 @@ void CgShader::Draw( const Mesh& mesh ) const
 
 		cgD3D11UnbindProgram( cgVertexProgram );
 		cgD3D11UnbindProgram( cgFragmentProgram );
+		
 		
 	}
 #endif//_WIN32
@@ -220,7 +224,9 @@ void CgShader::BindTexture( const Texture& text ) const
 #ifdef _WIN32
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
-		cgD3D11SetTextureParameter( cgGetNamedParameter( cgFragmentProgram, "decal" ), text.GetDxTextureId() );
+		ID3D11ShaderResourceView* srv = text.GetDxTextureId();
+		AdapterController::Get()->GetDeviceContext().dxDeviceContext->PSGetShaderResources( 0, 1, &srv );
+		//cgD3D11SetTextureParameter( cgGetNamedParameter( cgFragmentProgram, "decal" ), text.GetDxTextureId() ); // Fuck Cg dont' use this memory leaking piece of shit function. Fuck.
 	}
 #endif//_WIN32
 }

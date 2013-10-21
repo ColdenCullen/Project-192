@@ -35,8 +35,10 @@ void GraphosGame::Run( void )
 	// Init time
 	ISingleton<Time>::Get().Update();
 
+	
 	// Loop until there is a quit message from the window or the user.
 	while( !quit )
+	//for(int i = 0; i < 5; i++ )
 	{
 		try
 		{

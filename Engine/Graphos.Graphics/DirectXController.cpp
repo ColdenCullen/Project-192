@@ -125,13 +125,15 @@ void DirectXController::Shutdown( void )
 	ReleaseCOMobjMacro( swapChain );
 	ReleaseCOMobjMacro( depthStencilBuffer );
 
+
+	
 	// Restore default device settings
 	if( deviceContext.dxDeviceContext )
 		deviceContext.dxDeviceContext->ClearState();
 
 	// Release the context and finally the device
 	ReleaseCOMobjMacro(deviceContext.dxDeviceContext);
-
+	
 		
 #if defined(_DEBUG) || defined(DEBUG)
 	ID3D11Debug* debugDev;

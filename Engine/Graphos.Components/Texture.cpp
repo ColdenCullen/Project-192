@@ -52,8 +52,10 @@ void Texture::LoadFromFile( string filePath )
 		auto tempDevice = AdapterController::Get()->GetDevice().dxDevice;
 		ID3D11Resource* tex;
 		HRESULT result = CreateTexture( reinterpret_cast<ID3D11Device*>(tempDevice), img, 1, metaData, &tex );
-		dxTexture = reinterpret_cast<DirectX::ID3D11Resource*>(tex);
-		
+		ID3D11ShaderResourceView* srv;
+		reinterpret_cast<ID3D11Device*>(tempDevice)->CreateShaderResourceView(tex, NULL, &srv);
+		dxTexture = reinterpret_cast<DirectX::ID3D11ShaderResourceView*>(srv);
+
 	}
 #endif//_WIN32
 }
