@@ -17,6 +17,7 @@ namespace Graphos
 			void				Update( void );
 			void				Draw( void );
 			void				Shutdown( void );
+			Math::Matrix4		GetViewMatrix( void ) { return viewMatrix; }
 
 		private:
 			Math::Matrix4		viewMatrix;
