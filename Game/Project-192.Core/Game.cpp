@@ -31,9 +31,10 @@ bool Game::Update( void )
 		{
 			objects.CallFunction( &GameObject::Update );
 
-			float rotation = 5.0f * Time::GetDeltaTime();
+			//float rotation = 5.0f * ISingleton<Time>::Get().GetDeltaTime();
+			//cube->transform.Rotate( rotation, rotation, 0.0f );
 
-			cube->transform.Rotate( rotation, rotation, 0.0f );
+			camera->Update();
 
 			break;
 		}
@@ -41,6 +42,9 @@ bool Game::Update( void )
 
 	if( ISingleton<Input>::Get().IsKeyDown( VK_ESCAPE ) )
 		Exit();
+
+	if( ISingleton<Input>::Get().IsKeyDown( VK_F5 ) )
+		Reset();
 
 	return true;
 }
@@ -57,7 +61,9 @@ void Game::Draw( void )
 		}
 	case GameState::Game:
 		{
-			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetViewMatrix( Matrix4::Identity );
+			ISingleton<ShaderController>::Get().GetShader( "light" )->SetViewMatrix( camera->GetViewMatrix() );//Matrix4::Identity );
+			ISingleton<ShaderController>::Get().GetShader( "light" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
+			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetViewMatrix( camera->GetViewMatrix() );
 			ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
 
 			//camera->Draw();

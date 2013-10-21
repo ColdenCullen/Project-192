@@ -4,8 +4,6 @@
 #include "UserInterface.h"
 #include "Camera.h"
 
-//#include <unordered_map>
-
 namespace Graphos
 {
 	namespace Core
@@ -20,7 +18,9 @@ namespace Graphos
 			void				Run( void );
 			void				Reset( void );
 			void				Exit( void );
-	
+
+			static Camera*		camera;
+
 		protected:
 			virtual void		Initialize( void ) = 0;
 			virtual bool		Update( void ) = 0;
@@ -30,7 +30,6 @@ namespace Graphos
 			//std::unordered_map<std::string, GameObjectCollection> GOCList;
 
 			UserInterface*		ui;
-			Camera*				camera;
 	
 		private:
 			bool				quit;

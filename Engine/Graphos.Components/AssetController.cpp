@@ -34,16 +34,16 @@ void AssetController::Initialize( void )
 
 void AssetController::Shutdown( void )
 {
-	/*
+	
 	for( auto ingredient = begin( ingredientShelf ); ingredient != end( ingredientShelf ); ++ingredient )
 	{
-		if( static_cast<AwesomiumView*>( ingredient->second ) || static_cast<Script*>( ingredient->second ) )
+		//if( static_cast<AwesomiumView*>( ingredient->second ) || static_cast<Script*>( ingredient->second ) )
 		{
 			ingredient->second->Shutdown();
 			delete ingredient->second;
 		}
 	}
-	*/
+	
 
 	ingredientShelf.clear();
 }

@@ -1,7 +1,6 @@
 #ifndef _VECTOR3_H_
 #define _VECTOR3_H_
 
-#include <iostream>
 #include <math.h>
 
 namespace Graphos
@@ -86,20 +85,6 @@ namespace Graphos
 				x -= other.x;
 				y -= other.y;
 				z -= other.z;
-
-				return *this;
-			}
-			
-			inline Vector3 operator-( float other ) const
-			{
-				return Vector3( x - other, y - other, z - other );
-			}
-
-			Vector3& operator-=( float other )
-			{
-				x -= other;
-				y -= other;
-				z -= other;
 
 				return *this;
 			}
@@ -192,21 +177,17 @@ namespace Graphos
 				return Vector3( x / mag, y / mag, z / mag );
 			}
 
-			// Get perpendicular
-			/*inline Vector3 GetPerpendicular( const Vector3& pointTowards ) const
+			union
 			{
-				return TripleProduct( *this, *this, pointTowards );
-			}*/
-
-			// Output values
-			friend std::ostream& operator<<( std::ostream& os, const Vector3& vec )
-			{
-				os << "x: " << vec.x << " y: " << vec.y << " z: " << vec.z;
-
-				return os;
-			}
-
-			float x, y, z;
+				struct 
+				{
+					float x, y, z;
+				};
+				struct 
+				{
+					float r, g, b;
+				};
+			};
 		};
 	}
 }

@@ -1,13 +1,11 @@
+#include <sstream>
+#include <vector>
+#include <GL/GLIncludes.h>
+#include "GameObject.h"
 #include "Mesh.h"
 #include "Vector2.h"
 #include "Vector3.h"
 #include "File.h"
-
-#include <GL/GLIncludes.h>
-
-#include <sstream>
-#include <vector>
-#include "GameObject.h"
 
 #define POSITION_ATTRIBUTE 0
 #define UV_ATTRIBUTE 1
@@ -83,11 +81,11 @@ void Mesh::LoadFromFile( string filePath )
 		}
 	}
 
-	numElements = outputData.size() / 8;
+	numVertices = outputData.size() / 8;
 
-	unsigned int* indices = new unsigned int[ numElements ];
+	unsigned int* indices = new unsigned int[ numVertices ];
 
-	for( unsigned int ii = 0; ii < numElements; ++ii )
+	for( unsigned int ii = 0; ii < numVertices; ++ii )
 		indices[ ii ] = ii;
 
 	// make and bind the VAO
@@ -116,7 +114,7 @@ void Mesh::LoadFromFile( string filePath )
 	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
 
 	// Buffer index data
-	glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * numElements, &indices[ 0 ], GL_STATIC_DRAW );
+	glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * numVertices, &indices[ 0 ], GL_STATIC_DRAW );
 
 	// unbind the VBO and VAO
 	glBindBuffer( GL_ARRAY_BUFFER, NULL );

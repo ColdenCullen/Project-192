@@ -117,6 +117,8 @@ void DirectXController::Initialize( void )
 
 void DirectXController::Shutdown( void )
 {
+	CgShader::ShutdownCg();
+
 	// Release the DX stuff
 	ReleaseCOMobjMacro( renderTargetView );
 	ReleaseCOMobjMacro( depthStencilView );
@@ -129,15 +131,18 @@ void DirectXController::Shutdown( void )
 
 	// Release the context and finally the device
 	ReleaseCOMobjMacro(deviceContext.dxDeviceContext);
+
+		
+#if defined(_DEBUG) || defined(DEBUG)
+	ID3D11Debug* debugDev;
+	device.dxDevice->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debugDev));
+	debugDev->ReportLiveDeviceObjects( D3D11_RLDO_DETAIL );
+#endif
 	ReleaseCOMobjMacro(device.dxDevice);
+
 }
 
 void DirectXController::Resize( void )
-{
-
-}
-
-void DirectXController::Reload( void )
 {
 	// release old views
 	ReleaseCOMobjMacro(renderTargetView);
@@ -201,13 +206,21 @@ void DirectXController::Reload( void )
 	deviceContext.dxDeviceContext->RSSetViewports(1, &viewport);
 }
 
+void DirectXController::Reload( void )
+{
+	Resize();
+}
+
 
 void DirectXController::BeginDraw( void )
 {
-
+	float ClearColor[4] = { 100.0f/255.0f, 149.0f/255.0f, 237.0f/255.0f, 1.0f }; // RGBA
+	// Clear the back buffer        
+	deviceContext.dxDeviceContext->ClearRenderTargetView( renderTargetView, ClearColor );
+	deviceContext.dxDeviceContext->ClearDepthStencilView( depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0, 0 );
 }
 
 void DirectXController::EndDraw( void )
 {
-
+	swapChain->Present( 0, 0 );
 }

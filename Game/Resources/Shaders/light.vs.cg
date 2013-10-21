@@ -1,0 +1,16 @@
+#include "structs.cg"
+
+VertexToFragment main( InputData IN, 
+						uniform float4x4 modelViewProjection, 
+						uniform float4x4 modelMatrix )
+{	
+	VertexToFragment OUT;
+	
+	OUT.position = mul( modelViewProjection, float4( IN.position, 1.0 ) );
+	OUT.uv = IN.uv;
+	OUT.normal = normalize( mul( modelMatrix, float4( IN.normal, 1.0 ) ) ).xyz;
+	OUT.light.direction = normalize( float3( 0.0, 1.0, 1.0 ) );
+	OUT.light.color = float4( 1.0, 0.0, 1.0, 1.0 );
+	
+	return OUT;	
+}

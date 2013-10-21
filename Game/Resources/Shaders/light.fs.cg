@@ -1,0 +1,14 @@
+#include "structs.cg"
+
+float4 main( VertexToFragment IN,
+			 uniform sampler2D decal : TEX0 ) : COLOR
+{
+	float4 texdiffuse = tex2D(decal, IN.uv);
+
+	float ndotl = max( 0.0, dot( normalize(IN.normal), normalize(IN.light.direction) ) );
+
+	float4 diffuse = texdiffuse * IN.light.color;
+	float4 color = ndotl * diffuse;
+
+	return float4( color.xyz, 1.0 );
+}

@@ -14,11 +14,8 @@ namespace Graphos
 		{
 		public:
 			void				Initialize( void ) override;
-			//TODO: Should probably implement this
-			void				Shutdown( void ) override { }
-			// Resizes display with given values
+			void				Shutdown( void ) override;
 			void				Resize( void );
-			// Reloads display based on config settings
 			void				Reload( void );
 
 			GraphicsAdapter		GetActiveAdapter( void ) const { return activeAdapter; }

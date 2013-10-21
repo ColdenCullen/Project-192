@@ -1,0 +1,20 @@
+struct InputData
+{
+	in varying float3 position	: ATTR0;
+	in varying float2 uv		: ATTR1;
+	in varying float3 normal	: ATTR2;
+};
+
+struct DirectionLight
+{
+	float3 direction;
+	float4 color;
+};
+
+struct VertexToFragment
+{
+	float4 position	: POSITION;
+	float2 uv;
+	float3 normal;
+	DirectionLight light;
+};

@@ -79,7 +79,7 @@ void Win32Controller::Resize( void )
 	}
 
 	if( !fullScreen && ( width <= 0 || height <= 0 ) )
-		throw exception( "Display settings invalid" );
+		throw std::exception( "Display settings invalid" );
 
 	SetWindowLong( hWnd, GWL_STYLE, style );
 	SetWindowPos( hWnd, NULL, ( screenWidth - width ) / 2, ( screenHeight - height ) / 2, width + ( 2 * GetSystemMetrics( SM_CYBORDER ) ), height + GetSystemMetrics( SM_CYCAPTION ) + GetSystemMetrics( SM_CYBORDER ), SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED );
@@ -98,7 +98,7 @@ void Win32Controller::OpenWindow( void )
 		( screenWidth - this->width ) / 2, ( screenHeight - this->height ) / 2, this->width, this->height,
 		NULL, NULL, hInstance, NULL );
 	if( !hWnd )
-		throw exception( "Error opening window." );
+		throw std::exception( "Error opening window." );
 
 	ShowWindow( hWnd, SW_NORMAL );
 }

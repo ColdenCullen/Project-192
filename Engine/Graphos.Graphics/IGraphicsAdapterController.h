@@ -2,7 +2,14 @@
 #define __IGRAPHICS_ADAPTER_CONTROLLER
 
 #include "IController.h"
-#include <DirectX/DirectXIncludes.h>
+//#include <DirectX/DirectXIncludes.h>
+
+namespace DirectX
+{
+	struct ID3D11DeviceContext;
+	struct ID3D11Device;
+}
+
 #include <GL/glincludes.h>
 
 

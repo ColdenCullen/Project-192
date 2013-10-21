@@ -1,9 +1,14 @@
 #ifndef __TEXTURE
 #define __TEXTURE
 
-#include <string>
-#include <DirectX/DirectXIncludes.h>
 #include "IComponent.h"
+#include <string>
+
+
+namespace DirectX
+{
+	struct ID3D11Resource;
+}
 
 namespace Graphos
 {
@@ -21,6 +26,7 @@ namespace Graphos
 			void				Shutdown( void ) override;
 
 			unsigned int		GetGlTextureId( void ) const { return glTextureId; }
+			DirectX::ID3D11Resource*	GetDxTextureId( void ) const { return dxTexture; }
 
 		private:
 			// OpenGL Texture ID

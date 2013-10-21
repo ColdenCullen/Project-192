@@ -12,6 +12,7 @@
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace Graphos::Math;
 using namespace Awesomium;
 
 bool AwesomiumView::Initialize( string url, unsigned int width, unsigned int height )

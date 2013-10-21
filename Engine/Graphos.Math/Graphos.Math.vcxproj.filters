@@ -11,5 +11,6 @@
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="Vector4.h" />
   </ItemGroup>
 </Project>

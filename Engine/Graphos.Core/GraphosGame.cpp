@@ -74,7 +74,7 @@ void GraphosGame::Run( void )
 			// End drawing
 			AdapterController::Get()->EndDraw();
 		}
-		catch (exception e)
+		catch (std::exception e)
 		{
 			ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_ERROR, e.what() );
 			break;
@@ -146,3 +146,5 @@ void GraphosGame::Stop( void )
 	ISingleton<AssetController>::Get().Shutdown();
 	ISingleton<ScriptController>::Get().Shutdown();
 }
+
+Camera* Graphos::Core::GraphosGame::camera;

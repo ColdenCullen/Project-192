@@ -9,6 +9,7 @@
 #include "SphereCollider.h"
 #include "BoxCollider.h"
 #include "Texture.h"
+#include "GraphosGame.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -37,7 +38,9 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 
 	if( ( current = object.get( "Camera", object ) ) != object )
 	{
-		obj->AddComponent( new Camera( obj ) );
+		auto cam = new Camera( obj );
+		obj->AddComponent( cam );
+		GraphosGame::camera = cam;
 	}
 
 	// Set physics Rigid Body object
@@ -192,7 +195,9 @@ void GameObject::Draw( void )
 {
 	//shader->Use();
 	shader->SetModelMatrix( transform.WorldMatrix() );
-	shader->SetUniform( "shaderTexture", 0 );
+	// TODO...what did/does this do?...
+	// this SetUniform was removed...needs refactoring?
+//	shader->SetUniform( "shaderTexture", 0 );
 
 	for( auto ingredient = begin( componentList ); ingredient != end( componentList ); ++ingredient )
 		ingredient->second->Draw( shader );

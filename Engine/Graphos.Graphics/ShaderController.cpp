@@ -44,12 +44,12 @@ void ShaderController::Initialize( void )
 			string fileName = ent->d_name;
 
 			// Check shader type
-			if( fileName.substr( ent->d_namlen - 6 ) == ".fs.gl" &&
+			if( fileName.substr( ent->d_namlen - 8 ) == ".fs.glsl" &&
 				ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
 			{
-				string name = fileName.substr( 0, ent->d_namlen - 6 );
+				string name = fileName.substr( 0, ent->d_namlen - 8 );
 
-				shaders[ name ] = &( new GlShader() )->Initialize( absPath + name + ".vs.gl", absPath + name + ".fs.gl" );
+				shaders[ name ] = new GlShader( absPath + name + ".vs.glsl", absPath + name + ".fs.glsl" );
 			}
 			else if( fileName.substr( ent->d_namlen - 6 ) == ".fs.cg" )
 			{
@@ -57,12 +57,7 @@ void ShaderController::Initialize( void )
 				
 				shaders[ name ] = new CgShader( absPath + name + ".vs.cg", absPath + name + ".fs.cg" );
 			}
-			else if( fileName.substr( ent->d_namlen - 5 ) == ".cgfx" )
-			{
-				string name = fileName.substr( 0, ent->d_namlen - 5 );
-
-				shaders[ name ] = new CgShader( absPath + fileName );
-			}
+			
 		}
 
 		// Close dir
@@ -83,6 +78,7 @@ void ShaderController::Shutdown( void )
 {
 	for( auto shader : shaders )
 	{
+		shader.second->Shutdown();
 		delete shader.second;
 	}
 	shaders.clear();

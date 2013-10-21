@@ -1,18 +1,22 @@
 {
 	"Name": "Camera",
 
-	"Shader": "texture",
+	"Shader": "light",
 
 	"Camera": true,
+
+	"Script": {
+		"Class": "Camera"
+	}, 
 
 	"Transform": {
 		"Position": {
 			"x": 0.0,
-			"y": -2.0,
-			"z": -5.0
+			"y": 0.0,
+			"z": 0.0
 		},
 		"Rotation": {
-			"x": 0.325,
+			"x": 0.0,
 			"y": 0.0,
 			"z": 0.0
 		},
