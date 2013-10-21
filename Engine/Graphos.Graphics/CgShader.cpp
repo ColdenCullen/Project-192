@@ -158,9 +158,15 @@ void CgShader::Shutdown( void )
 void CgShader::Draw( const Mesh& mesh ) const
 {
 	CGparameter cgFragmentParam_decal = cgGetNamedParameter( cgFragmentProgram, "decal" );
+	
 
 	SetUniformArray( "modelViewProjection", modelViewProjection.dataArray, 16, ShaderType::VERTEX );
 	SetUniformArray( "modelMatrix", modelMatrix.dataArray, 16, ShaderType::VERTEX );
+/*	float lDir[3] = { -10.0, -10.0, 10.0 };
+	SetUniformArray( "lightDir", lDir, 3, ShaderType::FRAGMENT );
+	float lColor[4] = { 1.0, 1.0, 1.0, 1.0 };
+	SetUniformArray( "lightColor", lColor, 4, ShaderType::FRAGMENT ); */
+	
 
 	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
