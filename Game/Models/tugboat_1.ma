@@ -1,6 +1,6 @@
 //Maya ASCII 2014 scene
-//Name: Tugboat.ma
-//Last modified: Wed, Oct 09, 2013 05:10:42 PM
+//Name: tugboat_1.ma
+//Last modified: Tue, Oct 22, 2013 12:52:01 PM
 //Codeset: 1252
 requires maya "2014";
 requires -nodeType "mentalrayFramebuffer" -nodeType "mentalrayOutputPass" -nodeType "mentalrayRenderPass"
@@ -90,15 +90,15 @@ fileInfo "osv" "Microsoft Windows 8 Enterprise Edition, 64-bit  (Build 9200)\n";
 fileInfo "license" "education";
 createNode transform -s -n "persp";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 4.0065523707523392 3.7146280390629904 2.0963176968373052 ;
-	setAttr ".r" -type "double3" 323.99999999999562 63.199999999939926 0 ;
+	setAttr ".t" -type "double3" 1.6379333528642173 0.9169312131212578 -0.73806396552100995 ;
+	setAttr ".r" -type "double3" 337.80000000000007 117.19999999997343 0 ;
 	setAttr ".rp" -type "double3" 0 0 1.4210854715202004e-014 ;
 	setAttr ".rpt" -type "double3" 3.8468129061388999e-015 -5.9488758636313254e-016 
 		-5.0406292574224141e-016 ;
 createNode camera -s -n "perspShape" -p "persp";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999979;
-	setAttr ".coi" 5.5483417424095203;
+	setAttr ".coi" 2.008257886298507;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -106,7 +106,7 @@ createNode camera -s -n "perspShape" -p "persp";
 	setAttr ".hc" -type "string" "viewSet -p %camera";
 createNode transform -s -n "top";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 0.41560374680516432 100.1 -13.303176786669491 ;
+	setAttr ".t" -type "double3" 0.41560374680516432 100.1 -13.303176786669493 ;
 	setAttr ".r" -type "double3" -89.999999999999986 0 0 ;
 createNode camera -s -n "topShape" -p "top";
 	setAttr -k off ".v" no;
@@ -120,7 +120,7 @@ createNode camera -s -n "topShape" -p "top";
 	setAttr ".o" yes;
 createNode transform -s -n "front";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 29.582797303213038 0.58584529153962017 100.1 ;
+	setAttr ".t" -type "double3" 29.582797303213042 0.58584529153962017 100.1 ;
 createNode camera -s -n "frontShape" -p "front";
 	setAttr -k off ".v" no;
 	setAttr ".rnd" no;
@@ -139,7 +139,7 @@ createNode camera -s -n "sideShape" -p "side";
 	setAttr -k off ".v" no;
 	setAttr ".rnd" no;
 	setAttr ".coi" 100.1;
-	setAttr ".ow" 14.292097806309663;
+	setAttr ".ow" 14.292097806309664;
 	setAttr ".imn" -type "string" "side";
 	setAttr ".den" -type "string" "side_depth";
 	setAttr ".man" -type "string" "side_mask";
@@ -2010,9 +2010,9 @@ createNode mesh -n "pCylinderShape2" -p "pCylinder2";
 	setAttr ".cvd" -type "dataPolyComponent" Index_Data Vertex 0 ;
 	setAttr ".hfd" -type "dataPolyComponent" Index_Data Face 0 ;
 createNode transform -n "polySurface2";
-	setAttr ".t" -type "double3" -5.9604644775390625e-008 -1.639742883895444 22.945023535712618 ;
-	setAttr ".rp" -type "double3" 5.9604644775390625e-008 7.4557750225067139 -1.3234575986862183 ;
-	setAttr ".sp" -type "double3" 5.9604644775390625e-008 7.4557750225067139 -1.3234575986862183 ;
+	setAttr ".t" -type "double3" -5.9604644775390625e-008 -1.639742883895444 22.945023535712615 ;
+	setAttr ".rp" -type "double3" 5.9604644775390625e-008 7.4557750225067139 -1.3234575986862185 ;
+	setAttr ".sp" -type "double3" 5.9604644775390625e-008 7.4557750225067139 -1.3234575986862185 ;
 createNode mesh -n "polySurfaceShape2" -p "polySurface2";
 	setAttr -k off ".v";
 	setAttr -s 2 ".iog[0].og";
@@ -5100,13 +5100,13 @@ createNode script -n "sceneConfigurationScriptNode";
 createNode polyExtrudeEdge -n "polyExtrudeEdge1";
 	setAttr ".uopa" yes;
 	setAttr ".ics" -type "componentList" 1 "e[200:219]";
-	setAttr ".ix" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 -0.52113420164987545 -0.98971925783601833 -0.92049892260191024 1;
+	setAttr ".ix" -type "matrix" 1 0 0 0 0 1 0 0 0 0 1 0 -0.52113420164987545 -0.98971925783601844 -0.92049892260191024 1;
 	setAttr ".ws" yes;
 	setAttr ".pvt" -type "float3" -0.52113414 7.8693714 -2.1473372 ;
 	setAttr ".rs" 53626;
 	setAttr ".c[0]"  0 1 1;
-	setAttr ".cbn" -type "double3" -1.6923109928409765 7.8693715472176926 -3.2441285402929503 ;
-	setAttr ".cbx" -type "double3" 0.65004270875051517 7.8693715472176926 -1.0505457670843321 ;
+	setAttr ".cbn" -type "double3" -1.6923109928409763 7.8693715472176926 -3.2441285402929503 ;
+	setAttr ".cbx" -type "double3" 0.65004270875051517 7.8693715472176926 -1.0505457670843319 ;
 createNode groupId -n "groupId2";
 	setAttr ".ihi" 0;
 createNode groupParts -n "groupParts1";
@@ -5171,6 +5171,24 @@ createNode polyAutoProj -n "polyAutoProj1";
 	setAttr ".s" -type "double3" 0.88717317261133533 0.88717317261133533 0.88717317261133533 ;
 	setAttr ".ps" 0.20000000298023224;
 	setAttr ".dl" yes;
+createNode polySoftEdge -n "polySoftEdge1";
+	setAttr ".uopa" yes;
+	setAttr ".ics" -type "componentList" 1 "e[*]";
+	setAttr ".ix" -type "matrix" 0.068572444925156059 0 0 0 0 0.068572444925156059 0 0
+		 0 0 0.068572444925156059 0 0 0 0 1;
+	setAttr ".a" 180;
+createNode polySoftEdge -n "polySoftEdge2";
+	setAttr ".uopa" yes;
+	setAttr ".ics" -type "componentList" 15 "e[41]" "e[44]" "e[48]" "e[51]" "e[54]" "e[58]" "e[60]" "e[62]" "e[65]" "e[67]" "e[70:115]" "e[304:305]" "e[308:309]" "e[913:930]" "e[1014:1015]";
+	setAttr ".ix" -type "matrix" 0.068572444925156059 0 0 0 0 0.068572444925156059 0 0
+		 0 0 0.068572444925156059 0 0 0 0 1;
+	setAttr ".a" 0;
+createNode polySoftEdge -n "polySoftEdge3";
+	setAttr ".uopa" yes;
+	setAttr ".ics" -type "componentList" 6 "e[171:183]" "e[185:186]" "e[189:195]" "e[199:216]" "e[951:953]" "e[955]";
+	setAttr ".ix" -type "matrix" 0.068572444925156059 0 0 0 0 0.068572444925156059 0 0
+		 0 0 0.068572444925156059 0 0 0 0 1;
+	setAttr ".a" 0;
 select -ne :time1;
 	setAttr ".o" 1;
 	setAttr ".unw" 1;
@@ -5202,7 +5220,7 @@ select -ne :defaultHardwareRenderGlobals;
 	setAttr ".res" -type "string" "ntsc_4d 646 485 1.333";
 connectAttr "groupId4.id" "polySurfaceShape1.iog.og[0].gid";
 connectAttr ":initialShadingGroup.mwc" "polySurfaceShape1.iog.og[0].gco";
-connectAttr "polyAutoProj1.out" "polySurfaceShape1.i";
+connectAttr "polySoftEdge3.out" "polySurfaceShape1.i";
 connectAttr "groupParts1.og" "polySurfaceShape2.i";
 connectAttr "groupId2.id" "polySurfaceShape2.iog.og[0].gid";
 connectAttr ":initialShadingGroup.mwc" "polySurfaceShape2.iog.og[0].gco";
@@ -5260,6 +5278,12 @@ connectAttr "polySurfaceShape5.o" "groupParts2.ig";
 connectAttr "groupId4.id" "groupParts2.gi";
 connectAttr "polyTriangulate1.out" "polyAutoProj1.ip";
 connectAttr "polySurfaceShape1.wm" "polyAutoProj1.mp";
+connectAttr "polyAutoProj1.out" "polySoftEdge1.ip";
+connectAttr "polySurfaceShape1.wm" "polySoftEdge1.mp";
+connectAttr "polySoftEdge1.out" "polySoftEdge2.ip";
+connectAttr "polySurfaceShape1.wm" "polySoftEdge2.mp";
+connectAttr "polySoftEdge2.out" "polySoftEdge3.ip";
+connectAttr "polySurfaceShape1.wm" "polySoftEdge3.mp";
 connectAttr "pCylinderShape2.iog" ":initialShadingGroup.dsm" -na;
 connectAttr "polySurfaceShape2.iog.og[0]" ":initialShadingGroup.dsm" -na;
 connectAttr "pSphereShape1.iog" ":initialShadingGroup.dsm" -na;
@@ -5273,4 +5297,4 @@ connectAttr "groupId3.msg" ":initialShadingGroup.gn" -na;
 connectAttr "groupId4.msg" ":initialShadingGroup.gn" -na;
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
 connectAttr ":perspShape.msg" ":defaultRenderGlobals.sc";
-// End of Tugboat.ma
+// End of tugboat_1.ma
