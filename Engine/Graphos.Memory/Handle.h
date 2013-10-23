@@ -1,46 +1,56 @@
 #ifndef __HANDLE
 #define __HANDLE
 
-#include "Scope.h"
-
 namespace Graphos
 {
 	namespace Memory
 	{
-		template<typename T>
-		struct Handle
+		class Scope;
+
+		struct IHandle
 		{
 		public:
+			virtual void Delete( void ) = 0;
+		};
+
+		template<typename T>
+		struct Handle : public IHandle
+		{
+		private:
+			typedef T* THandle;
+			typedef T& TRef;
+
+		public:
 			// Creates new handle with pointer to memory
-			Handle( void* ptr, Scope* owner )
-				: ptr( static_cast<void*>( ptr ) ), owner( owner ) { }
+			Handle( THandle ptr, Scope* owner, unsigned int id )
+				: ptr( ptr ), owner( owner ), id( id ) { }
 
-			// Public-facing delete method, removes handle from scope
-			void Delete( void )
+			void Delete( void ) override
 			{
+				// Delete pointer
 				delete_s( ptr );
-			}
-			// Deletes memory and removes handle
-			~Handle( void )
-			{
-				Delete();
+
+				// Remove this from the current scope
+				owner->RemoveHandle( this );
 			}
 
-			T& operator->( void )
+			THandle operator->( void )
 			{
-				return *ptr;
+				return ptr;
 			}
 
-			T& operator*( void )
+			TRef operator*( void )
 			{
 				return *ptr;
 			}
 
 		private:
 			// Pointer to memory
-			T* ptr;
+			THandle ptr;
 			// Scope that owns this handle
 			Scope* owner;
+			// ID of handle
+			unsigned int id;
 
 			friend class Scope;
 		};

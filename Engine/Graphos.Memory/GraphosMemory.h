@@ -7,12 +7,7 @@
 template<typename T>
 Graphos::Memory::Handle<T> gnew( void )
 {
-	using namespace Graphos::Memory;
-
-	auto top = Scope::GetTopScope();
-	auto hndl = new Handle<T>( new T, top );
-	top->AddHandle( hndl );
-	return *hndl;
+	return Graphos::Memory::Scope::GetTopScope()->AddHandle( new T );
 }
 
 #endif//__GRAPHOS_MEMORY

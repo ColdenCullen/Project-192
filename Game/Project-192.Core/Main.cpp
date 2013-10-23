@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "File.h"
+#include "GraphosMemory.h"
+#include "Scope.h"
 
 #include <iostream>
 
@@ -10,9 +12,11 @@ int main()
 	auto scope = new Graphos::Memory::Scope();
 
 	auto test = gnew<Project192::Game>();
-	( *test).Run();
+	test->Run();
 
-	delete scope;
+	delete_s( test );
+
+	//delete scope;
 	
 	/*
 

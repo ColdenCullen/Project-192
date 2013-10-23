@@ -30,4 +30,11 @@ void delete_s( T*& ptr )
 	}
 }
 
+
+template<typename T>
+void delete_s( Graphos::Memory::Handle<T> handle )
+{
+	handle.Delete();
+}
+
 #endif//__GRAPHOS_GLOBAL
