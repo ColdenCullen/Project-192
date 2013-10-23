@@ -14,7 +14,7 @@ Scope::~Scope( void )
 
 	for( auto handle : handles )
 	{
-		handle.second->Delete();
+		handle.second->Clear();
 	}
 
 	handles.clear();

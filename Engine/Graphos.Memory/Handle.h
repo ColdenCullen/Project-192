@@ -9,8 +9,10 @@ namespace Graphos
 
 		struct IHandle
 		{
-		public:
-			virtual void Delete( void ) = 0;
+		protected:
+			virtual void Clear( void ) = 0;
+
+			friend class Scope;
 		};
 
 		template<typename T>
@@ -25,10 +27,9 @@ namespace Graphos
 			Handle( THandle ptr, Scope* owner, unsigned int id )
 				: ptr( ptr ), owner( owner ), id( id ) { }
 
-			void Delete( void ) override
+			void Delete( void )
 			{
-				// Delete pointer
-				delete_s( ptr );
+				Clear();
 
 				// Remove this from the current scope
 				owner->RemoveHandle( this );
@@ -51,6 +52,11 @@ namespace Graphos
 			Scope* owner;
 			// ID of handle
 			unsigned int id;
+
+			void Clear( void ) override
+			{
+				delete_s( ptr );
+			}
 
 			friend class Scope;
 		};
