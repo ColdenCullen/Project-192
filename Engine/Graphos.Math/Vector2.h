@@ -1,8 +1,7 @@
 #ifndef _VECTOR2_H_
 #define _VECTOR2_H_
 
-#include <iostream>
-using namespace std;
+//#include <iostream>
 
 namespace Graphos
 {
@@ -96,14 +95,14 @@ namespace Graphos
 
 				return Vector2( x / mag, y / mag );
 			}
-
+			/*
 			friend std::ostream& operator<<( std::ostream& os, const Vector2& vec )
 			{
 				os << "x: " << vec.x << " y: " << vec.y;
 
 				return os;
 			}
-
+			*/
 			float x, y;
 		};
 	}

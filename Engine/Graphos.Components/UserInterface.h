@@ -3,11 +3,11 @@
 
 #include "Transform.h"
 #include "AwesomiumView.h"
-#include "Vector2.h"
+//#include "Vector2.h"
 
 #include <Awesomium/JSObject.h>
 
-#define DEPTH 1.0f
+
 
 namespace Graphos
 {

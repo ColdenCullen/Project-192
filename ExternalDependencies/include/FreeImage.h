@@ -26,6 +26,7 @@
 #ifndef FREEIMAGE_H
 #define FREEIMAGE_H
 
+
 // Version information ------------------------------------------------------
 
 #define FREEIMAGE_MAJOR_VERSION   3

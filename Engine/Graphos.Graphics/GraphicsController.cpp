@@ -35,15 +35,20 @@ void GraphicsController::Reload( void )
 
 void GraphicsController::UpdateGraphicsAdapter( void )
 {
-	if( ISingleton<Config>::Get().GetData<string>( "graphics.Adapter" ) == "OpenGL" )
+	if( ISingleton<Config>::Get().GetData<std::string>( "graphics.Adapter" ) == "OpenGL" )
 		activeAdapter = GraphicsAdapter::OpenGL;
-	else if( ISingleton<Config>::Get().GetData<string>( "graphics.Adapter" ) == "DirectX" )
+	else if( ISingleton<Config>::Get().GetData<std::string>( "graphics.Adapter" ) == "DirectX" )
 		activeAdapter = GraphicsAdapter::DirectX;
 	else
-		throw exception( "Invalid Graphics.Adapter specified." );
+		throw std::exception( "Invalid Graphics.Adapter specified." );
 }
 
 void GraphicsController::MessageLoop( void )
 {
 	WindowController::Get().MessageLoop();
+}
+
+void GraphicsController::Shutdown( void )
+{
+	AdapterController::Get()->Shutdown();
 }
