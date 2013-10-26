@@ -26,6 +26,7 @@ namespace Graphos
 
 			Vector3( const float values[ 3 ] ) : x( values[ 0 ] ), y( values[ 1 ] ), z( values[ 2 ] ) { }
 			Vector3( float x = 0.0f, float y = 0.0f, float z = 0.0f ) : x( x ), y( y ), z( z ) { }
+			Vector3( float value ) : x( value ), y( value ), z( value ) { }
 			Vector3( const Vector3& other ) : x( other.x ), y( other.y ), z( other.z ) { }
 
 			float operator[]( const int index ) const

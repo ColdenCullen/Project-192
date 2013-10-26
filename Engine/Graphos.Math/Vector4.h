@@ -19,6 +19,7 @@ namespace Graphos
 			
 			Vector4( const float values[ 4 ] ) : x( values[ 0 ] ), y( values[ 1 ] ), z( values[ 2 ] ), w( values[ 3 ] ) { }
 			Vector4( float x = 0.0f, float y = 0.0f, float z = 0.0f, float w = 0.0f ) : x( x ), y( y ), z( z ), w( w ) { }
+			Vector4( float value ) : x( value ), y( value ), z( value ), w( value ) { }
 			Vector4( const Vector4& other ) : x( other.x ), y( other.y ), z( other.z ), w( other.w ) { }
 
 			float operator[]( const int index ) const

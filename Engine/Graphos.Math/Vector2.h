@@ -11,6 +11,7 @@ namespace Graphos
 			Vector2( const float values[ 2 ] ) : x( values[ 0 ] ), y( values[ 1 ] ) { }
 			Vector2( float x = 0.0f, float y = 0.0f ) : x( x ), y( y ) { }
 			Vector2( const Vector2& other ) : x( other.x ), y( other.y ) { }
+			Vector2( float value ) : x( value ), y( value ) { }
 
 			float operator[]( const int index ) const
 			{
