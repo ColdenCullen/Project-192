@@ -11,8 +11,15 @@ namespace Graphos
 		class DirectionalLight : public AmbientLight
 		{
 		public:
-								DirectionalLight( void );
-								~DirectionalLight( void );
+								DirectionalLight( Math::Vector3 initDir = Math::Vector3(),
+												  Math::Vector4 initColor = Math::Vector4(),
+												  GameObject* owner = nullptr)
+												  : AmbientLight( initColor, owner), 
+													direction( initDir) { }
+								~DirectionalLight( void ) { }
+
+			virtual void				Update( void ) override;
+			virtual void				Draw( Graphics::IShader* shader ) override;
 
 			Math::Vector3		direction;
 			

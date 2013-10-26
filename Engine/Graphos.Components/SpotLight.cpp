@@ -1,12 +1,14 @@
 #include "SpotLight.h"
 
 using namespace Graphos::Core;
+using namespace Graphos::Graphics;
 
-SpotLight::SpotLight(void)
+void SpotLight::Draw( IShader* shader )
 {
+
 }
 
-
-SpotLight::~SpotLight(void)
+void SpotLight::Update( void )
 {
+
 }

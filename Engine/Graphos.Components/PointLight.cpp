@@ -1,13 +1,14 @@
 #include "PointLight.h"
 
 using namespace Graphos::Core;
+using namespace Graphos::Graphics;
 
-
-PointLight::PointLight(void)
+void PointLight::Draw( IShader* shader )
 {
+
 }
 
-
-PointLight::~PointLight(void)
+void PointLight::Update( void )
 {
+
 }

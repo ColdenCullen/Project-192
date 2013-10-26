@@ -12,8 +12,13 @@ namespace Graphos
 		class AmbientLight : public IComponent
 		{
 		public:
-								AmbientLight( void );
-								~AmbientLight( void );
+								AmbientLight( Math::Vector4 initColor = Math::Vector4(), 
+											  GameObject* owner = nullptr )
+									: IComponent( owner ), color( initColor ) { }
+								~AmbientLight( void ) { }
+
+			virtual void		Update( void ) override;
+			virtual void		Draw( Graphics::IShader* shader ) override;
 
 			Math::Vector4		color;
 		};

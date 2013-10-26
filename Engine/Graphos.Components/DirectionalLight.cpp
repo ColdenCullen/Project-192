@@ -1,12 +1,14 @@
 #include "DirectionalLight.h"
 
 using namespace Graphos::Core;
+using namespace Graphos::Graphics;
 
-DirectionalLight::DirectionalLight(void)
+void DirectionalLight::Update( void )
 {
+
 }
 
-
-DirectionalLight::~DirectionalLight(void)
+void DirectionalLight::Draw( IShader* shader )
 {
+
 }

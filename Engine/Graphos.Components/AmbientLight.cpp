@@ -1,12 +1,14 @@
 #include "AmbientLight.h"
 
 using namespace Graphos::Core;
+using namespace Graphos::Graphics;
 
-AmbientLight::AmbientLight( void )
+void AmbientLight::Update( void )
 {
+
 }
 
-
-AmbientLight::~AmbientLight( void )
+void AmbientLight::Draw( IShader* shader )
 {
+
 }
