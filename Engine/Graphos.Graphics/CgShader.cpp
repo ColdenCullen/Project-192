@@ -197,8 +197,6 @@ void CgShader::Draw( const Mesh& mesh ) const
 		deviceContext->IASetVertexBuffers( 0, 1, buffers, strides, offsets );
 		deviceContext->IASetInputLayout( vertexLayout );    
 		deviceContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST ); 
-
-		ID3DBlob* shader = cgD3D11GetCompiledProgram( cgVertexProgram );
 		
 		cgD3D11BindProgram( cgVertexProgram );
 		cgD3D11BindProgram( cgFragmentProgram );

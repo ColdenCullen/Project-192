@@ -125,8 +125,6 @@ void DirectXController::Shutdown( void )
 	ReleaseCOMobjMacro( swapChain );
 	ReleaseCOMobjMacro( depthStencilBuffer );
 
-
-	
 	// Restore default device settings
 	if( deviceContext.dxDeviceContext )
 		deviceContext.dxDeviceContext->ClearState();
@@ -134,7 +132,6 @@ void DirectXController::Shutdown( void )
 	// Release the context and finally the device
 	ReleaseCOMobjMacro(deviceContext.dxDeviceContext);
 	
-		
 #if defined(_DEBUG) || defined(DEBUG)
 	ID3D11Debug* debugDev;
 	device.dxDevice->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debugDev));
@@ -216,7 +213,7 @@ void DirectXController::Reload( void )
 
 void DirectXController::BeginDraw( void )
 {
-	float ClearColor[4] = { 100.0f/255.0f, 149.0f/255.0f, 237.0f/255.0f, 1.0f }; // RGBA
+	float ClearColor[4] = { 100.0f/255.0f, 149.0f/255.0f, 237.0f/255.0f, 1.0f };
 	// Clear the back buffer        
 	deviceContext.dxDeviceContext->ClearRenderTargetView( renderTargetView, ClearColor );
 	deviceContext.dxDeviceContext->ClearDepthStencilView( depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0, 0 );

@@ -48,7 +48,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <ShowIncludes>false</ShowIncludes>
+      <ShowIncludes>true</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -75,6 +75,7 @@
     <ClInclude Include="AdapterController.h" />
     <ClInclude Include="CgShader.h" />
     <ClInclude Include="DirectXController.h" />
+    <ClInclude Include="DXShader.h" />
     <ClInclude Include="GlShader.h" />
     <ClInclude Include="GraphicsController.h" />
     <ClInclude Include="IGraphicsAdapterController.h" />
@@ -90,6 +91,7 @@
     <ClCompile Include="AdapterController.cpp" />
     <ClCompile Include="CgShader.cpp" />
     <ClCompile Include="DirectXController.cpp" />
+    <ClCompile Include="DXShader.cpp" />
     <ClCompile Include="GlShader.cpp" />
     <ClCompile Include="GraphicsController.cpp" />
     <ClCompile Include="OpenGlController.cpp" />

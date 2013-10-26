@@ -19,7 +19,6 @@ namespace Graphos
 			const std::string	ShaderPath;
 
 			void				Initialize( void ) override;
-			//TODO: Should probably implement
 			void				Shutdown( void ) override;
 			IShader*			GetShader( std::string shaderName );
 
