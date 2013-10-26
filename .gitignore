@@ -194,5 +194,7 @@ Icon
 # Files that might appear on external disk
 .Spotlight-V100
 .Trashes
+
+### Graphos Stuff ###
 Game/*.Scripts/*.js*
-ExternalDependencies/lib/
+Game/Resources/Scripts/

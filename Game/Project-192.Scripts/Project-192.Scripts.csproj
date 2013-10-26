@@ -50,7 +50,7 @@
     <TypeScriptIncludeComments>true</TypeScriptIncludeComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
-    <TypeScriptOutFile>__output.js</TypeScriptOutFile>
+    <TypeScriptOutFile>../Resources/Scripts/__output.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES3</TypeScriptTarget>
@@ -91,7 +91,4 @@
     </Content>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)__output.js" "$(SolutionDir)..\Game\Resources\Scripts" /y /i /r</PostBuildEvent>
-  </PropertyGroup>
 </Project>
