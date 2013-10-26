@@ -11,7 +11,7 @@ using namespace Graphos::Core;
 void Graphos::Core::Script::Update( void )
 {
 	//Handle<Value> args[ 1 ];
-	//args[ 0 ] = Number::New( ISingleton<Time>::Get().GetDeltaTime() );
+	//args[ 0 ] = Number::New( Time::GetDeltaTime() );
 	//TryCatch tc;
 
 	//TryCatch tc;

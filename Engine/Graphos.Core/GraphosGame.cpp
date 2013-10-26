@@ -1,5 +1,9 @@
-#include "GraphosGame.h"
+#include <vector>
+#include <string>
+#include <json/json.h>
+#include <cstdlib>
 
+#include "GraphosGame.h"
 #include "File.h"
 #include "Physics.h"
 #include "GraphicsController.h"
@@ -11,11 +15,6 @@
 #include "TimeController.h"
 #include "Config.h"
 #include "OutputController.h"
-
-#include <vector>
-#include <string>
-#include <json/json.h>
-#include <cstdlib>
 
 using namespace Graphos::Core;
 using namespace Graphos::Physics;
@@ -33,7 +32,7 @@ void GraphosGame::Run( void )
 	Start();
 
 	// Init time
-	ISingleton<Time>::Get().Update();
+	Time::Initialize();
 
 	// Loop until there is a quit message from the window or the user.
 	while( !quit )
@@ -51,7 +50,7 @@ void GraphosGame::Run( void )
 			ISingleton<GraphicsController>::Get().MessageLoop();
 
 			// Update time
-			ISingleton<Time>::Get().Update();
+			Time::Update();
 
 			// Update input
 			ISingleton<Input>::Get().Update();
