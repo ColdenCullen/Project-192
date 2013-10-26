@@ -24,7 +24,7 @@ namespace Graphos
 									: vertexShaderID( vertex ), fragmentShaderID( fragment ), programID( program ) { }
 
 			GlShader&			Initialize( std::string vertexPath, std::string fragmentPath );
-
+			void				Shutdown( void ) override { }
 			void				Draw( const Core::Mesh& mesh ) const override;
 			void				BindTexture( const Core::Texture& text ) const override;
 

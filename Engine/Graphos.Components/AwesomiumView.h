@@ -8,12 +8,6 @@
 
 #include "IComponent.h"
 
-namespace Awesomium
-{
-	//class WebView;
-	//class BitmapSurface;
-}
-
 namespace Graphos
 {
 	namespace Core

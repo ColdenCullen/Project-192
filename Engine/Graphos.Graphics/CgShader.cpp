@@ -70,39 +70,12 @@ void CgShader::InitCg( void )
 	{
 		cgD3D11SetDevice( cgContext, AdapterController::Get()->GetDevice().dxDevice );
 		cgVertexProfile = cgD3D11GetLatestVertexProfile();
+		cgFragmentProfile = cgD3D11GetLatestPixelProfile();
 
 	}
 #endif//_WIN32
 }
 
-CgShader::CgShader( string effectPath )
-{
-	cgEffect = cgCreateEffectFromFile( cgContext, effectPath.c_str(), NULL );
-	cgTechnique = cgGetFirstTechnique( cgEffect );
-
-	while( ( cgTechnique && cgValidateTechnique( cgTechnique ) ) == CG_FALSE )
-	{
-		if( !cgTechnique )
-		{
-			ISingleton<OutputController>::Get().PrintMessage(
-				OutputType::OT_ERROR,
-				string( "No valid techniques found." )
-				);
-
-			break;
-		}
-
-		if( cgValidateTechnique( cgTechnique ) == CG_FALSE )
-		{
-			ISingleton<OutputController>::Get().PrintMessage(
-				OutputType::OT_WARNING,
-				string( "Technique " ) + string( cgGetTechniqueName( cgTechnique ) ) + string( " did not validate. Skipping." )
-				);
-
-			cgTechnique = cgGetNextTechnique( cgTechnique );
-		}
-	}
-}
 
 CgShader::CgShader( string vertexPath, string fragmentPath )
 {
@@ -113,7 +86,7 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 		cgVertexProfile,
 		"main",
 		NULL );
-
+	
 	cgFragmentProgram = cgCreateProgramFromFile(
 		cgContext,
 		CG_SOURCE,
@@ -121,7 +94,7 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 		cgFragmentProfile,
 		"main",
 		NULL );
-
+	
 	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		cgGLLoadProgram( cgVertexProgram );
@@ -130,9 +103,57 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 #ifdef _WIN32
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
+		
 		cgD3D11LoadProgram( cgVertexProgram, NULL );
+		cgD3D11LoadProgram( cgFragmentProgram, NULL );
+
+		const D3D11_INPUT_ELEMENT_DESC layout[] =
+		{
+/*POS*/		{ "ATTR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+/*UV*/		{ "ATTR", 1, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+/*NORMAL*/	{ "ATTR", 2, DXGI_FORMAT_R32G32B32_FLOAT, 0, 20, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+		};
+
+		ID3DBlob* vertexShaderBuffer = cgD3D11GetCompiledProgram( cgVertexProgram );
+		AdapterController::Get()->GetDevice().dxDevice->
+			CreateInputLayout( layout, 3, vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &vertexLayout );
+
+
 	}
 #endif//_WIN32
+}
+
+void CgShader::ShutdownCg( void )
+{
+#ifdef _WIN32
+	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	{
+		cgD3D11SetDevice( cgContext, NULL );
+	}
+#endif
+	cgDestroyContext( cgContext );
+}
+
+void CgShader::Shutdown( void )
+{
+	
+	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	{
+		cgGLUnloadProgram( cgVertexProgram );
+		cgGLUnloadProgram( cgFragmentProgram);
+	}
+#ifdef _WIN32
+	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	{
+		ReleaseCOMobjMacro( vertexLayout );
+		cgD3D11UnloadProgram( cgVertexProgram );
+		cgD3D11UnloadProgram( cgFragmentProgram );
+	}
+#endif//_WIN32
+	cgDestroyProgram( cgVertexProgram );
+	cgDestroyProgram( cgFragmentProgram );
+	
+	
 }
 
 void CgShader::Draw( const Mesh& mesh ) const
@@ -141,27 +162,55 @@ void CgShader::Draw( const Mesh& mesh ) const
 
 	SetUniform( "modelViewProjection", modelViewProjection );
 
-	// Bind programs and profiles
-	cgGLBindProgram( cgVertexProgram );
-	cgGLEnableProfile( cgVertexProfile );
-	cgGLBindProgram( cgFragmentProgram );
-	cgGLEnableProfile( cgFragmentProfile );
+	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	{
+		// Bind programs and profiles
+		cgGLBindProgram( cgVertexProgram );
+		cgGLEnableProfile( cgVertexProfile );
+		cgGLBindProgram( cgFragmentProgram );
+		cgGLEnableProfile( cgFragmentProfile );
 	
-	// Enable the texture parameter
-	cgGLEnableTextureParameter( cgFragmentParam_decal );
+		// Enable the texture parameter
+		cgGLEnableTextureParameter( cgFragmentParam_decal );
 
-	// Bind the mesh elements
-	glBindVertexArray( mesh.GetVAO() );
-	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
+		// Bind the mesh elements
+		glBindVertexArray( mesh.GetVAO() );
+		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
 
-	// Draw the elements
-	glDrawElements( GL_TRIANGLES, mesh.GetNumElements(), GL_UNSIGNED_INT, NULL );
+		// Draw the elements
+		glDrawElements( GL_TRIANGLES, mesh.GetNumVertices(), GL_UNSIGNED_INT, NULL );
 
-	// Disable profiles
-	cgGLDisableProfile(cgVertexProfile);
-	cgGLDisableProfile(cgFragmentProfile);
+		// Disable profiles
+		cgGLDisableProfile(cgVertexProfile);
+		cgGLDisableProfile(cgFragmentProfile);
 	
-	cgGLDisableTextureParameter(cgFragmentParam_decal);
+		cgGLDisableTextureParameter(cgFragmentParam_decal);
+	}
+#ifdef _WIN32
+	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	{
+		UINT strides[1] = { mesh.GetVertexSize() };
+		UINT offsets[1] = { 0 };
+		ID3D11Buffer* buffers[1] = { mesh.GetVertexBuffer() };
+		auto deviceContext = AdapterController::Get()->GetDeviceContext().dxDeviceContext;
+    
+		deviceContext->IASetVertexBuffers( 0, 1, buffers, strides, offsets );
+		deviceContext->IASetInputLayout( vertexLayout );    
+		deviceContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST ); 
+		
+		cgD3D11BindProgram( cgVertexProgram );
+		cgD3D11BindProgram( cgFragmentProgram );
+
+		cgD3D11SetSamplerStateParameter( cgFragmentParam_decal, NULL ); // NULL == default states
+
+		deviceContext->Draw( mesh.GetNumVertices(), 0 );
+
+		cgD3D11UnbindProgram( cgVertexProgram );
+		cgD3D11UnbindProgram( cgFragmentProgram );
+		
+		
+	}
+#endif//_WIN32
 }
 
 void CgShader::BindTexture( const Texture& text ) const
@@ -173,7 +222,9 @@ void CgShader::BindTexture( const Texture& text ) const
 #ifdef _WIN32
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
-
+		ID3D11ShaderResourceView* srv = text.GetDxTextureId();
+		AdapterController::Get()->GetDeviceContext().dxDeviceContext->PSGetShaderResources( 0, 1, &srv );
+		//cgD3D11SetTextureParameter( cgGetNamedParameter( cgFragmentProgram, "decal" ), text.GetDxTextureId() ); // Fuck Cg dont' use this memory leaking piece of shit function. Fuck.
 	}
 #endif//_WIN32
 }

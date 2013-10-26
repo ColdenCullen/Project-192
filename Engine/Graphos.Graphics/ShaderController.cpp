@@ -57,12 +57,7 @@ void ShaderController::Initialize( void )
 				
 				shaders[ name ] = new CgShader( absPath + name + ".vs.cg", absPath + name + ".fs.cg" );
 			}
-			else if( fileName.substr( ent->d_namlen - 5 ) == ".cgfx" )
-			{
-				string name = fileName.substr( 0, ent->d_namlen - 5 );
-
-				shaders[ name ] = new CgShader( absPath + fileName );
-			}
+			
 		}
 
 		// Close dir
@@ -83,6 +78,7 @@ void ShaderController::Shutdown( void )
 {
 	for( auto shader : shaders )
 	{
+		shader.second->Shutdown();
 		delete shader.second;
 	}
 	shaders.clear();

@@ -2,6 +2,7 @@
 #define __SHADER
 
 #include "Matrix4.h"
+#include <string>
 
 namespace Graphos
 {
@@ -13,12 +14,14 @@ namespace Graphos
 
 	namespace Graphics
 	{
+
 		class IShader
 		{
 		public:
+			virtual void		Shutdown( void ) = 0;
 			virtual void		Draw( const Core::Mesh& mesh ) const = 0;
 			virtual void		BindTexture( const Core::Texture& text) const = 0;
-
+			
 			virtual void		SetUniform( std::string name, int value ) const = 0;
 			virtual void		SetUniform( std::string name, float value ) const = 0;
 			virtual void		SetUniform( std::string name, const Math::Matrix4& value ) const = 0;

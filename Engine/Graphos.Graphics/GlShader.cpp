@@ -133,7 +133,7 @@ void GlShader::Draw( const Mesh& mesh ) const
 	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
 
 	// Draw
-	glDrawElements( GL_TRIANGLES, mesh.GetNumElements(), GL_UNSIGNED_INT, 0 );
+	glDrawElements( GL_TRIANGLES, mesh.GetNumVertices(), GL_UNSIGNED_INT, 0 );
 }
 
 void GlShader::BindTexture( const Texture& text ) const

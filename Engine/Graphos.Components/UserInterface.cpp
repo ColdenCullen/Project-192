@@ -1,13 +1,15 @@
-#include "UserInterface.h"
+
+//#include "UserInterface.h"
+#include <Awesomium/WebCore.h>
+#include <Awesomium/STLHelpers.h>
 #include "GraphosGame.h"
 #include "WindowController.h"
 #include "ShaderController.h"
 #include "Input.h"
 #include "Config.h"
 
-#include <string>
-#include <Awesomium/WebCore.h>
-#include <Awesomium/STLHelpers.h>
+//#include <string>
+
 
 #define NO_NAMESPACE
 #include <GL/GLIncludes.h>
@@ -18,6 +20,8 @@ using namespace Graphos;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+
+#define DEPTH 1.0f
 
 UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 {

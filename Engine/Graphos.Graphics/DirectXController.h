@@ -3,10 +3,6 @@
 
 #include "IGraphicsAdapterController.h"
 
-#ifdef NO_NAMESPACE
-#pragma message( "NO_NAMESPACE" )
-#endif
-
 #include <DirectX\DirectXIncludes.h>
 
 namespace Graphos
@@ -26,9 +22,7 @@ namespace Graphos
 
 		private:
 			BOOL				enable4xMsaa;
-
 			UINT				msaa4xQuality;
-			
 			
 			DirectX::IDXGISwapChain*	swapChain;
 			DirectX::ID3D11Texture2D*	depthStencilBuffer;
