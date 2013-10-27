@@ -38,7 +38,9 @@
     <ClInclude Include="Resource.h">
       <Filter>Windows</Filter>
     </ClInclude>
-    <ClInclude Include="DXShader.h" />
+    <ClInclude Include="DXShader.h">
+      <Filter>Shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsController.cpp" />
@@ -63,7 +65,9 @@
     <ClCompile Include="Win32Controller.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
-    <ClCompile Include="DXShader.cpp" />
+    <ClCompile Include="DXShader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
