@@ -1,12 +1,12 @@
 {
-	"Name": "Camera",
+	"Name": "Camera1",
 
 	"Shader": "light",
 
 	"Camera": true,
 
 	"Script": {
-		"Class": "Camera"
+		"Class": "Camera1"
 	}, 
 
 	"Transform": {

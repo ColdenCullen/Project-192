@@ -1,14 +1,13 @@
-#include <sstream>
-#include <vector>
-#include <GL/GLIncludes.h>
-#include "GameObject.h"
 #include "Mesh.h"
+#include "GraphicsController.h"
+#include "File.h"
 #include "Vector2.h"
 #include "Vector3.h"
-#include "File.h"
+#include "AdapterController.h"
 
 #include <sstream>
 #include <vector>
+
 #define POSITION_ATTRIBUTE 0
 #define UV_ATTRIBUTE 1
 #define NORMAL_ATTRIBUTE 2
@@ -17,7 +16,10 @@ using namespace std;
 using namespace Graphos::Math;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace DirectX;
 using namespace OpenGL;
+
+#include <DirectX/DirectXIncludes.h>
 
 void Mesh::LoadFromFile( string filePath )
 {

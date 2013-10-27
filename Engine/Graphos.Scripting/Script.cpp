@@ -14,10 +14,13 @@ void Graphos::Core::Script::Update( void )
 	//args[ 0 ] = Number::New( Time::GetDeltaTime() );
 	//TryCatch tc;
 
-	//TryCatch tc;
+	/*
 	updateFunction->Call( instance, 0, NULL );
 
-	/*
+	/*/
+	TryCatch tc;
+	updateFunction->Call( instance, 0, NULL );
+
 	if( tc.HasCaught() )
 	{
 		string exceptionName = string( *String::AsciiValue( tc.Message()->Get()->ToString() ) );

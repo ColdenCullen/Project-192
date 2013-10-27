@@ -118,7 +118,7 @@ namespace cvv8
 				JSObjHandle toReturn( ClassCreator<T>::Instance().NewInstance( 0, NULL ) );
 				delete toReturn->GetPointerFromInternalField( ClassCreator_InternalFields<Type>::NativeIndex );
 				toReturn->SetPointerInInternalField( ClassCreator_InternalFields<Type>::NativeIndex, (void*)val );
-				Insert( toReturn, val );
+				//Insert( toReturn, val );
 				return toReturn;
 			}
 			//else
