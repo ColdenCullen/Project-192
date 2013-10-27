@@ -34,8 +34,8 @@ void RigidBody::Update( void )
 	linearVelocity += ISingleton<Physics>::Get().gravity * deltaTime;
 
 	// Update object
-	owner->transform.Translate( linearVelocity * deltaTime );
-	owner->transform.Rotate( angularVelocity * deltaTime );
+	owner->transform->Translate( linearVelocity * deltaTime );
+	owner->transform->Rotate( angularVelocity * deltaTime );
 }
 
 void RigidBody::AddForce( const Vector3& force )

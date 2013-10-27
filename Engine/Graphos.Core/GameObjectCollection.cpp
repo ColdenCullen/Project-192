@@ -55,7 +55,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 	}
 
 	for( auto parentPair = begin( parentMap ); parentPair != end( parentMap ); ++parentPair )
-		GetObjectById( parentPair->first )->transform.parent = &GetObjectByName( parentPair->second )->transform;
+		GetObjectById( parentPair->first )->transform->parent = GetObjectByName( parentPair->second )->transform;
 }
 
 GameObject* GameObjectCollection::GetObjectById( unsigned int id )

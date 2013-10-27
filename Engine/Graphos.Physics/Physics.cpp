@@ -39,7 +39,7 @@ void Physics::Update( void )
 			if( ( *insideCollider )->Type() == Sphere && ( *outsideCollider )->Type() == Sphere )
 			{
 				// Check if colliding.
-				isColliding = ( normal = ( ( *outsideCollider )->Owner()->transform.Position() - ( *insideCollider )->Owner()->transform.Position() ) ).Magnitude() <
+				isColliding = ( normal = ( *( *outsideCollider )->Owner()->transform->Position() - *( *insideCollider )->Owner()->transform->Position() ) ).Magnitude() <
 					static_cast<SphereCollider*>( *outsideCollider )->radius + static_cast<SphereCollider*>( *insideCollider )->radius;
 			}
 			else

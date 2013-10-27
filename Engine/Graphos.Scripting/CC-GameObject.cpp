@@ -30,7 +30,7 @@ void cvv8::ClassCreator_SetupBindings<GameObject>::Initialize( Handle<v8::Object
 	AccessorAdder gameObjectacc( gameObjectcc.Prototype() );
 	gameObjectacc
 		( "Transform",
-		MemberToAccessors<GameObject, Transform, &GameObject::transform>::Get,
+		MemberToAccessors<GameObject, Transform*, &GameObject::transform>::Get,
 		ThrowingSetter::Set )
 		;
 

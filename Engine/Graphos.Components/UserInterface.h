@@ -1,13 +1,11 @@
 #ifndef __USER_INTERFACE
 #define __USER_INTERFACE
 
-#include "Transform.h"
+#include "transform.h"
 #include "AwesomiumView.h"
 //#include "Vector2.h"
 
 #include <Awesomium/JSObject.h>
-
-
 
 namespace Graphos
 {

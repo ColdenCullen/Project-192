@@ -97,9 +97,16 @@ namespace cvv8
             else return (*it).second.second;
 		}
 
-		v8::Handle<v8::Value> operator()( Type const & n ) const
+		v8::Handle<v8::Value> operator()( Type const & val ) const
 		{
-			return this->operator()( &n );
+			//return this->operator()( &n );
+
+			// Create new object
+			JSObjHandle toReturn( ClassCreator<T>::Instance().NewInstance( 0, NULL ) );
+			// Copy values from original to new
+			auto res = static_cast<T*>( toReturn->GetPointerFromInternalField( ClassCreator_InternalFields<Type>::NativeIndex ) )->operator=( val );
+			//toReturn->SetPointerInInternalField( ClassCreator_InternalFields<Type>::NativeIndex, (void*)&val );
+			return toReturn;
 		}
 
 		v8::Handle<v8::Value> operator()( Type const * val ) const
