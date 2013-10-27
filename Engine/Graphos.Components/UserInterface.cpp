@@ -136,7 +136,7 @@ void UserInterface::Draw( void )
 {
 	//ISingleton<ShaderController>::Get().GetShader( "texture" ).Use();
 	ISingleton<ShaderController>::Get().GetShader( "texture" )->SetModelMatrix( transform.WorldMatrix() );
-	ISingleton<ShaderController>::Get().GetShader( "texture" )->SetUniform( "shaderTexture", 0 );
+	//ISingleton<ShaderController>::Get().GetShader( "texture" )->SetUniform( "shaderTexture", 0, 1,  );
 	ISingleton<ShaderController>::Get().GetShader( "texture" )->SetProjectionMatrix( WindowController::Get().OrthogonalMatrix() );
 
 	view->Draw( nullptr );

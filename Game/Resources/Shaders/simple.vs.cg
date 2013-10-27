@@ -1,22 +1,24 @@
-struct InputData
+struct BufferData
 {
-	in varying float3 position	: ATTR0;
-	in varying float2 uv		: ATTR1;
-	in varying float3 normal	: ATTR2;
+	float3 position : ATTR0;
+	float2 texCoord : ATTR1;
+	float3 normal	: ATTR2;
 };
 
 struct VertexToFragment
 {
 	float4 position : POSITION;
-	float2 uv : TEXCOORD0;
+	float2 texCoord : TEXCOORD0;
 };
 
-VertexToFragment main( InputData IN, uniform float4x4 modelViewProjection )
+VertexToFragment main( BufferData IN,
+					   uniform float4x4 modelViewProjection )
 {	
 	VertexToFragment OUT;
 	
-	OUT.position = mul( modelViewProjection, float4( IN.position, 1.0 ) );
-	OUT.uv = IN.uv;
+	OUT.position = mul( modelViewProjection, float4( IN.position, 1.0 ) ); // float4( IN.position / 2, 1.0 ); // 
+	OUT.texCoord = IN.texCoord;
+	//OUT.color = IN.color;
 	
 	return OUT;	
 }

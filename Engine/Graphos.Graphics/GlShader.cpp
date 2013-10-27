@@ -12,37 +12,14 @@ using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 using namespace OpenGL;
 
-GlShader& GlShader::Initialize( string vertexPath, string fragmentPath )
+GlShader::GlShader( std::string vertexPath, std::string fragmentPath )
+	: vertexShaderID( 0 ), fragmentShaderID( 0 ), programID( 0 )
 {
+
 	string vertexBody = File::ReadFile( vertexPath );
 	string fragmentBody = File::ReadFile( fragmentPath );
 	Compile( vertexBody, fragmentBody );
 	ScanForVars( vertexBody );
-	return *this;
-}
-
-void GlShader::SetUniform( string name, int value ) const
-{
-	auto currentUniform = uniforms.find( name );
-
-	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
-		glUniform1i( currentUniform->second, value );
-}
-
-void GlShader::SetUniform( string name, float value ) const
-{
-	auto currentUniform = uniforms.find( name );
-
-	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
-		glUniform1f( currentUniform->second, value );
-}
-
-void GlShader::SetUniform( string name, const Matrix4& value ) const
-{
-	auto currentUniform = uniforms.find( name );
-
-	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
-		glUniformMatrix4fv( currentUniform->second, 1, false, value.dataArray );
 }
 
 void GlShader::ScanForVars( string vertexBody )
@@ -125,7 +102,7 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 
 void GlShader::Draw( const Mesh& mesh ) const 
 {
-	SetUniform( "modelViewProjection", modelViewProjection );
+	SetUniformArray( "modelViewProjection", modelViewProjection.dataArray, 16, ShaderType::VERTEX );
 
 	glUseProgram( programID );
 

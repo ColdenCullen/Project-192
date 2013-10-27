@@ -7,7 +7,7 @@
 #include "GraphicsController.h"
 #include "AdapterController.h"
 
-
+#include <DirectX/DirectXIncludes.h>
 #include <GL\glincludes.h>
 using namespace OpenGL;
 using namespace DirectX;
@@ -103,7 +103,6 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 #ifdef _WIN32
 	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
-		
 		cgD3D11LoadProgram( cgVertexProgram, NULL );
 		cgD3D11LoadProgram( cgFragmentProgram, NULL );
 
@@ -160,7 +159,13 @@ void CgShader::Draw( const Mesh& mesh ) const
 {
 	CGparameter cgFragmentParam_decal = cgGetNamedParameter( cgFragmentProgram, "decal" );
 
-	SetUniform( "modelViewProjection", modelViewProjection );
+	SetUniformArray( "modelViewProjection", modelViewProjection.dataArray, 16, ShaderType::VERTEX );
+	SetUniformArray( "modelMatrix", modelMatrix.dataArray, 16, ShaderType::VERTEX );
+/*	float lDir[3] = { -10.0, -10.0, 10.0 };
+	SetUniformArray( "lightDir", lDir, 3, ShaderType::FRAGMENT );
+	float lColor[4] = { 1.0, 1.0, 1.0, 1.0 };
+	SetUniformArray( "lightColor", lColor, 4, ShaderType::FRAGMENT ); */
+	
 
 	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
@@ -207,8 +212,6 @@ void CgShader::Draw( const Mesh& mesh ) const
 
 		cgD3D11UnbindProgram( cgVertexProgram );
 		cgD3D11UnbindProgram( cgFragmentProgram );
-		
-		
 	}
 #endif//_WIN32
 }
@@ -229,20 +232,64 @@ void CgShader::BindTexture( const Texture& text ) const
 #endif//_WIN32
 }
 
-void CgShader::SetUniform( string name, int value ) const 
+void CgShader::SetUniform( std::string name, const float value, ShaderType type ) const
 {
-	//cgSetParameter1i( cgGetNamedEffectParameter( cgEffect, name.c_str() ), value );
+	switch( type )
+	{
+	case ShaderType::VERTEX:
+		cgSetParameter1f( cgGetNamedParameter( cgVertexProgram, name.c_str() ), value );
+		break;
+	case ShaderType::FRAGMENT:
+		cgSetParameter1f( cgGetNamedParameter( cgFragmentProgram, name.c_str() ), value );
+		break;
+	default:
+		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
+	}
 }
 
-void CgShader::SetUniform( string name, float value ) const 
+void CgShader::SetUniform( std::string name, const int value, ShaderType type ) const
 {
-	//cgSetParameter1f( cgGetNamedEffectParameter( cgEffect, name.c_str() ), value );
+	switch( type )
+	{
+	case ShaderType::VERTEX:
+		cgSetParameter1i( cgGetNamedParameter( cgVertexProgram, name.c_str() ), value );
+		break;
+	case ShaderType::FRAGMENT:
+		cgSetParameter1i( cgGetNamedParameter( cgFragmentProgram, name.c_str() ), value );
+		break;
+	default:
+		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
+	}
 }
 
-void CgShader::SetUniform( string name, const Matrix4& value ) const 
+void CgShader::SetUniformArray( string name, const float* value, const int size, ShaderType type ) const
 {
-	//cgSetParameterValuefc( cgGetNamedEffectParameter( cgEffect, name.c_str() ), 16, value.dataArray );
-	cgSetParameterValuefc( cgGetNamedParameter( cgVertexProgram, name.c_str() ), 16, value.dataArray );
+	switch( type )
+	{
+	case ShaderType::VERTEX:
+		cgSetParameterValuefc( cgGetNamedParameter( cgVertexProgram, name.c_str() ), size, value );
+		break;
+	case ShaderType::FRAGMENT:
+		cgSetParameterValuefc( cgGetNamedParameter( cgFragmentProgram, name.c_str() ), size, value );
+		break;
+	default:
+		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
+	}
+}
+
+void CgShader::SetUniformArray( string name, const int* value, const int size, ShaderType type ) const
+{
+	switch( type )
+	{
+	case ShaderType::VERTEX:
+		cgSetParameterValueic( cgGetNamedParameter( cgVertexProgram, name.c_str() ), size, value );
+		break;
+	case ShaderType::FRAGMENT:
+		cgSetParameterValueic( cgGetNamedParameter( cgFragmentProgram, name.c_str() ), size, value );
+		break;
+	default:
+		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
+	}
 }
 
 CGcontext CgShader::cgContext;

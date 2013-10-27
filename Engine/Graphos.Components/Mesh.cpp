@@ -1,9 +1,11 @@
+#include <sstream>
+#include <vector>
+#include <GL/GLIncludes.h>
+#include "GameObject.h"
 #include "Mesh.h"
-#include "GraphicsController.h"
-#include "File.h"
 #include "Vector2.h"
 #include "Vector3.h"
-#include "AdapterController.h"
+#include "File.h"
 
 #include <sstream>
 #include <vector>
@@ -11,27 +13,25 @@
 #define UV_ATTRIBUTE 1
 #define NORMAL_ATTRIBUTE 2
 
+using namespace std;
 using namespace Graphos::Math;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
-using namespace DirectX;
 using namespace OpenGL;
 
-#include <DirectX/DirectXIncludes.h>
-
-void Mesh::LoadFromFile( std::string filePath )
+void Mesh::LoadFromFile( string filePath )
 {
-	std::vector<Vector3> vertices;
-	std::vector<Vector2> uvs;
-	std::vector<Vector3> normals;
+	vector<Vector3> vertices;
+	vector<Vector2> uvs;
+	vector<Vector3> normals;
 
-	std::vector<float>	outputData;
+	vector<float>	outputData;
 
-	std::istringstream file( File::ReadFile( filePath ) );
-	std::string line;
+	istringstream file( File::ReadFile( filePath ) );
+	string line;
 
 	if( !file )
-		throw std::exception( std::string( "Failed to read object file " + filePath + "." ).c_str() );
+		throw exception( string( "Failed to read object file " + filePath + "." ).c_str() );
 
 	while( getline( file, line ) )
 	{

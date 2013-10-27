@@ -13,8 +13,8 @@
 	},
 	"graphics" : 
 	{
-		"Adapter": "DirectX",
-		"backfaceculling" : false,
+		"Adapter": "OpenGL",
+		"backfaceculling" : true,
 		"vsync" : false
 	},
 	"physics" : 
