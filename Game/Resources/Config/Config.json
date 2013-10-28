@@ -15,7 +15,7 @@
 	{
 		"Adapter": "OpenGL",
 		"backfaceculling" : true,
-		"vsync" : true
+		"vsync" : false
 	},
 	"physics" : 
 	{
@@ -28,7 +28,7 @@
 	},
 	"Scripts" : 
 	{
-		"Path" : "Resources/Scripts/__output.js"
+		"Path" : "Resources/Scripts/output.js"
 	},
 	"ui" : 
 	{

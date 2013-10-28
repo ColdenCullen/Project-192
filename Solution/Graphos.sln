@@ -17,14 +17,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Scripting", "..\Eng
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{510BA875-BC5D-46B6-B25A-8414F72B3D98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project-192.Scripts", "..\Game\Project-192.Scripts\Project-192.Scripts.csproj", "{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project-192.Core", "..\Game\Project-192.Core\Project-192.Core.vcxproj", "{1742CE04-C11E-4295-A8A3-C69FD9EE991F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E} = {62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resourses", "Resourses", "{C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game\Resources\Gruntfile.coffee = ..\Game\Resources\Gruntfile.coffee
+		..\Game\Resources\package.json = ..\Game\Resources\package.json
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Global Headers", "Global Headers", "{1D868376-9A33-40E7-8DC4-D6A2253620FC}"
 	ProjectSection(SolutionItems) = preProject
@@ -119,6 +118,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neon", "neon", "{CE1C2385-D
 		..\ExternalDependencies\submodules\bullet\vectormath\neon\vectormath_aos.h = ..\ExternalDependencies\submodules\bullet\vectormath\neon\vectormath_aos.h
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0CEE67E3-3A16-404E-A0A1-241574A1F641}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game\Resources\Scripts\Camera.ts = ..\Game\Resources\Scripts\Camera.ts
+		..\Game\Resources\Scripts\GameObject1.ts = ..\Game\Resources\Scripts\GameObject1.ts
+		..\Game\Resources\Scripts\Graphos.ts = ..\Game\Resources\Scripts\Graphos.ts
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -203,18 +209,6 @@ Global
 		{C409B8BC-41BD-439F-BAE3-FB7D9B4E3569}.Release|Win32.ActiveCfg = Release|Win32
 		{C409B8BC-41BD-439F-BAE3-FB7D9B4E3569}.Release|Win32.Build.0 = Release|Win32
 		{C409B8BC-41BD-439F-BAE3-FB7D9B4E3569}.Release|x64.ActiveCfg = Release|Win32
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Release|Win32.ActiveCfg = Release|Any CPU
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E}.Release|x64.ActiveCfg = Release|Any CPU
 		{1742CE04-C11E-4295-A8A3-C69FD9EE991F}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{1742CE04-C11E-4295-A8A3-C69FD9EE991F}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{1742CE04-C11E-4295-A8A3-C69FD9EE991F}.Debug|Mixed Platforms.Build.0 = Debug|Win32
@@ -280,12 +274,12 @@ Global
 		{569A12E4-7A87-4769-B91B-ACDEA8051DF2} = {121BCB09-3DD2-48AC-B441-A45525523659}
 		{4961F3A5-0FC0-487A-BEF3-8313C981AB49} = {121BCB09-3DD2-48AC-B441-A45525523659}
 		{C409B8BC-41BD-439F-BAE3-FB7D9B4E3569} = {121BCB09-3DD2-48AC-B441-A45525523659}
-		{62B4A70C-12EC-469B-9E1F-DDEAE9FA6B3E} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
 		{1742CE04-C11E-4295-A8A3-C69FD9EE991F} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
 		{C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
 		{78B39BD3-904D-4D33-ACC3-715914BE0377} = {C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4}
 		{E1E6740A-79E3-4326-905F-56995EBAE634} = {C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4}
 		{13C4CBF4-109C-4A8B-8A7F-139E88805C21} = {C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4}
+		{0CEE67E3-3A16-404E-A0A1-241574A1F641} = {C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4}
 		{48731D1C-E139-4A6D-B63A-2A897E00FFDD} = {78B39BD3-904D-4D33-ACC3-715914BE0377}
 		{B6E4ED65-20D6-4771-8CAF-835CBBA2974E} = {78B39BD3-904D-4D33-ACC3-715914BE0377}
 		{20BE76EC-4F26-4999-B6B0-9691B0DADA29} = {78B39BD3-904D-4D33-ACC3-715914BE0377}
