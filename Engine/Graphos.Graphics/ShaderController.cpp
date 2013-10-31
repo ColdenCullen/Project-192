@@ -5,7 +5,7 @@
 #include "File.h"
 
 #include "GlShader.h"
-#include "CgShader.h"
+#include "DXShader.h"
 
 #if defined( _WIN32 )
 #include <windirent.h>
@@ -53,12 +53,14 @@ void ShaderController::Initialize( void )
 
 				shaders[ name ] = new GlShader( absPath + name + ".vs.glsl", absPath + name + ".fs.glsl" );
 			}
-			else if( fileName.substr( ent->d_namlen - 6 ) == ".fs.cg" )
+			else if( fileName.substr( ent->d_namlen -8 ) == ".fs.hlsl" &&
+				ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
 			{
-				string name = fileName.substr( 0, ent->d_namlen - 6 );
-				
-				shaders[ name ] = new CgShader( absPath + name + ".vs.cg", absPath + name + ".fs.cg" );
+				string name = fileName.substr( 0, ent->d_namlen - 8 );
+
+				shaders[ name ] = new DXShader( absPath + name + ".vs.hlsl", absPath + name + ".fs.hlsl" );
 			}
+			
 			
 		}
 

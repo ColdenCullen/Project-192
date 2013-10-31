@@ -8,6 +8,7 @@ namespace DirectX
 #endif//NO_NAMESPACE
 
 	#include <d3d11.h>
+	#include <d3dcompiler.h>
 
 #ifndef NO_NAMESPACE
 }

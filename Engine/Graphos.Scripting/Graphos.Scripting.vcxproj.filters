@@ -22,9 +22,6 @@
     <ClCompile Include="CC-Vector3.cpp">
       <Filter>Class Wrapers</Filter>
     </ClCompile>
-    <ClCompile Include="CC-CgShader.cpp">
-      <Filter>Class Wrapers</Filter>
-    </ClCompile>
     <ClCompile Include="CC-GameObject.cpp">
       <Filter>Class Wrapers</Filter>
     </ClCompile>

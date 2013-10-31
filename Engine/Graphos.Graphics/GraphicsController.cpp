@@ -4,7 +4,6 @@
 #include "Config.h"
 #include "AdapterController.h"
 
-#include "CgShader.h"
 #include "WindowController.h"
 
 using namespace Graphos::Core;
