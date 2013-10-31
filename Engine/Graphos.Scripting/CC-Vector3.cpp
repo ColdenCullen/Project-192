@@ -24,7 +24,6 @@ void cvv8::ClassCreator_SetupBindings<Vector3>::Initialize( Handle<v8::Object> c
 		( "Cross", ConstMethodToInCa<const Vector3, Vector3 (const Vector3&), &Vector3::Cross>::Call )
 		( "Add", ConstMethodToInCa<const Vector3, Vector3 (const Vector3&), &Vector3::Add>::Call )
 		( "Multiply", ConstMethodToInCa<const Vector3, Vector3 (const float), &Vector3::operator*>::Call )
-		( "Negate", ConstMethodToInCa<const Vector3, Vector3 (void), &Vector3::operator- >::Call )
 		;
 
 	// Proxy accessor/mutator functions as JS properties
@@ -39,6 +38,9 @@ void cvv8::ClassCreator_SetupBindings<Vector3>::Initialize( Handle<v8::Object> c
 		( "z",
 			MemberToAccessors<const Vector3, float, &Vector3::z>::Get,
 			MemberToAccessors<const Vector3, float, &Vector3::z>::Set )
+		( "Inverse",
+			ConstMethodToGetter<const Vector3, Vector3 (void), &Vector3::Inverse>::Get,
+			ThrowingSetter::Set )
 		;
 
 	// Set static methods

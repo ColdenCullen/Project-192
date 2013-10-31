@@ -145,7 +145,7 @@ bool Game::Update( void )
 
 			float rotation = 5.0f * Time::GetDeltaTime();
 
-			cube->transform.Rotate( rotation, rotation, 0.0f );
+			cube->transform->Rotate( rotation, rotation, 0.0f );
 
 			break;
 		}

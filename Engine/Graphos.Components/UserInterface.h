@@ -7,8 +7,6 @@
 
 #include <Awesomium/JSObject.h>
 
-
-
 namespace Graphos
 {
 	namespace Core
