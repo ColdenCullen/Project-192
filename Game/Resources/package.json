@@ -25,6 +25,6 @@
     "grunt-contrib-watch": "0.5.x"
   },
   "bin": {
-    "grunt": "./bin/grunt"
+    "grunt": "./node_modules/.bin/grunt"
   }
 }
