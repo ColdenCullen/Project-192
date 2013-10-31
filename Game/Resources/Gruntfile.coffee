@@ -6,7 +6,7 @@
     configFiles = './Config/**'
     uiFiles = './UIs/**'
 
-    interDest = './bin/'
+    interDest = './.bin/'
 
     grunt.initConfig
         pkg: grunt.file.readJSON( 'package.json' )
