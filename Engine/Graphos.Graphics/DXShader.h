@@ -2,6 +2,8 @@
 #define __DXSHADER
 
 #include <string>
+#include <unordered_map>
+#include <utility>
 #include "IShader.h"
 #include <DirectX/DirectXIncludes.h>
 
@@ -9,10 +11,9 @@ namespace Graphos
 {
 	namespace Graphics
 	{
-
 		class DXShader : public IShader
 		{
-			public:
+		public:
 								DXShader( std::string vertexPath, std::string fragmentPath );
 
 								~DXShader(void);
@@ -26,16 +27,21 @@ namespace Graphos
 			void				SetUniformArray( std::string name, const float* value, const int size, ShaderType type ) const override {}
 			void				SetUniformArray( std::string name, const int* value, const int size, ShaderType type ) const override {}
 			
-			private:
-			
+		private:
 			// Shaders
 			DirectX::ID3D11VertexShader* vertexShader;
 			DirectX::ID3D11PixelShader*  pixelShader;
 
 			DirectX::ID3D11InputLayout*  vertexLayout;
-			
-			
 
+			struct ConstBuffer
+			{
+				char*			data;
+				std::unordered_map<std::string, std::pair<int, std::size_t>>
+								meta;
+			};
+
+			ConstBuffer buffer;
 		};
 	}
 }
