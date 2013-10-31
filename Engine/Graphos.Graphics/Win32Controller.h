@@ -1,7 +1,9 @@
 #if !defined( __WIN32_CONTROLLER ) && defined( _WIN32 )
 #define __WIN32_CONTROLLER
 
-#include "ISingleton.h"
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
+
 #include "IPlatformWindowController.h"
 
 namespace Graphos
@@ -11,15 +13,16 @@ namespace Graphos
 		class Win32Controller : public IPlatformWindowController
 		{
 		public:
+			static Win32Controller*	Get();
+
 			void				Initialize( void ) override;
 			void				Shutdown( void ) override;
-			void				Resize( void );
-			void				MessageLoop( void );
+			void				Resize( void ) override;
+			void				MessageLoop( void ) override;
+	
+			void				OpenWindow( void ) override;
+			void				CloseWindow( void ) override;
 
-			void				OpenWindow( void );
-			void				CloseWindow( void );
-
-			// Getters
 			HWND				GetHWnd( void ) { return hWnd; }
 
 		private:
@@ -31,7 +34,6 @@ namespace Graphos
 			HWND				hWnd;							// Current Windows window
 
 			friend class		WindowController;
-			friend class		Core::ISingleton<Win32Controller>;
 		};
 	}
 }

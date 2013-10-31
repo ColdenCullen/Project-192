@@ -37,7 +37,7 @@ void CgErrorHandler( CGcontext context, CGerror error, void* appData )
 			strError = cgGetErrorString( error );
 		}
 
-		ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_ERROR, string( "Cg Error: " ) + strError );
+		OutputController::PrintMessage( OutputType::OT_ERROR, string( "Cg Error: " ) + strError );
 	}
 }
 
@@ -49,7 +49,7 @@ void CgShader::InitCg( void )
 
 	cgSetParameterSettingMode( cgContext, CG_DEFERRED_PARAMETER_SETTING );
 
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 #ifndef _DEBUG
 		cgGLSetDebugMode( CG_FALSE );
@@ -66,7 +66,7 @@ void CgShader::InitCg( void )
 		cgGLEnableProfile( cgFragmentProfile );
 	}
 #ifdef _WIN32
-	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		cgD3D11SetDevice( cgContext, AdapterController::Get()->GetDevice().dxDevice );
 		cgVertexProfile = cgD3D11GetLatestVertexProfile();
@@ -95,13 +95,13 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 		"main",
 		NULL );
 	
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		cgGLLoadProgram( cgVertexProgram );
 		cgGLLoadProgram( cgFragmentProgram );
 	}
 #ifdef _WIN32
-	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		cgD3D11LoadProgram( cgVertexProgram, NULL );
 		cgD3D11LoadProgram( cgFragmentProgram, NULL );
@@ -125,7 +125,7 @@ CgShader::CgShader( string vertexPath, string fragmentPath )
 void CgShader::ShutdownCg( void )
 {
 #ifdef _WIN32
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		cgD3D11SetDevice( cgContext, NULL );
 	}
@@ -136,13 +136,13 @@ void CgShader::ShutdownCg( void )
 void CgShader::Shutdown( void )
 {
 	
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		cgGLUnloadProgram( cgVertexProgram );
 		cgGLUnloadProgram( cgFragmentProgram);
 	}
 #ifdef _WIN32
-	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		ReleaseCOMobjMacro( vertexLayout );
 		cgD3D11UnloadProgram( cgVertexProgram );
@@ -167,7 +167,7 @@ void CgShader::Draw( const Mesh& mesh ) const
 	SetUniformArray( "lightColor", lColor, 4, ShaderType::FRAGMENT ); */
 	
 
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		// Bind programs and profiles
 		cgGLBindProgram( cgVertexProgram );
@@ -192,7 +192,7 @@ void CgShader::Draw( const Mesh& mesh ) const
 		cgGLDisableTextureParameter(cgFragmentParam_decal);
 	}
 #ifdef _WIN32
-	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		UINT strides[1] = { mesh.GetVertexSize() };
 		UINT offsets[1] = { 0 };
@@ -218,12 +218,12 @@ void CgShader::Draw( const Mesh& mesh ) const
 
 void CgShader::BindTexture( const Texture& text ) const
 {
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		cgGLSetTextureParameter( cgGetNamedParameter( cgFragmentProgram, "decal" ), text.GetGlTextureId() );
 	}
 #ifdef _WIN32
-	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		ID3D11ShaderResourceView* srv = text.GetDxTextureId();
 		AdapterController::Get()->GetDeviceContext().dxDeviceContext->PSGetShaderResources( 0, 1, &srv );
@@ -243,7 +243,7 @@ void CgShader::SetUniform( std::string name, const float value, ShaderType type 
 		cgSetParameter1f( cgGetNamedParameter( cgFragmentProgram, name.c_str() ), value );
 		break;
 	default:
-		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
+		OutputController::PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
 	}
 }
 
@@ -258,7 +258,7 @@ void CgShader::SetUniform( std::string name, const int value, ShaderType type ) 
 		cgSetParameter1i( cgGetNamedParameter( cgFragmentProgram, name.c_str() ), value );
 		break;
 	default:
-		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
+		OutputController::PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
 	}
 }
 
@@ -273,7 +273,7 @@ void CgShader::SetUniformArray( string name, const float* value, const int size,
 		cgSetParameterValuefc( cgGetNamedParameter( cgFragmentProgram, name.c_str() ), size, value );
 		break;
 	default:
-		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
+		OutputController::PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
 	}
 }
 
@@ -288,7 +288,7 @@ void CgShader::SetUniformArray( string name, const int* value, const int size, S
 		cgSetParameterValueic( cgGetNamedParameter( cgFragmentProgram, name.c_str() ), size, value );
 		break;
 	default:
-		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
+		OutputController::PrintMessage(OutputType::OT_ERROR,"Invalid Shader Type");
 	}
 }
 

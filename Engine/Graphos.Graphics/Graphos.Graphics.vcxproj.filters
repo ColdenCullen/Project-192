@@ -68,6 +68,9 @@
     <ClCompile Include="DXShader.cpp">
       <Filter>Shaders</Filter>
     </ClCompile>
+    <ClCompile Include="WindowController.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">

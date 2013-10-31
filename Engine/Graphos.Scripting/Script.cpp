@@ -26,7 +26,7 @@ void Graphos::Core::Script::Update( void )
 		string exceptionName = string( *String::AsciiValue( tc.Message()->Get()->ToString() ) );
 		string stackTrace = string( *String::AsciiValue( tc.StackTrace()->ToString() ) );
 		string message = string( "An exception has been thrown in JavaScript: " + exceptionName + "\nStack trace:\n" + stackTrace );
-		ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_ERROR, message );
+		OutputController::PrintMessage( OutputType::OT_ERROR, message );
 	}
 	//*/
 }
@@ -37,5 +37,5 @@ Graphos::Core::Script::Script( Handle<Object> instance, GameObject* owner /*= nu
 	updateFunction = Handle<Function>::Cast( instance->Get( String::New( "Update" ) ) );
 
 	if( !updateFunction->IsFunction() )
-		ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_ERROR, "Invalid Update function." );
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid Update function." );
 }

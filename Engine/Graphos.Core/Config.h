@@ -1,9 +1,6 @@
 #ifndef _CONFIGCONTROLLER_H_
 #define _CONFIGCONTROLLER_H_
 
-#include "IController.h"
-#include "ISingleton.h"
-//#include "GraphosGame.h"
 #include "Vector3.h"
 
 #include <string>
@@ -15,38 +12,39 @@ namespace Graphos
 {
 	namespace Core
 	{
-		class Config : public IController
+		class Config
 		{
 		public:
 			// Initialize the settings controller
-			void				Initialize( void );
+			static void			Initialize( void );
 
 			#pragma region GetData
 			// Get value from settings
 			template<typename T>
-			T					GetData( std::string path );
-#if defined( _WIN32 )
+			static T			GetData( std::string path );
+#if 0//defined( _WIN32 )
 			template<>
-			int					GetData<int>( std::string path );
+			static int			GetData<int>( std::string path );
 			template<>
-			unsigned int		GetData<unsigned int>( std::string path );
+			static unsigned int	GetData<unsigned int>( std::string path );
 			template<>
-			float				GetData<float>( std::string path );
+			static float		GetData<float>( std::string path );
 			template<>
-			bool				GetData<bool>( std::string path );
+			static bool			GetData<bool>( std::string path );
 			template<>
-			std::string			GetData<std::string>( std::string path );
+			static std::string	GetData<std::string>( std::string path );
 			template<>
-			const char*			GetData<const char*>( std::string path );
+			static const char*	GetData<const char*>( std::string path );
 			template<>
-			std::string*				GetData<std::string*>( std::string path );
+			static std::string*	GetData<std::string*>( std::string path );
 			template<>
-			Math::Vector3		GetData<Math::Vector3>( std::string path );
+			static Math::Vector3
+								GetData<Math::Vector3>( std::string path );
 #endif
 			#pragma endregion
 
 			template<typename T>
-			void				SetData( std::string path, T newValue )
+			static void			SetData( std::string path, T newValue )
 			{
 				GetValueAtPath( path ) = newValue;
 
@@ -62,16 +60,14 @@ namespace Graphos
 								Config( const Config& );
 			Config&				operator=( const Config& );
 
-			Json::Value&		GetValueAtPath( std::string path );
+			static Json::Value&	GetValueAtPath( std::string path );
 
 			// JSON values
-			Json::Value			config;
-
-			friend class		ISingleton<Config>;
+			static Json::Value	config;
 		};
 
 		#pragma region GetData
-#if defined( _WIN32 )
+#if 0//defined( _WIN32 )
 		template<>
 		int Config::GetData<int>( std::string path )
 		{

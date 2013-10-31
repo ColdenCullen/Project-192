@@ -21,7 +21,7 @@ using namespace cvv8;
 #pragma region Handlers
 Handle<Value> IsKeyDown( const Arguments& args )
 {
-	return Boolean::New( ISingleton<Input>::Get().IsKeyDown( args[ 0 ]->Int32Value() ) );
+	return Boolean::New( Input::IsKeyDown( args[ 0 ]->Int32Value() ) );
 }
 
 Handle<Value> PrintHandler( const Arguments& args )
@@ -60,7 +60,7 @@ void ScriptController::Initialize( void )
 	// Compile
 	auto compiled = v8::Script::Compile(
 		String::New( 
-				File::ReadFile( ISingleton<Config>::Get().GetData<string>( "Scripts.Path" ) ).c_str()
+				File::ReadFile( Config::GetData<string>( "Scripts.Path" ) ).c_str()
 			)
 		);
 
@@ -118,13 +118,13 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 		for( int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
 			props += string( *String::AsciiValue( inst->GetPropertyNames()->Get( ii ) ) ) + ", ";
 
-		ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_INFO, "Found the following properties on inst:\n" + props );
+		OutputController::PrintMessage( OutputType::OT_INFO, "Found the following properties on inst:\n" + props );
 
 		props = "";
 		for( int ii = 0; ii < gameObject->GetPropertyNames()->Length(); ++ii )
 			props += string( *String::AsciiValue( gameObject->GetPropertyNames()->Get( ii ) ) ) + ", ";
 
-		ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_INFO, "Found the following properties on newobj:\n" + props );
+		OutputController::PrintMessage( OutputType::OT_INFO, "Found the following properties on newobj:\n" + props );
 
 		//auto trans = CastFromJS<Transform>( gameObject->Get( v8::String::NewSymbol( "Transform" ) ) );
 
@@ -133,6 +133,6 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( string className,
 	}
 	else
 	{
-		ISingleton<OutputController>::Get().PrintMessage(OutputType::OT_ERROR, "Invalid Class Name." );
+		OutputController::PrintMessage(OutputType::OT_ERROR, "Invalid Class Name." );
 	}
 }

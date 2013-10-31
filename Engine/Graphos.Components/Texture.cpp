@@ -10,15 +10,13 @@ using namespace OpenGL;
 
 #include "AdapterController.h"
 
-
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
 
-
 void Texture::LoadFromFile( string filePath )
 {
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		// Load and convert to 32 bits
 		FIBITMAP* imageData = FreeImage_ConvertTo32Bits( FreeImage_Load( FreeImage_GetFileType( filePath.c_str() ), filePath.c_str() ) );
@@ -38,7 +36,7 @@ void Texture::LoadFromFile( string filePath )
 		glBindTexture( GL_TEXTURE_2D, NULL );
 	}
 #if defined( _WIN32 )
-	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		wstring wFilePath( filePath.begin(), filePath.end() );
 
@@ -67,13 +65,13 @@ void Texture::Draw( IShader* shader )
 
 void Texture::Shutdown( void )
 {
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		glBindTexture( GL_TEXTURE_2D, NULL );
 		glDeleteBuffers( 1, &glTextureId );
 	}
 #if defined( _WIN32 )
-	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 	//#define CHANGE_TYPE(type, value) static_cast<type>( static_cast<void*>( value ) )	
 		if(dxTexture)

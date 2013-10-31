@@ -96,6 +96,7 @@
     <ClCompile Include="OpenGlController.cpp" />
     <ClCompile Include="ShaderController.cpp" />
     <ClCompile Include="Win32Controller.cpp" />
+    <ClCompile Include="WindowController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

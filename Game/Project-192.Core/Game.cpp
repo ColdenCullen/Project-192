@@ -151,10 +151,10 @@ bool Game::Update( void )
 		}
 	}
 
-	if( ISingleton<Input>::Get().IsKeyDown( VK_ESCAPE ) )
+	if( Input::IsKeyDown( VK_ESCAPE ) )
 		Exit();
 
-	if( ISingleton<Input>::Get().IsKeyDown( VK_F5 ) )
+	if( Input::IsKeyDown( VK_F5 ) )
 		Reset();
 
 	return true;
@@ -172,8 +172,8 @@ void Game::Draw( void )
 		}
 	case GameState::Game:
 		{
-			ISingleton<ShaderController>::Get().GetShader( "light" )->SetViewMatrix( camera->GetViewMatrix() );
-			ISingleton<ShaderController>::Get().GetShader( "light" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
+			ShaderController::GetShader( "light" )->SetViewMatrix( camera->GetViewMatrix() );
+			ShaderController::GetShader( "light" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
 
 			//camera->Draw();
 			objects.CallFunction( &GameObject::Draw );

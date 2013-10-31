@@ -10,19 +10,7 @@ namespace Graphos
 		class WindowController
 		{
 		public:
-#if defined( _WIN32 )
-			static
-			Win32Controller&	Get( void )
-			{
-				return Core::ISingleton<Win32Controller>::Get();
-			}
-#elif defined( __APPLE__ )
-			static
-			OSXController&		Get( void )
-			{
-				return Core::IController<OSXController>::Get();
-			}
-#endif//_WIN32||__APPLE__
+								static IPlatformWindowController* Get();
 
 		private:
 								WindowController( void ) { }

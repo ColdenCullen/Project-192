@@ -11,8 +11,8 @@ using namespace DirectX;
 
 void DirectXController::Initialize( void )
 {
-	WindowController::Get().Initialize();
-	WindowController::Get().OpenWindow();
+	WindowController::Get()->Initialize();
+	WindowController::Get()->OpenWindow();
 
 	driverType = D3D_DRIVER_TYPE_HARDWARE;
 	enable4xMsaa = false;
@@ -70,15 +70,15 @@ void DirectXController::Initialize( void )
 	DXGI_SWAP_CHAIN_DESC swapChainDesc;
 	ZeroMemory(&swapChainDesc, sizeof(swapChainDesc) );
 	swapChainDesc.BufferCount							= 1;
-	swapChainDesc.BufferDesc.Width						= WindowController::Get().GetWidth();//windowWidth;
-	swapChainDesc.BufferDesc.Height						= WindowController::Get().GetHeight();//windowHeight;
+	swapChainDesc.BufferDesc.Width						= WindowController::Get()->GetWidth();//windowWidth;
+	swapChainDesc.BufferDesc.Height						= WindowController::Get()->GetHeight();//windowHeight;
 	swapChainDesc.BufferDesc.RefreshRate.Numerator		= 60;
 	swapChainDesc.BufferDesc.RefreshRate.Denominator	= 1;
 	swapChainDesc.BufferDesc.Format						= DXGI_FORMAT_R8G8B8A8_UNORM;
 	swapChainDesc.BufferDesc.ScanlineOrdering			= DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 	swapChainDesc.BufferDesc.Scaling					= DXGI_MODE_SCALING_UNSPECIFIED;
 	swapChainDesc.BufferUsage							= DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	swapChainDesc.OutputWindow							= WindowController::Get().GetHWnd();//hMainWnd;
+	swapChainDesc.OutputWindow							= Win32Controller::Get()->GetHWnd();//hMainWnd;
 	swapChainDesc.Windowed								= true;
 	swapChainDesc.Flags									= 0;
 
@@ -151,8 +151,8 @@ void DirectXController::Resize( void )
 	// resize swap chain
 	HR( swapChain->ResizeBuffers(
 			1,			// BufferCount
-			WindowController::Get().GetWidth(),
-			WindowController::Get().GetHeight(),
+			WindowController::Get()->GetWidth(),
+			WindowController::Get()->GetHeight(),
 			DXGI_FORMAT_R8G8B8A8_UNORM,	
 			0)		// Swap chain flags
 	);
@@ -166,8 +166,8 @@ void DirectXController::Resize( void )
 	// Set up the description of the texture to use for the
 	// depth stencil buffer
 	D3D11_TEXTURE2D_DESC depthStencilDesc;
-	depthStencilDesc.Width			= WindowController::Get().GetWidth();//windowWidth;
-	depthStencilDesc.Height			= WindowController::Get().GetHeight();//windowHeight;
+	depthStencilDesc.Width			= WindowController::Get()->GetWidth();//windowWidth;
+	depthStencilDesc.Height			= WindowController::Get()->GetHeight();//windowHeight;
 	depthStencilDesc.MipLevels		= 1;
 	depthStencilDesc.ArraySize		= 1;
 	depthStencilDesc.Format			= DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -197,8 +197,8 @@ void DirectXController::Resize( void )
 	// Update the viewport and set it on the device
 	viewport.TopLeftX	= 0;
 	viewport.TopLeftY	= 0;
-	viewport.Width		= (float)WindowController::Get().GetWidth();
-	viewport.Height		= (float)WindowController::Get().GetHeight();
+	viewport.Width		= (float)WindowController::Get()->GetWidth();
+	viewport.Height		= (float)WindowController::Get()->GetHeight();
 	viewport.MinDepth	= 0.0f;
 	viewport.MaxDepth	= 1.0f;
 

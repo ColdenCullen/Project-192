@@ -31,7 +31,7 @@ void RigidBody::Update( void )
 	float deltaTime = Time::GetDeltaTime();
 
 	// Add gravity
-	linearVelocity += ISingleton<Physics>::Get().gravity * deltaTime;
+	linearVelocity += Physics::gravity * deltaTime;
 
 	// Update object
 	owner->transform.Translate( linearVelocity * deltaTime );

@@ -47,3 +47,5 @@ void AssetController::Shutdown( void )
 
 	ingredientShelf.clear();
 }
+
+unordered_map<string, IComponent*> AssetController::ingredientShelf;

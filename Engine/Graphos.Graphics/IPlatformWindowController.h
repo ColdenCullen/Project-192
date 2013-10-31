@@ -1,21 +1,23 @@
 #ifndef __IPLATFORM_WINDOW_CONTROLLER
 #define __IPLATFORM_WINDOW_CONTROLLER
 
-#include "IController.h"
 #include "Matrix4.h"
 
 namespace Graphos
 {
 	namespace Graphics
 	{
-		class IPlatformWindowController : public Core::IController
+		class IPlatformWindowController
 		{
 		public:
-			virtual void		Initialize( void ) override = 0;
-			virtual void		Shutdown( void ) override = 0;
+			virtual void		Initialize( void ) = 0;
+			virtual void		Shutdown( void ) = 0;
 
 			virtual void		Resize( void ) = 0;
 			virtual void		MessageLoop( void ) = 0;
+
+			virtual void		OpenWindow( void ) = 0;
+			virtual void		CloseWindow( void ) = 0;
 
 			// Getters
 			unsigned int		GetWidth( void )	{ return width; }

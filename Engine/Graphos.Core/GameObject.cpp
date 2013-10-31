@@ -20,7 +20,7 @@ using namespace Graphos::Graphics;
 GameObject* GameObject::CreateFromJson( Json::Value object )
 {
 	Json::Value current;
-	GameObject* obj = new GameObject( ISingleton<ShaderController>::Get().GetShader( object[ "Shader" ].asString() ) );
+	GameObject* obj = new GameObject( ShaderController::GetShader( object[ "Shader" ].asString() ) );
 
 	// Get parent
 	if( ( current = object.get( "Parent", object ) ) != object )
@@ -32,7 +32,7 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 	if( ( current = object.get( "Texture", object ) ) != object )
 	{
 		obj->AddComponent(
-			ISingleton<AssetController>::Get().GetContent<Texture>( current[ "Name" ].asString() )
+			AssetController::GetContent<Texture>( current[ "Name" ].asString() )
 		);
 	}
 
@@ -100,7 +100,7 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 	if( ( current = object.get( "Mesh", object ) ) != object )
 	{
 		obj->AddComponent(
-			ISingleton<AssetController>::Get().GetContent<Mesh>( current[ "Name" ].asString() )
+			AssetController::GetContent<Mesh>( current[ "Name" ].asString() )
 		);
 	}
 
@@ -133,7 +133,7 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 	if( ( current = object.get( "Script", object ) ) != object )
 	{
 		obj->AddComponent(
-			ISingleton<ScriptController>::Get().CreateObjectInstance( current[ "Class" ].asString(), obj )
+			ScriptController::Get().CreateObjectInstance( current[ "Class" ].asString(), obj )
 		);
 	}
 
@@ -178,7 +178,7 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 		}
 
 		obj->AddComponent<Collider>( col );
-		ISingleton<Physics::Physics>::Get().AddCollider( col );
+		Physics::Physics::AddCollider( col );
 	}
 
 	return obj;

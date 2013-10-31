@@ -8,7 +8,6 @@
 #include <json\json.h>
 
 #include "IComponent.h"
-#include "ISingleton.h"
 #include "Transform.h"
 #include "ShaderController.h"
 
@@ -38,7 +37,7 @@ namespace Graphos
 
 			// Getters and setters
 			Graphics::IShader*	GetShader( void ) const { return shader; }
-			void				SetShader( std::string newName ) { shader = ISingleton<Graphics::ShaderController>::Get().GetShader( newName ); }
+			void				SetShader( std::string newName ) { shader = Graphics::ShaderController::GetShader( newName ); }
 
 			// Add ingredient of type T
 			template<class T>

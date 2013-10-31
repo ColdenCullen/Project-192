@@ -92,7 +92,7 @@ void Mesh::LoadFromFile( string filePath )
 	for( unsigned int ii = 0; ii < numVertices; ++ii )
 		indices[ ii ] = ii;
 
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		// make and bind the VAO
 		glGenVertexArrays( 1, &vertexArrayObject );
@@ -127,7 +127,7 @@ void Mesh::LoadFromFile( string filePath )
 		glBindVertexArray( NULL );
 	}
 #ifdef _WIN32
-	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		// Create the vertex buffer
 		D3D11_BUFFER_DESC vbDesc;
@@ -154,13 +154,13 @@ void Mesh::Draw( IShader* shader )
 
 void Mesh::Shutdown( void )
 {
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		glDeleteBuffers( 1, &vertexBufferObject );
 		glDeleteBuffers( 1, &vertexArrayObject );
 	}
 #ifdef _WIN32
-	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		ReleaseCOMobjMacro( vertexBuffer );
 	}

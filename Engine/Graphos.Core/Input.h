@@ -46,8 +46,6 @@
 
 #include "UserInterface.h"
 #include "Vector2.h"
-#include "IController.h"
-#include "ISingleton.h"
 #include "Event.h"
 
 #include <cstdint>
@@ -76,39 +74,37 @@ namespace Graphos
 			uint64_t			bits[ SPLIT ];
 		};
 
-		class Input : public IController
+		class Input
 		{
 		public:
 			typedef Event<void(unsigned int)> KeyEvent;
 
-			UserInterface*		ui;
+			static UserInterface* ui;
 
-			void				Update( void );
+			static void			Update( void );
 
-			void				AddKeyEvent( unsigned int key, KeyEvent::Delegate func );
+			static void			AddKeyEvent( unsigned int key, KeyEvent::Delegate func );
 
-			void				KeyDown( unsigned int input );
-			void				KeyUp( unsigned int input );
+			static void			KeyDown( unsigned int input );
+			static void			KeyUp( unsigned int input );
 
-			bool				IsKeyDown( unsigned int input, const bool checkPrevious = false );
-			bool				IsKeyUp( unsigned int input, const bool checkPrevious = false );
+			static bool			IsKeyDown( unsigned int input, const bool checkPrevious = false );
+			static bool			IsKeyUp( unsigned int input, const bool checkPrevious = false );
 
-			Math::Vector2		GetMousePos( /*Transform& camera, float zPlane*/ ) const;
+			static Math::Vector2 GetMousePos( /*Transform& camera, float zPlane*/ );
 
 		private:
-			Input( void ) { }
-			Input( Input& other );
+								Input( void ) { }
+								Input( Input& other );
 			void				operator=( Input& other );
 
-			std::unordered_map<unsigned int, KeyEvent>
+			static std::unordered_map<unsigned int, KeyEvent>
 								keyEvents;
 
-			InputState			keyState;
-			InputState			prevKeyState;
-			InputState			stage;
-			bool				lmbDown, rmbDown;
-
-			friend class		ISingleton<Input>;
+			static InputState	keyState;
+			static InputState	prevKeyState;
+			static InputState	stage;
+			static bool			lmbDown, rmbDown;
 		};
 	}
 }

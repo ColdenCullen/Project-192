@@ -14,6 +14,8 @@
 #endif
 #include "GraphicsController.h"
 
+#define SHADER_PATH string("Resources\\Shaders\\")
+
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
@@ -22,9 +24,9 @@ void ShaderController::Initialize( void )
 {
 	char cAbsPath[ 256 ];
 #ifdef _WIN32
-	_fullpath( cAbsPath, ShaderPath.c_str(), MAX_PATH );
+	_fullpath( cAbsPath, SHADER_PATH.c_str(), MAX_PATH );
 #else
-	realpath( ShaderPath.c_str(), abspath );
+	realpath( SHADER_PATH.c_str(), abspath );
 #endif
 	string absPath = cAbsPath;
 
@@ -45,7 +47,7 @@ void ShaderController::Initialize( void )
 
 			// Check shader type
 			if( fileName.substr( ent->d_namlen - 8 ) == ".fs.glsl" &&
-				ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+				GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 			{
 				string name = fileName.substr( 0, ent->d_namlen - 8 );
 
@@ -83,3 +85,5 @@ void ShaderController::Shutdown( void )
 	}
 	shaders.clear();
 }
+
+unordered_map<string, IShader*> ShaderController::shaders;

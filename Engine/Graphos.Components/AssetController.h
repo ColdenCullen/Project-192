@@ -5,22 +5,20 @@
 #include <string>
 
 #include "IComponent.h"
-#include "IController.h"
-#include "ISingleton.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class AssetController : public IController
+		class AssetController
 		{
 		public:
-			virtual void		Initialize( void ) override;
-			virtual void		Shutdown( void ) override;
+			static void			Initialize( void );
+			static void			Shutdown( void );
 
 			// Returns content of the given type with the given name
 			template<class T>
-			typename std::enable_if<std::is_base_of<IComponent, T>::value, T*>::type
+			static typename std::enable_if<std::is_base_of<IComponent, T>::value, T*>::type
 								GetContent( std::string name )
 			{
 				return dynamic_cast<T*>( ingredientShelf[ name ] );
@@ -31,10 +29,8 @@ namespace Graphos
 								AssetController( const AssetController& other );
 			AssetController&	operator=( const AssetController& other );
 
-			std::unordered_map<std::string, IComponent*>
+			static std::unordered_map<std::string, IComponent*>
 								ingredientShelf;
-
-			friend class		Core::ISingleton<AssetController>;
 		};
 	}
 }

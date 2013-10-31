@@ -46,7 +46,7 @@ void Camera::Update( void )
 
 void Camera::Draw( void )
 {
-	//ISingleton<ShaderController>::Get().SetAllShadersUniform( "cameraMatrix", viewMatrix );
+	//ShaderController::SetAllShadersUniform( "cameraMatrix", viewMatrix );
 }
 
 void Camera::Shutdown( void )
