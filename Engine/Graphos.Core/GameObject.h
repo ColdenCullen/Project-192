@@ -9,7 +9,7 @@
 
 #include "IComponent.h"
 #include "ISingleton.h"
-#include "transform.h"
+#include "Transform.h"
 #include "ShaderController.h"
 
 namespace Graphos

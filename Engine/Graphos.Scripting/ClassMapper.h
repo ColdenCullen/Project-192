@@ -3,7 +3,7 @@
 
 #include "ClassWrapper.h"
 
-#include "transform.h"
+#include "Transform.h"
 #include "CgShader.h"
 #include "GameObject.h"
 #include "Mesh.h"
