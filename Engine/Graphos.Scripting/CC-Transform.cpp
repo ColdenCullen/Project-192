@@ -61,13 +61,13 @@ void cvv8::ClassCreator_SetupBindings<Transform>::Initialize( Handle<v8::Object>
 	AccessorAdder Transformacc( Transformcc.Prototype() );
 	Transformacc
 		( "Position",
-			ConstMethodToGetter<const Transform, const Vector3& (void), &Transform::Position>::Get,
+			ConstMethodToGetter<const Transform, const Vector3* (void), &Transform::Position>::Get,
 			ThrowingSetter::Set )
 		( "Rotation",
-			ConstMethodToGetter<const Transform, const Vector3& (void), &Transform::Rotation>::Get,
+			ConstMethodToGetter<const Transform, const Vector3* (void), &Transform::Rotation>::Get,
 			ThrowingSetter::Set )
 		/*( "Scale",
-			ConstMethodToGetter<const Transform, const Vector3& (void), &Transform::Scale>::Get,
+			ConstMethodToGetter<const Transform, const Vector3* (void), &Transform::Scale>::Get,
 			ThrowingSetter::Set )
 		( "WorldMatrix",
 			ConstMethodToGetter<const Transform, const Matrix4 (void), &Transform::WorldMatrix>::Get,
@@ -76,13 +76,13 @@ void cvv8::ClassCreator_SetupBindings<Transform>::Initialize( Handle<v8::Object>
 			ConstMethodToGetter<const Transform, const Matrix4 (void), &Transform::RotationMatrix>::Get,
 			ThrowingSetter::Set )*/
 		( "Right",
-			ConstMethodToGetter<const Transform, const Vector3& (void), &Transform::GetRight>::Get,
+			ConstMethodToGetter<const Transform, const Vector3* (void), &Transform::GetRight>::Get,
 			ThrowingSetter::Set )
 		( "Up",
-			ConstMethodToGetter<const Transform, const Vector3& (void), &Transform::GetUp>::Get,
+			ConstMethodToGetter<const Transform, const Vector3* (void), &Transform::GetUp>::Get,
 			ThrowingSetter::Set )
 		( "Forward",
-			ConstMethodToGetter<const Transform, const Vector3& (void), &Transform::GetForward>::Get,
+			ConstMethodToGetter<const Transform, const Vector3* (void), &Transform::GetForward>::Get,
 			ThrowingSetter::Set )
 		;
 

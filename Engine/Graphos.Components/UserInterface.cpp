@@ -114,8 +114,8 @@ bool UserInterface::Update( void )
 
 	// Transform for scale
 	view->webView->InjectMouseMove(
-		( width / 2 ) + ( ( ( width / 2 ) - cursor.x ) * -transform.Scale().x ),
-		( height / 2 ) + ( ( ( height / 2 ) - cursor.y ) * transform.Scale().y )
+		( width / 2 ) + ( ( ( width / 2 ) - cursor.x ) * -transform.Scale()->x ),
+		( height / 2 ) + ( ( ( height / 2 ) - cursor.y ) * transform.Scale()->y )
 	);
 
 	if( Input::IsKeyDown( VK_LBUTTON, true ) )

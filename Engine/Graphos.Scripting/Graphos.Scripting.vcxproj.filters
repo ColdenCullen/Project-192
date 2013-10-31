@@ -3,15 +3,11 @@
   <ItemGroup>
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
-    <ClInclude Include="ClassMapper.h">
-      <Filter>Class Wrapers</Filter>
-    </ClInclude>
-    <ClInclude Include="NativeToJSMap_Graphos.h">
-      <Filter>Class Wrapers</Filter>
-    </ClInclude>
     <ClInclude Include="ClassWrapper.h">
       <Filter>Class Wrapers</Filter>
     </ClInclude>
+    <ClInclude Include="NativeToJSMap_Graphos.h" />
+    <ClInclude Include="ClassMapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ScriptController.cpp" />

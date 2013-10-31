@@ -18,11 +18,11 @@ namespace Graphos
 		class GameObject
 		{
 		public:
-			Math::Transform		transform;
+			Math::Transform*	transform;
 
 			// Constructors
-			GameObject( void ) : shader( nullptr ) { }
-			GameObject( Graphics::IShader* shader ) : shader( shader ) { }
+			GameObject( void ) : shader( nullptr ), transform( new Math::Transform ) { }
+			GameObject( Graphics::IShader* shader ) : shader( shader ), transform( new Math::Transform ) { }
 			
 			// Factory for creating game objects from json
 			static GameObject*	CreateFromJson( Json::Value object );

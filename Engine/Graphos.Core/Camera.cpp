@@ -10,12 +10,12 @@ Camera::Camera( GameObject* owner ) : IComponent( owner ), viewMatrix( Matrix4::
 
 void Camera::Update( void )
 {
-	const Vector3& position = owner->transform.Position();
+	const Vector3& position = *owner->transform->Position();
 
-	Vector3 up = owner->transform.RotationMatrix() * Vector3::Up;
-	Vector3 lookAt = owner->transform.RotationMatrix() * Vector3::Forward;
+	Vector3 up = owner->transform->RotationMatrix() * Vector3::Up;
+	Vector3 lookAt = owner->transform->RotationMatrix() * Vector3::Forward;
 
-	//up += owner->transform.Position();
+	//up += owner->transform->Position();
 	lookAt += position;
 
 	Vector3 zAxis = ( lookAt - position ).Normalize();

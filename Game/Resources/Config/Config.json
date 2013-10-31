@@ -15,7 +15,7 @@
 	{
 		"Adapter": "OpenGL",
 		"backfaceculling" : true,
-		"vsync" : true
+		"vsync" : false
 	},
 	"physics" : 
 	{

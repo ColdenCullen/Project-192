@@ -110,19 +110,19 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 		Json::Value currentTransform;
 
 		if( ( currentTransform = current.get( "Scale", object ) ) != object )
-			obj->transform.Scale(
+			obj->transform->Scale(
 				currentTransform[ "x" ].asDouble(),
 				currentTransform[ "y" ].asDouble(),
 				currentTransform[ "z" ].asDouble()
 			);
 		if( ( currentTransform = current.get( "Position", object ) ) != object )
-			obj->transform.Translate(
+			obj->transform->Translate(
 				currentTransform[ "x" ].asDouble(),
 				currentTransform[ "y" ].asDouble(),
 				currentTransform[ "z" ].asDouble()
 			);
 		if( ( currentTransform = current.get( "Rotation", object ) ) != object )
-			obj->transform.Rotate(
+			obj->transform->Rotate(
 				currentTransform[ "x" ].asDouble(),
 				currentTransform[ "y" ].asDouble(),
 				currentTransform[ "z" ].asDouble()
@@ -194,7 +194,7 @@ void GameObject::Update( void )
 void GameObject::Draw( void )
 {
 	//shader->Use();
-	shader->SetModelMatrix( transform.WorldMatrix() );
+	shader->SetModelMatrix( transform->WorldMatrix() );
 	// TODO...what did/does this do?...
 	// this SetUniform was removed...needs refactoring?
 //	shader->SetUniform( "shaderTexture", 0 );
@@ -215,4 +215,6 @@ void GameObject::Shutdown( void )
 	}
 
 	componentList.clear();
+
+	delete_s( transform );
 }

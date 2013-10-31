@@ -7,8 +7,15 @@
 
 namespace cvv8
 {
+#if 0
+
 	template<typename T>
-	struct NativeToJSMap_Graphos// : public NativeToJSMap<T>
+	struct NativeToJSMap_Graphos : public NativeToJSMap<T>::NativeToJSImpl { };
+
+#else
+
+	template<typename T>
+	struct NativeToJSMap_Graphos : public NativeToJSMap<T>
 	{
 	private:
         typedef TypeInfo<T> TI;
@@ -16,12 +23,12 @@ namespace cvv8
         /**
            The native type to bind to.
         */
-        typedef Type const * NativeHandle;
+        typedef const Type* NativeHandle;
         /** The type for holding the JS 'this' object. */
         typedef v8::Persistent<v8::Object> JSObjHandle;
         //typedef v8::Handle<v8::Object> JSObjHandle; // Hmmm.
         typedef std::pair<NativeHandle,JSObjHandle> ObjBindT;
-        typedef std::map<void const *, ObjBindT> OneOfUsT;
+        typedef std::map<const void*, ObjBindT> OneOfUsT;
         /** Maps (void const *) to ObjBindT.
         
             Reminder to self: we might need to make this map a static
@@ -32,7 +39,7 @@ namespace cvv8
             initialization of the member is going to require a really
             ugly set of template parameters, though.
         */
-        static OneOfUsT & Map()
+        static OneOfUsT& Map()
         {
             static OneOfUsT bob;
             return bob;
@@ -40,8 +47,7 @@ namespace cvv8
     public:
         /** Maps obj as a lookup key for jself. Returns false if !obj,
          else true. */
-        static bool Insert( JSObjHandle const & jself,
-                            NativeHandle obj )
+        static bool Insert( const JSObjHandle& jself, NativeHandle obj )
         {
             return obj
                 ? (Map().insert( std::make_pair( obj, std::make_pair( obj, jself ) ) ),true)
@@ -52,7 +58,7 @@ namespace cvv8
            Removes any mapping of the given key. Returns the
            mapped native, or 0 if none is found.
         */
-        static NativeHandle Remove( void const * key )
+        static NativeHandle Remove( const void* key )
         {
             typedef typename OneOfUsT::iterator Iterator;
             OneOfUsT & map( Map() );
@@ -73,7 +79,7 @@ namespace cvv8
            Returns the native associated (via Insert())
            with key, or 0 if none is found.
         */
-        static NativeHandle GetNative( void const * key )
+        static NativeHandle GetNative( const void* key )
         {
             if( ! key ) return 0;
             else
@@ -89,7 +95,7 @@ namespace cvv8
            Returns the JS object associated with key, or
            an empty handle if !key or no object is found.
         */
-        static v8::Handle<v8::Object> GetJSObject( void const * key )
+        static v8::Handle<v8::Object> GetJSObject( const void* key )
         {
             if( ! key ) return v8::Handle<v8::Object>();
             typename OneOfUsT::const_iterator it = Map().find(key);
@@ -97,12 +103,16 @@ namespace cvv8
             else return (*it).second.second;
 		}
 
-		v8::Handle<v8::Value> operator()( Type const & n ) const
+		v8::Handle<v8::Value> operator()( const Type& val ) const
 		{
-			return this->operator()( &n );
+			// Create new object
+			v8::Handle<v8::Object>& toReturn = ClassCreator<T>::Instance().NewInstance( 0, NULL );
+			// Copy values from original to new
+			*static_cast<T*>( toReturn->GetPointerFromInternalField( ClassCreator_InternalFields<Type>::NativeIndex ) ) = val;
+			return toReturn;
 		}
 
-		v8::Handle<v8::Value> operator()( Type const * val ) const
+		v8::Handle<v8::Value> operator()( const Type* val ) const
 		{
 			/*
 			v8::Handle<v8::Value> const & rc( BM::GetJSObject(n) );
@@ -112,7 +122,7 @@ namespace cvv8
 
 			v8::Handle<v8::Value> const & rc( GetJSObject( val ) );
 
-			//if( rc.IsEmpty() )
+			if( rc.IsEmpty() )
 			{
 				// If object does not exist in the JSMap, create it
 				JSObjHandle toReturn( ClassCreator<T>::Instance().NewInstance( 0, NULL ) );
@@ -121,23 +131,15 @@ namespace cvv8
 				//Insert( toReturn, val );
 				return toReturn;
 			}
-			//else
+			else
 			{
 				return rc;
 				//return v8::Null();
 			}
 		}
-
-#if 0
-		// Old implemetation
-		v8::Handle<v8::Value> operator()( Type const * n ) const
-		{
-			v8::Handle<v8::Value> const & rc( GetJSObject(n) );
-			if( rc.IsEmpty() ) return v8::Null();
-			else return rc;
-		}
-#endif
 	};
+
+#endif
 }
 
 #endif//__NATIVE_TO_JS_MAP_GRAPHOS
