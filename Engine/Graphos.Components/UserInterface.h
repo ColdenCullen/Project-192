@@ -35,10 +35,8 @@ namespace Graphos
 			unsigned int		width;
 			unsigned int		height;
 
-			//Mesh				uiMesh();
-			GameObjectCollection
-								objects;
-			GameObject*			uiMesh;
+			GameObject*			uiObj;
+			Mesh*				uiMesh;
 
 			Math::Transform		transform;
 

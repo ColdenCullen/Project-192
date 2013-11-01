@@ -33,10 +33,12 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	height = ISingleton<Config>::Get().GetData<unsigned int>( "display.height" );
 
 	// Initialize mesh
-	//uiMesh = new Mesh("Resources/Assets/Meshes/UI.obj");
+	uiObj = new GameObject(ISingleton<ShaderController>::Get().GetShader( "simple" ));
+	uiMesh = new Mesh("Resources/Assets/Meshes/UI.obj");
+	uiObj->AddComponent(uiMesh);
 	//uiMesh().LoadFromFile("Resources/Assets/Meshes/UI.obj");
-	objects.LoadObjects( "" );
-	uiMesh = objects.GetObjectByName( "UI" );
+	//objects.LoadObjects( "" );
+	//uiMesh = objects.GetObjectByName( "UI" );
 
 	// Initialize Awesomium view
 	view = new AwesomiumView( abspath, width, height );
@@ -53,10 +55,10 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	width	= static_cast<float>( width )  * ISingleton<Config>::Get().GetData<float>( "ui.scale.x" );
 	height	= static_cast<float>( height ) * ISingleton<Config>::Get().GetData<float>( "ui.scale.y" );
 
-	// Scale to fix Awesomium issue
+	// Scale the UI obj
 	transform.Scale(
-		width,//ISingleton<Config>::Get().GetData<float>( "ui.scale.x" ),
-		-1 * height,//-ISingleton<Config>::Get().GetData<float>( "ui.scale.y" ),
+		width,
+		-1 * height,
 		1.0f
 	);
 
@@ -108,8 +110,7 @@ void UserInterface::Draw( void )
 	view->Draw( nullptr );
 
 	// Draw mesh
-	//uiMesh->Draw(ISingleton<ShaderController>::Get().GetShader( "simple" ));
-	uiMesh->Draw();
+	uiObj->Draw();
 
 	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
 }
