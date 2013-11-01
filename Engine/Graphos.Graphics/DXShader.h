@@ -22,10 +22,10 @@ namespace Graphos
 			void				Draw( const Core::Mesh& mesh ) const override;
 			void				BindTexture( const Core::Texture& text ) const override;
 
-			void				SetUniform( std::string name, const float value, ShaderType type ) const override {}
-			void				SetUniform( std::string name, const int value, ShaderType type ) const override {}
-			void				SetUniformArray( std::string name, const float* value, const int size, ShaderType type ) const override {}
-			void				SetUniformArray( std::string name, const int* value, const int size, ShaderType type ) const override {}
+			void				SetUniform( std::string name, const float value, ShaderType type ) const override;
+			void				SetUniform( std::string name, const int value, ShaderType type ) const override;
+			void				SetUniformArray( std::string name, const float* value, const int size, ShaderType type ) const override;
+			void				SetUniformArray( std::string name, const int* value, const int size, ShaderType type ) const override;
 			
 		private:
 			// Shaders
@@ -39,9 +39,11 @@ namespace Graphos
 				char*			data;
 				std::unordered_map<std::string, std::pair<int, std::size_t>>
 								meta;
+				DirectX::ID3D11Buffer* vsConsantBuffer;
 			};
 
 			ConstBuffer buffer;
+
 		};
 	}
 }

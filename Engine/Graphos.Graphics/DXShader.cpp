@@ -1,8 +1,10 @@
+#include <memory>
 #include <DirectX/DirectXIncludes.h>
 
 #include "DXShader.h"
 #include "GraphicsController.h"
 #include "AdapterController.h"
+#include "OutputController.h"
 
 using namespace Graphos::Graphics;
 using namespace Graphos::Core;
@@ -59,40 +61,72 @@ DXShader::DXShader( std::string vertexPath, std::string fragmentPath )
 
 DXShader::~DXShader(void)
 {
-
+	Shutdown();
 }
 
 void DXShader::Shutdown( void )
 {
-
+	delete [] buffer.data;
+	ReleaseCOMobjMacro( buffer.vsConsantBuffer );
+	ReleaseCOMobjMacro( vertexShader );
+	ReleaseCOMobjMacro( pixelShader );
+	ReleaseCOMobjMacro( vertexLayout );
 }
 
-void DXShader::Draw( const Core::Mesh& mesh ) const 
+void DXShader::Draw( const Mesh& mesh ) const 
 {
 
 }
 
-void DXShader::BindTexture( const Core::Texture& text ) const 
+void DXShader::BindTexture( const Texture& text ) const 
 {
 
 }
 
 void DXShader::SetUniform( std::string name, const float value, ShaderType type ) const
 {
+	auto it = buffer.meta.find( name );
 
+	if( it == end( buffer.meta ) )
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
+	if( it->second.second == sizeof( value ) )
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniform(float)" );
+
+	std::memcpy( buffer.data + it->second.first, &value, it->second.second );
 }
 
 void DXShader::SetUniform( std::string name, const int value, ShaderType type ) const 
 {
+	auto it = buffer.meta.find( name );
 
+	if( it == end( buffer.meta ) )
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
+	if( it->second.second == sizeof( value ) )
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniform(int)" );
+
+	std::memcpy( buffer.data + it->second.first, &value, it->second.second );
 }
 
 void DXShader::SetUniformArray( std::string name, const float* value, const int size, ShaderType type ) const 
 {
+	auto it = buffer.meta.find( name );
 
+	if( it == end( buffer.meta ) )
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
+	if( it->second.second == sizeof( *value )*size )
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniformArray(float)" );
+	
+	std::memcpy( buffer.data + it->second.first, value, it->second.second );
 }
 
 void DXShader::SetUniformArray( std::string name, const int* value, const int size, ShaderType type ) const 
 {
+	auto it = buffer.meta.find( name );
 
+	if( it == end( buffer.meta ) )
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
+	if( it->second.second == sizeof( *value )*size )
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniformArray(int)" );
+	
+	std::memcpy( buffer.data + it->second.first, value, it->second.second );
 }
