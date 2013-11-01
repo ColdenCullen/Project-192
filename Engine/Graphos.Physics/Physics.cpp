@@ -11,8 +11,6 @@ using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Physics;
 
-Physics::Physics( void ) : gravity() { }
-
 void Physics::AddCollider( Collider* col )
 {
 	colliders.push_back( col );
@@ -39,7 +37,7 @@ void Physics::Update( void )
 			if( ( *insideCollider )->Type() == Sphere && ( *outsideCollider )->Type() == Sphere )
 			{
 				// Check if colliding.
-				isColliding = ( normal = ( ( *outsideCollider )->Owner()->transform.Position() - ( *insideCollider )->Owner()->transform.Position() ) ).Magnitude() <
+				isColliding = ( normal = ( *( *outsideCollider )->Owner()->transform->Position() - *( *insideCollider )->Owner()->transform->Position() ) ).Magnitude() <
 					static_cast<SphereCollider*>( *outsideCollider )->radius + static_cast<SphereCollider*>( *insideCollider )->radius;
 			}
 			else
@@ -99,7 +97,7 @@ void Physics::Update( void )
 
 void Physics::Initialize( void )
 {
-	gravity = ISingleton<Config>::Get().GetData<Vector3>( "physics.gravity" );
+	gravity = Config::GetData<Vector3>( "physics.gravity" );
 }
 
 void Physics::Shutdown( void )
@@ -214,3 +212,7 @@ bool Physics::Simplex::ContainsOrigin( Vector3& direction )
 
 	return false;
 }
+
+std::vector<Collider*> Physics::colliders;
+
+Vector3 Physics::gravity;

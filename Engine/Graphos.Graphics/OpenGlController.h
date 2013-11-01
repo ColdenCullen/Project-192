@@ -19,10 +19,10 @@ namespace Graphos
 			virtual void		BeginDraw( void );
 			virtual void		EndDraw( void );
 
-			OpenGL::GLRenderContext&	RenderContext( void )		{ return renderContext; }
+			OpenGL::GLRenderContext& RenderContext( void ) { return renderContext; }
 
 		private:
-			OpenGL::GLRenderContext		renderContext;
+			OpenGL::GLRenderContext renderContext;
 
 			friend class		AdapterController;
 		};

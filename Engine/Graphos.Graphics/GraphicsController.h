@@ -1,40 +1,33 @@
 #ifndef __GRAPHICS_CONTROLLER
 #define __GRAPHICS_CONTROLLER
 
-#include "IController.h"
-#include "ISingleton.h"
-
 namespace Graphos
 {
 	namespace Graphics
 	{
 		enum class				GraphicsAdapter { OpenGL, DirectX };
 
-		class GraphicsController : public Core::IController
+		class GraphicsController
 		{
 		public:
-			void				Initialize( void ) override;
-			//TODO: Should probably implement this
-			void				Shutdown( void ) override { }
-			// Resizes display with given values
-			void				Resize( void );
-			// Reloads display based on config settings
-			void				Reload( void );
+			static void			Initialize( void );
+			static void			Shutdown( void );
+			static void			Resize( void );
+			static void			Reload( void );
 
-			GraphicsAdapter		GetActiveAdapter( void ) const { return activeAdapter; }
-
-			void				MessageLoop( void );
+			static GraphicsAdapter	
+								GetActiveAdapter( void ) { return activeAdapter; }
+			static void			MessageLoop( void );
 
 		private:
-			GraphicsAdapter		activeAdapter;
+			static GraphicsAdapter	
+								activeAdapter;
 
 								GraphicsController( void ) { }
 								GraphicsController( const GraphicsController& );
 			void				operator=( const GraphicsController& );
 
-			void				UpdateGraphicsAdapter( void );
-
-			friend class		Core::ISingleton<GraphicsController>;
+			static void			UpdateGraphicsAdapter( void );
 		};
 	}
 }

@@ -21,7 +21,7 @@ namespace Graphos
 
 			const ColliderType	Type( void ) const	{ return type; }
 			const Graphos::Math::Vector3
-								Position( void ) const { return owner->transform.Position() + centerOffset; }
+								Position( void ) const { return *owner->transform->Position() + centerOffset; }
 			virtual const Graphos::Math::Vector3
 								GetFurthestPointInDirection( const Graphos::Math::Vector3& direction ) const = 0;
 			virtual const Graphos::Math::Vector3

@@ -36,7 +36,9 @@
     <Import Project="..\..\Solution\GraphosProperties.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -68,25 +70,21 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CC-Camera.cpp" />
     <ClCompile Include="CC-CgShader.cpp" />
     <ClCompile Include="CC-GameObject.cpp" />
-    <ClCompile Include="CC-IShader.cpp" />
+    <ClCompile Include="CC-Matrix4.cpp" />
     <ClCompile Include="CC-Mesh.cpp" />
     <ClCompile Include="CC-Texture.cpp" />
+    <ClCompile Include="CC-Time.cpp" />
     <ClCompile Include="CC-Transform.cpp" />
     <ClCompile Include="CC-Vector3.cpp" />
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptController.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CC-CgShader.h" />
-    <ClInclude Include="CC-GameObject.h" />
-    <ClInclude Include="CC-IShader.h" />
-    <ClInclude Include="CC-Mesh.h" />
-    <ClInclude Include="CC-Texture.h" />
-    <ClInclude Include="CC-Transform.h" />
-    <ClInclude Include="CC-Vector3.h" />
     <ClInclude Include="ClassMapper.h" />
+    <ClInclude Include="ClassWrapper.h" />
     <ClInclude Include="NativeToJSMap_Graphos.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />

@@ -2,6 +2,7 @@
 #define __SHADER
 
 #include "Matrix4.h"
+#include <string>
 
 namespace Graphos
 {
@@ -13,15 +14,19 @@ namespace Graphos
 
 	namespace Graphics
 	{
+		enum class ShaderType { VERTEX, FRAGMENT };
+
 		class IShader
 		{
 		public:
+			virtual void		Shutdown( void ) = 0;
 			virtual void		Draw( const Core::Mesh& mesh ) const = 0;
 			virtual void		BindTexture( const Core::Texture& text) const = 0;
-
-			virtual void		SetUniform( std::string name, int value ) const = 0;
-			virtual void		SetUniform( std::string name, float value ) const = 0;
-			virtual void		SetUniform( std::string name, const Math::Matrix4& value ) const = 0;
+			
+			virtual void		SetUniform( std::string name, const float value, ShaderType type ) const = 0;
+			virtual void		SetUniform( std::string name, const int value, ShaderType type ) const = 0;
+			virtual void		SetUniformArray( std::string name, const float* value, const int size, ShaderType type ) const = 0;
+			virtual void		SetUniformArray( std::string name, const int* value, const int size, ShaderType type ) const = 0;
 
 			void				SetModelMatrix( const Math::Matrix4& value ) { modelMatrix = value; UpdateMVPMatrix(); }
 			void				SetViewMatrix( const Math::Matrix4& value ) { viewMatrix = value; UpdateMVPMatrix(); }

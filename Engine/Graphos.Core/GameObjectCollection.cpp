@@ -25,7 +25,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 		auto name = object[ "Name" ].asString();
 
 		if( nameMap.find( name ) != end( nameMap ) )
-			ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_ERROR, "Object name " + name + " already in use." );
+			OutputController::PrintMessage( OutputType::OT_ERROR, "Object name " + name + " already in use." );
 
 		objectList[ currentId ] = GameObject::CreateFromJson( object );
 		nameMap[ name ] = currentId++;
@@ -50,12 +50,12 @@ void GameObjectCollection::LoadObjects( string assetPath )
 		}
 		else
 		{
-			ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_ERROR, "Invalid object json in " + fileList[ fileIndex ].GetFileName() );
+			OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid object json in " + fileList[ fileIndex ].GetFileName() );
 		}
 	}
 
 	for( auto parentPair = begin( parentMap ); parentPair != end( parentMap ); ++parentPair )
-		GetObjectById( parentPair->first )->transform.parent = &GetObjectByName( parentPair->second )->transform;
+		GetObjectById( parentPair->first )->transform->parent = GetObjectByName( parentPair->second )->transform;
 }
 
 GameObject* GameObjectCollection::GetObjectById( unsigned int id )

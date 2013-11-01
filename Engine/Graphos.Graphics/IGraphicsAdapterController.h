@@ -1,16 +1,19 @@
 #ifndef __IGRAPHICS_ADAPTER_CONTROLLER
 #define __IGRAPHICS_ADAPTER_CONTROLLER
 
-#include "IController.h"
-#include <DirectX/DirectXIncludes.h>
-#include <GL/glincludes.h>
+namespace DirectX
+{
+	struct ID3D11DeviceContext;
+	struct ID3D11Device;
+}
 
+#include <GL/glincludes.h>
 
 namespace Graphos
 {
 	namespace Graphics
 	{
-		class IGraphicsAdapterController : public Core::IController
+		class IGraphicsAdapterController
 		{
 		protected:
 			union AdapterDeviceContext
@@ -24,8 +27,8 @@ namespace Graphos
 			} device;
 
 		public:
-			virtual void		Initialize( void ) override = 0;
-			virtual void		Shutdown( void ) override = 0;
+			virtual void		Initialize( void ) = 0;
+			virtual void		Shutdown( void ) = 0;
 
 			virtual void		Resize( void ) = 0;
 			virtual void		Reload( void ) = 0;

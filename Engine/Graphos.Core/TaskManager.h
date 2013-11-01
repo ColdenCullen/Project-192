@@ -16,35 +16,28 @@ namespace Graphos
 
 			static const int	DefaultThreadCount = -1;
 
-			static TaskManager&	Get( void )
-			{
-				static TaskManager instance;
-				return instance;
-			}
+			static void		Initialize( void );
+			static void		Initialize( int initThreadCount  );
+			static void		Shutdown( void );
 
-			virtual void		Initialize( void );
-			virtual void		Initialize( int initThreadCount  );
-			virtual void		Shutdown( void );
+			static const int& GetThreadCount( void )		{ return numThreads; }
+			static const int& GetActiveThreadCount( void )	{ return runningThreads; }
 
-			const int&			GetThreadCount( void )			{ return numThreads; }
-			const int&			GetActiveThreadCount( void )	{ return runningThreads; }
-
-			void				AddTask( Task task );
-			void				WaitForCompletion( void );
-
-			void				ExecuteTask( Task task, int index );
+			static void		AddTask( Task task );
+			static void		WaitForCompletion( void );
+			static void		ExecuteTask( Task task, int index );
 
 		private:
-			int					numThreads;
-			int					runningThreads;
-			std::deque<Task>	tasksWaiting;
-			std::thread*		workers;
-			bool*				workerAvailablibility;
-			std::mutex			monitorMutex;
+			static int		numThreads;
+			static int		runningThreads;
+			static std::deque<Task>	tasksWaiting;
+			static std::thread*	workers;
+			static bool*	workerAvailablibility;
+			static std::mutex monitorMutex;
 
-			TaskManager( void ) { }
-			TaskManager( const TaskManager& );
-			TaskManager&		operator=( const TaskManager& );
+							TaskManager( void ) { }
+							TaskManager( const TaskManager& );
+			TaskManager&	operator=( const TaskManager& );
 		};
 	}
 }

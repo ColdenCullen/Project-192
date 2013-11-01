@@ -14,6 +14,8 @@
 #endif
 #include "GraphicsController.h"
 
+#define SHADER_PATH string("Resources\\Shaders\\")
+
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
@@ -22,9 +24,9 @@ void ShaderController::Initialize( void )
 {
 	char cAbsPath[ 256 ];
 #ifdef _WIN32
-	_fullpath( cAbsPath, ShaderPath.c_str(), MAX_PATH );
+	_fullpath( cAbsPath, SHADER_PATH.c_str(), MAX_PATH );
 #else
-	realpath( ShaderPath.c_str(), abspath );
+	realpath( SHADER_PATH.c_str(), abspath );
 #endif
 	string absPath = cAbsPath;
 
@@ -44,12 +46,12 @@ void ShaderController::Initialize( void )
 			string fileName = ent->d_name;
 
 			// Check shader type
-			if( fileName.substr( ent->d_namlen - 6 ) == ".fs.gl" &&
-				ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+			if( fileName.substr( ent->d_namlen - 8 ) == ".fs.glsl" &&
+				GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 			{
-				string name = fileName.substr( 0, ent->d_namlen - 6 );
+				string name = fileName.substr( 0, ent->d_namlen - 8 );
 
-				shaders[ name ] = &( new GlShader() )->Initialize( absPath + name + ".vs.gl", absPath + name + ".fs.gl" );
+				shaders[ name ] = new GlShader( absPath + name + ".vs.glsl", absPath + name + ".fs.glsl" );
 			}
 			else if( fileName.substr( ent->d_namlen - 6 ) == ".fs.cg" )
 			{
@@ -57,12 +59,7 @@ void ShaderController::Initialize( void )
 				
 				shaders[ name ] = new CgShader( absPath + name + ".vs.cg", absPath + name + ".fs.cg" );
 			}
-			else if( fileName.substr( ent->d_namlen - 5 ) == ".cgfx" )
-			{
-				string name = fileName.substr( 0, ent->d_namlen - 5 );
-
-				shaders[ name ] = new CgShader( absPath + fileName );
-			}
+			
 		}
 
 		// Close dir
@@ -83,7 +80,10 @@ void ShaderController::Shutdown( void )
 {
 	for( auto shader : shaders )
 	{
+		shader.second->Shutdown();
 		delete shader.second;
 	}
 	shaders.clear();
 }
+
+unordered_map<string, IShader*> ShaderController::shaders;

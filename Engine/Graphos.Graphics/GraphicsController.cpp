@@ -16,12 +16,12 @@ void GraphicsController::Initialize( void )
 
 	AdapterController::Get()->Initialize();
 
-	ISingleton<ShaderController>::Get().Initialize();
+	ShaderController::Initialize();
 }
 
 void GraphicsController::Resize( void )
 {
-	WindowController::Get().Resize();
+	WindowController::Get()->Resize();
 	AdapterController::Get()->Resize();
 }
 
@@ -29,21 +29,28 @@ void GraphicsController::Reload( void )
 {
 	UpdateGraphicsAdapter();
 
-	WindowController::Get().Resize();
+	WindowController::Get()->Resize();
 	AdapterController::Get()->Reload();
 }
 
 void GraphicsController::UpdateGraphicsAdapter( void )
 {
-	if( ISingleton<Config>::Get().GetData<string>( "graphics.Adapter" ) == "OpenGL" )
+	if( Config::GetData<std::string>( "graphics.Adapter" ) == "OpenGL" )
 		activeAdapter = GraphicsAdapter::OpenGL;
-	else if( ISingleton<Config>::Get().GetData<string>( "graphics.Adapter" ) == "DirectX" )
+	else if( Config::GetData<std::string>( "graphics.Adapter" ) == "DirectX" )
 		activeAdapter = GraphicsAdapter::DirectX;
 	else
-		throw exception( "Invalid Graphics.Adapter specified." );
+		throw std::exception( "Invalid Graphics.Adapter specified." );
 }
 
 void GraphicsController::MessageLoop( void )
 {
-	WindowController::Get().MessageLoop();
+	WindowController::Get()->MessageLoop();
 }
+
+void GraphicsController::Shutdown( void )
+{
+	AdapterController::Get()->Shutdown();
+}
+
+GraphicsAdapter GraphicsController::activeAdapter;

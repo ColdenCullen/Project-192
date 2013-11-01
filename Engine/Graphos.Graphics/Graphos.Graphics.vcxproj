@@ -37,13 +37,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(DXSDK_DIR)\Include;$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <ShowIncludes>true</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -73,6 +74,7 @@
     <ClInclude Include="AdapterController.h" />
     <ClInclude Include="CgShader.h" />
     <ClInclude Include="DirectXController.h" />
+    <ClInclude Include="DXShader.h" />
     <ClInclude Include="GlShader.h" />
     <ClInclude Include="GraphicsController.h" />
     <ClInclude Include="IGraphicsAdapterController.h" />
@@ -88,11 +90,13 @@
     <ClCompile Include="AdapterController.cpp" />
     <ClCompile Include="CgShader.cpp" />
     <ClCompile Include="DirectXController.cpp" />
+    <ClCompile Include="DXShader.cpp" />
     <ClCompile Include="GlShader.cpp" />
     <ClCompile Include="GraphicsController.cpp" />
     <ClCompile Include="OpenGlController.cpp" />
     <ClCompile Include="ShaderController.cpp" />
     <ClCompile Include="Win32Controller.cpp" />
+    <ClCompile Include="WindowController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

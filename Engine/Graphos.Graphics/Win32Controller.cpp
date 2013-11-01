@@ -6,6 +6,7 @@
 #include "Config.h"
 #include "Resource.h"
 #include "Win32Controller.h"
+#include "WindowController.h"
 #include "CgShader.h"
 #include "OpenGlController.h"
 #include "DirectXController.h"
@@ -26,6 +27,11 @@ using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 
 LRESULT CALLBACK WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam );
+
+Win32Controller* Win32Controller::Get()
+{
+	return static_cast<Win32Controller*>( WindowController::Get() );
+}
 
 void Win32Controller::Initialize( void )
 {
@@ -61,25 +67,25 @@ void Win32Controller::Resize( void )
 	screenWidth = GetSystemMetrics( SM_CXSCREEN );
 	screenHeight = GetSystemMetrics( SM_CYSCREEN );
 
-	fullScreen = ISingleton<Config>::Get().GetData<bool>( "display.fullscreen" );
+	fullScreen = Config::GetData<bool>( "display.fullscreen" );
 	if( fullScreen )
 	{
 		width	= screenWidth;
 		height	= screenHeight;
 		style  |= GWS_FULLSCREEN;
 
-		ISingleton<Config>::Get().SetData( "display.width", screenWidth );
-		ISingleton<Config>::Get().SetData( "display.height", screenHeight );
+		Config::SetData( "display.width", screenWidth );
+		Config::SetData( "display.height", screenHeight );
 	}
 	else
 	{
-		width	= ISingleton<Config>::Get().GetData<unsigned int>( "display.width" );
-		height	= ISingleton<Config>::Get().GetData<unsigned int>( "display.height" );
+		width	= Config::GetData<unsigned int>( "display.width" );
+		height	= Config::GetData<unsigned int>( "display.height" );
 		style  |= GWS_WINDOWED;
 	}
 
 	if( !fullScreen && ( width <= 0 || height <= 0 ) )
-		throw exception( "Display settings invalid" );
+		throw std::exception( "Display settings invalid" );
 
 	SetWindowLong( hWnd, GWL_STYLE, style );
 	SetWindowPos( hWnd, NULL, ( screenWidth - width ) / 2, ( screenHeight - height ) / 2, width + ( 2 * GetSystemMetrics( SM_CYBORDER ) ), height + GetSystemMetrics( SM_CYCAPTION ) + GetSystemMetrics( SM_CYBORDER ), SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED );
@@ -98,7 +104,7 @@ void Win32Controller::OpenWindow( void )
 		( screenWidth - this->width ) / 2, ( screenHeight - this->height ) / 2, this->width, this->height,
 		NULL, NULL, hInstance, NULL );
 	if( !hWnd )
-		throw exception( "Error opening window." );
+		throw std::exception( "Error opening window." );
 
 	ShowWindow( hWnd, SW_NORMAL );
 }
@@ -145,27 +151,27 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam 
 		break;
 		// If key down, send it to input
 	case WM_KEYDOWN:
-		ISingleton<Input>::Get().KeyDown( (unsigned int)wParam );
+		Input::KeyDown( (unsigned int)wParam );
 		return 0;
 		// If key up, send it to input
 	case WM_KEYUP:
-		ISingleton<Input>::Get().KeyUp( (unsigned int)wParam );
+		Input::KeyUp( (unsigned int)wParam );
 		return 0;
 		// On Mouse Event
 	case WM_RBUTTONDOWN:
-		ISingleton<Input>::Get().KeyDown( VK_RBUTTON );
+		Input::KeyDown( VK_RBUTTON );
 		return 0;
 		// On Mouse Event
 	case WM_RBUTTONUP:
-		ISingleton<Input>::Get().KeyUp( VK_RBUTTON );
+		Input::KeyUp( VK_RBUTTON );
 		return 0;
 		// On Mouse Event
 	case WM_LBUTTONDOWN:
-		ISingleton<Input>::Get().KeyDown( VK_LBUTTON );
+		Input::KeyDown( VK_LBUTTON );
 		return 0;
 		// On Mouse Event
 	case WM_LBUTTONUP:
-		ISingleton<Input>::Get().KeyUp( VK_LBUTTON );
+		Input::KeyUp( VK_LBUTTON );
 		return 0;
 		// If no change, send to default windows handler
 	default:

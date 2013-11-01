@@ -5,24 +5,21 @@
 
 #include "Vector3.h"
 #include "Collider.h"
-#include "IController.h"
-#include "ISingleton.h"
 
 namespace Graphos
 {
 	namespace Physics
 	{
-		class Physics : public Core::IController
+		class Physics
 		{
 		public:
-			virtual void		Initialize( void ) override;
-			virtual void		Shutdown( void ) override;
+			static void			Initialize( void );
+			static void			Shutdown( void );
 
-			void				AddCollider( Collider* col );
-			void				Update( void );
+			static void			AddCollider( Collider* col );
+			static void			Update( void );
 
-			Math::Vector3
-								gravity;
+			static Math::Vector3 gravity;
 
 		private:
 			struct Simplex
@@ -41,19 +38,16 @@ namespace Graphos
 				bool			ContainsOrigin( Math::Vector3& direction );
 			};
 
-			Physics( void );
-			Physics( const Physics& );
+								Physics( void ) { }
+								Physics( const Physics& );
 			void				operator=( const Physics& );
 
 			// Get point in Minkowski Difference furthest in direction
-			Math::Vector3		Support( Collider* shape1, Collider* shape2, Math::Vector3& direction );
+			static Math::Vector3 Support( Collider* shape1, Collider* shape2, Math::Vector3& direction );
 
-			bool				CheckGJK( Collider* shape1, Collider* shape2 );
+			static bool			CheckGJK( Collider* shape1, Collider* shape2 );
 
-			std::vector<Collider*>
-								colliders;
-
-			friend class		Core::ISingleton<Physics>;
+			static std::vector<Collider*> colliders;
 		};
 	}
 }

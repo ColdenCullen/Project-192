@@ -1,9 +1,6 @@
 #ifndef __OUTPUT_MANAGER
 #define __OUTPUT_MANAGER
 
-#include "IController.h"
-#include "ISingleton.h"
-
 #include <string>
 #include <iostream>
 
@@ -13,12 +10,12 @@ namespace Graphos
 	{
 		enum class				OutputType { OT_INFO, OT_WARNING, OT_ERROR };
 
-		class OutputController : public IController
+		class OutputController
 		{
 		public:
-			void				PrintMessage( OutputType type, std::string message );
+			static void			PrintMessage( OutputType type, std::string message );
 			template<typename T>
-			void				PrintValue( OutputType type, std::string varName, T value )
+			static void			PrintValue( OutputType type, std::string varName, T value )
 			{
 				if( GetWhetherPrint( type ) )
 				{
@@ -30,11 +27,9 @@ namespace Graphos
 								OutputController( void ) { }
 								OutputController( const OutputController& );
 			OutputController&	operator=( const OutputController& );
-
-			std::string			GetOutputHeader( OutputType type );
-			bool				GetWhetherPrint( OutputType type );
-
-			friend class		ISingleton<OutputController>;
+			
+			static std::string	GetOutputHeader( OutputType type );
+			static bool			GetWhetherPrint( OutputType type );
 		};
 	}
 }

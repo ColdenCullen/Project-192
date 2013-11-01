@@ -6,23 +6,27 @@
 
 #include "Script.h"
 #include "GameObject.h"
-#include "IController.h"
-#include "ISingleton.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class ScriptController : public Core::IController
+		class ScriptController
 		{
 		public:
-			virtual void		Initialize( void ) override;
-			virtual void		Shutdown( void ) override;
+			void				Initialize( void );
+			void				Shutdown( void );
 
 			Script*				CreateObjectInstance( std::string className, GameObject* owner = nullptr );
+
+			static ScriptController& Get( void )
+			{
+				static ScriptController instance;
+				return instance;
+			}
 		
 		private:
-								ScriptController( void ) : isInitialized( false ), /*isolate( v8::Isolate::GetCurrent() ),*/ handleScope() { }
+								ScriptController( void ) : isInitialized( false ), handleScope() { }
 								ScriptController( const ScriptController& );
 			void				operator=( const ScriptController& );
 
@@ -33,8 +37,6 @@ namespace Graphos
 								globalObject;
 
 			bool				isInitialized;
-
-			friend class		ISingleton<ScriptController>;
 		};
 	}
 }

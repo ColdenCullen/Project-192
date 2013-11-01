@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="LinearMath">
+      <UniqueIdentifier>{8EBCCDEA-E8D3-D143-91C5-809084E0FC3A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="btConvexHullComputer.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btDefaultMotionState.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btGeometryUtil.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btGrahamScan2dConvexHull.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btHashMap.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btIDebugDraw.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btList.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btMatrix3x3.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btMinMax.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btMotionState.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btPolarDecomposition.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btPoolAllocator.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btQuadWord.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btQuaternion.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btQuickprof.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btRandom.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btScalar.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btSerializer.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btStackAlloc.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btTransform.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btTransformUtil.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btVector3.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btAabbUtil2.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btAlignedAllocator.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btAlignedObjectArray.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+    <ClInclude Include="btConvexHull.h">
+      <Filter>LinearMath</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="btGeometryUtil.cpp">
+      <Filter>LinearMath</Filter>
+    </ClCompile>
+    <ClCompile Include="btPolarDecomposition.cpp">
+      <Filter>LinearMath</Filter>
+    </ClCompile>
+    <ClCompile Include="btQuickprof.cpp">
+      <Filter>LinearMath</Filter>
+    </ClCompile>
+    <ClCompile Include="btSerializer.cpp">
+      <Filter>LinearMath</Filter>
+    </ClCompile>
+    <ClCompile Include="btVector3.cpp">
+      <Filter>LinearMath</Filter>
+    </ClCompile>
+    <ClCompile Include="btAlignedAllocator.cpp">
+      <Filter>LinearMath</Filter>
+    </ClCompile>
+    <ClCompile Include="btConvexHull.cpp">
+      <Filter>LinearMath</Filter>
+    </ClCompile>
+    <ClCompile Include="btConvexHullComputer.cpp">
+      <Filter>LinearMath</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

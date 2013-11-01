@@ -93,9 +93,7 @@
     <ClInclude Include="GraphosGame.h" />
     <ClInclude Include="GraphosGlobal.h" />
     <ClInclude Include="IComponent.h" />
-    <ClInclude Include="IController.h" />
     <ClInclude Include="Input.h" />
-    <ClInclude Include="ISingleton.h" />
     <ClInclude Include="OutputController.h" />
     <ClInclude Include="TaskManager.h" />
     <ClInclude Include="TimeController.h" />

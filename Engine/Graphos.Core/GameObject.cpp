@@ -9,6 +9,7 @@
 #include "SphereCollider.h"
 #include "BoxCollider.h"
 #include "Texture.h"
+#include "GraphosGame.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -19,7 +20,7 @@ using namespace Graphos::Graphics;
 GameObject* GameObject::CreateFromJson( Json::Value object )
 {
 	Json::Value current;
-	GameObject* obj = new GameObject( ISingleton<ShaderController>::Get().GetShader( object[ "Shader" ].asString() ) );
+	GameObject* obj = new GameObject( ShaderController::GetShader( object[ "Shader" ].asString() ) );
 
 	// Get parent
 	if( ( current = object.get( "Parent", object ) ) != object )
@@ -31,13 +32,15 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 	if( ( current = object.get( "Texture", object ) ) != object )
 	{
 		obj->AddComponent(
-			ISingleton<AssetController>::Get().GetContent<Texture>( current[ "Name" ].asString() )
+			AssetController::GetContent<Texture>( current[ "Name" ].asString() )
 		);
 	}
 
 	if( ( current = object.get( "Camera", object ) ) != object )
 	{
-		obj->AddComponent( new Camera( obj ) );
+		auto cam = new Camera( obj );
+		obj->AddComponent( cam );
+		GraphosGame::camera = cam;
 	}
 
 	// Set physics Rigid Body object
@@ -97,7 +100,7 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 	if( ( current = object.get( "Mesh", object ) ) != object )
 	{
 		obj->AddComponent(
-			ISingleton<AssetController>::Get().GetContent<Mesh>( current[ "Name" ].asString() )
+			AssetController::GetContent<Mesh>( current[ "Name" ].asString() )
 		);
 	}
 
@@ -107,19 +110,19 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 		Json::Value currentTransform;
 
 		if( ( currentTransform = current.get( "Scale", object ) ) != object )
-			obj->transform.Scale(
+			obj->transform->Scale(
 				currentTransform[ "x" ].asDouble(),
 				currentTransform[ "y" ].asDouble(),
 				currentTransform[ "z" ].asDouble()
 			);
 		if( ( currentTransform = current.get( "Position", object ) ) != object )
-			obj->transform.Translate(
+			obj->transform->Translate(
 				currentTransform[ "x" ].asDouble(),
 				currentTransform[ "y" ].asDouble(),
 				currentTransform[ "z" ].asDouble()
 			);
 		if( ( currentTransform = current.get( "Rotation", object ) ) != object )
-			obj->transform.Rotate(
+			obj->transform->Rotate(
 				currentTransform[ "x" ].asDouble(),
 				currentTransform[ "y" ].asDouble(),
 				currentTransform[ "z" ].asDouble()
@@ -130,7 +133,7 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 	if( ( current = object.get( "Script", object ) ) != object )
 	{
 		obj->AddComponent(
-			ISingleton<ScriptController>::Get().CreateObjectInstance( current[ "Class" ].asString(), obj )
+			ScriptController::Get().CreateObjectInstance( current[ "Class" ].asString(), obj )
 		);
 	}
 
@@ -175,7 +178,7 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 		}
 
 		obj->AddComponent<Collider>( col );
-		ISingleton<Physics::Physics>::Get().AddCollider( col );
+		Physics::Physics::AddCollider( col );
 	}
 
 	return obj;
@@ -191,8 +194,10 @@ void GameObject::Update( void )
 void GameObject::Draw( void )
 {
 	//shader->Use();
-	shader->SetModelMatrix( transform.WorldMatrix() );
-	shader->SetUniform( "shaderTexture", 0 );
+	shader->SetModelMatrix( transform->WorldMatrix() );
+	// TODO...what did/does this do?...
+	// this SetUniform was removed...needs refactoring?
+//	shader->SetUniform( "shaderTexture", 0 );
 
 	for( auto ingredient = begin( componentList ); ingredient != end( componentList ); ++ingredient )
 		ingredient->second->Draw( shader );
@@ -210,4 +215,6 @@ void GameObject::Shutdown( void )
 	}
 
 	componentList.clear();
+
+	delete_s( transform );
 }

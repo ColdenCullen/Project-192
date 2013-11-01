@@ -35,7 +35,7 @@ void TaskManager::AddTask( Task task )
 		{
 			if( workerAvailablibility[ ii ] )
 			{
-				workers[ ii ] = thread( &TaskManager::ExecuteTask, this, task, ii );
+				workers[ ii ] = thread( &TaskManager::ExecuteTask, task, ii );
 				workerAvailablibility[ ii ] = false;
 				++runningThreads;
 				break;
@@ -45,7 +45,7 @@ void TaskManager::AddTask( Task task )
 	monitorMutex.unlock();
 }
 
-void Graphos::Core::TaskManager::ExecuteTask( Task task, int index )
+void TaskManager::ExecuteTask( Task task, int index )
 {
 	// Execute task
 	task();
@@ -60,7 +60,7 @@ void Graphos::Core::TaskManager::ExecuteTask( Task task, int index )
 		auto newTask = tasksWaiting.front();
 		tasksWaiting.pop_front();
 
-		workers[ index ] = thread( &TaskManager::ExecuteTask, this, newTask, index );
+		workers[ index ] = thread( &TaskManager::ExecuteTask, newTask, index );
 	}
 	else
 	{	// Else, mark thread as done

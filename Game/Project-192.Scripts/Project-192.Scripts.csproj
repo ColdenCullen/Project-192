@@ -50,7 +50,7 @@
     <TypeScriptIncludeComments>true</TypeScriptIncludeComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
-    <TypeScriptOutFile>__output.js</TypeScriptOutFile>
+    <TypeScriptOutFile>$(SolutionDir)/../Game/Resources/Scripts/__output.js</TypeScriptOutFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES3</TypeScriptTarget>
@@ -63,35 +63,11 @@
     <TypeScriptCompile Include="GameObject1.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GameObject1.js">
-      <DependentUpon>GameObject1.ts</DependentUpon>
-    </Content>
-    <Content Include="GameObject1.min.js">
-      <DependentUpon>GameObject1.ts</DependentUpon>
-    </Content>
-    <Content Include="Graphos.js">
-      <DependentUpon>Graphos.ts</DependentUpon>
-    </Content>
-    <Content Include="Graphos.min.js">
-      <DependentUpon>Graphos.ts</DependentUpon>
-    </Content>
+    <TypeScriptCompile Include="Camera.ts" />
     <Content Include="Graphos.ts" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="GameObject1.js.map">
-      <DependentUpon>GameObject1.ts</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Graphos.js.map">
-      <DependentUpon>Graphos.ts</DependentUpon>
-    </Content>
-  </ItemGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)__output.js" "$(SolutionDir)..\Game\Resources\Scripts" /y /i /r</PostBuildEvent>
-  </PropertyGroup>
 </Project>

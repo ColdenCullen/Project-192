@@ -4,17 +4,19 @@ declare class Vector3
     public x: Number;
     public y: Number;
     public z: Number;
+    public Inverse: Vector3;
 
     constructor();
-    constructor(x: number, y: number, z: number);
-    constructor(other: Vector3);
+    constructor( x: number, y: number, z: number );
+    constructor( other: Vector3 );
 
-    public Equals(other: Vector3): boolean;
-    public Dot(other: Vector3): number;
-    public Cross(other: Vector3): Vector3;
-    public Add(other: Vector3): Vector3;
+    public Equals( other: Vector3 ): boolean;
+    public Dot( other: Vector3 ): number;
+    public Cross( other: Vector3 ): Vector3;
+    public Add( other: Vector3 ): Vector3;
+    public Multiply( other: number ): Vector3;
 
-    public static TripleProduct(a: Vector3, b: Vector3, c: Vector3): Vector3;
+    public static TripleProduct( a: Vector3, b: Vector3, c: Vector3 ): Vector3;
 }
 
 // Interface for object transforms
@@ -42,22 +44,44 @@ class GameObject
     public Transform: Transform;
 
     // Abstract method for updating object
-    public Update(deltaTime: number): void { }
+    public Update(): void { }
+}
+
+class GraphosGame
+{
+    CurrentState: GameState;
+
+    // DO NOT OVERRIDE
+    public Reset(): void { }
+    public Exit(): void { }
+
+    // To be overridden
+    public Initialize(): void { }
+    public Update(): void { }
+    public Draw(): void { }
+    public Shutdown(): void { }
+}
+
+enum GameState
+{
+    Menu = 0,
+    Game = 1
 }
 
 declare class Time
 {
     public static DeltaTime: number;
+    public static TotalTime: number;
 }
 
 // Interface that allows GameObjects to check for input
 declare class Input
 {
-    static IsKeyDown(key: number): boolean;
+    static IsKeyDown( key: number ): boolean;
 }
 
 // Print function
-declare function log(toPrint: any): void;
+declare function log( toPrint: any ): void;
 
 enum Keys
 {

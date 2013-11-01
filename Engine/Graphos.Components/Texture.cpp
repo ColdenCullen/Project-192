@@ -1,23 +1,22 @@
-
-#include "IShader.h"
-#include "Config.h"
 #include "GraphicsController.h"
+#include "IShader.h"
 
+#include <DirectX/DirectXTex.h>
 #include "Texture.h"
-#include <GL\GLIncludes.h>
+
+#include <GL/GLIncludes.h>
+using namespace OpenGL;
+#include <FreeImage.h>
+
+#include "AdapterController.h"
 
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
-using namespace DirectX;
-using namespace OpenGL;
-
-#include <FreeImage.h>
-#include <DirectX\DirectXTex.h>
 
 void Texture::LoadFromFile( string filePath )
 {
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		// Load and convert to 32 bits
 		FIBITMAP* imageData = FreeImage_ConvertTo32Bits( FreeImage_Load( FreeImage_GetFileType( filePath.c_str() ), filePath.c_str() ) );
@@ -37,18 +36,24 @@ void Texture::LoadFromFile( string filePath )
 		glBindTexture( GL_TEXTURE_2D, NULL );
 	}
 #if defined( _WIN32 )
-	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		wstring wFilePath( filePath.begin(), filePath.end() );
 
-		TexMetadata metaData;
+		DirectX::TexMetadata metaData;
 		GetMetadataFromWICFile( wFilePath.c_str(), NULL, metaData );
 
-		ScratchImage scratchImg;
-		LoadFromWICFile( wFilePath.c_str(), WIC_FLAGS_NONE, &metaData, scratchImg );
+		DirectX::ScratchImage scratchImg;
+		LoadFromWICFile( wFilePath.c_str(), DirectX::WIC_FLAGS_NONE, &metaData, scratchImg );
 
-		const Image* img = scratchImg.GetImage( 0, 0, 0 );
-		//CreateTexture( device, img, 1, metaData, &dxTexture );
+		const DirectX::Image* img = scratchImg.GetImage( 0, 0, 0 );
+		auto tempDevice = AdapterController::Get()->GetDevice().dxDevice;
+		ID3D11Resource* tex;
+		HRESULT result = CreateTexture( reinterpret_cast<ID3D11Device*>(tempDevice), img, 1, metaData, &tex );
+		ID3D11ShaderResourceView* srv;
+		reinterpret_cast<ID3D11Device*>(tempDevice)->CreateShaderResourceView(tex, NULL, &srv);
+		dxTexture = reinterpret_cast<DirectX::ID3D11ShaderResourceView*>(srv);
+
 	}
 #endif//_WIN32
 }
@@ -60,15 +65,22 @@ void Texture::Draw( IShader* shader )
 
 void Texture::Shutdown( void )
 {
-	if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		glBindTexture( GL_TEXTURE_2D, NULL );
 		glDeleteBuffers( 1, &glTextureId );
 	}
 #if defined( _WIN32 )
-	else if( ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
-		ReleaseCOMobjMacro( dxTexture );
+	//#define CHANGE_TYPE(type, value) static_cast<type>( static_cast<void*>( value ) )	
+		if(dxTexture)
+		{
+			reinterpret_cast<ID3D11Resource*>(dxTexture)->Release();
+			dxTexture = nullptr;
+		}
+		//ReleaseCOMobjMacro( dxTexture );
+
 	}
 #endif//_WIN32
 }

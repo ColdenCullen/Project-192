@@ -11,12 +11,12 @@ IGraphicsAdapterController* AdapterController::Get( void )
 	static OpenGlController glInstance;
 	static DirectXController dxInstance;
 
-	if( Core::ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		return &glInstance;
 	}
 #ifdef _WIN32
-	else if( Core::ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 		return &dxInstance;
 	}

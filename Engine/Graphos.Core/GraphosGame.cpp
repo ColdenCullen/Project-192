@@ -1,5 +1,9 @@
-#include "GraphosGame.h"
+#include <vector>
+#include <string>
+#include <json/json.h>
+#include <cstdlib>
 
+#include "GraphosGame.h"
 #include "File.h"
 #include "Physics.h"
 #include "GraphicsController.h"
@@ -11,11 +15,6 @@
 #include "TimeController.h"
 #include "Config.h"
 #include "OutputController.h"
-
-#include <vector>
-#include <string>
-#include <json/json.h>
-#include <cstdlib>
 
 using namespace Graphos::Core;
 using namespace Graphos::Physics;
@@ -33,7 +32,7 @@ void GraphosGame::Run( void )
 	Start();
 
 	// Init time
-	ISingleton<Time>::Get().Update();
+	Time::Initialize();
 
 	// Loop until there is a quit message from the window or the user.
 	while( !quit )
@@ -48,16 +47,16 @@ void GraphosGame::Run( void )
 			//////////////////////////////////////////////////////////////////////////
 
 			// Platform specific program stuff
-			ISingleton<GraphicsController>::Get().MessageLoop();
+			GraphicsController::MessageLoop();
 
 			// Update time
-			ISingleton<Time>::Get().Update();
+			Time::Update();
 
 			// Update input
-			ISingleton<Input>::Get().Update();
+			Input::Update();
 
 			// Update physics
-			ISingleton<Physics::Physics>::Get().Update();
+			Physics::Physics::Update();
 
 			// Do the updating of the child class.
 			Update();
@@ -75,9 +74,9 @@ void GraphosGame::Run( void )
 			// End drawing
 			AdapterController::Get()->EndDraw();
 		}
-		catch (exception e)
+		catch (std::exception e)
 		{
-			ISingleton<OutputController>::Get().PrintMessage( OutputType::OT_ERROR, e.what() );
+			OutputController::PrintMessage( OutputType::OT_ERROR, e.what() );
 			break;
 		}
 	}
@@ -87,23 +86,23 @@ void GraphosGame::Run( void )
 
 void GraphosGame::Reset( void )
 {
-	ISingleton<Config>::Get().Initialize();
-	ISingleton<GraphicsController>::Get().Reload();
+	Config::Initialize();
+	GraphicsController::Reload();
 
 	// Call child shutdown
 	Shutdown();
 
 	// Shutdown UI and controllers
 	delete_s( ui );
-	ISingleton<Physics::Physics>::Get().Shutdown();
-	ISingleton<AssetController>::Get().Shutdown();
-	ISingleton<ScriptController>::Get().Shutdown();
+	Physics::Physics::Shutdown();
+	AssetController::Shutdown();
+	ScriptController::Get().Shutdown();
 
 	// Restart<
-	ISingleton<ScriptController>::Get().Initialize();
-	ISingleton<AssetController>::Get().Initialize();
-	ISingleton<Physics::Physics>::Get().Initialize();
-	ISingleton<Input>::Get().ui = ui = new UserInterface( this );
+	ScriptController::Get().Initialize();
+	AssetController::Initialize();
+	Physics::Physics::Initialize();
+	Input::ui = ui = new UserInterface( this );
 
 	CurrentState = GameState::Menu;
 
@@ -120,17 +119,17 @@ void GraphosGame::Start( void )
 	CurrentState = GameState::Menu;
 	camera = nullptr;
 
-	ISingleton<Config>::Get().Initialize();
+	Config::Initialize();
 
-	ISingleton<GraphicsController>::Get().Initialize();
+	GraphicsController::Initialize();
 
-	ISingleton<AssetController>::Get().Initialize();
+	AssetController::Initialize();
 
-	ISingleton<Physics::Physics>::Get().Initialize();
+	Physics::Physics::Initialize();
 
-	ISingleton<ScriptController>::Get().Initialize();
+	ScriptController::Get().Initialize();
 
-	ISingleton<Input>::Get().ui = ui = new UserInterface( this );
+	Input::ui = ui = new UserInterface( this );
 
 	Initialize();
 }
@@ -142,8 +141,10 @@ void GraphosGame::Stop( void )
 
 	// Shutdown UI and controllers
 	delete_s( ui );
-	ISingleton<ShaderController>::Get().Shutdown();
-	ISingleton<Physics::Physics>::Get().Shutdown();
-	ISingleton<AssetController>::Get().Shutdown();
-	ISingleton<ScriptController>::Get().Shutdown();
+	ShaderController::Shutdown();
+	Physics::Physics::Shutdown();
+	AssetController::Shutdown();
+	ScriptController::Get().Shutdown();
 }
+
+Camera* Graphos::Core::GraphosGame::camera;

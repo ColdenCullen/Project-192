@@ -12,16 +12,16 @@ using namespace OpenGL;
 
 void OpenGlController::Initialize( void )
 {
-	WindowController::Get().Initialize();
+	WindowController::Get()->Initialize();
 
-	WindowController::Get().OpenWindow();
+	WindowController::Get()->OpenWindow();
 
 	unsigned int formatCount;
 	int pixelFormat[1];
 	PIXELFORMATDESCRIPTOR pixelFormatDescriptor;
 
 	// Get device context
-	deviceContext.glDeviceContext = GetDC( WindowController::Get().GetHWnd() );
+	deviceContext.glDeviceContext = GetDC( Win32Controller::Get()->GetHWnd() );
 	if( !deviceContext.glDeviceContext )
 		throw exception( "Error getting device context." );
 
@@ -41,8 +41,8 @@ void OpenGlController::Initialize( void )
 
 	CgShader::InitCg();
 
-	WindowController::Get().CloseWindow();
-	WindowController::Get().OpenWindow();
+	WindowController::Get()->CloseWindow();
+	WindowController::Get()->OpenWindow();
 
 	// Set attributes list
 	int attributeList[ 19 ] = {
@@ -66,7 +66,7 @@ void OpenGlController::Initialize( void )
 	};
 
 	// Get new Device Context
-	deviceContext.glDeviceContext = GetDC( WindowController::Get().GetHWnd() );
+	deviceContext.glDeviceContext = GetDC( Win32Controller::Get()->GetHWnd() );
 	if( !deviceContext.glDeviceContext )
 		throw exception( "Error getting device context." );
 
@@ -117,17 +117,19 @@ void OpenGlController::EndDraw( void )
 
 void OpenGlController::Shutdown( void )
 {
+	CgShader::ShutdownCg();
 	// Release contexts
 	wglMakeCurrent( NULL, NULL );
 	wglDeleteContext( renderContext );
 	renderContext = NULL;
-	ReleaseDC( WindowController::Get().GetHWnd(), deviceContext.glDeviceContext );
+	ReleaseDC( Win32Controller::Get()->GetHWnd(), deviceContext.glDeviceContext );
 	deviceContext.glDeviceContext = NULL;
+
 }
 
 void OpenGlController::Resize( void )
 {
-	glViewport( 0, 0, WindowController::Get().GetWidth(), WindowController::Get().GetHeight() );
+	glViewport( 0, 0, WindowController::Get()->GetWidth(), WindowController::Get()->GetHeight() );
 }
 
 void Graphos::Graphics::OpenGlController::Reload( void )
@@ -135,12 +137,12 @@ void Graphos::Graphics::OpenGlController::Reload( void )
 	Resize();
 
 	// Enable back face culling
-	if( ISingleton<Config>::Get().GetData<bool>( "graphics.backfaceculling" ) )
+	if( Config::GetData<bool>( "graphics.backfaceculling" ) )
 	{
 		glEnable( GL_CULL_FACE );
 		glCullFace( GL_BACK );
 	}
 
 	// Turn on of off the v sync
-	wglSwapIntervalEXT( ISingleton<Config>::Get().GetData<bool>( "graphics.vsync" ) );
+	wglSwapIntervalEXT( Config::GetData<bool>( "graphics.vsync" ) );
 }
