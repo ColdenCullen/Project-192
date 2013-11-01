@@ -106,7 +106,7 @@ void GlShader::Draw( const Mesh& mesh ) const
 
 	glUseProgram( programID );
 
-	glBindVertexArray( mesh.GetVAO() );
+	glBindVertexArray( mesh.GetGlVao() );
 	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
 
 	// Draw

@@ -31,22 +31,29 @@ namespace Graphos
 			void				Shutdown( void ) override;
 
 			unsigned int 		GetNumVertices( void ) const { return numVertices; }
-			unsigned int		GetVAO( void ) const { return vertexArrayObject; }
-			unsigned int		GetIndexBuffer( void ) const { return indexBuffer; }
+			unsigned int		GetGlVao( void ) const { return vertexArrayObject; }
+			unsigned int		GetGlIndexBuffer( void ) const { return indexBuffer.glIndexBuffer; }
 
-			DirectX::ID3D11Buffer*		GetVertexBuffer( void ) const { return vertexBuffer; }
+			DirectX::ID3D11Buffer*		GetDxVertexBuffer( void ) const { return vertexBuffer.dxVertexBuffer; }
+			DirectX::ID3D11Buffer*		GetDxIndexBuffer( void ) const { return indexBuffer.dxIndexBuffer; }
 
 		private:
 			// shared
 			unsigned int		numVertices;
+			union
+			{
+				unsigned int			glVertexBuffer;
+				DirectX::ID3D11Buffer*  dxVertexBuffer;
+			} vertexBuffer;
+			union
+			{
+				unsigned int			glIndexBuffer;
+				DirectX::ID3D11Buffer*  dxIndexBuffer;
+			} indexBuffer;
 
 			// GL
-			unsigned int		vertexBufferObject;
 			unsigned int		vertexArrayObject;
-			unsigned int		indexBuffer;
 			
-			// Dx
-			DirectX::ID3D11Buffer*		vertexBuffer;
 		};
 	}
 }

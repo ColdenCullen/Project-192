@@ -41,9 +41,11 @@ namespace Graphos
 				char*			data;
 				std::unordered_map<std::string, std::pair<unsigned int, std::size_t>>
 								meta;
+				DirectX::ID3D11Buffer* vsConsantBuffer;
 			};
 
 			ConstBuffer buffer;
+
 		};
 	}
 }
