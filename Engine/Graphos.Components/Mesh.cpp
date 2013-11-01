@@ -4,6 +4,7 @@
 #include "Vector2.h"
 #include "Vector3.h"
 #include "AdapterController.h"
+#include <GL/GLIncludes.h>
 
 #include <sstream>
 #include <vector>

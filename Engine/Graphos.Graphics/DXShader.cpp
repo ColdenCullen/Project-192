@@ -1,11 +1,10 @@
-#include <DirectX/DirectXIncludes.h>
-
 #include "DXShader.h"
 #include "GraphicsController.h"
 #include "AdapterController.h"
 
-using namespace Graphos::Graphics;
+using namespace v8;
 using namespace Graphos::Core;
+using namespace Graphos::Graphics;
 using namespace DirectX;
 
 // Requires the compiled shaders (.cso files)
@@ -56,6 +55,41 @@ DXShader::DXShader( std::string vertexPath, std::string fragmentPath )
 
 }
 
+void DXShader::RegisterConstBuffer( Arguments args )
+{
+	/*
+	auto RegisterStruct = [&]( Handle<Object> obj )
+	{
+		unsigned int totalSize = 0;
+		ConstBuffer buf;
+
+		for( int ii = 0; ii < obj->GetPropertyNames()->Length(); ++ii )
+		{
+			auto prop = obj->GetPropertyNames()->Get( ii );
+
+			
+
+			std::string name = std::string( *String::AsciiValue( prop ) );
+
+			buf.meta[ name ] = std::pair<unsigned int, std::size_t>( totalSize, 4 );
+		}
+	};
+
+	if( args.Data()->IsArray() )
+	{
+		auto vals = Handle<Array>::Cast( args.Data() );
+
+		for( int ii = 0; ii < vals->Length(); ++ii )
+		{
+			RegisterStruct( vals->Get( ii )->ToObject() );
+		}
+	}
+	else
+	{
+		RegisterStruct( args.Data() );
+	}
+	*/
+}
 
 DXShader::~DXShader(void)
 {
@@ -67,12 +101,12 @@ void DXShader::Shutdown( void )
 
 }
 
-void DXShader::Draw( const Core::Mesh& mesh ) const 
+void DXShader::Draw( const Mesh& mesh ) const 
 {
 
 }
 
-void DXShader::BindTexture( const Core::Texture& text ) const 
+void DXShader::BindTexture( const Texture& text ) const 
 {
 
 }

@@ -39,8 +39,6 @@ void OpenGlController::Initialize( void )
 	glewExperimental = GL_TRUE;
 	GLenum result = glewInit();
 
-	CgShader::InitCg();
-
 	WindowController::Get()->CloseWindow();
 	WindowController::Get()->OpenWindow();
 
@@ -117,7 +115,6 @@ void OpenGlController::EndDraw( void )
 
 void OpenGlController::Shutdown( void )
 {
-	CgShader::ShutdownCg();
 	// Release contexts
 	wglMakeCurrent( NULL, NULL );
 	wglDeleteContext( renderContext );

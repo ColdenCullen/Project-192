@@ -54,7 +54,7 @@ void ShaderController::Initialize( void )
 				shaders[ name ] = new GlShader( absPath + name + ".vs.glsl", absPath + name + ".fs.glsl" );
 			}
 			else if( fileName.substr( ent->d_namlen -8 ) == ".fs.hlsl" &&
-				ISingleton<GraphicsController>::Get().GetActiveAdapter() == GraphicsAdapter::DirectX )
+				GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 			{
 				string name = fileName.substr( 0, ent->d_namlen - 8 );
 

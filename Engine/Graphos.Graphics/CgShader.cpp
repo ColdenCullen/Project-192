@@ -1,3 +1,4 @@
+#if 0
 #include "stdafx.h"
 #include "CgShader.h"
 #include "Matrix4.h"
@@ -295,3 +296,4 @@ void CgShader::SetUniformArray( string name, const int* value, const int size, S
 CGcontext CgShader::cgContext;
 CGprofile CgShader::cgVertexProfile;
 CGprofile CgShader::cgFragmentProfile;
+#endif

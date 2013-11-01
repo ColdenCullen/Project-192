@@ -1,3 +1,4 @@
+#if 0
 #ifndef __CG_SHADER
 #define __CG_SHADER
 
@@ -49,3 +50,4 @@ namespace Graphos
 }
 
 #endif//__CG_SHADER
+#endif

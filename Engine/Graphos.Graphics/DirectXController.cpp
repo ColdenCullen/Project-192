@@ -111,14 +111,10 @@ void DirectXController::Initialize( void )
 	// The remaining steps also need to happen each time the window
 	// is resized, so just run the OnResize method
 	Resize();
-
-	CgShader::InitCg();
 }
 
 void DirectXController::Shutdown( void )
 {
-	CgShader::ShutdownCg();
-
 	// Release the DX stuff
 	ReleaseCOMobjMacro( renderTargetView );
 	ReleaseCOMobjMacro( depthStencilView );
