@@ -9,6 +9,7 @@
 #include "TimeController.h"
 #include "Vector3.h"
 #include "Camera.h"
+#include "IShader.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Math;
@@ -27,6 +28,7 @@ WRAP_CLASS(Matrix4,(CtorForwarder<Matrix4*( void )>))//,
 				//							float, float, float, float,
 				//							float, float, float, float )>)) 
 WRAP_CLASS(Camera,(CtorForwarder<Camera*( GameObject* )>))
+WRAP_CLASS(IShader,(CtorForwarder<IShader*(void)>))
 
 namespace Graphos
 {

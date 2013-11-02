@@ -92,6 +92,7 @@
     <ClCompile Include="DXShader.cpp" />
     <ClCompile Include="GlShader.cpp" />
     <ClCompile Include="GraphicsController.cpp" />
+    <ClCompile Include="IShader.cpp" />
     <ClCompile Include="OpenGlController.cpp" />
     <ClCompile Include="ShaderController.cpp" />
     <ClCompile Include="Win32Controller.cpp" />

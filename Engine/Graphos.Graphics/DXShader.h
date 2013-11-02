@@ -4,7 +4,6 @@
 #include <string>
 #include <unordered_map>
 #include <utility>
-#include <v8/v8.h>
 #include "IShader.h"
 #include <DirectX/DirectXIncludes.h>
 
@@ -15,10 +14,26 @@ namespace Graphos
 		class DXShader : public IShader
 		{
 		public:
+			struct ConstBuffer
+			{
+				char*			data;
+				std::unordered_map<std::string, std::pair<unsigned int, std::size_t>>
+								meta;
+				DirectX::ID3D11Buffer* vsConsantBuffer;
+				std::size_t		size;
+
+				~ConstBuffer()
+				{
+					delete[] data;
+					ReleaseCOMobjMacro( vsConsantBuffer );
+				}
+			};
+
 								DXShader( std::string vertexPath, std::string fragmentPath );
 								~DXShader(void);
 
-			void				RegisterConstBuffer( v8::Arguments args );
+			void				RegisterConstBuffer( std::string name, ConstBuffer* buf );
+			void				BuildConstBuffer( v8::Arguments args ) override;
 
 			void				Shutdown( void ) override;
 			void				Draw( Core::Mesh& mesh ) const override;
@@ -37,16 +52,7 @@ namespace Graphos
 			DirectX::ID3D11InputLayout*  vertexLayout;
 			DirectX::ID3D11SamplerState* samplerState;
 
-			struct ConstBuffer
-			{
-				char*			data;
-				std::unordered_map<std::string, std::pair<unsigned int, std::size_t>>
-								meta;
-				DirectX::ID3D11Buffer* vsConsantBuffer;
-			};
-
-			ConstBuffer buffer;
-
+			ConstBuffer*		buffer;
 		};
 	}
 }
