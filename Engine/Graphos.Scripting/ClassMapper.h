@@ -41,7 +41,7 @@ namespace Graphos
 				cvv8::ClassCreator<Transform>::SetupBindings( dest );
 				cvv8::ClassCreator<Vector3>::SetupBindings( dest );
 				cvv8::ClassCreator<Matrix4>::SetupBindings( dest );
-				//cvv8::ClassCreator<IShader>::SetupBindings( dest );
+				cvv8::ClassCreator<IShader>::SetupBindings( dest );
 				cvv8::ClassCreator<GameObject>::SetupBindings( dest );
 				cvv8::ClassCreator<Time>::SetupBindings( dest );
 				cvv8::ClassCreator<Camera>::SetupBindings( dest );

@@ -41,6 +41,7 @@ namespace Graphos
 			void				SetUniform( std::string name, const int value ) const override;
 			void				SetUniformArray( std::string name, const float* value, const int size ) const override;
 			void				SetUniformArray( std::string name, const int* value, const int size ) const override;
+			void				SetUniformMatrix( std::string name, const Math::Matrix4& matrix ) const override;
 			
 		private:
 			// Shaders

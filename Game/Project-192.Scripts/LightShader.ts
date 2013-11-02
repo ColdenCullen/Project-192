@@ -4,9 +4,12 @@ class light extends IShader
 {
     thing: number;
 
-    Test(): void
+    Draw(): void
     {
-        log( "LIGHT BALLS" );
+        log( "Lighting." );
+        this.SetUniform( "shaderTexture", 0 );
+        this.SetUniformMatrix( "modelViewProjection", this.ModelViewProjectionMatrix );
+        this.SetUniformMatrix( "modelMatrix", this.ModelMatrix );
     }
 }
 
@@ -14,8 +17,9 @@ class texture extends IShader
 {
     thang: number;
 
-    Test(): void
+    Draw(): void
     {
-        log( "TEXTURE BALLS" );
+        this.SetUniform( "shaderTexture", 0 );
+        this.SetUniformMatrix( "modelViewProjection", this.ModelViewProjectionMatrix );
     }
 }

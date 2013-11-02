@@ -57,6 +57,9 @@ class IShader
     public ProjectionMatrix: Matrix4;
     public ModelViewProjectionMatrix: Matrix4;
     public RegisterConstBuffer( buffer: any ): void { }
+
+    public SetUniform( name: string, value: number ): void { }
+    public SetUniformMatrix( name: string, value: Matrix4 ): void { }
 }
 
 declare class Mesh

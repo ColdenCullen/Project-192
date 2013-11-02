@@ -20,7 +20,7 @@ namespace Graphos
 
 								GlShader( std::string vertexPath, std::string fragmentPath );
 
-			void				Shutdown( void ) override { }
+			void				Shutdown( void ) override { IShader::Shutdown(); }
 			void				Draw( Core::Mesh& mesh ) const override;
 			void				BindTexture( Core::Texture& text ) const override;
 
@@ -30,7 +30,7 @@ namespace Graphos
 			void				SetUniform( std::string name, const int value ) const override;
 			void				SetUniformArray( std::string name, const float* value, const int size ) const override;
 			void				SetUniformArray( std::string name, const int* value, const int size ) const override;
-			void				SetUniformMatrix( std::string name, const Matrix4& matrix ) const;
+			void				SetUniformMatrix( std::string name, const Math::Matrix4& matrix ) const;
 
 		private:
 			std::unordered_map<std::string, unsigned int>

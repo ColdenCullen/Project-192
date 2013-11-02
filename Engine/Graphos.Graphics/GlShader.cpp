@@ -145,13 +145,13 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 
 void GlShader::Draw( Mesh& mesh ) const
 {
-	script->CallFunction( "Test" );
-
 	glUseProgram( programID );
 
-	SetUniformArray( "modelViewProjection", modelViewProjection.dataArray, 16, ShaderType::VERTEX );
-	SetUniformArray( "modelMatrix", modelMatrix.dataArray, 16, ShaderType::VERTEX );
-	SetUniform( "shaderTexture", 0, ShaderType::FRAGMENT );
+	script->CallFunction( "Draw" );
+
+	//SetUniformMatrix( "modelViewProjection", *modelViewProjection );
+	//SetUniformMatrix( "modelMatrix", *modelMatrix );
+	//SetUniform( "shaderTexture", 0 );
 
 	glBindVertexArray( mesh.GetGlVao() );
 	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
@@ -178,7 +178,7 @@ void GlShader::SetUniformArray( string name, const int* value, const int size ) 
 		glUniform1iv( currentUniform->second, size, value );
 }
 
-void GlShader::SetUniformArray( string name, const float* value, const int siz ) const 
+void GlShader::SetUniformArray( string name, const float* value, const int size ) const 
 { 
 	auto currentUniform = uniforms.find( name );
 

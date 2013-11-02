@@ -146,6 +146,7 @@ DXShader::~DXShader(void)
 
 void DXShader::Shutdown( void )
 {
+	IShader::Shutdown();
 	delete buffer;
 	ReleaseCOMobjMacro( vertexShader );
 	ReleaseCOMobjMacro( pixelShader );
@@ -155,7 +156,6 @@ void DXShader::Shutdown( void )
 
 void DXShader::Draw( Mesh& mesh ) const 
 {
-
 	auto deviceContext = AdapterController::Get()->GetDeviceContext().dx;
 
 	// update constant buffer on the GPU
@@ -252,4 +252,10 @@ void DXShader::SetUniformArray( string name, const int* value, const int size ) 
 	
 	memcpy( buffer->data + it->second.first, value, it->second.second );
 }
+
+void DXShader::SetUniformMatrix( std::string name, const Matrix4& matrix ) const 
+{
+	SetUniformArray( name, matrix.dataArray, 16 );
+}
+
 #pragma endregion
