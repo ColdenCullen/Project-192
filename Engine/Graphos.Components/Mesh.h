@@ -19,6 +19,25 @@ namespace Graphos
 	{
 		class Mesh : public IComponent
 		{
+		private:
+			// shared
+			unsigned int		numVertices;
+
+			union VertexBuffer
+			{
+				unsigned int			gl;
+				DirectX::ID3D11Buffer*  dx;
+			} vertexBuffer;
+
+			union IndexBuffer
+			{
+				unsigned int			gl;
+				DirectX::ID3D11Buffer*  dx;
+			} indexBuffer;
+
+			// GL
+			unsigned int		vertexArrayObject;
+
 		public:
 			static unsigned int GetVertexSize( void ) { return sizeof(float) * 8; }
 								Mesh( void ) { }
@@ -30,29 +49,11 @@ namespace Graphos
 			void				Draw( Graphics::IShader* shader ) override;
 			void				Shutdown( void ) override;
 
+			VertexBuffer&		GetVertexBuffer( void ) { return vertexBuffer; }
+			IndexBuffer&		GetIndexBuffer( void )	{ return indexBuffer; }
+
 			unsigned int 		GetNumVertices( void ) const { return numVertices; }
 			unsigned int		GetGlVao( void ) const { return vertexArrayObject; }
-			unsigned int		GetGlIndexBuffer( void ) const { return indexBuffer.glIndexBuffer; }
-
-			DirectX::ID3D11Buffer*		GetDxVertexBuffer( void ) const { return vertexBuffer.dxVertexBuffer; }
-			DirectX::ID3D11Buffer*		GetDxIndexBuffer( void ) const { return indexBuffer.dxIndexBuffer; }
-
-		private:
-			// shared
-			unsigned int		numVertices;
-			union
-			{
-				unsigned int			glVertexBuffer;
-				DirectX::ID3D11Buffer*  dxVertexBuffer;
-			} vertexBuffer;
-			union
-			{
-				unsigned int			glIndexBuffer;
-				DirectX::ID3D11Buffer*  dxIndexBuffer;
-			} indexBuffer;
-
-			// GL
-			unsigned int		vertexArrayObject;
 			
 		};
 	}

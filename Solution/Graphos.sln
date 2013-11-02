@@ -119,6 +119,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hlsl", "hlsl", "{B8D27C56-2
 	ProjectSection(SolutionItems) = preProject
 		..\Game\Resources\Shaders\hlsl\light.fs.hlsl = ..\Game\Resources\Shaders\hlsl\light.fs.hlsl
 		..\Game\Resources\Shaders\hlsl\light.vs.hlsl = ..\Game\Resources\Shaders\hlsl\light.vs.hlsl
+		..\Game\Resources\Shaders\hlsl\lightStructs.hlsl = ..\Game\Resources\Shaders\hlsl\lightStructs.hlsl
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "glsl", "glsl", "{1F6885C7-2894-4493-8338-15079AC10EB1}"

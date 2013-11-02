@@ -21,8 +21,8 @@ namespace Graphos
 			void				RegisterConstBuffer( v8::Arguments args );
 
 			void				Shutdown( void ) override;
-			void				Draw( const Core::Mesh& mesh ) const override;
-			void				BindTexture( const Core::Texture& text ) const override;
+			void				Draw( Core::Mesh& mesh ) const override;
+			void				BindTexture( Core::Texture& text ) const override;
 
 			void				SetUniform( std::string name, const float value, ShaderType type ) const override;
 			void				SetUniform( std::string name, const int value, ShaderType type ) const override;
@@ -35,6 +35,7 @@ namespace Graphos
 			DirectX::ID3D11PixelShader*  pixelShader;
 
 			DirectX::ID3D11InputLayout*  vertexLayout;
+			DirectX::ID3D11SamplerState* samplerState;
 
 			struct ConstBuffer
 			{

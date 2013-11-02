@@ -26,8 +26,8 @@ void Texture::LoadFromFile( string filePath )
 		height = FreeImage_GetHeight( imageData );
 
 		// Buffer to GL
-		glGenTextures( 1, &glTextureId );
-		glBindTexture( GL_TEXTURE_2D, glTextureId );
+		glGenTextures( 1, &textureId.gl );
+		glBindTexture( GL_TEXTURE_2D, textureId.gl );
 		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA ,GL_UNSIGNED_BYTE, (GLvoid*)FreeImage_GetBits( imageData ) );
 		glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 
@@ -52,7 +52,7 @@ void Texture::LoadFromFile( string filePath )
 		HRESULT result = CreateTexture( reinterpret_cast<ID3D11Device*>(tempDevice), img, 1, metaData, &tex );
 		ID3D11ShaderResourceView* srv;
 		reinterpret_cast<ID3D11Device*>(tempDevice)->CreateShaderResourceView(tex, NULL, &srv);
-		dxTexture = reinterpret_cast<DirectX::ID3D11ShaderResourceView*>(srv);
+		textureId.dx = reinterpret_cast<DirectX::ID3D11ShaderResourceView*>(srv);
 
 	}
 #endif//_WIN32
@@ -68,16 +68,16 @@ void Texture::Shutdown( void )
 	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
 		glBindTexture( GL_TEXTURE_2D, NULL );
-		glDeleteBuffers( 1, &glTextureId );
+		glDeleteBuffers( 1, &textureId.gl );
 	}
 #if defined( _WIN32 )
 	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
 	//#define CHANGE_TYPE(type, value) static_cast<type>( static_cast<void*>( value ) )	
-		if(dxTexture)
+		if( textureId.dx )
 		{
-			reinterpret_cast<ID3D11Resource*>(dxTexture)->Release();
-			dxTexture = nullptr;
+			reinterpret_cast<ID3D11Resource*>(textureId.dx)->Release();
+			textureId.dx = nullptr;
 		}
 		//ReleaseCOMobjMacro( dxTexture );
 

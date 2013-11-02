@@ -20,8 +20,8 @@ namespace Graphos
 		{
 		public:
 			virtual void		Shutdown( void ) = 0;
-			virtual void		Draw( const Core::Mesh& mesh ) const = 0;
-			virtual void		BindTexture( const Core::Texture& text) const = 0;
+			virtual void		Draw( Core::Mesh& mesh ) const = 0;
+			virtual void		BindTexture( Core::Texture& text) const = 0;
 			
 			virtual void		SetUniform( std::string name, const float value, ShaderType type ) const = 0;
 			virtual void		SetUniform( std::string name, const int value, ShaderType type ) const = 0;

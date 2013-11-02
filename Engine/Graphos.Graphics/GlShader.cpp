@@ -100,7 +100,7 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 		throw exception( "Error linking shader program." );
 }
 
-void GlShader::Draw( const Mesh& mesh ) const 
+void GlShader::Draw( Mesh& mesh ) const
 {
 	SetUniformArray( "modelViewProjection", modelViewProjection.dataArray, 16, ShaderType::VERTEX );
 
@@ -113,7 +113,7 @@ void GlShader::Draw( const Mesh& mesh ) const
 	glDrawElements( GL_TRIANGLES, mesh.GetNumVertices(), GL_UNSIGNED_INT, 0 );
 }
 
-void GlShader::BindTexture( const Texture& text ) const
+void GlShader::BindTexture( Texture& text ) const
 {
-	glBindTexture( GL_TEXTURE_2D, text.GetGlTextureId() );
+	glBindTexture( GL_TEXTURE_2D, text.GetTextureId().gl );
 }

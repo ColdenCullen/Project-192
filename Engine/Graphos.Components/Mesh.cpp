@@ -101,8 +101,8 @@ void Mesh::LoadFromFile( string filePath )
 		glBindVertexArray( vertexArrayObject );
 
 		// make and bind the VBO
-		glGenBuffers( 1, &vertexBuffer.glVertexBuffer );
-		glBindBuffer( GL_ARRAY_BUFFER, vertexBuffer.glVertexBuffer );
+		glGenBuffers( 1, &vertexBuffer.gl );
+		glBindBuffer( GL_ARRAY_BUFFER, vertexBuffer.gl );
 
 		// Buffer the data
 		glBufferData( GL_ARRAY_BUFFER, outputData.size() * sizeof(GLfloat), &outputData[ 0 ], GL_STATIC_DRAW );
@@ -118,8 +118,8 @@ void Mesh::LoadFromFile( string filePath )
 		glVertexAttribPointer( NORMAL_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (unsigned char*)NULL + ( sizeof(GLfloat) * 5 ) );
 
 		// Generate index buffer
-		glGenBuffers( 1, &indexBuffer.glIndexBuffer );
-		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer.glIndexBuffer );
+		glGenBuffers( 1, &indexBuffer.gl );
+		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer.gl );
 
 		// Buffer index data
 		glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * numVertices, &indices[ 0 ], GL_STATIC_DRAW );
@@ -145,7 +145,7 @@ void Mesh::LoadFromFile( string filePath )
 		D3D11_SUBRESOURCE_DATA initialVertexData;
 		ZeroMemory( &initialVertexData, sizeof( D3D11_SUBRESOURCE_DATA ) );
 		initialVertexData.pSysMem = &outputData[0];
-		result = AdapterController::Get()->GetDevice().dxDevice->CreateBuffer( &vbDesc, &initialVertexData, &vertexBuffer.dxVertexBuffer );
+		result = AdapterController::Get()->GetDevice().dxDevice->CreateBuffer( &vbDesc, &initialVertexData, &vertexBuffer.dx );
 		if( FAILED(result) )
 			OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to init dx vertex buffer" );
 
@@ -161,7 +161,7 @@ void Mesh::LoadFromFile( string filePath )
 		D3D11_SUBRESOURCE_DATA initialIndexData;
 		ZeroMemory( &initialIndexData, sizeof( D3D11_SUBRESOURCE_DATA ) );
 		initialIndexData.pSysMem = indices;
-		result = AdapterController::Get()->GetDevice().dxDevice->CreateBuffer( &ibDesc, &initialIndexData, &indexBuffer.dxIndexBuffer );
+		result = AdapterController::Get()->GetDevice().dxDevice->CreateBuffer( &ibDesc, &initialIndexData, &indexBuffer.dx );
 		if( FAILED(result) )
 			OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to init dx index buffer" );
 
@@ -180,14 +180,14 @@ void Mesh::Shutdown( void )
 {
 	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 	{
-		glDeleteBuffers( 1, &vertexBuffer.glVertexBuffer );
+		glDeleteBuffers( 1, &vertexBuffer.gl );
 		glDeleteBuffers( 1, &vertexArrayObject );
 	}
 #ifdef _WIN32
 	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{
-		ReleaseCOMobjMacro( vertexBuffer.dxVertexBuffer );
-		ReleaseCOMobjMacro( indexBuffer.dxIndexBuffer );
+		ReleaseCOMobjMacro( vertexBuffer.dx );
+		ReleaseCOMobjMacro( indexBuffer.dx );
 	}
 #endif//_WIN32
 	
