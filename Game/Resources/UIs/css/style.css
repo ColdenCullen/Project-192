@@ -15,10 +15,20 @@ body {
   background: #162B3F;
 }
 
-h1 {
+#game-title {
   font-family: 'Track', sans-serif;
   color: #f1c40f;
-  font-size: 3em;
+  font-size: 4em;
+
+  opacity: 0;
+  -webkit-transform: translateY(-20px);
+  transition: 0.5s all;
+  transition-delay: 0.5s;
+}
+
+.loaded #game-title {
+  -webkit-transform: translateY(0);
+  opacity: 1;
 }
 
 #wrapper {
@@ -28,13 +38,24 @@ h1 {
   text-align: center;
 }
 
+#start-button {
+  display: inline-block;
+  width: 50%;
+  font-size: 0;
+  transition: 0.4s font-size;
+  transition-delay: 1.0s;
+}
+
+.loaded #start-button {
+  font-size: 1.25em;
+}
+
 #start-game {
   border-radius: 100%;
   width: 4.5em;
   height: 4.5em;
   line-height: 4.5em;
   text-align: center;
-  font-size: 2.25em;
   padding: 0;
   position: relative;
   display: inline-block;
@@ -44,15 +65,31 @@ h1 {
   border: 0;
   cursor: pointer;
   outline: 0;
+  transition: 0.1s background;
 }
 
 #start-game:hover {
-color: #fff;
-background: #E66E61;
+  background: #E66E61;
+}
+
+.loaded #start-game {
+  font-size: 2.25em;
 }
 
 #nav
 {
+  float: left;
+  display: inline-block;
+  width: 50%;
+  opacity: 0;
+  -webkit-transform: translateY(-20px);
+  transition: 0.4s all;
+  transition-delay: 0.7s;
+}
+
+.loaded #nav {
+  -webkit-transform: translateY(0);
+  opacity: 1;
 }
 
 #nav a
@@ -61,9 +98,11 @@ background: #E66E61;
   position: relative;
   display: block;
   color: #fff;
-  margin-bottom: 0.5em;
+  width: 200px;
+  margin: 0 auto 0.5em auto;
   font-size: 2em;
   text-decoration: none;
+  transition: 0.1s color;
 }
 
 #nav a:hover {

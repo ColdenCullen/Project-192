@@ -12,15 +12,20 @@
 
 	<body class="homepage">
 		<div id="wrapper">
-			<h1>Beta Balls Alpha</h1>
+			<h1 id="game-title">Beta Balls Alpha</h1>
 			<nav id="nav">
 				<a href="#me">Home</a>
 				<a href="#settings">Settings</a>
 				<a href="#work">Credits</a>
 			</nav>
 
-			<a href="#paused" id="start-game" onclick="GraphosGame.ChangeState( 'Game' );">Start</a>
+			<div id="start-button">
+				<a href="#paused" id="start-game" onclick="GraphosGame.ChangeState( 'Game' );">Start</a>
+			</div>
 		</div>
+
+		<!-- Add a loaded tag to body -->
+		<script>$(window).load(function(){$("body").addClass("loaded");});</script>
 
 		<!--fullscreenChecked-->
 		<script type="text/javascript">
