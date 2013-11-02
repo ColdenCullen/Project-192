@@ -1,5 +1,5 @@
 
-cbuffer uniforms //: register( b0 )
+cbuffer uniforms : register( b0 )
 {
 	float4x4 modelViewProj;
 	float4x4 modelMatrix;
@@ -24,10 +24,10 @@ VertexToFragment main( VertexShaderInput input )
 {
 	VertexToFragment output;
 
-	matrix <float, 4, 4> testMat = { 1.35799515, 0.0, 0.0, 0.0,
+	/*matrix <float, 4, 4> testMat = { 1.35799515, 0.0, 0.0, 0.0,
 									 0.0, 2.41421342, 0.0, 0.0,
 									 0.0, 0.0, 1.00000095, 1.0,
-									 0.0, 0.0, 2.99900293, 3.0 };
+									 0.0, 0.0, 2.99900293, 3.0 };*/
 
 	//output.position = float4(input.position,1.0f);
 	//output.position = mul( transpose(testMat), float4( input.position, 1.0f ) );
