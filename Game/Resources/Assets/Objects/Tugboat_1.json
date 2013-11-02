@@ -2,10 +2,10 @@
 	{
 		"Name": "Cube",
 	
-		"Shader": "light",
+		"Shader": "texture",
 
 		"Texture": {
-			"Name": "white"
+			"Name": "balls"
 		},
 
 		"Mesh": {

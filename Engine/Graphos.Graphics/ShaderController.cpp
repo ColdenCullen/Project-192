@@ -30,15 +30,15 @@ void ShaderController::Initialize( void )
 			GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 		{
 			shaders[ shaderName ] = new GlShader(
-				file.GetFullPath(),
-				file.GetFullPath().substr( 0, file.GetFullPath().size() - 8 ) + ".vs.glsl" );
+				file.GetFullPath().substr( 0, file.GetFullPath().size() - 8 ) + ".vs.glsl",
+				file.GetFullPath() );
 		}
 		else if( fileName.substr( fileName.size() - 8 ) == ".fs.hlsl" &&
 			GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 		{
 			shaders[ shaderName ] = new DXShader(
-				file.GetFullPath(),
-				file.GetFullPath().substr( 0, file.GetFullPath().size() - 8 ) + ".vs.hlsl" );
+				file.GetFullPath().substr( 0, file.GetFullPath().size() - 8 ) + ".vs.hlsl",
+				file.GetFullPath() );
 		}
 	}
 }
