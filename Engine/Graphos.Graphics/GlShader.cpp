@@ -182,7 +182,7 @@ void GlShader::SetUniformArray( string name, const float* value, const int size,
 
 	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
 		//glUniform1fv( currentUniform->second, size, value );
-		glUniformMatrix4fv( currentUniform->second, size, false, value );
+		glUniformMatrix4fv( currentUniform->second, 1, false, value );
 }
 
 void GlShader::SetUniform( string name, const int value, ShaderType type ) const 
