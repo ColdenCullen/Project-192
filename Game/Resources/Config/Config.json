@@ -2,7 +2,7 @@
 {
 	"Game" :
 	{
-		"DefaultState" : "Game",
+		"DefaultState" : "FIELD UNUSED",
 		"Verbosity" : "High"
 	},
 	"display" : 

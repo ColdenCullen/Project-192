@@ -16,9 +16,7 @@ void Game::Initialize( void )
 	cube = objects.GetObjectByName( "Cube" );
 	CurrentState = GameState::Game;
 
-
-	
-	int i;
+	//int i;
 	///-----initialization_start-----
 
 	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
