@@ -93,6 +93,7 @@ void DXShader::RegisterConstBuffer( Arguments args )
 		RegisterStruct( args.Data() );
 	}
 	*/
+	
 }
 
 DXShader::~DXShader(void)

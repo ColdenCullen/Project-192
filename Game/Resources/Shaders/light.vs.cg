@@ -9,7 +9,7 @@ VertexToFragment main( InputData IN,
 	OUT.position = mul( modelViewProjection, float4( IN.position, 1.0 ) );
 	OUT.uv = IN.uv;
 
-	OUT.normal = normalize( mul( inverse(transpose(modelMatrix)), float4( IN.normal, 1.0 ) ) ).xyz;
+	OUT.normal = normalize( mul( transpose(modelMatrix), float4( IN.normal, 1.0 ) ) ).xyz;
 	OUT.light.color = float4( 1.0, 1.0, 1.0, 1.0 );
 	OUT.light.direction = float3( -1.0, -1.0, 1.0 );
 	return OUT;	
