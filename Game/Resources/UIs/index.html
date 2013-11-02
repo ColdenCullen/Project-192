@@ -10,23 +10,49 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
 
-  <body class="homepage">
-    <h1 id="game-title">Beta Balls Alpha</h1>
-    <h2 id="sub-title">(currently in alpha)</h2>
-    <div id="wrapper">
-      <nav id="nav">
-        <!-- <a href="#me">Home</a> -->
-        <a href="#settings">Settings</a>
-        <a href="#work">Credits</a>
-      </nav>
+  <body>
+    <section id="homepage">
+      <h1 id="game-title">Beta Balls Alpha</h1>
+      <h2 id="sub-title">(alpha)</h2>
+      <div id="wrapper">
+        <nav id="nav">
+          <a href="#settings" onclick="showSection('#settings');">Settings</a>
+          <a href="#work">Credits</a>
+        </nav>
 
-      <div id="start-button">
-        <a href="#paused" id="start-game" onclick="GraphosGame.ChangeState( 'Game' );">Start</a>
+        <div id="start-button">
+          <a href="#paused" id="start-game" onclick="GraphosGame.ChangeState('Game');">Start</a>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <section id="settings" class="active">
+      <h1 id="game-title">Beta Balls Alpha</h1>
+      <h2 id="sub-title">(settings page)</h2>
+      <div id="wrapper">
+        <nav id="nav">
+          <a href="#me" onclick="showSection('#homepage');">Home</a>
+          <a href="#settings">Settings</a>
+          <a href="#work">Credits</a>
+        </nav>
+
+        <div id="start-button">
+          <a href="#paused" id="start-game" onclick="GraphosGame.ChangeState('Game');">Start</a>
+        </div>
+      </div>
+    </section>
 
     <!-- Add a loaded tag to body -->
     <script>$(window).load(function(){$("body").addClass("loaded");});</script>
+
+    <!-- Switch sections -->
+    <script type="text/javascript">
+      function showSection(sectionID) 
+      {
+        $(".active").removeClass("active");
+        $(sectionID).addClass("active");
+      }
+    </script>
 
     <!--fullscreenChecked-->
     <script type="text/javascript">
