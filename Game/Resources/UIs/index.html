@@ -1,53 +1,54 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Beta Balls Alpha</title>
+  <head>
+    <meta charset="utf-8">
+    <title>Beta Balls Alpha</title>
 
-		<script src="js/jquery-1.9.1.min.js"></script>
-		<script src="js/config.js"></script>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/config.js"></script>
 
-		<link rel="stylesheet" href="css/style.css" />
-	</head>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-	<body class="homepage">
-		<div id="wrapper">
-			<h1 id="game-title">Beta Balls Alpha</h1>
-			<nav id="nav">
-				<a href="#me">Home</a>
-				<a href="#settings">Settings</a>
-				<a href="#work">Credits</a>
-			</nav>
+  <body class="homepage">
+    <h1 id="game-title">Beta Balls Alpha</h1>
+    <h2 id="sub-title">(currently in alpha)</h2>
+    <div id="wrapper">
+      <nav id="nav">
+        <!-- <a href="#me">Home</a> -->
+        <a href="#settings">Settings</a>
+        <a href="#work">Credits</a>
+      </nav>
 
-			<div id="start-button">
-				<a href="#paused" id="start-game" onclick="GraphosGame.ChangeState( 'Game' );">Start</a>
-			</div>
-		</div>
+      <div id="start-button">
+        <a href="#paused" id="start-game" onclick="GraphosGame.ChangeState( 'Game' );">Start</a>
+      </div>
+    </div>
 
-		<!-- Add a loaded tag to body -->
-		<script>$(window).load(function(){$("body").addClass("loaded");});</script>
+    <!-- Add a loaded tag to body -->
+    <script>$(window).load(function(){$("body").addClass("loaded");});</script>
 
-		<!--fullscreenChecked-->
-		<script type="text/javascript">
-			function fullscreenChecked() 
-			{
-				$("#screenWidth").prop('disabled', $('#fullscreen').is(':checked'));
-				$("#screenHeight").prop('disabled', $('#fullscreen').is(':checked'));
-				$("#screenWidth").val(screen.width);
-      	$("#screenHeight").val(screen.height);
-			}
-		</script>
+    <!--fullscreenChecked-->
+    <script type="text/javascript">
+      function fullscreenChecked() 
+      {
+        $("#screenWidth").prop('disabled', $('#fullscreen').is(':checked'));
+        $("#screenHeight").prop('disabled', $('#fullscreen').is(':checked'));
+        $("#screenWidth").val(screen.width);
+        $("#screenHeight").val(screen.height);
+      }
+    </script>
 
-		<!--printValue-->
-		<script type="text/javascript">
-			function printValue(sliderID, textbox) {
-				var x = document.getElementById(textbox);
-				var y = document.getElementById(sliderID);
-				x.value = y.value;
-			}
+    <!--printValue-->
+    <script type="text/javascript">
+      function printValue(sliderID, textbox) {
+        var x = document.getElementById(textbox);
+        var y = document.getElementById(sliderID);
+        x.value = y.value;
+      }
 
-			jQuery(window).load = function() { printValue('uiScaleSlider', 'uiScaleValue'); }
-		</script>
+      jQuery(window).load = function() { printValue('uiScaleSlider', 'uiScaleValue'); }
+    </script>
 
-	</body>
+  </body>
 </html>

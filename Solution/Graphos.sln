@@ -50,6 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meshes", "Meshes", "{48731D
 	ProjectSection(SolutionItems) = preProject
 		..\Game\Resources\Assets\Meshes\Cube.obj = ..\Game\Resources\Assets\Meshes\Cube.obj
 		..\Game\Resources\Assets\Meshes\Tugboat_1.obj = ..\Game\Resources\Assets\Meshes\Tugboat_1.obj
+		..\Game\Resources\Assets\Meshes\UI.obj = ..\Game\Resources\Assets\Meshes\UI.obj
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Objects", "Objects", "{B6E4ED65-20D6-4771-8CAF-835CBBA2974E}"

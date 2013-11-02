@@ -1,6 +1,13 @@
 @charset 'UTF-8';
 
 @font-face {
+  font-family: 'Source Sans Pro';
+  src: url('../fonts/SourceSansPro.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Track';
   src: url('../fonts/Track.ttf') format('truetype');
   font-weight: normal;
@@ -11,14 +18,25 @@
 /* Basic                                                                         */
 /*********************************************************************************/
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   background: #162B3F;
+  background-size: 100% 100%;
+  color: white;
+  font-family: 'Source Sans Pro', 'Track', sans-serif;
 }
 
 #game-title {
-  font-family: 'Track', sans-serif;
   color: #f1c40f;
-  font-size: 4em;
+  font-size: 9em;
+  text-align: center;
+  margin: 0;
 
   opacity: 0;
   -webkit-transform: translateY(-20px);
@@ -26,7 +44,20 @@ body {
   transition-delay: 0.5s;
 }
 
-.loaded #game-title {
+#sub-title {
+  color: #f1c40f;
+  font-size: 4em;
+  text-align: center;
+  margin: 0 0 1.5em 0;
+
+  opacity: 0;
+  -webkit-transform: translateY(-20px);
+  transition: 0.5s all;
+  transition-delay: 0.6s;
+}
+
+.loaded #game-title,
+.loaded #sub-title {
   -webkit-transform: translateY(0);
   opacity: 1;
 }
@@ -59,7 +90,7 @@ body {
   padding: 0;
   position: relative;
   display: inline-block;
-  background: #e74c3c;
+  background: #000;
   color: #fff;
   text-decoration: none;
   border: 0;
@@ -73,7 +104,7 @@ body {
 }
 
 .loaded #start-game {
-  font-size: 2.25em;
+  font-size: 3em;
 }
 
 #nav
@@ -94,7 +125,6 @@ body {
 
 #nav a
 {
-  font-family: 'Track', sans-serif;
   position: relative;
   display: block;
   color: #fff;
