@@ -22,12 +22,9 @@ WRAP_CLASS(Mesh,(CtorForwarder<Mesh*( std::string )>))
 WRAP_CLASS(Vector3,(CtorForwarder<Vector3*( void )>,
 					CtorForwarder<Vector3*( float, float, float )>,
 					CtorForwarder<Vector3*( const Vector3& )>))
-WRAP_CLASS(Matrix4,(CtorForwarder<Matrix4*( void )>))//,
-				//	CtorForwarder<Matrix4*( float, float, float, float,
-				//							float, float, float, float,
-				//							float, float, float, float,
-				//							float, float, float, float )>)) 
+WRAP_CLASS(Matrix4,(CtorForwarder<Matrix4*( void )>))
 WRAP_CLASS(Camera,(CtorForwarder<Camera*( GameObject* )>))
+WRAP_CLASS(ConstBuffer,(CtorForwarder<ConstBuffer*(void)>))
 WRAP_CLASS(IShader,(CtorForwarder<IShader*(void)>))
 
 namespace Graphos
@@ -44,7 +41,7 @@ namespace Graphos
 				cvv8::ClassCreator<Transform>::SetupBindings( dest );
 				cvv8::ClassCreator<Vector3>::SetupBindings( dest );
 				cvv8::ClassCreator<Matrix4>::SetupBindings( dest );
-				//cvv8::ClassCreator<IShader>::SetupBindings( dest );
+				cvv8::ClassCreator<IShader>::SetupBindings( dest );
 				cvv8::ClassCreator<GameObject>::SetupBindings( dest );
 				cvv8::ClassCreator<Time>::SetupBindings( dest );
 				cvv8::ClassCreator<Camera>::SetupBindings( dest );

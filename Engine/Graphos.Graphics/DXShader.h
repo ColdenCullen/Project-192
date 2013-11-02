@@ -11,38 +11,37 @@ namespace Graphos
 {
 	namespace Graphics
 	{
+		struct DxConstBuffer : public ConstBuffer
+		{
+			DirectX::ID3D11Buffer* vsConsantBuffer;
+			char*			data;
+
+			DxConstBuffer( void ) : ConstBuffer() { }
+
+			~DxConstBuffer( void )
+			{
+				delete[] data;
+				ReleaseCOMobjMacro( vsConsantBuffer );
+			}
+		};
+
 		class DXShader : public IShader
 		{
 		public:
-			struct ConstBuffer
-			{
-				char*			data;
-				std::unordered_map<std::string, std::pair<unsigned int, std::size_t>>
-								meta;
-				DirectX::ID3D11Buffer* vsConsantBuffer;
-				std::size_t		size;
-
-				~ConstBuffer()
-				{
-					delete[] data;
-					ReleaseCOMobjMacro( vsConsantBuffer );
-				}
-			};
-
 								DXShader( std::string vertexPath, std::string fragmentPath );
 								~DXShader(void);
 
-			void				RegisterConstBuffer( std::string name, ConstBuffer* buf );
-			void				BuildConstBuffer( v8::Arguments args ) override;
+			void				RegisterConstBuffer( std::string name, ConstBuffer* buf ) override;
 
 			void				Shutdown( void ) override;
 			void				Draw( Core::Mesh& mesh ) const override;
 			void				BindTexture( Core::Texture& text ) const override;
 
-			void				SetUniform( std::string name, const float value, ShaderType type ) const override;
-			void				SetUniform( std::string name, const int value, ShaderType type ) const override;
-			void				SetUniformArray( std::string name, const float* value, const int size, ShaderType type ) const override;
-			void				SetUniformArray( std::string name, const int* value, const int size, ShaderType type ) const override;
+			void				SetUniform( std::string name, const float value ) const override;
+			void				SetUniform( std::string name, const int value ) const override;
+			void				SetUniformArray( std::string name, const float* value, const int size ) const override;
+			void				SetUniformArray( std::string name, const int* value, const int size ) const override;
+			void				SetUniformMatrix( std::string name, const Math::Matrix4& matrix ) const override;
 			
 		private:
 			// Shaders
@@ -53,7 +52,7 @@ namespace Graphos
 			DirectX::ID3D11InputLayout*  vertexLayout;
 			DirectX::ID3D11SamplerState* samplerState;
 
-			ConstBuffer*		buffer;
+			DxConstBuffer*		buffer;
 		};
 	}
 }

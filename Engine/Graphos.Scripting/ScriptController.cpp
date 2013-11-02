@@ -9,7 +9,7 @@
 #include "Input.h"
 #include "Config.h"
 #include "File.h"
-#include "ClassMapper.h"
+//#include "ClassMapper.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -86,53 +86,5 @@ void ScriptController::Shutdown( void )
 		//context->Dispose();
 
 		//isInitialized = false;
-	}
-}
-
-Graphos::Core::Script* ScriptController::CreateObjectInstance( string className, GameObject* owner /*= nullptr*/ )
-{
-	if( !isInitialized )
-		Initialize();
-
-	// Create a scope
-	Context::Scope contextScope( context );
-
-	// Get an instance of the class
-	Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
-
-	// Return object
-	if( !ctor.IsEmpty() )
-	{
-		// Create basic gameobject as well as instance of new class
-		auto gameObject = CastToJS( owner )->ToObject();
-		auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
-
-		for( int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
-		{
-			auto name = inst->GetPropertyNames()->Get( ii );
-			if( !gameObject->Has( name->ToString() ) )
-				gameObject->Set( name, inst->Get( name ) );
-		}
-
-		string props = "";
-		for( int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
-			props += string( *String::AsciiValue( inst->GetPropertyNames()->Get( ii ) ) ) + ", ";
-
-		OutputController::PrintMessage( OutputType::OT_INFO, "Found the following properties on inst:\n" + props );
-
-		props = "";
-		for( int ii = 0; ii < gameObject->GetPropertyNames()->Length(); ++ii )
-			props += string( *String::AsciiValue( gameObject->GetPropertyNames()->Get( ii ) ) ) + ", ";
-
-		OutputController::PrintMessage( OutputType::OT_INFO, "Found the following properties on newobj:\n" + props );
-
-		//auto trans = CastFromJS<Transform>( gameObject->Get( v8::String::NewSymbol( "Transform" ) ) );
-
-		// Return new script
- 		return new Graphos::Core::Script( gameObject, owner );
-	}
-	else
-	{
-		OutputController::PrintMessage(OutputType::OT_ERROR, "Invalid Class Name." );
 	}
 }

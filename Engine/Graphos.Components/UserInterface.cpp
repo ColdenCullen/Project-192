@@ -7,6 +7,7 @@
 #include "ShaderController.h"
 #include "Input.h"
 #include "Config.h"
+#include "IShader.h"
 
 //#include <string>
 

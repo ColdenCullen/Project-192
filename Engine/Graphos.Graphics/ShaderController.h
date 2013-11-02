@@ -5,12 +5,12 @@
 #include <unordered_map>
 #include <string>
 
-#include "IShader.h"
-
 namespace Graphos
 {
 	namespace Graphics
 	{
+		class IShader;
+
 		class ShaderController
 		{
 		public:
