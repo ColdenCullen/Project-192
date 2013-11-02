@@ -36,7 +36,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	result = D3DCompileFromFile( wVertexPath.c_str(),
 								NULL,
 								NULL,
-								"main",
+								"VertexFunction",
 								"vs_5_0",
 								D3DCOMPILE_ENABLE_STRICTNESS,
 								0,
@@ -71,7 +71,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	result = D3DCompileFromFile( wPixelPath.c_str(),
 								NULL,
 								NULL,
-								"main",
+								"FragmentFunction",
 								"ps_5_0",
 								D3DCOMPILE_ENABLE_STRICTNESS,
 								0,
@@ -109,6 +109,14 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
 	AdapterController::Get()->GetDevice().dx->CreateSamplerState( &samplerDesc, &samplerState );
+
+	// TEMPORARY BUFFER TO BE REMOVED FROM C++ SIDE
+	buffer->data = new char[2*16*4];
+	buffer->meta[ "modelViewProj" ] = pair<unsigned int, size_t>( 0, 16*4 );
+	buffer->meta[ "modelMatrix" ] = pair<unsigned int, size_t>( 16*4, 16*4 );
+	buffer->size = 2*16*4;
+	RegisterConstBuffer( "uniforms", buffer );
+
 
 }
 
@@ -267,7 +275,7 @@ void DXShader::SetUniform( string name, const float value, ShaderType type ) con
 
 	if( it == end( buffer->meta ) )
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
-	if( it->second.second == sizeof( value ) )
+	if( it->second.second != sizeof( value ) )
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniform(float)" );
 
 	memcpy( buffer->data + it->second.first, &value, it->second.second );
@@ -279,7 +287,7 @@ void DXShader::SetUniform( string name, const int value, ShaderType type ) const
 
 	if( it == end( buffer->meta ) )
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
-	if( it->second.second == sizeof( value ) )
+	if( it->second.second != sizeof( value ) )
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniform(int)" );
 
 	memcpy( buffer->data + it->second.first, &value, it->second.second );
@@ -291,7 +299,7 @@ void DXShader::SetUniformArray( string name, const float* value, const int size,
 
 	if( it == end( buffer->meta ) )
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
-	if( it->second.second == sizeof( *value )*size )
+	if( it->second.second != sizeof( *value )*size )
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniformArray(float)" );
 	
 	memcpy( buffer->data + it->second.first, value, it->second.second );
@@ -303,7 +311,7 @@ void DXShader::SetUniformArray( string name, const int* value, const int size, S
 
 	if( it == end( buffer->meta ) )
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
-	if( it->second.second == sizeof( *value )*size )
+	if( it->second.second != sizeof( *value )*size )
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniformArray(int)" );
 	
 	memcpy( buffer->data + it->second.first, value, it->second.second );

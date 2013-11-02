@@ -1,10 +1,32 @@
 
-#include "lightStructs.hlsl"
+//#include "lightStructs.hlsl"
+
+struct DirectionalLight
+{
+	float3 direction;
+	float4 color;
+};
+
+struct VertexShaderInput
+{
+	float3 position			: POSITION;
+	float2 uv				: TEXCOORD0;
+	float3 normal			: NORMAL;
+};
+
+struct VertexToFragment
+{
+	float4 position			: SV_POSITION;
+	float2 uv				: TEXCOORD0;
+	float3 normal			: NORMAL;
+	DirectionalLight light;
+};
+
 
 Texture2D shaderTexture;
 SamplerState sampleType;
 
-float4 main( VertexToFragment input ) : SV_TARGET
+float4 FragmentFunction( VertexToFragment input ) : SV_TARGET
 {
 	float4 texDiffuse = shaderTexture.Sample( sampleType, input.uv );
 

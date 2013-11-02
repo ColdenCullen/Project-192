@@ -1,5 +1,27 @@
 
-#include "lightStructs.h"
+//#include "lightStructs.h"
+
+struct DirectionalLight
+{
+	float3 direction;
+	float4 color;
+};
+
+struct VertexShaderInput
+{
+	float3 position			: POSITION;
+	float2 uv				: TEXCOORD0;
+	float3 normal			: NORMAL;
+};
+
+struct VertexToFragment
+{
+	float4 position			: SV_POSITION;
+	float2 uv				: TEXCOORD0;
+	float3 normal			: NORMAL;
+	DirectionalLight light;
+};
+
 
 cbuffer uniforms : register( b0 )
 {
@@ -7,7 +29,7 @@ cbuffer uniforms : register( b0 )
 	matrix modelMatrix;
 };
 
-VertexToFragment main( VertexShaderInput input )
+VertexToFragment VertexFunction( VertexShaderInput input )
 {
 	VertexToFragment output;
 
