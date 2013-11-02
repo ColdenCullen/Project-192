@@ -22,6 +22,7 @@ using namespace Graphos::Graphics;
 
 void ShaderController::Initialize( void )
 {
+#if 0
 	char cAbsPath[ 256 ];
 #ifdef _WIN32
 	_fullpath( cAbsPath, SHADER_PATH.c_str(), MAX_PATH );
@@ -40,7 +41,7 @@ void ShaderController::Initialize( void )
 		while( ( ent = readdir( dir ) ) != NULL )
 		{
 			// If the selected file name is less than 3 characters long, skip it.
-			if( ent->d_namlen < 3 )
+			if( ent->d_namlen < 8 )
 				continue;
 
 			string fileName = ent->d_name;
@@ -53,15 +54,13 @@ void ShaderController::Initialize( void )
 
 				shaders[ name ] = new GlShader( absPath + name + ".vs.glsl", absPath + name + ".fs.glsl" );
 			}
-			else if( fileName.substr( ent->d_namlen -8 ) == ".fs.hlsl" &&
+			else if( fileName.substr( ent->d_namlen - 8 ) == ".fs.hlsl" &&
 				GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 			{
 				string name = fileName.substr( 0, ent->d_namlen - 8 );
 
 				shaders[ name ] = new DXShader( absPath + name + ".vs.hlsl", absPath + name + ".fs.hlsl" );
 			}
-			
-			
 		}
 
 		// Close dir
@@ -71,6 +70,7 @@ void ShaderController::Initialize( void )
 	{
 		throw exception( "Error reading shader dir." );
 	}
+#endif
 }
 
 IShader* ShaderController::GetShader( string shaderName )
