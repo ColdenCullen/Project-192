@@ -2,7 +2,7 @@
 	{
 		"Name": "Cube",
 	
-		"Shader": "texture",
+		"Shader": "light",
 
 		"Texture": {
 			"Name": "balls"

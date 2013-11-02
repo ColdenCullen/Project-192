@@ -3,15 +3,15 @@
 
 struct DirectionalLight
 {
-	float3 direction;
-	float4 color;
+	float3 direction		: POSITION;
+	float4 color			: COLOR;
 };
 
 struct VertexShaderInput
 {
 	float3 position			: POSITION;
 	float2 uv				: TEXCOORD0;
-	float3 normal			: NORMAL;
+	float3 normal			: NORMAL0;
 };
 
 struct VertexToFragment
