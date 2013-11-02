@@ -52,16 +52,21 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 
 	// Scale the UI obj
 	uiObj->transform->Scale(
-		width / 2,
-		height / 2,
+		static_cast<float>(width) / 2.0f,
+		static_cast<float>(height) / 2.0f,
 		1.0f
 	);
+
+	// this pushes the top down on Windows, remove this code once problem fixed
+	if ( !Config::GetData<bool>( "display.fullscreen" ) )
+		uiObj->transform->Translate( 0.0f, -38.0f, 0.0f );
 
 	// Focus for input
 	view->webView->Focus();
 }
 
 /// Destructor
+/// DO NOT CALL
 UserInterface::~UserInterface()
 {
 	if( view )
@@ -75,14 +80,7 @@ UserInterface::~UserInterface()
 bool UserInterface::Update( void )
 {
 	Vector2 cursor = Input::GetMousePos();
-
-	// Transform for scale
-	/*view->webView->InjectMouseMove(
-		( width / 2 ) + ( ( ( width / 2 ) - cursor.x ) * -uiObj->transform->Scale()->x ),
-		( height / 2 ) + ( ( ( height / 2 ) - cursor.y ) * uiObj->transform->Scale()->y )
-	);*/
-
-	view->webView->InjectMouseMove(cursor.x, cursor.y + 40);
+	view->webView->InjectMouseMove(cursor.x, cursor.y);
 
 	if( Input::IsKeyDown( VK_LBUTTON, true ) )
 	{
