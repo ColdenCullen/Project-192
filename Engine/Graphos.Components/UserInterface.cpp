@@ -23,17 +23,17 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 {
 	char abspath[ 256 ];
 #ifdef WIN32
-	_fullpath( abspath, ISingleton<Config>::Get().GetData<std::string>( "ui.filePath" ).c_str(), MAX_PATH );
+	_fullpath( abspath, Config::GetData<std::string>( "ui.filePath" ).c_str(), MAX_PATH );
 #else
 	realpath( url.c_str(), abspath );
 #endif
 
 	// Get dimensions
-	width = ISingleton<Config>::Get().GetData<unsigned int>( "display.width" );
-	height = ISingleton<Config>::Get().GetData<unsigned int>( "display.height" );
+	width = Config::GetData<unsigned int>( "display.width" );
+	height = Config::GetData<unsigned int>( "display.height" );
 
 	// Initialize mesh
-	uiObj = new GameObject(ISingleton<ShaderController>::Get().GetShader( "simple" ));
+	uiObj = new GameObject(ShaderController::GetShader( "texture" ));
 	uiMesh = new Mesh("Resources/Assets/Meshes/UI.obj");
 	uiObj->AddComponent(uiMesh);
 	//uiMesh().LoadFromFile("Resources/Assets/Meshes/UI.obj");
@@ -52,8 +52,8 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	graphosGame.SetCustomMethod( WSLit( "SetConfig" ), false );
 	graphosGame.SetCustomMethod( WSLit( "Reset" ), false );
 
-	width	= static_cast<float>( width )  * ISingleton<Config>::Get().GetData<float>( "ui.scale.x" );
-	height	= static_cast<float>( height ) * ISingleton<Config>::Get().GetData<float>( "ui.scale.y" );
+	width	= static_cast<float>( width )  * Config::GetData<float>( "ui.scale.x" );
+	height	= static_cast<float>( height ) * Config::GetData<float>( "ui.scale.y" );
 
 	// Scale the UI obj
 	transform.Scale(
@@ -78,19 +78,19 @@ UserInterface::~UserInterface()
 /// Get input from the mouse
 bool UserInterface::Update( void )
 {
-	Vector2 cursor = ISingleton<Input>::Get().GetMousePos();
+	Vector2 cursor = Input::GetMousePos();
 
 	// Transform for scale
 	view->webView->InjectMouseMove(
-		( width / 2 ) + ( ( ( width / 2 ) - cursor.x ) * -transform.Scale().x ),
-		( height / 2 ) + ( ( ( height / 2 ) - cursor.y ) * transform.Scale().y )
+		( width / 2 ) + ( ( ( width / 2 ) - cursor.x ) * -transform.Scale()->x ),
+		( height / 2 ) + ( ( ( height / 2 ) - cursor.y ) * transform.Scale()->y )
 	);
 
-	if( ISingleton<Input>::Get().IsKeyDown( VK_LBUTTON, true ) )
+	if( Input::IsKeyDown( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseDown( kMouseButton_Left );
 	}
-	else if( ISingleton<Input>::Get().IsKeyUp( VK_LBUTTON, true ) )
+	else if( Input::IsKeyUp( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseUp( kMouseButton_Left );
 	}
@@ -102,9 +102,8 @@ bool UserInterface::Update( void )
 
 void UserInterface::Draw( void )
 {
-	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetModelMatrix( transform.WorldMatrix() );
-	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetUniform( "shaderTexture", 0 );
-	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().OrthogonalMatrix() );
+	ShaderController::GetShader( "texture" )->SetModelMatrix( transform.WorldMatrix() );
+	ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->OrthogonalMatrix() );
 
 	// Draw Awesomium
 	view->Draw( nullptr );
@@ -112,7 +111,7 @@ void UserInterface::Draw( void )
 	// Draw mesh
 	uiObj->Draw();
 
-	ISingleton<ShaderController>::Get().GetShader( "simple" )->SetProjectionMatrix( WindowController::Get().PerspectiveMatrix() );
+	ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
 }
 
 void UserInterface::KeyPress( unsigned int key )
@@ -160,13 +159,13 @@ void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, unsigned i
 		else if( methodName == WSLit( "SetConfig" ) && args.size() == 2 )
 		{
 			if( args[ 1 ].IsBoolean() )
-				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToBoolean() );
+				Config::SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToBoolean() );
 			else if( args[ 1 ].IsInteger() )
-				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToInteger() );
+				Config::SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToInteger() );
 			else if( args[ 1 ].IsDouble() )
-				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), static_cast<float>( args[ 1 ].ToDouble() ) );
+				Config::SetData( ToString( args[ 0 ].ToString() ), static_cast<float>( args[ 1 ].ToDouble() ) );
 			else if( args[ 1 ].IsString() )
-				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), ToString( args[ 1 ].ToString() ) );
+				Config::SetData( ToString( args[ 0 ].ToString() ), ToString( args[ 1 ].ToString() ) );
 		}
 		else if( methodName == WSLit( "Reset" ) && args.size() == 0 )
 		{

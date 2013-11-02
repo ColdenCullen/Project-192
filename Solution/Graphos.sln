@@ -41,11 +41,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{E1E674
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{13C4CBF4-109C-4A8B-8A7F-139E88805C21}"
 	ProjectSection(SolutionItems) = preProject
-		..\Game\Resources\Shaders\light.fs.cg = ..\Game\Resources\Shaders\light.fs.cg
-		..\Game\Resources\Shaders\light.vs.cg = ..\Game\Resources\Shaders\light.vs.cg
-		..\Game\Resources\Shaders\simple.fs.cg = ..\Game\Resources\Shaders\simple.fs.cg
-		..\Game\Resources\Shaders\simple.vs.cg = ..\Game\Resources\Shaders\simple.vs.cg
-		..\Game\Resources\Shaders\structs.cg = ..\Game\Resources\Shaders\structs.cg
 		..\Game\Resources\Shaders\texture.fs.glsl = ..\Game\Resources\Shaders\texture.fs.glsl
 		..\Game\Resources\Shaders\texture.vs.glsl = ..\Game\Resources\Shaders\texture.vs.glsl
 	EndProjectSection
@@ -54,12 +49,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meshes", "Meshes", "{48731D
 	ProjectSection(SolutionItems) = preProject
 		..\Game\Resources\Assets\Meshes\Cube.obj = ..\Game\Resources\Assets\Meshes\Cube.obj
 		..\Game\Resources\Assets\Meshes\Tugboat_1.obj = ..\Game\Resources\Assets\Meshes\Tugboat_1.obj
+		..\Game\Resources\Assets\Meshes\UI.obj = ..\Game\Resources\Assets\Meshes\UI.obj
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Objects", "Objects", "{B6E4ED65-20D6-4771-8CAF-835CBBA2974E}"
 	ProjectSection(SolutionItems) = preProject
 		..\Game\Resources\Assets\Objects\Camera.json = ..\Game\Resources\Assets\Objects\Camera.json
 		..\Game\Resources\Assets\Objects\Tugboat_1.json = ..\Game\Resources\Assets\Objects\Tugboat_1.json
+		..\Game\Resources\Assets\Objects\UI.json = ..\Game\Resources\Assets\Objects\UI.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Textures", "Textures", "{20BE76EC-4F26-4999-B6B0-9691B0DADA29}"

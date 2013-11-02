@@ -2,7 +2,7 @@
 	{
 		"Name": "Cube",
 	
-		"Shader": "light",
+		"Shader": "texture",
 
 		"Texture": {
 			"Name": "white"
@@ -37,7 +37,7 @@
 	{ 
 		"Name": "Thang",
 
-		"Shader": "light",
+		"Shader": "texture",
 
 		"Texture": { 
 			"Name": "Poop"

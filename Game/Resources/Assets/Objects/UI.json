@@ -1,15 +1,12 @@
 {
 	"Name": "UI",
 	
-	"Shader": "simple",
+	"Shader": "texture",
 
 	"Texture": {
-		"Name": "Poop"
+		"Name": "white"
 	},
 
-	"Mesh": {
-		"Name": "UI"
-	},
 
 	"Transform": {
 		"Position": {
