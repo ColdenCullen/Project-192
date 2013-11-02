@@ -24,9 +24,9 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	const int numLayoutElements = 3;
 	const D3D11_INPUT_ELEMENT_DESC vLayout[] =
 	{
-/*POS*/		{ "ATTR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
-/*UV*/		{ "ATTR", 1, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-/*NORMAL*/	{ "ATTR", 2, DXGI_FORMAT_R32G32B32_FLOAT, 0, 20, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+/*POS*/		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+/*UV*/		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+/*NORMAL*/	{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 20, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 
 	// ---- Load Vertex Shader
@@ -111,6 +111,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	AdapterController::Get()->GetDevice().dx->CreateSamplerState( &samplerDesc, &samplerState );
 
 	// TEMPORARY BUFFER TO BE REMOVED FROM C++ SIDE
+	buffer = new ConstBuffer;
 	buffer->data = new char[2*16*4];
 	buffer->meta[ "modelViewProj" ] = pair<unsigned int, size_t>( 0, 16*4 );
 	buffer->meta[ "modelMatrix" ] = pair<unsigned int, size_t>( 16*4, 16*4 );
