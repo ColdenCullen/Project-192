@@ -172,6 +172,8 @@ void Game::Draw( void )
 		}
 	case GameState::Game:
 		{
+			ShaderController::GetShader( "texture" )->SetViewMatrix( camera->GetViewMatrix() );
+			ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
 			ShaderController::GetShader( "light" )->SetViewMatrix( camera->GetViewMatrix() );
 			ShaderController::GetShader( "light" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
 

@@ -18,12 +18,12 @@ out vec3 normal;
 out DirectionalLight light;
 
 // Uniforms
-uniform mat4 modelViewProj;
+uniform mat4 modelViewProjection;
 uniform mat4 modelMatrix;
 
 void main( void )
 {
-	gl_Position = modelViewProj * vec4( inPosition, 1.0f );
+	gl_Position = modelViewProjection * vec4( inPosition, 1.0f );
 
 	uv = inUV;
 	normal = normalize( modelMatrix * vec4( inNormal, 1.0f ) ).xyz;

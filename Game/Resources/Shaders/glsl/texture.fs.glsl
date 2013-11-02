@@ -14,6 +14,5 @@ void main( void )
 	// Sample pixel color from texture using the sampler
 	textureColor = texture( shaderTexture, texCoord );
 
-	//gl_FragColor = textureColor;
-	gl_FragColor = vec4( 0.0, 0.0, 1.0, 1.0 );
+	gl_FragColor = textureColor;
 }
