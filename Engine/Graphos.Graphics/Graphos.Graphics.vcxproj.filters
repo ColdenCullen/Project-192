@@ -71,6 +71,9 @@
     <ClCompile Include="WindowController.cpp">
       <Filter>Windows</Filter>
     </ClCompile>
+    <ClCompile Include="IShader.cpp">
+      <Filter>Shaders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">

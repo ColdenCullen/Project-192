@@ -4,12 +4,12 @@
 #include "ClassWrapper.h"
 
 #include "Transform.h"
-#include "CgShader.h"
 #include "GameObject.h"
 #include "Mesh.h"
 #include "TimeController.h"
 #include "Vector3.h"
 #include "Camera.h"
+#include "IShader.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Math;
@@ -17,7 +17,6 @@ using namespace Graphos::Graphics;
 
 WRAP_CLASS(Time,())
 WRAP_CLASS(Transform,(CtorForwarder<Transform*( void )>))
-WRAP_CLASS(CgShader,(CtorForwarder<CgShader*( std::string, std::string )>))
 WRAP_CLASS(GameObject,(CtorForwarder<GameObject*( void )>))
 WRAP_CLASS(Mesh,(CtorForwarder<Mesh*( std::string )>))
 WRAP_CLASS(Vector3,(CtorForwarder<Vector3*( void )>,
@@ -29,6 +28,7 @@ WRAP_CLASS(Matrix4,(CtorForwarder<Matrix4*( void )>))//,
 				//							float, float, float, float,
 				//							float, float, float, float )>)) 
 WRAP_CLASS(Camera,(CtorForwarder<Camera*( GameObject* )>))
+WRAP_CLASS(IShader,(CtorForwarder<IShader*(void)>))
 
 namespace Graphos
 {
@@ -45,7 +45,6 @@ namespace Graphos
 				cvv8::ClassCreator<Vector3>::SetupBindings( dest );
 				cvv8::ClassCreator<Matrix4>::SetupBindings( dest );
 				//cvv8::ClassCreator<IShader>::SetupBindings( dest );
-				cvv8::ClassCreator<CgShader>::SetupBindings( dest );
 				cvv8::ClassCreator<GameObject>::SetupBindings( dest );
 				cvv8::ClassCreator<Time>::SetupBindings( dest );
 				cvv8::ClassCreator<Camera>::SetupBindings( dest );

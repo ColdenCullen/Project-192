@@ -71,8 +71,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CC-Camera.cpp" />
-    <ClCompile Include="CC-CgShader.cpp" />
     <ClCompile Include="CC-GameObject.cpp" />
+    <ClCompile Include="CC-IShader.cpp" />
     <ClCompile Include="CC-Matrix4.cpp" />
     <ClCompile Include="CC-Mesh.cpp" />
     <ClCompile Include="CC-Texture.cpp" />

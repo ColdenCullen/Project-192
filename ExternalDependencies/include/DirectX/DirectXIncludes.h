@@ -1,4 +1,3 @@
-
 #if !defined( __DX_INCLUDES ) && defined( _WIN32 )
 #define __DX_INCLUDES
 
@@ -8,6 +7,7 @@ namespace DirectX
 #endif//NO_NAMESPACE
 
 	#include <d3d11.h>
+	#include <d3dcompiler.h>
 
 #ifndef NO_NAMESPACE
 }
@@ -29,7 +29,7 @@ namespace DirectX
 		MessageBox(NULL, L"", L"DirectX Error", MB_OK);		\
 		PostQuitMessage(0);									\
 	}														\
-}														
+}
 #endif
 #else
  #ifndef HR

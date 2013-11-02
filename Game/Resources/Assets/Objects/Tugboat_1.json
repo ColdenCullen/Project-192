@@ -5,7 +5,7 @@
 		"Shader": "texture",
 
 		"Texture": {
-			"Name": "white"
+			"Name": "balls"
 		},
 
 		"Mesh": {

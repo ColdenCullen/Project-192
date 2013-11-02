@@ -19,6 +19,14 @@ declare class Vector3
     public static TripleProduct( a: Vector3, b: Vector3, c: Vector3 ): Vector3;
 }
 
+declare class Matrix4
+{
+    public Mul( other: Vector3 ): Vector3;
+    public Mul( other: Matrix4 ): Matrix4;
+    public Add( other: Matrix4 ): Matrix4;
+    public Equals( other: Matrix4 ): boolean;
+}
+
 // Interface for object transforms
 declare class Transform
 {
@@ -37,6 +45,26 @@ declare class Transform
     public Scale(x: number, y: number, z: number): void;
 }
 
+declare class Camera
+{
+    public GetViewMatrix(): Matrix4;
+}
+
+declare class IShader
+{
+    public BuildConstBuffer( buffer: any ): void;
+}
+
+declare class Mesh
+{
+    public Draw( shader: IShader ): void;
+}
+
+declare class Texture
+{
+    public Draw( shader: IShader ): void;
+}
+
 // Class with variables and functions
 class GameObject
 {
@@ -47,19 +75,19 @@ class GameObject
     public Update(): void { }
 }
 
-class GraphosGame
+declare class GraphosGame
 {
     CurrentState: GameState;
 
     // DO NOT OVERRIDE
-    public Reset(): void { }
-    public Exit(): void { }
+    public Reset(): void;
+    public Exit(): void;
 
     // To be overridden
-    public Initialize(): void { }
-    public Update(): void { }
-    public Draw(): void { }
-    public Shutdown(): void { }
+    public Initialize(): void;
+    public Update(): void;
+    public Draw(): void;
+    public Shutdown(): void;
 }
 
 enum GameState
@@ -77,7 +105,7 @@ declare class Time
 // Interface that allows GameObjects to check for input
 declare class Input
 {
-    static IsKeyDown( key: number ): boolean;
+    public static IsKeyDown( key: number ): boolean;
 }
 
 // Print function

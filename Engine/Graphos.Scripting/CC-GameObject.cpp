@@ -23,8 +23,6 @@ void cvv8::ClassCreator_SetupBindings<GameObject>::Initialize( Handle<v8::Object
 		( "destroy", ClassCreator<GameObject>::DestroyObjectCallback )
 		//( "Update", MethodToInCa<GameObject, void (void), &GameObject::Update>::Call )
 		//( "Draw", MethodToInCa<GameObject, void (void), &GameObject::Draw>::Call )
-		//( "Cross", ConstMethodToInCa<const CgShader, CgShader (const CgShader&), &CgShader::Cross>::Call )
-		//( "Add", ConstMethodToInCa<const CgShader, CgShader (const CgShader&), &CgShader::Add>::Call )
 		;
 
 	AccessorAdder gameObjectacc( gameObjectcc.Prototype() );

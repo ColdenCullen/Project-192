@@ -18,9 +18,6 @@
     <ClCompile Include="CC-Vector3.cpp">
       <Filter>Class Wrapers</Filter>
     </ClCompile>
-    <ClCompile Include="CC-CgShader.cpp">
-      <Filter>Class Wrapers</Filter>
-    </ClCompile>
     <ClCompile Include="CC-GameObject.cpp">
       <Filter>Class Wrapers</Filter>
     </ClCompile>
@@ -37,6 +34,9 @@
       <Filter>Class Wrapers</Filter>
     </ClCompile>
     <ClCompile Include="CC-Matrix4.cpp">
+      <Filter>Class Wrapers</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-IShader.cpp">
       <Filter>Class Wrapers</Filter>
     </ClCompile>
   </ItemGroup>
