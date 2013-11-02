@@ -31,7 +31,7 @@ VertexToFragment main( VertexShaderInput input )
 
 	//output.position = float4(input.position,1.0f);
 	//output.position = mul( transpose(testMat), float4( input.position, 1.0f ) );
-	output.position = mul( transpose(modelViewProj), float4( input.position, 1.0f ) );
+	output.position = mul( modelViewProj, float4( input.position, 1.0f ) );
 
 	output.uv = input.uv;
 
