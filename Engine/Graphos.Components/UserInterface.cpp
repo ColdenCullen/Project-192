@@ -29,16 +29,13 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 #endif
 
 	// Get dimensions
-	width = Config::GetData<unsigned int>( "display.width" );
-	height = Config::GetData<unsigned int>( "display.height" );
+	width  = Config::GetData<unsigned int>( "display.width" ) * Config::GetData<unsigned int>( "ui.scale.x" );
+	height = Config::GetData<unsigned int>( "display.height" ) * Config::GetData<unsigned int>( "ui.scale.y" );
 
-	// Initialize mesh
+	// Initialize UI
 	uiObj = new GameObject(ShaderController::GetShader( "texture" ));
 	uiMesh = new Mesh("Resources/Assets/Meshes/UI.obj");
 	uiObj->AddComponent(uiMesh);
-	//uiMesh().LoadFromFile("Resources/Assets/Meshes/UI.obj");
-	//objects.LoadObjects( "" );
-	//uiMesh = objects.GetObjectByName( "UI" );
 
 	// Initialize Awesomium view
 	view = new AwesomiumView( abspath, width, height );
@@ -47,18 +44,16 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	while( view->webView->IsLoading() )
 		WebCore::instance()->Update();
 
+	// Set up JS hooks
 	graphosGame = view->webView->CreateGlobalJavascriptObject( WSLit( "GraphosGame" ) ).ToObject();
 	graphosGame.SetCustomMethod( WSLit( "ChangeState" ), false );
 	graphosGame.SetCustomMethod( WSLit( "SetConfig" ), false );
 	graphosGame.SetCustomMethod( WSLit( "Reset" ), false );
 
-	width	= static_cast<float>( width )  * Config::GetData<float>( "ui.scale.x" );
-	height	= static_cast<float>( height ) * Config::GetData<float>( "ui.scale.y" );
-
 	// Scale the UI obj
-	transform.Scale(
-		width,
-		-1 * height,
+	uiObj->transform->Scale(
+		width / 2,
+		height / 2,
 		1.0f
 	);
 
@@ -66,6 +61,7 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	view->webView->Focus();
 }
 
+/// Destructor
 UserInterface::~UserInterface()
 {
 	if( view )
@@ -81,10 +77,12 @@ bool UserInterface::Update( void )
 	Vector2 cursor = Input::GetMousePos();
 
 	// Transform for scale
-	view->webView->InjectMouseMove(
-		( width / 2 ) + ( ( ( width / 2 ) - cursor.x ) * -transform.Scale()->x ),
-		( height / 2 ) + ( ( ( height / 2 ) - cursor.y ) * transform.Scale()->y )
-	);
+	/*view->webView->InjectMouseMove(
+		( width / 2 ) + ( ( ( width / 2 ) - cursor.x ) * -uiObj->transform->Scale()->x ),
+		( height / 2 ) + ( ( ( height / 2 ) - cursor.y ) * uiObj->transform->Scale()->y )
+	);*/
+
+	view->webView->InjectMouseMove(cursor.x, cursor.y + 40);
 
 	if( Input::IsKeyDown( VK_LBUTTON, true ) )
 	{
@@ -102,16 +100,13 @@ bool UserInterface::Update( void )
 
 void UserInterface::Draw( void )
 {
-	ShaderController::GetShader( "texture" )->SetModelMatrix( transform.WorldMatrix() );
 	ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->OrthogonalMatrix() );
 
 	// Draw Awesomium
 	view->Draw( nullptr );
 
 	// Draw mesh
-	uiObj->Draw();
-
-	ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
+	uiObj->Draw();	
 }
 
 void UserInterface::KeyPress( unsigned int key )

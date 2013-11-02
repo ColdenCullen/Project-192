@@ -71,7 +71,7 @@ void AwesomiumView::Draw( IShader* shader )
 			if( surface->is_dirty() )
 			{
 				// Copy to buffer
-				surface->CopyTo( buffer, surface->row_span(), 4, false, false );
+				surface->CopyTo( buffer, surface->row_span(), 4, false, true );
 
 				glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, surface->width(), surface->height(), 0, GL_BGRA, GL_UNSIGNED_BYTE, (GLvoid*)buffer );
 				glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );

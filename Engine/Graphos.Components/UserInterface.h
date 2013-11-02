@@ -29,16 +29,11 @@ namespace Graphos
 			void				KeyPress( unsigned int key );
 
 		private:
-			// GL Texture ID
-			//unsigned int		textureID;
-
 			unsigned int		width;
 			unsigned int		height;
 
 			GameObject*			uiObj;
 			Mesh*				uiMesh;
-
-			Math::Transform		transform;
 
 			GraphosGame*		owner;
 
