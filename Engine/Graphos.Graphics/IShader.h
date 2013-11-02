@@ -20,9 +20,11 @@ namespace Graphos
 		class IShader
 		{
 		public:
-			virtual void		Shutdown( void ) = 0;
-			virtual void		Draw( Core::Mesh& mesh ) const = 0;
-			virtual void		BindTexture( Core::Texture& text) const = 0;
+			virtual void		Shutdown( void );
+			virtual void		Draw( Core::Mesh& mesh ) const;
+			virtual void		BindTexture( Core::Texture& text) const;
+
+			virtual void		BuildConstBuffer( v8::Arguments args );
 			
 			virtual void		SetUniform( std::string name, const float value, ShaderType type ) const;
 			virtual void		SetUniform( std::string name, const int value, ShaderType type ) const;

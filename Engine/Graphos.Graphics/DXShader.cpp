@@ -83,12 +83,12 @@ void DXShader::Shutdown( void )
 	ReleaseCOMobjMacro( vertexLayout );
 }
 
-void DXShader::Draw( const Mesh& mesh ) const 
+void DXShader::Draw( Mesh& mesh ) const 
 {
 
 }
 
-void DXShader::BindTexture( const Texture& text ) const 
+void DXShader::BindTexture( Texture& text ) const 
 {
 
 }

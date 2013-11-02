@@ -11,12 +11,12 @@ void IShader::Shutdown( void )
 	throw exception( "Not implemented" );
 }
 
-void IShader::Draw( const Mesh& mesh ) const
+void IShader::Draw( Mesh& mesh ) const
 {
 	throw exception( "Not implemented" );
 }
 
-void IShader::BindTexture( const Texture& text ) const
+void IShader::BindTexture( Texture& text ) const
 {
 	throw exception( "Not implemented" );
 }
