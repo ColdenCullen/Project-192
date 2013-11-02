@@ -22,12 +22,9 @@ WRAP_CLASS(Mesh,(CtorForwarder<Mesh*( std::string )>))
 WRAP_CLASS(Vector3,(CtorForwarder<Vector3*( void )>,
 					CtorForwarder<Vector3*( float, float, float )>,
 					CtorForwarder<Vector3*( const Vector3& )>))
-WRAP_CLASS(Matrix4,(CtorForwarder<Matrix4*( void )>))//,
-				//	CtorForwarder<Matrix4*( float, float, float, float,
-				//							float, float, float, float,
-				//							float, float, float, float,
-				//							float, float, float, float )>)) 
+WRAP_CLASS(Matrix4,(CtorForwarder<Matrix4*( void )>))
 WRAP_CLASS(Camera,(CtorForwarder<Camera*( GameObject* )>))
+WRAP_CLASS(ConstBuffer,(CtorForwarder<ConstBuffer*(void)>))
 WRAP_CLASS(IShader,(CtorForwarder<IShader*(void)>))
 
 namespace Graphos

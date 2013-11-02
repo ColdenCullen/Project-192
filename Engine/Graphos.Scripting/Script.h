@@ -2,6 +2,7 @@
 #define _SCRIPT_H_
 
 #include <v8\v8.h>
+#include <string>
 
 #include "IComponent.h"
 
@@ -17,6 +18,8 @@ namespace Graphos
 			void				Update( void );
 			void				Draw( void ) { }
 			void				Shutdown( void ) { }
+
+			void				CallFunction( std::string name );
 
 		private:
 			v8::Handle<v8::Object>

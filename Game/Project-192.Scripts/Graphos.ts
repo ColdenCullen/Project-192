@@ -50,9 +50,13 @@ declare class Camera
     public GetViewMatrix(): Matrix4;
 }
 
-declare class IShader
+class IShader
 {
-    public BuildConstBuffer( buffer: any ): void;
+    public ModelMatrix: Matrix4;
+    public ViewMatrix: Matrix4;
+    public ProjectionMatrix: Matrix4;
+    public ModelViewProjectionMatrix: Matrix4;
+    public RegisterConstBuffer( buffer: any ): void { }
 }
 
 declare class Mesh

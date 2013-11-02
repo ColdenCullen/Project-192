@@ -11,6 +11,7 @@
 using namespace v8;
 using namespace std;
 using namespace Graphos::Core;
+using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 using namespace DirectX;
 
@@ -111,23 +112,22 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	AdapterController::Get()->GetDevice().dx->CreateSamplerState( &samplerDesc, &samplerState );
 
 	// TEMPORARY BUFFER TO BE REMOVED FROM C++ SIDE
-	buffer = new ConstBuffer;
-	buffer->data = new char[2*16*4];
-	buffer->meta[ "modelViewProj" ] = pair<unsigned int, size_t>( 0, 16*4 );
-	buffer->meta[ "modelMatrix" ] = pair<unsigned int, size_t>( 16*4, 16*4 );
-	buffer->size = 2*16*4;
-	RegisterConstBuffer( "uniforms", buffer );
-
-
+	auto buf = new ConstBuffer;
+	buf->AddProperty( "modelViewProj", sizeof(Matrix4) );
+	buf->AddProperty( "modelMatrix", sizeof(Matrix4) );
+	RegisterConstBuffer( "uniforms", buf );
 }
 
 void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
 {
-	buffer = buf;
+	buffer = new DxConstBuffer();
+	buffer->meta = buf->meta;
+	buffer->totalSize = buf->totalSize;
+	buffer->data = new char[ buffer->totalSize ];
 
 	// ---- Constant Buffer
 	D3D11_BUFFER_DESC cBufferDesc;
-	cBufferDesc.ByteWidth			= buf->size;
+	cBufferDesc.ByteWidth			= buf->totalSize;
 	cBufferDesc.Usage				= D3D11_USAGE_DEFAULT;
 	cBufferDesc.BindFlags			= D3D11_BIND_CONSTANT_BUFFER;
 	cBufferDesc.CPUAccessFlags		= 0;
@@ -199,78 +199,13 @@ void DXShader::BindTexture( Texture& text ) const
 	AdapterController::Get()->GetDeviceContext().dx->PSSetShaderResources( 0, 1, &text.GetTextureId().dx );
 }
 
-void DXShader::BuildConstBuffer( v8::Arguments args )
-{
-	auto BuildStruct = [&]( Handle<Object> obj )
-	{
-		// Total size of the struct
-		size_t totalSize = 0;
-		ConstBuffer* buf = new ConstBuffer();
-
-		for( unsigned int ii = 0; ii < obj->GetPropertyNames()->Length(); ++ii )
-		{
-			// Get the property
-			auto prop = obj->GetPropertyNames()->Get( ii );
-
-			// Get size of object
-			size_t size;
-			if( prop->IsBoolean() )
-			{
-				size = 1;
-			}
-			else if( prop->IsArray() )
-			{
-				size = 4 * Handle<Array>::Cast( prop )->Length();
-			}
-			else if( prop->IsObject() )
-			{
-				size = 4 * prop->ToObject()->GetPropertyNames()->Length();
-			}
-			else
-			{
-				size = 4;
-			}
-
-			// Get the name of the property
-			string name = string( *String::AsciiValue( prop ) );
-
-			// Store the property's offset and size
-			buf->meta[ name ] = pair<unsigned int, size_t>( totalSize, size );
-
-			// Update current offset
-			totalSize += size;
-		}
-
-		// Allocate buffer space
-		buf->data = new char[ totalSize ];
-		buf->size = totalSize;
-
-		return buf;
-	};
-
-	if( args.Data()->IsArray() )
-	{
-		auto obj = Handle<Array>::Cast( args.Data() );
-
-		for( unsigned int ii = 0; ii < obj->Length(); ++ii )
-		{
-			RegisterConstBuffer( "", BuildStruct( obj->Get( ii )->ToObject() ) );
-		}
-	}
-	else
-	{
-		RegisterConstBuffer( "", BuildStruct( args.Data()->ToObject() ) );
-	}
-	
-}
-
 #pragma region SetUniforms 
 //
 // For DirectX, these should only update the data on the CPU side
 // Draw should update once on the GPU
 //
 
-void DXShader::SetUniform( string name, const float value, ShaderType type ) const
+void DXShader::SetUniform( string name, const float value ) const
 {
 	auto it = buffer->meta.find( name );
 
@@ -282,7 +217,7 @@ void DXShader::SetUniform( string name, const float value, ShaderType type ) con
 	memcpy( buffer->data + it->second.first, &value, it->second.second );
 }
 
-void DXShader::SetUniform( string name, const int value, ShaderType type ) const 
+void DXShader::SetUniform( string name, const int value ) const 
 {
 	auto it = buffer->meta.find( name );
 
@@ -294,7 +229,7 @@ void DXShader::SetUniform( string name, const int value, ShaderType type ) const
 	memcpy( buffer->data + it->second.first, &value, it->second.second );
 }
 
-void DXShader::SetUniformArray( string name, const float* value, const int size, ShaderType type ) const 
+void DXShader::SetUniformArray( string name, const float* value, const int size ) const 
 {
 	auto it = buffer->meta.find( name );
 
@@ -306,7 +241,7 @@ void DXShader::SetUniformArray( string name, const float* value, const int size,
 	memcpy( buffer->data + it->second.first, value, it->second.second );
 }
 
-void DXShader::SetUniformArray( string name, const int* value, const int size, ShaderType type ) const 
+void DXShader::SetUniformArray( string name, const int* value, const int size ) const 
 {
 	auto it = buffer->meta.find( name );
 
