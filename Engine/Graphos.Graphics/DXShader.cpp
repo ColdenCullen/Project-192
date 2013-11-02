@@ -58,6 +58,16 @@ void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
 
 	// ---- Constant Buffer
 	D3D11_BUFFER_DESC cBufferDesc;
+	cBufferDesc.ByteWidth			= buf->size;
+	cBufferDesc.Usage				= D3D11_USAGE_DEFAULT;
+	cBufferDesc.BindFlags			= D3D11_BIND_CONSTANT_BUFFER;
+	cBufferDesc.CPUAccessFlags		= 0;
+	cBufferDesc.MiscFlags			= 0;
+	cBufferDesc.StructureByteStride = 0;
+	HR(AdapterController::Get()->GetDevice().dxDevice->CreateBuffer(
+		&cBufferDesc,
+		NULL,
+		&buffer->vsConsantBuffer));
 }
 
 DXShader::~DXShader(void)
@@ -127,6 +137,7 @@ void DXShader::BuildConstBuffer( v8::Arguments args )
 
 		// Allocate buffer space
 		buf->data = new char[ totalSize ];
+		buf->size = totalSize;
 
 		return buf;
 	};
@@ -144,6 +155,7 @@ void DXShader::BuildConstBuffer( v8::Arguments args )
 	{
 		RegisterConstBuffer( "", BuildStruct( args.Data()->ToObject() ) );
 	}
+	
 }
 
 #pragma region SetUniforms
