@@ -1,18 +1,11 @@
 #include "StdAfx.h"
 #include "ShaderController.h"
-
 #include "WindowController.h"
-#include "File.h"
-
+#include "GraphicsController.h"
 #include "GlShader.h"
 #include "DXShader.h"
-
-#if defined( _WIN32 )
-#include <windirent.h>
-#elif defined( __APPLE__ )
-#include <dirent.h>
-#endif
-#include "GraphicsController.h"
+#include "File.h"
+#include "OutputController.h"
 
 #define SHADER_PATH string("Resources\\Shaders\\")
 
@@ -22,54 +15,31 @@ using namespace Graphos::Graphics;
 
 void ShaderController::Initialize( void )
 {
-	char cAbsPath[ 256 ];
-#ifdef _WIN32
-	_fullpath( cAbsPath, SHADER_PATH.c_str(), MAX_PATH );
-#else
-	realpath( SHADER_PATH.c_str(), abspath );
-#endif
-	string absPath = cAbsPath;
+	auto shaderFiles = File::ScanDir( SHADER_PATH );
 
-	DIR* dir;
-	dirent* ent;
-
-	// Open directory
-	if( ( dir = opendir( cAbsPath ) ) != NULL )
+	for( auto file : shaderFiles )
 	{
-		// Iterate through contents
-		while( ( ent = readdir( dir ) ) != NULL )
+		string fileName = file.GetFileName();
+
+		if( fileName.size() < 8 )
+			OutputController::PrintMessage( OutputType::OT_WARNING, "File not valid shader file: " + file.GetFileName() );
+
+		string shaderName = fileName.substr( 0, fileName.size() - 8 );
+
+		if( fileName.substr( fileName.size() - 8 ) == ".fs.glsl" &&
+			GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 		{
-			// If the selected file name is less than 3 characters long, skip it.
-			if( ent->d_namlen < 3 )
-				continue;
-
-			string fileName = ent->d_name;
-
-			// Check shader type
-			if( fileName.substr( ent->d_namlen - 8 ) == ".fs.glsl" &&
-				GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
-			{
-				string name = fileName.substr( 0, ent->d_namlen - 8 );
-
-				shaders[ name ] = new GlShader( absPath + name + ".vs.glsl", absPath + name + ".fs.glsl" );
-			}
-			else if( fileName.substr( ent->d_namlen -8 ) == ".fs.hlsl" &&
-				GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
-			{
-				string name = fileName.substr( 0, ent->d_namlen - 8 );
-
-				shaders[ name ] = new DXShader( absPath + name + ".vs.hlsl", absPath + name + ".fs.hlsl" );
-			}
-			
-			
+			shaders[ shaderName ] = new GlShader(
+				file.GetFullPath(),
+				file.GetFullPath().substr( 0, file.GetFullPath().size() - 8 ) + ".vs.glsl" );
 		}
-
-		// Close dir
-		closedir( dir );
-	}
-	else
-	{
-		throw exception( "Error reading shader dir." );
+		else if( fileName.substr( fileName.size() - 8 ) == ".fs.hlsl" &&
+			GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
+		{
+			shaders[ shaderName ] = new DXShader(
+				file.GetFullPath(),
+				file.GetFullPath().substr( 0, file.GetFullPath().size() - 8 ) + ".vs.hlsl" );
+		}
 	}
 }
 
