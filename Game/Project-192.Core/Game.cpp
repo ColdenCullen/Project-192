@@ -135,8 +135,8 @@ bool Game::Update( void )
 		{
 			ui->Update();
 
-			//switch to game with F1
-            if( Input::IsKeyDown( VK_F1 ) )
+			//switch to game with F2
+            if( Input::IsKeyDown( VK_F2 ) )
                     CurrentState = GameState::Game;
 
 			break;
@@ -151,18 +151,20 @@ bool Game::Update( void )
 
 			cube->transform->Rotate( rotation, rotation, 0.0f );
 
-			//switch to game with F1
-            if( Input::IsKeyDown( VK_F5 ) )
+			//switch to menu with F1
+            if( Input::IsKeyDown( VK_F1 ) )
                     CurrentState = GameState::Menu;
 
 			break;
 		}
 	}
 
+	// Quit game with Escape
 	if( Input::IsKeyDown( VK_ESCAPE ) )
 		Exit();
 
-	if( Input::IsKeyDown( VK_F9 ) )
+	// Reset game with F5
+	if( Input::IsKeyDown( VK_F5 ) )
 		Reset();
 
 	return true;
