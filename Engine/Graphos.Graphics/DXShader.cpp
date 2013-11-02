@@ -5,6 +5,8 @@
 #include "GraphicsController.h"
 #include "AdapterController.h"
 #include "OutputController.h"
+#include "Mesh.h"
+#include "Texture.h"
 
 using namespace v8;
 using namespace std;
@@ -15,6 +17,9 @@ using namespace DirectX;
 // Requires the compiled shaders (.cso files)
 DXShader::DXShader( string vertexPath, string fragmentPath )
 {
+	HRESULT result;
+	ID3DBlob* shaderCompileErrors;
+
 	// Layout description, must match layout in vertex shader
 	const int numLayoutElements = 3;
 	const D3D11_INPUT_ELEMENT_DESC vLayout[] =
@@ -27,29 +32,84 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	// ---- Load Vertex Shader
 	ID3DBlob* vsb;
 	wstring wVertexPath( vertexPath.begin(), vertexPath.end() );
-	D3DReadFileToBlob( wVertexPath.c_str(), &vsb );
+	//D3DReadFileToBlob( wVertexPath.c_str(), &vsb );
+	result = D3DCompileFromFile( wVertexPath.c_str(),
+								NULL,
+								NULL,
+								"main",
+								"vs_5_0",
+								D3DCOMPILE_ENABLE_STRICTNESS,
+								0,
+								&vsb,
+								&shaderCompileErrors );
 
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Error compiling vertex shader\n" + vertexPath );
+		OutputController::PrintMessage( OutputType::OT_ERROR, (char*)(shaderCompileErrors->GetBufferPointer()) );
+	}
+	
 	AdapterController::Get()->GetDevice().dx->CreateVertexShader( vsb->GetBufferPointer(), 
-																		vsb->GetBufferSize(),
-																		NULL,
-																		&vertexShader );
-	AdapterController::Get()->GetDevice().dx->CreateInputLayout( vLayout,
-																		numLayoutElements,//ARRAYSIZE(vertexLayout),
-																		vsb->GetBufferPointer(),
-																		vsb->GetBufferSize(),
-																		&vertexLayout );
+																vsb->GetBufferSize(),
+																NULL,
+																&vertexShader );
 
+	// Create Input Layout
+	AdapterController::Get()->GetDevice().dx->CreateInputLayout( vLayout,
+																numLayoutElements,//ARRAYSIZE(vertexLayout),
+																vsb->GetBufferPointer(),
+																vsb->GetBufferSize(),
+																&vertexLayout );
+	// release unneeded buffers
 	ReleaseCOMobjMacro( vsb );
+	ReleaseCOMobjMacro( shaderCompileErrors );
 
 	// ---- Load Pixel Shader
 	ID3DBlob* psb;
 	wstring wPixelPath( fragmentPath.begin(), fragmentPath.end() );
-	D3DReadFileToBlob( wPixelPath.c_str(), &psb );
+	//D3DReadFileToBlob( wPixelPath.c_str(), &psb );
+	result = D3DCompileFromFile( wPixelPath.c_str(),
+								NULL,
+								NULL,
+								"main",
+								"ps_5_0",
+								D3DCOMPILE_ENABLE_STRICTNESS,
+								0,
+								&psb,
+								&shaderCompileErrors );
+
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Error compiling fragment shader\n" + fragmentPath );
+		OutputController::PrintMessage( OutputType::OT_ERROR, (char*)(shaderCompileErrors->GetBufferPointer()) );
+	}
+
 	AdapterController::Get()->GetDevice().dx->CreatePixelShader( psb->GetBufferPointer(),
-																		psb->GetBufferSize(),
-																		NULL,
-																		&pixelShader );
+																psb->GetBufferSize(),
+																NULL,
+																&pixelShader );
+	// release unneeded buffers
 	ReleaseCOMobjMacro( psb );
+	ReleaseCOMobjMacro( shaderCompileErrors );
+
+	// ---- Create Sampler State
+	D3D11_SAMPLER_DESC samplerDesc;
+	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.MipLODBias = 0.0f;
+	samplerDesc.MaxAnisotropy = 1;
+	samplerDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+	samplerDesc.BorderColor[0] = 0;
+	samplerDesc.BorderColor[1] = 0;
+	samplerDesc.BorderColor[2] = 0;
+	samplerDesc.BorderColor[3] = 0;
+	samplerDesc.MinLOD = 0;
+	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+	AdapterController::Get()->GetDevice().dx->CreateSamplerState( &samplerDesc, &samplerState );
+
 }
 
 void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
@@ -81,24 +141,53 @@ void DXShader::Shutdown( void )
 	ReleaseCOMobjMacro( vertexShader );
 	ReleaseCOMobjMacro( pixelShader );
 	ReleaseCOMobjMacro( vertexLayout );
+	ReleaseCOMobjMacro( samplerState );
 }
 
 void DXShader::Draw( Mesh& mesh ) const 
 {
+
+	auto deviceContext = AdapterController::Get()->GetDeviceContext().dx;
+
 	// update constant buffer on the GPU
 	AdapterController::Get()->GetDeviceContext().dx->UpdateSubresource( buffer->vsConsantBuffer,
-																					0,
-																					NULL,
-																					&buffer->data,
-																					0,
-																					0 );
+																		0,
+																		NULL,
+																		&buffer->data,
+																		0,
+																		0 );
 
-	//AdapterController::Get()->GetDeviceContext().dx
+	// set up input assembler
+	deviceContext->IASetInputLayout( vertexLayout );
+	deviceContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST );
+
+	UINT strides[1] = { mesh.GetVertexSize() };
+	UINT offsets[1] = { 0 };
+	ID3D11Buffer* buffers[1] = { mesh.GetVertexBuffer().dx };
+	
+	// set buffers 
+	deviceContext->IASetVertexBuffers( 0, 1, buffers, strides, offsets );
+	deviceContext->IASetInputLayout( vertexLayout );    
+	deviceContext->IASetPrimitiveTopology( D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST ); 
+	deviceContext->IASetIndexBuffer( mesh.GetIndexBuffer().dx, DXGI_FORMAT_R32_UINT, 0 );
+	
+	// set shaders
+	deviceContext->VSSetShader( vertexShader, NULL, 0 );
+	deviceContext->VSSetConstantBuffers( 0, 1, &buffer->vsConsantBuffer );
+	deviceContext->PSSetShader( pixelShader, NULL, 0 );
+
+	// set sampler state
+	deviceContext->PSSetSamplers( 0, 1, &samplerState );
+
+	// draw
+	deviceContext->DrawIndexed( mesh.GetNumIndices(), 0, 0 );
+
 }
 
 void DXShader::BindTexture( Texture& text ) const 
 {
-
+	// set the texture in the shader
+	AdapterController::Get()->GetDeviceContext().dx->PSSetShaderResources( 0, 1, &text.GetTextureId().dx );
 }
 
 void DXShader::BuildConstBuffer( v8::Arguments args )

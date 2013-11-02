@@ -22,6 +22,7 @@ namespace Graphos
 		private:
 			// shared
 			unsigned int		numVertices;
+			unsigned int		numIndices;
 
 			union VertexBuffer
 			{
@@ -53,6 +54,7 @@ namespace Graphos
 			IndexBuffer&		GetIndexBuffer( void )	{ return indexBuffer; }
 
 			unsigned int 		GetNumVertices( void ) const { return numVertices; }
+			unsigned int		GetNumIndices( void ) const { return numIndices; }
 			unsigned int		GetGlVao( void ) const { return vertexArrayObject; }
 			
 		};

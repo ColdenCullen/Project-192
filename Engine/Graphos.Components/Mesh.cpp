@@ -88,10 +88,11 @@ void Mesh::LoadFromFile( string filePath )
 	}
 
 	numVertices = outputData.size() / 8;  // 8 is num floats per vertex
+	numIndices = numVertices;
 
-	unsigned int* indices = new unsigned int[ numVertices ];
+	unsigned int* indices = new unsigned int[ numIndices ];
 
-	for( unsigned int ii = 0; ii < numVertices; ++ii )
+	for( unsigned int ii = 0; ii < numIndices; ++ii )
 		indices[ ii ] = ii;
 
 	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )

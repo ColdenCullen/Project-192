@@ -49,6 +49,7 @@ namespace Graphos
 			DirectX::ID3D11VertexShader* vertexShader;
 			DirectX::ID3D11PixelShader*  pixelShader;
 
+			// other data for the shader
 			DirectX::ID3D11InputLayout*  vertexLayout;
 			DirectX::ID3D11SamplerState* samplerState;
 
