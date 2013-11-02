@@ -66,13 +66,13 @@ declare class Texture
 }
 
 // Class with variables and functions
-declare class GameObject
+class GameObject
 {
     // Transform object
     public Transform: Transform;
 
     // Abstract method for updating object
-    public Update(): void;
+    public Update(): void { }
 }
 
 declare class GraphosGame

@@ -5,8 +5,7 @@ struct DirectionalLight
 {
 	vec3 direction;
 	vec4 color;
-
-}
+};
 
 // In variables
 in vec2 uv;

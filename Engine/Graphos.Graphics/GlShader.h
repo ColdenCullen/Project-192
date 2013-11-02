@@ -26,16 +26,16 @@ namespace Graphos
 
 			void				BuildConstBuffer( v8::Arguments args );
 
-			void				SetUniform( std::string name, const float value, ShaderType type ) const override { };
-			void				SetUniform( std::string name, const int value, ShaderType type ) const override { };
-			void				SetUniformArray( std::string name, const float* value, const int size, ShaderType type ) const override { };
-			void				SetUniformArray( std::string name, const int* value, const int size, ShaderType type ) const override { };
+			void				SetUniform( std::string name, const float value, ShaderType type ) const override;
+			void				SetUniform( std::string name, const int value, ShaderType type ) const override;
+			void				SetUniformArray( std::string name, const float* value, const int size, ShaderType type ) const override;
+			void				SetUniformArray( std::string name, const int* value, const int size, ShaderType type ) const override;
 
 		private:
 			std::unordered_map<std::string, unsigned int>
 								uniforms;
 
-			void				ScanForVars( std::string vertexBody );
+			void				ScanForVars( std::string vertexBody, std::string fragmentBody );
 			void				Compile( std::string vertexBody, std::string fragmentBody );
 
 		};

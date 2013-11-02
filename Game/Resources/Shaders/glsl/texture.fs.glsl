@@ -3,9 +3,6 @@
 // In vars
 in vec2 texCoord;
 
-// Out vars
-//out vec4 outputColor;
-
 // Uniform vars
 uniform sampler2D shaderTexture;
 
@@ -17,5 +14,6 @@ void main( void )
 	// Sample pixel color from texture using the sampler
 	textureColor = texture( shaderTexture, texCoord );
 
-	gl_FragColor = textureColor;
+	//gl_FragColor = textureColor;
+	gl_FragColor = vec4( 0.0, 0.0, 1.0, 1.0 );
 }
