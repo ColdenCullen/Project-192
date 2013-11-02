@@ -71,7 +71,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AdapterController.h" />
-    <ClInclude Include="CgShader.h" />
     <ClInclude Include="DirectXController.h" />
     <ClInclude Include="DXShader.h" />
     <ClInclude Include="GlShader.h" />
@@ -87,7 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AdapterController.cpp" />
-    <ClCompile Include="CgShader.cpp" />
     <ClCompile Include="DirectXController.cpp" />
     <ClCompile Include="DXShader.cpp" />
     <ClCompile Include="GlShader.cpp" />

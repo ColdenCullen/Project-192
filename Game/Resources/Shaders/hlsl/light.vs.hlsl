@@ -29,7 +29,7 @@ cbuffer uniforms : register( b0 )
 	matrix modelMatrix;
 };
 
-VertexToFragment VertexFunction( VertexShaderInput input )
+VertexToFragment main( VertexShaderInput input )
 {
 	VertexToFragment output;
 

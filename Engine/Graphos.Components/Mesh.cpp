@@ -160,7 +160,7 @@ void Mesh::LoadFromFile( string filePath )
 		ibDesc.StructureByteStride		= 0;
 
 		D3D11_SUBRESOURCE_DATA initialIndexData;
-		//ZeroMemory( &initialIndexData, sizeof( D3D11_SUBRESOURCE_DATA ) );
+		ZeroMemory( &initialIndexData, sizeof( D3D11_SUBRESOURCE_DATA ) );
 		initialIndexData.pSysMem = indices;
 		result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &ibDesc, &initialIndexData, &indexBuffer.dx );
 		if( FAILED(result) )
