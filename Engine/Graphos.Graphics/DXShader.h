@@ -15,10 +15,24 @@ namespace Graphos
 		class DXShader : public IShader
 		{
 		public:
+			struct ConstBuffer
+			{
+				char*			data;
+				std::unordered_map<std::string, std::pair<unsigned int, std::size_t>>
+								meta;
+				DirectX::ID3D11Buffer* vsConsantBuffer;
+
+				~ConstBuffer()
+				{
+					delete[] data;
+					ReleaseCOMobjMacro( vsConsantBuffer );
+				}
+			};
+
 								DXShader( std::string vertexPath, std::string fragmentPath );
 								~DXShader(void);
 
-			void				RegisterConstBuffer( v8::Arguments args );
+			void				RegisterConstBuffer( std::string name, ConstBuffer* buf );
 
 			void				Shutdown( void ) override;
 			void				Draw( const Core::Mesh& mesh ) const override;
@@ -36,16 +50,9 @@ namespace Graphos
 
 			DirectX::ID3D11InputLayout*  vertexLayout;
 
-			struct ConstBuffer
-			{
-				char*			data;
-				std::unordered_map<std::string, std::pair<unsigned int, std::size_t>>
-								meta;
-				DirectX::ID3D11Buffer* vsConsantBuffer;
-			};
+			ConstBuffer*		buffer;
 
-			ConstBuffer buffer;
-
+			void				BuildCBufferFromJs( v8::Arguments args );
 		};
 	}
 }
