@@ -131,12 +131,8 @@ Matrix4 Matrix4::BuildOrthogonal( const float width, const float height, const f
 
 	toReturn.matrix[ 0 ][ 0 ] = 2.0f / width;
 	toReturn.matrix[ 1 ][ 1 ] = 2.0f / height;
-	toReturn.matrix[ 2 ][ 2 ] = 1.0f / ( far - near );
-	toReturn.matrix[ 3 ][ 2 ] = near / ( near - far );
-
-	// Set to be 0,0 - width,height
-	//toReturn.matrix[ 3 ][ 0 ] = -1.0f;
-	//toReturn.matrix[ 3 ][ 1 ] = -1.0f;
+	toReturn.matrix[ 2 ][ 2 ] = -2.0f / ( far - near );
+	toReturn.matrix[ 3 ][ 3 ] = 1.0f;
 
 	return toReturn;
 }
