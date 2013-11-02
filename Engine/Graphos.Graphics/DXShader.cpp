@@ -29,11 +29,11 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	wstring wVertexPath( vertexPath.begin(), vertexPath.end() );
 	D3DReadFileToBlob( wVertexPath.c_str(), &vsb );
 
-	AdapterController::Get()->GetDevice().dxDevice->CreateVertexShader( vsb->GetBufferPointer(), 
+	AdapterController::Get()->GetDevice().dx->CreateVertexShader( vsb->GetBufferPointer(), 
 																		vsb->GetBufferSize(),
 																		NULL,
 																		&vertexShader );
-	AdapterController::Get()->GetDevice().dxDevice->CreateInputLayout( vLayout,
+	AdapterController::Get()->GetDevice().dx->CreateInputLayout( vLayout,
 																		numLayoutElements,//ARRAYSIZE(vertexLayout),
 																		vsb->GetBufferPointer(),
 																		vsb->GetBufferSize(),
@@ -45,7 +45,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	ID3DBlob* psb;
 	wstring wPixelPath( fragmentPath.begin(), fragmentPath.end() );
 	D3DReadFileToBlob( wPixelPath.c_str(), &psb );
-	AdapterController::Get()->GetDevice().dxDevice->CreatePixelShader( psb->GetBufferPointer(),
+	AdapterController::Get()->GetDevice().dx->CreatePixelShader( psb->GetBufferPointer(),
 																		psb->GetBufferSize(),
 																		NULL,
 																		&pixelShader );
@@ -64,7 +64,7 @@ void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
 	cBufferDesc.CPUAccessFlags		= 0;
 	cBufferDesc.MiscFlags			= 0;
 	cBufferDesc.StructureByteStride = 0;
-	HR(AdapterController::Get()->GetDevice().dxDevice->CreateBuffer(
+	HR(AdapterController::Get()->GetDevice().dx->CreateBuffer(
 		&cBufferDesc,
 		NULL,
 		&buffer->vsConsantBuffer));
@@ -85,7 +85,15 @@ void DXShader::Shutdown( void )
 
 void DXShader::Draw( Mesh& mesh ) const 
 {
+	// update constant buffer on the GPU
+	AdapterController::Get()->GetDeviceContext().dx->UpdateSubresource( buffer->vsConsantBuffer,
+																					0,
+																					NULL,
+																					&buffer->data,
+																					0,
+																					0 );
 
+	//AdapterController::Get()->GetDeviceContext().dx
 }
 
 void DXShader::BindTexture( Texture& text ) const 
@@ -158,7 +166,12 @@ void DXShader::BuildConstBuffer( v8::Arguments args )
 	
 }
 
-#pragma region SetUniforms
+#pragma region SetUniforms 
+//
+// For DirectX, these should only update the data on the CPU side
+// Draw should update once on the GPU
+//
+
 void DXShader::SetUniform( string name, const float value, ShaderType type ) const
 {
 	auto it = buffer->meta.find( name );

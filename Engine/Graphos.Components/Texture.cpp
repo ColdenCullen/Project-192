@@ -47,7 +47,7 @@ void Texture::LoadFromFile( string filePath )
 		LoadFromWICFile( wFilePath.c_str(), DirectX::WIC_FLAGS_NONE, &metaData, scratchImg );
 
 		const DirectX::Image* img = scratchImg.GetImage( 0, 0, 0 );
-		auto tempDevice = AdapterController::Get()->GetDevice().dxDevice;
+		auto tempDevice = AdapterController::Get()->GetDevice().dx;
 		ID3D11Resource* tex;
 		HRESULT result = CreateTexture( reinterpret_cast<ID3D11Device*>(tempDevice), img, 1, metaData, &tex );
 		ID3D11ShaderResourceView* srv;

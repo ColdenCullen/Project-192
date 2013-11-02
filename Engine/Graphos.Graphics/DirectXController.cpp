@@ -17,8 +17,8 @@ void DirectXController::Initialize( void )
 	driverType = D3D_DRIVER_TYPE_HARDWARE;
 	enable4xMsaa = false;
 	msaa4xQuality = 0;
-	device.dxDevice = nullptr;
-	deviceContext.dxDeviceContext = nullptr;
+	device.dx = nullptr;
+	deviceContext.dx = nullptr;
 	swapChain = nullptr;
 	depthStencilBuffer = nullptr;
 	renderTargetView = nullptr;
@@ -41,9 +41,9 @@ void DirectXController::Initialize( void )
 		&requiredFeatureLevel,	// Feature levels
 		1,						// num Feature levels
 		D3D11_SDK_VERSION,		// SDK Version
-		&device.dxDevice,		// Device
+		&device.dx,				// Device
 		&featureLevel,			// Feature Level
-		&deviceContext.dxDeviceContext );		// Device Context
+		&deviceContext.dx );	// Device Context
 
 
 	// Handle any device creation or DirectX version errors
@@ -60,7 +60,7 @@ void DirectXController::Initialize( void )
 	}
 
 	// Check for 4X MSAA quality support
-	HR(device.dxDevice->CheckMultisampleQualityLevels(
+	HR(device.dx->CheckMultisampleQualityLevels(
 		DXGI_FORMAT_R8G8B8A8_UNORM,
 		4,
 		&msaa4xQuality));
@@ -98,12 +98,12 @@ void DirectXController::Initialize( void )
 	IDXGIDevice*	dxgiDevice	= 0;
 	IDXGIAdapter*	dxgiAdapter = 0;
 	IDXGIFactory*	dxgiFactory = 0;
-	HR(device.dxDevice->QueryInterface(	__uuidof(IDXGIDevice),	(void**)&dxgiDevice));
+	HR(device.dx->QueryInterface(	__uuidof(IDXGIDevice),	(void**)&dxgiDevice));
 	HR(dxgiDevice->GetParent(	__uuidof(IDXGIAdapter), (void**)&dxgiAdapter));
 	HR(dxgiAdapter->GetParent(	__uuidof(IDXGIFactory), (void**)&dxgiFactory));
 
 	// Finally make the swap chain and release the DXGI stuff
-	HR(dxgiFactory->CreateSwapChain(device.dxDevice, &swapChainDesc, &swapChain));
+	HR(dxgiFactory->CreateSwapChain(device.dx, &swapChainDesc, &swapChain));
 	ReleaseCOMobjMacro(dxgiDevice);
 	ReleaseCOMobjMacro(dxgiAdapter);
 	ReleaseCOMobjMacro(dxgiFactory);
@@ -122,27 +122,27 @@ void DirectXController::Shutdown( void )
 	ReleaseCOMobjMacro( depthStencilBuffer );
 
 	// Restore default device settings
-	if( deviceContext.dxDeviceContext )
-		deviceContext.dxDeviceContext->ClearState();
+	if( deviceContext.dx )
+		deviceContext.dx->ClearState();
 
 	// Release the context and finally the device
-	ReleaseCOMobjMacro(deviceContext.dxDeviceContext);
+	ReleaseCOMobjMacro( deviceContext.dx );
 	
 #if defined(_DEBUG) || defined(DEBUG)
 	ID3D11Debug* debugDev;
-	device.dxDevice->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debugDev));
+	device.dx->QueryInterface(__uuidof(ID3D11Debug), reinterpret_cast<void**>(&debugDev));
 	debugDev->ReportLiveDeviceObjects( D3D11_RLDO_DETAIL );
 #endif
-	ReleaseCOMobjMacro(device.dxDevice);
+	ReleaseCOMobjMacro( device.dx );
 
 }
 
 void DirectXController::Resize( void )
 {
 	// release old views
-	ReleaseCOMobjMacro(renderTargetView);
-	ReleaseCOMobjMacro(depthStencilView);
-	ReleaseCOMobjMacro(depthStencilBuffer);
+	ReleaseCOMobjMacro( renderTargetView );
+	ReleaseCOMobjMacro( depthStencilView );
+	ReleaseCOMobjMacro( depthStencilBuffer );
 
 	// resize swap chain
 	HR( swapChain->ResizeBuffers(
@@ -156,7 +156,7 @@ void DirectXController::Resize( void )
 	// create render target view
 	ID3D11Texture2D* backBuffer;
 	HR( swapChain->GetBuffer( 0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBuffer ) );
-	HR( device.dxDevice->CreateRenderTargetView( backBuffer, NULL, &renderTargetView ) );
+	HR( device.dx->CreateRenderTargetView( backBuffer, NULL, &renderTargetView ) );
 	ReleaseCOMobjMacro( backBuffer );
 
 	// Set up the description of the texture to use for the
@@ -184,11 +184,11 @@ void DirectXController::Resize( void )
 	}
 
 	// Create the depth/stencil buffer and corresponding view
-	HR(device.dxDevice->CreateTexture2D(&depthStencilDesc, NULL, &depthStencilBuffer));
-	HR(device.dxDevice->CreateDepthStencilView(depthStencilBuffer, NULL, &depthStencilView));
+	HR(device.dx->CreateTexture2D(&depthStencilDesc, NULL, &depthStencilBuffer));
+	HR(device.dx->CreateDepthStencilView(depthStencilBuffer, NULL, &depthStencilView));
 
 	// Bind these views to the pipeline, so rendering actually uses the underlying textures
-	deviceContext.dxDeviceContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
+	deviceContext.dx->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
 
 	// Update the viewport and set it on the device
 	viewport.TopLeftX	= 0;
@@ -198,7 +198,7 @@ void DirectXController::Resize( void )
 	viewport.MinDepth	= 0.0f;
 	viewport.MaxDepth	= 1.0f;
 
-	deviceContext.dxDeviceContext->RSSetViewports(1, &viewport);
+	deviceContext.dx->RSSetViewports(1, &viewport);
 }
 
 void DirectXController::Reload( void )
@@ -211,8 +211,8 @@ void DirectXController::BeginDraw( void )
 {
 	float ClearColor[4] = { 100.0f/255.0f, 149.0f/255.0f, 237.0f/255.0f, 1.0f };
 	// Clear the back buffer        
-	deviceContext.dxDeviceContext->ClearRenderTargetView( renderTargetView, ClearColor );
-	deviceContext.dxDeviceContext->ClearDepthStencilView( depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0, 0 );
+	deviceContext.dx->ClearRenderTargetView( renderTargetView, ClearColor );
+	deviceContext.dx->ClearDepthStencilView( depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0, 0 );
 }
 
 void DirectXController::EndDraw( void )

@@ -21,19 +21,19 @@ void OpenGlController::Initialize( void )
 	PIXELFORMATDESCRIPTOR pixelFormatDescriptor;
 
 	// Get device context
-	deviceContext.glDeviceContext = GetDC( Win32Controller::Get()->GetHWnd() );
-	if( !deviceContext.glDeviceContext )
+	deviceContext.gl = GetDC( Win32Controller::Get()->GetHWnd() );
+	if( !deviceContext.gl )
 		throw exception( "Error getting device context." );
 
 	// Set the pixel format
-	if( !SetPixelFormat( deviceContext.glDeviceContext, 1, &pixelFormatDescriptor ) )
+	if( !SetPixelFormat( deviceContext.gl, 1, &pixelFormatDescriptor ) )
 		throw exception( "Error setting pixel format." );
 
-	renderContext = wglCreateContext( deviceContext.glDeviceContext );
+	renderContext = wglCreateContext( deviceContext.gl );
 	if( !renderContext )
 		throw exception( "Error getting render context." );
 
-	if( !wglMakeCurrent( deviceContext.glDeviceContext, renderContext ) )
+	if( !wglMakeCurrent( deviceContext.gl, renderContext ) )
 		throw exception( "Error setting contexts." );
 
 	glewExperimental = GL_TRUE;
@@ -64,25 +64,25 @@ void OpenGlController::Initialize( void )
 	};
 
 	// Get new Device Context
-	deviceContext.glDeviceContext = GetDC( Win32Controller::Get()->GetHWnd() );
-	if( !deviceContext.glDeviceContext )
+	deviceContext.gl = GetDC( Win32Controller::Get()->GetHWnd() );
+	if( !deviceContext.gl )
 		throw exception( "Error getting device context." );
 
 	// Query pixel format
-	if( wglChoosePixelFormatARB( deviceContext.glDeviceContext, attributeList, NULL, 1, pixelFormat, &formatCount ) == -1 )
+	if( wglChoosePixelFormatARB( deviceContext.gl, attributeList, NULL, 1, pixelFormat, &formatCount ) == -1 )
 		throw exception( "Error getting pixel format." );
 
 	// Set the pixel format
-	if( SetPixelFormat( deviceContext.glDeviceContext, *pixelFormat, &pixelFormatDescriptor ) == -1 )
+	if( SetPixelFormat( deviceContext.gl, *pixelFormat, &pixelFormatDescriptor ) == -1 )
 		throw exception( "Error setting pixel format." );
 
 	// Create OpenGL rendering context
-	renderContext = wglCreateContextAttribsARB( deviceContext.glDeviceContext, NULL, versionInfo );
+	renderContext = wglCreateContextAttribsARB( deviceContext.gl, NULL, versionInfo );
 	if( !renderContext )
 		throw exception( "Error getting render context." );
 
 	// Set current context
-	if( !wglMakeCurrent( deviceContext.glDeviceContext, renderContext ) )
+	if( !wglMakeCurrent( deviceContext.gl, renderContext ) )
 		throw exception( "Error setting contexts." );
 
 	// Set depth buffer
@@ -110,7 +110,7 @@ void OpenGlController::BeginDraw( void )
 
 void OpenGlController::EndDraw( void )
 {
-	SwapBuffers( deviceContext.glDeviceContext );
+	SwapBuffers( deviceContext.gl );
 }
 
 void OpenGlController::Shutdown( void )
@@ -119,8 +119,8 @@ void OpenGlController::Shutdown( void )
 	wglMakeCurrent( NULL, NULL );
 	wglDeleteContext( renderContext );
 	renderContext = NULL;
-	ReleaseDC( Win32Controller::Get()->GetHWnd(), deviceContext.glDeviceContext );
-	deviceContext.glDeviceContext = NULL;
+	ReleaseDC( Win32Controller::Get()->GetHWnd(), deviceContext.gl );
+	deviceContext.gl = NULL;
 
 }
 

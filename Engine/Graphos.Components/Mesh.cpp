@@ -145,7 +145,7 @@ void Mesh::LoadFromFile( string filePath )
 		D3D11_SUBRESOURCE_DATA initialVertexData;
 		ZeroMemory( &initialVertexData, sizeof( D3D11_SUBRESOURCE_DATA ) );
 		initialVertexData.pSysMem = &outputData[0];
-		result = AdapterController::Get()->GetDevice().dxDevice->CreateBuffer( &vbDesc, &initialVertexData, &vertexBuffer.dx );
+		result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &vbDesc, &initialVertexData, &vertexBuffer.dx );
 		if( FAILED(result) )
 			OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to init dx vertex buffer" );
 
@@ -161,7 +161,7 @@ void Mesh::LoadFromFile( string filePath )
 		D3D11_SUBRESOURCE_DATA initialIndexData;
 		ZeroMemory( &initialIndexData, sizeof( D3D11_SUBRESOURCE_DATA ) );
 		initialIndexData.pSysMem = indices;
-		result = AdapterController::Get()->GetDevice().dxDevice->CreateBuffer( &ibDesc, &initialIndexData, &indexBuffer.dx );
+		result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &ibDesc, &initialIndexData, &indexBuffer.dx );
 		if( FAILED(result) )
 			OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to init dx index buffer" );
 
