@@ -24,6 +24,8 @@ namespace Graphos
 			void				Draw( const Core::Mesh& mesh ) const override;
 			void				BindTexture( const Core::Texture& text ) const override;
 
+			void				BuildConstBuffer( v8::Arguments args );
+
 			void				SetUniform( std::string name, const float value, ShaderType type ) const override { };
 			void				SetUniform( std::string name, const int value, ShaderType type ) const override { };
 			void				SetUniformArray( std::string name, const float* value, const int size, ShaderType type ) const override { };

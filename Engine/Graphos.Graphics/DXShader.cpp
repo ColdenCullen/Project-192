@@ -83,9 +83,9 @@ void DXShader::BindTexture( const Texture& text ) const
 
 }
 
-void DXShader::BuildCBufferFromJs( v8::Arguments args )
+void DXShader::BuildConstBuffer( v8::Arguments args )
 {
-	auto RegisterStruct = [&]( Handle<Object> obj )
+	auto BuildStruct = [&]( Handle<Object> obj )
 	{
 		// Total size of the struct
 		size_t totalSize = 0;
@@ -137,12 +137,12 @@ void DXShader::BuildCBufferFromJs( v8::Arguments args )
 
 		for( unsigned int ii = 0; ii < obj->Length(); ++ii )
 		{
-			RegisterStruct( obj->Get( ii )->ToObject() );
+			RegisterConstBuffer( "", BuildStruct( obj->Get( ii )->ToObject() ) );
 		}
 	}
 	else
 	{
-		RegisterStruct( args.Data()->ToObject() );
+		RegisterConstBuffer( "", BuildStruct( args.Data()->ToObject() ) );
 	}
 }
 

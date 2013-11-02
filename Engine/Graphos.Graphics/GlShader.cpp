@@ -117,3 +117,8 @@ void GlShader::BindTexture( const Texture& text ) const
 {
 	glBindTexture( GL_TEXTURE_2D, text.GetGlTextureId() );
 }
+
+void GlShader::BuildConstBuffer( v8::Arguments args )
+{
+	// LOL JK
+}

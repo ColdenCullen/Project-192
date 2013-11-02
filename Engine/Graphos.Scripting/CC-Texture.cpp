@@ -21,7 +21,7 @@ void cvv8::ClassCreator_SetupBindings<Texture>::Initialize( Handle<v8::Object> c
 	Texturecc
 		( "destroy", ClassCreator<Texture>::DestroyObjectCallback )
 		//( "Update", MethodToInCa<IComponent, void (void), &Texture::Update>::Call )
-		//( "Draw", MethodToInCa<Texture, void (IShader*), &Texture::Draw>::Call )
+		( "Draw", MethodToInCa<Texture, void (IShader*), &Texture::Draw>::Call )
 		;
 
 	// Set static methods

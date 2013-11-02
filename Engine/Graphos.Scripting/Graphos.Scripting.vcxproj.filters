@@ -36,6 +36,9 @@
     <ClCompile Include="CC-Matrix4.cpp">
       <Filter>Class Wrapers</Filter>
     </ClCompile>
+    <ClCompile Include="CC-IShader.cpp">
+      <Filter>Class Wrapers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Class Wrapers">

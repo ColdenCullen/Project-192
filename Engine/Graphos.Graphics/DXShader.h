@@ -4,7 +4,6 @@
 #include <string>
 #include <unordered_map>
 #include <utility>
-#include <v8/v8.h>
 #include "IShader.h"
 #include <DirectX/DirectXIncludes.h>
 
@@ -33,6 +32,7 @@ namespace Graphos
 								~DXShader(void);
 
 			void				RegisterConstBuffer( std::string name, ConstBuffer* buf );
+			void				BuildConstBuffer( v8::Arguments args ) override;
 
 			void				Shutdown( void ) override;
 			void				Draw( const Core::Mesh& mesh ) const override;
@@ -51,8 +51,6 @@ namespace Graphos
 			DirectX::ID3D11InputLayout*  vertexLayout;
 
 			ConstBuffer*		buffer;
-
-			void				BuildCBufferFromJs( v8::Arguments args );
 		};
 	}
 }
