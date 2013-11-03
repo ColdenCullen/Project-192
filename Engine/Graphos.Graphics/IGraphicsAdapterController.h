@@ -7,7 +7,7 @@ namespace DirectX
 	struct ID3D11Device;
 }
 
-#include <GL/glincludes.h>
+struct HDC__;
 
 namespace Graphos
 {
@@ -18,12 +18,13 @@ namespace Graphos
 		protected:
 			union AdapterDeviceContext
 			{
-				DirectX::ID3D11DeviceContext*	dxDeviceContext;
-				OpenGL::GLDeviceContext			glDeviceContext;
+				DirectX::ID3D11DeviceContext*	dx;
+				/*OpenGL::HDC__*				glDeviceContext;*/
+				HDC__*							gl;
 			} deviceContext;
 			union AdapterDevice
 			{
-				DirectX::ID3D11Device*			dxDevice;
+				DirectX::ID3D11Device*			dx;
 			} device;
 
 		public:

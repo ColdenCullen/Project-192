@@ -63,6 +63,7 @@
     <TypeScriptCompile Include="GameObject1.ts" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="LightShader.ts" />
     <TypeScriptCompile Include="Camera.ts" />
     <Content Include="Graphos.ts" />
   </ItemGroup>

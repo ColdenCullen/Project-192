@@ -1,716 +1,181 @@
-/*
-	Astral 2.0 by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
-
 @charset 'UTF-8';
 
-@font-face
-{
-    font-family: 'LigatureSymbols';
-    src: url('fonts/LigatureSymbols-2.11.eot');
-    src: url('fonts/LigatureSymbols-2.11.eot?#iefix') format('embedded-opentype'),
-         url('fonts/LigatureSymbols-2.11.woff') format('woff'),
-         url('fonts/LigatureSymbols-2.11.ttf') format('truetype'),
-         url('fonts/LigatureSymbols-2.11.svg#LigatureSymbols') format('svg');
-    font-weight: normal;
-    font-style: normal;
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('../fonts/SourceSansPro.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
-@font-face 
-{
-  font-family: 'Source Sans Pro';
+@font-face {
+  font-family: 'Track';
+  src: url('../fonts/Track.ttf') format('truetype');
+  font-weight: normal;
   font-style: normal;
-  font-weight: 400;
-  src: local('Source Sans Pro'), local('SourceSansPro-Regular'), url('../fonts/SourceSansPro-Regular.ttf') format('ttf');
 }
 
 /*********************************************************************************/
 /* Basic                                                                         */
 /*********************************************************************************/
 
-	*
-	{
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		-o-box-sizing: border-box;
-		-ms-box-sizing: border-box;
-		box-sizing: border-box;
-	}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 
-	body
-	{
-		/*
-			Fallback for browsers that don't support pseudo elements.
-		*/
-
-		background: url('images/bg.jpg');
-	}
-
-		body:before
-		{
-			content: '';
-			position: fixed;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			z-index: -1;
-
-			/*
-				Default background is a weird gradient so I've set it to stretch to
-				100% in both directions. If you replace it with a photo or something,
-				set background-size to "cover".
-			*/
-
-			background: url('images/bg.jpg');
-			background-size: 100% 100%;
-		}
-
-		/*
-			The pseudo element below applies a noise pattern to the background image. It's
-			meant to help mask blurriness, but you can remove it if you don't like it.
-		*/
-
-		body:after
-		{
-			content: '';
-			position: fixed;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			background: url('images/overlay.png');
-			z-index: -1;
-		}
-	
-	body, input, textarea
-	{
-		font-family: 'Source Sans Pro', sans-serif;
-		font-weight: 300;
-		color: #777;
-	}
-	
-	strong, b
-	{
-		font-weight: 400;
-		color: #363636;
-	}
-
-	h1, h2, h3, h4,h5, h6
-	{
-		font-weight: 400;
-		color: #363636;
-	}
-	
-	blockquote
-	{
-		border-left: solid 0.5em #ddd;
-		padding: 1em 0 1em 2em;
-		font-style: italic;
-	}
-	
-	em, i
-	{
-		font-style: italic;
-	}
-	
-	hr
-	{
-		border: 0;
-		border-top: solid 1px #ddd;
-		padding: 1.5em 0 0 0;
-		margin: 1.75em 0 0 0;
-	}
-	
-	sub
-	{
-		position: relative;
-		top: 0.5em;
-		font-size: 0.8em;
-	}
-	
-	sup
-	{
-		position: relative;
-		top: -0.5em;
-		font-size: 0.8em;
-	}
-	
-	table
-	{
-		width: 100%;
-	}
-	
-	table.style1
-	{
-		width: 100%;
-	}
-	
-		table.style1 tbody tr:nth-child(2n+2)
-		{
-			background: #f4f4f4;
-		}
-		
-		table.style1 td
-		{
-			padding: 0.5em 1em 0.5em 1em;
-		}
-		
-		table.style1 th
-		{
-			text-align: left;
-			font-weight: 400;
-			padding: 0.5em 1em 0.5em 1em;
-		}
-	
-		table.style1 thead
-		{
-			background: #222222;
-			color: #fff;
-		}
-		
-		table.style1 tfoot
-		{
-			background: #eee;
-		}
-		
-		table.style1 tbody
-		{
-		}
-
-	form
-	{
-	}
-	
-		form input.text,
-		form select,
-		form textarea
-		{
-			border: 0;
-			background: #f0f0f0;
-			padding: 0.65em;
-			width: 100%;
-		}
-
-		form input.button,
-		form input.text,
-		form select,
-		form textarea
-		{
-			-webkit-appearance: none;
-		}
-		
-		form textarea
-		{
-			height: 15em;
-		}
-		
-		form input:focus,
-		form select:focus,
-		form textarea:focus
-		{
-			background: #f5f5f5;
-		}
-
-		form ::-webkit-input-placeholder
-		{
-			color: #999;
-		}
-
-		form :-moz-placeholder
-		{
-			color: #999;
-		}
-
-		form ::-moz-placeholder
-		{
-			color: #999;
-		}
-
-		form :-ms-input-placeholder
-		{
-			color: #999;
-		}		
-
-	br.clear
-	{
-		clear: both;
-	}
-	
-	p, ul, ol, dl, table, blockquote, form
-	{
-		margin-bottom: 2em;
-	}
-	
-	section,
-	article
-	{
-		margin-bottom: 3em;
-	}
-	
-	section > :last-child,
-	article > :last-child
-	{
-		margin-bottom: 0;
-	}
-
-	section:last-child,
-	article:last-child
-	{
-		margin-bottom: 0;
-	}
-
-	.align-right
-	{
-		text-align: right;
-	}
-
-	.image
-	{
-		display: inline-block;
-	}
-	
-		.image img
-		{
-			display: block;
-			width: 100%;
-		}
-
-	.image-full
-	{
-		display: block;
-		width: 100%;
-		margin: 0 0 2em 0;
-	}
-	
-	.image-left
-	{
-		float: left;
-		margin: 0 2em 2em 0;
-	}
-	
-	.image-centered
-	{
-		display: block;
-		margin: 0 0 2em 0;
-	}
-
-		.image-centered img
-		{
-			margin: 0 auto;
-			width: auto;
-		}
-		
-	.button
-	{
-		display: inline-block;
-		background-color: #222222;
-		color: #fff;
-		border: 0;
-		cursor: pointer;
-		outline: 0;
-		-moz-transition: background-color .25s ease-in-out;
-		-webkit-transition: background-color .25s ease-in-out;
-		-o-transition: background-color .25s ease-in-out;
-		-ms-transition: background-color .25s ease-in-out;
-		transition: background-color .25s ease-in-out;
-	}
-
-		.button:hover
-		{
-			background-color: #333333;
-		}
-		
-		.button:active
-		{
-			background-color: #444444;
-		}
-	
-		.button-alt
-		{
-			background-color: #777777;
-		}
-
-			.button-alt:hover
-			{
-				background-color: #888888;
-			}
-			
-			.button-alt:active
-			{
-				background-color: #999999;
-			}
-	
-		.button-small
-		{
-		}
-		
-		.button-big
-		{
-		}
-		
-		.button-huge
-		{
-		}
-
-	ul.style1
-	{
-		list-style: disc;
-		padding-left: 1em;
-	}
-	
-		ul.style1 li
-		{
-			padding-left: 0.5em;
-		}
-	
-	ul.links
-	{
-	}
-	
-		ul.links li
-		{
-			display: inline-block;
-		}
-
-			ul.links li:before
-			{
-				display: inline;
-				content: '\2022';
-				opacity: 0.5;
-			}
-		
-			ul.links li:first-child:before
-			{
-				display: none;
-			}
-		
-	ol.style1
-	{
-		list-style: decimal;
-		padding-left: 1.25em;
-	}
-
-		ol.style1 li
-		{
-			padding-left: 0.25em;
-		}
-
-	.byline
-	{
-		display: block;
-		color: #aaa;
-	}
-
-	.top-name
-	{
-		width: 100%;
-		text-align: center;
-		margin-bottom: 0.4em;
-		color: #666;
-		text-shadow: 1px 1px 2px rgb(121, 121, 121);
-	}
-
-	.top-name.colden
-	{
-		color: rgb(199, 8, 8);
-	}
-
-	.top-name.daniel
-	{
-		color: rgb(0, 97, 202);
-	}
-
-	.amp
-	{
-		margin-top: 160px !important;
-		text-align: left;
-		font-size: 7em;
-	}
-
-	.settings-header
-	{
-		display: block;
-		width: 100%;
-		text-align: center;
-	}
-
-	.setting-inline
-	{
-		display: inline;
-		padding-left: 5px;
-	}
-
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-	    -webkit-appearance: none;
-	    margin: 0;
-	}
-	
-	.icon
-	{
-		text-decoration: none;
-	}
-
-		.icon:before
-		{
-			text-decoration: none;
-			padding-right: 0.25em;
-			font-family: 'LigatureSymbols';
-			-webkit-text-rendering: optimizeLegibility;
-			-moz-text-rendering: optimizeLegibility;
-			-ms-text-rendering: optimizeLegibility;
-			-o-text-rendering: optimizeLegibility;
-			text-rendering: optimizeLegibility;
-			-webkit-font-smoothing: antialiased;
-			-moz-font-smoothing: antialiased;
-			-ms-font-smoothing: antialiased;
-			-o-font-smoothing: antialiased;
-			font-smoothing: antialiased;
-			-webkit-font-feature-settings: "liga" 1, "dlig" 1;
-			-moz-font-feature-settings: "liga=1, dlig=1";
-			-ms-font-feature-settings: "liga" 1, "dlig" 1;
-			-o-font-feature-settings: "liga" 1, "dlig" 1;
-			font-feature-settings: "liga" 1, "dlig" 1;
-		}
-
-/*********************************************************************************/
-/* Icons                                                                         */
-/*********************************************************************************/
-
-	/*
-		These are powered by the kickass Ligature Symbols font by
-		Kazuyuki Motoyama (@kudakurage). I've already added styles for
-		a pretty good set of icons, but the font actually has WAYYYY
-		more (including icons for many other accounts and services).
-		To add them to Astral, go here to look up the unicode for
-		the icon you want to use:
-		
-		http://kudakurage.com/ligature_symbols/
-	
-		Then simply add the CSS for it in this format:
-		
-		.icon-(name):before		{ content: '(unicode)'; }
-	*/
-	
-	.icon-album:before			{ content: '\E002'; }
-	.icon-book:before			{ content: '\E020'; }
-	.icon-comment:before		{ content: '\E034'; }
-	.icon-file:before			{ content: '\E048'; }
-	.icon-folder:before			{ content: '\E04c'; }
-	.icon-info:before			{ content: '\E075'; }
-	.icon-mail:before			{ content: '\E08a'; }
-	.icon-notify:before			{ content: '\E097'; }
-	.icon-right:before			{ content: '\E112'; }
-	.icon-share:before			{ content: '\E118'; }
-	.icon-tilemenu:before		{ content: '\E12a'; }
-	.icon-user:before			{ content: '\E137'; }
-	.icon-home:before			{ content: '\E106'; }
-	.icon-pause:before			{ content: '\E09d'; }
-	.icon-settings:before		{ content: '\E055'; }
-
-	.icon-dribbble:before		{ content: '\E03f'; }
-	.icon-facebook:before		{ content: '\E047'; }
-	.icon-google:before			{ content: '\E05a'; }
-	.icon-linkedin:before		{ content: '\E083'; }
-	.icon-tumblr:before			{ content: '\E03f'; }
-	.icon-twitter:before		{ content: '\E12f'; }
-
-/*********************************************************************************/
-/* Checkbox Style                                                                */
-/*********************************************************************************/
-.check {
-  position:relative;
-  -webkit-appearance: none;
-  -moz-appearance: none!important;
-  width:40px;
-  height:40px;
-  -webkit-border-radius:6px;
-     -moz-border-radius:6px;
-          border-radius:6px;
-  font:2em 'Source Sans Pro';
-  text-align:center;
-  transition: all .15s ease-in-out;
-  -webkit-transition: all .15s ease-in-out;
-  background: #BA0000;
-  vertical-align: middle;
+  /* This hides the highlighting on double click */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-.check:after {
-  position:absolute;
-  top:9px;
-  left:8px;
-  content:"";
-  background:url('images/tick-sprite.png');
-  width:22px;
-  height:22px;
+body {
+  background: #162B3F;
+/*background: transparent;*/
+  color: white;
+  font-family: 'Source Sans Pro', 'Track', sans-serif;
 }
 
-.check:checked {
-  transition: all .15s ease-in-out;
-  -moz-transition: all .15s ease-in-out;
-  -webkit-transition: all .15s ease-in-out;
-  background: #2980B9;
+#game-title {
+  color: #f1c40f;
+  font-size: 9em;
+  line-height: 0.8;
+  text-align: center;
+  margin: 0;
+
+  opacity: 0;
+  -webkit-transform: translateY(-20px);
+  transition: 0.5s all;
+  transition-delay: 0.5s;
+}
+/* poop */
+#sub-title {
+  color: #f1c40f;
+  font-size: 4em;
+  text-align: center;
+  margin: 0 0 0.3em 0;
+
+  opacity: 0;
+  -webkit-transform: translateY(-20px);
+  transition: 0.5s all;
+  transition-delay: 0.6s;
 }
 
-.check:checked:after {
-  position:absolute;
-  top:9px;
-  left:6px;
-  content:"";       
-  background:url('images/tick-sprite.png');
-  background-position:-20px;
-  width:22px;
-  height:22px;
+.loaded .active #game-title,
+.loaded .active #sub-title {
+  -webkit-transform: translateY(0);
+  opacity: 1;
 }
 
-/*********************************************************************************/
-/* Textbox Style                                                                 */
-/*********************************************************************************/
-.search {
-  padding: 3px 10px;
-  width: 100px;
+#wrapper {
+  width: 800px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+#start-button {
   display: inline-block;
-  margin-bottom: 10px;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
-  color: #FFF;
-  outline: none;
-  background: #2980B9;
-  border: 2px solid #34495E;
-  transition: all .3s ease-in-out;
-  -moz-transition: all .3s ease-in-out;
-  -webkit-transition: all .3s ease-in-out;
+  width: 50%;
+  font-size: 0;
+  transition: 0.4s font-size;
+  transition-delay: 1.0s;
 }
 
-	.search:focus {
-	  color: #FFF;
-	  background: #3498DB;
-	}
-
-	.search:disabled {
-	  color: #BBB;
-	  background: #555;
-	  border: 2px solid #222;
-	}
-
-	.search::-webkit-input-placeholder {
-	   color: #FFF;
-	}
-
-	.search:-moz-placeholder { 
-	   color: #FFF;
-	}
-
-	.search::-moz-placeholder {
-	   color: #FFF;
-	}
-
-	.search:-ms-input-placeholder {  
-	   color: #FFF;
-	}
-
-/*********************************************************************************/
-/* Range Style                                                                   */
-/*********************************************************************************/
-input[type='range'] {
-	position: relative;
-	width:300px;
-	-webkit-appearance: none;
-	-webkit-border-radius: 10px;
-	   -moz-border-radius: 10px;
-	        border-radius: 10px;
-	background: #34495E;
-	height: 20px;
+.loaded #start-button {
+  font-size: 1.25em;
 }
 
-	input[type='range']::-webkit-slider-thumb {
-		-webkit-appearance: none;
-		-webkit-border-radius: 100px;
-		-moz-border-radius: 100px;
-		-webkit-border-radius: 100px;
-		background-color: #2980B9;
-		height: 20px;
-		width: 20px;
-	}
-		
-/*********************************************************************************/
-/* Nav                                                                           */
-/*********************************************************************************/
-	
-	#nav
-	{
-	}
-	
-		#nav a
-		{
-			position: relative;
-			display: inline-block;
-			color: #fff;
-			width: 1em;
-			height: 1em;
-			line-height: 0.9em;
-		}
+#start-game {
+  border-radius: 100%;
+  width: 4.5em;
+  height: 4.5em;
+  line-height: 4.5em;
+  text-align: center;
+  padding: 0;
+  position: relative;
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  outline: 0;
+  transition: 0.4s background;
+}
 
-			#nav a.icon:before
-			{
-				padding-right: 0;
-			}
-		
-/*********************************************************************************/
-/* Panels                                                                        */
-/*********************************************************************************/
+#start-game:hover {
+  background: #3498db;
+}
 
-	#main
-	{
-		position: relative;
-		overflow: hidden;
-	}
+.loaded #start-game {
+  font-size: 3em;
+}
 
-	.panel
-	{
-		position: relative;
-	}
+#nav {
+  display: block;
+  width: 100%;
+  margin-bottom: 1em;
+  opacity: 0;
+  -webkit-transform: translateY(-20px);
+  transition: 0.4s all;
+  transition-delay: 0.7s;
+}
 
-	/* Me */
-	
-		#me
-		{
-		}
-		
-			#me .pic,
-			#paused .pic
-			{
-				position: relative;
-				display: block;
-				text-decoration: none;
-			}
+.loaded #nav {
+  -webkit-transform: translateY(0);
+  opacity: 1;
+}
+
+#nav a {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  width: 200px;
+  cursor: pointer;
+  margin: 0 auto 0.5em auto;
+  font-size: 2em;
+  text-decoration: none;
+  transition: 0.1s color;
+}
+
+#nav a:hover {
+  color: #3498db;
+}
 
 /*********************************************************************************/
-/* Footer                                                                        */
+/* Credits                                                                       */
 /*********************************************************************************/
 
-	#footer
-	{
-		color: #ccc;
-		color: rgba(255,255,255,0.45);
-	}
-	
-		#footer a
-		{
-			color: #ddd;
-			color: rgba(255,255,255,0.65);
-			-moz-transition: color .25s ease-in-out;
-			-webkit-transition: color .25s ease-in-out;
-			-o-transition: color .25s ease-in-out;
-			-ms-transition: color .25s ease-in-out;
-			transition: color .25s ease-in-out;
-		}
-		
-		#footer a:hover
-		{
-			color: rgba(255,255,255,1.0);
-		}
+.developer {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 24.8%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.developer .photo {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/*********************************************************************************/
+/* Sections                                                                      */
+/*********************************************************************************/
+
+section {
+  display: none;
+}
+
+.active {
+  display: block;
+}

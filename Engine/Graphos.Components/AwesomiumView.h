@@ -7,15 +7,21 @@
 #include <string>
 
 #include "IComponent.h"
+#include "Texture.h"
+
+namespace DirectX
+{
+	struct ID3D11Texture2D;
+}
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class AwesomiumView : public IComponent
+		class AwesomiumView : public Texture
 		{
 		public:
-								AwesomiumView( void ) : webView( nullptr ), surface( nullptr ), buffer( nullptr ) { }
+								AwesomiumView( void ) : webView( nullptr ), surface( nullptr ) { }
 								AwesomiumView( std::string url, unsigned int width, unsigned int height ) { Initialize( url, width, height ); }
 								~AwesomiumView( void ) { }
 
@@ -24,7 +30,6 @@ namespace Graphos
 			void				Draw( Graphics::IShader* shader ) override;
 			void				Shutdown( void ) override;
 
-			unsigned int		textureID;
 
 			friend class		UserInterface;
 
@@ -32,8 +37,15 @@ namespace Graphos
 			Awesomium::WebView*	webView;
 			Awesomium::BitmapSurface*
 								surface;
+			union 
+			{
+				unsigned char*	gl;
+				DirectX::ID3D11Texture2D*		
+								dx;
+			} buffer;
 
-			unsigned char*		buffer;
+		private:
+			void				BufferAwesomiumSurface();
 		};
 	}
 }

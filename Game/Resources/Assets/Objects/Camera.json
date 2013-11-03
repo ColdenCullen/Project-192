@@ -1,7 +1,7 @@
 {
 	"Name": "Camera1",
 
-	"Shader": "light",
+	"Shader": "texture",
 
 	"Camera": true,
 

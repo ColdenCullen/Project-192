@@ -16,9 +16,7 @@ void Game::Initialize( void )
 	cube = objects.GetObjectByName( "Cube" );
 	CurrentState = GameState::Game;
 
-
-	
-	int i;
+	//int i;
 	///-----initialization_start-----
 
 	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
@@ -135,6 +133,10 @@ bool Game::Update( void )
 		{
 			ui->Update();
 
+			//switch to game with F2
+            if( Input::IsKeyDown( VK_F2 ) )
+                    CurrentState = GameState::Game;
+
 			break;
 		}
 	case GameState::Game:
@@ -147,13 +149,19 @@ bool Game::Update( void )
 
 			cube->transform->Rotate( rotation, rotation, 0.0f );
 
+			//switch to menu with F1
+            if( Input::IsKeyDown( VK_F1 ) )
+                    CurrentState = GameState::Menu;
+
 			break;
 		}
 	}
 
+	// Quit game with Escape
 	if( Input::IsKeyDown( VK_ESCAPE ) )
 		Exit();
 
+	// Reset game with F5
 	if( Input::IsKeyDown( VK_F5 ) )
 		Reset();
 
@@ -172,6 +180,8 @@ void Game::Draw( void )
 		}
 	case GameState::Game:
 		{
+			ShaderController::GetShader( "texture" )->SetViewMatrix( camera->GetViewMatrix() );
+			ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
 			ShaderController::GetShader( "light" )->SetViewMatrix( camera->GetViewMatrix() );
 			ShaderController::GetShader( "light" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
 

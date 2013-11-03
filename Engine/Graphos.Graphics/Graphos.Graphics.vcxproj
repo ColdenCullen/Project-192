@@ -44,13 +44,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <ShowIncludes>true</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>OpenGL32.lib;glew32.lib;FreeImage.lib;cg.lib;cgGL.lib;cgD3D11.lib;D3D11.lib;DirectXTex.lib;</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;glew32.lib;FreeImage.lib;D3D11.lib;D3DCompiler.lib;DirectXTex.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -72,7 +71,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AdapterController.h" />
-    <ClInclude Include="CgShader.h" />
     <ClInclude Include="DirectXController.h" />
     <ClInclude Include="DXShader.h" />
     <ClInclude Include="GlShader.h" />
@@ -88,11 +86,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AdapterController.cpp" />
-    <ClCompile Include="CgShader.cpp" />
     <ClCompile Include="DirectXController.cpp" />
     <ClCompile Include="DXShader.cpp" />
     <ClCompile Include="GlShader.cpp" />
     <ClCompile Include="GraphicsController.cpp" />
+    <ClCompile Include="IShader.cpp" />
     <ClCompile Include="OpenGlController.cpp" />
     <ClCompile Include="ShaderController.cpp" />
     <ClCompile Include="Win32Controller.cpp" />

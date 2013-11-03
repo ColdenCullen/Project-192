@@ -22,7 +22,7 @@ namespace OpenGL
 
 	// Platform specific typedefs
 	#if defined( _WIN32 )
-	 typedef HDC GLDeviceContext;
+	 typedef HDC__* GLDeviceContext;
 	 typedef HGLRC GLRenderContext;
 	#elif defined( __APPLE__ )
 	 //typedef NSOpenGLContext GLRenderContext;

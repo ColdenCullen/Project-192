@@ -8,6 +8,7 @@
 namespace DirectX
 {
 	struct ID3D11ShaderResourceView;
+	struct ID3D11Resource;
 }
 
 namespace Graphos
@@ -16,6 +17,13 @@ namespace Graphos
 	{
 		class Texture : public IComponent
 		{
+		protected:
+			union TextureID
+			{
+				unsigned int gl;
+				DirectX::ID3D11ShaderResourceView* dx;
+			} textureId;
+
 		public:
 								Texture( void ) { }
 								Texture( std::string filePath ) { LoadFromFile( filePath ); }
@@ -25,18 +33,12 @@ namespace Graphos
 			void				Draw( Graphics::IShader* shader ) override;
 			void				Shutdown( void ) override;
 
-			unsigned int		GetGlTextureId( void ) const { return glTextureId; }
-			DirectX::ID3D11ShaderResourceView*	GetDxTextureId( void ) const { return dxTexture; }
+			TextureID&			GetTextureId( void ) { return textureId; }
 
-		private:
-			// OpenGL Texture ID
-			unsigned int		glTextureId;
-
-			// DirectX Texture Reference
-			DirectX::ID3D11ShaderResourceView*		dxTexture;
-
+		protected:
 			unsigned int		width;
 			unsigned int		height;
+
 		};
 	}
 }

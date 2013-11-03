@@ -1,15 +1,15 @@
-
-//#include "UserInterface.h"
-#include <Awesomium/WebCore.h>
-#include <Awesomium/STLHelpers.h>
+#include "UserInterface.h"
 #include "GraphosGame.h"
 #include "WindowController.h"
 #include "ShaderController.h"
 #include "Input.h"
 #include "Config.h"
+#include "IShader.h"
+#include "GraphicsController.h"
 
-//#include <string>
-
+#include <string>
+#include <Awesomium/WebCore.h>
+#include <Awesomium/STLHelpers.h>
 
 #define NO_NAMESPACE
 #include <GL/GLIncludes.h>
@@ -21,8 +21,6 @@ using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 
-#define DEPTH 1.0f
-
 UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 {
 	char abspath[ 256 ];
@@ -33,72 +31,45 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 #endif
 
 	// Get dimensions
-	width = Config::GetData<unsigned int>( "display.width" );
-	height = Config::GetData<unsigned int>( "display.height" );
+	width  = Config::GetData<unsigned int>( "display.width" ) * Config::GetData<unsigned int>( "ui.scale.x" );
+	height = Config::GetData<unsigned int>( "display.height" ) * Config::GetData<unsigned int>( "ui.scale.y" );
 
-	// Generate mesh
-	numElements = 6;
-	unsigned int indices[] = { 0, 1, 2, 0, 2, 3 };
+	// Initialize UI
+	uiObj = new GameObject(ShaderController::GetShader( "texture" ));
+	uiMesh = new Mesh("Resources/Assets/Meshes/UI.obj");
+	uiObj->AddComponent(uiMesh);
 
-	GLfloat floatWidth = static_cast<GLfloat>( width );
-	GLfloat floatHeight = static_cast<GLfloat>( height );
-
-	GLfloat vertices[] = {
-		-floatWidth / 2.0f,	floatHeight / 2.0f,	DEPTH, 0.0f, 1.0f,
-		-floatWidth / 2.0f,	-floatHeight / 2.0f,DEPTH, 0.0f, 0.0f,
-		floatWidth / 2.0f,	-floatHeight / 2.0f,DEPTH, 1.0f, 0.0f,
-		floatWidth / 2.0f,	floatHeight / 2.0f,	DEPTH, 1.0f, 1.0f
-	};
-
-	// Setup GL buffers
-	glGenVertexArrays( 1, &vertexArrayObject );
-
-	glBindVertexArray( vertexArrayObject );
-
-	glGenBuffers( 1, &vertexBufferObject );
-
-	glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	glBufferData( GL_ARRAY_BUFFER, 6/*4*/ * 5 * sizeof( GLfloat ), vertices, GL_STATIC_DRAW );
-
-	glEnableVertexAttribArray( 0 );// Position
-	glEnableVertexAttribArray( 1 );// UV
-
-	glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	glVertexAttribPointer( 0, 3, GL_FLOAT, false, 5 * sizeof( GLfloat ), 0 );
-
-	glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	glVertexAttribPointer( 1, 2, GL_FLOAT, false, 5 * sizeof( GLfloat ), (unsigned char*)NULL + ( 3 * sizeof( GLfloat ) ) );
-
-	glGenBuffers( 1, &indexBuffer );
-
-	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
-	glBufferData( GL_ELEMENT_ARRAY_BUFFER, numElements * sizeof( unsigned int ), indices, GL_STATIC_DRAW );
-
+	// Initialize Awesomium view
 	view = new AwesomiumView( abspath, width, height );
 	view->webView->set_js_method_handler( new JavaScriptHandler( this ) );
 
 	while( view->webView->IsLoading() )
 		WebCore::instance()->Update();
 
+	// Set up JS hooks
 	graphosGame = view->webView->CreateGlobalJavascriptObject( WSLit( "GraphosGame" ) ).ToObject();
 	graphosGame.SetCustomMethod( WSLit( "ChangeState" ), false );
 	graphosGame.SetCustomMethod( WSLit( "SetConfig" ), false );
 	graphosGame.SetCustomMethod( WSLit( "Reset" ), false );
 
-	width	= static_cast<float>( width )  * Config::GetData<float>( "ui.scale.x" );
-	height	= static_cast<float>( height ) * Config::GetData<float>( "ui.scale.y" );
-
-	// Scale to fix Awesomium issue
-	transform.Scale(
-		Config::GetData<float>( "ui.scale.x" ),
-		-Config::GetData<float>( "ui.scale.y" ),
+	// Scale the UI obj
+	uiObj->transform->Scale(
+		static_cast<float>(width) / 2.0f,
+		static_cast<float>(height) / 2.0f,
 		1.0f
 	);
+
+	// this pushes the top down on Windows, remove this code once problem fixed
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL &&
+		!Config::GetData<bool>( "display.fullscreen" ) )
+		uiObj->transform->Translate( 0.0f, -38.0f, 0.0f );
 
 	// Focus for input
 	view->webView->Focus();
 }
 
+/// Destructor
+/// DO NOT CALL
 UserInterface::~UserInterface()
 {
 	if( view )
@@ -108,15 +79,11 @@ UserInterface::~UserInterface()
 	}
 }
 
+/// Get input from the mouse
 bool UserInterface::Update( void )
 {
 	Vector2 cursor = Input::GetMousePos();
-
-	// Transform for scale
-	view->webView->InjectMouseMove(
-		( width / 2 ) + ( ( ( width / 2 ) - cursor.x ) * -transform.Scale()->x ),
-		( height / 2 ) + ( ( ( height / 2 ) - cursor.y ) * transform.Scale()->y )
-	);
+	view->webView->InjectMouseMove(cursor.x, cursor.y);
 
 	if( Input::IsKeyDown( VK_LBUTTON, true ) )
 	{
@@ -134,20 +101,13 @@ bool UserInterface::Update( void )
 
 void UserInterface::Draw( void )
 {
-	//ShaderController::GetShader( "texture" ).Use();
-	ShaderController::GetShader( "texture" )->SetModelMatrix( transform.WorldMatrix() );
-	//ShaderController::GetShader( "texture" )->SetUniform( "shaderTexture", 0, 1,  );
 	ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->OrthogonalMatrix() );
 
-	view->Draw( nullptr );
+	// Draw Awesomium
+	view->Draw( ShaderController::GetShader( "texture" ) );
 
-	// Bind and draw buffer
-	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
-	glBindVertexArray( vertexArrayObject );
-
-	glDrawElements( GL_TRIANGLES, numElements, GL_UNSIGNED_INT, NULL );
-
-	ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
+	// Draw mesh
+	uiObj->Draw();	
 }
 
 void UserInterface::KeyPress( unsigned int key )

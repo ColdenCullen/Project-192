@@ -3,9 +3,6 @@
 // In vars
 in vec2 texCoord;
 
-// Out vars
-//out vec4 outputColor;
-
 // Uniform vars
 uniform sampler2D shaderTexture;
 

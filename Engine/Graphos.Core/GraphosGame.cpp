@@ -98,13 +98,11 @@ void GraphosGame::Reset( void )
 	AssetController::Shutdown();
 	ScriptController::Get().Shutdown();
 
-	// Restart<
+	// Restart
 	ScriptController::Get().Initialize();
 	AssetController::Initialize();
 	Physics::Physics::Initialize();
 	Input::ui = ui = new UserInterface( this );
-
-	CurrentState = GameState::Menu;
 
 	Initialize();
 }
@@ -145,6 +143,7 @@ void GraphosGame::Stop( void )
 	Physics::Physics::Shutdown();
 	AssetController::Shutdown();
 	ScriptController::Get().Shutdown();
+	GraphicsController::Shutdown();
 }
 
 Camera* Graphos::Core::GraphosGame::camera;

@@ -3,9 +3,13 @@
 
 #include "Transform.h"
 #include "AwesomiumView.h"
-//#include "Vector2.h"
+#include "Vector2.h"
+#include "Mesh.h"
+#include "GameObjectCollection.h"
 
 #include <Awesomium/JSObject.h>
+
+#define DEPTH 1.0f
 
 namespace Graphos
 {
@@ -25,13 +29,11 @@ namespace Graphos
 			void				KeyPress( unsigned int key );
 
 		private:
-			// GL Texture ID
-			unsigned int		textureID;
-
 			unsigned int		width;
 			unsigned int		height;
 
-			Math::Transform		transform;
+			GameObject*			uiObj;
+			Mesh*				uiMesh;
 
 			GraphosGame*		owner;
 

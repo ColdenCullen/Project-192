@@ -21,7 +21,7 @@ void cvv8::ClassCreator_SetupBindings<Mesh>::Initialize( Handle<v8::Object> cons
 	Meshcc
 		( "destroy", ClassCreator<Mesh>::DestroyObjectCallback )
 		//( "Update", MethodToInCa<Mesh, void (void), &Mesh::Update>::Call )
-		//( "Draw", MethodToInCa<Mesh, void (IShader*), &Mesh::Draw>::Call )
+		( "Draw", MethodToInCa<Mesh, void (IShader*), &Mesh::Draw>::Call )
 		;
 
 	// Set static methods

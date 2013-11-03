@@ -20,20 +20,23 @@ namespace Graphos
 
 								GlShader( std::string vertexPath, std::string fragmentPath );
 
-			void				Shutdown( void ) override { }
-			void				Draw( const Core::Mesh& mesh ) const override;
-			void				BindTexture( const Core::Texture& text ) const override;
+			void				Shutdown( void ) override { IShader::Shutdown(); }
+			void				Draw( Core::Mesh& mesh ) const override;
+			void				BindTexture( Core::Texture& text ) const override;
 
-			void				SetUniform( std::string name, const float value, ShaderType type ) const override { };
-			void				SetUniform( std::string name, const int value, ShaderType type ) const override { };
-			void				SetUniformArray( std::string name, const float* value, const int size, ShaderType type ) const override { };
-			void				SetUniformArray( std::string name, const int* value, const int size, ShaderType type ) const override { };
+			void				RegisterConstBuffer( std::string name, ConstBuffer* buf ) override;
+
+			void				SetUniform( std::string name, const float value ) const override;
+			void				SetUniform( std::string name, const int value ) const override;
+			void				SetUniformArray( std::string name, const float* value, const int size ) const override;
+			void				SetUniformArray( std::string name, const int* value, const int size ) const override;
+			void				SetUniformMatrix( std::string name, const Math::Matrix4& matrix ) const;
 
 		private:
 			std::unordered_map<std::string, unsigned int>
 								uniforms;
 
-			void				ScanForVars( std::string vertexBody );
+			void				ScanForVars( std::string vertexBody, std::string fragmentBody );
 			void				Compile( std::string vertexBody, std::string fragmentBody );
 
 		};
