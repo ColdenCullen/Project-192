@@ -129,11 +129,8 @@ namespace cvv8
 		{
 			JSObjHandle const & rc( GetJSObject( val ) );
 
-			if( rc.IsEmpty() )//|| !rc->IsObject() )
+			if( rc.IsEmpty() || !rc->IsObject() )
 			{
-				// If object does not exist in the JSMap, create it
-				//JSObjHandle toReturn( ClassCreator<T>::Instance().NewInstance( 0, NULL ) );
-
 				JSObjHandle toReturn =
 					v8::Persistent<v8::Object>::New(
 							ClassCreator<T>::Instance().NewInstance( 0, NULL ) );
@@ -146,7 +143,6 @@ namespace cvv8
 			else
 			{
 				return rc;
-				//return v8::Null();
 			}
 		}
 	};
