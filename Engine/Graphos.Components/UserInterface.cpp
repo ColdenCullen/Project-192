@@ -32,8 +32,8 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 #endif
 
 	// Get dimensions
-	width  = Config::GetData<unsigned int>( "display.width" ) * Config::GetData<unsigned int>( "ui.scale.x" );
-	height = Config::GetData<unsigned int>( "display.height" ) * Config::GetData<unsigned int>( "ui.scale.y" );
+	width  = Config::GetData<float>( "display.width" ) * Config::GetData<float>( "ui.scale.x" );
+	height = Config::GetData<float>( "display.height" ) * Config::GetData<float>( "ui.scale.y" );
 
 	// Initialize UI
 	uiObj = new GameObject(ShaderController::GetShader( "texture" ));
@@ -41,7 +41,7 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	uiObj->AddComponent(uiMesh);
 
 	// Initialize Awesomium view
-	view = new AwesomiumView( abspath, width, height );
+	view = new AwesomiumView( abspath, static_cast<int>( width ), static_cast<int>( height ) );
 	view->webView->set_js_method_handler( new JavaScriptHandler( this ) );
 
 	while( view->webView->IsLoading() )
@@ -55,8 +55,8 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 
 	// Scale the UI obj
 	uiObj->transform->Scale(
-		static_cast<float>(width) / 2.0f,
-		static_cast<float>(height) / 2.0f,
+		width / 2.0f,
+		height / 2.0f,
 		1.0f
 	);
 

@@ -29,8 +29,8 @@ namespace Graphos
 			void				KeyPress( unsigned int key );
 
 		private:
-			unsigned int		width;
-			unsigned int		height;
+			float				width;
+			float				height;
 
 			GameObject*			uiObj;
 			Mesh*				uiMesh;
