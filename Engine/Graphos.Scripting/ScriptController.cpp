@@ -57,11 +57,12 @@ void ScriptController::Initialize( void )
 	v8::Debug::EnableAgent( "Graphos", 5858, false );
 #endif
 
+	string path = Config::GetData<string>( "Scripts.Path" );
+
 	// Compile
 	auto compiled = v8::Script::Compile(
-		String::New( 
-				File::ReadFile( Config::GetData<string>( "Scripts.Path" ) ).c_str()
-			)
+		String::New( File::ReadFile( path ).c_str() ),
+		String::New( path.c_str() )
 		);
 
 	if( compiled.IsEmpty() )

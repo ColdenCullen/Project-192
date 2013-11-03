@@ -37,7 +37,7 @@ void GraphosGame::Run( void )
 	// Loop until there is a quit message from the window or the user.
 	while( !quit )
 	{
-		try
+		//try
 		{
 			if( CurrentState == GameState::Reseting )
 				Reset();
@@ -75,11 +75,14 @@ void GraphosGame::Run( void )
 			// End drawing
 			AdapterController::Get()->EndDraw();
 		}
+		/*
 		catch (std::exception e)
 		{
 			OutputController::PrintMessage( OutputType::OT_ERROR, e.what() );
+			system( "pause" );
 			break;
 		}
+		*/
 	}
 
 	Stop();

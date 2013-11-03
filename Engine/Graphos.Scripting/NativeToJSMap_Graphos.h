@@ -47,11 +47,18 @@ namespace cvv8
     public:
         /** Maps obj as a lookup key for jself. Returns false if !obj,
          else true. */
-        static bool Insert( const JSObjHandle& jself, NativeHandle obj )
+        static bool Insert( const JSObjHandle jself, NativeHandle obj )
         {
-            return obj
-                ? (Map().insert( std::make_pair( obj, std::make_pair( obj, jself ) ) ),true)
-                : 0;
+            if( obj )
+			{
+				//Map().insert( std::make_pair( obj, std::make_pair( obj, jself ) ) );
+				Map()[ obj ] = std::make_pair( obj, jself );
+				return true;
+			}
+			else
+			{
+				return false;
+			}
         }
 
         /**
@@ -69,7 +76,7 @@ namespace cvv8
             }
             else
             {
-                NativeHandle victim = (*it).second.first;
+                NativeHandle victim = it->second.first;
                 map.erase(it);
                 return victim;
             }
@@ -81,13 +88,13 @@ namespace cvv8
         */
         static NativeHandle GetNative( const void* key )
         {
-            if( ! key ) return 0;
+            if( ! key ) return nullptr;
             else
             {
                 typename OneOfUsT::iterator it = Map().find(key);
                 return (Map().end() == it)
                     ? 0
-                    : (*it).second.first;
+                    : it->second.first;
             }
         }
 
@@ -95,12 +102,18 @@ namespace cvv8
            Returns the JS object associated with key, or
            an empty handle if !key or no object is found.
         */
-        static v8::Handle<v8::Object> GetJSObject( const void* key )
+        static JSObjHandle GetJSObject( const void* key )
         {
-            if( ! key ) return v8::Handle<v8::Object>();
-            typename OneOfUsT::const_iterator it = Map().find(key);
-            if( Map().end() == it ) return v8::Handle<v8::Object>();
-            else return (*it).second.second;
+            if( !key )
+				return JSObjHandle();
+
+			auto it = Map().find(key);
+
+            if( Map().end() == it )
+				return JSObjHandle();
+
+            else
+				return it->second.second;
 		}
 
 		v8::Handle<v8::Value> operator()( const Type& val ) const
@@ -114,32 +127,26 @@ namespace cvv8
 
 		v8::Handle<v8::Value> operator()( const Type* val ) const
 		{
-			/*
-			v8::Handle<v8::Value> const & rc( BM::GetJSObject(n) );
-			if( rc.IsEmpty() ) return v8::Null();
-			else return rc;
-			*/
+			JSObjHandle const & rc( GetJSObject( val ) );
 
-			v8::Handle<v8::Value> const & rc( GetJSObject( val ) );
-
-			if( rc.IsEmpty() )
+			if( rc.IsEmpty() || !rc->IsObject() )
 			{
-				// If object does not exist in the JSMap, create it
-				JSObjHandle toReturn( ClassCreator<T>::Instance().NewInstance( 0, NULL ) );
+				JSObjHandle toReturn =
+					v8::Persistent<v8::Object>::New(
+							ClassCreator<T>::Instance().NewInstance( 0, NULL ) );
+
 				delete toReturn->GetPointerFromInternalField( ClassCreator_InternalFields<Type>::NativeIndex );
 				toReturn->SetPointerInInternalField( ClassCreator_InternalFields<Type>::NativeIndex, (void*)val );
-				//Insert( toReturn, val );
+				Insert( toReturn, val );
 				return toReturn;
 			}
 			else
 			{
 				return rc;
-				//return v8::Null();
 			}
 		}
 	};
 
 #endif
 }
-
 #endif//__NATIVE_TO_JS_MAP_GRAPHOS

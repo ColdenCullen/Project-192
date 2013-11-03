@@ -26,7 +26,5 @@ void cvv8::ClassCreator_SetupBindings<Camera>::Initialize( Handle<v8::Object> co
 	// Set static methos
 	Handle<Function> ctor( Cameracc.CtorFunction() );
 
-	Cameracc.AddClassTo( TypeName<Camera>::Value, target );
-
-	
-};
+	Cameracc.AddClassTo( TypeName<Camera>::Value, target );	
+}
