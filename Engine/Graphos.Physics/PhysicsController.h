@@ -15,6 +15,17 @@ namespace Graphos
 		class PhysicsController
 		{
 		public:
+
+			struct PhysicsConfig 
+			{
+				float				mass;
+				float				restitution;
+				float				friction;
+				float				rollingFriction;
+
+				PhysicsConfig() : mass( 0.0 ), restitution( 1.0 ), friction( 0.5 ), rollingFriction( 0.4 ) {};
+			};
+
 			static void				Initialize( void );
 			static void				Shutdown( void );
 
