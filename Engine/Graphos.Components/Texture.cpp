@@ -10,6 +10,8 @@ using namespace OpenGL;
 
 #include "AdapterController.h"
 
+#include <DirectX\DirectXIncludes.h>
+
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
@@ -49,9 +51,12 @@ void Texture::LoadFromFile( string filePath )
 		const DirectX::Image* img = scratchImg.GetImage( 0, 0, 0 );
 		auto tempDevice = AdapterController::Get()->GetDevice().dx;
 
+		//ID3D11Resource* tex;
+        //HRESULT result = CreateTexture( reinterpret_cast<ID3D11Device*>(tempDevice), img, 1, metaData, &tex );
+		//dxTex = reinterpret_cast<DirectX::ID3D11Resource*>(tex);
 		ID3D11ShaderResourceView* srv;
 		HRESULT result = CreateShaderResourceView( reinterpret_cast<ID3D11Device*>(tempDevice), img, 1, metaData, &srv );
-		
+		//reinterpret_cast<ID3D11Device*>(tempDevice)->CreateShaderResourceView(tex, NULL, &srv);
 		textureId.dx = reinterpret_cast<DirectX::ID3D11ShaderResourceView*>(srv);
 
 	}
@@ -76,7 +81,9 @@ void Texture::Shutdown( void )
 	//#define CHANGE_TYPE(type, value) static_cast<type>( static_cast<void*>( value ) )	
 		if( textureId.dx )
 		{
-			reinterpret_cast<ID3D11Resource*>(textureId.dx)->Release();
+			//reinterpret_cast<ID3D11Resource*>(dxTex)->Release();
+			//dxTex = nullptr;
+			reinterpret_cast<ID3D11ShaderResourceView*>(textureId.dx)->Release();
 			textureId.dx = nullptr;
 		}
 		//ReleaseCOMobjMacro( dxTexture );
@@ -84,3 +91,5 @@ void Texture::Shutdown( void )
 	}
 #endif//_WIN32
 }
+
+

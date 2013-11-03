@@ -8,6 +8,7 @@
 namespace DirectX
 {
 	struct ID3D11ShaderResourceView;
+	struct ID3D11Resource;
 }
 
 namespace Graphos
@@ -16,7 +17,7 @@ namespace Graphos
 	{
 		class Texture : public IComponent
 		{
-		private:
+		protected:
 			union TextureID
 			{
 				unsigned int gl;
@@ -34,9 +35,10 @@ namespace Graphos
 
 			TextureID&			GetTextureId( void ) { return textureId; }
 
-		private:
+		protected:
 			unsigned int		width;
 			unsigned int		height;
+
 		};
 	}
 }

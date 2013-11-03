@@ -102,7 +102,7 @@ void UserInterface::Draw( void )
 	ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->OrthogonalMatrix() );
 
 	// Draw Awesomium
-	view->Draw( nullptr );
+	view->Draw( ShaderController::GetShader( "texture" ) );
 
 	// Draw mesh
 	uiObj->Draw();	
