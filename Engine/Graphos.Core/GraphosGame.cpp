@@ -56,7 +56,8 @@ void GraphosGame::Run( void )
 			Input::Update();
 
 			// Update physics
-			//Physics::Physics::Update();
+			if( CurrentState == GameState::Game )
+				PhysicsController::StepPhysics( Time::GetDeltaTime() );
 
 			// Do the updating of the child class.
 			Update();
