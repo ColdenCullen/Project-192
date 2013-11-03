@@ -16,6 +16,13 @@
 			"Class": "GameObject1"
 		},
 
+		"Physics": {
+			"Mass": 1.0,
+			"Restitution": 0.5,
+			"Friction": 0.4,
+			"RollingFriction": 0.0
+		},
+
 		"Transform": {
 			"Position": {
 				"x": 0.0,
