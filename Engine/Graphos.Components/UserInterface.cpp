@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Config.h"
 #include "IShader.h"
+#include "GraphicsController.h"
 
 #include <string>
 #include <Awesomium/WebCore.h>
@@ -59,7 +60,8 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	);
 
 	// this pushes the top down on Windows, remove this code once problem fixed
-	if ( !Config::GetData<bool>( "display.fullscreen" ) )
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL &&
+		!Config::GetData<bool>( "display.fullscreen" ) )
 		uiObj->transform->Translate( 0.0f, -38.0f, 0.0f );
 
 	// Focus for input

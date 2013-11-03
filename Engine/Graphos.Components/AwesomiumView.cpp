@@ -94,7 +94,6 @@ void AwesomiumView::Draw( IShader* shader )
 	if( WebCore::instance() )
 	{
 		shader->BindTexture( *this );
-		//glBindTexture( GL_TEXTURE_2D, textureID );
 
 		if( surface )
 		{
