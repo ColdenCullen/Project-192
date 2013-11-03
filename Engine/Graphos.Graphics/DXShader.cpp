@@ -153,7 +153,7 @@ void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
 	cBufferDesc.StructureByteStride = 0;
 	HRESULT result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &cBufferDesc,
 																NULL,
-																&buffer->vsConsantBuffer);
+																&buffer->vsConstantBuffer);
 	if( FAILED(result) )
 	{
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create constant buffer " + name );
@@ -187,13 +187,13 @@ void DXShader::Draw( Mesh& mesh ) const
 	//memcpy( &f, buffer->data , 128 );
 
 	// update constant buffer on the GPU
-	deviceContext->UpdateSubresource( buffer->vsConsantBuffer,
+	deviceContext->UpdateSubresource( buffer->vsConstantBuffer,
 									0,
 									NULL,
 									buffer->data,
 									0,
 									0 );
-	//deviceContext->Map( buffer->vsConsantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0,
+	//deviceContext->Map( buffer->vsConstantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0,
 
 	// set up input assembler
 	deviceContext->IASetInputLayout( vertexLayout );
@@ -211,7 +211,7 @@ void DXShader::Draw( Mesh& mesh ) const
 	
 	// set shaders
 	deviceContext->VSSetShader( vertexShader, NULL, 0 );
-	deviceContext->VSSetConstantBuffers( 0, 1, &buffer->vsConsantBuffer );
+	deviceContext->VSSetConstantBuffers( 0, 1, &buffer->vsConstantBuffer );
 	deviceContext->PSSetShader( pixelShader, NULL, 0 );
 
 	// set sampler state

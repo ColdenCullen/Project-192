@@ -20,10 +20,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project-192.Core", "..\Game\Project-192.Core\Project-192.Core.vcxproj", "{1742CE04-C11E-4295-A8A3-C69FD9EE991F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resourses", "Resourses", "{C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\Resources\Gruntfile.coffee = ..\Game\Resources\Gruntfile.coffee
-		..\Game\Resources\package.json = ..\Game\Resources\package.json
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Global Headers", "Global Headers", "{1D868376-9A33-40E7-8DC4-D6A2253620FC}"
 	ProjectSection(SolutionItems) = preProject
@@ -39,20 +35,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{E1E674
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{13C4CBF4-109C-4A8B-8A7F-139E88805C21}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\Resources\Shaders\light.fs.cg = ..\Game\Resources\Shaders\light.fs.cg
-		..\Game\Resources\Shaders\light.vs.cg = ..\Game\Resources\Shaders\light.vs.cg
-		..\Game\Resources\Shaders\simple.fs.cg = ..\Game\Resources\Shaders\simple.fs.cg
-		..\Game\Resources\Shaders\simple.vs.cg = ..\Game\Resources\Shaders\simple.vs.cg
-		..\Game\Resources\Shaders\structs.cg = ..\Game\Resources\Shaders\structs.cg
-		..\Game\Resources\Shaders\texture.fs.glsl = ..\Game\Resources\Shaders\texture.fs.glsl
-		..\Game\Resources\Shaders\texture.vs.glsl = ..\Game\Resources\Shaders\texture.vs.glsl
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meshes", "Meshes", "{48731D1C-E139-4A6D-B63A-2A897E00FFDD}"
 	ProjectSection(SolutionItems) = preProject
 		..\Game\Resources\Assets\Meshes\Cube.obj = ..\Game\Resources\Assets\Meshes\Cube.obj
 		..\Game\Resources\Assets\Meshes\Tugboat_1.obj = ..\Game\Resources\Assets\Meshes\Tugboat_1.obj
+		..\Game\Resources\Assets\Meshes\UI.obj = ..\Game\Resources\Assets\Meshes\UI.obj
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Objects", "Objects", "{B6E4ED65-20D6-4771-8CAF-835CBBA2974E}"
@@ -118,12 +106,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neon", "neon", "{CE1C2385-D
 		..\ExternalDependencies\submodules\bullet\vectormath\neon\vectormath_aos.h = ..\ExternalDependencies\submodules\bullet\vectormath\neon\vectormath_aos.h
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0CEE67E3-3A16-404E-A0A1-241574A1F641}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hlsl", "hlsl", "{B8D27C56-2806-4868-A436-09F172A87E83}"
 	ProjectSection(SolutionItems) = preProject
-		..\Game\Resources\Scripts\Camera.ts = ..\Game\Resources\Scripts\Camera.ts
-		..\Game\Resources\Scripts\GameObject1.ts = ..\Game\Resources\Scripts\GameObject1.ts
-		..\Game\Resources\Scripts\Graphos.ts = ..\Game\Resources\Scripts\Graphos.ts
-		..\Game\Resources\Scripts\LightShader.ts = ..\Game\Resources\Scripts\LightShader.ts
+		..\Game\Resources\Shaders\hlsl\light.fs.hlsl = ..\Game\Resources\Shaders\hlsl\light.fs.hlsl
+		..\Game\Resources\Shaders\hlsl\light.vs.hlsl = ..\Game\Resources\Shaders\hlsl\light.vs.hlsl
+		..\Game\Resources\Shaders\hlsl\lightStructs.hlsl = ..\Game\Resources\Shaders\hlsl\lightStructs.hlsl
+		..\Game\Resources\Shaders\hlsl\texture.fs.hlsl = ..\Game\Resources\Shaders\hlsl\texture.fs.hlsl
+		..\Game\Resources\Shaders\hlsl\texture.vs.hlsl = ..\Game\Resources\Shaders\hlsl\texture.vs.hlsl
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "glsl", "glsl", "{1F6885C7-2894-4493-8338-15079AC10EB1}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game\Resources\Shaders\glsl\light.fs.glsl = ..\Game\Resources\Shaders\glsl\light.fs.glsl
+		..\Game\Resources\Shaders\glsl\light.vs.glsl = ..\Game\Resources\Shaders\glsl\light.vs.glsl
+		..\Game\Resources\Shaders\glsl\texture.fs.glsl = ..\Game\Resources\Shaders\glsl\texture.fs.glsl
+		..\Game\Resources\Shaders\glsl\texture.vs.glsl = ..\Game\Resources\Shaders\glsl\texture.vs.glsl
 	EndProjectSection
 EndProject
 Global
@@ -280,10 +277,11 @@ Global
 		{78B39BD3-904D-4D33-ACC3-715914BE0377} = {C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4}
 		{E1E6740A-79E3-4326-905F-56995EBAE634} = {C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4}
 		{13C4CBF4-109C-4A8B-8A7F-139E88805C21} = {C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4}
-		{0CEE67E3-3A16-404E-A0A1-241574A1F641} = {C7EB94AC-8D7F-421C-8EB5-E65A0370B1F4}
 		{48731D1C-E139-4A6D-B63A-2A897E00FFDD} = {78B39BD3-904D-4D33-ACC3-715914BE0377}
 		{B6E4ED65-20D6-4771-8CAF-835CBBA2974E} = {78B39BD3-904D-4D33-ACC3-715914BE0377}
 		{20BE76EC-4F26-4999-B6B0-9691B0DADA29} = {78B39BD3-904D-4D33-ACC3-715914BE0377}
+		{B8D27C56-2806-4868-A436-09F172A87E83} = {13C4CBF4-109C-4A8B-8A7F-139E88805C21}
+		{1F6885C7-2894-4493-8338-15079AC10EB1} = {13C4CBF4-109C-4A8B-8A7F-139E88805C21}
 		{821A2CD9-123E-4EE4-98E9-B15B5CC6E89C} = {7D86DD02-EFD8-43A3-934B-43BF3CED4607}
 		{5E9C8D62-5AC6-774A-99E8-F778BCCDEED2} = {821A2CD9-123E-4EE4-98E9-B15B5CC6E89C}
 		{8F5C9BDF-AC6F-F64F-AF86-4DA030F93A58} = {821A2CD9-123E-4EE4-98E9-B15B5CC6E89C}

@@ -28,9 +28,6 @@ body {
 
   /* This hides the highlighting on double click */
   -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
@@ -50,7 +47,9 @@ body {
 
   opacity: 0;
   -webkit-transform: translateY(-20px);
+  -webkit-transition: 0.5s all;
   transition: 0.5s all;
+  -webkit-transition-delay: 0.5s;
   transition-delay: 0.5s;
 }
 /* poop */
@@ -62,7 +61,9 @@ body {
 
   opacity: 0;
   -webkit-transform: translateY(-20px);
+  -webkit-transition: 0.5s all;
   transition: 0.5s all;
+  -webkit-transition-delay: 0.6s;
   transition-delay: 0.6s;
 }
 
@@ -83,7 +84,9 @@ body {
   display: inline-block;
   width: 50%;
   font-size: 0;
+  -webkit-transition: 0.4s font-size;
   transition: 0.4s font-size;
+  -webkit-transition-delay: 1.0s;
   transition-delay: 1.0s;
 }
 
@@ -106,6 +109,7 @@ body {
   border: 0;
   cursor: pointer;
   outline: 0;
+  -webkit-transition: 0.4s background;
   transition: 0.4s background;
 }
 
@@ -123,7 +127,9 @@ body {
   margin-bottom: 1em;
   opacity: 0;
   -webkit-transform: translateY(-20px);
+  -webkit-transition: 0.4s all;
   transition: 0.4s all;
+  -webkit-transition-delay: 0.7s;
   transition-delay: 0.7s;
 }
 
@@ -141,6 +147,7 @@ body {
   margin: 0 auto 0.5em auto;
   font-size: 2em;
   text-decoration: none;
+  -webkit-transition: 0.1s color;
   transition: 0.1s color;
 }
 

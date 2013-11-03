@@ -13,7 +13,7 @@ namespace Graphos
 	{
 		struct DxConstBuffer : public ConstBuffer
 		{
-			DirectX::ID3D11Buffer* vsConsantBuffer;
+			DirectX::ID3D11Buffer* vsConstantBuffer;
 			char*			data;
 
 			DxConstBuffer( void ) : ConstBuffer() { }
@@ -21,7 +21,7 @@ namespace Graphos
 			~DxConstBuffer( void )
 			{
 				delete[] data;
-				ReleaseCOMobjMacro( vsConsantBuffer );
+				ReleaseCOMobjMacro( vsConstantBuffer );
 			}
 		};
 
