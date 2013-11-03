@@ -1,17 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="BoxCollider.h" />
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="Physics.h" />
-    <ClInclude Include="RigidBody.h" />
-    <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="PhysicsController.h" />
+    <ClInclude Include="GraphosMotionState.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="Physics.cpp" />
-    <ClCompile Include="RigidBody.cpp" />
-    <ClCompile Include="SphereCollider.cpp" />
-    <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="PhysicsController.cpp" />
+    <ClCompile Include="GraphosMotionState.cpp" />
   </ItemGroup>
 </Project>

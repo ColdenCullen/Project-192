@@ -5,7 +5,6 @@
 
 #include "GraphosGame.h"
 #include "File.h"
-#include "Physics.h"
 #include "GraphicsController.h"
 #include "AdapterController.h"
 #include "ShaderController.h"
@@ -15,6 +14,7 @@
 #include "TimeController.h"
 #include "Config.h"
 #include "OutputController.h"
+#include "PhysicsController.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Physics;
@@ -56,7 +56,8 @@ void GraphosGame::Run( void )
 			Input::Update();
 
 			// Update physics
-			Physics::Physics::Update();
+			if( CurrentState == GameState::Game )
+				PhysicsController::StepPhysics( Time::GetDeltaTime() );
 
 			// Do the updating of the child class.
 			Update();
@@ -94,14 +95,14 @@ void GraphosGame::Reset( void )
 
 	// Shutdown UI and controllers
 	delete_s( ui );
-	Physics::Physics::Shutdown();
+	PhysicsController::Shutdown();
 	AssetController::Shutdown();
 	ScriptController::Get().Shutdown();
 
 	// Restart
 	ScriptController::Get().Initialize();
 	AssetController::Initialize();
-	Physics::Physics::Initialize();
+	PhysicsController::Initialize();
 	Input::ui = ui = new UserInterface( this );
 
 	Initialize();
@@ -123,7 +124,7 @@ void GraphosGame::Start( void )
 
 	AssetController::Initialize();
 
-	Physics::Physics::Initialize();
+	PhysicsController::Initialize();
 
 	ScriptController::Get().Initialize();
 
@@ -140,7 +141,7 @@ void GraphosGame::Stop( void )
 	// Shutdown UI and controllers
 	delete_s( ui );
 	ShaderController::Shutdown();
-	Physics::Physics::Shutdown();
+	PhysicsController::Shutdown();
 	AssetController::Shutdown();
 	ScriptController::Get().Shutdown();
 	GraphicsController::Shutdown();

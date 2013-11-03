@@ -92,6 +92,22 @@ void Transform::Translate( const Vector3& displacement )
 	Translate( displacement.x, displacement.y, displacement.z );
 }
 
+void Graphos::Math::Transform::TranslateTo( const float x, const float y, const float z )
+{
+	matrix.matrix[ 3 ][ 0 ] = x;
+	matrix.matrix[ 3 ][ 1 ] = y;
+	matrix.matrix[ 3 ][ 2 ] = z;
+
+	position->x = x;
+	position->y = y;
+	position->z = z;
+}
+
+void Graphos::Math::Transform::TranslateTo( const Vector3& newLocation )
+{
+	TranslateTo( newLocation.x, newLocation.y, newLocation.z );
+}
+
 void Transform::Scale( const float x, const float y, const float z )
 {
 	Matrix4 scaleMatrix = Matrix4::Identity;
@@ -148,7 +164,7 @@ Matrix4 Transform::RotateZ( const float angle ) const
 	return newTrans;
 }
 
-const Matrix4 Transform::WorldMatrix() const
+Matrix4& Transform::WorldMatrix()
 {
 	if( parent != nullptr ) return parent->WorldMatrix() * matrix;
 	else					return matrix;
@@ -166,3 +182,5 @@ void Transform::UpdateLocalVectors( void )
 	*up = RotationMatrix() * *up;
 	*forward = RotationMatrix() * *forward;
 }
+
+

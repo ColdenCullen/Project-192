@@ -3,13 +3,12 @@
 #include "Script.h"
 #include "AssetController.h"
 #include "Camera.h"
-#include "RigidBody.h"
 #include "Mesh.h"
 #include "ScriptController.h"
-#include "SphereCollider.h"
-#include "BoxCollider.h"
 #include "Texture.h"
 #include "GraphosGame.h"
+#include "GraphosMotionState.h"
+#include "PhysicsController.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -43,11 +42,75 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 		GraphosGame::camera = cam;
 	}
 
-	// Set physics Rigid Body object
-	if( ( current = object.get( "Rigidbody", object ) ) != object )
-	{
-		RigidBody* rb = new RigidBody( obj );
+	
+	
+	
 
+	// Add webview
+	if( ( current = object.get( "AwesomiumView", object ) ) != object )
+		obj->AddComponent(
+			new AwesomiumView(
+				current[ "url" ].asString(),
+				current[ "width" ].asUInt(),
+				current[ "height" ].asUInt()
+			)
+		);
+
+	// Add a mesh
+	if( ( current = object.get( "Mesh", object ) ) != object )
+	{
+		obj->AddComponent(
+			AssetController::GetContent<Mesh>( current[ "Name" ].asString() )
+		);
+	}
+
+	// Transform object
+	if( ( current = object.get( "Transform", object ) ) != object )
+	{
+		Json::Value currentTransform;
+
+		if( ( currentTransform = current.get( "Scale", object ) ) != object )
+			obj->transform->Scale(
+				currentTransform[ "x" ].asDouble(),
+				currentTransform[ "y" ].asDouble(),
+				currentTransform[ "z" ].asDouble()
+			);
+		if( ( currentTransform = current.get( "Position", object ) ) != object )
+			obj->transform->TranslateTo(
+				currentTransform[ "x" ].asDouble(),
+				currentTransform[ "y" ].asDouble(),
+				currentTransform[ "z" ].asDouble()
+			);
+		if( ( currentTransform = current.get( "Rotation", object ) ) != object )
+			obj->transform->Rotate(
+				currentTransform[ "x" ].asDouble(),
+				currentTransform[ "y" ].asDouble(),
+				currentTransform[ "z" ].asDouble()
+			);
+	}
+
+
+
+	// Set physics Rigid Body object
+	if( ( current = object.get( "Physics", object ) ) != object )
+	{
+		auto gms = new GraphosMotionState( obj );
+		float mass;
+		float restitution;
+		float friction;
+		float rollingFriction;
+
+		mass = current[ "Mass" ].asDouble();
+		// TODO: Make these optional
+		restitution = current[ "Restitution" ].asDouble();
+		friction = current[ "Friction" ].asDouble();
+		rollingFriction = current[ "RollingFriction" ].asDouble();
+
+
+		PhysicsController::CreatePhysicsObject( gms, mass, restitution, friction, rollingFriction );
+
+
+		/*
 		// Get rigid body's values
 		Json::Value currentRigidbody = current[ "LinearVelocity" ];
 
@@ -82,52 +145,12 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 				rb->rotationConstraints.z = static_cast<float>( currentRigidbody[ "Rotation" ][ "z" ].asBool() );
 			}
 		}
+		*/
 
-		obj->AddComponent( rb );
+		obj->AddComponent( gms );
 	}
 
-	// Add webview
-	if( ( current = object.get( "AwesomiumView", object ) ) != object )
-		obj->AddComponent(
-			new AwesomiumView(
-				current[ "url" ].asString(),
-				current[ "width" ].asUInt(),
-				current[ "height" ].asUInt()
-			)
-		);
 
-	// Add a mesh
-	if( ( current = object.get( "Mesh", object ) ) != object )
-	{
-		obj->AddComponent(
-			AssetController::GetContent<Mesh>( current[ "Name" ].asString() )
-		);
-	}
-
-	// Transform object
-	if( ( current = object.get( "Transform", object ) ) != object )
-	{
-		Json::Value currentTransform;
-
-		if( ( currentTransform = current.get( "Scale", object ) ) != object )
-			obj->transform->Scale(
-				currentTransform[ "x" ].asDouble(),
-				currentTransform[ "y" ].asDouble(),
-				currentTransform[ "z" ].asDouble()
-			);
-		if( ( currentTransform = current.get( "Position", object ) ) != object )
-			obj->transform->Translate(
-				currentTransform[ "x" ].asDouble(),
-				currentTransform[ "y" ].asDouble(),
-				currentTransform[ "z" ].asDouble()
-			);
-		if( ( currentTransform = current.get( "Rotation", object ) ) != object )
-			obj->transform->Rotate(
-				currentTransform[ "x" ].asDouble(),
-				currentTransform[ "y" ].asDouble(),
-				currentTransform[ "z" ].asDouble()
-			);
-	}
 
 	// Add script
 	if( ( current = object.get( "Script", object ) ) != object )
@@ -136,6 +159,7 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 		obj->AddComponent( script );
 	}
 
+	/*
 	// Setup collider
 	if( ( current = object.get( "Collider", object ) ) != object )
 	{
@@ -179,6 +203,7 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 		obj->AddComponent<Collider>( col );
 		Physics::Physics::AddCollider( col );
 	}
+	*/
 
 	return obj;
 }
@@ -186,8 +211,8 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 
 void GameObject::Update( void )
 {
-	for( auto ingredient = begin( componentList ); ingredient != end( componentList ); ++ingredient )
-		ingredient->second->Update();
+	for( auto component : componentList )
+		component.second->Update();
 }
 
 void GameObject::Draw( void )
@@ -196,10 +221,10 @@ void GameObject::Draw( void )
 	shader->SetModelMatrix( transform->WorldMatrix() );
 	// TODO...what did/does this do?...
 	// this SetUniform was removed...needs refactoring?
-//	shader->SetUniform( "shaderTexture", 0 );
+	// shader->SetUniform( "shaderTexture", 0 );
 
-	for( auto ingredient = begin( componentList ); ingredient != end( componentList ); ++ingredient )
-		ingredient->second->Draw( shader );
+	for( auto component : componentList )
+		component.second->Draw( shader );
 }
 
 void GameObject::Shutdown( void )

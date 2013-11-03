@@ -24,13 +24,15 @@ namespace Graphos
 			void					Rotate( const float x, const float y, const float z );
 			void					Translate( const Vector3& displacement );
 			void					Translate( const float x, const float y, const float z );
+			void					TranslateTo( const Vector3& newLocation );
+			void					TranslateTo( const float x, const float y, const float z );
 			void					Scale( const Vector3& scale );
 			void					Scale( const float x, const float y, const float z );
 
 			const Math::Vector3*	Position( void )	const { return position; }
 			const Math::Vector3*	Rotation( void )	const { return rotation; }
 			const Math::Vector3*	Scale( void )		const { return scale; }
-			const Math::Matrix4		WorldMatrix( void )	const;
+			Math::Matrix4&			WorldMatrix( void );
 			const Math::Matrix4		RotationMatrix( void ) const;
 
 			const Math::Vector3*	GetRight( void )	const { return right; }

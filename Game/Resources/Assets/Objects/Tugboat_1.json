@@ -9,18 +9,25 @@
 		},
 
 		"Mesh": {
-			"Name": "Tugboat_test"
+			"Name": "Cube"
 		},
 
 		"Script": {
 			"Class": "GameObject1"
 		},
 
+		"Physics": {
+			"Mass": 3.0,
+			"Restitution": 0.5,
+			"Friction": 0.4,
+			"RollingFriction": 0.0
+		},
+
 		"Transform": {
 			"Position": {
-				"x": 0.0,
-				"y": 0.0,
-				"z": 3.0
+				"x": 1.5,
+				"y": 3.0,
+				"z": 5.5
 			},
 			"Rotation": {
 				"x": 0,
@@ -33,30 +40,42 @@
 				"z": 1.0
 			}
 		}
-	}, 
-	{ 
-		"Name": "Thang",
+	},
+	{
+		"Name": "Cube2",
+	
+		"Shader": "light",
 
-		"Shader": "texture",
-
-		"Texture": { 
-			"Name": "balls"
+		"Texture": {
+			"Name": "Poop"
 		},
-		
-		"Mesh": { 
-			"Name": "Cube"  
-		}, 
+
+		"Mesh": {
+			"Name": "Cube"
+		},
+
+		"Physics": {
+			"Mass": 0.0,
+			"Restitution": 0.5,
+			"Friction": 0.4,
+			"RollingFriction": 0.0
+		},
 
 		"Transform": {
 			"Position": {
-				"x": -1.0,
-				"y": 0.0,
-				"z": 3.0
+				"x": 0.0,
+				"y": -2.0,
+				"z": 7.0
+			},
+			"Rotation": {
+				"x": 0,
+				"y": 0,
+				"z": 0
 			},
 			"Scale": {
-				"x": 0.25,
-				"y": 0.25,
-				"z": 0.25
+				"x": 1.0,
+				"y": 1.0,
+				"z": 1.0
 			}
 		}
 	}

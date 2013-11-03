@@ -15,7 +15,7 @@ namespace Graphos
 {
 	namespace Core
 	{
-		class GameObject
+		class GameObject 
 		{
 		public:
 			Math::Transform*	transform;
@@ -23,7 +23,7 @@ namespace Graphos
 			// Constructors
 			GameObject( void ) : shader( nullptr ), transform( new Math::Transform ) { }
 			GameObject( Graphics::IShader* shader ) : shader( shader ), transform( new Math::Transform ) { }
-			
+
 			// Factory for creating game objects from json
 			static GameObject*	CreateFromJson( Json::Value object );
 

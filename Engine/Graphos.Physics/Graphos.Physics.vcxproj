@@ -36,9 +36,7 @@
     <Import Project="..\..\Solution\GraphosProperties.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(RootDir)ExternalDependencies\submodules\bullet;$(IncludePath)</IncludePath>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -64,20 +62,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BoxCollider.h" />
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="Physics.h" />
-    <ClInclude Include="RigidBody.h" />
-    <ClInclude Include="SphereCollider.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="BoxCollider.cpp" />
-    <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="Physics.cpp" />
-    <ClCompile Include="RigidBody.cpp" />
-    <ClCompile Include="SphereCollider.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\ExternalDependencies\submodules\bullet\BulletCollision\BulletCollision.vcxproj">
       <Project>{5e9c8d62-5ac6-774a-99e8-f778bccdeed2}</Project>
     </ProjectReference>
@@ -87,6 +71,14 @@
     <ProjectReference Include="..\..\ExternalDependencies\submodules\bullet\LinearMath\LinearMath.vcxproj">
       <Project>{2a35e0c0-b05f-324d-8233-8dc92198f05b}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GraphosMotionState.h" />
+    <ClInclude Include="PhysicsController.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GraphosMotionState.cpp" />
+    <ClCompile Include="PhysicsController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
