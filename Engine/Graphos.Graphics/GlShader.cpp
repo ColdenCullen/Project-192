@@ -149,10 +149,6 @@ void GlShader::Draw( Mesh& mesh ) const
 
 	script->CallFunction( "Draw" );
 
-	//SetUniformMatrix( "modelViewProjection", *modelViewProjection );
-	//SetUniformMatrix( "modelMatrix", *modelMatrix );
-	//SetUniform( "shaderTexture", 0 );
-
 	glBindVertexArray( mesh.GetGlVao() );
 	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
 

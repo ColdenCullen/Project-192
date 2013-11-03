@@ -19,10 +19,6 @@ Graphos::Core::Script::Script( Handle<Object> instance, GameObject* owner /*= nu
 
 void Graphos::Core::Script::Update( void )
 {
-	//Handle<Value> args[ 1 ];
-	//args[ 0 ] = Number::New( Time::GetDeltaTime() );
-	//TryCatch tc;
-
 	//*
 	updateFunction->Call( instance, 0, NULL );
 	/*/

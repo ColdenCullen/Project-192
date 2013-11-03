@@ -6,7 +6,7 @@ class GameObject1 extends GameObject
     {
         if( Input.IsKeyDown( Keys.Space ) )
         {
-            //this.Transform->Translate( this.Transform.Forward );
+            //log( this.Transform.Forward.Multiply( 3 ) );
         }
     }
 }
