@@ -21,7 +21,6 @@
     <ClCompile Include="OutputController.cpp" />
     <ClCompile Include="TaskManager.cpp" />
     <ClCompile Include="TimeController.cpp" />
-    <ClCompile Include="Config.cpp" />
     <ClCompile Include="JsonController.cpp">
       <Filter>JSON</Filter>
     </ClCompile>

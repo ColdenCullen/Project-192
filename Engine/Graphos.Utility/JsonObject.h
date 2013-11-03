@@ -17,7 +17,7 @@ namespace Graphos
 
 			// Get value from settings
 			template<typename T>
-			T					GetValue( std::string path );
+			T GetValue( std::string path );
 
 			template<typename T>
 			bool TryGetValue( std::string path, T& val )
@@ -61,8 +61,9 @@ namespace Graphos
 			}
 
 		private:
-
 			Json::Value			object;
+
+			friend class		JsonController;
 		};
 	}
 }

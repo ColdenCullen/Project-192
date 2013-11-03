@@ -1,12 +1,12 @@
 #ifndef __CONFIG__CONTROLLER
 #define __CONFIG__CONTROLLER
 
-#include "Vector3.h"
+#include "JsonObject.h"
+#include "JsonController.h"
 
 #include <string>
 #include <ostream>
 #include <fstream>
-#include <json/json.h>
 
 namespace Graphos
 {
@@ -16,22 +16,28 @@ namespace Graphos
 		{
 		public:
 			// Initialize the settings controller
-			static void			Initialize( void );
+			static void Initialize( void )
+			{
+				Json() = JsonController::Get( "Config.Config" );
+			}
 
 			// Get value from settings
 			template<typename T>
-			static T			GetData( std::string path );
+			static T GetData( std::string path )
+			{
+				return Json().GetValue<T>( path );
+			}
 
 			template<typename T>
-			static void			SetData( std::string path, T newValue )
+			static void SetData( std::string path, T newValue )
 			{
-				GetValueAtPath( path ) = newValue;
+				Json().SetValue( path, newValue );
 
-				std::ofstream outfile( "Resources/Config/Config.json" );
+				//std::ofstream outfile( "Resources/Config/Config.json" );
 
-				outfile << config;
+				//outfile << config;
 
-				outfile.close();
+				//outfile.close();
 			}
 
 		private:
@@ -39,10 +45,12 @@ namespace Graphos
 								Config( const Config& );
 			Config&				operator=( const Config& );
 
-			static Json::Value&	GetValueAtPath( std::string path );
-
 			// JSON values
-			static Json::Value	config;
+			static JsonObject& Json()
+			{
+				static JsonObject config;
+				return config;
+			}
 		};
 	}
 }

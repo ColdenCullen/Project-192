@@ -80,7 +80,6 @@
     <ClInclude Include="TimeController.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Config.cpp" />
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="JsonController.cpp" />
