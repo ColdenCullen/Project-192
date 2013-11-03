@@ -153,8 +153,8 @@ void Mesh::LoadFromFile( string filePath )
 		// Create the index buffer
 		D3D11_BUFFER_DESC ibDesc;
 		ibDesc.Usage					= D3D11_USAGE_IMMUTABLE;
-		ibDesc.ByteWidth				= sizeof(unsigned int) * numVertices;
-		ibDesc.BindFlags				= D3D11_BIND_CONSTANT_BUFFER;
+		ibDesc.ByteWidth				= sizeof(unsigned int) * numIndices;
+		ibDesc.BindFlags				= D3D11_BIND_INDEX_BUFFER;
 		ibDesc.CPUAccessFlags			= 0;
 		ibDesc.MiscFlags				= 0;
 		ibDesc.StructureByteStride		= 0;

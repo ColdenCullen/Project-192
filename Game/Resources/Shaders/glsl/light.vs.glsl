@@ -26,7 +26,7 @@ void main( void )
 	gl_Position = modelViewProjection * vec4( inPosition, 1.0f );
 
 	uv = inUV;
-	normal = normalize( modelMatrix * vec4( inNormal, 1.0f ) ).xyz;
+	normal = normalize( transpose(modelMatrix) * vec4( inNormal, 1.0f ) ).xyz;
 	light.direction = vec3( -1.0, -1.0f, 1.0f );
 	light.color = vec4( 1.0, 1.0, 1.0, 1.0 );
 }

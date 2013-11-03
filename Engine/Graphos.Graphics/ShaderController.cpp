@@ -6,6 +6,7 @@
 #include "DXShader.h"
 #include "File.h"
 #include "OutputController.h"
+#include "ScriptController.h"
 
 #define SHADER_PATH string("Resources\\Shaders\\")
 
@@ -26,20 +27,30 @@ void ShaderController::Initialize( void )
 
 		string shaderName = fileName.substr( 0, fileName.size() - 8 );
 
+		IShader* shader;
+
 		if( fileName.substr( fileName.size() - 8 ) == ".fs.glsl" &&
 			GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
 		{
-			shaders[ shaderName ] = new GlShader(
+			shader = new GlShader(
 				file.GetFullPath().substr( 0, file.GetFullPath().size() - 8 ) + ".vs.glsl",
 				file.GetFullPath() );
 		}
 		else if( fileName.substr( fileName.size() - 8 ) == ".fs.hlsl" &&
 			GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 		{
-			shaders[ shaderName ] = new DXShader(
+			shader = new DXShader(
 				file.GetFullPath().substr( 0, file.GetFullPath().size() - 8 ) + ".vs.hlsl",
 				file.GetFullPath() );
 		}
+		else
+		{
+			continue;
+		}
+
+		shader->script = ScriptController::Get().CreateObjectInstance( shaderName, shader );
+
+		shaders[ shaderName ] = shader;
 	}
 }
 

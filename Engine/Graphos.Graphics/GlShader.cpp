@@ -147,9 +147,11 @@ void GlShader::Draw( Mesh& mesh ) const
 {
 	glUseProgram( programID );
 
-	SetUniformArray( "modelViewProjection", modelViewProjection.dataArray, 16, ShaderType::VERTEX );
-	SetUniformArray( "modelMatrix", modelMatrix.dataArray, 16, ShaderType::VERTEX );
-	SetUniform( "shaderTexture", 0, ShaderType::FRAGMENT );
+	script->CallFunction( "Draw" );
+
+	//SetUniformMatrix( "modelViewProjection", *modelViewProjection );
+	//SetUniformMatrix( "modelMatrix", *modelMatrix );
+	//SetUniform( "shaderTexture", 0 );
 
 	glBindVertexArray( mesh.GetGlVao() );
 	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, mesh.GetIndexBuffer() );
@@ -163,12 +165,12 @@ void GlShader::BindTexture( Texture& text ) const
 	glBindTexture( GL_TEXTURE_2D, text.GetTextureId().gl );
 }
 
-void GlShader::BuildConstBuffer( v8::Arguments args )
+void GlShader::RegisterConstBuffer( std::string name, ConstBuffer* buf )
 {
 	// LOL JK
 }
 
-void GlShader::SetUniformArray( string name, const int* value, const int size, ShaderType type ) const 
+void GlShader::SetUniformArray( string name, const int* value, const int size ) const 
 {
 	auto currentUniform = uniforms.find( name );
 
@@ -176,16 +178,15 @@ void GlShader::SetUniformArray( string name, const int* value, const int size, S
 		glUniform1iv( currentUniform->second, size, value );
 }
 
-void GlShader::SetUniformArray( string name, const float* value, const int size, ShaderType type ) const 
+void GlShader::SetUniformArray( string name, const float* value, const int size ) const 
 { 
 	auto currentUniform = uniforms.find( name );
 
 	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
-		//glUniform1fv( currentUniform->second, size, value );
-		glUniformMatrix4fv( currentUniform->second, 1, false, value );
+		glUniform1fv( currentUniform->second, size, value );
 }
 
-void GlShader::SetUniform( string name, const int value, ShaderType type ) const 
+void GlShader::SetUniform( string name, const int value ) const 
 {
 	auto currentUniform = uniforms.find( name );
 
@@ -193,10 +194,18 @@ void GlShader::SetUniform( string name, const int value, ShaderType type ) const
 		glUniform1i( currentUniform->second, value );
 }
 
-void GlShader::SetUniform( string name, const float value, ShaderType type ) const 
+void GlShader::SetUniform( string name, const float value ) const 
 {
 	auto currentUniform = uniforms.find( name );
 
 	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
 		glUniform1f( currentUniform->second, value );
+}
+
+void GlShader::SetUniformMatrix( std::string name, const Matrix4& matrix ) const
+{
+	auto currentUniform = uniforms.find( name );
+
+	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
+		glUniformMatrix4fv( currentUniform->second, 1, false, matrix.dataArray );
 }

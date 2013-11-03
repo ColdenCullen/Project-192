@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="GraphicsController.h" />
-    <ClInclude Include="CgShader.h">
-      <Filter>Shaders</Filter>
-    </ClInclude>
     <ClInclude Include="GlShader.h">
       <Filter>Shaders</Filter>
     </ClInclude>
@@ -44,9 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GraphicsController.cpp" />
-    <ClCompile Include="CgShader.cpp">
-      <Filter>Shaders</Filter>
-    </ClCompile>
     <ClCompile Include="GlShader.cpp">
       <Filter>Shaders</Filter>
     </ClCompile>

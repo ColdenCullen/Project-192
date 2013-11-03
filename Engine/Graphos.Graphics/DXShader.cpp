@@ -11,6 +11,7 @@
 using namespace v8;
 using namespace std;
 using namespace Graphos::Core;
+using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 using namespace DirectX;
 
@@ -24,9 +25,9 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	const int numLayoutElements = 3;
 	const D3D11_INPUT_ELEMENT_DESC vLayout[] =
 	{
-/*POS*/		{ "ATTR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
-/*UV*/		{ "ATTR", 1, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-/*NORMAL*/	{ "ATTR", 2, DXGI_FORMAT_R32G32B32_FLOAT, 0, 20, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+/*POS*/		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+/*UV*/		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+/*NORMAL*/	{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 20, D3D11_INPUT_PER_VERTEX_DATA, 0 }
 	};
 
 	// ---- Load Vertex Shader
@@ -36,7 +37,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	result = D3DCompileFromFile( wVertexPath.c_str(),
 								NULL,
 								NULL,
-								"VertexFunction",
+								"main",
 								"vs_5_0",
 								D3DCOMPILE_ENABLE_STRICTNESS,
 								0,
@@ -49,17 +50,25 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 		OutputController::PrintMessage( OutputType::OT_ERROR, (char*)(shaderCompileErrors->GetBufferPointer()) );
 	}
 	
-	AdapterController::Get()->GetDevice().dx->CreateVertexShader( vsb->GetBufferPointer(), 
+	result = AdapterController::Get()->GetDevice().dx->CreateVertexShader( vsb->GetBufferPointer(), 
 																vsb->GetBufferSize(),
 																NULL,
 																&vertexShader );
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create vertex shader." );
+	}
 
 	// Create Input Layout
-	AdapterController::Get()->GetDevice().dx->CreateInputLayout( vLayout,
+	result = AdapterController::Get()->GetDevice().dx->CreateInputLayout( vLayout,
 																numLayoutElements,//ARRAYSIZE(vertexLayout),
 																vsb->GetBufferPointer(),
 																vsb->GetBufferSize(),
 																&vertexLayout );
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create input layout." );
+	}
 	// release unneeded buffers
 	ReleaseCOMobjMacro( vsb );
 	ReleaseCOMobjMacro( shaderCompileErrors );
@@ -71,7 +80,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	result = D3DCompileFromFile( wPixelPath.c_str(),
 								NULL,
 								NULL,
-								"FragmentFunction",
+								"main",
 								"ps_5_0",
 								D3DCOMPILE_ENABLE_STRICTNESS,
 								0,
@@ -84,10 +93,15 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 		OutputController::PrintMessage( OutputType::OT_ERROR, (char*)(shaderCompileErrors->GetBufferPointer()) );
 	}
 
-	AdapterController::Get()->GetDevice().dx->CreatePixelShader( psb->GetBufferPointer(),
+	result = AdapterController::Get()->GetDevice().dx->CreatePixelShader( psb->GetBufferPointer(),
 																psb->GetBufferSize(),
 																NULL,
 																&pixelShader );
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create fragment shader." );
+	}
+
 	// release unneeded buffers
 	ReleaseCOMobjMacro( psb );
 	ReleaseCOMobjMacro( shaderCompileErrors );
@@ -108,34 +122,43 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	samplerDesc.MinLOD = 0;
 	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
-	AdapterController::Get()->GetDevice().dx->CreateSamplerState( &samplerDesc, &samplerState );
+	result = AdapterController::Get()->GetDevice().dx->CreateSamplerState( &samplerDesc, &samplerState );
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create sampler state." );
+	}
 
 	// TEMPORARY BUFFER TO BE REMOVED FROM C++ SIDE
-	buffer->data = new char[2*16*4];
-	buffer->meta[ "modelViewProj" ] = pair<unsigned int, size_t>( 0, 16*4 );
-	buffer->meta[ "modelMatrix" ] = pair<unsigned int, size_t>( 16*4, 16*4 );
-	buffer->size = 2*16*4;
-	RegisterConstBuffer( "uniforms", buffer );
-
-
+	auto buf = new ConstBuffer;
+	buf->totalSize = 0;
+	buf->AddProperty( "modelViewProj", sizeof(Matrix4) );
+	buf->AddProperty( "modelMatrix", sizeof(Matrix4) );
+	RegisterConstBuffer( "uniforms", buf );
 }
 
 void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
 {
-	buffer = buf;
+	buffer = new DxConstBuffer();
+	buffer->meta = buf->meta;
+	buffer->totalSize = buf->totalSize;
+	buffer->data = new char[ buffer->totalSize ];
 
 	// ---- Constant Buffer
 	D3D11_BUFFER_DESC cBufferDesc;
-	cBufferDesc.ByteWidth			= buf->size;
+	cBufferDesc.ByteWidth			= buf->totalSize; // must be multiple of 16 if a CONSTANT_BUFFER
 	cBufferDesc.Usage				= D3D11_USAGE_DEFAULT;
 	cBufferDesc.BindFlags			= D3D11_BIND_CONSTANT_BUFFER;
 	cBufferDesc.CPUAccessFlags		= 0;
 	cBufferDesc.MiscFlags			= 0;
 	cBufferDesc.StructureByteStride = 0;
-	HR(AdapterController::Get()->GetDevice().dx->CreateBuffer(
-		&cBufferDesc,
-		NULL,
-		&buffer->vsConsantBuffer));
+	HRESULT result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &cBufferDesc,
+																NULL,
+																&buffer->vsConsantBuffer);
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create constant buffer " + name );
+	}
+
 }
 
 DXShader::~DXShader(void)
@@ -145,6 +168,7 @@ DXShader::~DXShader(void)
 
 void DXShader::Shutdown( void )
 {
+	IShader::Shutdown();
 	delete buffer;
 	ReleaseCOMobjMacro( vertexShader );
 	ReleaseCOMobjMacro( pixelShader );
@@ -154,16 +178,22 @@ void DXShader::Shutdown( void )
 
 void DXShader::Draw( Mesh& mesh ) const 
 {
-
 	auto deviceContext = AdapterController::Get()->GetDeviceContext().dx;
 
+	SetUniformMatrix( "modelViewProj", *modelViewProjection );
+	SetUniformMatrix( "modelMatrix", *modelMatrix );
+
+	//float f[32];
+	//memcpy( &f, buffer->data , 128 );
+
 	// update constant buffer on the GPU
-	AdapterController::Get()->GetDeviceContext().dx->UpdateSubresource( buffer->vsConsantBuffer,
-																		0,
-																		NULL,
-																		&buffer->data,
-																		0,
-																		0 );
+	deviceContext->UpdateSubresource( buffer->vsConsantBuffer,
+									0,
+									NULL,
+									buffer->data,
+									0,
+									0 );
+	//deviceContext->Map( buffer->vsConsantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0,
 
 	// set up input assembler
 	deviceContext->IASetInputLayout( vertexLayout );
@@ -198,78 +228,13 @@ void DXShader::BindTexture( Texture& text ) const
 	AdapterController::Get()->GetDeviceContext().dx->PSSetShaderResources( 0, 1, &text.GetTextureId().dx );
 }
 
-void DXShader::BuildConstBuffer( v8::Arguments args )
-{
-	auto BuildStruct = [&]( Handle<Object> obj )
-	{
-		// Total size of the struct
-		size_t totalSize = 0;
-		ConstBuffer* buf = new ConstBuffer();
-
-		for( unsigned int ii = 0; ii < obj->GetPropertyNames()->Length(); ++ii )
-		{
-			// Get the property
-			auto prop = obj->GetPropertyNames()->Get( ii );
-
-			// Get size of object
-			size_t size;
-			if( prop->IsBoolean() )
-			{
-				size = 1;
-			}
-			else if( prop->IsArray() )
-			{
-				size = 4 * Handle<Array>::Cast( prop )->Length();
-			}
-			else if( prop->IsObject() )
-			{
-				size = 4 * prop->ToObject()->GetPropertyNames()->Length();
-			}
-			else
-			{
-				size = 4;
-			}
-
-			// Get the name of the property
-			string name = string( *String::AsciiValue( prop ) );
-
-			// Store the property's offset and size
-			buf->meta[ name ] = pair<unsigned int, size_t>( totalSize, size );
-
-			// Update current offset
-			totalSize += size;
-		}
-
-		// Allocate buffer space
-		buf->data = new char[ totalSize ];
-		buf->size = totalSize;
-
-		return buf;
-	};
-
-	if( args.Data()->IsArray() )
-	{
-		auto obj = Handle<Array>::Cast( args.Data() );
-
-		for( unsigned int ii = 0; ii < obj->Length(); ++ii )
-		{
-			RegisterConstBuffer( "", BuildStruct( obj->Get( ii )->ToObject() ) );
-		}
-	}
-	else
-	{
-		RegisterConstBuffer( "", BuildStruct( args.Data()->ToObject() ) );
-	}
-	
-}
-
 #pragma region SetUniforms 
 //
 // For DirectX, these should only update the data on the CPU side
 // Draw should update once on the GPU
 //
 
-void DXShader::SetUniform( string name, const float value, ShaderType type ) const
+void DXShader::SetUniform( string name, const float value ) const
 {
 	auto it = buffer->meta.find( name );
 
@@ -281,7 +246,7 @@ void DXShader::SetUniform( string name, const float value, ShaderType type ) con
 	memcpy( buffer->data + it->second.first, &value, it->second.second );
 }
 
-void DXShader::SetUniform( string name, const int value, ShaderType type ) const 
+void DXShader::SetUniform( string name, const int value ) const 
 {
 	auto it = buffer->meta.find( name );
 
@@ -293,7 +258,7 @@ void DXShader::SetUniform( string name, const int value, ShaderType type ) const
 	memcpy( buffer->data + it->second.first, &value, it->second.second );
 }
 
-void DXShader::SetUniformArray( string name, const float* value, const int size, ShaderType type ) const 
+void DXShader::SetUniformArray( string name, const float* value, const int size ) const 
 {
 	auto it = buffer->meta.find( name );
 
@@ -305,7 +270,7 @@ void DXShader::SetUniformArray( string name, const float* value, const int size,
 	memcpy( buffer->data + it->second.first, value, it->second.second );
 }
 
-void DXShader::SetUniformArray( string name, const int* value, const int size, ShaderType type ) const 
+void DXShader::SetUniformArray( string name, const int* value, const int size ) const 
 {
 	auto it = buffer->meta.find( name );
 
@@ -316,4 +281,10 @@ void DXShader::SetUniformArray( string name, const int* value, const int size, S
 	
 	memcpy( buffer->data + it->second.first, value, it->second.second );
 }
+
+void DXShader::SetUniformMatrix( std::string name, const Matrix4& matrix ) const 
+{
+	SetUniformArray( name, matrix.dataArray, 16 );
+}
+
 #pragma endregion

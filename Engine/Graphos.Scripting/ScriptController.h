@@ -3,9 +3,12 @@
 
 #include <string>
 #include <v8\v8.h>
+#include <cvv8\ClassCreator.hpp>
 
 #include "Script.h"
 #include "GameObject.h"
+#include "OutputController.h"
+#include "ClassMapper.h"
 
 namespace Graphos
 {
@@ -17,12 +20,52 @@ namespace Graphos
 			void				Initialize( void );
 			void				Shutdown( void );
 
-			Script*				CreateObjectInstance( std::string className, GameObject* owner = nullptr );
-
 			static ScriptController& Get( void )
 			{
 				static ScriptController instance;
 				return instance;
+			}
+
+			template<typename T>
+			Graphos::Core::Script*	CreateObjectInstance( std::string className, T* owner )
+			{
+				using namespace v8;
+				using namespace cvv8;
+
+				if( !isInitialized )
+					Initialize();
+
+				// Create a scope
+				Context::Scope contextScope( context );
+
+				// Get an instance of the class
+				Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
+
+				// Return object
+				if( !ctor.IsEmpty() )
+				{
+					// Create basic gameobject as well as instance of new class
+					auto base = CastToJS( owner )->ToObject();
+					auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
+
+					for( int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
+					{
+						auto name = inst->GetPropertyNames()->Get( ii );
+						if( !base->Has( name->ToString() ) )
+							base->Set( name, inst->Get( name ) );
+					}
+
+					// Return new script
+					if( typeid( T ).hash_code() == typeid( GameObject ).hash_code() )
+						return new Graphos::Core::Script( base, reinterpret_cast<GameObject*>( owner ) );
+					else
+						return new Graphos::Core::Script( base );
+				}
+				else
+				{
+					OutputController::PrintMessage(OutputType::OT_ERROR, "Invalid Class Name." );
+					return nullptr;
+				}
 			}
 		
 		private:

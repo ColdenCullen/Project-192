@@ -132,9 +132,8 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 	// Add script
 	if( ( current = object.get( "Script", object ) ) != object )
 	{
-		obj->AddComponent(
-			ScriptController::Get().CreateObjectInstance( current[ "Class" ].asString(), obj )
-		);
+		auto script = ScriptController::Get().CreateObjectInstance( current[ "Class" ].asString(), obj );
+		obj->AddComponent( script );
 	}
 
 	// Setup collider

@@ -48,10 +48,10 @@ void Texture::LoadFromFile( string filePath )
 
 		const DirectX::Image* img = scratchImg.GetImage( 0, 0, 0 );
 		auto tempDevice = AdapterController::Get()->GetDevice().dx;
-		ID3D11Resource* tex;
-		HRESULT result = CreateTexture( reinterpret_cast<ID3D11Device*>(tempDevice), img, 1, metaData, &tex );
+
 		ID3D11ShaderResourceView* srv;
-		reinterpret_cast<ID3D11Device*>(tempDevice)->CreateShaderResourceView(tex, NULL, &srv);
+		HRESULT result = CreateShaderResourceView( reinterpret_cast<ID3D11Device*>(tempDevice), img, 1, metaData, &srv );
+		
 		textureId.dx = reinterpret_cast<DirectX::ID3D11ShaderResourceView*>(srv);
 
 	}
