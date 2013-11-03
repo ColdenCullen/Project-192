@@ -37,7 +37,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	result = D3DCompileFromFile( wVertexPath.c_str(),
 								NULL,
 								NULL,
-								"VertexFunction",
+								"main",
 								"vs_5_0",
 								D3DCOMPILE_ENABLE_STRICTNESS,
 								0,
@@ -50,17 +50,25 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 		OutputController::PrintMessage( OutputType::OT_ERROR, (char*)(shaderCompileErrors->GetBufferPointer()) );
 	}
 	
-	AdapterController::Get()->GetDevice().dx->CreateVertexShader( vsb->GetBufferPointer(), 
+	result = AdapterController::Get()->GetDevice().dx->CreateVertexShader( vsb->GetBufferPointer(), 
 																vsb->GetBufferSize(),
 																NULL,
 																&vertexShader );
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create vertex shader." );
+	}
 
 	// Create Input Layout
-	AdapterController::Get()->GetDevice().dx->CreateInputLayout( vLayout,
+	result = AdapterController::Get()->GetDevice().dx->CreateInputLayout( vLayout,
 																numLayoutElements,//ARRAYSIZE(vertexLayout),
 																vsb->GetBufferPointer(),
 																vsb->GetBufferSize(),
 																&vertexLayout );
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create input layout." );
+	}
 	// release unneeded buffers
 	ReleaseCOMobjMacro( vsb );
 	ReleaseCOMobjMacro( shaderCompileErrors );
@@ -72,7 +80,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	result = D3DCompileFromFile( wPixelPath.c_str(),
 								NULL,
 								NULL,
-								"FragmentFunction",
+								"main",
 								"ps_5_0",
 								D3DCOMPILE_ENABLE_STRICTNESS,
 								0,
@@ -85,10 +93,15 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 		OutputController::PrintMessage( OutputType::OT_ERROR, (char*)(shaderCompileErrors->GetBufferPointer()) );
 	}
 
-	AdapterController::Get()->GetDevice().dx->CreatePixelShader( psb->GetBufferPointer(),
+	result = AdapterController::Get()->GetDevice().dx->CreatePixelShader( psb->GetBufferPointer(),
 																psb->GetBufferSize(),
 																NULL,
 																&pixelShader );
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create fragment shader." );
+	}
+
 	// release unneeded buffers
 	ReleaseCOMobjMacro( psb );
 	ReleaseCOMobjMacro( shaderCompileErrors );
@@ -109,10 +122,15 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	samplerDesc.MinLOD = 0;
 	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
-	AdapterController::Get()->GetDevice().dx->CreateSamplerState( &samplerDesc, &samplerState );
+	result = AdapterController::Get()->GetDevice().dx->CreateSamplerState( &samplerDesc, &samplerState );
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create sampler state." );
+	}
 
 	// TEMPORARY BUFFER TO BE REMOVED FROM C++ SIDE
 	auto buf = new ConstBuffer;
+	buf->totalSize = 0;
 	buf->AddProperty( "modelViewProj", sizeof(Matrix4) );
 	buf->AddProperty( "modelMatrix", sizeof(Matrix4) );
 	RegisterConstBuffer( "uniforms", buf );
@@ -127,16 +145,20 @@ void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
 
 	// ---- Constant Buffer
 	D3D11_BUFFER_DESC cBufferDesc;
-	cBufferDesc.ByteWidth			= buf->totalSize;
+	cBufferDesc.ByteWidth			= buf->totalSize; // must be multiple of 16 if a CONSTANT_BUFFER
 	cBufferDesc.Usage				= D3D11_USAGE_DEFAULT;
 	cBufferDesc.BindFlags			= D3D11_BIND_CONSTANT_BUFFER;
 	cBufferDesc.CPUAccessFlags		= 0;
 	cBufferDesc.MiscFlags			= 0;
 	cBufferDesc.StructureByteStride = 0;
-	HR(AdapterController::Get()->GetDevice().dx->CreateBuffer(
-		&cBufferDesc,
-		NULL,
-		&buffer->vsConsantBuffer));
+	HRESULT result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &cBufferDesc,
+																NULL,
+																&buffer->vsConsantBuffer);
+	if( FAILED(result) )
+	{
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create constant buffer " + name );
+	}
+
 }
 
 DXShader::~DXShader(void)
@@ -158,13 +180,20 @@ void DXShader::Draw( Mesh& mesh ) const
 {
 	auto deviceContext = AdapterController::Get()->GetDeviceContext().dx;
 
+	SetUniformMatrix( "modelViewProj", *modelViewProjection );
+	SetUniformMatrix( "modelMatrix", *modelMatrix );
+
+	//float f[32];
+	//memcpy( &f, buffer->data , 128 );
+
 	// update constant buffer on the GPU
-	AdapterController::Get()->GetDeviceContext().dx->UpdateSubresource( buffer->vsConsantBuffer,
-																		0,
-																		NULL,
-																		&buffer->data,
-																		0,
-																		0 );
+	deviceContext->UpdateSubresource( buffer->vsConsantBuffer,
+									0,
+									NULL,
+									buffer->data,
+									0,
+									0 );
+	//deviceContext->Map( buffer->vsConsantBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0,
 
 	// set up input assembler
 	deviceContext->IASetInputLayout( vertexLayout );

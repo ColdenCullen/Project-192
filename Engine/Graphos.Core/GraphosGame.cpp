@@ -148,6 +148,7 @@ void GraphosGame::Stop( void )
 	Physics::Physics::Shutdown();
 	AssetController::Shutdown();
 	ScriptController::Get().Shutdown();
+	GraphicsController::Shutdown();
 }
 
 Camera* Graphos::Core::GraphosGame::camera;

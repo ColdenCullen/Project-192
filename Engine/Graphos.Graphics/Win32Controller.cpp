@@ -7,7 +7,6 @@
 #include "Resource.h"
 #include "Win32Controller.h"
 #include "WindowController.h"
-#include "CgShader.h"
 #include "OpenGlController.h"
 #include "DirectXController.h"
 #include "Input.h"

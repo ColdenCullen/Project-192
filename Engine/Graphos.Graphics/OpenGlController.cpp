@@ -3,8 +3,6 @@
 #include "WindowController.h"
 #include "Config.h"
 
-#include "CgShader.h"
-
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;

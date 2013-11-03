@@ -23,6 +23,8 @@ namespace Graphos
 			std::unordered_map<std::string, std::pair<unsigned int, std::size_t>> meta;
 			std::size_t				 totalSize;
 
+			ConstBuffer() { totalSize = 0; }
+
 			void AddProperty( std::string name, std::size_t size )
 			{
 				meta[ name ] = std::pair<unsigned int, std::size_t>( totalSize, size );

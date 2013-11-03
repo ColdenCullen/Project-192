@@ -40,11 +40,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{E1E674
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{13C4CBF4-109C-4A8B-8A7F-139E88805C21}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\Resources\Shaders\light.fs.cg = ..\Game\Resources\Shaders\light.fs.cg
-		..\Game\Resources\Shaders\light.vs.cg = ..\Game\Resources\Shaders\light.vs.cg
-		..\Game\Resources\Shaders\structs.cg = ..\Game\Resources\Shaders\structs.cg
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meshes", "Meshes", "{48731D1C-E139-4A6D-B63A-2A897E00FFDD}"
 	ProjectSection(SolutionItems) = preProject
@@ -120,6 +115,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hlsl", "hlsl", "{B8D27C56-2
 		..\Game\Resources\Shaders\hlsl\light.fs.hlsl = ..\Game\Resources\Shaders\hlsl\light.fs.hlsl
 		..\Game\Resources\Shaders\hlsl\light.vs.hlsl = ..\Game\Resources\Shaders\hlsl\light.vs.hlsl
 		..\Game\Resources\Shaders\hlsl\lightStructs.hlsl = ..\Game\Resources\Shaders\hlsl\lightStructs.hlsl
+		..\Game\Resources\Shaders\hlsl\texture.fs.hlsl = ..\Game\Resources\Shaders\hlsl\texture.fs.hlsl
+		..\Game\Resources\Shaders\hlsl\texture.vs.hlsl = ..\Game\Resources\Shaders\hlsl\texture.vs.hlsl
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "glsl", "glsl", "{1F6885C7-2894-4493-8338-15079AC10EB1}"
