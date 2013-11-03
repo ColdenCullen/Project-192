@@ -23,7 +23,7 @@ namespace Graphos
 				float				friction;
 				float				rollingFriction;
 
-				PhysicsConfig() : mass( 0.0 ), restitution( 1.0 ), friction( 0.5 ), rollingFriction( 0.4 ) {};
+				PhysicsConfig() : mass( 0.0f ), restitution( 1.0f ), friction( 0.5f ), rollingFriction( 0.4f ) {};
 			};
 
 			static void				Initialize( void );

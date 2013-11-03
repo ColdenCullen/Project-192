@@ -25,7 +25,11 @@
 	  </AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>$(RootDir)\Engine\Graphos.Core\GraphosGlobal.h</ForcedIncludeFiles>
+      <WarningLevel>Level1</WarningLevel>
     </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="RootDir">

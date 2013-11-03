@@ -26,7 +26,7 @@ bool InputState::operator[]( const unsigned char index )
 
 bool InputState::CheckState( const unsigned char keyCode ) const
 {
-	return bits[ keyCode / SIZE ] & BIT_AT_KEY_STATE( keyCode );
+	return ( bits[ keyCode / SIZE ] & BIT_AT_KEY_STATE( keyCode ) ) != 0;
 }
 
 void InputState::SetState( const unsigned char keyCode, const bool newValue )
@@ -127,7 +127,7 @@ Vector2 Input::GetMousePos( /*Transform& camera, float zPlane*/ )
 		i.x -= GetSystemMetrics( SM_CYBORDER );
 
 	//i.y -= GetSystemMetrics( /*SM_CYCAPTION*/SM_CYBORDER );
-	return Vector2( i.x, i.y );
+	return Vector2( static_cast<float>( i.x ), static_cast<float>( i.y ) );
 	
 #elif defined( __APPLE__ )
 	

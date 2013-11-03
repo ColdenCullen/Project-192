@@ -48,7 +48,7 @@ namespace Graphos
 					auto base = CastToJS( owner )->ToObject();
 					auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
 
-					for( int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
+					for( unsigned int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
 					{
 						auto name = inst->GetPropertyNames()->Get( ii );
 						if( !base->Has( name->ToString() ) )

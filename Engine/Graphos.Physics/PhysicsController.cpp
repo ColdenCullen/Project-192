@@ -85,50 +85,50 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, const floa
 {
 	// 1. Create collision shape
 	// Re-using the same collision shape is better for memory usage and performance
-	btCollisionShape* colShape = new btBoxShape(btVector3(1.0f, 1.0f, 1.0f));
+	btCollisionShape* colShape = new btBoxShape( btVector3( 1.0f, 1.0f, 1.0f ) );
 
 	// 2. Set some properties of collision shape
-	colShape->setMargin(btScalar(0.04f));
+	colShape->setMargin( btScalar( 0.04f ) );
 
 	//rigidbody is dynamic if and only if mass is non zero, otherwise static
 	//btScalar m = mass;
-	btVector3 localInertia(0, 0, 1);
+	btVector3 localInertia( 0.0f, 0.0f, 1.0f );
 
-	colShape->calculateLocalInertia(mass, localInertia);
+	colShape->calculateLocalInertia( mass, localInertia );
 
 	// 3. Create motions state for rigid body
 	//btDefaultMotionState* myMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),btVector3(0.0f, 0.0f, 0.0f)));
 
 	// 4. Create rigid body
-	btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, gms, colShape, localInertia);
-	rbInfo.m_angularSleepingThreshold = btScalar(0.0f);
-	rbInfo.m_linearSleepingThreshold = btScalar(0.0f);
+	btRigidBody::btRigidBodyConstructionInfo rbInfo( mass, gms, colShape, localInertia );
+	rbInfo.m_angularSleepingThreshold = btScalar( 0.0f );
+	rbInfo.m_linearSleepingThreshold = btScalar( 0.0f );
 
-	btRigidBody* body = new btRigidBody(rbInfo);
+	btRigidBody* body = new btRigidBody( rbInfo );
 
 	// 5. Set properties of the rigid body
 	btTransform startTransform;
 	startTransform.setIdentity();
 
 	//body->setCenterOfMassTransform(startTransform);
-	body->setAngularFactor(btVector3(1, 1, 1));
-	body->setLinearFactor(btVector3(1, 1, 0.5f));
-	body->setDamping(0.9, 0.3);
+	body->setAngularFactor( btVector3( 1.0f, 1.0f, 1.0f ) );
+	body->setLinearFactor( btVector3( 1.0f, 1.0f, 0.5f ) );
+	body->setDamping( 0.9f, 0.3f );
 	body->setRestitution( restitution );
 	body->setFriction( friction );
 	body->setRollingFriction( rollingFriction );
-	body->forceActivationState(DISABLE_DEACTIVATION);
+	body->forceActivationState( DISABLE_DEACTIVATION );
 
 	// 6. Add created rigid body to the world
-	dynamicsWorld->addRigidBody(body);
+	dynamicsWorld->addRigidBody( body );
 }
 
-btDefaultCollisionConfiguration* Graphos::Physics::PhysicsController::collisionConfiguration;
+btDefaultCollisionConfiguration* PhysicsController::collisionConfiguration;
 
-btCollisionDispatcher* Graphos::Physics::PhysicsController::dispatcher;
+btCollisionDispatcher* PhysicsController::dispatcher;
 
-btBroadphaseInterface* Graphos::Physics::PhysicsController::overlappingPairCache;
+btBroadphaseInterface* PhysicsController::overlappingPairCache;
 
-btSequentialImpulseConstraintSolver* Graphos::Physics::PhysicsController::solver;
+btSequentialImpulseConstraintSolver* PhysicsController::solver;
 
-btDiscreteDynamicsWorld* Graphos::Physics::PhysicsController::dynamicsWorld;
+btDiscreteDynamicsWorld* PhysicsController::dynamicsWorld;

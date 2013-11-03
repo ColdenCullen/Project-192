@@ -210,7 +210,6 @@
       <AdditionalIncludeDirectories>..\..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
-      <OutputFile>$(OutDir)LinearMath_vs2010_debug.lib</OutputFile>
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <Link>

@@ -84,7 +84,7 @@ UserInterface::~UserInterface()
 bool UserInterface::Update( void )
 {
 	Vector2 cursor = Input::GetMousePos();
-	view->webView->InjectMouseMove(cursor.x, cursor.y);
+	view->webView->InjectMouseMove( static_cast<int>( cursor.x ), static_cast<int>( cursor.y ) );
 
 	if( Input::IsKeyDown( VK_LBUTTON, true ) )
 	{
