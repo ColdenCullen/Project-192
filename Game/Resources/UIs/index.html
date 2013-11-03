@@ -11,35 +11,86 @@
   </head>
 
   <body>
-    <section id="homepage">
+
+    <!-- Homepage -->
+    <section id="homepage" class="active">
       <h1 id="game-title">Beta Balls Alpha</h1>
       <h2 id="sub-title">(alpha)</h2>
       <div id="wrapper">
         <nav id="nav">
-          <a href="#settings" onclick="showSection('#settings');">Settings</a>
-          <a href="#work">Credits</a>
+          <a>Home</a>
+          <a onclick="showSection('#settings');">Settings</a>
+          <a onclick="showSection('#credits');">Credits</a>
         </nav>
 
         <div id="start-button">
-          <a href="#paused" id="start-game" onclick="GraphosGame.ChangeState('Game');">Start</a>
+          <a id="start-game" onclick="GraphosGame.ChangeState('Game');">Start</a>
         </div>
       </div>
     </section>
 
-    <section id="settings" class="active">
-      <h1 id="game-title">Beta Balls Alpha</h1>
-      <h2 id="sub-title">(settings page)</h2>
+    <!-- Settings -->
+    <section id="settings">
+      <h1 id="game-title">Settings</h1>
+      <h2 id="sub-title">(scale the UI, I dare you)</h2>
       <div id="wrapper">
         <nav id="nav">
-          <a href="#me" onclick="showSection('#homepage');">Home</a>
-          <a href="#settings">Settings</a>
-          <a href="#work">Credits</a>
+          <a onclick="showSection('#homepage');">Home</a>
+          <a>Settings</a>
+          <a onclick="showSection('#credits');">Credits</a>
         </nav>
 
         <div id="start-button">
-          <a href="#paused" id="start-game" onclick="GraphosGame.ChangeState('Game');">Start</a>
+          <a id="start-game" onclick="updateConfig();">Apply</a>
+        </div>
+
+        <div id="settings-form">
+          <input id="fullscreen" class="check" type="checkbox" onclick="fullscreenChecked()" /><span class="setting-inline">Fullscreen</span><br /><br />
+
+          <span class="setting-inline">Resolution: </span>
+          <input id="screenWidth" class="search" type="number" placeholder="Width" value="test" />
+          <input id="screenHeight" class="search" type="number" placeholder="Height" /><br /><br />
+
+          <input id="vsync" class="check" type="checkbox" /><span class="setting-inline">VSync</span><br /><br />
+
+          <span class="setting-inline">UI Scale</span>
+          <input id="uiScaleSlider" type="range" min="0" max="2" value="1" step="0.01" onchange="printValue('uiScaleSlider','uiScaleValue')" />
+          <input id="uiScaleValue" class="search setting-inline" type="number" size="5" step="0.01" min="0" max="100" />
         </div>
       </div>
+    </section>
+
+    <!-- Credits -->
+    <section id="credits">
+      <h1 id="game-title">Who Made This?</h1>
+      <h2 id="sub-title">(we did.)</h2>
+      <div id="wrapper">
+        <nav id="nav">
+          <a onclick="showSection('#homepage');">Home</a>
+          <a onclick="showSection('#settings');">Settings</a>
+          <a>Credits</a>
+        </nav>
+      </div>
+
+        <div class="developer">
+          <img class="photo" src="images/colden.png" />
+          <h2 class="credits-name colden">Colden Cullen</h2>
+        </div>
+
+        <div class="developer">
+          <img class="photo" src="images/daniel.png" />
+          <h2 class="credits-name daniel">Daniel Jost</h2>
+        </div>
+
+        <div class="developer">
+          <img class="photo" src="images/brandon.png" />
+          <h2 class="credits-name daniel">Brandon Littell</h2>
+        </div>
+
+        <div class="developer">
+          <img class="photo" src="images/eric.png" />
+          <h2 class="credits-name daniel">Eric Christenson</h2>
+        </div>
     </section>
 
     <!-- Add a loaded tag to body -->
