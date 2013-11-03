@@ -15,7 +15,6 @@ using namespace Graphos::Graphics;
 void Game::Initialize( void )
 {
 	objects.LoadObjects( "" );
-	cube = objects.GetObjectByName( "Thang" );
 	CurrentState = GameState::Game;
 
 
@@ -154,10 +153,6 @@ bool Game::Update( void )
 			PhysicsController::StepPhysics( Time::GetDeltaTime() );
 
 			objects.CallFunction( &GameObject::Update );
-
-			float rotation = 5.0f * Time::GetDeltaTime();
-
-			cube->transform->Rotate( rotation, rotation, 0.0f );
 
 			break;
 		}
