@@ -40,42 +40,42 @@ void IShader::Shutdown( void )
 }
 void IShader::SetUniformMatrix( std::string name, const Matrix4& matrix ) const
 {
-	throw exception( "Not implented!" );
+	throw exception( "Not implemented!" );
 }
 
 void IShader::SetUniformArray( std::string name, const int* value, const int size ) const
 {
-	throw exception( "Not implented!" );
+	throw exception( "Not implemented!" );
 }
 
 void IShader::SetUniformArray( std::string name, const float* value, const int size ) const
 {
-	throw exception( "Not implented!" );
+	throw exception( "Not implemented!" );
 }
 
 void IShader::SetUniform( std::string name, const int value ) const
 {
-	throw exception( "Not implented!" );
+	throw exception( "Not implemented!" );
 }
 
 void IShader::SetUniform( std::string name, const float value ) const
 {
-	throw exception( "Not implented!" );
+	throw exception( "Not implemented!" );
 }
 
 void IShader::RegisterConstBuffer( std::string name, ConstBuffer* buf )
 {
-	throw exception( "Not implented!" );
+	throw exception( "Not implemented!" );
 }
 
 void IShader::BindTexture( Texture& text ) const
 {
-	throw exception( "Not implented!" );
+	throw exception( "Not implemented!" );
 }
 
 void IShader::Draw( Mesh& mesh ) const
 {
-	throw exception( "Not implented!" );
+	throw exception( "Not implemented!" );
 }
 
 IShader::IShader( void ) : modelMatrix( new Matrix4 ), viewMatrix( new Matrix4 ),
