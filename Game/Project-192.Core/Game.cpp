@@ -4,40 +4,34 @@
 #include "ShaderController.h"
 #include "WindowController.h"
 #include "Matrix4.h"
+#include "PhysicsController.h"
 
 using namespace Project192;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
+using namespace Graphos::Physics;
 using namespace Graphos::Graphics;
 
 void Game::Initialize( void )
 {
 	objects.LoadObjects( "" );
-	cube = objects.GetObjectByName( "Cube" );
+	cube = objects.GetObjectByName( "Thang" );
 	CurrentState = GameState::Game;
 
 
-	
-	int i;
-	///-----initialization_start-----
+#pragma region Other Bullet Stuffs
+	/*
+	// Create a Rigid Body for our cube
+	btRigidBody::btRigidBodyConstructionInfo cubeInfo;
+	cubeInfo.m_mass = 10;
+	cubeInfo.m_restitution = 0.5;
+	cubeInfo.m_friction = 0.4;
+	//cubeInfo.m_motionState = this;
 
-	///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
-	collisionConfiguration = new btDefaultCollisionConfiguration();
+	btRigidBody* pRigidBody = new btRigidBody( cubeInfo );
+	dynamicsWorld->addRigidBody( pRigidBody );
 
-	///use the default collision dispatcher. For parallel processing you can use a diffent dispatcher (see Extras/BulletMultiThreaded)
-	dispatcher = new	btCollisionDispatcher(collisionConfiguration);
 
-	///btDbvtBroadphase is a good general purpose broadphase. You can also try out btAxis3Sweep.
-	overlappingPairCache = new btDbvtBroadphase();
-
-	///the default constraint solver. For parallel processing you can use a different solver (see Extras/BulletMultiThreaded)
-	solver = new btSequentialImpulseConstraintSolver;
-
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,overlappingPairCache,solver,collisionConfiguration);
-
-	dynamicsWorld->setGravity(btVector3(0,-10,0));
-
-	///-----initialization_end-----
 
 	///create a few basic rigid bodies
 	groundShape = new btBoxShape(btVector3(btScalar(50.),btScalar(50.),btScalar(50.)));
@@ -125,6 +119,8 @@ void Game::Initialize( void )
 	///-----stepsimulation_end-----
 	*/
 	
+#pragma endregion
+
 }
 
 bool Game::Update( void )
@@ -139,7 +135,23 @@ bool Game::Update( void )
 		}
 	case GameState::Game:
 		{
-			dynamicsWorld->stepSimulation(1.f/60.f,10);
+			//dynamicsWorld->stepSimulation(Time::GetDeltaTime(),10);
+
+			/*
+			//print positions of all objects
+			for (int j=dynamicsWorld->getNumCollisionObjects()-1; j>=0 ;j--)
+			{
+				btCollisionObject* obj = dynamicsWorld->getCollisionObjectArray()[j];
+				btRigidBody* body = btRigidBody::upcast(obj);
+				if (body && body->getMotionState())
+				{
+					btTransform trans;
+					body->getMotionState()->getWorldTransform(trans);
+					printf("world pos = %f,%f,%f\n",float(trans.getOrigin().getX()),float(trans.getOrigin().getY()),float(trans.getOrigin().getZ()));
+				}
+			}*/
+
+			PhysicsController::StepPhysics( Time::GetDeltaTime() );
 
 			objects.CallFunction( &GameObject::Update );
 
@@ -190,7 +202,7 @@ void Game::Shutdown( void )
 	//cleanup in the reverse order of creation/initialization
 	
 	///-----cleanup_start-----
-	
+	/*
 	int i;
 
 	//remove the rigidbodies from the dynamics world and delete them
@@ -230,7 +242,7 @@ void Game::Shutdown( void )
 
 	//next line is optional: it will be cleared by the destructor when the array goes out of scope
 	collisionShapes.clear();
-
+	*/
 	///-----cleanup_end-----
 	
 }

@@ -11,6 +11,7 @@ namespace Project192
 	class Game : public Graphos::Core::GraphosGame
 	{
 	private:
+		/*
 		///collision configuration contains default setup for memory, collision setup. Advanced users can create their own configuration.
 		btDefaultCollisionConfiguration* collisionConfiguration;
 
@@ -25,14 +26,13 @@ namespace Project192
 
 		btDiscreteDynamicsWorld* dynamicsWorld;
 
-		///-----initialization_end-----
-
 		///create a few basic rigid bodies
 		btCollisionShape* groundShape;
 
 		//keep track of the shapes, we release memory at exit.
 		//make sure to re-use collision shapes among rigid bodies whenever possible!
 		btAlignedObjectArray<btCollisionShape*> collisionShapes;
+		*/
 
 	public:
 		Graphos::Core::GameObjectCollection

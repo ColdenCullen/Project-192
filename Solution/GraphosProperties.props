@@ -7,7 +7,7 @@
   <PropertyGroup>
     <OutDir>$(RootDir)Output\Final\$(Configuration)\</OutDir>
     <IntDir>$(RootDir)Output\Intermediary\$(Configuration)\</IntDir>
-    <IncludePath>$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(RootDir)ExternalDependencies\submodules\bullet;$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(RootDir)ExternalDependencies\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>$(RootDir)ExternalDependencies\bin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
