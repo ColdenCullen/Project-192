@@ -16,7 +16,7 @@
 #include <sstream>
 
 using namespace std;
-using namespace Graphos::Core;
+using namespace Graphos::Utility;
 
 #pragma region Static
 string File::ReadFile( string filePath )

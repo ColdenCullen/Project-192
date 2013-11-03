@@ -18,6 +18,7 @@ using namespace std;
 using namespace Graphos::Math;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 using namespace DirectX;
 using namespace OpenGL;
 

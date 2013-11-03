@@ -5,8 +5,8 @@
 #include <string>
 
 using namespace std;
-using namespace Graphos::Core;
 using namespace Graphos::Math;
+using namespace Graphos::Utility;
 
 void Config::Initialize( void )
 {
@@ -43,7 +43,7 @@ Json::Value& Config::GetValueAtPath( std::string path )
 	return *currentValue;
 }
 
-Json::Value Graphos::Core::Config::config;
+Json::Value Config::config;
 
 #pragma region GetData
 #if 1//defined( __APPLE__ )

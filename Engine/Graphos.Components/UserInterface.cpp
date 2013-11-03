@@ -20,6 +20,7 @@ using namespace Graphos;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 
 UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 {

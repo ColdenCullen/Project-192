@@ -13,6 +13,7 @@
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 
 void ShaderController::Initialize( void )
 {

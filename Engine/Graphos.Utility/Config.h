@@ -10,7 +10,7 @@
 
 namespace Graphos
 {
-	namespace Core
+	namespace Utility
 	{
 		class Config
 		{

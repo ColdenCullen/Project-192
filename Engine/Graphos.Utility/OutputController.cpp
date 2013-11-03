@@ -4,7 +4,7 @@
 #include <iostream>
 
 using namespace std;
-using namespace Graphos::Core;
+using namespace Graphos::Utility;
 
 void OutputController::PrintMessage( OutputType type, string message )
 {

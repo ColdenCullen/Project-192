@@ -10,6 +10,7 @@
 
 using namespace std;
 using namespace Graphos::Core;
+using namespace Graphos::Utility;
 
 void AssetController::Initialize( void )
 {

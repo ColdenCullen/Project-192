@@ -7,6 +7,7 @@
 using namespace v8;
 using namespace std;
 using namespace Graphos::Core;
+using namespace Graphos::Utility;
 
 Graphos::Core::Script::Script( Handle<Object> instance, GameObject* owner /*= nullptr */ )
 	: IComponent( owner ), instance( instance )

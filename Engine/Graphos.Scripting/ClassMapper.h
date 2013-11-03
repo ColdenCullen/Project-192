@@ -14,6 +14,7 @@
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 
 WRAP_CLASS(Time,())
 WRAP_CLASS(Transform,(CtorForwarder<Transform*( void )>))

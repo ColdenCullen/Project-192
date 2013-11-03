@@ -47,7 +47,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>jsoncpp.lib;awesomium.lib;FreeImage.lib;</AdditionalDependencies>
+      <AdditionalDependencies>awesomium.lib;FreeImage.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -71,7 +71,9 @@
     <ClInclude Include="AmbientLight.h" />
     <ClInclude Include="AssetController.h" />
     <ClInclude Include="AwesomiumView.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="IComponent.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="SpotLight.h" />
@@ -82,6 +84,7 @@
     <ClCompile Include="AmbientLight.cpp" />
     <ClCompile Include="AssetController.cpp" />
     <ClCompile Include="AwesomiumView.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="PointLight.cpp" />

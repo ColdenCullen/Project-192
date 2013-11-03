@@ -9,6 +9,7 @@ using namespace Project192;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 
 void Game::Initialize( void )
 {

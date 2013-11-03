@@ -21,9 +21,9 @@
 #define GWS_FULLSCREEN ( WS_POPUP | WS_SYSMENU )
 #define GWS_WINDOWED ( WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU )
 
-using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 
 LRESULT CALLBACK WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam );
 

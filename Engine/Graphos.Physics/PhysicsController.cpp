@@ -9,6 +9,7 @@ using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Physics;
+using namespace Graphos::Utility;
 
 void PhysicsController::Initialize( void )
 {

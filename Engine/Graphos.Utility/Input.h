@@ -58,7 +58,7 @@
 
 namespace Graphos
 {
-	namespace Core
+	namespace Utility
 	{
 		// Struct to store key-states
 		struct InputState
@@ -79,7 +79,7 @@ namespace Graphos
 		public:
 			typedef Event<void(unsigned int)> KeyEvent;
 
-			static UserInterface* ui;
+			static Core::UserInterface* ui;
 
 			static void			Update( void );
 

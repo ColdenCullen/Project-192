@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="File.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="OutputController.h" />
+    <ClInclude Include="TaskManager.h" />
+    <ClInclude Include="TimeController.h" />
+    <ClInclude Include="Config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="File.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="OutputController.cpp" />
+    <ClCompile Include="TaskManager.cpp" />
+    <ClCompile Include="TimeController.cpp" />
+    <ClCompile Include="Config.cpp" />
+  </ItemGroup>
+</Project>

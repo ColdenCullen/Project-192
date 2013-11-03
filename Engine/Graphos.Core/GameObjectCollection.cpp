@@ -9,6 +9,7 @@
 
 using namespace std;
 using namespace Graphos::Core;
+using namespace Graphos::Utility;
 
 void GameObjectCollection::LoadObjects( string assetPath )
 {

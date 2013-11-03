@@ -3,8 +3,8 @@
 #include "WindowController.h"
 #include "Config.h"
 
-using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 using namespace DirectX;
 
 void DirectXController::Initialize( void )

@@ -7,7 +7,7 @@
 
 namespace Graphos
 {
-	namespace Core
+	namespace Utility
 	{
 		class TaskManager
 		{

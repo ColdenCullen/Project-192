@@ -13,6 +13,7 @@ using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 using namespace DirectX;
 
 // Requires the compiled shaders (.cso files)

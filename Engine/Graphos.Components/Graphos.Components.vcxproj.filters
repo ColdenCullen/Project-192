@@ -18,6 +18,8 @@
     <ClInclude Include="AmbientLight.h">
       <Filter>Lights</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="IComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Texture.cpp" />
@@ -37,6 +39,7 @@
     <ClCompile Include="AmbientLight.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Lights">

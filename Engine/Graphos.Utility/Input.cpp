@@ -8,6 +8,7 @@ using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 
 InputState& InputState::operator=( const InputState& other )
 {
@@ -122,7 +123,7 @@ Vector2 Input::GetMousePos( /*Transform& camera, float zPlane*/ )
 	ScreenToClient( Win32Controller::Get()->GetHWnd(), &i );
 
 	// Adjust for border
-	if( !Graphos::Core::Config::GetData<bool>( "display.fullscreen" ) )
+	if( !Config::GetData<bool>( "display.fullscreen" ) )
 		i.x -= GetSystemMetrics( SM_CYBORDER );
 
 	//i.y -= GetSystemMetrics( /*SM_CYCAPTION*/SM_CYBORDER );

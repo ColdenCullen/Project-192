@@ -11,18 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1062AAD5-13BF-424A-A03D-136896C04C4F}</ProjectGuid>
-    <RootNamespace>GraphosCore</RootNamespace>
+    <ProjectGuid>{5D9174DC-FE98-4D01-B470-954BFF4AF2B4}</ProjectGuid>
+    <RootNamespace>GraphosUtility</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -31,7 +31,11 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets">
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\Solution\GraphosProperties.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Solution\GraphosProperties.props" />
   </ImportGroup>
@@ -39,6 +43,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
@@ -46,12 +51,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>ws2_32.lib;winmm.lib;vld.lib;</AdditionalDependencies>
+      <AdditionalDependencies>jsoncpp.lib</AdditionalDependencies>
     </Lib>
-    <PreLinkEvent>
-      <Command>
-      </Command>
-    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -66,40 +67,23 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
-    <Lib>
-      <AdditionalDependencies>ws2_32.lib;winmm.lib;vld.lib;</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GameObjectCollection.cpp" />
-    <ClCompile Include="GraphosGame.cpp" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="File.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="OutputController.h" />
+    <ClInclude Include="TaskManager.h" />
+    <ClInclude Include="TimeController.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameObjectCollection.h" />
-    <ClInclude Include="GraphosGame.h" />
-    <ClInclude Include="GraphosGlobal.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Graphos.Components\Graphos.Components.vcxproj">
-      <Project>{afad6ca0-0992-4aa7-ba82-a014007812de}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Graphos.Graphics\Graphos.Graphics.vcxproj">
-      <Project>{f2d275fd-32ba-43d1-b155-e17988eec88c}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Graphos.Math\Graphos.Math.vcxproj">
-      <Project>{569a12e4-7a87-4769-b91b-acdea8051df2}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Graphos.Physics\Graphos.Physics.vcxproj">
-      <Project>{4961f3a5-0fc0-487a-bef3-8313c981ab49}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Graphos.Scripting\Graphos.Scripting.vcxproj">
-      <Project>{c409b8bc-41bd-439f-bae3-fb7d9b4e3569}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Graphos.Utility\Graphos.Utility.vcxproj">
-      <Project>{5d9174dc-fe98-4d01-b470-954bff4af2b4}</Project>
-    </ProjectReference>
+    <ClCompile Include="Config.cpp" />
+    <ClCompile Include="File.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="OutputController.cpp" />
+    <ClCompile Include="TaskManager.cpp" />
+    <ClCompile Include="TimeController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

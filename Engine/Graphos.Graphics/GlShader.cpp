@@ -11,6 +11,7 @@ using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 using namespace OpenGL;
 
 GlShader::GlShader( std::string vertexPath, std::string fragmentPath )

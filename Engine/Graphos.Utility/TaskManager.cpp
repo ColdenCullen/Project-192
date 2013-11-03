@@ -2,9 +2,9 @@
 #include <iostream>
 
 using namespace std;
-using namespace Graphos::Core;
+using namespace Graphos::Utility;
 
-void Graphos::Core::TaskManager::Initialize( void )
+void TaskManager::Initialize( void )
 {	// If no thread count is specified, use system number
 	int systemThreadCount = thread::hardware_concurrency();
 

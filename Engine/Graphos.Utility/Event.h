@@ -6,7 +6,7 @@
 
 namespace Graphos
 {
-	namespace Core
+	namespace Utility
 	{
 		template<typename TArgs>
 		struct Event

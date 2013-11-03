@@ -4,7 +4,7 @@
 
 using namespace std;
 using namespace std::chrono;
-using namespace Graphos::Core;
+using namespace Graphos::Utility;
 
 void Time::Update( void )
 {
@@ -25,7 +25,7 @@ void Time::Update( void )
 		frameCount = 0;
 	}
 }
-void Graphos::Core::Time::Initialize( void )
+void Time::Initialize( void )
 {
 	cur = high_resolution_clock::now();
 	prev = high_resolution_clock::now();
