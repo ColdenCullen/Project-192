@@ -137,6 +137,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{734D
 		..\Game\Resources\Scripts\LightShader.ts = ..\Game\Resources\Scripts\LightShader.ts
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4A87336B-8791-4974-BF22-800A267AC016}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Tests", "..\Tests\Graphos.Tests\Graphos.Tests.vcxproj", "{3E29D947-3FB4-4C26-B500-5670D36A3CF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -287,6 +291,18 @@ Global
 		{5D9174DC-FE98-4D01-B470-954BFF4AF2B4}.Release|Win32.ActiveCfg = Release|Win32
 		{5D9174DC-FE98-4D01-B470-954BFF4AF2B4}.Release|Win32.Build.0 = Release|Win32
 		{5D9174DC-FE98-4D01-B470-954BFF4AF2B4}.Release|x64.ActiveCfg = Release|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Debug|Win32.Build.0 = Debug|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Debug|x64.ActiveCfg = Debug|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Release|Any CPU.ActiveCfg = Release|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Release|Win32.ActiveCfg = Release|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Release|Win32.Build.0 = Release|Win32
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -318,5 +334,6 @@ Global
 		{C75650C8-8133-41F1-87B0-77109753A16D} = {2624E4A8-7F50-4C79-BA0F-A4AFD3C7A68E}
 		{D16C5FF9-0DB3-49A2-ABE1-B2228906369E} = {2624E4A8-7F50-4C79-BA0F-A4AFD3C7A68E}
 		{CE1C2385-D712-4C7E-A076-3F87448B0ACA} = {2624E4A8-7F50-4C79-BA0F-A4AFD3C7A68E}
+		{3E29D947-3FB4-4C26-B500-5670D36A3CF7} = {4A87336B-8791-4974-BF22-800A267AC016}
 	EndGlobalSection
 EndGlobal

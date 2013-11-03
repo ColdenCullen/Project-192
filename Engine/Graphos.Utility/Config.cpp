@@ -5,7 +5,7 @@
 #include <string>
 
 using namespace std;
-using namespace Graphos::Math;
+using namespace Graphos;
 using namespace Graphos::Utility;
 
 void Config::Initialize( void )
@@ -46,9 +46,8 @@ Json::Value& Config::GetValueAtPath( std::string path )
 Json::Value Config::config;
 
 #pragma region GetData
-#if 1//defined( __APPLE__ )
 template<>
-int Config::GetData<int>( string path )
+int Config::GetData<int>( std::string path )
 {
 	const Json::Value& val = GetValueAtPath( path );
 
@@ -62,7 +61,7 @@ int Config::GetData<int>( string path )
 	}
 }
 template<>
-unsigned int Config::GetData<unsigned int>( string path )
+unsigned int Config::GetData<unsigned int>( std::string path )
 {
 	const Json::Value& val = GetValueAtPath( path );
 
@@ -76,7 +75,7 @@ unsigned int Config::GetData<unsigned int>( string path )
 	}
 }
 template<>
-float Config::GetData<float>( string path )
+float Config::GetData<float>( std::string path )
 {
 	const Json::Value& val = GetValueAtPath( path );
 
@@ -90,7 +89,7 @@ float Config::GetData<float>( string path )
 	}
 }
 template<>
-bool Config::GetData<bool>( string path )
+bool Config::GetData<bool>( std::string path )
 {
 	const Json::Value& val = GetValueAtPath( path );
 
@@ -104,23 +103,23 @@ bool Config::GetData<bool>( string path )
 	}
 }
 template<>
-string Config::GetData<string>( string path )
+std::string Config::GetData<std::string>( std::string path )
 {
 	return GetValueAtPath( path ).asString();
 }
 template<>
-const char* Config::GetData<const char*>( string path )
+const char* Config::GetData<const char*>( std::string path )
 {
 	return GetValueAtPath( path ).asCString();
 }
 template<>
-string* Config::GetData<string*>( std::string path )
+std::string* Config::GetData<std::string*>( std::string path )
 {
 	Json::Value& node = GetValueAtPath( path );
 
 	if( node.isArray() )
 	{
-		string* toReturn = new string[ node.size() ];
+		std::string* toReturn = new std::string[ node.size() ];
 
 		for( int ii = 0; ii < node.size(); ++ii )
 			toReturn[ ii ] = node[ ii ].asString();
@@ -129,16 +128,14 @@ string* Config::GetData<string*>( std::string path )
 	}
 }
 template<>
-Vector3	Config::GetData<Vector3>( string path )
+Math::Vector3 Config::GetData<Math::Vector3>( std::string path )
 {
 	Json::Value root = GetValueAtPath( path );
 
-	return Vector3(
+	return Math::Vector3(
 		static_cast<float>( root.get( "x", root ).asDouble() ),
 		static_cast<float>( root.get( "y", root ).asDouble() ),
 		static_cast<float>( root.get( "z", root ).asDouble() )
 		);
 }
-
-#endif
 #pragma endregion

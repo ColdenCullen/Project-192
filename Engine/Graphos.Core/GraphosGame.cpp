@@ -15,10 +15,12 @@
 #include "Config.h"
 #include "OutputController.h"
 #include "PhysicsController.h"
+#include "JsonController.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Physics;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 
 void GraphosGame::Run( void )
 {
@@ -90,6 +92,7 @@ void GraphosGame::Run( void )
 
 void GraphosGame::Reset( void )
 {
+	JsonController::Initialize();
 	Config::Initialize();
 	GraphicsController::Reload();
 
@@ -121,14 +124,11 @@ void GraphosGame::Start( void )
 	CurrentState = GameState::Menu;
 	camera = nullptr;
 
+	JsonController::Initialize();
 	Config::Initialize();
-
 	GraphicsController::Initialize();
-
 	AssetController::Initialize();
-
 	PhysicsController::Initialize();
-
 	ScriptController::Get().Initialize();
 
 	Input::ui = ui = new UserInterface( this );

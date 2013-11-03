@@ -8,6 +8,12 @@
     <ClInclude Include="TaskManager.h" />
     <ClInclude Include="TimeController.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="JsonController.h">
+      <Filter>JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="JsonObject.h">
+      <Filter>JSON</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="File.cpp" />
@@ -16,5 +22,16 @@
     <ClCompile Include="TaskManager.cpp" />
     <ClCompile Include="TimeController.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="JsonController.cpp">
+      <Filter>JSON</Filter>
+    </ClCompile>
+    <ClCompile Include="JsonObject.cpp">
+      <Filter>JSON</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="JSON">
+      <UniqueIdentifier>{cd012aad-9963-4cf1-84ff-6387f8009891}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
