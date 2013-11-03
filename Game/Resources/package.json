@@ -22,7 +22,8 @@
     "grunt-typescript": "0.2.x",
     "grunt-contrib-copy": "0.4.x",
     "grunt-contrib-clean": "0.5.x",
-    "grunt-contrib-watch": "0.5.x"
+    "grunt-contrib-watch": "0.5.x",
+	"node-inspector": "0.5.x"
   },
   "bin": {
     "grunt": "./node_modules/.bin/grunt"
