@@ -6,7 +6,6 @@ class light extends IShader
 
     Draw(): void
     {
-        log( "Lighting." );
         this.SetUniform( "shaderTexture", 0 );
         this.SetUniformMatrix( "modelViewProjection", this.ModelViewProjectionMatrix );
         this.SetUniformMatrix( "modelMatrix", this.ModelMatrix );
