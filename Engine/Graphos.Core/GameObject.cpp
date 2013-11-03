@@ -43,6 +43,54 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 	}
 
 	
+	
+	
+
+	// Add webview
+	if( ( current = object.get( "AwesomiumView", object ) ) != object )
+		obj->AddComponent(
+			new AwesomiumView(
+				current[ "url" ].asString(),
+				current[ "width" ].asUInt(),
+				current[ "height" ].asUInt()
+			)
+		);
+
+	// Add a mesh
+	if( ( current = object.get( "Mesh", object ) ) != object )
+	{
+		obj->AddComponent(
+			AssetController::GetContent<Mesh>( current[ "Name" ].asString() )
+		);
+	}
+
+	// Transform object
+	if( ( current = object.get( "Transform", object ) ) != object )
+	{
+		Json::Value currentTransform;
+
+		if( ( currentTransform = current.get( "Scale", object ) ) != object )
+			obj->transform->Scale(
+				currentTransform[ "x" ].asDouble(),
+				currentTransform[ "y" ].asDouble(),
+				currentTransform[ "z" ].asDouble()
+			);
+		if( ( currentTransform = current.get( "Position", object ) ) != object )
+			obj->transform->TranslateTo(
+				currentTransform[ "x" ].asDouble(),
+				currentTransform[ "y" ].asDouble(),
+				currentTransform[ "z" ].asDouble()
+			);
+		if( ( currentTransform = current.get( "Rotation", object ) ) != object )
+			obj->transform->Rotate(
+				currentTransform[ "x" ].asDouble(),
+				currentTransform[ "y" ].asDouble(),
+				currentTransform[ "z" ].asDouble()
+			);
+	}
+
+
+
 	// Set physics Rigid Body object
 	if( ( current = object.get( "Physics", object ) ) != object )
 	{
@@ -101,50 +149,8 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 
 		obj->AddComponent( gms );
 	}
-	
 
-	// Add webview
-	if( ( current = object.get( "AwesomiumView", object ) ) != object )
-		obj->AddComponent(
-			new AwesomiumView(
-				current[ "url" ].asString(),
-				current[ "width" ].asUInt(),
-				current[ "height" ].asUInt()
-			)
-		);
 
-	// Add a mesh
-	if( ( current = object.get( "Mesh", object ) ) != object )
-	{
-		obj->AddComponent(
-			AssetController::GetContent<Mesh>( current[ "Name" ].asString() )
-		);
-	}
-
-	// Transform object
-	if( ( current = object.get( "Transform", object ) ) != object )
-	{
-		Json::Value currentTransform;
-
-		if( ( currentTransform = current.get( "Scale", object ) ) != object )
-			obj->transform->Scale(
-				currentTransform[ "x" ].asDouble(),
-				currentTransform[ "y" ].asDouble(),
-				currentTransform[ "z" ].asDouble()
-			);
-		if( ( currentTransform = current.get( "Position", object ) ) != object )
-			obj->transform->Translate(
-				currentTransform[ "x" ].asDouble(),
-				currentTransform[ "y" ].asDouble(),
-				currentTransform[ "z" ].asDouble()
-			);
-		if( ( currentTransform = current.get( "Rotation", object ) ) != object )
-			obj->transform->Rotate(
-				currentTransform[ "x" ].asDouble(),
-				currentTransform[ "y" ].asDouble(),
-				currentTransform[ "z" ].asDouble()
-			);
-	}
 
 	// Add script
 	if( ( current = object.get( "Script", object ) ) != object )

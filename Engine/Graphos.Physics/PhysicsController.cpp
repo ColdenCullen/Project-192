@@ -109,7 +109,7 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, const floa
 	btTransform startTransform;
 	startTransform.setIdentity();
 
-	body->setCenterOfMassTransform(startTransform);
+	//body->setCenterOfMassTransform(startTransform);
 	body->setAngularFactor(btVector3(1, 1, 1));
 	body->setLinearFactor(btVector3(1, 1, 0.5f));
 	body->setDamping(0.9, 0.3);
