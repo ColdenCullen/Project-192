@@ -70,13 +70,16 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 }
 
 /// Destructor
-/// DO NOT CALL
 UserInterface::~UserInterface()
 {
+	uiObj->Shutdown();
+	delete_s( uiObj );
+	uiMesh->Shutdown();
+	delete_s( uiMesh );
 	if( view )
 	{
 		view->Shutdown();
-		delete view;
+		delete_s( view );
 	}
 }
 

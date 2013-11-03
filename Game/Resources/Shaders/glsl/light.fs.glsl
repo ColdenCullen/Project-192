@@ -8,21 +8,22 @@ struct DirectionalLight
 };
 
 // In variables
-in vec2 uv;
-in vec3 normal;
-in DirectionalLight light;
+in vec3 fPosition;
+in vec2 fUV;
+in vec3 fNormal;
+in DirectionalLight fDirLights[2];
 
 // Uniforms
-uniform sampler2D shaderTexture;
+uniform sampler2D uShaderTexture;
 
 void main( void )
 {
-	vec4 texDiffuse = texture( shaderTexture, uv );
+	vec4 texDiffuse = texture( uShaderTexture, fUV );
 
 	//*
-	float ndotl = clamp( dot( normal, -light.direction ), 0.0f, 1.0f );
+	float ndotl = clamp( dot( fNormal, -fDirLights[0].direction ), 0.0f, 1.0f );
 
-	vec4 color = light.color * ndotl;
+	vec4 color = fDirLights[0].color * ndotl;
 
 	color = color * texDiffuse;
 

@@ -1,5 +1,5 @@
 
-cbuffer uniforms : register( b0 )
+cbuffer uniforms //: register( b0 )
 {
 	float4x4 modelViewProj;
 	float4x4 modelMatrix;

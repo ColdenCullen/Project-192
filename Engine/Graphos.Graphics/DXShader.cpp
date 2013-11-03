@@ -135,6 +135,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	buf->AddProperty( "modelViewProj", sizeof(Matrix4) );
 	buf->AddProperty( "modelMatrix", sizeof(Matrix4) );
 	RegisterConstBuffer( "uniforms", buf );
+	delete buf;
 }
 
 void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
@@ -183,9 +184,6 @@ void DXShader::Draw( Mesh& mesh ) const
 
 	SetUniformMatrix( "modelViewProj", *modelViewProjection );
 	SetUniformMatrix( "modelMatrix", *modelMatrix );
-
-	//float f[32];
-	//memcpy( &f, buffer->data , 128 );
 
 	// update constant buffer on the GPU
 	deviceContext->UpdateSubresource( buffer->vsConstantBuffer,
