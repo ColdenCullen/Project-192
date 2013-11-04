@@ -2,23 +2,28 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Event.h" />
-    <ClInclude Include="File.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="OutputController.h" />
     <ClInclude Include="TaskManager.h" />
     <ClInclude Include="TimeController.h" />
-    <ClInclude Include="Config.h" />
     <ClInclude Include="JsonController.h">
       <Filter>JSON</Filter>
     </ClInclude>
     <ClInclude Include="JsonObject.h">
       <Filter>JSON</Filter>
     </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>JSON</Filter>
+    </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputController.h">
+      <Filter>IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="File.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="OutputController.cpp" />
     <ClCompile Include="TaskManager.cpp" />
     <ClCompile Include="TimeController.cpp" />
     <ClCompile Include="JsonController.cpp">
@@ -27,10 +32,22 @@
     <ClCompile Include="JsonObject.cpp">
       <Filter>JSON</Filter>
     </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputController.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="JSON">
       <UniqueIdentifier>{cd012aad-9963-4cf1-84ff-6387f8009891}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO">
+      <UniqueIdentifier>{062440a4-96c2-4db9-a2ab-4ea5f6b01882}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

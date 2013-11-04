@@ -10,5 +10,8 @@
     <ClCompile Include="JsonTest.cpp">
       <Filter>Graphos.Utility</Filter>
     </ClCompile>
+    <ClCompile Include="EventTest.cpp">
+      <Filter>Graphos.Utility</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
