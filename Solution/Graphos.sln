@@ -141,6 +141,36 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4A87336B
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Tests", "..\Tests\Graphos.Tests\Graphos.Tests.vcxproj", "{3E29D947-3FB4-4C26-B500-5670D36A3CF7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "V8-Convert", "V8-Convert", "{2DCBB307-809D-4D56-816C-686826916676}"
+	ProjectSection(SolutionItems) = preProject
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\arguments.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\arguments.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\ClassCreator.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\ClassCreator.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\convert.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\convert.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\invocable.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\invocable.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\NativeToJSMap.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\NativeToJSMap.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\properties.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\properties.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\signature.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\signature.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\v8-convert.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\v8-convert.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\V8Shell.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\V8Shell.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\XTo.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\XTo.hpp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "detail", "detail", "{7899A8AF-53CE-41EB-B59B-2A55AEB686BD}"
+	ProjectSection(SolutionItems) = preProject
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\convert_core.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\convert_core.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\doxygen_hack.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\doxygen_hack.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\invocable_core.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\invocable_core.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\invocable_generated.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\invocable_generated.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\signature_core.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\signature_core.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\signature_generated.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\signature_generated.hpp
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\tmp.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\detail\tmp.hpp
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "generator", "generator", "{6D35829F-8518-4903-8ADF-62AEEA0C77E4}"
+	ProjectSection(SolutionItems) = preProject
+		..\ExternalDependencies\submodules\v8convert\include\cvv8\generator\Signature.hpp = ..\ExternalDependencies\submodules\v8convert\include\cvv8\generator\Signature.hpp
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -327,6 +357,7 @@ Global
 		{B8D27C56-2806-4868-A436-09F172A87E83} = {13C4CBF4-109C-4A8B-8A7F-139E88805C21}
 		{1F6885C7-2894-4493-8338-15079AC10EB1} = {13C4CBF4-109C-4A8B-8A7F-139E88805C21}
 		{821A2CD9-123E-4EE4-98E9-B15B5CC6E89C} = {7D86DD02-EFD8-43A3-934B-43BF3CED4607}
+		{2DCBB307-809D-4D56-816C-686826916676} = {7D86DD02-EFD8-43A3-934B-43BF3CED4607}
 		{5E9C8D62-5AC6-774A-99E8-F778BCCDEED2} = {821A2CD9-123E-4EE4-98E9-B15B5CC6E89C}
 		{8F5C9BDF-AC6F-F64F-AF86-4DA030F93A58} = {821A2CD9-123E-4EE4-98E9-B15B5CC6E89C}
 		{2A35E0C0-B05F-324D-8233-8DC92198F05B} = {821A2CD9-123E-4EE4-98E9-B15B5CC6E89C}
@@ -335,5 +366,7 @@ Global
 		{D16C5FF9-0DB3-49A2-ABE1-B2228906369E} = {2624E4A8-7F50-4C79-BA0F-A4AFD3C7A68E}
 		{CE1C2385-D712-4C7E-A076-3F87448B0ACA} = {2624E4A8-7F50-4C79-BA0F-A4AFD3C7A68E}
 		{3E29D947-3FB4-4C26-B500-5670D36A3CF7} = {4A87336B-8791-4974-BF22-800A267AC016}
+		{7899A8AF-53CE-41EB-B59B-2A55AEB686BD} = {2DCBB307-809D-4D56-816C-686826916676}
+		{6D35829F-8518-4903-8ADF-62AEEA0C77E4} = {2DCBB307-809D-4D56-816C-686826916676}
 	EndGlobalSection
 EndGlobal
