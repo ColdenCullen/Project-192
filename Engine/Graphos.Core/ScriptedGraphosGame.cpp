@@ -1,11 +1,12 @@
 #include "ScriptedGraphosGame.h"
+#include "ScriptController.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Scripting;
 
 void ScriptedGraphosGame::Initialize( void )
 {
-	script = ScriptController::Get().CreateObjectInstance( "GraphosGame", this );
+	script = ScriptController::Get().CreateObjectInstance( "MyGame", this );
 	script->CallFunction( "Initialize" );
 }
 

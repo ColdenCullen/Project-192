@@ -2,7 +2,7 @@
 #define __SCRIPTED_GRAPHOS_GAME
 
 #include "GraphosGame.h"
-#include "ScriptController.h"
+#include "Script.h"
 
 namespace Graphos
 {

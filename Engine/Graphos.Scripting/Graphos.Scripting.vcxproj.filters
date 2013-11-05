@@ -44,6 +44,9 @@
     <ClCompile Include="CC-GraphosGame.cpp">
       <Filter>Class Wrappers</Filter>
     </ClCompile>
+    <ClCompile Include="CC-ScriptedGraphosGame.cpp">
+      <Filter>Class Wrappers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Class Wrappers">

@@ -77,6 +77,7 @@
     <ClCompile Include="CC-IShader.cpp" />
     <ClCompile Include="CC-Matrix4.cpp" />
     <ClCompile Include="CC-Mesh.cpp" />
+    <ClCompile Include="CC-ScriptedGraphosGame.cpp" />
     <ClCompile Include="CC-Texture.cpp" />
     <ClCompile Include="CC-Time.cpp" />
     <ClCompile Include="CC-Transform.cpp" />

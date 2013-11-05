@@ -89,8 +89,23 @@
     <ClCompile Include="JsonTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Engine\Graphos.Core\Graphos.Core.vcxproj">
-      <Project>{1062aad5-13bf-424a-a03d-136896c04c4f}</Project>
+    <ProjectReference Include="..\..\Engine\Graphos.Components\Graphos.Components.vcxproj">
+      <Project>{afad6ca0-0992-4aa7-ba82-a014007812de}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engine\Graphos.Graphics\Graphos.Graphics.vcxproj">
+      <Project>{f2d275fd-32ba-43d1-b155-e17988eec88c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engine\Graphos.Math\Graphos.Math.vcxproj">
+      <Project>{569a12e4-7a87-4769-b91b-acdea8051df2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engine\Graphos.Physics\Graphos.Physics.vcxproj">
+      <Project>{4961f3a5-0fc0-487a-bef3-8313c981ab49}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engine\Graphos.Scripting\Graphos.Scripting.vcxproj">
+      <Project>{c409b8bc-41bd-439f-bae3-fb7d9b4e3569}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engine\Graphos.Utility\Graphos.Utility.vcxproj">
+      <Project>{5d9174dc-fe98-4d01-b470-954bff4af2b4}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

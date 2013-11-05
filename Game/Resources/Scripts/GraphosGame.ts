@@ -9,16 +9,16 @@ class MyGame extends GraphosGame
 
     public Update(): void
     {
-        log( "Updating" );
+        //log( "Updating" );
     }
 
     public Draw(): void
     {
-        log( "Drawing" );
+        //log( "Drawing" );
     }
 
     public Shutdown(): void
     {
-        log( "Shutting down" );
+        //log( "Shutting down" );
     }
 }

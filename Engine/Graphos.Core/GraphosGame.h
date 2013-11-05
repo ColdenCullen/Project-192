@@ -22,10 +22,10 @@ namespace Graphos
 			static Camera*		camera;
 
 		protected:
-			virtual void		Initialize( void ) = 0;
-			virtual void		Update( void ) = 0;
-			virtual void		Draw( void ) = 0;
-			virtual void		Shutdown( void ) = 0;
+			virtual void		Initialize( void );
+			virtual void		Update( void );
+			virtual void		Draw( void );
+			virtual void		Shutdown( void );
 
 			//std::unordered_map<std::string, GameObjectCollection> GOCList;
 
