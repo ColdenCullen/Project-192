@@ -11,15 +11,8 @@ using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Utility;
 
-void GameObjectCollection::LoadObjects( string assetPath )
+void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 {
-	// Read in list of files
-	File::FileList fileList = File::ScanDir( "Resources/Assets/Objects/" + assetPath );
-	// Json reader
-	Json::Reader reader;
-	// Root of current file
-	Json::Value root;
-
 	// Function to add objects to the list
 	auto addObj = [&]( JsonObject object )
 	{
@@ -32,10 +25,7 @@ void GameObjectCollection::LoadObjects( string assetPath )
 		nameMap[ name ] = currentId++;
 	};
 
-	// Map for parents, to be added after all objects are loaded
-	unordered_map<unsigned int, string> parentMap;
-
-	for( auto object : JsonController::Get( "Assets.Objects" ).node )
+	for( auto object : JsonController::Get( "Assets.Objects" + ( assetPath.size() ? "." + assetPath : "" ) ).node )
 	{
 		if( object.isArray() )
 		{
@@ -47,9 +37,6 @@ void GameObjectCollection::LoadObjects( string assetPath )
 			addObj( object );
 		}
 	}
-
-	for( auto parentPair = begin( parentMap ); parentPair != end( parentMap ); ++parentPair )
-		GetObjectById( parentPair->first )->transform->parent = GetObjectByName( parentPair->second )->transform;
 }
 
 GameObject* GameObjectCollection::GetObjectById( unsigned int id )

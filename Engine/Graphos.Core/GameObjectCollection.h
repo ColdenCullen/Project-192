@@ -15,7 +15,7 @@ namespace Graphos
 		{
 		public:
 			// Load object from resources folder
-			void				LoadObjects( std::string assetPath );
+			void				LoadObjects( std::string assetPath = "" );
 
 			// Add object
 			unsigned int		CreateObject( std::string name, Graphics::IShader* shader );
