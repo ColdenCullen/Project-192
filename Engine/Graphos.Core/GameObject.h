@@ -5,8 +5,8 @@
 #include <string>
 #include <unordered_map>
 #include <type_traits>
-#include <json\json.h>
 
+#include "JsonObject.h"
 #include "IComponent.h"
 #include "Transform.h"
 #include "ShaderController.h"
@@ -25,7 +25,7 @@ namespace Graphos
 			GameObject( Graphics::IShader* shader ) : shader( shader ), transform( new Math::Transform ) { }
 
 			// Factory for creating game objects from json
-			static GameObject*	CreateFromJson( Json::Value object );
+			static GameObject*	CreateFromJson( Utility::JsonObject object );
 
 			// Shutdown memory
 			void				Shutdown( void );

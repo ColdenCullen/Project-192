@@ -1,6 +1,5 @@
 #include <vector>
 #include <string>
-#include <json/json.h>
 #include <cstdlib>
 
 #include "GraphosGame.h"

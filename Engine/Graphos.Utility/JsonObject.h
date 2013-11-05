@@ -13,22 +13,22 @@ namespace Graphos
 		class JsonObject
 		{
 		public:
-								JsonObject( Json::Value obj = Json::Value( Json::objectValue ) ) : object( obj ) { }
+			JsonObject( Json::Value obj = Json::Value( Json::objectValue ) ) : node( obj ) { }
 
 			// Get value from settings
 			template<typename T>
-			T GetValue( std::string path );
+			T Get( std::string path );
 
 			template<typename T>
-			bool TryGetValue( std::string path, T& val )
+			bool TryGet( std::string path, T& val )
 			{
 				if( path.size() == 0 )
-					return val = object, true;
+					return val = node, true;
 
 				std::string left;
 				std::string right = path;
 				int currentIndex;
-				Json::Value* currentValue = &object;
+				Json::Value* currentValue = &node;
 
 				do
 				{
@@ -55,15 +55,12 @@ namespace Graphos
 			}
 
 			template<typename T>
-			void SetValue( std::string path, T value )
+			void Set( std::string path, T value )
 			{
-				GetValue<Json::Value&>( path ) = value;
+				Get<Json::Value&>( path ) = value;
 			}
 
-		private:
-			Json::Value			object;
-
-			friend class		JsonController;
+			Json::Value			node;
 		};
 	}
 }

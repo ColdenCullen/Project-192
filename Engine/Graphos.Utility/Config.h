@@ -25,13 +25,13 @@ namespace Graphos
 			template<typename T>
 			static T GetData( std::string path )
 			{
-				return Json().GetValue<T>( path );
+				return Json().Get<T>( path );
 			}
 
 			template<typename T>
 			static void SetData( std::string path, T newValue )
 			{
-				Json().SetValue( path, newValue );
+				Json().Set( path, newValue );
 
 				//std::ofstream outfile( "Resources/Config/Config.json" );
 

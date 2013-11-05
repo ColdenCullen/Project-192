@@ -24,7 +24,7 @@ void JsonController::Initialize( void )
 
 			string fileName = file.GetFileName().substr( 0, file.GetFileName().size() - 5 );
 
-			root.SetValue( path + fileName, Parse( file.GetContents() ).object );
+			root.Set( path + fileName, Parse( file.GetContents() ).node );
 		}
 	}
 }

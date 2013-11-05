@@ -15,20 +15,20 @@ namespace GraphosTests
 		{
 			JsonObject test;
 
-			test.SetValue( "Test1", "Result" );
-			Assert::AreEqual( "Result", test.GetValue<string>( "Test1" ).c_str() );
+			test.Set( "Test1", "Result" );
+			Assert::AreEqual( "Result", test.Get<string>( "Test1" ).c_str() );
 
-			test.SetValue( "Test2.Test3", "Set1" );
-			Assert::AreEqual( "Set1", test.GetValue<string>( "Test2.Test3" ).c_str() );
+			test.Set( "Test2.Test3", "Set1" );
+			Assert::AreEqual( "Set1", test.Get<string>( "Test2.Test3" ).c_str() );
 
-			test.SetValue( "Test2.Test3", "Set2" );
-			Assert::AreEqual( "Set2", test.GetValue<string>( "Test2.Test3" ).c_str() );
+			test.Set( "Test2.Test3", "Set2" );
+			Assert::AreEqual( "Set2", test.Get<string>( "Test2.Test3" ).c_str() );
 
-			test.SetValue( "Test2.Test4", 3 );
-			Assert::AreEqual( 3, test.GetValue<int>( "Test2.Test4" ) );
+			test.Set( "Test2.Test4", 3 );
+			Assert::AreEqual( 3, test.Get<int>( "Test2.Test4" ) );
 
-			test.SetValue( "Test2.Test5.Test6", "Set4" );
-			Assert::AreEqual( "Set4", test.GetValue<string>( "Test2.Test5.Test6" ).c_str() );
+			test.Set( "Test2.Test5.Test6", "Set4" );
+			Assert::AreEqual( "Set4", test.Get<string>( "Test2.Test5.Test6" ).c_str() );
 		}
 
 		TEST_METHOD(TryGet)
@@ -36,10 +36,10 @@ namespace GraphosTests
 			JsonObject test;
 			JsonObject testRef;
 
-			test.SetValue( "Test1", "Set1" );
-			Assert::IsTrue( test.TryGetValue( "Test1", testRef ), L"Test1 not found." );
+			test.Set( "Test1", "Set1" );
+			Assert::IsTrue( test.TryGet( "Test1", testRef ), L"Test1 not found." );
 
-			Assert::IsFalse( test.TryGetValue( "Test2", testRef ), L"Test2 reported found." );
+			Assert::IsFalse( test.TryGet( "Test2", testRef ), L"Test2 reported found." );
 		}
 	};
 }
