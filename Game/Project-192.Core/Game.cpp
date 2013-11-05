@@ -13,7 +13,7 @@ using namespace Graphos::Utility;
 
 void Game::Initialize( void )
 {
-	objects.LoadObjects( "" );
+	objects.LoadObjects();
 	CurrentState = GameState::Game;
 	
 }

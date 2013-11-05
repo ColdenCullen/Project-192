@@ -86,7 +86,6 @@
   <ItemGroup>
     <ClInclude Include="ClassMapper.h" />
     <ClInclude Include="ClassWrapper.h" />
-    <ClInclude Include="NativeToJSMap_Graphos.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
   </ItemGroup>

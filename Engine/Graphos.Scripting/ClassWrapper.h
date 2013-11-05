@@ -3,7 +3,6 @@
 
 #include <v8/v8.h>
 #include <cvv8/ClassCreator.hpp>
-#include "NativeToJSMap_Graphos.h"
 
 #define WRAP_CLASS(CLASS, CONSTRUCTORS)																		\
 namespace cvv8 {																							\
@@ -13,7 +12,7 @@ namespace cvv8 {																							\
 	template<> struct ClassCreator_SetupBindings<CLASS>														\
 		{ static void Initialize( v8::Handle<v8::Object> const & target ); };								\
 	template<> struct JSToNative<CLASS> : public JSToNative_ClassCreator<CLASS> { };						\
-	template<> struct NativeToJS<CLASS> : public NativeToJSMap_Graphos<CLASS> { };							\
+	template<> struct NativeToJS<CLASS> : public NativeToJSMap<CLASS>::NativeToJSImpl { };					\
 }
 
 #define NAME_CLASS(CLASS)																					\

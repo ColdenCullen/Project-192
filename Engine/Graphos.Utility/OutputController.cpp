@@ -35,5 +35,6 @@ bool OutputController::GetWhetherPrint( OutputType type )
 	return
 		( verbosity == "High" ) ||
 		( verbosity == "Med" && type >= OutputType::OT_WARNING ) ||
-		( verbosity == "Low" && type >= OutputType::OT_ERROR );
+		( verbosity == "Low" && type >= OutputType::OT_ERROR ) ||
+		( verbosity == "" );
 }

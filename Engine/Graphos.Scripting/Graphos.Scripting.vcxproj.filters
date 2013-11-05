@@ -6,7 +6,6 @@
     <ClInclude Include="ClassWrapper.h">
       <Filter>Class Wrappers</Filter>
     </ClInclude>
-    <ClInclude Include="NativeToJSMap_Graphos.h" />
     <ClInclude Include="ClassMapper.h" />
   </ItemGroup>
   <ItemGroup>
