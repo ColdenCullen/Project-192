@@ -3,7 +3,6 @@
 class MyGame extends GraphosGame
 {
     objects: GameObjectCollection;
-    box: GameObject;
 
     public Initialize(): void
     {
@@ -12,23 +11,21 @@ class MyGame extends GraphosGame
         this.objects = new GameObjectCollection();
 
         this.objects.LoadObjects( "" );
-        this.box = this.objects.GetObjectByName( "Cube2" );
     }
 
     public Update(): void
     {
-        //log( "Updating" );
-        this.box.Update();
+        this.objects.Update();
     }
 
     public Draw(): void
     {
-        //log( "Drawing" );
-        this.box.Draw();
+        this.objects.Draw();
     }
 
     public Shutdown(): void
     {
-        //log( "Shutting down" );
+        log( "Shutting down" );
+        this.objects.ClearObjects();
     }
 }

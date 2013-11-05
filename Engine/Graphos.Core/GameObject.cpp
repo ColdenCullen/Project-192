@@ -113,11 +113,7 @@ void GameObject::Update( void )
 
 void GameObject::Draw( void )
 {
-	//shader->Use();
 	shader->SetModelMatrix( transform->WorldMatrix() );
-	// TODO...what did/does this do?...
-	// this SetUniform was removed...needs refactoring?
-	// shader->SetUniform( "shaderTexture", 0 );
 
 	for( auto component : componentList )
 		component.second->Draw( shader );

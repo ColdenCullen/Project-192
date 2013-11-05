@@ -16,8 +16,13 @@ namespace Graphos
 			void				Draw( void ) override;
 			void				Shutdown( void ) override;
 
+			Graphos::Core::GameObjectCollection
+								objects;
+
 		protected:
 			Script*				script;
+
+			bool				useScript;
 		};
 	}
 }

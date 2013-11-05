@@ -30,10 +30,10 @@ void cvv8::ClassCreator_SetupBindings<ScriptedGraphosGame>::Initialize( Handle<v
 
 	AccessorAdder graphosGameacc( graphosGamecc.Prototype() );
 	//graphosGameacc
-	//	( "CurrentState",
-	//		MemberToAccessors<GraphosGame, GameState, &GraphosGame::CurrentState>::Get,
+	//	( "Objects",
+	//		MemberToAccessors<ScriptedGraphosGame, GameObjectCollection, &ScriptedGraphosGame::objects>::Get,
 	//		ThrowingSetter::Set )
-	//;
+	//	;
 
 	// Set static methods
 	Handle<Function> ctor( graphosGamecc.CtorFunction() );

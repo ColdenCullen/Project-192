@@ -29,7 +29,7 @@
                 tasks: [ 'copy:uis', 'copy:output', 'clean:autocompiled' ]
             autos:
             	files: autos
-            	tasks: [ 'clear:autocompile' ]
+            	tasks: [ 'clean:autocompiled' ]
 
         typescript:
             game:

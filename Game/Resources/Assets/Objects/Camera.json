@@ -4,10 +4,11 @@
 	"Shader": "texture",
 
 	"Camera": true,
-
+	
+	/*
 	"Script": {
 		"Class": "Camera1"
-	}, 
+	},*/
 
 	"Transform": {
 		"Position": {

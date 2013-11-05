@@ -92,6 +92,8 @@ declare class GameObjectCollection
     public GetObjectByName( name: string ): GameObject;
     public RemoveObjectById( id: number ): void;
     public RemoveObjectByName( name: string ): void;
+    public Update(): void;
+    public Draw(): void;
 }
 
 class GraphosGame
