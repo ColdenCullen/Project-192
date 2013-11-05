@@ -19,7 +19,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -74,12 +74,15 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectCollection.cpp" />
     <ClCompile Include="GraphosGame.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ScriptedGraphosGame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectCollection.h" />
     <ClInclude Include="GraphosGame.h" />
     <ClInclude Include="GraphosGlobal.h" />
+    <ClInclude Include="ScriptedGraphosGame.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Graphos.Components\Graphos.Components.vcxproj">

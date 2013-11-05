@@ -18,7 +18,7 @@ void Game::Initialize( void )
 	
 }
 
-bool Game::Update( void )
+void Game::Update( void )
 {
 	switch( CurrentState )
 	{
@@ -51,8 +51,6 @@ bool Game::Update( void )
 	// Reset game with F5
 	if( Input::IsKeyDown( VK_F5 ) )
 		Reset();
-
-	return true;
 }
 
 void Game::Draw( void )

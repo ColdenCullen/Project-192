@@ -134,6 +134,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{734D
 		..\Game\Resources\Scripts\Camera.ts = ..\Game\Resources\Scripts\Camera.ts
 		..\Game\Resources\Scripts\GameObject1.ts = ..\Game\Resources\Scripts\GameObject1.ts
 		..\Game\Resources\Scripts\Graphos.ts = ..\Game\Resources\Scripts\Graphos.ts
+		..\Game\Resources\Scripts\GraphosGame.ts = ..\Game\Resources\Scripts\GraphosGame.ts
 		..\Game\Resources\Scripts\LightShader.ts = ..\Game\Resources\Scripts\LightShader.ts
 	EndProjectSection
 EndProject

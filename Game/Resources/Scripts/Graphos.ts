@@ -82,19 +82,19 @@ class GameObject
     public Update(): void { }
 }
 
-declare class GraphosGame
+class GraphosGame
 {
-    CurrentState: GameState;
+    public CurrentState: GameState;
 
     // DO NOT OVERRIDE
-    public Reset(): void;
-    public Exit(): void;
+    public Reset(): void { }
+    public Exit(): void { }
 
     // To be overridden
-    public Initialize(): void;
-    public Update(): void;
-    public Draw(): void;
-    public Shutdown(): void;
+    public Initialize(): void { }
+    public Update(): void { }
+    public Draw(): void { }
+    public Shutdown(): void { }
 }
 
 enum GameState
