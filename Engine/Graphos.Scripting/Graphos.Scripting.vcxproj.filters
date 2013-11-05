@@ -3,54 +3,72 @@
   <ItemGroup>
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
-    <ClInclude Include="ClassWrapper.h">
+    <ClInclude Include="ClassMapper.h" />
+    <ClInclude Include="ClassCreator.h">
       <Filter>Class Wrappers</Filter>
     </ClInclude>
-    <ClInclude Include="ClassMapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ScriptController.cpp" />
     <ClCompile Include="Script.cpp" />
-    <ClCompile Include="CC-Transform.cpp">
-      <Filter>Class Wrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-Vector3.cpp">
-      <Filter>Class Wrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-GameObject.cpp">
-      <Filter>Class Wrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-Mesh.cpp">
-      <Filter>Class Wrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-Texture.cpp">
-      <Filter>Class Wrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-Time.cpp">
-      <Filter>Class Wrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-Camera.cpp">
-      <Filter>Class Wrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-Matrix4.cpp">
-      <Filter>Class Wrappers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-IShader.cpp">
-      <Filter>Class Wrappers</Filter>
-    </ClCompile>
     <ClCompile Include="CC-ConstBuffer.cpp">
       <Filter>Class Wrappers</Filter>
     </ClCompile>
+    <ClCompile Include="CC-Mesh.cpp">
+      <Filter>Class Wrappers\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Texture.cpp">
+      <Filter>Class Wrappers\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Camera.cpp">
+      <Filter>Class Wrappers\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-GameObject.cpp">
+      <Filter>Class Wrappers\Core</Filter>
+    </ClCompile>
     <ClCompile Include="CC-GraphosGame.cpp">
-      <Filter>Class Wrappers</Filter>
+      <Filter>Class Wrappers\Core</Filter>
     </ClCompile>
     <ClCompile Include="CC-ScriptedGraphosGame.cpp">
-      <Filter>Class Wrappers</Filter>
+      <Filter>Class Wrappers\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Time.cpp">
+      <Filter>Class Wrappers\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Matrix4.cpp">
+      <Filter>Class Wrappers\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Transform.cpp">
+      <Filter>Class Wrappers\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Vector3.cpp">
+      <Filter>Class Wrappers\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-IShader.cpp">
+      <Filter>Class Wrappers\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-GameObjectCollection.cpp">
+      <Filter>Class Wrappers\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Class Wrappers">
       <UniqueIdentifier>{82ee8070-4f75-43b8-ad10-81d56c4040de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class Wrappers\Core">
+      <UniqueIdentifier>{86249606-c1c9-4aa5-afd0-d6fabe95a93c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class Wrappers\Components">
+      <UniqueIdentifier>{25d644f9-b2fc-466c-9504-dd78a94f319f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class Wrappers\Utility">
+      <UniqueIdentifier>{1e464c17-c85f-45cb-9e75-8507e1009469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class Wrappers\Math">
+      <UniqueIdentifier>{4b847c4a-a621-4251-9702-9bb4c10044c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class Wrappers\Graphics">
+      <UniqueIdentifier>{7f3c1adf-140f-462b-b010-d03b8264d00d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

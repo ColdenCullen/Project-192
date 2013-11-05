@@ -21,8 +21,8 @@ void cvv8::ClassCreator_SetupBindings<GameObject>::Initialize( Handle<v8::Object
 
 	gameObjectcc
 		( "destroy", ClassCreator<GameObject>::DestroyObjectCallback )
-		//( "Update", MethodToInCa<GameObject, void (void), &GameObject::Update>::Call )
-		//( "Draw", MethodToInCa<GameObject, void (void), &GameObject::Draw>::Call )
+		( "Update", MethodToInCa<GameObject, void (void), &GameObject::Update>::Call )
+		( "Draw", MethodToInCa<GameObject, void (void), &GameObject::Draw>::Call )
 		;
 
 	AccessorAdder gameObjectacc( gameObjectcc.Prototype() );

@@ -80,6 +80,18 @@ class GameObject
 
     // Abstract method for updating object
     public Update(): void { }
+    public Draw(): void { }
+}
+
+declare class GameObjectCollection
+{
+    public LoadObjects( path: string ): void;
+    public ClearObjects(): void;
+    public CreateObject( name: string, shader: IShader ): number;
+    public GetObjectById( id: number ): GameObject;
+    public GetObjectByName( name: string ): GameObject;
+    public RemoveObjectById( id: number ): void;
+    public RemoveObjectByName( name: string ): void;
 }
 
 class GraphosGame

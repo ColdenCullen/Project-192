@@ -17,8 +17,8 @@ int main()
 
 	/*/
 
-	Project192::Game game;
-	game.Run();
+	//Project192::Game game;
+	//game.Run();
 
 	//*/
 }

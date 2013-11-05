@@ -1,7 +1,7 @@
 #ifndef __CLASS_MAPPER
 #define __CLASS_MAPPER
 
-#include "ClassWrapper.h"
+#include "ClassCreator.h"
 
 #include "Transform.h"
 #include "GameObject.h"
@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "IShader.h"
 #include "ScriptedGraphosGame.h"
+#include "GameObjectCollection.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Math;
@@ -20,6 +21,7 @@ using namespace Graphos::Utility;
 WRAP_CLASS(Time,())
 WRAP_CLASS(Transform,(CtorForwarder<Transform*( void )>))
 WRAP_CLASS(GameObject,(CtorForwarder<GameObject*( void )>))
+WRAP_CLASS(GameObjectCollection,(CtorForwarder<GameObjectCollection*( void )>))
 WRAP_CLASS(Mesh,(CtorForwarder<Mesh*( std::string )>))
 WRAP_CLASS(Vector3,(CtorForwarder<Vector3*( void )>,
 					CtorForwarder<Vector3*( float, float, float )>,

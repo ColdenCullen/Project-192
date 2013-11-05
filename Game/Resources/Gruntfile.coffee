@@ -5,6 +5,7 @@
     shaderFiles = './Shaders/**'
     configFiles = './Config/**'
     uiFiles = './UIs/**'
+    autos = [ './Scripts/*.js', './Gruntfile*.js' ]
 
     interDest = './.bin/'
 
@@ -26,6 +27,10 @@
             uis:
                 files: uiFiles
                 tasks: [ 'copy:uis', 'copy:output', 'clean:autocompiled' ]
+            autos:
+            	files: autos
+            	tasks: [ 'clear:autocompile' ]
+
         typescript:
             game:
                 src: scriptFiles
@@ -36,6 +41,7 @@
                     base_path: './Scripts'
                     sourcemap: true
                     fullSourceMapPath: true
+
         copy:
             assets:
                 files: [
@@ -68,11 +74,12 @@
                     src: '**'
                     dest: '<%= outputdir %>/Resources'
                 ]
+                
         clean:
             output:
                 src: interDest
             autocompiled:
-                src: [ './Scripts/*.js', './Gruntfile*.js' ]
+                src: autos
 
         config: grunt.option( 'config' ) || 'debug'
         outputdir: './../../Output/Final/<%= config %>'
