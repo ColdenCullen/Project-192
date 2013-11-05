@@ -27,12 +27,9 @@ cbuffer uniforms //: register( b0 )
 {
 	matrix modelViewProj;
 	matrix modelMatrix;
-};
-
-cbuffer lights 
-{
 	DirectionalLight dirLights[2];
 };
+
 
 VertexToFragment main( VertexShaderInput input )
 {

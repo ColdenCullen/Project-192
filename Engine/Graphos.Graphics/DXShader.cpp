@@ -16,6 +16,9 @@ using namespace Graphos::Graphics;
 using namespace Graphos::Utility;
 using namespace DirectX;
 
+#include <d3dcompiler.inl>
+
+
 // Requires the compiled shaders (.cso files)
 DXShader::DXShader( string vertexPath, string fragmentPath )
 {
@@ -70,9 +73,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	{
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create input layout." );
 	}
-	// release unneeded buffers
-	ReleaseCOMobjMacro( vsb );
-	ReleaseCOMobjMacro( shaderCompileErrors );
+	
 
 	// ---- Load Pixel Shader
 	ID3DBlob* psb;
@@ -103,9 +104,25 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create fragment shader." );
 	}
 
-	// release unneeded buffers
-	ReleaseCOMobjMacro( psb );
-	ReleaseCOMobjMacro( shaderCompileErrors );
+	// get constant buffer variables
+	ID3D11ShaderReflection* vsReflection = nullptr;
+	D3D11Reflect( vsb->GetBufferPointer(), vsb->GetBufferSize(), &vsReflection );
+	D3D11_SHADER_BUFFER_DESC vsShaderBufferDesc;
+	vsReflection->GetConstantBufferByName( "uniforms" )->GetDesc( &vsShaderBufferDesc );
+	vsShaderBufferDesc.Name;
+	UINT numVariables = vsShaderBufferDesc.Variables;
+	ID3D11ShaderReflectionVariable* var2 = vsReflection->GetConstantBufferByName( "uniforms" )->GetVariableByIndex( 2 );
+	
+	D3D11_SHADER_VARIABLE_DESC var2Desc;
+	var2->GetDesc( &var2Desc );
+	var2Desc.Name;
+	var2Desc.Size;
+
+	ID3D11ShaderReflectionType* var2Type = var2->GetType();
+	var2Type->GetMemberTypeByIndex(0);
+	
+
+	
 
 	// ---- Create Sampler State
 	D3D11_SAMPLER_DESC samplerDesc;
@@ -129,11 +146,17 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create sampler state." );
 	}
 
+	// release unneeded buffers
+	ReleaseCOMobjMacro( psb );
+	ReleaseCOMobjMacro( vsb );
+	ReleaseCOMobjMacro( shaderCompileErrors );
+
 	// TEMPORARY BUFFER TO BE REMOVED FROM C++ SIDE
 	auto buf = new ConstBuffer;
 	buf->totalSize = 0;
 	buf->AddProperty( "modelViewProj", sizeof(Matrix4) );
 	buf->AddProperty( "modelMatrix", sizeof(Matrix4) );
+
 	RegisterConstBuffer( "uniforms", buf );
 	delete buf;
 }

@@ -49,7 +49,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>OpenGL32.lib;glew32.lib;FreeImage.lib;D3D11.lib;D3DCompiler.lib;DirectXTex.lib;</AdditionalDependencies>
+      <AdditionalDependencies>OpenGL32.lib;glew32.lib;FreeImage.lib;D3D11.lib;D3DCompiler.lib;DirectXTex.lib;dxguid.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
