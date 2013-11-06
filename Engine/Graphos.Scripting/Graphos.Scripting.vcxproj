@@ -69,24 +69,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CC-Camera.cpp" />
-    <ClCompile Include="CC-ConstBuffer.cpp" />
     <ClCompile Include="CC-GameObject.cpp" />
     <ClCompile Include="CC-GameObjectCollection.cpp" />
     <ClCompile Include="CC-GraphosGame.cpp" />
     <ClCompile Include="CC-IShader.cpp" />
     <ClCompile Include="CC-Matrix4.cpp" />
     <ClCompile Include="CC-Mesh.cpp" />
-    <ClCompile Include="CC-ScriptedGraphosGame.cpp" />
+    <ClCompile Include="CC-ShaderController.cpp" />
     <ClCompile Include="CC-Texture.cpp" />
     <ClCompile Include="CC-Time.cpp" />
     <ClCompile Include="CC-Transform.cpp" />
     <ClCompile Include="CC-Vector3.cpp" />
+    <ClCompile Include="CC-WindowController.cpp" />
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClassMapper.h" />
-    <ClInclude Include="ClassCreator.h" />
+    <ClInclude Include="ClassWrapper.h" />
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
   </ItemGroup>

@@ -8,7 +8,7 @@
 namespace cvv8 {																							\
 	CVV8_TypeName_DECL((CLASS));																			\
 	template<> class ClassCreator_Factory<CLASS>															\
-		: public ClassCreator_Factory_NativeToJSMap<CLASS,CtorArityDispatcher<Signature<CLASS CONSTRUCTORS >>> { };			\
+		: public ClassCreator_Factory_NativeToJSMap<CLASS,CtorArityDispatcher<Signature<CLASS CONSTRUCTORS >>> { };	\
 	template<> struct ClassCreator_SetupBindings<CLASS>														\
 		{ static void Initialize( v8::Handle<v8::Object> const & target ); };								\
 	template<> struct JSToNative<CLASS> : public JSToNative_ClassCreator<CLASS> { };						\

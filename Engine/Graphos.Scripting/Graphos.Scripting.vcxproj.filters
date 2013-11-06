@@ -4,16 +4,16 @@
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
     <ClInclude Include="ClassMapper.h" />
-    <ClInclude Include="ClassCreator.h">
+    <ClInclude Include="Enums.h">
+      <Filter>Class Creators</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassWrapper.h">
       <Filter>Class Creators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ScriptController.cpp" />
     <ClCompile Include="Script.cpp" />
-    <ClCompile Include="CC-ConstBuffer.cpp">
-      <Filter>Class Creators</Filter>
-    </ClCompile>
     <ClCompile Include="CC-Mesh.cpp">
       <Filter>Class Creators\Components</Filter>
     </ClCompile>
@@ -27,9 +27,6 @@
       <Filter>Class Creators\Core</Filter>
     </ClCompile>
     <ClCompile Include="CC-GraphosGame.cpp">
-      <Filter>Class Creators\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-ScriptedGraphosGame.cpp">
       <Filter>Class Creators\Core</Filter>
     </ClCompile>
     <ClCompile Include="CC-Time.cpp">
@@ -49,6 +46,12 @@
     </ClCompile>
     <ClCompile Include="CC-GameObjectCollection.cpp">
       <Filter>Class Creators\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-ShaderController.cpp">
+      <Filter>Class Creators\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-WindowController.cpp">
+      <Filter>Class Creators\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

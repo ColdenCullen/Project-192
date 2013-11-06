@@ -1,6 +1,6 @@
 /// <reference path="Graphos.ts" />
 
-class MyGame extends GraphosBehavior
+class MyGame extends GraphosGame
 {
     objects: GameObjectCollection;
 
@@ -15,12 +15,56 @@ class MyGame extends GraphosBehavior
 
     public Update(): void
     {
-        this.objects.Update();
+
+        switch( this.CurrentState )
+        {
+            case GameState.Game:
+                {
+                    //switch to menu with F1
+			        if( Input.IsKeyDown( Keys.F1 ) )
+                        this.CurrentState = GameState.Menu;
+
+                    this.objects.Update();
+                    break;
+                }
+            case GameState.Menu:
+                {
+                    //switch to game with F2
+			        if( Input.IsKeyDown( Keys.F2 ) )
+                        this.CurrentState = GameState.Game;
+
+                    break;
+                }
+        }
+
+        // Quit game with Escape
+	    if( Input.IsKeyDown( Keys.Escape ) )
+		    this.Exit();
+
+	    // Reset game with F5
+	    if( Input.IsKeyDown( Keys.F5 ) )
+		    this.Reset();
     }
 
     public Draw(): void
     {
-        this.objects.Draw();
+        //ShaderController.GetShader( "texture" ).SetViewMatrix( camera.GetViewMatrix() );
+        //ShaderController.GetShader( "texture" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
+        //ShaderController.GetShader( "light" ).SetViewMatrix( camera.GetViewMatrix() );
+        //ShaderController.GetShader( "light" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
+
+        switch( this.CurrentState )
+        {
+            case GameState.Game:
+                {
+                    this.objects.Draw();
+                    break;
+                }
+            case GameState.Menu:
+                {
+                    break;
+                }
+        }
     }
 
     public Shutdown(): void

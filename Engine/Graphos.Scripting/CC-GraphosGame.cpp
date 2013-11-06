@@ -24,20 +24,16 @@ void cvv8::ClassCreator_SetupBindings<GraphosGame>::Initialize( Handle<v8::Objec
 
 	graphosGamecc
 		( "destroy", ClassCreator<GraphosGame>::DestroyObjectCallback )
-		//( "Update", MethodToInCa<GameObject, void (void), &GameObject::Update>::Call )
-		//( "Draw", MethodToInCa<GameObject, void (void), &GameObject::Draw>::Call )
+		( "Reset", MethodToInCa<GraphosGame, void( void ), &GraphosGame::Reset>::Call )
+		( "Exit", MethodToInCa<GraphosGame, void( void ), &GraphosGame::Exit>::Call )
 		;
 
 	AccessorAdder graphosGameacc( graphosGamecc.Prototype() );
-	/*graphosGameacc
-	( "CurrentState",
-	MemberToAccessors<GraphosGame, GameState, &GraphosGame::CurrentState>::Get,
-	ThrowingSetter::Set )
-	;*/
-
-	// Set static methods
-	Handle<Function> ctor( graphosGamecc.CtorFunction() );
-	//ctor->Set( String::New( "TripleProduct" ), FunctionTemplate::New( FunctionToInCa<Vector3 (const Vector3&, const Vector3&, const Vector3&), &Vector3::TripleProduct>::Call )->GetFunction() );
+	graphosGameacc
+		( "CurrentState",
+			MemberToAccessors<GraphosGame, GameState, &GraphosGame::CurrentState>::Get,
+			MemberToAccessors<GraphosGame, GameState, &GraphosGame::CurrentState>::Set )
+	;
 
 	graphosGamecc.AddClassTo( TypeName<GraphosGame>::Value, target );
 };

@@ -26,10 +26,12 @@ Handle<Value> IsKeyDown( const Arguments& args )
 
 Handle<Value> PrintHandler( const Arguments& args )
 {
-	for( int ii = 0; ii < args.Length(); ++ii )
-		cout << *String::Utf8Value( args[ ii ] );
+	string message = "";
 
-	cout << endl;
+	for( int ii = 0; ii < args.Length(); ++ii )
+		message += string( *String::Utf8Value( args[ ii ] ) );
+
+	OutputController::PrintMessage( OutputType::Info, message );
 
 	return Undefined();
 }
@@ -78,6 +80,32 @@ void ScriptController::Initialize( void )
 	ClassMapper::BindGraphosTypes( globalObject );
 
 	isInitialized = true;
+}
+
+Graphos::Core::Script* ScriptController::CreateObjectInstance( std::string className )
+{
+	using namespace v8;
+	using namespace cvv8;
+
+	if( !isInitialized )
+		Initialize();
+
+	// Create a scope
+	Context::Scope contextScope( context );
+
+	// Get an instance of the class
+	Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
+
+	// Return object
+	if( !ctor.IsEmpty() )
+	{
+		// Create basic gameobject as well as instance of new class
+		return new Graphos::Core::Script(
+			Persistent<Object>::New(
+				ctor->CallAsConstructor( 0, nullptr )->ToObject()
+				)
+			);
+	}
 }
 
 void ScriptController::Shutdown( void )

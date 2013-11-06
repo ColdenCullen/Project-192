@@ -10,14 +10,14 @@ namespace Graphos
 		class IPlatformWindowController
 		{
 		public:
-			virtual void		Initialize( void ) = 0;
-			virtual void		Shutdown( void ) = 0;
+			virtual void		Initialize( void ) { }
+			virtual void		Shutdown( void ) { }
 
-			virtual void		Resize( void ) = 0;
-			virtual void		MessageLoop( void ) = 0;
+			virtual void		Resize( void ) { }
+			virtual void		MessageLoop( void ) { }
 
-			virtual void		OpenWindow( void ) = 0;
-			virtual void		CloseWindow( void ) = 0;
+			virtual void		OpenWindow( void ) { }
+			virtual void		CloseWindow( void ) { }
 
 			// Getters
 			unsigned int		GetWidth( void )	{ return width; }

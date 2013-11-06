@@ -28,7 +28,7 @@ void Graphos::Core::Script::Update( void )
 {
 	//*
 	//updateFunction->Call( instance, 0, NULL );
-	CallFunction( "Update" );
+	CallFunction( "OnUpdate" );
 	/*/
 	TryCatch tc;
 	updateFunction->Call( instance, 0, NULL );

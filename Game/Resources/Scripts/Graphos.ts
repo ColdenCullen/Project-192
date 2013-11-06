@@ -50,16 +50,36 @@ declare class Camera
     public GetViewMatrix(): Matrix4;
 }
 
+declare class WindowController
+{
+    public static Get(): WindowController;
+
+    public Width: number;
+    public Height: number;
+    public PerspectiveMatrix: Matrix4;
+    public OrthogonalMatrix: Matrix4;
+
+    public Initialize(): void;
+    public Shutdown(): void;
+    public Resize(): void;
+    public OpenWindow(): void;
+    public CloseWindow(): void;
+}
+
 class IShader
 {
     public ModelMatrix: Matrix4;
     public ViewMatrix: Matrix4;
     public ProjectionMatrix: Matrix4;
     public ModelViewProjectionMatrix: Matrix4;
-    public RegisterConstBuffer( buffer: any ): void { }
 
     public SetUniform( name: string, value: number ): void { }
     public SetUniformMatrix( name: string, value: Matrix4 ): void { }
+}
+
+declare class ShaderController
+{
+    public static GetShader( name: string ): IShader;
 }
 
 declare class Mesh
@@ -72,25 +92,32 @@ declare class Texture
     public Draw( shader: IShader ): void;
 }
 
-// Class with variables and functions
-declare class GameObject
+class GraphosObject
 {
     // Transform object
     public Transform: Transform;
-
-    // Abstract method for updating object
-    public Update(): void;
-    public Draw(): void;
 }
 
-class GraphosBehavior
+// Class with variables and functions
+class GameObject extends GraphosObject
 {
-    public Owner: GameObject;
+    constructor()
+    {
+        super();
+        throw Error( "DO NOT EXTEND GAMEOBJECT" );
+    }
 
-    public Initialize(): void { }
+    // Abstract method for updating object
     public Update(): void { }
     public Draw(): void { }
-    public Shutdown(): void { }
+}
+
+class GraphosBehavior extends GraphosObject
+{
+    public OnInitialize(): void { }
+    public OnUpdate(): void { }
+    public OnDraw(): void { }
+    public OnShutdown(): void { }
 }
 
 declare class GameObjectCollection
@@ -124,7 +151,8 @@ class GraphosGame
 enum GameState
 {
     Menu = 0,
-    Game = 1
+    Game = 1,
+    Resetting = 2
 }
 
 declare class Time

@@ -13,7 +13,7 @@ class Camera1 extends GraphosBehavior
     //    this.RotationSpeed = 0.01;
     //}
 
-    //public Update(): void
+    //public OnUpdate(): void
     //{
     //    if( Input.IsKeyDown( Keys.W ) )
     //    {

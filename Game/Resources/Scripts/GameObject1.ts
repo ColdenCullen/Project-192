@@ -2,7 +2,7 @@
 
 class GameObject1 extends GraphosBehavior
 {
-    public Update(): void
+    public OnUpdate(): void
     {
         if( Input.IsKeyDown( Keys.Space ) )
         {
