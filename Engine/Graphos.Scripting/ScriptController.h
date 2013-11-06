@@ -44,6 +44,7 @@ namespace Graphos
 				// Return object
 				if( !ctor.IsEmpty() )
 				{
+					/*
 					// Create basic gameobject as well as instance of new class
 					auto base = Persistent<Object>::New( CastToJS( owner )->ToObject() );
 					auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
@@ -54,6 +55,10 @@ namespace Graphos
 						if( !base->Has( name->ToString() ) )
 							base->Set( name, inst->Get( name ) );
 					}
+					*/
+
+					auto base = Persistent<Object>::New( ctor->CallAsConstructor( 0, nullptr )->ToObject() );
+					base->Set( String::New( "Owner" ), CastToJS( owner ) );
 
 					// Return new script
 					if( typeid( T ).hash_code() == typeid( GameObject ).hash_code() )

@@ -72,7 +72,6 @@
     <ClCompile Include="CC-ConstBuffer.cpp" />
     <ClCompile Include="CC-GameObject.cpp" />
     <ClCompile Include="CC-GameObjectCollection.cpp" />
-    <ClCompile Include="CC-GraphosBehavior.cpp" />
     <ClCompile Include="CC-GraphosGame.cpp" />
     <ClCompile Include="CC-IShader.cpp" />
     <ClCompile Include="CC-Matrix4.cpp" />
@@ -88,7 +87,6 @@
   <ItemGroup>
     <ClInclude Include="ClassMapper.h" />
     <ClInclude Include="ClassCreator.h" />
-    <ClInclude Include="GraphosBehavior.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 /// <reference path="Graphos.ts" />
 
-class Camera1 extends GameObject
+class Camera1 extends GraphosBehavior
 {
     //Speed: number;
     //RotationSpeed: number;

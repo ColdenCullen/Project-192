@@ -1,6 +1,6 @@
 /// <reference path="Graphos.ts" />
 
-class GameObject1 extends GameObject
+class GameObject1 extends GraphosBehavior
 {
     public Update(): void
     {

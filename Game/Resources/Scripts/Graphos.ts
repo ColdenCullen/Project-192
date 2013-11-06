@@ -73,14 +73,24 @@ declare class Texture
 }
 
 // Class with variables and functions
-class GameObject
+declare class GameObject
 {
     // Transform object
     public Transform: Transform;
 
     // Abstract method for updating object
+    public Update(): void;
+    public Draw(): void;
+}
+
+class GraphosBehavior
+{
+    public Owner: GameObject;
+
+    public Initialize(): void { }
     public Update(): void { }
     public Draw(): void { }
+    public Shutdown(): void { }
 }
 
 declare class GameObjectCollection

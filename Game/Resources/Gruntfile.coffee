@@ -84,7 +84,7 @@
         config: grunt.option( 'config' ) || 'debug'
         outputdir: './../../Output/Final/<%= config %>'
 
-    grunt.registerTask 'build', [ 'typescript:game', 'copy' ]
+    grunt.registerTask 'build', [ 'typescript:game', 'copy', 'clean:autocompiled' ]
 
     grunt.registerTask 'default', 'build'
 
