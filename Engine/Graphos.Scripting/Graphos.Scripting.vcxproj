@@ -36,9 +36,7 @@
     <Import Project="..\..\Solution\GraphosProperties.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
-  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -49,7 +47,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>v8_base.lib;v8_snapshot.lib;ws2_32.lib;winmm.lib;</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;winmm.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -91,6 +89,14 @@
     <ClInclude Include="ClassCreator.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ExternalDependencies\submodules\v8\tools\gyp\v8_base.vcxproj">
+      <Project>{0365b47c-0806-2d4c-c633-bffe035a6182}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ExternalDependencies\submodules\v8\tools\gyp\v8_snapshot.vcxproj">
+      <Project>{d7e18491-93af-c9d1-0cf8-261904821d5a}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
