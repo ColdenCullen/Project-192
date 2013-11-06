@@ -6,6 +6,11 @@ using namespace Graphos;
 using namespace Graphos::Math;
 using namespace Graphos::Utility;
 
+JsonObject* JsonObject::GetChildren( void )
+{
+	throw exception( "Not implemented." );
+}
+
 template<>
 auto JsonObject::Get( string path )							-> Json::Value&
 {

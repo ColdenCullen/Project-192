@@ -13,16 +13,17 @@ namespace Graphos
 		class Script : public IComponent
 		{
 		public:
-								Script( v8::Handle<v8::Object> instance, GameObject* owner = nullptr );
+								Script( v8::Persistent<v8::Object> instance, GameObject* owner = nullptr );
+								~Script( void );
 
 			void				Update( void );
 			void				Draw( void ) { }
 			void				Shutdown( void ) { }
 
-			void				CallFunction( std::string name );
+			void				CallFunction( std::string name, ... );
 
 		private:
-			v8::Handle<v8::Object>
+			v8::Persistent<v8::Object>
 								instance;
 			v8::Handle<v8::Function>
 								updateFunction;

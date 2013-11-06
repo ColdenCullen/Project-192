@@ -19,7 +19,7 @@ void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 		auto name = object.Get<string>( "Name" );
 
 		if( nameMap.find( name ) != end( nameMap ) )
-			OutputController::PrintMessage( OutputType::OT_ERROR, "Object name " + name + " already in use." );
+			OutputController::PrintMessage( OutputType::Error, "Object name " + name + " already in use." );
 
 		objectList[ currentId ] = GameObject::CreateFromJson( object );
 		nameMap[ name ] = currentId++;

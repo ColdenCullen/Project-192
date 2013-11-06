@@ -7,6 +7,7 @@
     <ClInclude Include="ClassCreator.h">
       <Filter>Class Creators</Filter>
     </ClInclude>
+    <ClInclude Include="GraphosBehavior.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ScriptController.cpp" />
@@ -49,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="CC-GameObjectCollection.cpp">
       <Filter>Class Creators\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-GraphosBehavior.cpp">
+      <Filter>Class Creators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

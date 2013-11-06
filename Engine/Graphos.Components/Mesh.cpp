@@ -149,7 +149,7 @@ void Mesh::LoadFromFile( string filePath )
 		initialVertexData.pSysMem = &outputData[0];
 		result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &vbDesc, &initialVertexData, &vertexBuffer.dx );
 		if( FAILED(result) )
-			OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to init dx vertex buffer" );
+			OutputController::PrintMessage( OutputType::Error, "Failed to init dx vertex buffer" );
 
 		// Create the index buffer
 		D3D11_BUFFER_DESC ibDesc;
@@ -165,7 +165,7 @@ void Mesh::LoadFromFile( string filePath )
 		initialIndexData.pSysMem = indices;
 		result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &ibDesc, &initialIndexData, &indexBuffer.dx );
 		if( FAILED(result) )
-			OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to init dx index buffer" );
+			OutputController::PrintMessage( OutputType::Error, "Failed to init dx index buffer" );
 
 	}
 #endif//_WIN32

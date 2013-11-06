@@ -27,7 +27,7 @@ namespace Graphos
 			}
 
 			template<typename T>
-			Graphos::Core::Script*	CreateObjectInstance( std::string className, T* owner )
+			Graphos::Core::Script* CreateObjectInstance( std::string className, T* owner )
 			{
 				using namespace v8;
 				using namespace cvv8;
@@ -45,7 +45,7 @@ namespace Graphos
 				if( !ctor.IsEmpty() )
 				{
 					// Create basic gameobject as well as instance of new class
-					auto base = CastToJS( owner )->ToObject();
+					auto base = Persistent<Object>::New( CastToJS( owner )->ToObject() );
 					auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
 
 					for( unsigned int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
@@ -63,7 +63,7 @@ namespace Graphos
 				}
 				else
 				{
-					OutputController::PrintMessage(OutputType::OT_ERROR, "Invalid Class Name." );
+					OutputController::PrintMessage( OutputType::Error, "Invalid Class Name." );
 					return nullptr;
 				}
 			}

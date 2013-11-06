@@ -19,6 +19,8 @@ namespace Graphos
 			template<typename T>
 			T Get( std::string path );
 
+			JsonObject* GetChildren( void );
+
 			template<typename T>
 			bool TryGet( std::string path, T& val )
 			{
@@ -32,7 +34,6 @@ namespace Graphos
 
 				do
 				{
-
 					currentIndex = right.find( '.' );
 
 					if( currentIndex != std::string::npos )

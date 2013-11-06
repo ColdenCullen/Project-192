@@ -28,13 +28,9 @@ void cvv8::ClassCreator_SetupBindings<GameObject>::Initialize( Handle<v8::Object
 	AccessorAdder gameObjectacc( gameObjectcc.Prototype() );
 	gameObjectacc
 		( "Transform",
-		MemberToAccessors<GameObject, Transform*, &GameObject::transform>::Get,
-		ThrowingSetter::Set )
+			MemberToAccessors<GameObject, Transform*, &GameObject::transform>::Get,
+			ThrowingSetter::Set )
 		;
-
-	// Set static methods
-	Handle<Function> ctor( gameObjectcc.CtorFunction() );
-	//ctor->Set( String::New( "TripleProduct" ), FunctionTemplate::New( FunctionToInCa<Vector3 (const Vector3&, const Vector3&, const Vector3&), &Vector3::TripleProduct>::Call )->GetFunction() );
 
 	gameObjectcc.AddClassTo( TypeName<GameObject>::Value, target );
 };
