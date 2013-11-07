@@ -42,7 +42,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>awesomium.lib;FreeImage.lib;</AdditionalDependencies>
+      <AdditionalDependencies>awesomium.lib;FreeImage.lib;jsoncpp.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
