@@ -17,7 +17,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Scripting", "..\Eng
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{510BA875-BC5D-46B6-B25A-8414F72B3D98}"
 	ProjectSection(SolutionItems) = preProject
+		..\Game\Resources\build.bat = ..\Game\Resources\build.bat
+		..\Game\Resources\debug.bat = ..\Game\Resources\debug.bat
 		..\Game\Resources\Gruntfile.coffee = ..\Game\Resources\Gruntfile.coffee
+		..\Game\Resources\init.bat = ..\Game\Resources\init.bat
 		..\Game\Resources\package.json = ..\Game\Resources\package.json
 	EndProjectSection
 EndProject
