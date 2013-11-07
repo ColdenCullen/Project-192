@@ -180,11 +180,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v8_snapshot", "..\ExternalD
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v8", "..\ExternalDependencies\submodules\v8\tools\gyp\v8.vcxproj", "{73848F9A-5128-CE82-AE99-9EB394FAA496}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{79419E0A-6F82-480D-B631-D102D427A268}"
-	ProjectSection(SolutionItems) = preProject
-		Performance1.psess = Performance1.psess
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -434,8 +429,5 @@ Global
 		{4D9A97F4-A135-9173-3480-80F840D9050D} = {A37C8C4D-9898-4E5A-A70B-D7D86A228F46}
 		{D7E18491-93AF-C9D1-0CF8-261904821D5A} = {A37C8C4D-9898-4E5A-A70B-D7D86A228F46}
 		{73848F9A-5128-CE82-AE99-9EB394FAA496} = {A37C8C4D-9898-4E5A-A70B-D7D86A228F46}
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
