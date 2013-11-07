@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <v8/v8.h>
 #include "Script.h"
 #include "Matrix4.h"
 #include "ShaderController.h"

@@ -2,8 +2,8 @@
 #define __SCRIPT_CONTROLLER
 
 #include <string>
-#include <v8\v8.h>
-#include <cvv8\ClassCreator.hpp>
+#include <v8.h>
+#include <cvv8/ClassCreator.hpp>
 
 #include "Script.h"
 #include "GameObject.h"

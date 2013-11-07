@@ -2,7 +2,7 @@
 #include <cvv8\ClassCreator.hpp>
 
 #include <iostream>
-#include <v8/v8-debug.h>
+#include <v8-debug.h>
 
 #include "OutputController.h"
 #include "ScriptController.h"

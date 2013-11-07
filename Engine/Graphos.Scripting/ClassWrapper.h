@@ -1,7 +1,7 @@
 #ifndef __CLASS_WRAPPER
 #define __CLASS_WRAPPER
 
-#include <v8/v8.h>
+#include <v8.h>
 #include <cvv8/ClassCreator.hpp>
 
 #define WRAP_CLASS(CLASS, CONSTRUCTORS)																		\
