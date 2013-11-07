@@ -14,7 +14,7 @@
 #include "GameObjectCollection.h"
 #include "GraphosGame.h"
 #include "ShaderController.h"
-#include "IPlatformWindowController.h"
+#include "WindowController.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Math;
@@ -34,7 +34,7 @@ WRAP_CLASS(Camera,(CtorForwarder<Camera*( GameObject* )>))
 WRAP_CLASS(IShader,(CtorForwarder<IShader*( void )>))
 WRAP_CLASS(ShaderController,())
 WRAP_CLASS(GraphosGame,(CtorForwarder<GraphosGame*( void )>))
-WRAP_CLASS(IPlatformWindowController,())
+WRAP_CLASS(WindowController,(CtorForwarder<WindowController*( void )>))
 
 namespace Graphos
 {
@@ -53,7 +53,7 @@ namespace Graphos
 				cvv8::ClassCreator<Matrix4>::SetupBindings( dest );
 				cvv8::ClassCreator<IShader>::SetupBindings( dest );
 				cvv8::ClassCreator<ShaderController>::SetupBindings( dest );
-				cvv8::ClassCreator<IPlatformWindowController>::SetupBindings( dest );
+				cvv8::ClassCreator<WindowController>::SetupBindings( dest );
 				cvv8::ClassCreator<GameObject>::SetupBindings( dest );
 				cvv8::ClassCreator<GameObjectCollection>::SetupBindings( dest );
 				cvv8::ClassCreator<Time>::SetupBindings( dest );

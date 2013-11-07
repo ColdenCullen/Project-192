@@ -136,6 +136,7 @@ declare class GameObjectCollection
 class GraphosGame
 {
     public CurrentState: GameState;
+    public Camera: Camera;
 
     // DO NOT OVERRIDE
     public Reset(): void { }

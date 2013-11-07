@@ -11,11 +11,12 @@ class MyGame extends GraphosGame
         this.objects = new GameObjectCollection();
 
         this.objects.LoadObjects( "" );
+
+        log( this.Camera );
     }
 
     public Update(): void
     {
-
         switch( this.CurrentState )
         {
             case GameState.Game:
@@ -48,10 +49,10 @@ class MyGame extends GraphosGame
 
     public Draw(): void
     {
-        //ShaderController.GetShader( "texture" ).SetViewMatrix( camera.GetViewMatrix() );
-        //ShaderController.GetShader( "texture" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
-        //ShaderController.GetShader( "light" ).SetViewMatrix( camera.GetViewMatrix() );
-        //ShaderController.GetShader( "light" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
+        ShaderController.GetShader( "texture" ).ViewMatrix = this.Camera.GetViewMatrix();
+        ShaderController.GetShader( "texture" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
+        ShaderController.GetShader( "light" ).ViewMatrix = this.Camera.GetViewMatrix();
+        ShaderController.GetShader( "light" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
 
         switch( this.CurrentState )
         {

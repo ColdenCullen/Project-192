@@ -13,6 +13,7 @@ namespace cvv8 {																							\
 		{ static void Initialize( v8::Handle<v8::Object> const & target ); };								\
 	template<> struct JSToNative<CLASS> : public JSToNative_ClassCreator<CLASS> { };						\
 	template<> struct NativeToJS<CLASS> : public NativeToJSMap<CLASS>::NativeToJSImpl { };					\
+	template<> struct ClassCreator_AllowNullConstructor<CLASS> : Opt_Bool<true> {};							\
 }
 
 #define NAME_CLASS(CLASS)																					\

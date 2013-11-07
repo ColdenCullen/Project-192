@@ -18,7 +18,7 @@ void cvv8::ClassCreator_SetupBindings<ShaderController>::Initialize( Handle<v8::
 	}
 
 	// Set static methods
-	Handle<Function> ctor( ShaderControllercc.CtorFunction() );
+	Handle<FunctionTemplate> ctor( ShaderControllercc.CtorTemplate() );
 	ctor->Set(
 		String::New( "GetShader" ),
 		FunctionTemplate::New( FunctionToInCa<IShader*( std::string ), &ShaderController::GetShader>::Call )->GetFunction() );

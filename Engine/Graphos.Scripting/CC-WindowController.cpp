@@ -7,48 +7,48 @@ using namespace v8;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 
-NAME_CLASS(IPlatformWindowController)
+NAME_CLASS(WindowController)
 
-void cvv8::ClassCreator_SetupBindings<IPlatformWindowController>::Initialize( Handle<v8::Object> const & target )
+void cvv8::ClassCreator_SetupBindings<WindowController>::Initialize( Handle<v8::Object> const & target )
 {
-	ClassCreator<IPlatformWindowController>& WindowControllercc( ClassCreator<IPlatformWindowController>::Instance() );
+	ClassCreator<WindowController>& WindowControllercc( ClassCreator<WindowController>::Instance() );
 	if( WindowControllercc.IsSealed() )
 	{
-		WindowControllercc.AddClassTo( TypeName<IPlatformWindowController>::Value, target );
+		WindowControllercc.AddClassTo( TypeName<WindowController>::Value, target );
 		return;
 	}
 
 	WindowControllercc
-		( "destroy", ClassCreator<IPlatformWindowController>::DestroyObjectCallback )
-		( "Initialize", MethodToInCa<IPlatformWindowController, void( void ), &IPlatformWindowController::Initialize>::Call )
-		( "Shutdown", MethodToInCa<IPlatformWindowController, void( void ), &IPlatformWindowController::Shutdown>::Call )
-		( "Resize", MethodToInCa<IPlatformWindowController, void( void ), &IPlatformWindowController::Resize>::Call )
-		( "OpenWindow", MethodToInCa<IPlatformWindowController, void( void ), &IPlatformWindowController::OpenWindow>::Call )
-		( "CloseWindow", MethodToInCa<IPlatformWindowController, void( void ), &IPlatformWindowController::CloseWindow>::Call )
+		( "destroy", ClassCreator<WindowController>::DestroyObjectCallback )
+		( "Initialize", MethodToInCa<WindowController, void( void ), &WindowController::Initialize>::Call )
+		( "Shutdown", MethodToInCa<WindowController, void( void ), &WindowController::Shutdown>::Call )
+		( "Resize", MethodToInCa<WindowController, void( void ), &WindowController::Resize>::Call )
+		( "OpenWindow", MethodToInCa<WindowController, void( void ), &WindowController::OpenWindow>::Call )
+		( "CloseWindow", MethodToInCa<WindowController, void( void ), &WindowController::CloseWindow>::Call )
 		;
 
 	// Proxy accessor/mutator functions as JS properties
 	AccessorAdder Vector3acc( WindowControllercc.Prototype() );
 	Vector3acc
 		( "Width",
-			MethodToGetter<IPlatformWindowController, unsigned int( void ), &IPlatformWindowController::GetWidth>::Get,
+			MethodToGetter<WindowController, unsigned int( void ), &WindowController::GetWidth>::Get,
 			ThrowingSetter::Set )
 		( "Height",
-			MethodToGetter<IPlatformWindowController, unsigned int( void ), &IPlatformWindowController::GetHeight>::Get,
+			MethodToGetter<WindowController, unsigned int( void ), &WindowController::GetHeight>::Get,
 			ThrowingSetter::Set )
 		( "PerspectiveMatrix",
-			MethodToGetter<IPlatformWindowController, Matrix4&( void ), &IPlatformWindowController::PerspectiveMatrix>::Get,
+			MethodToGetter<WindowController, Matrix4&( void ), &WindowController::PerspectiveMatrix>::Get,
 			ThrowingSetter::Set )
 		( "OrthogonalMatrix",
-			MethodToGetter<IPlatformWindowController, Matrix4&( void ), &IPlatformWindowController::OrthogonalMatrix>::Get,
+			MethodToGetter<WindowController, Matrix4&( void ), &WindowController::OrthogonalMatrix>::Get,
 			ThrowingSetter::Set )
 		;
 
 	// Set static methods
-	Handle<Function> ctor( WindowControllercc.CtorFunction() );
+	Handle<FunctionTemplate> ctor( WindowControllercc.CtorTemplate() );
 	ctor->Set(
 		String::New( "Get" ),
-		FunctionTemplate::New( FunctionToInCa<IPlatformWindowController*( void ), &WindowController::Get>::Call )->GetFunction() );
+		FunctionTemplate::New( FunctionToInCa<WindowController*( void ), &WindowController::Get>::Call )->GetFunction() );
 
 	WindowControllercc.AddClassTo( TypeName<WindowController>::Value, target );
 };

@@ -33,6 +33,9 @@ void cvv8::ClassCreator_SetupBindings<GraphosGame>::Initialize( Handle<v8::Objec
 		( "CurrentState",
 			MemberToAccessors<GraphosGame, GameState, &GraphosGame::CurrentState>::Get,
 			MemberToAccessors<GraphosGame, GameState, &GraphosGame::CurrentState>::Set )
+		( "Camera",
+			VarToAccessors<Camera*, &GraphosGame::camera>::Get,
+			VarToAccessors<Camera*, &GraphosGame::camera>::Set )
 	;
 
 	graphosGamecc.AddClassTo( TypeName<GraphosGame>::Value, target );

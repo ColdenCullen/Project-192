@@ -76,7 +76,6 @@
     <ClInclude Include="GlShader.h" />
     <ClInclude Include="GraphicsController.h" />
     <ClInclude Include="IGraphicsAdapterController.h" />
-    <ClInclude Include="IPlatformWindowController.h" />
     <ClInclude Include="IShader.h" />
     <ClInclude Include="OpenGlController.h" />
     <ClInclude Include="Resource.h" />

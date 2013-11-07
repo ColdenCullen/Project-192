@@ -23,11 +23,6 @@ void ScriptedGraphosGame::Update( void )
 
 void ScriptedGraphosGame::Draw( void )
 {
-	ShaderController::GetShader( "texture" )->SetViewMatrix( camera->GetViewMatrix() );
-	//ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
-	ShaderController::GetShader( "light" )->SetViewMatrix( camera->GetViewMatrix() );
-	//ShaderController::GetShader( "light" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
-
 	script->CallFunction( "Draw" );
 	
 	if( CurrentState == GameState::Menu )
@@ -37,8 +32,6 @@ void ScriptedGraphosGame::Draw( void )
 void ScriptedGraphosGame::Shutdown( void )
 {
 	script->CallFunction( "Shutdown" );
-
-	objects.ClearObjects();
 
 	delete script;
 }

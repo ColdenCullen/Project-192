@@ -8,7 +8,7 @@ namespace Graphos
 {
 	namespace Core
 	{
-		enum class GameState { Menu = 0, Game = 1, Reseting = 2 };
+		enum GameState { Menu = 0, Game = 1, Reseting = 2 };
 	
 		class GraphosGame
 		{
