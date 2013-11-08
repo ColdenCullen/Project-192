@@ -6,7 +6,10 @@
 	"Camera": true,
 	
 	"Script": {
-		"Class": "Camera1"
+		"Class": "Camera1",
+		"Variables": {
+			"test": 32
+		}
 	},
 
 	"Transform": {
