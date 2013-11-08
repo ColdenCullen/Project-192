@@ -85,8 +85,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EventTest.cpp" />
-    <ClCompile Include="JsonTest.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="Json.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Engine\Graphos.Components\Graphos.Components.vcxproj">

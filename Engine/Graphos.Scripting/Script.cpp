@@ -24,6 +24,14 @@ Graphos::Core::Script::~Script( void )
 
 }
 
+void Graphos::Core::Script::Initialize( JsonObject initVals )
+{
+	for( auto val : initVals.node.getMemberNames() )
+	{
+		instance->Set( String::New( val.c_str() ), initVals.Get<Handle<Value>>( val ) );
+	}
+}
+
 void Graphos::Core::Script::Update( void )
 {
 	//*

@@ -5,6 +5,7 @@
 #include <string>
 
 #include "IComponent.h"
+#include "JsonObject.h"
 
 namespace Graphos
 {
@@ -15,6 +16,8 @@ namespace Graphos
 		public:
 								Script( v8::Persistent<v8::Object> instance, GameObject* owner = nullptr );
 								~Script( void );
+
+			void				Initialize( Utility::JsonObject initVals );
 
 			void				Update( void );
 			void				Draw( void ) { }

@@ -3,6 +3,7 @@
 
 #include <json/json.h>
 #include <string>
+#include <vector>
 
 #include "Vector3.h"
 
@@ -19,7 +20,7 @@ namespace Graphos
 			template<typename T>
 			T Get( std::string path );
 
-			JsonObject* GetChildren( void );
+			std::vector<JsonObject> GetChildren( void );
 
 			template<typename T>
 			bool TryGet( std::string path, T& val )

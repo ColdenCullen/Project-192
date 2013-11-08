@@ -7,10 +7,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="JsonTest.cpp">
+    <ClCompile Include="Json.cpp">
       <Filter>Graphos.Utility</Filter>
     </ClCompile>
-    <ClCompile Include="EventTest.cpp">
+    <ClCompile Include="Event.cpp">
       <Filter>Graphos.Utility</Filter>
     </ClCompile>
   </ItemGroup>
