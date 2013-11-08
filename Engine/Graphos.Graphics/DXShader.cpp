@@ -47,8 +47,8 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 
 	if( FAILED(result) )
 	{
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Error compiling vertex shader\n" + vertexPath );
-		OutputController::PrintMessage( OutputType::OT_ERROR, (char*)(shaderCompileErrors->GetBufferPointer()) );
+		OutputController::PrintMessage( OutputType::Error, "Error compiling vertex shader\n" + vertexPath );
+		OutputController::PrintMessage( OutputType::Error, (char*)(shaderCompileErrors->GetBufferPointer()) );
 	}
 	
 	result = AdapterController::Get()->GetDevice().dx->CreateVertexShader( vsb->GetBufferPointer(), 
@@ -57,7 +57,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 																&vertexShader );
 	if( FAILED(result) )
 	{
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create vertex shader." );
+		OutputController::PrintMessage( OutputType::Error, "Failed to create vertex shader." );
 	}
 
 	// Create Input Layout
@@ -68,7 +68,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 																&vertexLayout );
 	if( FAILED(result) )
 	{
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create input layout." );
+		OutputController::PrintMessage( OutputType::Error, "Failed to create input layout." );
 	}
 	// release unneeded buffers
 	ReleaseCOMobjMacro( vsb );
@@ -90,8 +90,8 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 
 	if( FAILED(result) )
 	{
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Error compiling fragment shader\n" + fragmentPath );
-		OutputController::PrintMessage( OutputType::OT_ERROR, (char*)(shaderCompileErrors->GetBufferPointer()) );
+		OutputController::PrintMessage( OutputType::Error, "Error compiling fragment shader\n" + fragmentPath );
+		OutputController::PrintMessage( OutputType::Error, (char*)(shaderCompileErrors->GetBufferPointer()) );
 	}
 
 	result = AdapterController::Get()->GetDevice().dx->CreatePixelShader( psb->GetBufferPointer(),
@@ -100,7 +100,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 																&pixelShader );
 	if( FAILED(result) )
 	{
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create fragment shader." );
+		OutputController::PrintMessage( OutputType::Error, "Failed to create fragment shader." );
 	}
 
 	// release unneeded buffers
@@ -126,7 +126,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	result = AdapterController::Get()->GetDevice().dx->CreateSamplerState( &samplerDesc, &samplerState );
 	if( FAILED(result) )
 	{
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create sampler state." );
+		OutputController::PrintMessage( OutputType::Error, "Failed to create sampler state." );
 	}
 
 	// TEMPORARY BUFFER TO BE REMOVED FROM C++ SIDE
@@ -157,7 +157,7 @@ void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
 																&buffer->vsConstantBuffer);
 	if( FAILED(result) )
 	{
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to create constant buffer " + name );
+		OutputController::PrintMessage( OutputType::Error, "Failed to create constant buffer " + name );
 	}
 
 }
@@ -240,9 +240,9 @@ void DXShader::SetUniform( string name, const float value ) const
 	auto it = buffer->meta.find( name );
 
 	if( it == end( buffer->meta ) )
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
+		OutputController::PrintMessage( OutputType::Error, "Invalid name in SetUniform" );
 	if( it->second.second != sizeof( value ) )
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniform(float)" );
+		OutputController::PrintMessage( OutputType::Error, "Data size mismatch in SetUniform(float)" );
 
 	memcpy( buffer->data + it->second.first, &value, it->second.second );
 }
@@ -252,9 +252,9 @@ void DXShader::SetUniform( string name, const int value ) const
 	auto it = buffer->meta.find( name );
 
 	if( it == end( buffer->meta ) )
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
+		OutputController::PrintMessage( OutputType::Error, "Invalid name in SetUniform" );
 	if( it->second.second != sizeof( value ) )
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniform(int)" );
+		OutputController::PrintMessage( OutputType::Error, "Data size mismatch in SetUniform(int)" );
 
 	memcpy( buffer->data + it->second.first, &value, it->second.second );
 }
@@ -264,9 +264,9 @@ void DXShader::SetUniformArray( string name, const float* value, const int size 
 	auto it = buffer->meta.find( name );
 
 	if( it == end( buffer->meta ) )
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
+		OutputController::PrintMessage( OutputType::Error, "Invalid name in SetUniform" );
 	if( it->second.second != sizeof( *value )*size )
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniformArray(float)" );
+		OutputController::PrintMessage( OutputType::Error, "Data size mismatch in SetUniformArray(float)" );
 	
 	memcpy( buffer->data + it->second.first, value, it->second.second );
 }
@@ -276,9 +276,9 @@ void DXShader::SetUniformArray( string name, const int* value, const int size ) 
 	auto it = buffer->meta.find( name );
 
 	if( it == end( buffer->meta ) )
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
+		OutputController::PrintMessage( OutputType::Error, "Invalid name in SetUniform" );
 	if( it->second.second != sizeof( *value )*size )
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniformArray(int)" );
+		OutputController::PrintMessage( OutputType::Error, "Data size mismatch in SetUniformArray(int)" );
 	
 	memcpy( buffer->data + it->second.first, value, it->second.second );
 }

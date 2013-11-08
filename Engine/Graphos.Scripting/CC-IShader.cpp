@@ -20,7 +20,6 @@ void cvv8::ClassCreator_SetupBindings<IShader>::Initialize( Handle<v8::Object> c
 
 	IShadercc
 		( "destroy", ClassCreator<IShader>::DestroyObjectCallback )
-		( "RegisterConstBuffer", MethodToInCa<IShader, void (std::string, ConstBuffer*), &IShader::RegisterConstBuffer>::Call )
 		( "SetUniform", ConstMethodToInCa<const IShader, void (std::string, const int), &IShader::SetUniform>::Call )
 		( "SetUniformMatrix", ConstMethodToInCa<const IShader, void (std::string, const Matrix4&), &IShader::SetUniformMatrix>::Call )
 		;
@@ -42,9 +41,6 @@ void cvv8::ClassCreator_SetupBindings<IShader>::Initialize( Handle<v8::Object> c
 			MethodToGetter<IShader, Matrix4* (void), &IShader::GetModelViewProjectionMatrix>::Get,
 			ThrowingSetter::Set )
 		;
-
-	// Set static methods
-	Handle<Function> ctor( IShadercc.CtorFunction() );
 
 	IShadercc.AddClassTo( TypeName<IShader>::Value, target );
 };

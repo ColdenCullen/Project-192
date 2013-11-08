@@ -8,7 +8,7 @@ namespace Graphos
 {
 	namespace Core
 	{
-		enum class GameState { Menu = 0, Game = 1, Reseting = 2 };
+		enum GameState { Menu = 0, Game = 1, Reseting = 2 };
 	
 		class GraphosGame
 		{
@@ -22,10 +22,10 @@ namespace Graphos
 			static Camera*		camera;
 
 		protected:
-			virtual void		Initialize( void ) = 0;
-			virtual bool		Update( void ) = 0;
-			virtual void		Draw( void ) = 0;
-			virtual void		Shutdown( void ) = 0;
+			virtual void		Initialize( void );
+			virtual void		Update( void );
+			virtual void		Draw( void );
+			virtual void		Shutdown( void );
 
 			//std::unordered_map<std::string, GameObjectCollection> GOCList;
 

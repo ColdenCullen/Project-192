@@ -1,6 +1,7 @@
 #include "Input.h"
 #include "WindowController.h"
 #include "Config.h"
+#include "Win32Controller.h"
 
 #define BIT_AT_KEY_STATE( pos ) ( 1 << ( pos % SIZE ) )
 

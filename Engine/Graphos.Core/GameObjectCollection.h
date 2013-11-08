@@ -7,6 +7,8 @@
 #include <string>
 #include <unordered_map>
 
+#include "OutputController.h"
+
 namespace Graphos
 {
 	namespace Core
@@ -31,6 +33,9 @@ namespace Graphos
 
 			// Per-object operations
 			void				CallFunction( void (GameObject::*func)( void ) );
+
+			void Update( void ) { CallFunction( &GameObject::Update ); }
+			void Draw( void ) { CallFunction( &GameObject::Draw ); }
 
 		private:
 			std::unordered_map<unsigned int, GameObject*>
