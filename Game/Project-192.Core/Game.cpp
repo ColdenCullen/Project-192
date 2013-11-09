@@ -1,6 +1,6 @@
 #include "Game.h"
 #include "Input.h"
-#include "Time.h"
+#include "TimeController.h"
 #include "ShaderController.h"
 #include "WindowController.h"
 #include "Matrix4.h"
@@ -13,8 +13,8 @@ using namespace Graphos::Graphics;
 void Game::Initialize( void )
 {
 	objects.LoadObjects( "" );
-	cube = objects.GetObjectByName( "Cube" );
 	CurrentState = GameState::Game;
+	
 }
 
 bool Game::Update( void )
@@ -25,22 +25,31 @@ bool Game::Update( void )
 		{
 			ui->Update();
 
+			//switch to game with F2
+            if( Input::IsKeyDown( VK_F2 ) )
+                    CurrentState = GameState::Game;
+
 			break;
 		}
 	case GameState::Game:
 		{
 			objects.CallFunction( &GameObject::Update );
 
-			float rotation = 5.0f * ISingleton<Time>::Get().GetDeltaTime();
-
-			cube->transform.Rotate( rotation, rotation, 0.0f );
+			//switch to menu with F1
+            if( Input::IsKeyDown( VK_F1 ) )
+                    CurrentState = GameState::Menu;
 
 			break;
 		}
 	}
 
-	if( ISingleton<Input>::Get().IsKeyDown( VK_ESCAPE ) )
+	// Quit game with Escape
+	if( Input::IsKeyDown( VK_ESCAPE ) )
 		Exit();
+
+	// Reset game with F5
+	if( Input::IsKeyDown( VK_F5 ) )
+		Reset();
 
 	return true;
 }
@@ -57,8 +66,10 @@ void Game::Draw( void )
 		}
 	case GameState::Game:
 		{
-			ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "cameraMatrix", /*camera->transform.WorldMatrix()*/Matrix4::Identity );
-			ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().PerspectiveMatrix() );
+			ShaderController::GetShader( "texture" )->SetViewMatrix( camera->GetViewMatrix() );
+			ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
+			ShaderController::GetShader( "light" )->SetViewMatrix( camera->GetViewMatrix() );
+			ShaderController::GetShader( "light" )->SetProjectionMatrix( WindowController::Get()->PerspectiveMatrix() );
 
 			//camera->Draw();
 			objects.CallFunction( &GameObject::Draw );

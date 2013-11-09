@@ -7,13 +7,16 @@
   <PropertyGroup>
     <OutDir>$(RootDir)Output\Final\$(Configuration)\</OutDir>
     <IntDir>$(RootDir)Output\Intermediary\$(Configuration)\</IntDir>
-    <IncludePath>$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(RootDir)ExternalDependencies\submodules\bullet;$(RootDir)ExternalDependencies\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(RootDir)ExternalDependencies\lib;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>$(RootDir)ExternalDependencies\bin;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(RootDir)Engine\Graphos.Core;$(RootDir)Engine\Graphos.Components;$(RootDir)Engine\Graphos.Graphics;$(RootDir)Engine\Graphos.Math;$(RootDir)Engine\Graphos.Physics;$(RootDir)Engine\Graphos.Scripting</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ForcedIncludeFiles>$(RootDir)\Engine\Graphos.Core\GraphosGlobal.h</ForcedIncludeFiles>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>

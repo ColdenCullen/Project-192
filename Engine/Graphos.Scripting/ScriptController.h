@@ -3,26 +3,73 @@
 
 #include <string>
 #include <v8\v8.h>
+#include <cvv8\ClassCreator.hpp>
 
 #include "Script.h"
 #include "GameObject.h"
-#include "IController.h"
-#include "ISingleton.h"
+#include "OutputController.h"
+#include "ClassMapper.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class ScriptController : public Core::IController
+		class ScriptController
 		{
 		public:
-			virtual void		Initialize( void ) override;
-			virtual void		Shutdown( void ) override;
+			void				Initialize( void );
+			void				Shutdown( void );
 
-			Script*				CreateObjectInstance( std::string className, unsigned int ownerID, GameObject* owner = nullptr );
+			static ScriptController& Get( void )
+			{
+				static ScriptController instance;
+				return instance;
+			}
+
+			template<typename T>
+			Graphos::Core::Script*	CreateObjectInstance( std::string className, T* owner )
+			{
+				using namespace v8;
+				using namespace cvv8;
+
+				if( !isInitialized )
+					Initialize();
+
+				// Create a scope
+				Context::Scope contextScope( context );
+
+				// Get an instance of the class
+				Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
+
+				// Return object
+				if( !ctor.IsEmpty() )
+				{
+					// Create basic gameobject as well as instance of new class
+					auto base = CastToJS( owner )->ToObject();
+					auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
+
+					for( int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
+					{
+						auto name = inst->GetPropertyNames()->Get( ii );
+						if( !base->Has( name->ToString() ) )
+							base->Set( name, inst->Get( name ) );
+					}
+
+					// Return new script
+					if( typeid( T ).hash_code() == typeid( GameObject ).hash_code() )
+						return new Graphos::Core::Script( base, reinterpret_cast<GameObject*>( owner ) );
+					else
+						return new Graphos::Core::Script( base );
+				}
+				else
+				{
+					OutputController::PrintMessage(OutputType::OT_ERROR, "Invalid Class Name." );
+					return nullptr;
+				}
+			}
 		
 		private:
-								ScriptController( void ) : isInitialized( false ), /*isolate( v8::Isolate::GetCurrent() ),*/ handleScope() { }
+								ScriptController( void ) : isInitialized( false ), handleScope() { }
 								ScriptController( const ScriptController& );
 			void				operator=( const ScriptController& );
 
@@ -31,11 +78,8 @@ namespace Graphos
 								context;
 			v8::Local<v8::Object>
 								globalObject;
-			//v8::Isolate*		isolate;
 
 			bool				isInitialized;
-
-			friend class		ISingleton<ScriptController>;
 		};
 	}
 }

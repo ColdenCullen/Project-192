@@ -11,9 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{90871407-0B79-40A7-BA5C-F4FBEDDCD570}</ProjectGuid>
+    <ProjectGuid>{4961F3A5-0FC0-487A-BEF3-8313C981AB49}</ProjectGuid>
     <RootNamespace>GraphosPhysics</RootNamespace>
-    <ProjectName>Graphos.Physics</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -32,11 +31,7 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\..\Solution\GraphosProperties.props" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ImportGroup Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\Solution\GraphosProperties.props" />
   </ImportGroup>
@@ -47,14 +42,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Bscmake>
-      <PreserveSbr>true</PreserveSbr>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -71,18 +62,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BoxCollider.cpp" />
-    <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="Physics.cpp" />
-    <ClCompile Include="RigidBody.cpp" />
-    <ClCompile Include="SphereCollider.cpp" />
+    <ProjectReference Include="..\..\ExternalDependencies\submodules\bullet\BulletCollision\BulletCollision.vcxproj">
+      <Project>{5e9c8d62-5ac6-774a-99e8-f778bccdeed2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ExternalDependencies\submodules\bullet\BulletDynamics\BulletDynamics.vcxproj">
+      <Project>{8f5c9bdf-ac6f-f64f-af86-4da030f93a58}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ExternalDependencies\submodules\bullet\LinearMath\LinearMath.vcxproj">
+      <Project>{2a35e0c0-b05f-324d-8233-8dc92198f05b}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoxCollider.h" />
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="Physics.h" />
-    <ClInclude Include="RigidBody.h" />
-    <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="GraphosMotionState.h" />
+    <ClInclude Include="PhysicsController.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GraphosMotionState.cpp" />
+    <ClCompile Include="PhysicsController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

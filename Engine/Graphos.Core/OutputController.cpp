@@ -8,7 +8,6 @@ using namespace Graphos::Core;
 
 void OutputController::PrintMessage( OutputType type, string message )
 {
-	string verbosity = ISingleton<Config>::Get().GetData<string>( "Game.Verbosity" );
 	if( GetWhetherPrint( type ) )
 	{
 		cout << GetOutputHeader( type ) << " " << message << endl;
@@ -32,7 +31,7 @@ string OutputController::GetOutputHeader( OutputType type )
 
 bool OutputController::GetWhetherPrint( OutputType type )
 {
-	string verbosity = ISingleton<Config>::Get().GetData<string>( "Game.Verbosity" );
+	string verbosity = Config::GetData<string>( "Game.Verbosity" );
 	return
 		( verbosity == "High" ) ||
 		( verbosity == "Med" && type >= OutputType::OT_WARNING ) ||

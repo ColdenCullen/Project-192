@@ -1,17 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AssetController.cpp" />
-    <ClCompile Include="AwesomiumView.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="UserInterface.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AssetController.h" />
-    <ClInclude Include="AwesomiumView.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="UserInterface.h" />
+    <ClInclude Include="AssetController.h" />
+    <ClInclude Include="AwesomiumView.h" />
+    <ClInclude Include="DirectionalLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="AmbientLight.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
+    <ClCompile Include="AssetController.cpp" />
+    <ClCompile Include="AwesomiumView.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="AmbientLight.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Lights">
+      <UniqueIdentifier>{38c02f7c-5a04-429f-aab4-9a4a2f78e9fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

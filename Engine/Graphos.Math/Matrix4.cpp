@@ -3,6 +3,8 @@
 
 using namespace Graphos::Math;
 
+
+
 const Matrix4 Matrix4::Identity = Matrix4(
 	1.0f, 0.0f, 0.0f, 0.0f,
 	0.0f, 1.0f, 0.0f, 0.0f,
@@ -11,6 +13,11 @@ const Matrix4 Matrix4::Identity = Matrix4(
 );
 
 Matrix4 Matrix4::operator*( const Matrix4& other ) const
+{
+	return Mul( other );
+}
+
+Matrix4 Matrix4::Mul( const Matrix4& other ) const
 {
 	return Matrix4(
 		( dataArray[ 0 ] * other.dataArray[ 0 ] ) + ( dataArray[ 1 ] * other.dataArray[ 4 ] ) + ( dataArray[ 2 ] * other.dataArray[ 8 ] ) + ( dataArray[ 3 ] * other.dataArray[ 12 ] ),
@@ -36,6 +43,11 @@ Matrix4 Matrix4::operator*( const Matrix4& other ) const
 }
 
 Matrix4 Matrix4::operator+( const Matrix4& other ) const
+{
+	return Add( other );
+}
+
+Matrix4 Matrix4::Add( const Matrix4& other ) const
 {
 	Matrix4 toReturn;
 
@@ -87,6 +99,11 @@ Matrix4& Matrix4::operator+=( const Matrix4& other )
 
 bool Matrix4::operator==( const Matrix4& other ) const
 {
+	return Equals( other );
+}
+
+bool Matrix4::Equals( const Matrix4& other ) const
+{
 	for( int ii = 0; ii < 16; ++ii )
 		if( dataArray[ ii ] != other.dataArray[ ii ] )
 			return false;
@@ -114,17 +131,18 @@ Matrix4 Matrix4::BuildOrthogonal( const float width, const float height, const f
 
 	toReturn.matrix[ 0 ][ 0 ] = 2.0f / width;
 	toReturn.matrix[ 1 ][ 1 ] = 2.0f / height;
-	toReturn.matrix[ 2 ][ 2 ] = 1.0f / ( far - near );
-	toReturn.matrix[ 3 ][ 2 ] = near / ( near - far );
-
-	// Set to be 0,0 - width,height
-	//toReturn.matrix[ 3 ][ 0 ] = -1.0f;
-	//toReturn.matrix[ 3 ][ 1 ] = -1.0f;
+	toReturn.matrix[ 2 ][ 2 ] = -2.0f / ( far - near );
+	toReturn.matrix[ 3 ][ 3 ] = 1.0f;
 
 	return toReturn;
 }
 
 Vector3 Matrix4::operator*( const Vector3& vec ) const
+{
+	return Mul( vec );
+}
+
+Vector3 Matrix4::Mul( const Vector3& vec ) const
 {
 	return Vector3(
 		matrix[ 0 ][ 0 ] * vec.x + matrix[ 1 ][ 0 ] * vec.y + matrix[ 2 ][ 0 ] * vec.z,

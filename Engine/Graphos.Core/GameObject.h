@@ -5,25 +5,27 @@
 #include <string>
 #include <unordered_map>
 #include <type_traits>
+#include <json\json.h>
 
 #include "IComponent.h"
-#include "ISingleton.h"
 #include "Transform.h"
 #include "ShaderController.h"
-#include "GlShader.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class GameObject
+		class GameObject 
 		{
 		public:
-			Math::Transform		transform;
+			Math::Transform*	transform;
 
 			// Constructors
-			GameObject( void ) : shader( nullptr ) { }
-			GameObject( Graphics::Shader* shader ) : shader( shader ) { }
+			GameObject( void ) : shader( nullptr ), transform( new Math::Transform ) { }
+			GameObject( Graphics::IShader* shader ) : shader( shader ), transform( new Math::Transform ) { }
+
+			// Factory for creating game objects from json
+			static GameObject*	CreateFromJson( Json::Value object );
 
 			// Shutdown memory
 			void				Shutdown( void );
@@ -34,8 +36,8 @@ namespace Graphos
 			virtual void		OnCollision( GameObject* other ) { }
 
 			// Getters and setters
-			Graphics::Shader&	GetShader( void ) const { return *shader; }
-			void				SetShader( std::string newName ) { shader = &( ISingleton<Graphics::ShaderController>::Get().GetShader( newName ) ); }
+			Graphics::IShader*	GetShader( void ) const { return shader; }
+			void				SetShader( std::string newName ) { shader = Graphics::ShaderController::GetShader( newName ); }
 
 			// Add ingredient of type T
 			template<class T>
@@ -62,7 +64,7 @@ namespace Graphos
 			std::unordered_map<size_t, IComponent*>
 								componentList;
 
-			Graphics::Shader*	shader;
+			Graphics::IShader*	shader;
 		};
 	}
 }

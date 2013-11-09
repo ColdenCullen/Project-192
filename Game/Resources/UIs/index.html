@@ -1,140 +1,131 @@
 <!DOCTYPE HTML>
-<!--
-	Astral 2.0 by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
-	<head>
-		<title>Pinball Americana</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="A 3D pinball game." />
-		<meta name="keywords" content="3D, pinball, game, dsa1" />
-		<script src="js/jquery-1.9.1.min.js"></script>
-		<script src="js/config.js"></script>
-		<script src="js/skel.min.js"></script>
-		<noscript>
-			<link rel="stylesheet" href="css/skel-noscript.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-desktop.css" />
-			<link rel="stylesheet" href="css/noscript.css" />
-		</noscript>
-		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
-	</head>
-	<body class="homepage">
+  <head>
+    <meta charset="utf-8">
+    <title>Beta Balls Alpha</title>
 
-		<!-- Wrapper-->
-			<div id="wrapper">
-				
-				<!-- Nav -->
-					<nav id="nav">
-						<a href="#me" class="icon icon-home active"><span>Home</span></a>
-						<a href="#settings" class="icon icon-settings"><span>Settings</span></a>
-						<a href="#work" class="icon icon-user"><span>Credits</span></a>
-					</nav>
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/config.js"></script>
 
-				<!-- Main -->
-					<div id="main">
-						
-						<!-- Me -->
-							<article id="me" class="panel">
-								<header>
-									<h1>Pinball Americana</h1>
-									<span class="byline">Lovingly created by<br />Colden Cullen &amp; Daniel Jost</span>
-								</header>
-								<a href="#paused" class="jumplink pic" onclick="GraphosGame.ChangeState( 'Game' );">
-									<span class="jumplink arrow icon icon-right">Click here to begin</span>
-									<img src="images/home.png" />
-								</a>
-							</article>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
 
-						<!-- Settings -->
-							<article id="settings" class="panel">
-								<header>
-									<h1 class="settings-header">Settings</h1>
-								</header>
-								<div class="row">
-									<div class="6u">
-										<input id="fullscreen" class="check" type="checkbox" onclick="fullscreenChecked()" /><h3 class="setting-inline">Fullscreen</h3>
-									</div>
-									<div class="6u align-right">
-											<h3 class="setting-inline">Resolution: </h3>
-											<input id="screenWidth" class="search" type="number" placeholder="Width" value="test" />
-											<input id="screenHeight" class="search" type="number" placeholder="Height" />
-									</div>
-								</div>
-								<br />
-								<div class="row">
-									<div class="4u">
-										<input id="vsync" class="check" type="checkbox" /><h3 class="setting-inline">VSync</h3>
-									</div>
-									<div class="8u align-right">
-										<h3 class="setting-inline">UI Scale</h3>
-										<input id="uiScaleSlider" type="range" min="0" max="2" value="1" step="0.01" onchange="printValue('uiScaleSlider','uiScaleValue')" />
-										<input id="uiScaleValue" class="search setting-inline" type="number" size="5" step="0.01" min="0" max="100" />
-									</div>
-								</div>
-								<a href="#me" class="jumplink pic" onclick="updateConfig();">
-									<span class="jumplink arrow icon icon-right">Apply Changes</span>
-								</a>
-							</article>
+  <body>
 
-						<!-- Credits --> 
-							<article id="work" class="panel">
-								<div class="row">
-									<div class="5u">
-										<h2 class="top-name colden">Colden Cullen</h2>
-										<img class="photo" src="images/colden.png" />
-									</div>
-									<div class="2u amp"><span>&amp;</span></div>
-									<div class="5u">
-										<h2 class="top-name daniel">Daniel Jost</h2>
-										<img class="photo" src="images/daniel.png" />
-									</div>
-								</div>
-							</article>
+    <!-- Homepage -->
+    <section id="homepage" class="active">
+      <h1 id="game-title">Beta Balls Alpha</h1>
+      <h2 id="sub-title">(alpha)</h2>
+      <div id="wrapper">
+        <nav id="nav">
+          <a>Home</a>
+          <a onclick="showSection('#settings');">Settings</a>
+          <a onclick="showSection('#credits');">Credits</a>
+        </nav>
 
-						<!-- Paused -->
-							<article id="paused" class="panel">
-								<header>
-									<h1>PAUSED</h1>
-								</header>
-								<a href="#paused" class="jumplink pic" onclick="GraphosGame.ChangeState( 'Game' );">
-									<span class="jumplink arrow icon icon-right">Click here to resume</span>
-								</a>
-							</article>
-					</div>
-		
-				<!-- Footer -->
-					<div id="footer">
-						<ul class="links">
-							<li>&copy; Daniel Jost &amp; Colden Cullen</li>
-							<li>Design by html5up.net</li>
-						</ul>
-					</div>
-		
-			</div>
+        <div id="start-button">
+          <a id="start-game" onclick="GraphosGame.ChangeState('Game');">Start</a>
+        </div>
+      </div>
+    </section>
 
-			<!--fullscreenChecked-->
-			<script type="text/javascript">
-				function fullscreenChecked() 
-				{
-					$("#screenWidth").prop('disabled', $('#fullscreen').is(':checked'));
-					$("#screenHeight").prop('disabled', $('#fullscreen').is(':checked'));
-					$("#screenWidth").val(screen.width);
-        			$("#screenHeight").val(screen.height);
-				}
-			</script>
+    <!-- Settings -->
+    <section id="settings">
+      <h1 id="game-title">Settings</h1>
+      <h2 id="sub-title">(scale the UI, I dare you)</h2>
+      <div id="wrapper">
+        <nav id="nav">
+          <a onclick="showSection('#homepage');">Home</a>
+          <a>Settings</a>
+          <a onclick="showSection('#credits');">Credits</a>
+        </nav>
 
-			<!--printValue-->
-			<script type="text/javascript">
-				function printValue(sliderID, textbox) {
-					var x = document.getElementById(textbox);
-					var y = document.getElementById(sliderID);
-					x.value = y.value;
-				}
+        <div id="start-button">
+          <a id="start-game" onclick="updateConfig();">Apply</a>
+        </div>
 
-				jQuery(window).load = function() { printValue('uiScaleSlider', 'uiScaleValue'); }
-			</script>
-	</body>
+        <div id="settings-form">
+          <input id="fullscreen" class="check" type="checkbox" onclick="fullscreenChecked()" /><span class="setting-inline">Fullscreen</span><br /><br />
+
+          <span class="setting-inline">Resolution: </span>
+          <input id="screenWidth" class="search" type="number" placeholder="Width" value="test" />
+          <input id="screenHeight" class="search" type="number" placeholder="Height" /><br /><br />
+
+          <input id="vsync" class="check" type="checkbox" /><span class="setting-inline">VSync</span><br /><br />
+
+          <span class="setting-inline">UI Scale</span>
+          <input id="uiScaleSlider" type="range" min="0" max="2" value="1" step="0.01" onchange="printValue('uiScaleSlider','uiScaleValue')" />
+          <input id="uiScaleValue" class="search setting-inline" type="number" size="5" step="0.01" min="0" max="100" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Credits -->
+    <section id="credits">
+      <h1 id="game-title">Who Made This?</h1>
+      <h2 id="sub-title">(we did.)</h2>
+      <div id="wrapper">
+        <nav id="nav">
+          <a onclick="showSection('#homepage');">Home</a>
+          <a onclick="showSection('#settings');">Settings</a>
+          <a>Credits</a>
+        </nav>
+      </div>
+
+        <div class="developer">
+          <img class="photo" src="images/colden.png" />
+          <h2 class="credits-name colden">Colden Cullen</h2>
+        </div>
+
+        <div class="developer">
+          <img class="photo" src="images/daniel.png" />
+          <h2 class="credits-name daniel">Daniel Jost</h2>
+        </div>
+
+        <div class="developer">
+          <img class="photo" src="images/brandon.png" />
+          <h2 class="credits-name daniel">Brandon Littell</h2>
+        </div>
+
+        <div class="developer">
+          <img class="photo" src="images/eric.png" />
+          <h2 class="credits-name daniel">Eric Christenson</h2>
+        </div>
+    </section>
+
+    <!-- Add a loaded tag to body -->
+    <script>$(window).load(function(){$("body").addClass("loaded");});</script>
+
+    <!-- Switch sections -->
+    <script type="text/javascript">
+      function showSection(sectionID) 
+      {
+        $(".active").removeClass("active");
+        $(sectionID).addClass("active");
+      }
+    </script>
+
+    <!--fullscreenChecked-->
+    <script type="text/javascript">
+      function fullscreenChecked() 
+      {
+        $("#screenWidth").prop('disabled', $('#fullscreen').is(':checked'));
+        $("#screenHeight").prop('disabled', $('#fullscreen').is(':checked'));
+        $("#screenWidth").val(screen.width);
+        $("#screenHeight").val(screen.height);
+      }
+    </script>
+
+    <!--printValue-->
+    <script type="text/javascript">
+      function printValue(sliderID, textbox) {
+        var x = document.getElementById(textbox);
+        var y = document.getElementById(sliderID);
+        x.value = y.value;
+      }
+
+      jQuery(window).load = function() { printValue('uiScaleSlider', 'uiScaleValue'); }
+    </script>
+
+  </body>
 </html>

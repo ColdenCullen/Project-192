@@ -977,13 +977,15 @@ namespace cvv8 {
         */
         ResultType operator()( v8::Handle<v8::Value> const & h ) const
         {
+			bool empty = h.IsEmpty();
+			bool obj = h->IsObject();
             if( h.IsEmpty() || ! h->IsObject() ) return NULL;
             else
             {
                 void const * tid = NULL;
                 void * ext = NULL;
                 v8::Handle<v8::Value> proto(h);
-                while( !ext && !proto.IsEmpty() && proto->IsObject() )
+                while( !ext && !proto.IsEmpty() )// && proto->IsObject() )
                 {
                     v8::Local<v8::Object> const & obj( v8::Object::Cast( *proto ) );
                     tid = (obj->InternalFieldCount() != InternalFieldCount)

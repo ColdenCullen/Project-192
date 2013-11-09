@@ -1,41 +1,27 @@
 #include "Mesh.h"
+#include "GraphicsController.h"
+#include "File.h"
 #include "Vector2.h"
 #include "Vector3.h"
-#include "File.h"
-
+#include "AdapterController.h"
 #include <GL/GLIncludes.h>
+#include "OutputController.h"
 
 #include <sstream>
 #include <vector>
 
-//#define USE_GL_SHADERS
-#define USE_CG_SHADERS
-//#define USE_DX_SHADERS
-
-#if defined( USE_GL_SHADERS )
-
 #define POSITION_ATTRIBUTE 0
 #define UV_ATTRIBUTE 1
 #define NORMAL_ATTRIBUTE 2
-
-#elif defined( USE_CG_SHADERS )
-
-#define POSITION_ATTRIBUTE 0
-#define UV_ATTRIBUTE 1
-// Will be 2
-#define NORMAL_ATTRIBUTE 3
-
-#elif defined( USE_DX_SHADERS )
-
-#define POSITION_ATTRIBUTE 0
-#define UV_ATTRIBUTE 1
-#define NORMAL_ATTRIBUTE 2
-
-#endif
 
 using namespace std;
 using namespace Graphos::Math;
 using namespace Graphos::Core;
+using namespace Graphos::Graphics;
+using namespace DirectX;
+using namespace OpenGL;
+
+#include <DirectX/DirectXIncludes.h>
 
 void Mesh::LoadFromFile( string filePath )
 {
@@ -43,7 +29,7 @@ void Mesh::LoadFromFile( string filePath )
 	vector<Vector2> uvs;
 	vector<Vector3> normals;
 
-	vector<GLfloat>	outputData;
+	vector<float>	outputData;
 
 	istringstream file( File::ReadFile( filePath ) );
 	string line;
@@ -101,60 +87,109 @@ void Mesh::LoadFromFile( string filePath )
 		}
 	}
 
-	numElements = outputData.size() / 8;
+	numVertices = outputData.size() / 8;  // 8 is num floats per vertex
+	numIndices = numVertices;
 
-	unsigned int* indices = new unsigned int[ numElements ];
+	unsigned int* indices = new unsigned int[ numIndices ];
 
-	for( unsigned int ii = 0; ii < numElements; ++ii )
+	for( unsigned int ii = 0; ii < numIndices; ++ii )
 		indices[ ii ] = ii;
 
-	// make and bind the VAO
-	glGenVertexArrays( 1, &vertexArrayObject );
-	glBindVertexArray( vertexArrayObject );
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	{
+		// make and bind the VAO
+		glGenVertexArrays( 1, &vertexArrayObject );
+		glBindVertexArray( vertexArrayObject );
 
-	// make and bind the VBO
-	glGenBuffers( 1, &vertexBufferObject );
-	glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
+		// make and bind the VBO
+		glGenBuffers( 1, &vertexBuffer.gl );
+		glBindBuffer( GL_ARRAY_BUFFER, vertexBuffer.gl );
 
-	// Buffer the data
-	glBufferData( GL_ARRAY_BUFFER, outputData.size() * sizeof(GLfloat), &outputData[ 0 ], GL_STATIC_DRAW );
+		// Buffer the data
+		glBufferData( GL_ARRAY_BUFFER, outputData.size() * sizeof(GLfloat), &outputData[ 0 ], GL_STATIC_DRAW );
 
-	// Connect the position to the inputPosition attribute of the vertex shader
-	glEnableVertexAttribArray( 0 );
-	glVertexAttribPointer( POSITION_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), NULL );
-	// Connect uv to the textureCoordinate attribute of the vertex shader
-	glEnableVertexAttribArray( 1 );
-	glVertexAttribPointer( UV_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (unsigned char*)NULL + ( sizeof(GLfloat) * 3 ) );
-	// Connect color to the shaderPosition attribute of the vertex shader
-	glEnableVertexAttribArray( 2 );
-	glVertexAttribPointer( NORMAL_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (unsigned char*)NULL + ( sizeof(GLfloat) * 5 ) );
+		// Connect the position to the inputPosition attribute of the vertex shader
+		glEnableVertexAttribArray( POSITION_ATTRIBUTE );
+		glVertexAttribPointer( POSITION_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), NULL );
+		// Connect uv to the textureCoordinate attribute of the vertex shader
+		glEnableVertexAttribArray( UV_ATTRIBUTE );
+		glVertexAttribPointer( UV_ATTRIBUTE, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (unsigned char*)NULL + ( sizeof(GLfloat) * 3 ) );
+		// Connect color to the shaderPosition attribute of the vertex shader
+		glEnableVertexAttribArray( NORMAL_ATTRIBUTE );
+		glVertexAttribPointer( NORMAL_ATTRIBUTE, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (unsigned char*)NULL + ( sizeof(GLfloat) * 5 ) );
 
-	// Generate index buffer
-	glGenBuffers( 1, &indexBuffer );
-	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
+		// Generate index buffer
+		glGenBuffers( 1, &indexBuffer.gl );
+		glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer.gl );
 
-	// Buffer index data
-	glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * numElements, &indices[ 0 ], GL_STATIC_DRAW );
+		// Buffer index data
+		glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * numVertices, &indices[ 0 ], GL_STATIC_DRAW );
 
-	// unbind the VBO and VAO
-	glBindBuffer( GL_ARRAY_BUFFER, NULL );
-	glBindVertexArray( NULL );
+		// unbind the VBO and VAO
+		glBindBuffer( GL_ARRAY_BUFFER, NULL );
+		glBindVertexArray( NULL );
+	}
+#ifdef _WIN32
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
+	{
 
+		HRESULT result = S_OK;
+
+		// Create the vertex buffer
+		D3D11_BUFFER_DESC vbDesc;
+		vbDesc.ByteWidth		= sizeof(float) * outputData.size();
+		vbDesc.Usage			= D3D11_USAGE_IMMUTABLE;
+		vbDesc.BindFlags		= D3D11_BIND_VERTEX_BUFFER;
+		vbDesc.CPUAccessFlags   = 0;
+		vbDesc.MiscFlags		= 0;
+
+		D3D11_SUBRESOURCE_DATA initialVertexData;
+		ZeroMemory( &initialVertexData, sizeof( D3D11_SUBRESOURCE_DATA ) );
+		initialVertexData.pSysMem = &outputData[0];
+		result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &vbDesc, &initialVertexData, &vertexBuffer.dx );
+		if( FAILED(result) )
+			OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to init dx vertex buffer" );
+
+		// Create the index buffer
+		D3D11_BUFFER_DESC ibDesc;
+		ibDesc.Usage					= D3D11_USAGE_IMMUTABLE;
+		ibDesc.ByteWidth				= sizeof(unsigned int) * numIndices;
+		ibDesc.BindFlags				= D3D11_BIND_INDEX_BUFFER;
+		ibDesc.CPUAccessFlags			= 0;
+		ibDesc.MiscFlags				= 0;
+		ibDesc.StructureByteStride		= 0;
+
+		D3D11_SUBRESOURCE_DATA initialIndexData;
+		ZeroMemory( &initialIndexData, sizeof( D3D11_SUBRESOURCE_DATA ) );
+		initialIndexData.pSysMem = indices;
+		result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &ibDesc, &initialIndexData, &indexBuffer.dx );
+		if( FAILED(result) )
+			OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to init dx index buffer" );
+
+	}
+#endif//_WIN32
 	delete[] indices;
 }
 
-void Mesh::Draw( void )
+// Meshes can be shared between objects, objects may have different shaders
+void Mesh::Draw( IShader* shader )
 {
-	// Bind all of the buffers
-	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
-	glBindVertexArray( vertexArrayObject );
-
-	// Draw
-	glDrawElements( GL_TRIANGLES, numElements, GL_UNSIGNED_INT, 0 );
+	shader->Draw( *this );
 }
 
 void Mesh::Shutdown( void )
 {
-	glDeleteBuffers( 1, &vertexBufferObject );
-	glDeleteBuffers( 1, &vertexArrayObject );
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
+	{
+		glDeleteBuffers( 1, &vertexBuffer.gl );
+		glDeleteBuffers( 1, &vertexArrayObject );
+	}
+#ifdef _WIN32
+	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
+	{
+		ReleaseCOMobjMacro( vertexBuffer.dx );
+		ReleaseCOMobjMacro( indexBuffer.dx );
+	}
+#endif//_WIN32
+	
 }

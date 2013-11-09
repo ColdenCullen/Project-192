@@ -3,10 +3,15 @@
 #include "WindowController.h"
 #include "ShaderController.h"
 #include "Input.h"
+#include "Config.h"
+#include "IShader.h"
+#include "GraphicsController.h"
 
 #include <string>
 #include <Awesomium/WebCore.h>
 #include <Awesomium/STLHelpers.h>
+
+#define NO_NAMESPACE
 #include <GL/GLIncludes.h>
 
 using namespace Awesomium;
@@ -20,78 +25,51 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 {
 	char abspath[ 256 ];
 #ifdef WIN32
-	_fullpath( abspath, ISingleton<Config>::Get().GetData<std::string>( "ui.filePath" ).c_str(), MAX_PATH );
+	_fullpath( abspath, Config::GetData<std::string>( "ui.filePath" ).c_str(), MAX_PATH );
 #else
 	realpath( url.c_str(), abspath );
 #endif
 
 	// Get dimensions
-	width = ISingleton<Config>::Get().GetData<unsigned int>( "display.width" );
-	height = ISingleton<Config>::Get().GetData<unsigned int>( "display.height" );
+	width  = Config::GetData<unsigned int>( "display.width" ) * Config::GetData<unsigned int>( "ui.scale.x" );
+	height = Config::GetData<unsigned int>( "display.height" ) * Config::GetData<unsigned int>( "ui.scale.y" );
 
-	// Generate mesh
-	numElements = 6;
-	unsigned int indices[] = { 0, 1, 2, 0, 2, 3 };
+	// Initialize UI
+	uiObj = new GameObject(ShaderController::GetShader( "texture" ));
+	uiMesh = new Mesh("Resources/Assets/Meshes/UI.obj");
+	uiObj->AddComponent(uiMesh);
 
-	GLfloat floatWidth = static_cast<GLfloat>( width );
-	GLfloat floatHeight = static_cast<GLfloat>( height );
-
-	GLfloat vertices[] = {
-		-floatWidth / 2.0f,	floatHeight / 2.0f,	DEPTH, 0.0f, 1.0f,
-		-floatWidth / 2.0f,	-floatHeight / 2.0f,DEPTH, 0.0f, 0.0f,
-		floatWidth / 2.0f,	-floatHeight / 2.0f,DEPTH, 1.0f, 0.0f,
-		floatWidth / 2.0f,	floatHeight / 2.0f,	DEPTH, 1.0f, 1.0f
-	};
-
-	// Setup GL buffers
-	glGenVertexArrays( 1, &vertexArrayObject );
-
-	glBindVertexArray( vertexArrayObject );
-
-	glGenBuffers( 1, &vertexBufferObject );
-
-	glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	glBufferData( GL_ARRAY_BUFFER, 6/*4*/ * 5 * sizeof( GLfloat ), vertices, GL_STATIC_DRAW );
-
-	glEnableVertexAttribArray( 0 );// Position
-	glEnableVertexAttribArray( 1 );// UV
-
-	glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	glVertexAttribPointer( 0, 3, GL_FLOAT, false, 5 * sizeof( GLfloat ), 0 );
-
-	glBindBuffer( GL_ARRAY_BUFFER, vertexBufferObject );
-	glVertexAttribPointer( 1, 2, GL_FLOAT, false, 5 * sizeof( GLfloat ), (unsigned char*)NULL + ( 3 * sizeof( GLfloat ) ) );
-
-	glGenBuffers( 1, &indexBuffer );
-
-	glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
-	glBufferData( GL_ELEMENT_ARRAY_BUFFER, numElements * sizeof( unsigned int ), indices, GL_STATIC_DRAW );
-
+	// Initialize Awesomium view
 	view = new AwesomiumView( abspath, width, height );
 	view->webView->set_js_method_handler( new JavaScriptHandler( this ) );
 
 	while( view->webView->IsLoading() )
 		WebCore::instance()->Update();
 
+	// Set up JS hooks
 	graphosGame = view->webView->CreateGlobalJavascriptObject( WSLit( "GraphosGame" ) ).ToObject();
 	graphosGame.SetCustomMethod( WSLit( "ChangeState" ), false );
 	graphosGame.SetCustomMethod( WSLit( "SetConfig" ), false );
 	graphosGame.SetCustomMethod( WSLit( "Reset" ), false );
 
-	width	= static_cast<float>( width )  * ISingleton<Config>::Get().GetData<float>( "ui.scale.x" );
-	height	= static_cast<float>( height ) * ISingleton<Config>::Get().GetData<float>( "ui.scale.y" );
-
-	// Scale to fix Awesomium issue
-	transform.Scale(
-		ISingleton<Config>::Get().GetData<float>( "ui.scale.x" ),
-		-ISingleton<Config>::Get().GetData<float>( "ui.scale.y" ),
+	// Scale the UI obj
+	uiObj->transform->Scale(
+		static_cast<float>(width) / 2.0f,
+		static_cast<float>(height) / 2.0f,
 		1.0f
 	);
+
+	// this pushes the top down on Windows, remove this code once problem fixed
+	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL &&
+		!Config::GetData<bool>( "display.fullscreen" ) )
+		uiObj->transform->Translate( 0.0f, -38.0f, 0.0f );
 
 	// Focus for input
 	view->webView->Focus();
 }
 
+/// Destructor
+/// DO NOT CALL
 UserInterface::~UserInterface()
 {
 	if( view )
@@ -101,21 +79,17 @@ UserInterface::~UserInterface()
 	}
 }
 
+/// Get input from the mouse
 bool UserInterface::Update( void )
 {
-	Vector2 cursor = ISingleton<Input>::Get().GetMousePos();
+	Vector2 cursor = Input::GetMousePos();
+	view->webView->InjectMouseMove(cursor.x, cursor.y);
 
-	// Transform for scale
-	view->webView->InjectMouseMove(
-		( width / 2 ) + ( ( ( width / 2 ) - cursor.x ) * -transform.Scale().x ),
-		( height / 2 ) + ( ( ( height / 2 ) - cursor.y ) * transform.Scale().y )
-	);
-
-	if( ISingleton<Input>::Get().IsKeyDown( VK_LBUTTON, true ) )
+	if( Input::IsKeyDown( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseDown( kMouseButton_Left );
 	}
-	else if( ISingleton<Input>::Get().IsKeyUp( VK_LBUTTON, true ) )
+	else if( Input::IsKeyUp( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseUp( kMouseButton_Left );
 	}
@@ -127,20 +101,13 @@ bool UserInterface::Update( void )
 
 void UserInterface::Draw( void )
 {
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).Use();
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "modelMatrix", transform.WorldMatrix() );
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "shaderTexture", 0 );
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().OrthogonalMatrix() );
+	ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->OrthogonalMatrix() );
 
-	view->Draw();
+	// Draw Awesomium
+	view->Draw( ShaderController::GetShader( "texture" ) );
 
-	// Bind and draw buffer
-	//glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, indexBuffer );
-	glBindVertexArray( vertexArrayObject );
-
-	glDrawElements( GL_TRIANGLES, numElements, GL_UNSIGNED_INT, NULL );
-
-	ISingleton<ShaderController>::Get().GetShader( "texture" ).SetUniform( "projectionMatrix", WindowController::Get().PerspectiveMatrix() );
+	// Draw mesh
+	uiObj->Draw();	
 }
 
 void UserInterface::KeyPress( unsigned int key )
@@ -188,13 +155,13 @@ void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, unsigned i
 		else if( methodName == WSLit( "SetConfig" ) && args.size() == 2 )
 		{
 			if( args[ 1 ].IsBoolean() )
-				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToBoolean() );
+				Config::SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToBoolean() );
 			else if( args[ 1 ].IsInteger() )
-				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToInteger() );
+				Config::SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToInteger() );
 			else if( args[ 1 ].IsDouble() )
-				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), static_cast<float>( args[ 1 ].ToDouble() ) );
+				Config::SetData( ToString( args[ 0 ].ToString() ), static_cast<float>( args[ 1 ].ToDouble() ) );
 			else if( args[ 1 ].IsString() )
-				ISingleton<Config>::Get().SetData( ToString( args[ 0 ].ToString() ), ToString( args[ 1 ].ToString() ) );
+				Config::SetData( ToString( args[ 0 ].ToString() ), ToString( args[ 1 ].ToString() ) );
 		}
 		else if( methodName == WSLit( "Reset" ) && args.size() == 0 )
 		{

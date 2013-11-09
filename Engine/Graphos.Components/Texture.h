@@ -1,8 +1,15 @@
 #ifndef __TEXTURE
 #define __TEXTURE
 
-#include <string>
 #include "IComponent.h"
+#include <string>
+
+
+namespace DirectX
+{
+	struct ID3D11ShaderResourceView;
+	struct ID3D11Resource;
+}
 
 namespace Graphos
 {
@@ -10,20 +17,28 @@ namespace Graphos
 	{
 		class Texture : public IComponent
 		{
+		protected:
+			union TextureID
+			{
+				unsigned int gl;
+				DirectX::ID3D11ShaderResourceView* dx;
+			} textureId;
+
 		public:
 								Texture( void ) { }
 								Texture( std::string filePath ) { LoadFromFile( filePath ); }
 			
 			void				LoadFromFile( std::string filePath );
 
-			void				Update( void ) {  }
-			void				Draw( void );
-			void				Shutdown( void );
+			void				Draw( Graphics::IShader* shader ) override;
+			void				Shutdown( void ) override;
 
-		private:
-			unsigned int		textureID;
+			TextureID&			GetTextureId( void ) { return textureId; }
+
+		protected:
 			unsigned int		width;
 			unsigned int		height;
+
 		};
 	}
 }

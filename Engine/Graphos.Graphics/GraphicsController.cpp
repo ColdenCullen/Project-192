@@ -2,39 +2,54 @@
 #include "GraphicsController.h"
 #include "ShaderController.h"
 #include "Config.h"
+#include "AdapterController.h"
+
+#include "WindowController.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
 
 void GraphicsController::Initialize( void )
 {
-	WindowController::Get().Initialize();
+	UpdateGraphicsAdapter();
 
-	ISingleton<ShaderController>::Get().Initialize();
+	AdapterController::Get()->Initialize();
+
+	ShaderController::Initialize();
 }
 
-void GraphicsController::Resize( bool fullScreen, unsigned int newWidth, unsigned int newHeight )
+void GraphicsController::Resize( void )
 {
-	WindowController::Get().Resize( fullScreen, newWidth, newHeight );
-	//OpenGLController::Get().Resize( newWidth, newHeight );
+	WindowController::Get()->Resize();
+	AdapterController::Get()->Resize();
 }
 
 void GraphicsController::Reload( void )
 {
-	WindowController::Get().Reload();
+	UpdateGraphicsAdapter();
+
+	WindowController::Get()->Resize();
+	AdapterController::Get()->Reload();
 }
 
-void GraphicsController::CallGLFunction( GLFunctions function )
+void GraphicsController::UpdateGraphicsAdapter( void )
 {
-	switch( function )
-	{
-	case BEGIN:
-		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-		break;
-	case END:
-#ifdef _WIN32
-		SwapBuffers( WindowController::Get().GetDeviceContext() );
-#endif
-		break;
-	}
+	if( Config::GetData<std::string>( "graphics.Adapter" ) == "OpenGL" )
+		activeAdapter = GraphicsAdapter::OpenGL;
+	else if( Config::GetData<std::string>( "graphics.Adapter" ) == "DirectX" )
+		activeAdapter = GraphicsAdapter::DirectX;
+	else
+		throw std::exception( "Invalid Graphics.Adapter specified." );
 }
+
+void GraphicsController::MessageLoop( void )
+{
+	WindowController::Get()->MessageLoop();
+}
+
+void GraphicsController::Shutdown( void )
+{
+	AdapterController::Get()->Shutdown();
+}
+
+GraphicsAdapter GraphicsController::activeAdapter;

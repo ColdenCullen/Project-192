@@ -1,16 +1,15 @@
+// Class Creators
+#include <cvv8\ClassCreator.hpp>
+
+#include <iostream>
+#include <v8/v8-debug.h>
+
+#include "OutputController.h"
 #include "ScriptController.h"
 #include "Input.h"
 #include "Config.h"
 #include "File.h"
-#include "ClassMapper.h"
-
-// Class Creators
-//#include "CC-Transform.h"
-#include <cvv8\ClassCreator.hpp>
-
-#include <iostream>
-
-#include <cvv8\v8-convert.hpp>
+//#include "ClassMapper.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -22,7 +21,7 @@ using namespace cvv8;
 #pragma region Handlers
 Handle<Value> IsKeyDown( const Arguments& args )
 {
-	return Boolean::New( ISingleton<Input>::Get().IsKeyDown( args[ 0 ]->Int32Value() ) );
+	return Boolean::New( Input::IsKeyDown( args[ 0 ]->Int32Value() ) );
 }
 
 Handle<Value> PrintHandler( const Arguments& args )
@@ -54,11 +53,16 @@ void ScriptController::Initialize( void )
 	// Scope for created variables
 	Context::Scope contextScope( context );
 
+#ifdef _DEBUG
+	v8::Debug::EnableAgent( "Graphos", 5858, false );
+#endif
+
+	string path = Config::GetData<string>( "Scripts.Path" );
+
 	// Compile
 	auto compiled = v8::Script::Compile(
-		String::New( 
-				File::ReadFile( ISingleton<Config>::Get().GetData<string>( "Scripts.Path" ) ).c_str()
-			)
+		String::New( File::ReadFile( path ).c_str() ),
+		String::New( path.c_str() )
 		);
 
 	if( compiled.IsEmpty() )
@@ -83,35 +87,5 @@ void ScriptController::Shutdown( void )
 		//context->Dispose();
 
 		//isInitialized = false;
-	}
-}
-
-Graphos::Core::Script* ScriptController::CreateObjectInstance( string className, unsigned int ownerID, GameObject* owner /*= nullptr */ )
-{
-	if( !isInitialized )
-		Initialize();
-
-	// Create a scope
-	Context::Scope contextScope( context );
-
-	// Get an instance of the class
-	Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
-
-	// Return object
-	if( !ctor.IsEmpty() )
-	{
-		// Get object
-		Local<Object> instance = ctor->CallAsConstructor( 0, nullptr )->ToObject();
-
-		// Set id
-		instance->Set( String::New( "id" ), Int32::New( ownerID ) );
-
-		instance->Set( String::New( "Transform" ), CastToJS( owner->transform ) );
-		// Return new script
-		return new Graphos::Core::Script( instance, owner );
-	}
-	else
-	{
-		throw exception( "Invalid Class Name." );
 	}
 }

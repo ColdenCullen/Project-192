@@ -1,0 +1,31 @@
+{
+  "name": "Project-192",
+  "author": "Studio 192",
+  "contributors": [
+    {
+      "name": "Colden Cullen",
+      "email": "ColdenCullen@gmail.com"
+    }
+  ],
+  "description": "A joint DSA2 - GGP game.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ColdenCullen/Project-192.git"
+  },
+  "dependencies": {
+    "grunt-cli": "0.1.x",
+    "grunt": "0.4.x",
+    "typescript": "~0.9.1-1",
+    "grunt-typescript": "0.2.x",
+    "grunt-contrib-copy": "0.4.x",
+    "grunt-contrib-clean": "0.5.x",
+    "grunt-contrib-watch": "0.5.x",
+	"node-inspector": "0.5.x"
+  },
+  "bin": {
+    "grunt": "./node_modules/.bin/grunt"
+  }
+}

@@ -6,6 +6,7 @@
 
 using namespace std;
 using namespace Graphos::Core;
+using namespace Graphos::Math;
 
 void Config::Initialize( void )
 {
@@ -42,8 +43,10 @@ Json::Value& Config::GetValueAtPath( std::string path )
 	return *currentValue;
 }
 
+Json::Value Graphos::Core::Config::config;
+
 #pragma region GetData
-#if defined( __APPLE__ )
+#if 1//defined( __APPLE__ )
 template<>
 int Config::GetData<int>( string path )
 {
@@ -136,5 +139,6 @@ Vector3	Config::GetData<Vector3>( string path )
 		static_cast<float>( root.get( "z", root ).asDouble() )
 		);
 }
+
 #endif
 #pragma endregion

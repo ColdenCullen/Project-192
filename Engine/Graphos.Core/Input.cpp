@@ -4,6 +4,7 @@
 
 #define BIT_AT_KEY_STATE( pos ) ( 1 << ( pos % SIZE ) )
 
+using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
@@ -52,6 +53,16 @@ void Input::Update( void )
 	//stage.Reset();
 }
 
+void Input::AddKeyEvent( unsigned int key, KeyEvent::Delegate func )
+{
+	auto keyEvent = keyEvents.find( key );
+
+	if( keyEvent == end( keyEvents ) )
+		keyEvent->second = KeyEvent();
+
+	keyEvent->second.AddFunction( func );
+}
+
 // Called when keys are down
 void Input::KeyDown( unsigned int input )
 {
@@ -80,7 +91,7 @@ bool Input::IsKeyUp( unsigned int input, const bool checkPrevious )
 	return !keyState[ input ] && ( !checkPrevious || prevKeyState[ input ] );
 }
 
-Vector2 Input::GetMousePos( /*Transform& camera, float zPlane*/ ) const
+Vector2 Input::GetMousePos( /*Transform& camera, float zPlane*/ )
 {
 #if defined( _WIN32 )
 	/*
@@ -108,10 +119,10 @@ Vector2 Input::GetMousePos( /*Transform& camera, float zPlane*/ ) const
 
 	POINT i;
 	GetCursorPos( &i );
-	ScreenToClient( WindowController::Get().GetHWnd(), &i );
+	ScreenToClient( Win32Controller::Get()->GetHWnd(), &i );
 
 	// Adjust for border
-	if( !ISingleton<Graphos::Core::Config>::Get().GetData<bool>( "display.fullscreen" ) )
+	if( !Graphos::Core::Config::GetData<bool>( "display.fullscreen" ) )
 		i.x -= GetSystemMetrics( SM_CYBORDER );
 
 	//i.y -= GetSystemMetrics( /*SM_CYCAPTION*/SM_CYBORDER );
@@ -123,3 +134,11 @@ Vector2 Input::GetMousePos( /*Transform& camera, float zPlane*/ ) const
 	
 #endif
 }
+
+bool Input::lmbDown;
+bool Input::rmbDown;
+InputState Input::stage;
+InputState Input::prevKeyState;
+InputState Input::keyState;
+unordered_map<unsigned int, Input::KeyEvent> Input::keyEvents;
+UserInterface* Input::ui;

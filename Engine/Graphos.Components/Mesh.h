@@ -1,9 +1,17 @@
 #ifndef _MODEL_H_
 #define _MODEL_H_
 
-#include <string>
-
+//#define NO_NAMESPACE
+//#include <DirectX/DirectXIncludes.h>
+//#undef NO_NAMESPACE
+namespace DirectX
+{
+		struct ID3D11Buffer;
+}
 #include "IComponent.h"
+#include "IShader.h"
+
+//#include <string> in IShader.h
 
 namespace Graphos
 {
@@ -11,21 +19,44 @@ namespace Graphos
 	{
 		class Mesh : public IComponent
 		{
+		private:
+			// shared
+			unsigned int		numVertices;
+			unsigned int		numIndices;
+
+			union VertexBuffer
+			{
+				unsigned int			gl;
+				DirectX::ID3D11Buffer*  dx;
+			} vertexBuffer;
+
+			union IndexBuffer
+			{
+				unsigned int			gl;
+				DirectX::ID3D11Buffer*  dx;
+			} indexBuffer;
+
+			// GL
+			unsigned int		vertexArrayObject;
+
 		public:
+			static unsigned int GetVertexSize( void ) { return sizeof(float) * 8; }
 								Mesh( void ) { }
 								Mesh( std::string filePath ) { LoadFromFile( filePath ); }
 
 			void				LoadFromFile( std::string filePath );
 
-			void				Update( void ) { } 
-			void				Draw( void );
-			void				Shutdown( void );
+			void				Update( void ) override { }
+			void				Draw( Graphics::IShader* shader ) override;
+			void				Shutdown( void ) override;
 
-		private:
-			unsigned int		vertexBufferObject;
-			unsigned int		vertexArrayObject;
-			unsigned int		indexBuffer;
-			unsigned int		numElements;
+			VertexBuffer&		GetVertexBuffer( void ) { return vertexBuffer; }
+			IndexBuffer&		GetIndexBuffer( void )	{ return indexBuffer; }
+
+			unsigned int 		GetNumVertices( void ) const { return numVertices; }
+			unsigned int		GetNumIndices( void ) const { return numIndices; }
+			unsigned int		GetGlVao( void ) const { return vertexArrayObject; }
+			
 		};
 	}
 }

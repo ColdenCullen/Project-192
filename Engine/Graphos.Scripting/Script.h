@@ -1,8 +1,8 @@
 #ifndef _SCRIPT_H_
 #define _SCRIPT_H_
 
-#include <string>
 #include <v8\v8.h>
+#include <string>
 
 #include "IComponent.h"
 
@@ -13,15 +13,16 @@ namespace Graphos
 		class Script : public IComponent
 		{
 		public:
-								Script( v8::Local<v8::Object> instance, GameObject* owner = nullptr )
-									: instance( instance ), IComponent( owner ), updateFunction( v8::Handle<v8::Function>::Cast( instance->Get( v8::String::New( "Update" ) ) ) ) { }
+								Script( v8::Handle<v8::Object> instance, GameObject* owner = nullptr );
 
 			void				Update( void );
 			void				Draw( void ) { }
 			void				Shutdown( void ) { }
 
+			void				CallFunction( std::string name );
+
 		private:
-			v8::Local<v8::Object>
+			v8::Handle<v8::Object>
 								instance;
 			v8::Handle<v8::Function>
 								updateFunction;

@@ -2,7 +2,7 @@
 #define __GAME_OBJECT_COLLECTION
 
 #include "GameObject.h"
-#include "GlShader.h"
+#include "IShader.h"
 
 #include <string>
 #include <unordered_map>
@@ -14,14 +14,11 @@ namespace Graphos
 		class GameObjectCollection
 		{
 		public:
-			// Type for use with object lists
-			typedef std::unordered_map<unsigned int, GameObject> GOMap;
-
 			// Load object from resources folder
 			void				LoadObjects( std::string assetPath );
 
 			// Add object
-			unsigned int		CreateObject( std::string name, Graphics::Shader* shader );
+			unsigned int		CreateObject( std::string name, Graphics::IShader* shader );
 
 			// Access objects
 			GameObject*			GetObjectById( unsigned int id );
@@ -36,7 +33,8 @@ namespace Graphos
 			void				CallFunction( void (GameObject::*func)( void ) );
 
 		private:
-			GOMap				objectList;
+			std::unordered_map<unsigned int, GameObject*>
+								objectList;
 			std::unordered_map<std::string, unsigned int>
 								nameMap;
 

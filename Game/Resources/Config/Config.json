@@ -2,7 +2,7 @@
 {
 	"Game" :
 	{
-		"DefaultState" : "Game",
+		"DefaultState" : "FIELD UNUSED",
 		"Verbosity" : "High"
 	},
 	"display" : 
@@ -13,7 +13,8 @@
 	},
 	"graphics" : 
 	{
-		"backfaceculling" : false,
+		"Adapter": "DirectX",
+		"backfaceculling" : true,
 		"vsync" : false
 	},
 	"physics" : 
@@ -21,21 +22,21 @@
 		"gravity" : 
 		{
 			"x" : 0.0,
-			"y" : 0.0,
+			"y" : -10.0,
 			"z" : 0.0
 		}
 	},
 	"Scripts" : 
 	{
-		"Path" : "Resources/Scripts/__output.js"
+		"Path" : "Resources/Scripts/output.js"
 	},
 	"ui" : 
 	{
 		"filePath" : "Resources/UIs/index.html",
 		"scale" : 
 		{
-			"x" : 1.0,
-			"y" : 1.0
+			"x" : 1,
+			"y" : 1
 		}
 	}
 }

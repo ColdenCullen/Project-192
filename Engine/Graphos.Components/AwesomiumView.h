@@ -1,36 +1,35 @@
 #ifndef __AWESOMIUM_VIEW
 #define __AWESOMIUM_VIEW
 
-#include <Awesomium\WebView.h>
-#include <Awesomium\BitmapSurface.h>
+#include <Awesomium/WebView.h>
+#include <Awesomium/BitmapSurface.h>
 
 #include <string>
 
 #include "IComponent.h"
+#include "Texture.h"
 
-namespace Awesomium
+namespace DirectX
 {
-	//class WebView;
-	//class BitmapSurface;
+	struct ID3D11Texture2D;
 }
 
 namespace Graphos
 {
 	namespace Core
 	{
-		class AwesomiumView : public IComponent
+		class AwesomiumView : public Texture
 		{
 		public:
-								AwesomiumView( void ) : webView( nullptr ), surface( nullptr ), buffer( nullptr ) { }
+								AwesomiumView( void ) : webView( nullptr ), surface( nullptr ) { }
 								AwesomiumView( std::string url, unsigned int width, unsigned int height ) { Initialize( url, width, height ); }
 								~AwesomiumView( void ) { }
 
 			bool				Initialize( std::string url, unsigned int width, unsigned int height );
-			void				Update( void );
-			void				Draw( void );
-			void				Shutdown( void );
+			void				Update( void ) override;
+			void				Draw( Graphics::IShader* shader ) override;
+			void				Shutdown( void ) override;
 
-			unsigned int		textureID;
 
 			friend class		UserInterface;
 
@@ -38,8 +37,15 @@ namespace Graphos
 			Awesomium::WebView*	webView;
 			Awesomium::BitmapSurface*
 								surface;
+			union 
+			{
+				unsigned char*	gl;
+				DirectX::ID3D11Texture2D*		
+								dx;
+			} buffer;
 
-			unsigned char*		buffer;
+		private:
+			void				BufferAwesomiumSurface();
 		};
 	}
 }

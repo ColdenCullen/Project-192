@@ -1,8 +1,9 @@
 #include "AssetController.h"
+
+#include "AwesomiumView.h"
 #include "Mesh.h"
 #include "Texture.h"
 #include "File.h"
-#include "AwesomiumView.h"
 #include "Script.h"
 
 #define CONTENT_PATH "Resources/Assets/"
@@ -33,16 +34,18 @@ void AssetController::Initialize( void )
 
 void AssetController::Shutdown( void )
 {
-	/*
+	
 	for( auto ingredient = begin( ingredientShelf ); ingredient != end( ingredientShelf ); ++ingredient )
 	{
-		if( static_cast<AwesomiumView*>( ingredient->second ) || static_cast<Script*>( ingredient->second ) )
+		//if( static_cast<AwesomiumView*>( ingredient->second ) || static_cast<Script*>( ingredient->second ) )
 		{
 			ingredient->second->Shutdown();
 			delete ingredient->second;
 		}
 	}
-	*/
+	
 
 	ingredientShelf.clear();
 }
+
+unordered_map<string, IComponent*> AssetController::ingredientShelf;

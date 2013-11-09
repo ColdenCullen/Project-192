@@ -6,8 +6,19 @@
 using namespace Graphos::Math;
 
 Transform::Transform( void ) :
-	parent( nullptr ), matrix( Matrix4::Identity ), scale( 1.0f, 1.0f, 1.0f ),
-	right( Vector3::Right ), up( Vector3::Up ), forward( Vector3::Forward ) { }
+	parent( nullptr ), matrix( Matrix4::Identity ), 
+	position( new Vector3( 0.0f, 0.0f, 0.0f ) ), rotation( new Vector3( 0.0f, 0.0f, 0.0f ) ), scale( new Vector3( 1.0f, 1.0f, 1.0f ) ),
+	right( new Vector3( Vector3::Right ) ), up( new Vector3( Vector3::Up ) ), forward( new Vector3( Vector3::Forward ) ) { }
+
+Transform::~Transform( void )
+{
+	delete_s( position );
+	delete_s( rotation );
+	delete_s( scale );
+	delete_s( right );
+	delete_s( up );
+	delete_s( forward );
+}
 
 void Transform::Rotate( const Quaternion& rotation )
 {
@@ -23,7 +34,7 @@ void Transform::Rotate( const float x, const float y, const float z, const float
 	// For future reference
 	//Rotate( Quaternion( x, y, z, angle ) );
 
-	Vector3 oldCoord = position;
+	Vector3 oldCoord = *position;
 
 	Translate( -oldCoord );
 
@@ -32,9 +43,9 @@ void Transform::Rotate( const float x, const float y, const float z, const float
 	if( x != 0.0f ) matrix *= RotateX( x );
 	if( y != 0.0f ) matrix *= RotateY( y );
 
-	rotation.x += x;
-	rotation.y += y;
-	rotation.z += z;
+	rotation->x += x;
+	rotation->y += y;
+	rotation->z += z;
 
 	Translate( oldCoord );
 
@@ -43,7 +54,7 @@ void Transform::Rotate( const float x, const float y, const float z, const float
 
 void Transform::Rotate( const float x, const float y, const float z )
 {
-	Vector3 oldCoord = position;
+	Vector3 oldCoord = *position;
 
 	Translate( -oldCoord );
 
@@ -51,9 +62,9 @@ void Transform::Rotate( const float x, const float y, const float z )
 	if( x != 0.0f ) matrix *= RotateX( x * M_PI / 180 );
 	if( y != 0.0f ) matrix *= RotateY( y * M_PI / 180 );
 	
-	rotation.x += x;
-	rotation.y += y;
-	rotation.z += z;
+	rotation->x += x;
+	rotation->y += y;
+	rotation->z += z;
 
 	Translate( oldCoord );
 
@@ -71,14 +82,30 @@ void Transform::Translate( const float x, const float y, const float z )
 	matrix.matrix[ 3 ][ 1 ] += y;
 	matrix.matrix[ 3 ][ 2 ] += z;
 
-	position.x += x;
-	position.y += y;
-	position.z += z;
+	position->x += x;
+	position->y += y;
+	position->z += z;
 }
 
 void Transform::Translate( const Vector3& displacement )
 {
 	Translate( displacement.x, displacement.y, displacement.z );
+}
+
+void Graphos::Math::Transform::TranslateTo( const float x, const float y, const float z )
+{
+	matrix.matrix[ 3 ][ 0 ] = x;
+	matrix.matrix[ 3 ][ 1 ] = y;
+	matrix.matrix[ 3 ][ 2 ] = z;
+
+	position->x = x;
+	position->y = y;
+	position->z = z;
+}
+
+void Graphos::Math::Transform::TranslateTo( const Vector3& newLocation )
+{
+	TranslateTo( newLocation.x, newLocation.y, newLocation.z );
 }
 
 void Transform::Scale( const float x, const float y, const float z )
@@ -91,9 +118,9 @@ void Transform::Scale( const float x, const float y, const float z )
 
 	matrix *= scaleMatrix;
 
-	scale.x *= x;
-	scale.y *= y;
-	scale.z *= z;
+	scale->x *= x;
+	scale->y *= y;
+	scale->z *= z;
 }
 
 void Transform::Scale( const Vector3& scale )
@@ -137,7 +164,7 @@ Matrix4 Transform::RotateZ( const float angle ) const
 	return newTrans;
 }
 
-const Matrix4 Transform::WorldMatrix() const
+Matrix4& Transform::WorldMatrix()
 {
 	if( parent != nullptr ) return parent->WorldMatrix() * matrix;
 	else					return matrix;
@@ -145,13 +172,15 @@ const Matrix4 Transform::WorldMatrix() const
 
 const Matrix4 Transform::RotationMatrix( void ) const
 {
-	Matrix4 x = RotateZ( rotation.z ) * RotateX( rotation.x ) * RotateY( rotation.y );
-	return RotateZ( rotation.z ) * RotateX( rotation.x ) * RotateY( rotation.y );
+	Matrix4 x = RotateZ( rotation->z ) * RotateX( rotation->x ) * RotateY( rotation->y );
+	return RotateZ( rotation->z ) * RotateX( rotation->x ) * RotateY( rotation->y );
 }
 
 void Transform::UpdateLocalVectors( void )
 {
-	right = RotationMatrix() * right;
-	up = RotationMatrix() * up;
-	forward = RotationMatrix() * forward;
+	*right = RotationMatrix() * *right;
+	*up = RotationMatrix() * *up;
+	*forward = RotationMatrix() * *forward;
 }
+
+
