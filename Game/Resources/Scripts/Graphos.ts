@@ -45,11 +45,6 @@ declare class Transform
     public Scale(x: number, y: number, z: number): void;
 }
 
-declare class Camera
-{
-    public GetViewMatrix(): Matrix4;
-}
-
 declare class WindowController
 {
     public static Get(): WindowController;
@@ -92,32 +87,26 @@ declare class Texture
     public Draw( shader: IShader ): void;
 }
 
-class GraphosObject
+// Class with variables and functions
+class GameObject
 {
     // Transform object
     public Transform: Transform;
-}
 
-// Class with variables and functions
-class GameObject extends GraphosObject
-{
-    constructor()
-    {
-        super();
-        throw Error( "DO NOT EXTEND GAMEOBJECT" );
-    }
-
-    // Abstract method for updating object
+    // DO NOT OVERRIDE
     public Update(): void { }
     public Draw(): void { }
-}
 
-class GraphosBehavior extends GraphosObject
-{
+    // To be overridden
     public OnInitialize(): void { }
     public OnUpdate(): void { }
     public OnDraw(): void { }
     public OnShutdown(): void { }
+}
+
+class Camera extends GameObject
+{
+    public ViewMatrix: Matrix4;
 }
 
 declare class GameObjectCollection

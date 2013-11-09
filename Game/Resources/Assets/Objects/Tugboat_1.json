@@ -12,10 +12,6 @@
 			"Name": "Cube"
 		},
 
-		/*"Script": {
-			"Class": "GameObject1"
-		},*/
-
 		"Physics": {
 			"Mass": 3.0,
 			"Restitution": 0.5,

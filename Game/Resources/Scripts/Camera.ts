@@ -1,6 +1,6 @@
 /// <reference path="Graphos.ts" />
 
-class Camera1 extends GraphosBehavior
+class Camera1 extends Camera
 {
     test: number;
     test1: GameObject;
@@ -11,6 +11,8 @@ class Camera1 extends GraphosBehavior
         {
             log( this.test );
             log( this.test1.Transform.Position.x );
+            log( this.Transform.Position.x );
+            log( "\n" );
         }
 
         //if( Input.IsKeyDown( Keys.W ) )

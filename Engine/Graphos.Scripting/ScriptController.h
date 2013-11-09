@@ -51,6 +51,12 @@ namespace Graphos
 					auto base = Persistent<Object>::New( CastToJS( owner )->ToObject() );
 					auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
 
+					if( inst.IsEmpty() )
+					{
+						OutputController::PrintMessage( OutputType::Error, "THE SHIT DUDE. YOU'RE OBJECT'S (of type " + className + ") EMPTY." );
+						return nullptr;
+					}
+
 					for( unsigned int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
 					{
 						auto name = inst->GetPropertyNames()->Get( ii );
