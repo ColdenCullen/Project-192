@@ -26,7 +26,7 @@ void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 		nameMap[ name ] = currentId++;
 	};
 
-	for( auto object : JsonController::Get( "Assets.Objects" + ( assetPath.size() ? "." + assetPath : "" ) ).node )
+	for( auto object : JsonController::Get( "Objects" + ( assetPath.size() ? "." + assetPath : "" ) ).node )
 	{
 		if( object.isArray() )
 		{
