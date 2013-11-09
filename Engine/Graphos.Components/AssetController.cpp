@@ -4,7 +4,7 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include "File.h"
-#include "Script.h"
+#include "GraphosBehavior.h"
 
 #define CONTENT_PATH "Resources/Assets/"
 

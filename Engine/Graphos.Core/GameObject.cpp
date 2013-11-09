@@ -1,6 +1,5 @@
 #include "GameObject.h"
 #include "AwesomiumView.h"
-#include "Script.h"
 #include "AssetController.h"
 #include "Camera.h"
 #include "Mesh.h"
@@ -100,7 +99,7 @@ GameObject* GameObject::CreateFromJson( JsonObject object )
 		auto script = ScriptController::Get().CreateObjectInstance( component.Get<string>( "Class" ), obj );
 
 		if( component.TryGet( "Variables", component ) )
-			script->Initialize( component );
+			script->SetInitialValues( component );
 
 		obj->AddComponent( script );
 	}
@@ -127,7 +126,7 @@ void GameObject::Shutdown( void )
 {
 	for( auto ingredient = begin( componentList ); ingredient != end( componentList ); ++ingredient )
 	{
-		if( dynamic_cast<AwesomiumView*>( ingredient->second ) || dynamic_cast<Script*>( ingredient->second ) )
+		if( dynamic_cast<AwesomiumView*>( ingredient->second ) || dynamic_cast<GraphosBehavior*>( ingredient->second ) )
 		{
 			ingredient->second->Shutdown();
 			delete ingredient->second;

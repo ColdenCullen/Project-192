@@ -11,14 +11,17 @@ namespace Graphos
 {
 	namespace Core
 	{
-		class Script : public IComponent
+		class GameObjectCollection;
+
+		class GraphosBehavior : public IComponent
 		{
 		public:
-								Script( v8::Persistent<v8::Object> instance, GameObject* owner = nullptr );
-								~Script( void );
+								GraphosBehavior( v8::Persistent<v8::Object> instance, GameObject* owner = nullptr );
+								~GraphosBehavior( void );
 
-			void				Initialize( Utility::JsonObject initVals );
+			void				SetInitialValues( Utility::JsonObject initVals );
 
+			void				Initialize( GameObjectCollection* objects );
 			void				Update( void );
 			void				Draw( void ) { }
 			void				Shutdown( void ) { }
@@ -30,6 +33,8 @@ namespace Graphos
 								instance;
 			v8::Handle<v8::Function>
 								updateFunction;
+
+			Utility::JsonObject	initialValues;
 		};
 	}
 }
