@@ -82,7 +82,7 @@ void ScriptController::Initialize( void )
 	isInitialized = true;
 }
 
-Graphos::Core::Script* ScriptController::CreateObjectInstance( std::string className )
+GraphosBehavior* ScriptController::CreateObjectInstance( std::string className )
 {
 	using namespace v8;
 	using namespace cvv8;
@@ -100,7 +100,7 @@ Graphos::Core::Script* ScriptController::CreateObjectInstance( std::string class
 	if( !ctor.IsEmpty() )
 	{
 		// Create basic gameobject as well as instance of new class
-		return new Graphos::Core::Script(
+		return new Graphos::Core::GraphosBehavior(
 			Persistent<Object>::New(
 				ctor->CallAsConstructor( 0, nullptr )->ToObject()
 				)
@@ -116,4 +116,10 @@ void ScriptController::Shutdown( void )
 
 		//isInitialized = false;
 	}
+}
+
+void ScriptController::InitializeObjects( GameObjectCollection* objects )
+{
+	for( auto obj : behaviors )
+		obj->Initialize( objects );
 }

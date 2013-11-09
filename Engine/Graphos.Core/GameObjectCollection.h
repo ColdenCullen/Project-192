@@ -1,13 +1,12 @@
 #ifndef __GAME_OBJECT_COLLECTION
 #define __GAME_OBJECT_COLLECTION
 
-#include "GameObject.h"
-#include "IShader.h"
-
 #include <string>
 #include <unordered_map>
 
 #include "OutputController.h"
+#include "GameObject.h"
+#include "IShader.h"
 
 namespace Graphos
 {

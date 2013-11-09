@@ -1,23 +1,19 @@
 /// <reference path="Graphos.ts" />
 
-class Camera1 extends GraphosBehavior
+class Camera1 extends Camera
 {
-    //Speed: number;
-    //RotationSpeed: number;
     test: number;
-
-    //constructor()
-    //{
-    //    super();
-
-    //    this.Speed = 0.01;
-    //    this.RotationSpeed = 0.01;
-    //}
+    test1: GameObject;
 
     public OnUpdate(): void
     {
         if( Input.IsKeyDown( Keys.Space ) )
+        {
             log( this.test );
+            log( this.test1.Transform.Position.x );
+            log( this.Transform.Position.x );
+            log( "\n" );
+        }
 
         //if( Input.IsKeyDown( Keys.W ) )
         //{

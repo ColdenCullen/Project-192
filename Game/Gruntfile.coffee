@@ -1,11 +1,12 @@
 ﻿module.exports = ( grunt ) ->
 
-    scriptFiles = './Scripts/**/*.ts'
-    assetFiles = './Assets/**'
+    scriptFiles = './Assets/Scripts/**/*.ts'
+    assetFiles = [ './Assets/Textures/**', './Assets/Meshes/**' ]
     shaderFiles = './Shaders/**'
     configFiles = './Config/**'
+    objectFiles = './Objects/**'
     uiFiles = './UIs/**'
-    autos = [ './Scripts/*.js', './Gruntfile*.js' ]
+    autos = [ './Assets/Scripts/*.js', './Gruntfile*.js' ]
 
     interDest = './.bin/'
 
@@ -27,6 +28,9 @@
             uis:
                 files: uiFiles
                 tasks: [ 'copy:uis', 'copy:output', 'clean:autocompiled' ]
+            objects:
+                files: objectFiles
+                tasks: [ 'copy:objects', 'copy:output', 'clean:autocompiled' ]
             autos:
             	files: autos
             	tasks: [ 'clean:autocompiled' ]
@@ -67,6 +71,12 @@
                     src: uiFiles
                     dest: interDest
                 ]
+            objects:
+                files: [
+                    expand: true
+                    src: objectFiles
+                    dest: interDest
+                ]
             output:
                 files: [
                     expand: true
@@ -82,7 +92,7 @@
                 src: autos
 
         config: grunt.option( 'config' ) || 'debug'
-        outputdir: './../../Output/Final/<%= config %>'
+        outputdir: './../Output/Final/<%= config %>'
 
     grunt.registerTask 'build', [ 'typescript:game', 'copy', 'clean:autocompiled' ]
 

@@ -6,6 +6,7 @@
 
 // Controllers used to add components
 #include "OutputController.h"
+#include "ScriptController.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -25,7 +26,7 @@ void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 		nameMap[ name ] = currentId++;
 	};
 
-	for( auto object : JsonController::Get( "Assets.Objects" + ( assetPath.size() ? "." + assetPath : "" ) ).node )
+	for( auto object : JsonController::Get( "Objects" + ( assetPath.size() ? "." + assetPath : "" ) ).node )
 	{
 		if( object.isArray() )
 		{
@@ -37,6 +38,8 @@ void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 			addObj( object );
 		}
 	}
+
+	ScriptController::Get().InitializeObjects( this );
 }
 
 GameObject* GameObjectCollection::GetObjectById( unsigned int id )

@@ -49,9 +49,9 @@ class MyGame extends GraphosGame
 
     public Draw(): void
     {
-        ShaderController.GetShader( "texture" ).ViewMatrix = this.Camera.GetViewMatrix();
+        ShaderController.GetShader( "texture" ).ViewMatrix = this.Camera.ViewMatrix;
         ShaderController.GetShader( "texture" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
-        ShaderController.GetShader( "light" ).ViewMatrix = this.Camera.GetViewMatrix();
+        ShaderController.GetShader( "light" ).ViewMatrix = this.Camera.ViewMatrix;
         ShaderController.GetShader( "light" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
 
         switch( this.CurrentState )
