@@ -56,6 +56,9 @@ void GraphosGame::Run( void )
 			// Update input
 			Input::Update();
 
+			// Update Scripts
+			ScriptController::Get().Update();
+
 			// Update physics
 			if( CurrentState == GameState::Game )
 				PhysicsController::StepPhysics( Time::GetDeltaTime() );

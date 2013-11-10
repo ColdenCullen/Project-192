@@ -18,7 +18,7 @@ GraphosBehavior::GraphosBehavior( Persistent<Object> instance, GameObject* owner
 	updateFunction = Handle<Function>::Cast( instance->Get( String::New( "Update" ) ) );
 
 	if( !updateFunction->IsFunction() )
-		OutputController::PrintMessage( OutputType::Error, "Invalid Update function." );
+		OutputController::PrintMessage( OutputType::Warning, "Invalid Update function." );
 }
 
 GraphosBehavior::~GraphosBehavior( void )
@@ -56,21 +56,7 @@ void GraphosBehavior::Initialize( GameObjectCollection* objects )
 
 void GraphosBehavior::Update( void )
 {
-	//*
-	//updateFunction->Call( instance, 0, NULL );
 	CallFunction( "OnUpdate" );
-	/*/
-	TryCatch tc;
-	updateFunction->Call( instance, 0, NULL );
-
-	if( tc.HasCaught() )
-	{
-		string exceptionName = string( *String::AsciiValue( tc.Message()->Get()->ToString() ) );
-		string stackTrace = string( *String::AsciiValue( tc.StackTrace()->ToString() ) );
-		string message = string( "An exception has been thrown in JavaScript: " + exceptionName + "\nStack trace:\n" + stackTrace );
-		OutputController::PrintMessage( OutputType::OT_ERROR, message );
-	}
-	//*/
 }
 
 void GraphosBehavior::CallFunction( string name, ... )
@@ -102,17 +88,4 @@ void GraphosBehavior::CallFunction( string name, ... )
 	va_end( args );
 
 	func->Call( instance, count, vals );
-
-	/*
-	TryCatch tc;
-	func->Call( instance, 0, NULL );
-
-	if( tc.HasCaught() )
-	{
-		string exceptionName = string( *String::AsciiValue( tc.Message()->Get()->ToString() ) );
-		string stackTrace = string( *String::AsciiValue( tc.StackTrace()->ToString() ) );
-		string message = string( "An exception has been thrown in JavaScript: " + exceptionName + "\nStack trace:\n" + stackTrace );
-		OutputController::PrintMessage( OutputType::OT_ERROR, message );
-	}
-	//*/
 }
