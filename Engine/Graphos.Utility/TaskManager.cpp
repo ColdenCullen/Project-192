@@ -46,8 +46,8 @@ void TaskManager::AddTask( Task task )
 		{
 			if( workerAvailablibility[ ii ] )
 			{
-				workers[ ii ] = thread( &TaskManager::ExecuteTask, task, ii );
 				workerAvailablibility[ ii ] = false;
+				workers[ ii ] = thread( &TaskManager::ExecuteTask, task, ii );
 				++runningThreads;
 				break;
 			}
@@ -69,6 +69,11 @@ void TaskManager::ExecuteTask( Task task, int index )
 	// Detach this thread and let it finish
 	if( workers[ index ].joinable() )
 		workers[ index ].detach();
+	else
+	{
+		//_CrtDbgBreak();
+		workers[ index ].join();
+	}
 
 	monitorMutex.lock();
 	if( !tasksWaiting.empty() )
@@ -80,8 +85,10 @@ void TaskManager::ExecuteTask( Task task, int index )
 	}
 	else
 	{	// Else, mark thread as done
-		--runningThreads;
 		workerAvailablibility[ index ] = true;
+		--runningThreads;
+
+		workers[ index ] = thread();// = thread();
 	}
 	monitorMutex.unlock();
 }

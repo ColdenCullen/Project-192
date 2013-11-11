@@ -3,6 +3,7 @@
 
 #include <thread>
 #include <deque>
+#include <array>
 #include <mutex>
 
 namespace Graphos
@@ -34,7 +35,7 @@ namespace Graphos
 			static int		runningThreads;
 			static std::deque<Task>	tasksWaiting;
 			static std::deque<Task> invokeQueue;
-			static std::thread*	workers;
+			static std::thread* workers;
 			static bool*	workerAvailablibility;
 			static std::mutex monitorMutex;
 			static std::thread::id main_thread;

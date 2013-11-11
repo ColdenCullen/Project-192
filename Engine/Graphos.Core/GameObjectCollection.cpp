@@ -96,7 +96,5 @@ void GameObjectCollection::ClearObjects( void )
 void GameObjectCollection::CallFunction( void (GameObject::*func)( void ) )
 {
 	for( auto iterator = begin( objectList ); iterator != end( objectList ); ++iterator )
-		TaskManager::AddTask( [&](){ (iterator->second->*func)(); } );
-
-	TaskManager::WaitForCompletion();
+			(iterator->second->*func)();
 }

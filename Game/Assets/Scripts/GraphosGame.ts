@@ -17,8 +17,6 @@ class MyGame extends GraphosGame
 
     public Update(): void
     {
-        log( "UPDATING BITCH" );
-
         switch( this.CurrentState )
         {
             case GameState.Game:
