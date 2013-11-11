@@ -17,7 +17,6 @@ namespace Graphos
 		{
 		public:
 			void				Initialize( void );
-			void				Update( void );
 			void				Shutdown( void );
 
 			static ScriptController& Get( void )

@@ -56,8 +56,7 @@ void ScriptController::Initialize( void )
 	Context::Scope contextScope( context );
 
 #ifdef _DEBUG
-	Debug::SetDebugMessageDispatchHandler( &ScriptController::DebugHandler );
-	Debug::EnableAgent( "Graphos", 5858, false );
+	v8::Debug::EnableAgent( "Graphos", 5858, false );
 #endif
 
 	string path = Config::GetData<string>( "Scripts.Path" );
@@ -81,15 +80,6 @@ void ScriptController::Initialize( void )
 	ClassMapper::BindGraphosTypes( globalObject );
 
 	isInitialized = true;
-}
-
-void ScriptController::Update( void )
-{
-	if( messagesWaiting )
-	{
-		Debug::ProcessDebugMessages();
-		messagesWaiting = false;
-	}
 }
 
 GraphosBehavior* ScriptController::CreateObjectInstance( std::string className )
