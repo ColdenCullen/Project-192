@@ -17,13 +17,15 @@ namespace Graphos
 			static const int	DefaultThreadCount = -1;
 
 			static void		Initialize( void );
-			static void		Initialize( int initThreadCount  );
+			static void		Initialize( int initThreadCount );
 			static void		Shutdown( void );
 
+			static const bool OnMainThread( void )			{ return std::this_thread::get_id() == main_thread; }
 			static const int& GetThreadCount( void )		{ return numThreads; }
 			static const int& GetActiveThreadCount( void )	{ return runningThreads; }
 
 			static void		AddTask( Task task );
+			static void		Invoke( Task task );
 			static void		WaitForCompletion( void );
 			static void		ExecuteTask( Task task, int index );
 
@@ -31,9 +33,11 @@ namespace Graphos
 			static int		numThreads;
 			static int		runningThreads;
 			static std::deque<Task>	tasksWaiting;
+			static std::deque<Task> invokeQueue;
 			static std::thread*	workers;
 			static bool*	workerAvailablibility;
 			static std::mutex monitorMutex;
+			static std::thread::id main_thread;
 
 							TaskManager( void ) { }
 							TaskManager( const TaskManager& );

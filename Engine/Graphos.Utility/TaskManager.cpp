@@ -4,6 +4,15 @@
 using namespace std;
 using namespace Graphos::Utility;
 
+mutex TaskManager::monitorMutex;
+bool* TaskManager::workerAvailablibility;
+thread* TaskManager::workers;
+deque<TaskManager::Task> TaskManager::tasksWaiting;
+deque<TaskManager::Task> TaskManager::invokeQueue;
+int TaskManager::runningThreads;
+int TaskManager::numThreads;
+thread::id TaskManager::main_thread;
+
 void TaskManager::Initialize( void )
 {	// If no thread count is specified, use system number
 	int systemThreadCount = thread::hardware_concurrency();
@@ -16,6 +25,8 @@ void TaskManager::Initialize( int initThreadCount  )
 {
 	// Assign thread count
 	numThreads = initThreadCount;
+
+	main_thread = this_thread::get_id();
 
 	// Create arrays of workers
 	workers = new thread[ numThreads ];
@@ -45,6 +56,11 @@ void TaskManager::AddTask( Task task )
 	monitorMutex.unlock();
 }
 
+void TaskManager::Invoke( Task task )
+{
+	invokeQueue.push_back( task );
+}
+
 void TaskManager::ExecuteTask( Task task, int index )
 {
 	// Execute task
@@ -72,6 +88,11 @@ void TaskManager::ExecuteTask( Task task, int index )
 
 void TaskManager::WaitForCompletion( void )
 {
+	for( auto task : invokeQueue )
+	{
+		task();
+	}
+
 	while( runningThreads > 0  ) ;
 }
 

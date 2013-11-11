@@ -6,6 +6,7 @@
 #include "OutputController.h"
 #include "GameObjectCollection.h"
 #include "ClassMapper.h"
+#include "TaskManager.h"
 
 using namespace v8;
 using namespace std;
@@ -61,31 +62,37 @@ void GraphosBehavior::Update( void )
 
 void GraphosBehavior::CallFunction( string name, ... )
 {
-	auto func = Handle<Function>::Cast( instance->Get( String::New( name.c_str() ) ) );
-
-	if( !func->IsFunction() )
-		OutputController::PrintMessage( OutputType::Error, "Invalid " + name + " function." );
-
-	int count = 0;
-	va_list args;
-	va_start( args, count );
-	Handle<Value>* vals;
-	
-	if( count )
+	auto exec = [&, name]()
 	{
-		vals = new Handle<Value>[ count ];
+		auto func = Handle<Function>::Cast( instance->Get( String::New( name.c_str() ) ) );
 
-		for( int ii = 0; ii < count; ++ii )
+		if( !func->IsFunction() )
+			OutputController::PrintMessage( OutputType::Error, "Invalid " + name + " function." );
+
+		int count = 0;
+		Handle<Value>* vals = NULL;
+		/*
+		va_list args;
+		va_start( args, count );
+	
+		if( count )
 		{
-			vals[ ii ] = va_arg( args, Handle<Value> );
+			vals = new Handle<Value>[ count ];
+			for( int ii = 0; ii < count; ++ii )
+				vals[ ii ] = va_arg( args, Handle<Value> );
 		}
+		va_end( args );
+		*/
+
+		func->Call( instance, count, vals );
+	};
+
+	if( TaskManager::OnMainThread() )
+	{
+		exec();
 	}
 	else
 	{
-		vals = NULL;
+		TaskManager::Invoke( exec );
 	}
-
-	va_end( args );
-
-	func->Call( instance, count, vals );
 }
