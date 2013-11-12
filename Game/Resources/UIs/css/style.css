@@ -41,7 +41,7 @@ body {
 #game-title {
   color: #f1c40f;
   font-size: 9em;
-  line-height: 0.8;
+  line-height: 0.9;
   text-align: center;
   margin: 0;
 
@@ -52,7 +52,7 @@ body {
   -webkit-transition-delay: 0.5s;
   transition-delay: 0.5s;
 }
-/* poop */
+
 #sub-title {
   color: #f1c40f;
   font-size: 4em;
