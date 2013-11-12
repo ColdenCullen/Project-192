@@ -1,0 +1,6 @@
+[submodule "ExternalDependencies/submodules/v8convert"]
+	path = ExternalDependencies/submodules/v8convert
+	url = git@github.com:ColdenCullen/V8-Convert.git
+[submodule "ExternalDependencies/submodules/v8"]
+	path = ExternalDependencies/submodules/v8
+	url = git@github.com:ColdenCullen/v8.git

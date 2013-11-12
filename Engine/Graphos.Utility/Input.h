@@ -77,13 +77,14 @@ namespace Graphos
 		class Input
 		{
 		public:
-			typedef Event<void(unsigned int)> KeyEvent;
+			typedef Event<void, unsigned int> KeyEvent;
 
 			static Core::UserInterface* ui;
 
 			static void			Update( void );
 
-			static void			AddKeyEvent( unsigned int key, KeyEvent::Delegate func );
+			static void			AddKeyDownUp( KeyEvent::Delegate func );
+			static void			AddKeyDownEvent( KeyEvent::Delegate func );
 
 			static void			KeyDown( unsigned int input );
 			static void			KeyUp( unsigned int input );
@@ -98,8 +99,8 @@ namespace Graphos
 								Input( Input& other );
 			void				operator=( Input& other );
 
-			static std::unordered_map<unsigned int, KeyEvent>
-								keyEvents;
+			static KeyEvent		keyDown;
+			static KeyEvent		keyUp;
 
 			static InputState	keyState;
 			static InputState	prevKeyState;

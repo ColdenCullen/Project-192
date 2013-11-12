@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "OpenGlController.h"
 #include "WindowController.h"
+#include "Win32Controller.h"
 #include "Config.h"
 
 using namespace std;

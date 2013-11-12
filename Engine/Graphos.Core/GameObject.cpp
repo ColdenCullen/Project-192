@@ -16,83 +16,65 @@ using namespace Graphos::Math;
 using namespace Graphos::Physics;
 using namespace Graphos::Graphics;
 
-GameObject* GameObject::CreateFromJson( Json::Value object )
+GameObject* GameObject::CreateFromJson( JsonObject object )
 {
-	Json::Value current;
-	GameObject* obj = new GameObject( ShaderController::GetShader( object[ "Shader" ].asString() ) );
+	JsonObject component;
+	GameObject* obj = new GameObject( ShaderController::GetShader( object.Get<string>( "Shader" ) ) );
 
 	// Get parent
-	if( ( current = object.get( "Parent", object ) ) != object )
+	if( object.TryGet( "Parent", component ) )
 	{
 		//parentMap[ id ] = current.asString();
 	}
 
 	// Set texture
-	if( ( current = object.get( "Texture", object ) ) != object )
+	if( object.TryGet( "Texture", component ) )
 	{
 		obj->AddComponent(
-			AssetController::GetContent<Texture>( current[ "Name" ].asString() )
+			AssetController::GetContent<Texture>( component.Get<string>( "Name" ) )
 		);
 	}
 
-	if( ( current = object.get( "Camera", object ) ) != object )
+	if( object.TryGet( "Camera", component ) )
 	{
 		auto cam = new Camera( obj );
 		obj->AddComponent( cam );
 		GraphosGame::camera = cam;
-	}
-
-	
-	
-	
+	}	
 
 	// Add webview
-	if( ( current = object.get( "AwesomiumView", object ) ) != object )
+	if( object.TryGet( "AwesomiumView", component ) )
 		obj->AddComponent(
 			new AwesomiumView(
-				current[ "url" ].asString(),
-				current[ "width" ].asUInt(),
-				current[ "height" ].asUInt()
+				component.Get<string>( "url" ),
+				component.Get<unsigned int>( "width" ),
+				component.Get<unsigned int>( "height" )
 			)
 		);
 
 	// Add a mesh
-	if( ( current = object.get( "Mesh", object ) ) != object )
+	if( object.TryGet( "Mesh", component ) )
 	{
 		obj->AddComponent(
-			AssetController::GetContent<Mesh>( current[ "Name" ].asString() )
+			AssetController::GetContent<Mesh>( component.Get<string>( "Name" ) )
 		);
 	}
 
 	// Transform object
-	if( ( current = object.get( "Transform", object ) ) != object )
+	if( object.TryGet( "Transform", component ) )
 	{
-		Json::Value currentTransform;
+		JsonObject currentTransform;
 
-		if( ( currentTransform = current.get( "Scale", object ) ) != object )
-			obj->transform->Scale(
-				currentTransform[ "x" ].asDouble(),
-				currentTransform[ "y" ].asDouble(),
-				currentTransform[ "z" ].asDouble()
-			);
-		if( ( currentTransform = current.get( "Position", object ) ) != object )
-			obj->transform->TranslateTo(
-				currentTransform[ "x" ].asDouble(),
-				currentTransform[ "y" ].asDouble(),
-				currentTransform[ "z" ].asDouble()
-			);
-		if( ( currentTransform = current.get( "Rotation", object ) ) != object )
-			obj->transform->Rotate(
-				currentTransform[ "x" ].asDouble(),
-				currentTransform[ "y" ].asDouble(),
-				currentTransform[ "z" ].asDouble()
-			);
+		if( component.TryGet( "Scale", currentTransform ) )
+			obj->transform->Scale( currentTransform.Get<Vector3>( "" ) );
+		if( component.TryGet( "Position", currentTransform ) )
+			obj->transform->TranslateTo( currentTransform.Get<Vector3>( "" ) );
+		if( component.TryGet( "Rotation", currentTransform ) )
+			obj->transform->Rotate( currentTransform.Get<Vector3>( "" ) );
 	}
 
-
-
 	// Set physics Rigid Body object
-	if( ( current = object.get( "Physics", object ) ) != object )
+	if(  object.TryGet( "Physics", component ) )
 	{
 		auto gms = new GraphosMotionState( obj );
 		float mass;
@@ -100,110 +82,28 @@ GameObject* GameObject::CreateFromJson( Json::Value object )
 		float friction;
 		float rollingFriction;
 
-		mass = current[ "Mass" ].asDouble();
+		mass = component.Get<float>( "Mass" );
 		// TODO: Make these optional
-		restitution = current[ "Restitution" ].asDouble();
-		friction = current[ "Friction" ].asDouble();
-		rollingFriction = current[ "RollingFriction" ].asDouble();
 
+		restitution = component.Get<float>( "Restitution" );
+		friction = component.Get<float>( "Friction" );
+		rollingFriction = component.Get<float>( "RollingFriction" );
 
 		PhysicsController::CreatePhysicsObject( gms, mass, restitution, friction, rollingFriction );
-
-
-		/*
-		// Get rigid body's values
-		Json::Value currentRigidbody = current[ "LinearVelocity" ];
-
-		// Add initial velocities and drags
-		rb->linearVelocity.x = currentRigidbody[ "x" ].asDouble();
-		rb->linearVelocity.y = currentRigidbody[ "y" ].asDouble();
-		rb->linearVelocity.z = currentRigidbody[ "z" ].asDouble();
-
-		currentRigidbody = current[ "AngularVelocity" ];
-
-		// Add initial velocities and drags
-		rb->angularVelocity.x = currentRigidbody[ "x" ].asDouble();
-		rb->angularVelocity.y = currentRigidbody[ "y" ].asDouble();
-		rb->angularVelocity.z = currentRigidbody[ "z" ].asDouble();
-
-		// Add initial velocities and drags
-		rb->linearDrag = current.get( "LinearDrag", object ).asDouble();
-		rb->angularDrag = current.get( "AngularDrag", object ).asDouble();
-
-		if( ( currentRigidbody = current.get( "Constraints", object ) ) != object )
-		{
-			if( currentRigidbody.get( "Position", object ) != object )
-			{
-				rb->positionConstraints.x = static_cast<float>( currentRigidbody[ "Position" ][ "x" ].asBool() );
-				rb->positionConstraints.y = static_cast<float>( currentRigidbody[ "Position" ][ "y" ].asBool() );
-				rb->positionConstraints.z = static_cast<float>( currentRigidbody[ "Position" ][ "z" ].asBool() );
-			}
-			if( currentRigidbody.get( "Rotation", object ) != object )
-			{
-				rb->rotationConstraints.x = static_cast<float>( currentRigidbody[ "Rotation" ][ "x" ].asBool() );
-				rb->rotationConstraints.y = static_cast<float>( currentRigidbody[ "Rotation" ][ "y" ].asBool() );
-				rb->rotationConstraints.z = static_cast<float>( currentRigidbody[ "Rotation" ][ "z" ].asBool() );
-			}
-		}
-		*/
 
 		obj->AddComponent( gms );
 	}
 
-
-
 	// Add script
-	if( ( current = object.get( "Script", object ) ) != object )
+	if( object.TryGet( "Script", component ) )
 	{
-		auto script = ScriptController::Get().CreateObjectInstance( current[ "Class" ].asString(), obj );
+		auto script = ScriptController::Get().CreateObjectInstance( component.Get<string>( "Class" ), obj );
+
+		if( component.TryGet( "Variables", component ) )
+			script->Initialize( component );
+
 		obj->AddComponent( script );
 	}
-
-	/*
-	// Setup collider
-	if( ( current = object.get( "Collider", object ) ) != object )
-	{
-		Json::Value currentCol;
-		string type = current[ "Type" ].asString();
-		Collider* col;
-
-		if( type == "Sphere" )
-		{
-			col = new SphereCollider( obj );
-			static_cast<SphereCollider*>( col )->radius = static_cast<float>( current[ "Radius" ].asDouble() );
-		}
-		else// if( type == "Box" )
-		{
-			col = new BoxCollider( obj );
-
-			if( ( currentCol = current.get( "Size", object ) ) != object )
-				static_cast<BoxCollider*>( col )->size = Vector3(
-				currentCol[ "x" ].asDouble(),
-				currentCol[ "y" ].asDouble(),
-				currentCol[ "z" ].asDouble()
-				);
-			else
-				static_cast<BoxCollider*>( col )->size = Vector3( 1.0f, 1.0f, 1.0f );
-		}
-
-		if( ( currentCol = current.get( "Offset", object ) ) != object )
-		{
-			col->centerOffset = Vector3(
-				currentCol[ "x" ].asDouble(),
-				currentCol[ "y" ].asDouble(),
-				currentCol[ "z" ].asDouble()
-			);
-		}
-
-		if( ( currentCol = current.get( "Bounce", object ) ) != object )
-		{
-			col->bounce = currentCol.asDouble();
-		}
-
-		obj->AddComponent<Collider>( col );
-		Physics::Physics::AddCollider( col );
-	}
-	*/
 
 	return obj;
 }
@@ -217,11 +117,7 @@ void GameObject::Update( void )
 
 void GameObject::Draw( void )
 {
-	//shader->Use();
 	shader->SetModelMatrix( transform->WorldMatrix() );
-	// TODO...what did/does this do?...
-	// this SetUniform was removed...needs refactoring?
-	// shader->SetUniform( "shaderTexture", 0 );
 
 	for( auto component : componentList )
 		component.second->Draw( shader );

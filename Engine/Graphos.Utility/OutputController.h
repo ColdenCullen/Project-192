@@ -8,7 +8,7 @@ namespace Graphos
 {
 	namespace Utility
 	{
-		enum class				OutputType { OT_INFO, OT_WARNING, OT_ERROR };
+		enum class				OutputType { Info, Warning, Error };
 
 		class OutputController
 		{

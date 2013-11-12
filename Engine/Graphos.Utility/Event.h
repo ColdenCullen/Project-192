@@ -8,31 +8,62 @@ namespace Graphos
 {
 	namespace Utility
 	{
-		template<typename TArgs>
+		template<typename TReturn, typename TArgs>
 		struct Event
 		{
 		public:
-			typedef std::function<void(TArgs)> Delegate;
+			typedef std::function<TReturn(TArgs)> Delegate;
 		
-			void AddFunction( Delegate func )
+			virtual void AddFunction( Delegate func )
 			{
 				functions.push_back( func );
 			}
 
-			void Call( TArgs arguments ) const
+			virtual void Call( TArgs arguments ) const
 			{
 				for( auto func : functions )
-					func( arguments NULL );
+					func( arguments );
 			}
 
-			void operator+=( Delegate func )
+			virtual void operator+=( Delegate func )
 			{
 				AddFunction( func );
 			}
 
-			void operator()( TArgs arguments ) const
+			virtual void operator()( TArgs arguments ) const
 			{
 				Call( arguments );
+			}
+
+		private:
+			std::vector<Delegate> functions;
+		};
+
+		template<typename TReturn>
+		struct Event<TReturn, void>
+		{
+		public:
+			typedef std::function<TReturn(void)> Delegate;
+
+			virtual void AddFunction( Delegate func )
+			{
+				functions.push_back( func );
+			}
+
+			virtual void Call( void ) const
+			{
+				for( auto func : functions )
+					func();
+			}
+
+			virtual void operator+=( Delegate func )
+			{
+				AddFunction( func );
+			}
+
+			virtual void operator()( void ) const
+			{
+				Call();
 			}
 
 		private:

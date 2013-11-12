@@ -1,6 +1,7 @@
 #include "Input.h"
 #include "WindowController.h"
 #include "Config.h"
+#include "Win32Controller.h"
 
 #define BIT_AT_KEY_STATE( pos ) ( 1 << ( pos % SIZE ) )
 
@@ -54,14 +55,14 @@ void Input::Update( void )
 	//stage.Reset();
 }
 
-void Input::AddKeyEvent( unsigned int key, KeyEvent::Delegate func )
+void Input::AddKeyDownUp( KeyEvent::Delegate func )
 {
-	auto keyEvent = keyEvents.find( key );
+	keyUp.AddFunction( func );
+}
 
-	if( keyEvent == end( keyEvents ) )
-		keyEvent->second = KeyEvent();
-
-	keyEvent->second.AddFunction( func );
+void Input::AddKeyDownEvent( KeyEvent::Delegate func )
+{
+	keyDown.AddFunction( func );
 }
 
 // Called when keys are down
@@ -72,12 +73,16 @@ void Input::KeyDown( unsigned int input )
 	if( ui && input != VK_LBUTTON && input != VK_RBUTTON )
 		//if( IsKeyDown( input, true ) )
 			ui->KeyPress( input );
+
+	keyDown( input );
 }
 
 // Called when keys are up
 void Input::KeyUp( unsigned int input )
 {
 	stage.SetState( input, false );
+
+	keyUp( input );
 }
 
 // Is key down?
@@ -141,5 +146,6 @@ bool Input::rmbDown;
 InputState Input::stage;
 InputState Input::prevKeyState;
 InputState Input::keyState;
-unordered_map<unsigned int, Input::KeyEvent> Input::keyEvents;
+Input::KeyEvent Input::keyUp;
+Input::KeyEvent Input::keyDown;
 UserInterface* Input::ui;

@@ -18,7 +18,7 @@ void cvv8::ClassCreator_SetupBindings<Time>::Initialize( Handle<v8::Object> cons
 	}
 
 	// Set static methods
-	Handle<Function> ctor( Timecc.CtorFunction() );
+	Handle<Object> ctor( Timecc.CtorFunction() );
 	ctor->SetAccessor( String::New( "DeltaTime" ),
 						FunctionToGetter<const float(void), &Time::GetDeltaTime>::Get,
 						ThrowingSetter::Set );

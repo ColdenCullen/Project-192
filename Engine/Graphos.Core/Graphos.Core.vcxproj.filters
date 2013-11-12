@@ -4,11 +4,14 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectCollection.cpp" />
     <ClCompile Include="GraphosGame.cpp" />
+    <ClCompile Include="ScriptedGraphosGame.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectCollection.h" />
     <ClInclude Include="GraphosGame.h" />
     <ClInclude Include="GraphosGlobal.h" />
+    <ClInclude Include="ScriptedGraphosGame.h" />
   </ItemGroup>
 </Project>

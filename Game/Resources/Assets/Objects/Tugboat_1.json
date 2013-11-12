@@ -12,9 +12,9 @@
 			"Name": "Cube"
 		},
 
-		"Script": {
+		/*"Script": {
 			"Class": "GameObject1"
-		},
+		},*/
 
 		"Physics": {
 			"Mass": 3.0,
