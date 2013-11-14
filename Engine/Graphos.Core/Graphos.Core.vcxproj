@@ -51,6 +51,12 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>doxygen Documentation/Doxyfile</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Generating Documentation...</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
