@@ -50,16 +50,36 @@ declare class Camera
     public GetViewMatrix(): Matrix4;
 }
 
+declare class WindowController
+{
+    public static Get(): WindowController;
+
+    public Width: number;
+    public Height: number;
+    public PerspectiveMatrix: Matrix4;
+    public OrthogonalMatrix: Matrix4;
+
+    public Initialize(): void;
+    public Shutdown(): void;
+    public Resize(): void;
+    public OpenWindow(): void;
+    public CloseWindow(): void;
+}
+
 class IShader
 {
     public ModelMatrix: Matrix4;
     public ViewMatrix: Matrix4;
     public ProjectionMatrix: Matrix4;
     public ModelViewProjectionMatrix: Matrix4;
-    public RegisterConstBuffer( buffer: any ): void { }
 
     public SetUniform( name: string, value: number ): void { }
     public SetUniformMatrix( name: string, value: Matrix4 ): void { }
+}
+
+declare class ShaderController
+{
+    public static GetShader( name: string ): IShader;
 }
 
 declare class Mesh
@@ -72,35 +92,68 @@ declare class Texture
     public Draw( shader: IShader ): void;
 }
 
-// Class with variables and functions
-class GameObject
+class GraphosObject
 {
     // Transform object
     public Transform: Transform;
+}
+
+// Class with variables and functions
+class GameObject extends GraphosObject
+{
+    constructor()
+    {
+        super();
+        throw Error( "DO NOT EXTEND GAMEOBJECT" );
+    }
 
     // Abstract method for updating object
     public Update(): void { }
+    public Draw(): void { }
 }
 
-declare class GraphosGame
+class GraphosBehavior extends GraphosObject
 {
-    CurrentState: GameState;
+    public OnInitialize(): void { }
+    public OnUpdate(): void { }
+    public OnDraw(): void { }
+    public OnShutdown(): void { }
+}
 
-    // DO NOT OVERRIDE
-    public Reset(): void;
-    public Exit(): void;
-
-    // To be overridden
-    public Initialize(): void;
+declare class GameObjectCollection
+{
+    public LoadObjects( path: string ): void;
+    public ClearObjects(): void;
+    public CreateObject( name: string, shader: IShader ): number;
+    public GetObjectById( id: number ): GameObject;
+    public GetObjectByName( name: string ): GameObject;
+    public RemoveObjectById( id: number ): void;
+    public RemoveObjectByName( name: string ): void;
     public Update(): void;
     public Draw(): void;
-    public Shutdown(): void;
+}
+
+class GraphosGame
+{
+    public CurrentState: GameState;
+    public Camera: Camera;
+
+    // DO NOT OVERRIDE
+    public Reset(): void { }
+    public Exit(): void { }
+
+    // To be overridden
+    public Initialize(): void { }
+    public Update(): void { }
+    public Draw(): void { }
+    public Shutdown(): void { }
 }
 
 enum GameState
 {
     Menu = 0,
-    Game = 1
+    Game = 1,
+    Resetting = 2
 }
 
 declare class Time

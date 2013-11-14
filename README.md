@@ -3,9 +3,6 @@ Project-192
 
 Project 192, a joint GGP-DSA2 project.
 
-### External Dependencies
-[Download external binaries](https://www.dropbox.com/s/r88lvsu6rzb5kfj/Project-192.zip)
-
 ### Coding Style
 [GitHub Wiki Page](https://github.com/ColdenCullen/Project-192/wiki/Coding-Standards)
 

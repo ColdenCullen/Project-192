@@ -20,7 +20,7 @@ void Time::Update( void )
 
 	if( secondTime.count() >= nano::den )
 	{
-		OutputController::PrintValue( OutputType::OT_INFO, "Framerate", (signed int)frameCount );
+		OutputController::PrintValue( OutputType::Info, "Framerate", (signed int)frameCount );
 		secondTime = nanoseconds::zero();
 		frameCount = 0;
 	}

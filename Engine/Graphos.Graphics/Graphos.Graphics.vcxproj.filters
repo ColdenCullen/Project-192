@@ -29,9 +29,6 @@
     <ClInclude Include="WindowController.h">
       <Filter>Windows</Filter>
     </ClInclude>
-    <ClInclude Include="IPlatformWindowController.h">
-      <Filter>Windows</Filter>
-    </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>Windows</Filter>
     </ClInclude>

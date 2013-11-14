@@ -149,4 +149,24 @@ void GraphosGame::Stop( void )
 	GraphicsController::Shutdown();
 }
 
-Camera* Graphos::Core::GraphosGame::camera;
+void GraphosGame::Initialize( void )
+{
+	throw std::exception( "Do not create an instance of GraphosGame!" );
+}
+
+void GraphosGame::Update( void )
+{
+	throw std::exception( "Do not create an instance of GraphosGame!" );
+}
+
+void GraphosGame::Draw( void )
+{
+	throw std::exception( "Do not create an instance of GraphosGame!" );
+}
+
+void GraphosGame::Shutdown( void )
+{
+	throw std::exception( "Do not create an instance of GraphosGame!" );
+}
+
+Camera* GraphosGame::camera;
