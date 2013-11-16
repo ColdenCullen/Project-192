@@ -17,17 +17,45 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Scripting", "..\Eng
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{510BA875-BC5D-46B6-B25A-8414F72B3D98}"
 	ProjectSection(SolutionItems) = preProject
-		..\Game\build.bat = ..\Game\build.bat
-		..\Game\debug.bat = ..\Game\debug.bat
-		..\Game\Gruntfile.coffee = ..\Game\Gruntfile.coffee
-		..\Game\init.bat = ..\Game\init.bat
-		..\Game\package.json = ..\Game\package.json
+		..\Game\Resources\build.bat = ..\Game\Resources\build.bat
+		..\Game\Resources\debug.bat = ..\Game\Resources\debug.bat
+		..\Game\Resources\Gruntfile.coffee = ..\Game\Resources\Gruntfile.coffee
+		..\Game\Resources\init.bat = ..\Game\Resources\init.bat
+		..\Game\Resources\package.json = ..\Game\Resources\package.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Global Headers", "Global Headers", "{1D868376-9A33-40E7-8DC4-D6A2253620FC}"
 	ProjectSection(SolutionItems) = preProject
 		..\ExternalDependencies\include\DirectX\DirectXIncludes.h = ..\ExternalDependencies\include\DirectX\DirectXIncludes.h
 		..\ExternalDependencies\include\GL\GLIncludes.h = ..\ExternalDependencies\include\GL\GLIncludes.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{78B39BD3-904D-4D33-ACC3-715914BE0377}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{E1E6740A-79E3-4326-905F-56995EBAE634}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game\Resources\Config\Config.json = ..\Game\Resources\Config\Config.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{13C4CBF4-109C-4A8B-8A7F-139E88805C21}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meshes", "Meshes", "{48731D1C-E139-4A6D-B63A-2A897E00FFDD}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game\Resources\Assets\Meshes\Cube.obj = ..\Game\Resources\Assets\Meshes\Cube.obj
+		..\Game\Resources\Assets\Meshes\Tugboat_1.obj = ..\Game\Resources\Assets\Meshes\Tugboat_1.obj
+		..\Game\Resources\Assets\Meshes\UI.obj = ..\Game\Resources\Assets\Meshes\UI.obj
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Objects", "Objects", "{B6E4ED65-20D6-4771-8CAF-835CBBA2974E}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game\Resources\Assets\Objects\Camera.json = ..\Game\Resources\Assets\Objects\Camera.json
+		..\Game\Resources\Assets\Objects\Tugboat_1.json = ..\Game\Resources\Assets\Objects\Tugboat_1.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Textures", "Textures", "{20BE76EC-4F26-4999-B6B0-9691B0DADA29}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game\Resources\Assets\Textures\balls.jpg = ..\Game\Resources\Assets\Textures\balls.jpg
+		..\Game\Resources\Assets\Textures\Poop.png = ..\Game\Resources\Assets\Textures\Poop.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Submodules", "Submodules", "{7D86DD02-EFD8-43A3-934B-43BF3CED4607}"
@@ -81,7 +109,33 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neon", "neon", "{CE1C2385-D
 		..\ExternalDependencies\submodules\bullet\vectormath\neon\vectormath_aos.h = ..\ExternalDependencies\submodules\bullet\vectormath\neon\vectormath_aos.h
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hlsl", "hlsl", "{B8D27C56-2806-4868-A436-09F172A87E83}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game\Resources\Shaders\hlsl\light.fs.hlsl = ..\Game\Resources\Shaders\hlsl\light.fs.hlsl
+		..\Game\Resources\Shaders\hlsl\light.vs.hlsl = ..\Game\Resources\Shaders\hlsl\light.vs.hlsl
+		..\Game\Resources\Shaders\hlsl\lightStructs.hlsl = ..\Game\Resources\Shaders\hlsl\lightStructs.hlsl
+		..\Game\Resources\Shaders\hlsl\texture.fs.hlsl = ..\Game\Resources\Shaders\hlsl\texture.fs.hlsl
+		..\Game\Resources\Shaders\hlsl\texture.vs.hlsl = ..\Game\Resources\Shaders\hlsl\texture.vs.hlsl
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "glsl", "glsl", "{1F6885C7-2894-4493-8338-15079AC10EB1}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game\Resources\Shaders\glsl\light.fs.glsl = ..\Game\Resources\Shaders\glsl\light.fs.glsl
+		..\Game\Resources\Shaders\glsl\light.vs.glsl = ..\Game\Resources\Shaders\glsl\light.vs.glsl
+		..\Game\Resources\Shaders\glsl\texture.fs.glsl = ..\Game\Resources\Shaders\glsl\texture.fs.glsl
+		..\Game\Resources\Shaders\glsl\texture.vs.glsl = ..\Game\Resources\Shaders\glsl\texture.vs.glsl
+	EndProjectSection
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Utility", "..\Engine\Graphos.Utility\Graphos.Utility.vcxproj", "{5D9174DC-FE98-4D01-B470-954BFF4AF2B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{734D2563-62BE-4708-A78E-3055208EEE95}"
+	ProjectSection(SolutionItems) = preProject
+		..\Game\Resources\Scripts\Camera.ts = ..\Game\Resources\Scripts\Camera.ts
+		..\Game\Resources\Scripts\GameObject1.ts = ..\Game\Resources\Scripts\GameObject1.ts
+		..\Game\Resources\Scripts\Graphos.ts = ..\Game\Resources\Scripts\Graphos.ts
+		..\Game\Resources\Scripts\GraphosGame.ts = ..\Game\Resources\Scripts\GraphosGame.ts
+		..\Game\Resources\Scripts\LightShader.ts = ..\Game\Resources\Scripts\LightShader.ts
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4A87336B-8791-4974-BF22-800A267AC016}"
 EndProject
@@ -128,78 +182,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v8_snapshot", "..\ExternalDependencies\submodules\v8\tools\gyp\v8_snapshot.vcxproj", "{D7E18491-93AF-C9D1-0CF8-261904821D5A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "v8", "..\ExternalDependencies\submodules\v8\tools\gyp\v8.vcxproj", "{73848F9A-5128-CE82-AE99-9EB394FAA496}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{A17FF4D6-4C6D-406E-A6A3-1143B8DBDCB8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{ABD384AD-1CAD-4B31-97F7-F42B00F9130B}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\Config\Config.json = ..\Game\Config\Config.json
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Objects", "Objects", "{D997BA39-CCD7-4232-AA29-5DC9414AE51E}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\Objects\Camera.json = ..\Game\Objects\Camera.json
-		..\Game\Objects\Tugboat_1.json = ..\Game\Objects\Tugboat_1.json
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{97AC17BB-6795-4E5A-B0AF-CC4567B40309}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UIs", "UIs", "{FF5F46A4-D160-4AEF-97FD-C579D8E03781}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\UIs\index.html = ..\Game\UIs\index.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Meshes", "Meshes", "{6A8E2E73-3636-41A2-8C51-48DAA70A3202}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\Assets\Meshes\Cube.obj = ..\Game\Assets\Meshes\Cube.obj
-		..\Game\Assets\Meshes\Tugboat_1.obj = ..\Game\Assets\Meshes\Tugboat_1.obj
-		..\Game\Assets\Meshes\Tugboat_test.obj = ..\Game\Assets\Meshes\Tugboat_test.obj
-		..\Game\Assets\Meshes\UI.obj = ..\Game\Assets\Meshes\UI.obj
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{0648CABA-B101-4053-952A-5DF6D9136375}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\Assets\Scripts\Camera.ts = ..\Game\Assets\Scripts\Camera.ts
-		..\Game\Assets\Scripts\Graphos.ts = ..\Game\Assets\Scripts\Graphos.ts
-		..\Game\Assets\Scripts\GraphosGame.ts = ..\Game\Assets\Scripts\GraphosGame.ts
-		..\Game\Assets\Scripts\LightShader.ts = ..\Game\Assets\Scripts\LightShader.ts
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Textures", "Textures", "{F9468042-C1A4-452F-9A8E-1B342054F4C0}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\Assets\Textures\balls.jpg = ..\Game\Assets\Textures\balls.jpg
-		..\Game\Assets\Textures\Poop.png = ..\Game\Assets\Textures\Poop.png
-		..\Game\Assets\Textures\white.png = ..\Game\Assets\Textures\white.png
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "glsl", "glsl", "{E0C515B3-8A26-41EA-979D-1187877F8ED2}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\Shaders\glsl\light.fs.glsl = ..\Game\Shaders\glsl\light.fs.glsl
-		..\Game\Shaders\glsl\light.vs.glsl = ..\Game\Shaders\glsl\light.vs.glsl
-		..\Game\Shaders\glsl\texture.fs.glsl = ..\Game\Shaders\glsl\texture.fs.glsl
-		..\Game\Shaders\glsl\texture.vs.glsl = ..\Game\Shaders\glsl\texture.vs.glsl
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hlsl", "hlsl", "{A29D1EA2-8564-4962-A31A-AE9AC9196F24}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\Shaders\hlsl\light.fs.hlsl = ..\Game\Shaders\hlsl\light.fs.hlsl
-		..\Game\Shaders\hlsl\light.vs.hlsl = ..\Game\Shaders\hlsl\light.vs.hlsl
-		..\Game\Shaders\hlsl\lightStructs.hlsl = ..\Game\Shaders\hlsl\lightStructs.hlsl
-		..\Game\Shaders\hlsl\texture.fs.hlsl = ..\Game\Shaders\hlsl\texture.fs.hlsl
-		..\Game\Shaders\hlsl\texture.vs.hlsl = ..\Game\Shaders\hlsl\texture.vs.hlsl
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "css", "css", "{8E8B8604-F503-4201-80CC-26E4DF1397C3}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\UIs\css\normalize.css = ..\Game\UIs\css\normalize.css
-		..\Game\UIs\css\style.css = ..\Game\UIs\css\style.css
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "js", "js", "{ED3EC7EE-8A60-4858-B820-041B0EBFF3DE}"
-	ProjectSection(SolutionItems) = preProject
-		..\Game\UIs\js\config.js = ..\Game\UIs\js\config.js
-		..\Game\UIs\js\jquery-1.9.1.min.js = ..\Game\UIs\js\jquery-1.9.1.min.js
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -423,11 +405,15 @@ Global
 		{4961F3A5-0FC0-487A-BEF3-8313C981AB49} = {121BCB09-3DD2-48AC-B441-A45525523659}
 		{C409B8BC-41BD-439F-BAE3-FB7D9B4E3569} = {121BCB09-3DD2-48AC-B441-A45525523659}
 		{5D9174DC-FE98-4D01-B470-954BFF4AF2B4} = {121BCB09-3DD2-48AC-B441-A45525523659}
-		{A17FF4D6-4C6D-406E-A6A3-1143B8DBDCB8} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
-		{ABD384AD-1CAD-4B31-97F7-F42B00F9130B} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
-		{D997BA39-CCD7-4232-AA29-5DC9414AE51E} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
-		{97AC17BB-6795-4E5A-B0AF-CC4567B40309} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
-		{FF5F46A4-D160-4AEF-97FD-C579D8E03781} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
+		{78B39BD3-904D-4D33-ACC3-715914BE0377} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
+		{E1E6740A-79E3-4326-905F-56995EBAE634} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
+		{13C4CBF4-109C-4A8B-8A7F-139E88805C21} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
+		{734D2563-62BE-4708-A78E-3055208EEE95} = {510BA875-BC5D-46B6-B25A-8414F72B3D98}
+		{48731D1C-E139-4A6D-B63A-2A897E00FFDD} = {78B39BD3-904D-4D33-ACC3-715914BE0377}
+		{B6E4ED65-20D6-4771-8CAF-835CBBA2974E} = {78B39BD3-904D-4D33-ACC3-715914BE0377}
+		{20BE76EC-4F26-4999-B6B0-9691B0DADA29} = {78B39BD3-904D-4D33-ACC3-715914BE0377}
+		{B8D27C56-2806-4868-A436-09F172A87E83} = {13C4CBF4-109C-4A8B-8A7F-139E88805C21}
+		{1F6885C7-2894-4493-8338-15079AC10EB1} = {13C4CBF4-109C-4A8B-8A7F-139E88805C21}
 		{821A2CD9-123E-4EE4-98E9-B15B5CC6E89C} = {7D86DD02-EFD8-43A3-934B-43BF3CED4607}
 		{2DCBB307-809D-4D56-816C-686826916676} = {7D86DD02-EFD8-43A3-934B-43BF3CED4607}
 		{A37C8C4D-9898-4E5A-A70B-D7D86A228F46} = {7D86DD02-EFD8-43A3-934B-43BF3CED4607}
@@ -446,12 +432,5 @@ Global
 		{4D9A97F4-A135-9173-3480-80F840D9050D} = {A37C8C4D-9898-4E5A-A70B-D7D86A228F46}
 		{D7E18491-93AF-C9D1-0CF8-261904821D5A} = {A37C8C4D-9898-4E5A-A70B-D7D86A228F46}
 		{73848F9A-5128-CE82-AE99-9EB394FAA496} = {A37C8C4D-9898-4E5A-A70B-D7D86A228F46}
-		{6A8E2E73-3636-41A2-8C51-48DAA70A3202} = {A17FF4D6-4C6D-406E-A6A3-1143B8DBDCB8}
-		{0648CABA-B101-4053-952A-5DF6D9136375} = {A17FF4D6-4C6D-406E-A6A3-1143B8DBDCB8}
-		{F9468042-C1A4-452F-9A8E-1B342054F4C0} = {A17FF4D6-4C6D-406E-A6A3-1143B8DBDCB8}
-		{E0C515B3-8A26-41EA-979D-1187877F8ED2} = {97AC17BB-6795-4E5A-B0AF-CC4567B40309}
-		{A29D1EA2-8564-4962-A31A-AE9AC9196F24} = {97AC17BB-6795-4E5A-B0AF-CC4567B40309}
-		{8E8B8604-F503-4201-80CC-26E4DF1397C3} = {FF5F46A4-D160-4AEF-97FD-C579D8E03781}
-		{ED3EC7EE-8A60-4858-B820-041B0EBFF3DE} = {FF5F46A4-D160-4AEF-97FD-C579D8E03781}
 	EndGlobalSection
 EndGlobal
