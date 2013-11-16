@@ -7,6 +7,7 @@
 // Controllers used to add components
 #include "OutputController.h"
 #include "ScriptController.h"
+#include "TaskManager.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -95,5 +96,5 @@ void GameObjectCollection::ClearObjects( void )
 void GameObjectCollection::CallFunction( void (GameObject::*func)( void ) )
 {
 	for( auto iterator = begin( objectList ); iterator != end( objectList ); ++iterator )
-		(iterator->second->*func)();
+			(iterator->second->*func)();
 }
