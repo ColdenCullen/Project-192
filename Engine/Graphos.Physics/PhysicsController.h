@@ -16,8 +16,16 @@ namespace Graphos
 		{
 		public:
 
+			enum CollisionShape {
+				G_SPHERE,
+				G_CUBE
+			};
+
 			struct PhysicsConfig 
 			{
+				CollisionShape		collisionShape;
+				Math::Vector3		collisionDimensions;
+				Math::Vector3		initialInertia;
 				float				mass;
 				float				restitution;
 				float				friction;
@@ -29,7 +37,8 @@ namespace Graphos
 			static void				Initialize( void );
 			static void				Shutdown( void );
 
-			// TODO: Send in collision shape
+			static void				CreatePhysicsObject(	GraphosMotionState* gms,
+															PhysicsConfig* physConfig );
 			static void				CreatePhysicsObject(	GraphosMotionState* gms, 
 															const float mass, 
 															const float restitution, 

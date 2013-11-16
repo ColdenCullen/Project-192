@@ -76,19 +76,19 @@ GameObject* GameObject::CreateFromJson( JsonObject object )
 	if(  object.TryGet( "Physics", component ) )
 	{
 		auto gms = new GraphosMotionState( obj );
-		float mass;
-		float restitution;
-		float friction;
-		float rollingFriction;
 
-		mass = component.Get<float>( "Mass" );
+		PhysicsController::PhysicsConfig physConfig;
+
+		physConfig.mass = component.Get<float>( "Mass" );
+
 		// TODO: Make these optional
+		physConfig.restitution = component.Get<float>( "Restitution" );
+		physConfig.friction = component.Get<float>( "Friction" );
+		physConfig.rollingFriction = component.Get<float>( "RollingFriction" );
 
-		restitution = component.Get<float>( "Restitution" );
-		friction = component.Get<float>( "Friction" );
-		rollingFriction = component.Get<float>( "RollingFriction" );
+		PhysicsController::CreatePhysicsObject( gms, &physConfig );
 
-		PhysicsController::CreatePhysicsObject( gms, mass, restitution, friction, rollingFriction );
+		// TODO: Cleanup physConfig
 
 		obj->AddComponent( gms );
 	}

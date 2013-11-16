@@ -17,10 +17,13 @@ void PhysicsController::Initialize( void )
 
 	// Set up physics logic
 	collisionConfiguration = new btDefaultCollisionConfiguration();
-	dispatcher = new	btCollisionDispatcher(collisionConfiguration);
+	dispatcher = new	btCollisionDispatcher( collisionConfiguration );
 	overlappingPairCache = new btDbvtBroadphase();
 	solver = new btSequentialImpulseConstraintSolver;
-	dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher,overlappingPairCache,solver,collisionConfiguration);
+	dynamicsWorld = new btDiscreteDynamicsWorld(	dispatcher,
+													overlappingPairCache,
+													solver,
+													collisionConfiguration );
 
 	Vector3 gravity = Config::GetData<Vector3>( "physics.gravity" );
 
@@ -79,6 +82,75 @@ void PhysicsController::Shutdown( void )
 void PhysicsController::StepPhysics( float timeStep, int maxSubSteps, float fixedTimeStep )
 {
 	dynamicsWorld->stepSimulation( timeStep, maxSubSteps, fixedTimeStep );
+}
+
+void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsConfig* physConfig )
+{
+	//
+	// Set the collision Shape
+	//
+	btCollisionShape* colShape = nullptr;
+	btVector3 colDimensions = btVector3(	physConfig->collisionDimensions.x, 
+											physConfig->collisionDimensions.y,
+											physConfig->collisionDimensions.z );
+
+	switch( physConfig->collisionShape )
+	{
+		case G_CUBE:
+			colShape = new btBoxShape( colDimensions );
+			break;
+		case G_SPHERE:
+			colShape = new btSphereShape( colDimensions.getX() );
+			break;
+		default:
+			colShape = new btBoxShape( btVector3( 1.0f, 1.0f, 1.0f ) );
+			break;
+	}
+
+	//
+	// Set properties of collision shape
+	//
+	colShape->setMargin( btScalar( 0.04f ) );
+
+
+	//
+	// Set inertia
+	//
+	btVector3 localInertia(		physConfig->initialInertia.x, 
+								physConfig->initialInertia.y, 
+								physConfig->initialInertia.z );
+	colShape->calculateLocalInertia( physConfig->mass, localInertia );
+
+
+
+	// 3. Create motions state for rigid body
+	//btDefaultMotionState* myMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),btVector3(0.0f, 0.0f, 0.0f)));
+
+
+
+	// 4. Create rigid body
+	btRigidBody::btRigidBodyConstructionInfo rbInfo( physConfig->mass, gms, colShape, localInertia );
+	rbInfo.m_angularSleepingThreshold = btScalar( 0.0f );
+	rbInfo.m_linearSleepingThreshold = btScalar( 0.0f );
+
+	btRigidBody* body = new btRigidBody( rbInfo );
+
+	// 5. Set properties of the rigid body
+	btTransform startTransform;
+	startTransform.setIdentity();
+
+	//body->setCenterOfMassTransform(startTransform);
+	body->setAngularFactor( btVector3( 1.0f, 1.0f, 1.0f ) );
+	body->setLinearFactor( btVector3( 1.0f, 1.0f, 0.5f ) );
+	body->setDamping( 0.9f, 0.3f );
+	body->setRestitution( physConfig->restitution );
+	body->setFriction( physConfig->friction );
+	body->setRollingFriction( physConfig->rollingFriction );
+	body->forceActivationState( DISABLE_DEACTIVATION );
+
+	// 6. Add created rigid body to the world
+	dynamicsWorld->addRigidBody( body );
+
 }
 
 void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, const float mass, const float restitution, const float friction, const float rollingFriction )
