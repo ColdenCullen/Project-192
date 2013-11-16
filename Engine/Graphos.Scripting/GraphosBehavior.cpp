@@ -1,16 +1,18 @@
 #include <iostream>
 #include <cstdarg>
 
-#include "Script.h"
+#include "GraphosBehavior.h"
 #include "TimeController.h"
 #include "OutputController.h"
+#include "GameObjectCollection.h"
+#include "ClassMapper.h"
 
 using namespace v8;
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Utility;
 
-Graphos::Core::Script::Script( Persistent<Object> instance, GameObject* owner /*= nullptr */ )
+GraphosBehavior::GraphosBehavior( Persistent<Object> instance, GameObject* owner /*= nullptr */ )
 	: IComponent( owner ), instance( instance )
 {
 	updateFunction = Handle<Function>::Cast( instance->Get( String::New( "Update" ) ) );
@@ -19,20 +21,40 @@ Graphos::Core::Script::Script( Persistent<Object> instance, GameObject* owner /*
 		OutputController::PrintMessage( OutputType::Error, "Invalid Update function." );
 }
 
-Graphos::Core::Script::~Script( void )
+GraphosBehavior::~GraphosBehavior( void )
 {
 
 }
 
-void Graphos::Core::Script::Initialize( JsonObject initVals )
+void GraphosBehavior::SetInitialValues( JsonObject initVals )
 {
-	for( auto val : initVals.node.getMemberNames() )
+	initialValues = initVals;
+}
+
+void GraphosBehavior::Initialize( GameObjectCollection* objects )
+{
+	for( auto val : initialValues.node.getMemberNames() )
 	{
-		instance->Set( String::New( val.c_str() ), initVals.Get<Handle<Value>>( val ) );
+		JsonObject current = initialValues.Get<JsonObject>( val );
+		Handle<Value> toSet;
+
+		if( current.node.isString() && current.Get<string>( "" ).find( "o:" ) != string::npos )
+		{
+			string objectName = current.Get<string>( "" ).substr( 2 );
+
+			toSet = cvv8::CastToJS( objects->GetObjectByName( objectName ) );
+		}
+		else
+		{
+			toSet = current.Get<Handle<Value>>( "" );
+		}
+
+
+		instance->Set( String::New( val.c_str() ), toSet );
 	}
 }
 
-void Graphos::Core::Script::Update( void )
+void GraphosBehavior::Update( void )
 {
 	//*
 	//updateFunction->Call( instance, 0, NULL );
@@ -51,7 +73,7 @@ void Graphos::Core::Script::Update( void )
 	//*/
 }
 
-void Graphos::Core::Script::CallFunction( string name, ... )
+void GraphosBehavior::CallFunction( string name, ... )
 {
 	auto func = Handle<Function>::Cast( instance->Get( String::New( name.c_str() ) ) );
 

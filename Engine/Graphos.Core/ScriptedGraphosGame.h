@@ -2,7 +2,7 @@
 #define __SCRIPTED_GRAPHOS_GAME
 
 #include "GraphosGame.h"
-#include "Script.h"
+#include "GraphosBehavior.h"
 
 namespace Graphos
 {
@@ -16,11 +16,11 @@ namespace Graphos
 			void				Draw( void ) override;
 			void				Shutdown( void ) override;
 
-			Graphos::Core::GameObjectCollection
+			GameObjectCollection
 								objects;
 
 		protected:
-			Script*				script;
+			GraphosBehavior*	script;
 
 			bool				useScript;
 		};

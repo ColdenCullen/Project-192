@@ -3,9 +3,8 @@
 
 #include <string>
 #include <v8.h>
-#include <cvv8/ClassCreator.hpp>
 
-#include "Script.h"
+#include "GraphosBehavior.h"
 #include "GameObject.h"
 #include "OutputController.h"
 #include "ClassMapper.h"
@@ -26,10 +25,12 @@ namespace Graphos
 				return instance;
 			}
 
-			Graphos::Core::Script* CreateObjectInstance( std::string className );
+			void				InitializeObjects( GameObjectCollection* objects );
+
+			GraphosBehavior*	CreateObjectInstance( std::string className );
 
 			template<typename T>
-			Graphos::Core::Script* CreateObjectInstance( std::string className, T* owner )
+			GraphosBehavior*	CreateObjectInstance( std::string className, T* owner )
 			{
 				using namespace v8;
 				using namespace cvv8;
@@ -50,6 +51,12 @@ namespace Graphos
 					auto base = Persistent<Object>::New( CastToJS( owner )->ToObject() );
 					auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
 
+					if( inst.IsEmpty() )
+					{
+						OutputController::PrintMessage( OutputType::Error, "THE SHIT DUDE. YOU'RE OBJECT'S (of type " + className + ") EMPTY." );
+						return nullptr;
+					}
+
 					for( unsigned int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
 					{
 						auto name = inst->GetPropertyNames()->Get( ii );
@@ -57,11 +64,17 @@ namespace Graphos
 							base->Set( name, inst->Get( name ) );
 					}
 
+					GraphosBehavior* behavior;
+
 					// Return new script
 					if( typeid( T ).hash_code() == typeid( GameObject ).hash_code() )
-						return new Graphos::Core::Script( base, reinterpret_cast<GameObject*>( owner ) );
+						behavior = new GraphosBehavior( base, reinterpret_cast<GameObject*>( owner ) );
 					else
-						return new Graphos::Core::Script( base );
+						behavior = new GraphosBehavior( base );
+
+					behaviors.push_back( behavior );
+
+					return behavior;
 						
 				}
 				else
@@ -81,6 +94,9 @@ namespace Graphos
 								context;
 			v8::Local<v8::Object>
 								globalObject;
+
+			std::vector<GraphosBehavior*>
+								behaviors;
 
 			bool				isInitialized;
 		};
