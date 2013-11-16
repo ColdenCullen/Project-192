@@ -39,9 +39,9 @@ void GraphosBehavior::Initialize( GameObjectCollection* objects )
 		JsonObject current = initialValues.Get<JsonObject>( val );
 		Handle<Value> toSet;
 
-		if( current.node.isString() && current.Get<string>( "" ).find( "object:" ) != string::npos )
+		if( current.node.isString() && current.Get<string>( "" ).find( "o:" ) != string::npos )
 		{
-			string objectName = current.Get<string>( "" ).substr( 7 );
+			string objectName = current.Get<string>( "" ).substr( 2 );
 
 			toSet = cvv8::CastToJS( objects->GetObjectByName( objectName ) );
 		}

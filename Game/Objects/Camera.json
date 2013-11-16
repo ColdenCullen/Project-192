@@ -9,7 +9,7 @@
 		"Class": "Camera1",
 		"Variables": {
 			"test": 32,
-			"test1": "object:Cube"
+			"test1": "o:Cube"
 		}
 	},
 
