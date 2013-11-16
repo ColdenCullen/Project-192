@@ -196,5 +196,5 @@ Icon
 .Trashes
 
 ### Graphos Stuff ###
-Game/Resources/node_modules/
-Game/Resources/.bin/
+Game/node_modules/
+Game/.bin/
