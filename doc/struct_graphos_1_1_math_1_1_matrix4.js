@@ -13,6 +13,7 @@ var struct_graphos_1_1_math_1_1_matrix4 =
     [ "operator+", "struct_graphos_1_1_math_1_1_matrix4.html#a1449e1243e73d40f934c1b3328f23d5c", null ],
     [ "operator+=", "struct_graphos_1_1_math_1_1_matrix4.html#a44fb9bcdbfbcb9f4e7ba82f106462cfa", null ],
     [ "operator==", "struct_graphos_1_1_math_1_1_matrix4.html#ab668aea9e3e4dae29595ed2502ebcfaf", null ],
+    [ "Transpose", "struct_graphos_1_1_math_1_1_matrix4.html#a4c0916ff4bfecc65d98cb435d935a2fa", null ],
     [ "dataArray", "struct_graphos_1_1_math_1_1_matrix4.html#a600c3924a0f11af22f7651922c2add8f", null ],
     [ "matrix", "struct_graphos_1_1_math_1_1_matrix4.html#a44f9e10a5d0c2a4e70583382bac04517", null ]
 ];

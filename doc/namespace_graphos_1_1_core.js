@@ -15,7 +15,6 @@ var namespace_graphos_1_1_core =
     [ "GameObject", "class_graphos_1_1_core_1_1_game_object.html", "class_graphos_1_1_core_1_1_game_object" ],
     [ "GameObjectCollection", "class_graphos_1_1_core_1_1_game_object_collection.html", "class_graphos_1_1_core_1_1_game_object_collection" ],
     [ "GraphosGame", "class_graphos_1_1_core_1_1_graphos_game.html", "class_graphos_1_1_core_1_1_graphos_game" ],
-    [ "ScriptedGraphosGame", "class_graphos_1_1_core_1_1_scripted_graphos_game.html", "class_graphos_1_1_core_1_1_scripted_graphos_game" ],
-    [ "GraphosBehavior", "class_graphos_1_1_core_1_1_graphos_behavior.html", "class_graphos_1_1_core_1_1_graphos_behavior" ],
+    [ "Script", "class_graphos_1_1_core_1_1_script.html", "class_graphos_1_1_core_1_1_script" ],
     [ "ScriptController", "class_graphos_1_1_core_1_1_script_controller.html", "class_graphos_1_1_core_1_1_script_controller" ]
 ];

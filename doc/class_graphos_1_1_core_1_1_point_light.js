@@ -1,6 +1,6 @@
 var class_graphos_1_1_core_1_1_point_light =
 [
-    [ "PointLight", "class_graphos_1_1_core_1_1_point_light.html#aaff49295cdbf05b669ac9449a71147f0", null ],
+    [ "PointLight", "class_graphos_1_1_core_1_1_point_light.html#ac085e81dd0e58a52ab3cba1df2f5767d", null ],
     [ "~PointLight", "class_graphos_1_1_core_1_1_point_light.html#ab559b457ef8b0e5d2213fed3223ec4e7", null ],
     [ "Draw", "class_graphos_1_1_core_1_1_point_light.html#a799ca41ab75bff16b6b0714b2be3a89d", null ],
     [ "Update", "class_graphos_1_1_core_1_1_point_light.html#aad3d0f4f721cdfa3ea367c941ee4748a", null ],

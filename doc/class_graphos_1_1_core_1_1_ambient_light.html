@@ -105,7 +105,7 @@ $(document).ready(function(){initNavTree('class_graphos_1_1_core_1_1_ambient_lig
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_graphos_1_1_core_1_1_ambient_light-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Graphos::Core::AmbientLight Class Reference</div>  </div>
@@ -128,46 +128,64 @@ Inheritance diagram for Graphos::Core::AmbientLight:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1ab6b467894b642e44088034b99deef1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#a1ab6b467894b642e44088034b99deef1">AmbientLight</a> (<a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a> initColor=<a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a>(), <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *<a class="el" href="class_graphos_1_1_core_1_1_i_component.html#a21c3d8b74b12a105e49fa7ebcd511355">owner</a>=nullptr)</td></tr>
-<tr class="separator:a1ab6b467894b642e44088034b99deef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00f66393179e6c42309ab217ba2d7e31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#a00f66393179e6c42309ab217ba2d7e31">AmbientLight</a> (std::string <a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#ae4345210258c3db84ad47c36eeef3176">name</a>, <a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a> initColor=<a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a>(), <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *<a class="el" href="class_graphos_1_1_core_1_1_i_component.html#a21c3d8b74b12a105e49fa7ebcd511355">owner</a>=nullptr)</td></tr>
+<tr class="separator:a00f66393179e6c42309ab217ba2d7e31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d5943047297e056ea102b7b80750b88"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#a7d5943047297e056ea102b7b80750b88">~AmbientLight</a> (void)</td></tr>
 <tr class="separator:a7d5943047297e056ea102b7b80750b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf0e2ecb07749edff86ae3d33374925c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#abf0e2ecb07749edff86ae3d33374925c">Update</a> (void) override</td></tr>
 <tr class="separator:abf0e2ecb07749edff86ae3d33374925c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a3807749ddf91cca68a086177393f97"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#a1a3807749ddf91cca68a086177393f97">Draw</a> (<a class="el" href="class_graphos_1_1_graphics_1_1_i_shader.html">Graphics::IShader</a> *shader) override</td></tr>
 <tr class="separator:a1a3807749ddf91cca68a086177393f97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42337561d309f659ebddf87a4fe1aafd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#a42337561d309f659ebddf87a4fe1aafd">Shutdown</a> (void) override</td></tr>
+<tr class="separator:a42337561d309f659ebddf87a4fe1aafd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9b153c14baf6df7f6388f8c8af810fb"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="_graphos_global_8h.html#afa539ed707890b8e09ea44e9fbca2b63">gByte</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#af9b153c14baf6df7f6388f8c8af810fb">GetBuffer</a> (void)</td></tr>
+<tr class="separator:af9b153c14baf6df7f6388f8c8af810fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a229c9b3eae653b63372c04c9db82edbe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#a229c9b3eae653b63372c04c9db82edbe">GetSize</a> (void)</td></tr>
+<tr class="separator:a229c9b3eae653b63372c04c9db82edbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a772a7669c085adf70dfe829911c71dbf"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#a772a7669c085adf70dfe829911c71dbf">GetName</a> (void)</td></tr>
+<tr class="separator:a772a7669c085adf70dfe829911c71dbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9e16e084aa3dd1d22ec20b5414eaf7b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#ac9e16e084aa3dd1d22ec20b5414eaf7b">GetColor</a> (void)</td></tr>
+<tr class="separator:ac9e16e084aa3dd1d22ec20b5414eaf7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3706e0f545e7fa9bdcb7b07ef4b253f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#a3706e0f545e7fa9bdcb7b07ef4b253f6">SetColor</a> (const <a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a> &amp;value)</td></tr>
+<tr class="separator:a3706e0f545e7fa9bdcb7b07ef4b253f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_graphos_1_1_core_1_1_i_component"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_graphos_1_1_core_1_1_i_component')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_graphos_1_1_core_1_1_i_component.html">Graphos::Core::IComponent</a></td></tr>
 <tr class="memitem:afe4f5253e5206de24cf37a31a43f184e inherit pub_methods_class_graphos_1_1_core_1_1_i_component"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_i_component.html#afe4f5253e5206de24cf37a31a43f184e">IComponent</a> (<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *<a class="el" href="class_graphos_1_1_core_1_1_i_component.html#a21c3d8b74b12a105e49fa7ebcd511355">owner</a>=nullptr)</td></tr>
 <tr class="separator:afe4f5253e5206de24cf37a31a43f184e inherit pub_methods_class_graphos_1_1_core_1_1_i_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa3fc5d830f38fb74135fd0b4b34392f3 inherit pub_methods_class_graphos_1_1_core_1_1_i_component"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_i_component.html#aa3fc5d830f38fb74135fd0b4b34392f3">~IComponent</a> (void)</td></tr>
 <tr class="separator:aa3fc5d830f38fb74135fd0b4b34392f3 inherit pub_methods_class_graphos_1_1_core_1_1_i_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ccc05d418126871548a131360c977ce inherit pub_methods_class_graphos_1_1_core_1_1_i_component"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_i_component.html#a6ccc05d418126871548a131360c977ce">Shutdown</a> (void)</td></tr>
-<tr class="separator:a6ccc05d418126871548a131360c977ce inherit pub_methods_class_graphos_1_1_core_1_1_i_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fc3bb42b2be21efee04e5eb1a143578 inherit pub_methods_class_graphos_1_1_core_1_1_i_component"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_i_component.html#a8fc3bb42b2be21efee04e5eb1a143578">Owner</a> (void) const </td></tr>
 <tr class="separator:a8fc3bb42b2be21efee04e5eb1a143578 inherit pub_methods_class_graphos_1_1_core_1_1_i_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:ae4345210258c3db84ad47c36eeef3176"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#ae4345210258c3db84ad47c36eeef3176">name</a></td></tr>
+<tr class="separator:ae4345210258c3db84ad47c36eeef3176"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9427b8c0380c8ebf3b3f39ad5ddf3a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#aa9427b8c0380c8ebf3b3f39ad5ddf3a8">color</a></td></tr>
 <tr class="separator:aa9427b8c0380c8ebf3b3f39ad5ddf3a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr class="memitem:a3a8fad1ad42b734b7417e018485c8c0f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_graphos_global_8h.html#afa539ed707890b8e09ea44e9fbca2b63">gByte</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#a3a8fad1ad42b734b7417e018485c8c0f">buffer</a></td></tr>
+<tr class="separator:a3a8fad1ad42b734b7417e018485c8c0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc780cbdbe79270cb80f6dec2196ee6d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#acc780cbdbe79270cb80f6dec2196ee6d">size</a></td></tr>
+<tr class="separator:acc780cbdbe79270cb80f6dec2196ee6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c5fb29f09415b094a6ede25060e5e87"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html#a5c5fb29f09415b094a6ede25060e5e87">dirty</a></td></tr>
+<tr class="separator:a5c5fb29f09415b094a6ede25060e5e87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_graphos_1_1_core_1_1_i_component"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_graphos_1_1_core_1_1_i_component')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_graphos_1_1_core_1_1_i_component.html">Graphos::Core::IComponent</a></td></tr>
 <tr class="memitem:a21c3d8b74b12a105e49fa7ebcd511355 inherit pro_attribs_class_graphos_1_1_core_1_1_i_component"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_i_component.html#a21c3d8b74b12a105e49fa7ebcd511355">owner</a></td></tr>
 <tr class="separator:a21c3d8b74b12a105e49fa7ebcd511355 inherit pro_attribs_class_graphos_1_1_core_1_1_i_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a1ab6b467894b642e44088034b99deef1"></a>
+<a class="anchor" id="a00f66393179e6c42309ab217ba2d7e31"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Graphos::Core::AmbientLight::AmbientLight </td>
+          <td class="memname">AmbientLight::AmbientLight </td>
           <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a>&#160;</td>
           <td class="paramname"><em>initColor</em> = <code><a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a>()</code>, </td>
         </tr>
@@ -183,11 +201,6 @@ Additional Inherited Members</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 </div>
@@ -245,6 +258,152 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="af9b153c14baf6df7f6388f8c8af810fb"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="_graphos_global_8h.html#afa539ed707890b8e09ea44e9fbca2b63">gByte</a>* Graphos::Core::AmbientLight::GetBuffer </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac9e16e084aa3dd1d22ec20b5414eaf7b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a> Graphos::Core::AmbientLight::GetColor </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a772a7669c085adf70dfe829911c71dbf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Graphos::Core::AmbientLight::GetName </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a229c9b3eae653b63372c04c9db82edbe"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Graphos::Core::AmbientLight::GetSize </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3706e0f545e7fa9bdcb7b07ef4b253f6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Graphos::Core::AmbientLight::SetColor </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a> &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a42337561d309f659ebddf87a4fe1aafd"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AmbientLight::Shutdown </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_graphos_1_1_core_1_1_i_component.html#a6ccc05d418126871548a131360c977ce">Graphos::Core::IComponent</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="abf0e2ecb07749edff86ae3d33374925c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -274,14 +433,102 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="a3a8fad1ad42b734b7417e018485c8c0f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_graphos_global_8h.html#afa539ed707890b8e09ea44e9fbca2b63">gByte</a>* Graphos::Core::AmbientLight::buffer</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aa9427b8c0380c8ebf3b3f39ad5ddf3a8"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="struct_graphos_1_1_math_1_1_vector4.html">Math::Vector4</a> Graphos::Core::AmbientLight::color</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5c5fb29f09415b094a6ede25060e5e87"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Graphos::Core::AmbientLight::dirty</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae4345210258c3db84ad47c36eeef3176"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Graphos::Core::AmbientLight::name</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acc780cbdbe79270cb80f6dec2196ee6d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Graphos::Core::AmbientLight::size</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -296,7 +543,7 @@ Additional Inherited Members</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_graphos.html">Graphos</a></li><li class="navelem"><a class="el" href="namespace_graphos_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="class_graphos_1_1_core_1_1_ambient_light.html">AmbientLight</a></li>
-    <li class="footer">Generated on Sat Nov 16 2013 14:49:39 for Graphos by
+    <li class="footer">Generated on Sat Nov 16 2013 18:04:25 for Graphos by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

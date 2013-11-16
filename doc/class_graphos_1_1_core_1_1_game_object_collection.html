@@ -115,8 +115,8 @@ $(document).ready(function(){initNavTree('class_graphos_1_1_core_1_1_game_object
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6e42916fa820537e5e602554dab10922"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html#a6e42916fa820537e5e602554dab10922">LoadObjects</a> (std::string assetPath=&quot;&quot;)</td></tr>
-<tr class="separator:a6e42916fa820537e5e602554dab10922"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada29cbb4f80d242aecd35ca6aae4cca7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html#ada29cbb4f80d242aecd35ca6aae4cca7">LoadObjects</a> (std::string assetPath)</td></tr>
+<tr class="separator:ada29cbb4f80d242aecd35ca6aae4cca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32d1b5e280b994517ba4455ea077fa70"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html#a32d1b5e280b994517ba4455ea077fa70">CreateObject</a> (std::string name, <a class="el" href="class_graphos_1_1_graphics_1_1_i_shader.html">Graphics::IShader</a> *shader)</td></tr>
 <tr class="separator:a32d1b5e280b994517ba4455ea077fa70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4325e8e296b498a36a52c0c997c7d1f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html#ab4325e8e296b498a36a52c0c997c7d1f">GetObjectById</a> (unsigned int id)</td></tr>
@@ -131,10 +131,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a458cc58601384642c2672887a0c25df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7de733d53ee69c8f91999fd667a16a5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html#a7de733d53ee69c8f91999fd667a16a5d">CallFunction</a> (void(GameObject::*func)(void))</td></tr>
 <tr class="separator:a7de733d53ee69c8f91999fd667a16a5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0627acc9de028c43fe6b55eb82160419"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html#a0627acc9de028c43fe6b55eb82160419">Update</a> (void)</td></tr>
-<tr class="separator:a0627acc9de028c43fe6b55eb82160419"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa06b47e0a25cac1bcd549aae82daf1a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html#aa06b47e0a25cac1bcd549aae82daf1a0">Draw</a> (void)</td></tr>
-<tr class="separator:aa06b47e0a25cac1bcd549aae82daf1a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a7de733d53ee69c8f91999fd667a16a5d"></a>
@@ -195,30 +191,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa06b47e0a25cac1bcd549aae82daf1a0"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Graphos::Core::GameObjectCollection::Draw </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ab4325e8e296b498a36a52c0c997c7d1f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -251,7 +223,7 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6e42916fa820537e5e602554dab10922"></a>
+<a class="anchor" id="ada29cbb4f80d242aecd35ca6aae4cca7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -259,7 +231,7 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void GameObjectCollection::LoadObjects </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>assetPath</em> = <code>&quot;&quot;</code></td><td>)</td>
+          <td class="paramname"><em>assetPath</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -299,30 +271,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0627acc9de028c43fe6b55eb82160419"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Graphos::Core::GameObjectCollection::Update </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>Engine/Graphos.Core/<a class="el" href="_game_object_collection_8h_source.html">GameObjectCollection.h</a></li>
 <li>Engine/Graphos.Core/<a class="el" href="_game_object_collection_8cpp.html">GameObjectCollection.cpp</a></li>
@@ -333,7 +281,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_graphos.html">Graphos</a></li><li class="navelem"><a class="el" href="namespace_graphos_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html">GameObjectCollection</a></li>
-    <li class="footer">Generated on Sat Nov 16 2013 14:49:40 for Graphos by
+    <li class="footer">Generated on Sat Nov 16 2013 18:04:25 for Graphos by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

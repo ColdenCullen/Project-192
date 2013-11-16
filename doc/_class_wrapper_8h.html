@@ -107,8 +107,9 @@ $(document).ready(function(){initNavTree('_class_wrapper_8h.html','');});
 <div class="title">ClassWrapper.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;v8.h&gt;</code><br/>
+<div class="textblock"><code>#include &lt;v8/v8.h&gt;</code><br/>
 <code>#include &lt;cvv8/ClassCreator.hpp&gt;</code><br/>
+<code>#include &quot;<a class="el" href="_native_to_j_s_map___graphos_8h_source.html">NativeToJSMap_Graphos.h</a>&quot;</code><br/>
 </div>
 <p><a href="_class_wrapper_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -134,10 +135,9 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">namespace </span>cvv8                                                                                              \</div>
-<div class="line">{                                                                                                           <a class="code" href="namespacecvv8.html#abc35f6356c1beeb39af865171fa45ee0">\</a></div>
-<div class="line"><a class="code" href="namespacecvv8.html#abc35f6356c1beeb39af865171fa45ee0">	CVV8_TypeName_IMPL</a>((CLASS), #CLASS);                                                                   \</div>
+<div class="line">{                                                                                                           \</div>
+<div class="line">    CVV8_TypeName_IMPL((CLASS), #CLASS);                                                                    \</div>
 <div class="line">}</div>
-<div class="ttc" id="namespacecvv8_html_abc35f6356c1beeb39af865171fa45ee0"><div class="ttname"><a href="namespacecvv8.html#abc35f6356c1beeb39af865171fa45ee0">cvv8::CVV8_TypeName_IMPL</a></div><div class="ttdeci">CVV8_TypeName_IMPL((GraphosGame),&quot;GraphosGame&quot;)</div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -167,12 +167,11 @@ Macros</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">namespace </span>cvv8 {                                                                                            \</div>
 <div class="line">    CVV8_TypeName_DECL((CLASS));                                                                            \</div>
 <div class="line">    template&lt;&gt; <span class="keyword">class </span>ClassCreator_Factory&lt;CLASS&gt;                                                            \</div>
-<div class="line">        : <span class="keyword">public</span> ClassCreator_Factory_NativeToJSMap&lt;CLASS,CtorArityDispatcher&lt;Signature&lt;CLASS CONSTRUCTORS &gt;&gt;&gt; { }; \</div>
+<div class="line">        : <span class="keyword">public</span> ClassCreator_Factory_NativeToJSMap&lt;CLASS,CtorArityDispatcher&lt;Signature&lt;CLASS CONSTRUCTORS &gt;&gt;&gt; { };         \</div>
 <div class="line">    template&lt;&gt; <span class="keyword">struct </span>ClassCreator_SetupBindings&lt;CLASS&gt;                                                     \</div>
 <div class="line">        { <span class="keyword">static</span> <span class="keywordtype">void</span> Initialize( v8::Handle&lt;v8::Object&gt; <span class="keyword">const</span> &amp; target ); };                               \</div>
 <div class="line">    template&lt;&gt; <span class="keyword">struct </span>JSToNative&lt;CLASS&gt; : <span class="keyword">public</span> JSToNative_ClassCreator&lt;CLASS&gt; { };                        \</div>
-<div class="line">    template&lt;&gt; <span class="keyword">struct </span>NativeToJS&lt;CLASS&gt; : <span class="keyword">public</span> NativeToJSMap&lt;CLASS&gt;::NativeToJSImpl { };                  \</div>
-<div class="line">    template&lt;&gt; <span class="keyword">struct </span>ClassCreator_AllowNullConstructor&lt;CLASS&gt; : Opt_Bool&lt;true&gt; {};                         \</div>
+<div class="line">    template&lt;&gt; <span class="keyword">struct </span>NativeToJS&lt;CLASS&gt; : <span class="keyword">public</span> NativeToJSMap_Graphos&lt;CLASS&gt; { };                          \</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -183,7 +182,7 @@ Macros</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_0b6ee6e7e9547e675db4add2e5de97da.html">Engine</a></li><li class="navelem"><a class="el" href="dir_2db978ef12e7d8fd9717349051e1c48e.html">Graphos.Scripting</a></li><li class="navelem"><a class="el" href="_class_wrapper_8h.html">ClassWrapper.h</a></li>
-    <li class="footer">Generated on Sat Nov 16 2013 14:49:39 for Graphos by
+    <li class="footer">Generated on Sat Nov 16 2013 18:04:25 for Graphos by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

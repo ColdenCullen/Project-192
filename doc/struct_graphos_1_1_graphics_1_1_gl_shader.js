@@ -8,6 +8,7 @@ var struct_graphos_1_1_graphics_1_1_gl_shader =
     [ "SetUniform", "struct_graphos_1_1_graphics_1_1_gl_shader.html#a99faad453b77d43690a87ca32e21a5be", null ],
     [ "SetUniformArray", "struct_graphos_1_1_graphics_1_1_gl_shader.html#a3566cc64413380310bd0e66235d2a28b", null ],
     [ "SetUniformArray", "struct_graphos_1_1_graphics_1_1_gl_shader.html#a1e3146f1593d9e53140f3b041fab987c", null ],
+    [ "SetUniformBuffer", "struct_graphos_1_1_graphics_1_1_gl_shader.html#aedfdbb4873a4c563d2b9349e177ca100", null ],
     [ "SetUniformMatrix", "struct_graphos_1_1_graphics_1_1_gl_shader.html#a476545a7e73ca0365b18f36536add838", null ],
     [ "Shutdown", "struct_graphos_1_1_graphics_1_1_gl_shader.html#a2beb92223b102d3b38875ceca8c058bc", null ],
     [ "fragmentShaderID", "struct_graphos_1_1_graphics_1_1_gl_shader.html#a17c9f6ee2703cf79e645732f348d2ad5", null ],

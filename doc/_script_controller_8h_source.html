@@ -109,129 +109,107 @@ $(document).ready(function(){initNavTree('_script_controller_8h_source.html','')
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define __SCRIPT_CONTROLLER</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;v8.h&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_graphos_behavior_8h.html">GraphosBehavior.h</a>&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_game_object_8h.html">GameObject.h</a>&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_output_controller_8h.html">OutputController.h</a>&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_class_mapper_8h.html">ClassMapper.h</a>&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>Graphos</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">namespace </span>Core</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script_controller.html">   16</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#ab4ea0aad405732d9c4075a7f2f00ddc3">Initialize</a>( <span class="keywordtype">void</span> );</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#a728c663909461d3bc0c80139c037462d">Shutdown</a>( <span class="keywordtype">void</span> );</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script_controller.html#a072e4b1d8bbc25d98fdfc5b8e4eb2545">   22</a></span>&#160;            <span class="keyword">static</span> <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a>&amp; <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#a072e4b1d8bbc25d98fdfc5b8e4eb2545">Get</a>( <span class="keywordtype">void</span> )</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                <span class="keyword">static</span> <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a> instance;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                <span class="keywordflow">return</span> instance;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            }</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#a7f85697bcceed468ad5e47cda119ac7f">InitializeObjects</a>( <a class="code" href="class_graphos_1_1_core_1_1_game_object_collection.html">GameObjectCollection</a>* objects );</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <a class="code" href="class_graphos_1_1_core_1_1_graphos_behavior.html">GraphosBehavior</a>*    <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#afdda9acc00cd22972d75420c8d9eac31">CreateObjectInstance</a>( std::string className );</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script_controller.html#aa869c716d999016622d5c117f1d99505">   33</a></span>&#160;            <a class="code" href="class_graphos_1_1_core_1_1_graphos_behavior.html">GraphosBehavior</a>*    <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#aa869c716d999016622d5c117f1d99505">CreateObjectInstance</a>( std::string className, T* owner )</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <span class="keyword">using namespace </span>v8;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                <span class="keyword">using namespace </span>cvv8;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;v8\v8.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;cvv8\ClassCreator.hpp&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_script_8h.html">Script.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_game_object_8h.html">GameObject.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_output_controller_8h.html">OutputController.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_class_mapper_8h.html">ClassMapper.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span>Graphos</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keyword">namespace </span>Core</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    {</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script_controller.html">   17</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#ab4ea0aad405732d9c4075a7f2f00ddc3">Initialize</a>( <span class="keywordtype">void</span> );</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#a728c663909461d3bc0c80139c037462d">Shutdown</a>( <span class="keywordtype">void</span> );</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script_controller.html#a072e4b1d8bbc25d98fdfc5b8e4eb2545">   23</a></span>&#160;            <span class="keyword">static</span> <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a>&amp; <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#a072e4b1d8bbc25d98fdfc5b8e4eb2545">Get</a>( <span class="keywordtype">void</span> )</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                <span class="keyword">static</span> <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a> instance;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                <span class="keywordflow">return</span> instance;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script_controller.html#abc49978ebde16780ea82f0a0f65b348c">   30</a></span>&#160;            <a class="code" href="class_graphos_1_1_core_1_1_script.html">Graphos::Core::Script</a>*  <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#abc49978ebde16780ea82f0a0f65b348c">CreateObjectInstance</a>( std::string className, T* owner )</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                <span class="keyword">using namespace </span>v8;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                <span class="keyword">using namespace </span>cvv8;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <span class="keywordflow">if</span>( !isInitialized )</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                    <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#ab4ea0aad405732d9c4075a7f2f00ddc3">Initialize</a>();</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="keywordflow">if</span>( !isInitialized )</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                    <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html#ab4ea0aad405732d9c4075a7f2f00ddc3">Initialize</a>();</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                <span class="comment">// Create a scope</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                Context::Scope contextScope( context );</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                <span class="comment">// Create a scope</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                Context::Scope contextScope( context );</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                <span class="comment">// Get an instance of the class</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                Handle&lt;Function&gt; ctor = Handle&lt;Function&gt;::Cast( globalObject-&gt;Get( String::New( className.c_str() ) ) );</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="comment">// Get an instance of the class</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                Handle&lt;Function&gt; ctor = Handle&lt;Function&gt;::Cast( globalObject-&gt;Get( String::New( className.c_str() ) ) );</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                <span class="comment">// Return object</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordflow">if</span>( !ctor.IsEmpty() )</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    <span class="comment">// Create basic gameobject as well as instance of new class</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    <span class="keyword">auto</span> base = Persistent&lt;Object&gt;::New( CastToJS( owner )-&gt;ToObject() );</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    <span class="keyword">auto</span> inst = ctor-&gt;CallAsConstructor( 0, <span class="keyword">nullptr</span> )-&gt;ToObject();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    <span class="keywordflow">if</span>( inst.IsEmpty() )</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                        OutputController::PrintMessage( OutputType::Error, <span class="stringliteral">&quot;THE SHIT DUDE. YOU&#39;RE OBJECT&#39;S (of type &quot;</span> + className + <span class="stringliteral">&quot;) EMPTY.&quot;</span> );</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                    }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                    <span class="keywordflow">for</span>( <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> ii = 0; ii &lt; inst-&gt;GetPropertyNames()-&gt;Length(); ++ii )</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    {</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                        <span class="keyword">auto</span> name = inst-&gt;GetPropertyNames()-&gt;Get( ii );</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                        <span class="keywordflow">if</span>( !base-&gt;Has( name-&gt;ToString() ) )</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                            base-&gt;Set( name, inst-&gt;Get( name ) );</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    <a class="code" href="class_graphos_1_1_core_1_1_graphos_behavior.html">GraphosBehavior</a>* behavior;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                    <span class="comment">// Return new script</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    <span class="keywordflow">if</span>( <span class="keyword">typeid</span>( T ).hash_code() == <span class="keyword">typeid</span>( <a class="code" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> ).hash_code() )</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                        behavior = <span class="keyword">new</span> <a class="code" href="class_graphos_1_1_core_1_1_graphos_behavior.html">GraphosBehavior</a>( base, reinterpret_cast&lt;GameObject*&gt;( owner ) );</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                        behavior = <span class="keyword">new</span> <a class="code" href="class_graphos_1_1_core_1_1_graphos_behavior.html">GraphosBehavior</a>( base );</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                    behaviors.push_back( behavior );</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    <span class="keywordflow">return</span> behavior;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                {</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    OutputController::PrintMessage( OutputType::Error, <span class="stringliteral">&quot;Invalid Class Name.&quot;</span> );</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                }</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                                <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a>( <span class="keywordtype">void</span> ) : isInitialized( false ), handleScope() { }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                                <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a>( <span class="keyword">const</span> <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a>&amp; );</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="keywordtype">void</span>                operator=( <span class="keyword">const</span> <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a>&amp; );</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            v8::HandleScope     handleScope;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            v8::Persistent&lt;v8::Context&gt;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                                context;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            v8::Local&lt;v8::Object&gt;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                                globalObject;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            std::vector&lt;GraphosBehavior*&gt;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                                behaviors;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordtype">bool</span>                isInitialized;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        };</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#endif//__SCRIPT_CONTROLLER</span></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html_aa869c716d999016622d5c117f1d99505"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html#aa869c716d999016622d5c117f1d99505">Graphos::Core::ScriptController::CreateObjectInstance</a></div><div class="ttdeci">GraphosBehavior * CreateObjectInstance(std::string className, T *owner)</div><div class="ttdef"><b>Definition:</b> ScriptController.h:33</div></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="comment">// Return object</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keywordflow">if</span>( !ctor.IsEmpty() )</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                    <span class="comment">// Create basic gameobject as well as instance of new class</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                    <span class="keyword">auto</span> base = CastToJS( owner )-&gt;ToObject();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    <span class="keyword">auto</span> inst = ctor-&gt;CallAsConstructor( 0, <span class="keyword">nullptr</span> )-&gt;ToObject();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    <span class="keywordflow">for</span>( <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> ii = 0; ii &lt; inst-&gt;GetPropertyNames()-&gt;Length(); ++ii )</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                        <span class="keyword">auto</span> name = inst-&gt;GetPropertyNames()-&gt;Get( ii );</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                        <span class="keywordflow">if</span>( !base-&gt;Has( name-&gt;ToString() ) )</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                            base-&gt;Set( name, inst-&gt;Get( name ) );</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                    <span class="comment">// Return new script</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    <span class="keywordflow">if</span>( <span class="keyword">typeid</span>( T ).hash_code() == <span class="keyword">typeid</span>( <a class="code" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> ).hash_code() )</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                        <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_graphos_1_1_core_1_1_script.html">Graphos::Core::Script</a>( base, reinterpret_cast&lt;GameObject*&gt;( owner ) );</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                        <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="class_graphos_1_1_core_1_1_script.html">Graphos::Core::Script</a>( base );</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    OutputController::PrintMessage(OutputType::OT_ERROR, <span class="stringliteral">&quot;Invalid Class Name.&quot;</span> );</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            }</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                                <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a>( <span class="keywordtype">void</span> ) : isInitialized( false ), handleScope() { }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                                <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a>( <span class="keyword">const</span> <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a>&amp; );</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordtype">void</span>                operator=( <span class="keyword">const</span> <a class="code" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a>&amp; );</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            v8::HandleScope     handleScope;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            v8::Persistent&lt;v8::Context&gt;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                                context;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            v8::Local&lt;v8::Object&gt;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                                globalObject;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordtype">bool</span>                isInitialized;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        };</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif//__SCRIPT_CONTROLLER</span></div>
 <div class="ttc" id="_game_object_8h_html"><div class="ttname"><a href="_game_object_8h.html">GameObject.h</a></div></div>
-<div class="ttc" id="_graphos_behavior_8h_html"><div class="ttname"><a href="_graphos_behavior_8h.html">GraphosBehavior.h</a></div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html">Graphos::Core::ScriptController</a></div><div class="ttdef"><b>Definition:</b> ScriptController.h:16</div></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html">Graphos::Core::ScriptController</a></div><div class="ttdef"><b>Definition:</b> ScriptController.h:17</div></div>
 <div class="ttc" id="class_graphos_1_1_core_1_1_game_object_html"><div class="ttname"><a href="class_graphos_1_1_core_1_1_game_object.html">Graphos::Core::GameObject</a></div><div class="ttdef"><b>Definition:</b> GameObject.h:18</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html_ab4ea0aad405732d9c4075a7f2f00ddc3"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html#ab4ea0aad405732d9c4075a7f2f00ddc3">Graphos::Core::ScriptController::Initialize</a></div><div class="ttdeci">void Initialize(void)</div><div class="ttdef"><b>Definition:</b> ScriptController.cpp:40</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_game_object_collection_html"><div class="ttname"><a href="class_graphos_1_1_core_1_1_game_object_collection.html">Graphos::Core::GameObjectCollection</a></div><div class="ttdef"><b>Definition:</b> GameObjectCollection.h:15</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html_a7f85697bcceed468ad5e47cda119ac7f"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html#a7f85697bcceed468ad5e47cda119ac7f">Graphos::Core::ScriptController::InitializeObjects</a></div><div class="ttdeci">void InitializeObjects(GameObjectCollection *objects)</div><div class="ttdef"><b>Definition:</b> ScriptController.cpp:121</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html_a072e4b1d8bbc25d98fdfc5b8e4eb2545"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html#a072e4b1d8bbc25d98fdfc5b8e4eb2545">Graphos::Core::ScriptController::Get</a></div><div class="ttdeci">static ScriptController &amp; Get(void)</div><div class="ttdef"><b>Definition:</b> ScriptController.h:22</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html_a728c663909461d3bc0c80139c037462d"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html#a728c663909461d3bc0c80139c037462d">Graphos::Core::ScriptController::Shutdown</a></div><div class="ttdeci">void Shutdown(void)</div><div class="ttdef"><b>Definition:</b> ScriptController.cpp:111</div></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html_abc49978ebde16780ea82f0a0f65b348c"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html#abc49978ebde16780ea82f0a0f65b348c">Graphos::Core::ScriptController::CreateObjectInstance</a></div><div class="ttdeci">Graphos::Core::Script * CreateObjectInstance(std::string className, T *owner)</div><div class="ttdef"><b>Definition:</b> ScriptController.h:30</div></div>
+<div class="ttc" id="_script_8h_html"><div class="ttname"><a href="_script_8h.html">Script.h</a></div></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html_ab4ea0aad405732d9c4075a7f2f00ddc3"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html#ab4ea0aad405732d9c4075a7f2f00ddc3">Graphos::Core::ScriptController::Initialize</a></div><div class="ttdeci">void Initialize(void)</div><div class="ttdef"><b>Definition:</b> ScriptController.cpp:38</div></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_html"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html">Graphos::Core::Script</a></div><div class="ttdef"><b>Definition:</b> Script.h:13</div></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html_a072e4b1d8bbc25d98fdfc5b8e4eb2545"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html#a072e4b1d8bbc25d98fdfc5b8e4eb2545">Graphos::Core::ScriptController::Get</a></div><div class="ttdeci">static ScriptController &amp; Get(void)</div><div class="ttdef"><b>Definition:</b> ScriptController.h:23</div></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html_a728c663909461d3bc0c80139c037462d"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html#a728c663909461d3bc0c80139c037462d">Graphos::Core::ScriptController::Shutdown</a></div><div class="ttdeci">void Shutdown(void)</div><div class="ttdef"><b>Definition:</b> ScriptController.cpp:83</div></div>
 <div class="ttc" id="_class_mapper_8h_html"><div class="ttname"><a href="_class_mapper_8h.html">ClassMapper.h</a></div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_graphos_behavior_html"><div class="ttname"><a href="class_graphos_1_1_core_1_1_graphos_behavior.html">Graphos::Core::GraphosBehavior</a></div><div class="ttdef"><b>Definition:</b> GraphosBehavior.h:16</div></div>
 <div class="ttc" id="_output_controller_8h_html"><div class="ttname"><a href="_output_controller_8h.html">OutputController.h</a></div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_controller_html_afdda9acc00cd22972d75420c8d9eac31"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script_controller.html#afdda9acc00cd22972d75420c8d9eac31">Graphos::Core::ScriptController::CreateObjectInstance</a></div><div class="ttdeci">GraphosBehavior * CreateObjectInstance(std::string className)</div><div class="ttdef"><b>Definition:</b> ScriptController.cpp:85</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_0b6ee6e7e9547e675db4add2e5de97da.html">Engine</a></li><li class="navelem"><a class="el" href="dir_2db978ef12e7d8fd9717349051e1c48e.html">Graphos.Scripting</a></li><li class="navelem"><a class="el" href="_script_controller_8h.html">ScriptController.h</a></li>
-    <li class="footer">Generated on Sat Nov 16 2013 14:49:39 for Graphos by
+    <li class="footer">Generated on Sat Nov 16 2013 18:04:24 for Graphos by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

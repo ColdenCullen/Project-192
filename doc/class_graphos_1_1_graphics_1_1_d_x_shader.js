@@ -9,6 +9,7 @@ var class_graphos_1_1_graphics_1_1_d_x_shader =
     [ "SetUniform", "class_graphos_1_1_graphics_1_1_d_x_shader.html#a352e56437de445d0389fc035e3e95fc8", null ],
     [ "SetUniformArray", "class_graphos_1_1_graphics_1_1_d_x_shader.html#a37d535a1d11572b8d102cc7c04d5293a", null ],
     [ "SetUniformArray", "class_graphos_1_1_graphics_1_1_d_x_shader.html#a91aeae7d3442938bbd0fc5ade51f9347", null ],
+    [ "SetUniformBuffer", "class_graphos_1_1_graphics_1_1_d_x_shader.html#a45d8f159c87fd285c2fe3b6c617d85c2", null ],
     [ "SetUniformMatrix", "class_graphos_1_1_graphics_1_1_d_x_shader.html#ad1070744b8db743d4cf59adb5b589299", null ],
     [ "Shutdown", "class_graphos_1_1_graphics_1_1_d_x_shader.html#a9c3ba7c34bd3f43438ee2103ee19af98", null ]
 ];

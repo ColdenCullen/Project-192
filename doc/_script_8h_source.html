@@ -108,51 +108,43 @@ $(document).ready(function(){initNavTree('_script_8h_source.html','');});
 <a href="_script_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _SCRIPT_H_</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define _SCRIPT_H_</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;v8.h&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;v8\v8.h&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_i_component_8h.html">IComponent.h</a>&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_json_object_8h.html">JsonObject.h</a>&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>Graphos</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">namespace </span>Core</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script.html">   14</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_graphos_1_1_core_1_1_script.html">Script</a> : <span class="keyword">public</span> <a class="code" href="class_graphos_1_1_core_1_1_i_component.html">IComponent</a></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                <a class="code" href="class_graphos_1_1_core_1_1_script.html#a83b4408b3fef8fbdd6c110fe05f7a21d">Script</a>( v8::Persistent&lt;v8::Object&gt; instance, <a class="code" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a>* <a class="code" href="class_graphos_1_1_core_1_1_i_component.html#a21c3d8b74b12a105e49fa7ebcd511355">owner</a> = <span class="keyword">nullptr</span> );</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                                <a class="code" href="class_graphos_1_1_core_1_1_script.html#a92634704286f273619c036a8fdb9ab11">~Script</a>( <span class="keywordtype">void</span> );</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script.html#a9aa449840b6adbb2b5676751e0bb9a29">Initialize</a>( <a class="code" href="class_graphos_1_1_utility_1_1_json_object.html">Utility::JsonObject</a> initVals );</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>Graphos</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">namespace </span>Core</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script.html">   13</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_graphos_1_1_core_1_1_script.html">Script</a> : <span class="keyword">public</span> <a class="code" href="class_graphos_1_1_core_1_1_i_component.html">IComponent</a></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;                                <a class="code" href="class_graphos_1_1_core_1_1_script.html#aa7b2bcff19b141eaf7791a2a0d45bc50">Script</a>( v8::Handle&lt;v8::Object&gt; instance, <a class="code" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a>* <a class="code" href="class_graphos_1_1_core_1_1_i_component.html#a21c3d8b74b12a105e49fa7ebcd511355">owner</a> = <span class="keyword">nullptr</span> );</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script.html#a958ab95cce18e1a6e494b790075475fd">Update</a>( <span class="keywordtype">void</span> );</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script.html#a3831f56c05eecb5e6c8f5df759b711e2">   19</a></span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script.html#a3831f56c05eecb5e6c8f5df759b711e2">Draw</a>( <span class="keywordtype">void</span> ) { }</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script.html#a4ed17a00db00020631c4aa3726bc91cb">   20</a></span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script.html#a4ed17a00db00020631c4aa3726bc91cb">Shutdown</a>( <span class="keywordtype">void</span> ) { }</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script.html#a958ab95cce18e1a6e494b790075475fd">Update</a>( <span class="keywordtype">void</span> );</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script.html#a3831f56c05eecb5e6c8f5df759b711e2">   23</a></span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script.html#a3831f56c05eecb5e6c8f5df759b711e2">Draw</a>( <span class="keywordtype">void</span> ) { }</div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_graphos_1_1_core_1_1_script.html#a4ed17a00db00020631c4aa3726bc91cb">   24</a></span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script.html#a4ed17a00db00020631c4aa3726bc91cb">Shutdown</a>( <span class="keywordtype">void</span> ) { }</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script.html#af6fbf08760d955cea29abd5051acd51d">CallFunction</a>( std::string name, ... );</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            v8::Persistent&lt;v8::Object&gt;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                                instance;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            v8::Handle&lt;v8::Function&gt;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                                updateFunction;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        };</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif//_SCRIPT_H_</span></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_af6fbf08760d955cea29abd5051acd51d"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#af6fbf08760d955cea29abd5051acd51d">Graphos::Core::Script::CallFunction</a></div><div class="ttdeci">void CallFunction(std::string name,...)</div><div class="ttdef"><b>Definition:</b> Script.cpp:54</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_a4ed17a00db00020631c4aa3726bc91cb"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#a4ed17a00db00020631c4aa3726bc91cb">Graphos::Core::Script::Shutdown</a></div><div class="ttdeci">void Shutdown(void)</div><div class="ttdef"><b>Definition:</b> Script.h:24</div></div>
-<div class="ttc" id="class_graphos_1_1_utility_1_1_json_object_html"><div class="ttname"><a href="class_graphos_1_1_utility_1_1_json_object.html">Graphos::Utility::JsonObject</a></div><div class="ttdef"><b>Definition:</b> JsonObject.h:14</div></div>
-<div class="ttc" id="_json_object_8h_html"><div class="ttname"><a href="_json_object_8h.html">JsonObject.h</a></div></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="keywordtype">void</span>                <a class="code" href="class_graphos_1_1_core_1_1_script.html#abc6f1fcbda3b35bd3a831ef4c444a6b6">CallFunction</a>( std::string name );</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            v8::Handle&lt;v8::Object&gt;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                                instance;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            v8::Handle&lt;v8::Function&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                updateFunction;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        };</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif//_SCRIPT_H_</span></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_a4ed17a00db00020631c4aa3726bc91cb"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#a4ed17a00db00020631c4aa3726bc91cb">Graphos::Core::Script::Shutdown</a></div><div class="ttdeci">void Shutdown(void)</div><div class="ttdef"><b>Definition:</b> Script.h:20</div></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_abc6f1fcbda3b35bd3a831ef4c444a6b6"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#abc6f1fcbda3b35bd3a831ef4c444a6b6">Graphos::Core::Script::CallFunction</a></div><div class="ttdeci">void CallFunction(std::string name)</div><div class="ttdef"><b>Definition:</b> Script.cpp:39</div></div>
 <div class="ttc" id="class_graphos_1_1_core_1_1_game_object_html"><div class="ttname"><a href="class_graphos_1_1_core_1_1_game_object.html">Graphos::Core::GameObject</a></div><div class="ttdef"><b>Definition:</b> GameObject.h:18</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_a83b4408b3fef8fbdd6c110fe05f7a21d"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#a83b4408b3fef8fbdd6c110fe05f7a21d">Graphos::Core::Script::Script</a></div><div class="ttdeci">Script(v8::Persistent&lt; v8::Object &gt; instance, GameObject *owner=nullptr)</div><div class="ttdef"><b>Definition:</b> Script.cpp:13</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_html"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html">Graphos::Core::Script</a></div><div class="ttdef"><b>Definition:</b> Script.h:14</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_a958ab95cce18e1a6e494b790075475fd"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#a958ab95cce18e1a6e494b790075475fd">Graphos::Core::Script::Update</a></div><div class="ttdeci">void Update(void)</div><div class="ttdef"><b>Definition:</b> Script.cpp:35</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_a92634704286f273619c036a8fdb9ab11"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#a92634704286f273619c036a8fdb9ab11">Graphos::Core::Script::~Script</a></div><div class="ttdeci">~Script(void)</div><div class="ttdef"><b>Definition:</b> Script.cpp:22</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_a9aa449840b6adbb2b5676751e0bb9a29"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#a9aa449840b6adbb2b5676751e0bb9a29">Graphos::Core::Script::Initialize</a></div><div class="ttdeci">void Initialize(Utility::JsonObject initVals)</div><div class="ttdef"><b>Definition:</b> Script.cpp:27</div></div>
-<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_a3831f56c05eecb5e6c8f5df759b711e2"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#a3831f56c05eecb5e6c8f5df759b711e2">Graphos::Core::Script::Draw</a></div><div class="ttdeci">void Draw(void)</div><div class="ttdef"><b>Definition:</b> Script.h:23</div></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_html"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html">Graphos::Core::Script</a></div><div class="ttdef"><b>Definition:</b> Script.h:13</div></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_aa7b2bcff19b141eaf7791a2a0d45bc50"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#aa7b2bcff19b141eaf7791a2a0d45bc50">Graphos::Core::Script::Script</a></div><div class="ttdeci">Script(v8::Handle&lt; v8::Object &gt; instance, GameObject *owner=nullptr)</div><div class="ttdef"><b>Definition:</b> Script.cpp:12</div></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_a958ab95cce18e1a6e494b790075475fd"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#a958ab95cce18e1a6e494b790075475fd">Graphos::Core::Script::Update</a></div><div class="ttdeci">void Update(void)</div><div class="ttdef"><b>Definition:</b> Script.cpp:21</div></div>
+<div class="ttc" id="class_graphos_1_1_core_1_1_script_html_a3831f56c05eecb5e6c8f5df759b711e2"><div class="ttname"><a href="class_graphos_1_1_core_1_1_script.html#a3831f56c05eecb5e6c8f5df759b711e2">Graphos::Core::Script::Draw</a></div><div class="ttdeci">void Draw(void)</div><div class="ttdef"><b>Definition:</b> Script.h:19</div></div>
 <div class="ttc" id="class_graphos_1_1_core_1_1_i_component_html"><div class="ttname"><a href="class_graphos_1_1_core_1_1_i_component.html">Graphos::Core::IComponent</a></div><div class="ttdef"><b>Definition:</b> IComponent.h:16</div></div>
 <div class="ttc" id="_i_component_8h_html"><div class="ttname"><a href="_i_component_8h.html">IComponent.h</a></div></div>
 <div class="ttc" id="class_graphos_1_1_core_1_1_i_component_html_a21c3d8b74b12a105e49fa7ebcd511355"><div class="ttname"><a href="class_graphos_1_1_core_1_1_i_component.html#a21c3d8b74b12a105e49fa7ebcd511355">Graphos::Core::IComponent::owner</a></div><div class="ttdeci">GameObject * owner</div><div class="ttdef"><b>Definition:</b> IComponent.h:29</div></div>
@@ -162,7 +154,7 @@ $(document).ready(function(){initNavTree('_script_8h_source.html','');});
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_0b6ee6e7e9547e675db4add2e5de97da.html">Engine</a></li><li class="navelem"><a class="el" href="dir_2db978ef12e7d8fd9717349051e1c48e.html">Graphos.Scripting</a></li><li class="navelem"><a class="el" href="_script_8h.html">Script.h</a></li>
-    <li class="footer">Generated on Thu Nov 14 2013 13:37:30 for Graphos by
+    <li class="footer">Generated on Sat Nov 16 2013 18:04:24 for Graphos by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>
