@@ -31,7 +31,9 @@
     <Import Project="..\..\Solution\GraphosProperties.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
       <SDLCheck>true</SDLCheck>
@@ -51,6 +53,12 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>doxygen $(RootDir)/Documentation/Doxyfile</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Generating Documentation...</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

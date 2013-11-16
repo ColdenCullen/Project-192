@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
     <ClInclude Include="ClassMapper.h" />
     <ClInclude Include="Enums.h">
@@ -10,10 +9,10 @@
     <ClInclude Include="ClassWrapper.h">
       <Filter>Class Creators</Filter>
     </ClInclude>
+    <ClInclude Include="GraphosBehavior.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ScriptController.cpp" />
-    <ClCompile Include="Script.cpp" />
     <ClCompile Include="CC-Mesh.cpp">
       <Filter>Class Creators\Components</Filter>
     </ClCompile>
@@ -53,6 +52,7 @@
     <ClCompile Include="CC-WindowController.cpp">
       <Filter>Class Creators\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="GraphosBehavior.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Class Creators">

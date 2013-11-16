@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "Script.h"
+#include "GraphosBehavior.h"
 #include "Matrix4.h"
 #include "ShaderController.h"
 
@@ -63,7 +63,7 @@ namespace Graphos
 			Math::Matrix4*		projectionMatrix;
 			Math::Matrix4*		modelViewProjection;
 
-			Core::Script*		script;
+			Core::GraphosBehavior* script;
 
 		private:
 			void				UpdateMVPMatrix( void );

@@ -41,7 +41,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>ws2_32.lib;winmm.lib;</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;winmm.lib;v8_base.lib;v8_snapshot.lib;</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -75,23 +75,15 @@
     <ClCompile Include="CC-Transform.cpp" />
     <ClCompile Include="CC-Vector3.cpp" />
     <ClCompile Include="CC-WindowController.cpp" />
-    <ClCompile Include="Script.cpp" />
+    <ClCompile Include="GraphosBehavior.cpp" />
     <ClCompile Include="ScriptController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClassMapper.h" />
     <ClInclude Include="ClassWrapper.h" />
     <ClInclude Include="Enums.h" />
-    <ClInclude Include="Script.h" />
+    <ClInclude Include="GraphosBehavior.h" />
     <ClInclude Include="ScriptController.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\ExternalDependencies\submodules\v8\tools\gyp\v8_base.vcxproj">
-      <Project>{0365b47c-0806-2d4c-c633-bffe035a6182}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ExternalDependencies\submodules\v8\tools\gyp\v8_snapshot.vcxproj">
-      <Project>{d7e18491-93af-c9d1-0cf8-261904821d5a}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

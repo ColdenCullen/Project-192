@@ -4,3 +4,6 @@
 [submodule "ExternalDependencies/submodules/v8"]
 	path = ExternalDependencies/submodules/v8
 	url = git@github.com:ColdenCullen/v8.git
+[submodule "Documentation"]
+	path = Documentation
+	url = git@github.com:ColdenCullen/Project-192.git
