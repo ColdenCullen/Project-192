@@ -39,6 +39,7 @@ namespace Graphos
 			bool				Equals( const Matrix4& other ) const;
 
 			Matrix4				Inverse( void ) const;
+			Matrix4				Transpose( void ) const;
 
 			Vector3				operator*( const Vector3& vec ) const;
 			Vector3				Mul( const Vector3& vec ) const;

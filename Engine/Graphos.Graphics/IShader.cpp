@@ -63,6 +63,11 @@ void IShader::SetUniform( std::string name, const float value ) const
 	throw exception( "Not implemented!" );
 }
 
+void IShader::SetUniformBuffer( std::string name, const gByte* value, const size_t size ) const
+{
+	throw exception( "Not implemented!" );
+}
+
 void IShader::RegisterConstBuffer( std::string name, ConstBuffer* buf )
 {
 	throw exception( "Not implemented!" );

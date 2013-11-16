@@ -45,8 +45,21 @@ namespace Graphos
 			
 			virtual void		SetUniform( std::string name, const float value ) const;
 			virtual void		SetUniform( std::string name, const int value ) const;
+								
+								/**
+								 * @param name Name of the uniform
+								 * @param value The data
+								 * @param size The number of values in data
+								 */
 			virtual void		SetUniformArray( std::string name, const float* value, const int size ) const;
 			virtual void		SetUniformArray( std::string name, const int* value, const int size ) const;
+
+								/**
+								 * @param name Name of the uniform
+								 * @param value The data
+								 * @param size The size (in bytes) of value
+								 */
+			virtual void		SetUniformBuffer( std::string name, const gByte* value, const size_t size ) const;
 			virtual void		SetUniformMatrix( std::string name, const Math::Matrix4& matrix ) const;
 
 			void				SetModelMatrix( const Math::Matrix4& value );

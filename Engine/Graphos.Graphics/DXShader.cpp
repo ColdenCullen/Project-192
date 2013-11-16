@@ -7,6 +7,7 @@
 #include "OutputController.h"
 #include "Mesh.h"
 #include "Texture.h"
+#include "GameObject.h"
 
 using namespace v8;
 using namespace std;
@@ -155,7 +156,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	auto buf = new ConstBuffer;
 	buf->totalSize = 0;
 	buf->AddProperty( "modelViewProj", sizeof(Matrix4) );
-	buf->AddProperty( "modelMatrix", sizeof(Matrix4) );
+	buf->AddProperty( "rotationMatrix", sizeof(Matrix4) );
 
 	RegisterConstBuffer( "uniforms", buf );
 	delete buf;
@@ -166,7 +167,7 @@ void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
 	buffer = new DxConstBuffer();
 	buffer->meta = buf->meta;
 	buffer->totalSize = buf->totalSize;
-	buffer->data = new char[ buffer->totalSize ];
+	buffer->data = new gByte[ buffer->totalSize ];
 
 	// ---- Constant Buffer
 	D3D11_BUFFER_DESC cBufferDesc;
@@ -206,7 +207,7 @@ void DXShader::Draw( Mesh& mesh ) const
 	auto deviceContext = AdapterController::Get()->GetDeviceContext().dx;
 
 	SetUniformMatrix( "modelViewProj", *modelViewProjection );
-	SetUniformMatrix( "modelMatrix", *modelMatrix );
+//	SetUniformMatrix( "modelMatrix", mesh.Owner()->transform->RotationMatrix() );
 
 	// update constant buffer on the GPU
 	deviceContext->UpdateSubresource( buffer->vsConstantBuffer,
@@ -300,6 +301,18 @@ void DXShader::SetUniformArray( string name, const int* value, const int size ) 
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
 	if( it->second.second != sizeof( *value )*size )
 		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniformArray(int)" );
+	
+	memcpy( buffer->data + it->second.first, value, it->second.second );
+}
+
+void DXShader::SetUniformBuffer( string name, const gByte* value, const size_t size) const
+{
+	auto it = buffer->meta.find( name );
+
+	if( it == end( buffer->meta ) )
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
+	if( it->second.second != sizeof( *value )*size )
+		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniformBuffer" );
 	
 	memcpy( buffer->data + it->second.first, value, it->second.second );
 }

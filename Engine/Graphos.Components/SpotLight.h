@@ -11,7 +11,8 @@ namespace Graphos
 		class SpotLight : public DirectionalLight
 		{
 		public:
-								SpotLight( Math::Vector3 initPos = Math::Vector3(),
+								SpotLight( std::string name, 
+											Math::Vector3 initPos = Math::Vector3(),
 											float initInnerAngle = 30,
 											float initOuterAngle = 30,
 											float initFallOffRadius = 1,
@@ -20,7 +21,7 @@ namespace Graphos
 											GameObject* owner = nullptr )
 											: position( initPos ), innerAngle( initInnerAngle ),
 											outerAngle( initOuterAngle ), fallOffRadius( initFallOffRadius ),
-											DirectionalLight( initDir, initColor, owner ) { }
+											DirectionalLight( name, initDir, initColor, owner ) { }
 								~SpotLight( void ) { }
 
 			void				Update( void ) override;
