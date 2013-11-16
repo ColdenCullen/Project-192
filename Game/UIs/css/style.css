@@ -102,6 +102,10 @@ body {
   font-size: 1.25em;
 }
 
+#settings-form {
+  width: 50%;
+}
+
 #start-game {
   border-radius: 100%;
   width: 4.5em;
