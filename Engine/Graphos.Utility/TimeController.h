@@ -14,8 +14,8 @@ namespace Graphos
 		public:
 			static void			Initialize( void );
 			static void			Update( void );
-			static const float	GetDeltaTime( void ) { return static_cast<float>( deltaTime.count() ) / std::nano::den; }
-			static const float	GetTotalTime( void ) { return static_cast<float>( totalTime.count() ) / std::nano::den; }
+			static const gFloat	GetDeltaTime( void ) { return static_cast<gFloat>( deltaTime.count() ) / std::nano::den; }
+			static const gFloat	GetTotalTime( void ) { return static_cast<gFloat>( totalTime.count() ) / std::nano::den; }
 
 		private:
 			static std::chrono::high_resolution_clock::time_point
@@ -26,7 +26,7 @@ namespace Graphos
 								deltaTime;
 			static std::chrono::nanoseconds
 								totalTime;
-			static unsigned int	frameCount;
+			static gUInt		frameCount;
 
 			static std::chrono::nanoseconds
 								secondTime;

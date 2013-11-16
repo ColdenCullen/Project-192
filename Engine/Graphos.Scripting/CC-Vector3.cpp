@@ -19,25 +19,25 @@ void cvv8::ClassCreator_SetupBindings<Vector3>::Initialize( Handle<v8::Object> c
 
 	Vector3cc
 		( "destroy", ClassCreator<Vector3>::DestroyObjectCallback )
-		( "Equals", ConstMethodToInCa<const Vector3, bool (const Vector3&), &Vector3::Equals>::Call )
-		( "Dot", ConstMethodToInCa<const Vector3, float (const Vector3&), &Vector3::Dot>::Call )
+		( "Equals", ConstMethodToInCa<const Vector3, gBool (const Vector3&), &Vector3::Equals>::Call )
+		( "Dot", ConstMethodToInCa<const Vector3, gFloat (const Vector3&), &Vector3::Dot>::Call )
 		( "Cross", ConstMethodToInCa<const Vector3, Vector3 (const Vector3&), &Vector3::Cross>::Call )
 		( "Add", ConstMethodToInCa<const Vector3, Vector3 (const Vector3&), &Vector3::Add>::Call )
-		( "Multiply", ConstMethodToInCa<const Vector3, Vector3 (const float), &Vector3::operator*>::Call )
+		( "Multiply", ConstMethodToInCa<const Vector3, Vector3 (const gFloat), &Vector3::operator*>::Call )
 		;
 
 	// Proxy accessor/mutator functions as JS properties
 	AccessorAdder Vector3acc( Vector3cc.Prototype() );
 	Vector3acc
 		( "x",
-			MemberToAccessors<const Vector3, float, &Vector3::x>::Get,
-			MemberToAccessors<const Vector3, float, &Vector3::x>::Set )
+			MemberToAccessors<const Vector3, gFloat, &Vector3::x>::Get,
+			MemberToAccessors<const Vector3, gFloat, &Vector3::x>::Set )
 		( "y",
-			MemberToAccessors<const Vector3, float, &Vector3::y>::Get,
-			MemberToAccessors<const Vector3, float, &Vector3::y>::Set )
+			MemberToAccessors<const Vector3, gFloat, &Vector3::y>::Get,
+			MemberToAccessors<const Vector3, gFloat, &Vector3::y>::Set )
 		( "z",
-			MemberToAccessors<const Vector3, float, &Vector3::z>::Get,
-			MemberToAccessors<const Vector3, float, &Vector3::z>::Set )
+			MemberToAccessors<const Vector3, gFloat, &Vector3::z>::Get,
+			MemberToAccessors<const Vector3, gFloat, &Vector3::z>::Set )
 		( "Inverse",
 			ConstMethodToGetter<const Vector3, Vector3 (void), &Vector3::Inverse>::Get,
 			ThrowingSetter::Set )

@@ -18,10 +18,10 @@ namespace Graphos
 
 			struct PhysicsConfig 
 			{
-				float				mass;
-				float				restitution;
-				float				friction;
-				float				rollingFriction;
+				gFloat				mass;
+				gFloat				restitution;
+				gFloat				friction;
+				gFloat				rollingFriction;
 
 				PhysicsConfig() : mass( 0.0f ), restitution( 1.0f ), friction( 0.5f ), rollingFriction( 0.4f ) {};
 			};
@@ -31,10 +31,10 @@ namespace Graphos
 
 			// TODO: Send in collision shape
 			static void				CreatePhysicsObject(	GraphosMotionState* gms, 
-															const float mass, 
-															const float restitution, 
-															const float friction,
-															const float rollingFriction );
+															const gFloat mass, 
+															const gFloat restitution, 
+															const gFloat friction,
+															const gFloat rollingFriction );
 
 			static PhysicsController& Get( void )
 			{
@@ -42,7 +42,7 @@ namespace Graphos
 				return instance;
 			}
 
-			static void StepPhysics( float timeStep, int maxSubSteps=1, float fixedTimeStep=(1.f/60.f) );
+			static void StepPhysics( gFloat timeStep, gInt maxSubSteps=1, gFloat fixedTimeStep=(1.f/60.f) );
 
 		private:
 								PhysicsController( void ) { }

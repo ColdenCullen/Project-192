@@ -19,17 +19,17 @@ namespace Graphos
 			{
 				//return ( b * a.Dot( c ) ) - ( a * b.Dot( c ) );
 
-				float z = ( a.x * b.y ) - ( a.y * b.x );
+				gFloat z = ( a.x * b.y ) - ( a.y * b.x );
 				return Vector3( -z * c.y, z * c.x, 0.0f );
 			}
 			#pragma endregion
 
-			Vector3( const float values[ 3 ] ) : x( values[ 0 ] ), y( values[ 1 ] ), z( values[ 2 ] ) { }
-			Vector3( float x = 0.0f, float y = 0.0f, float z = 0.0f ) : x( x ), y( y ), z( z ) { }
-			Vector3( float value ) : x( value ), y( value ), z( value ) { }
+			Vector3( const gFloat values[ 3 ] ) : x( values[ 0 ] ), y( values[ 1 ] ), z( values[ 2 ] ) { }
+			Vector3( gFloat x = 0.0f, gFloat y = 0.0f, gFloat z = 0.0f ) : x( x ), y( y ), z( z ) { }
+			Vector3( gFloat value ) : x( value ), y( value ), z( value ) { }
 			Vector3( const Vector3& other ) : x( other.x ), y( other.y ), z( other.z ) { }
 
-			float operator[]( const int index ) const
+			gFloat operator[]( const int index ) const
 			{
 				return *( &x + index );
 			}
@@ -102,18 +102,18 @@ namespace Graphos
 			}
 
 			// Rotate
-			inline Vector3 Rotate( const float xDeg, const float yDeg, const float zDeg )
+			inline Vector3 Rotate( const gFloat xDeg, const gFloat yDeg, const gFloat zDeg )
 			{
 				return Vector3( x * cos( zDeg ) - y * sin( zDeg ), x * sin( zDeg ) - y * cos( zDeg ), z );
 			}
 
 			// Dot product
-			inline float Dot( const Vector3& other ) const
+			inline gFloat Dot( const Vector3& other ) const
 			{
 				return ( x * other.x ) + ( y * other.y ) + ( z * other.z );
 			}
 			// Dot product
-			inline float operator*( const Vector3& other ) const
+			inline gFloat operator*( const Vector3& other ) const
 			{
 				return Dot( other );
 			}
@@ -130,12 +130,12 @@ namespace Graphos
 			}
 
 			// Multiply by scaler
-			inline Vector3 operator*( const float other ) const
+			inline Vector3 operator*( const gFloat other ) const
 			{
 				return Vector3( x * other, y * other, z * other );
 			}
 			// Multiply by scaler
-			Vector3& operator*=( const float other )
+			Vector3& operator*=( const gFloat other )
 			{
 				x *= other;
 				y *= other;
@@ -145,11 +145,11 @@ namespace Graphos
 			}
 
 			// Divide by scalar
-			inline Vector3 operator/( const float other ) const
+			inline Vector3 operator/( const gFloat other ) const
 			{
 				return Vector3( x / other, y / other, z / other );
 			}
-			Vector3& operator/=( const float other )
+			Vector3& operator/=( const gFloat other )
 			{
 				x /= other;
 				y /= other;
@@ -159,13 +159,13 @@ namespace Graphos
 			}
 
 			// Conversion function
-			operator float()
+			operator gFloat()
 			{
 				return Magnitude();
 			}
 			
 			// Magnitude
-			inline float Magnitude( void ) const
+			inline gFloat Magnitude( void ) const
 			{
 				return sqrt( ( x * x ) + ( y * y ) + ( z * z ) );
 			}
@@ -173,7 +173,7 @@ namespace Graphos
 			// Normalize
 			Vector3 Normalize( void ) const
 			{
-				float mag = Magnitude();
+				gFloat mag = Magnitude();
 
 				return Vector3( x / mag, y / mag, z / mag );
 			}
@@ -182,11 +182,11 @@ namespace Graphos
 			{
 				struct 
 				{
-					float x, y, z;
+					gFloat x, y, z;
 				};
 				struct 
 				{
-					float r, g, b;
+					gFloat r, g, b;
 				};
 			};
 		};

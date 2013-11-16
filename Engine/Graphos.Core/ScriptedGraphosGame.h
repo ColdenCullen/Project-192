@@ -22,7 +22,7 @@ namespace Graphos
 		protected:
 			GraphosBehavior*	script;
 
-			bool				useScript;
+			gBool				useScript;
 		};
 	}
 }

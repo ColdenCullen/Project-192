@@ -15,7 +15,7 @@ namespace Graphos
 			static const Quaternion Identity;
 
 			// Scaler component
-			float w;
+			gFloat w;
 
 			// Angular component
 			union
@@ -23,14 +23,14 @@ namespace Graphos
 				// Vector version
 				struct { Vector3 axis; };
 
-				// Float version
-				struct { float x, y, z; };
+				// gFloat version
+				struct { gFloat x, y, z; };
 			};
 
 			// Constructors
 			Quaternion( void ) : axis(), w( 1.0f ) { };
-			Quaternion( const Vector3& axisOther, const float w ) : axis( axisOther ), w( w ) { }
-			Quaternion( const float x, const float y, const float z, const float w ) : axis( x, y, z ), w( w ) { }
+			Quaternion( const Vector3& axisOther, const gFloat w ) : axis( axisOther ), w( w ) { }
+			Quaternion( const gFloat x, const gFloat y, const gFloat z, const gFloat w ) : axis( x, y, z ), w( w ) { }
 			Quaternion( const Quaternion& other ) : axis( other.axis ), w( other.w ) { }
 			
 			// Multiply quaternions

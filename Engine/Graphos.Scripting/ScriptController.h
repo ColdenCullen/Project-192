@@ -98,7 +98,7 @@ namespace Graphos
 			std::vector<GraphosBehavior*>
 								behaviors;
 
-			bool				isInitialized;
+			gBool				isInitialized;
 		};
 	}
 }

@@ -29,7 +29,7 @@ namespace Graphos
 			OutputController&	operator=( const OutputController& );
 			
 			static std::string	GetOutputHeader( OutputType type );
-			static bool			GetWhetherPrint( OutputType type );
+			static gBool		GetWhetherPrint( OutputType type );
 		};
 	}
 }

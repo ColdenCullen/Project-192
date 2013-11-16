@@ -20,10 +20,10 @@ void cvv8::ClassCreator_SetupBindings<Time>::Initialize( Handle<v8::Object> cons
 	// Set static methods
 	Handle<Object> ctor( Timecc.CtorFunction() );
 	ctor->SetAccessor( String::New( "DeltaTime" ),
-						FunctionToGetter<const float(void), &Time::GetDeltaTime>::Get,
+						FunctionToGetter<const gFloat(void), &Time::GetDeltaTime>::Get,
 						ThrowingSetter::Set );
 	ctor->SetAccessor( String::New( "TotalTime" ),
-						FunctionToGetter<const float(void), &Time::GetTotalTime>::Get,
+						FunctionToGetter<const gFloat(void), &Time::GetTotalTime>::Get,
 						ThrowingSetter::Set );
 
 	Timecc.AddClassTo( TypeName<Time>::Value, target );

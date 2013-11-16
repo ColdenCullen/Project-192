@@ -15,8 +15,8 @@ void OpenGlController::Initialize( void )
 
 	WindowController::Get()->OpenWindow();
 
-	unsigned int formatCount;
-	int pixelFormat[1];
+	gUInt formatCount;
+	gInt pixelFormat[1];
 	PIXELFORMATDESCRIPTOR pixelFormatDescriptor;
 
 	// Get device context

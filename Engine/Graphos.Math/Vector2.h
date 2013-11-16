@@ -8,12 +8,12 @@ namespace Graphos
 		struct Vector2
 		{
 		public:
-			Vector2( const float values[ 2 ] ) : x( values[ 0 ] ), y( values[ 1 ] ) { }
-			Vector2( float x = 0.0f, float y = 0.0f ) : x( x ), y( y ) { }
+			Vector2( const gFloat values[ 2 ] ) : x( values[ 0 ] ), y( values[ 1 ] ) { }
+			Vector2( gFloat x = 0.0f, gFloat y = 0.0f ) : x( x ), y( y ) { }
 			Vector2( const Vector2& other ) : x( other.x ), y( other.y ) { }
-			Vector2( float value ) : x( value ), y( value ) { }
+			Vector2( gFloat value ) : x( value ), y( value ) { }
 
-			float operator[]( const int index ) const
+			gFloat operator[]( const int index ) const
 			{
 				return *( &x + index );
 			}
@@ -49,53 +49,53 @@ namespace Graphos
 			}
 
 			// Cross product
-			float Cross( const Vector2& other ) const
+			gFloat Cross( const Vector2& other ) const
 			{
 				return ( x * other.y ) - ( y * other.x );
 			}
 			// Cross product
-			float operator%( const Vector2& other ) const
+			gFloat operator%( const Vector2& other ) const
 			{
 				return Cross( other );
 			}
 
 			// Dot product
-			float Dot( const Vector2& other ) const
+			gFloat Dot( const Vector2& other ) const
 			{
 				return ( x * other.x ) + ( y * other.y );
 			}
 			// Dot product
-			float operator*( const Vector2& other ) const
+			gFloat operator*( const Vector2& other ) const
 			{
 				return Dot( other );
 			}
 
 			// Multiply by scaler
-			Vector2 operator*( const float other ) const
+			Vector2 operator*( const gFloat other ) const
 			{
 				return Vector2( x * other, y * other );
 			}
 
 			// Conversion function
-			operator float()
+			operator gFloat()
 			{
 				return Magnitude();
 			}
 
 			// Magnitude
-			float Magnitude( void ) const
+			gFloat Magnitude( void ) const
 			{
 				return sqrt( ( x * x ) + ( y * y ) );
 			}
 
 			Vector2 Normalize( void ) const
 			{
-				float mag = sqrt( ( x * x ) + ( y * y ) );
+				gFloat mag = sqrt( ( x * x ) + ( y * y ) );
 
 				return Vector2( x / mag, y / mag );
 			}
 			
-			float x, y;
+			gFloat x, y;
 		};
 	}
 }

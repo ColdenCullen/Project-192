@@ -65,10 +65,10 @@ namespace Graphos
 		{
 		public:
 			InputState&			operator=( const InputState& other );
-			bool				operator[]( const unsigned char index );
+			gBool				operator[]( const unsigned char index );
 
-			bool				CheckState( const unsigned char keyCode ) const;
-			void				SetState( const unsigned char keyCode, const bool newValue );
+			gBool				CheckState( const unsigned char keyCode ) const;
+			void				SetState( const unsigned char keyCode, const gBool newValue );
 			void				Reset( void );
 		private:
 			uint64_t			bits[ SPLIT ];
@@ -77,7 +77,7 @@ namespace Graphos
 		class Input
 		{
 		public:
-			typedef Event<void, unsigned int> KeyEvent;
+			typedef Event<void, gUInt> KeyEvent;
 
 			static Core::UserInterface* ui;
 
@@ -86,11 +86,11 @@ namespace Graphos
 			static void			AddKeyDownUp( KeyEvent::Delegate func );
 			static void			AddKeyDownEvent( KeyEvent::Delegate func );
 
-			static void			KeyDown( unsigned int input );
-			static void			KeyUp( unsigned int input );
+			static void			KeyDown( gUInt input );
+			static void			KeyUp( gUInt input );
 
-			static bool			IsKeyDown( unsigned int input, const bool checkPrevious = false );
-			static bool			IsKeyUp( unsigned int input, const bool checkPrevious = false );
+			static gBool		IsKeyDown( gUInt input, const gBool checkPrevious = false );
+			static gBool		IsKeyUp( gUInt input, const gBool checkPrevious = false );
 
 			static Math::Vector2 GetMousePos( /*Transform& camera, float zPlane*/ );
 
@@ -105,7 +105,7 @@ namespace Graphos
 			static InputState	keyState;
 			static InputState	prevKeyState;
 			static InputState	stage;
-			static bool			lmbDown, rmbDown;
+			static gBool		lmbDown, rmbDown;
 		};
 	}
 }

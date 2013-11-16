@@ -76,12 +76,12 @@ void PhysicsController::Shutdown( void )
 	//collisionShapes.clear();
 }
 
-void PhysicsController::StepPhysics( float timeStep, int maxSubSteps, float fixedTimeStep )
+void PhysicsController::StepPhysics( gFloat timeStep, gInt maxSubSteps, gFloat fixedTimeStep )
 {
 	dynamicsWorld->stepSimulation( timeStep, maxSubSteps, fixedTimeStep );
 }
 
-void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, const float mass, const float restitution, const float friction, const float rollingFriction )
+void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, const gFloat mass, const gFloat restitution, const gFloat friction, const gFloat rollingFriction )
 {
 	// 1. Create collision shape
 	// Re-using the same collision shape is better for memory usage and performance

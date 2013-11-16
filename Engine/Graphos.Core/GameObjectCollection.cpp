@@ -30,7 +30,7 @@ void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 	{
 		if( object.isArray() )
 		{
-			for( int ii = 0; ii < object.size(); ++ii )
+			for( gInt ii = 0; ii < object.size(); ++ii )
 				addObj( object[ ii ] );
 		}
 		else
@@ -81,11 +81,13 @@ void GameObjectCollection::RemoveObjectByName( string name )
 void GameObjectCollection::ClearObjects( void )
 {
 	if( objectList.size() > 0 )
+	{
 		for( auto object = begin( objectList ); object != end( objectList ); ++object )
 		{
 			object->second->Shutdown();
 			delete object->second;
 		}
+	}
 
 	objectList.clear();
 	nameMap.clear();
