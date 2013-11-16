@@ -2,61 +2,44 @@
 
 // For parsing and building objects
 #include "File.h"
-#include <json\json.h>
+#include "JsonController.h"
 
 // Controllers used to add components
 #include "OutputController.h"
+#include "ScriptController.h"
 
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Utility;
 
-void GameObjectCollection::LoadObjects( string assetPath )
+void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 {
-	// Read in list of files
-	File::FileList fileList = File::ScanDir( "Resources/Assets/Objects/" + assetPath );
-	// Json reader
-	Json::Reader reader;
-	// Root of current file
-	Json::Value root;
-
 	// Function to add objects to the list
-	auto addObj = [&]( Json::Value object )
+	auto addObj = [&]( JsonObject object )
 	{
-		auto name = object[ "Name" ].asString();
+		auto name = object.Get<string>( "Name" );
 
 		if( nameMap.find( name ) != end( nameMap ) )
-			OutputController::PrintMessage( OutputType::OT_ERROR, "Object name " + name + " already in use." );
+			OutputController::PrintMessage( OutputType::Error, "Object name " + name + " already in use." );
 
 		objectList[ currentId ] = GameObject::CreateFromJson( object );
 		nameMap[ name ] = currentId++;
 	};
 
-	// Map for parents, to be added after all objects are loaded
-	unordered_map<unsigned int, string> parentMap;
-
-	for( int fileIndex = 0; fileIndex < fileList.size(); ++fileIndex )
+	for( auto object : JsonController::Get( "Objects" + ( assetPath.size() ? "." + assetPath : "" ) ).node )
 	{
-		if( reader.parse( fileList[ fileIndex ].GetContents(), root ) )
+		if( object.isArray() )
 		{
-			if( root.isArray() )
-			{
-				for( int ii = 0; ii < root.size(); ++ii )
-					addObj( root[ ii ] );
-			}
-			else
-			{
-				addObj( root );
-			}
+			for( gInt ii = 0; ii < object.size(); ++ii )
+				addObj( object[ ii ] );
 		}
 		else
 		{
-			OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid object json in " + fileList[ fileIndex ].GetFileName() );
+			addObj( object );
 		}
 	}
 
-	for( auto parentPair = begin( parentMap ); parentPair != end( parentMap ); ++parentPair )
-		GetObjectById( parentPair->first )->transform->parent = GetObjectByName( parentPair->second )->transform;
+	ScriptController::Get().InitializeObjects( this );
 }
 
 GameObject* GameObjectCollection::GetObjectById( unsigned int id )
@@ -98,11 +81,13 @@ void GameObjectCollection::RemoveObjectByName( string name )
 void GameObjectCollection::ClearObjects( void )
 {
 	if( objectList.size() > 0 )
+	{
 		for( auto object = begin( objectList ); object != end( objectList ); ++object )
 		{
 			object->second->Shutdown();
 			delete object->second;
 		}
+	}
 
 	objectList.clear();
 	nameMap.clear();

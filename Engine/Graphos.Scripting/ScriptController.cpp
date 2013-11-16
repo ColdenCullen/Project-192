@@ -2,7 +2,7 @@
 #include <cvv8\ClassCreator.hpp>
 
 #include <iostream>
-#include <v8/v8-debug.h>
+#include <v8-debug.h>
 
 #include "OutputController.h"
 #include "ScriptController.h"
@@ -26,10 +26,12 @@ Handle<Value> IsKeyDown( const Arguments& args )
 
 Handle<Value> PrintHandler( const Arguments& args )
 {
-	for( int ii = 0; ii < args.Length(); ++ii )
-		cout << *String::Utf8Value( args[ ii ] );
+	string message = "";
 
-	cout << endl;
+	for( int ii = 0; ii < args.Length(); ++ii )
+		message += string( *String::Utf8Value( args[ ii ] ) );
+
+	OutputController::PrintMessage( OutputType::Info, message );
 
 	return Undefined();
 }
@@ -80,6 +82,32 @@ void ScriptController::Initialize( void )
 	isInitialized = true;
 }
 
+GraphosBehavior* ScriptController::CreateObjectInstance( std::string className )
+{
+	using namespace v8;
+	using namespace cvv8;
+
+	if( !isInitialized )
+		Initialize();
+
+	// Create a scope
+	Context::Scope contextScope( context );
+
+	// Get an instance of the class
+	Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
+
+	// Return object
+	if( !ctor.IsEmpty() )
+	{
+		// Create basic gameobject as well as instance of new class
+		return new Graphos::Core::GraphosBehavior(
+			Persistent<Object>::New(
+				ctor->CallAsConstructor( 0, nullptr )->ToObject()
+				)
+			);
+	}
+}
+
 void ScriptController::Shutdown( void )
 {
 	if( isInitialized )
@@ -88,4 +116,10 @@ void ScriptController::Shutdown( void )
 
 		//isInitialized = false;
 	}
+}
+
+void ScriptController::InitializeObjects( GameObjectCollection* objects )
+{
+	for( auto obj : behaviors )
+		obj->Initialize( objects );
 }

@@ -22,10 +22,10 @@ namespace Graphos
 		{
 		public:
 								AwesomiumView( void ) : webView( nullptr ), surface( nullptr ) { }
-								AwesomiumView( std::string url, unsigned int width, unsigned int height ) { Initialize( url, width, height ); }
+								AwesomiumView( std::string url, gUInt width, gUInt height ) { Initialize( url, width, height ); }
 								~AwesomiumView( void ) { }
 
-			bool				Initialize( std::string url, unsigned int width, unsigned int height );
+			bool				Initialize( std::string url, gUInt width, gUInt height );
 			void				Update( void ) override;
 			void				Draw( Graphics::IShader* shader ) override;
 			void				Shutdown( void ) override;
@@ -39,9 +39,8 @@ namespace Graphos
 								surface;
 			union 
 			{
-				unsigned char*	gl;
-				DirectX::ID3D11Texture2D*		
-								dx;
+				gByte*						gl;
+				DirectX::ID3D11Texture2D*	dx;
 			} buffer;
 
 		private:

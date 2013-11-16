@@ -27,9 +27,9 @@ namespace Graphos
 
 			void				RegisterConstBuffer( std::string name, ConstBuffer* buf ) override;
 
-			void				SetUniform( std::string name, const float value ) const override;
+			void				SetUniform( std::string name, const gFloat value ) const override;
 			void				SetUniform( std::string name, const int value ) const override;
-			void				SetUniformArray( std::string name, const float* value, const int size ) const override;
+			void				SetUniformArray( std::string name, const gFloat* value, const int size ) const override;
 			void				SetUniformArray( std::string name, const int* value, const int size ) const override;
 			void				SetUniformBuffer( std::string name, const gByte* value, const size_t size ) const override 
 			{

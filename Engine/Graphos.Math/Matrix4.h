@@ -14,10 +14,10 @@ namespace Graphos
 		{
 		public:
 			Matrix4( void ) { }
-			Matrix4( float val00, float val01, float val02, float val03,
-					float val10, float val11, float val12, float val13,
-					float val20, float val21, float val22, float val23,
-					float val30, float val31, float val32, float val33 )
+			Matrix4( gFloat val00, gFloat val01, gFloat val02, gFloat val03,
+					gFloat val10, gFloat val11, gFloat val12, gFloat val13,
+					gFloat val20, gFloat val21, gFloat val22, gFloat val23,
+					gFloat val30, gFloat val31, gFloat val32, gFloat val33 )
 			{
 				dataArray[ 0 ] = val00; dataArray[ 1 ] = val01; dataArray[ 2 ] = val02; dataArray[ 3 ] = val03;
 				dataArray[ 4 ] = val10; dataArray[ 5 ] = val11; dataArray[ 6 ] = val12; dataArray[ 7 ] = val13;
@@ -44,15 +44,15 @@ namespace Graphos
 			Vector3				operator*( const Vector3& vec ) const;
 			Vector3				Mul( const Vector3& vec ) const;
 
-			static Matrix4		BuildPerspective( const float fov, const float screenAspect, const float near, const float depth );
-			static Matrix4		BuildOrthogonal( const float width, const float height, const float near, const float far );
+			static Matrix4		BuildPerspective( const gFloat fov, const gFloat screenAspect, const gFloat near, const gFloat depth );
+			static Matrix4		BuildOrthogonal( const gFloat width, const gFloat height, const gFloat near, const gFloat far );
 
 			static const Matrix4 Identity;
 
 			union
 			{
-				float matrix[ WIDTH ][ WIDTH ];
-				float dataArray[ WIDTH * WIDTH ];
+				gFloat matrix[ WIDTH ][ WIDTH ];
+				gFloat dataArray[ WIDTH * WIDTH ];
 			};
 		};
 	}

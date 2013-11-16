@@ -6,7 +6,7 @@ using namespace Graphos::Utility;
 
 void TaskManager::Initialize( void )
 {	// If no thread count is specified, use system number
-	int systemThreadCount = thread::hardware_concurrency();
+	gUInt systemThreadCount = thread::hardware_concurrency();
 
 	// If hardware_concurrency is 0, use 1 worker thread
 	Initialize( systemThreadCount > 1 ? systemThreadCount - 1 : 1 );

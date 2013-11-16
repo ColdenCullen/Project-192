@@ -3,8 +3,7 @@
 
 #include <string>
 #include <vector>
-#include <v8/v8.h>
-#include "Script.h"
+#include "GraphosBehavior.h"
 #include "Matrix4.h"
 #include "ShaderController.h"
 
@@ -20,14 +19,14 @@ namespace Graphos
 	{
 		struct ConstBuffer
 		{
-			std::unordered_map<std::string, std::pair<unsigned int, std::size_t>> meta;
-			std::size_t				 totalSize;
+			std::unordered_map<std::string, std::pair<gSize, gSize>> meta;
+			gSize				 totalSize;
 
 			ConstBuffer() { totalSize = 0; }
 
-			void AddProperty( std::string name, std::size_t size )
+			void AddProperty( std::string name, gSize size )
 			{
-				meta[ name ] = std::pair<unsigned int, std::size_t>( totalSize, size );
+				meta[ name ] = std::pair<gSize, gSize>( totalSize, size );
 				totalSize += size;
 			}
 		};
@@ -43,16 +42,16 @@ namespace Graphos
 
 			virtual void		RegisterConstBuffer( std::string name, ConstBuffer* buf );
 			
-			virtual void		SetUniform( std::string name, const float value ) const;
-			virtual void		SetUniform( std::string name, const int value ) const;
+			virtual void		SetUniform( std::string name, const gFloat value ) const;
+			virtual void		SetUniform( std::string name, const gInt value ) const;
 								
 								/**
 								 * @param name Name of the uniform
 								 * @param value The data
 								 * @param size The number of values in data
 								 */
-			virtual void		SetUniformArray( std::string name, const float* value, const int size ) const;
-			virtual void		SetUniformArray( std::string name, const int* value, const int size ) const;
+			virtual void		SetUniformArray( std::string name, const gFloat* value, const gInt size ) const;
+			virtual void		SetUniformArray( std::string name, const gInt* value, const gInt size ) const;
 
 								/**
 								 * @param name Name of the uniform
@@ -77,7 +76,7 @@ namespace Graphos
 			Math::Matrix4*		projectionMatrix;
 			Math::Matrix4*		modelViewProjection;
 
-			Core::Script*		script;
+			Core::GraphosBehavior* script;
 
 		private:
 			void				UpdateMVPMatrix( void );

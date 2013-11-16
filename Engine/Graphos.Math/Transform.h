@@ -19,15 +19,15 @@ namespace Graphos
 									~Transform( void );
 
 			void					Rotate( const Quaternion& rotation );
-			void					Rotate( const float x, const float y, const float z, const float w );
+			void					Rotate( const gFloat x, const gFloat y, const gFloat z, const gFloat w );
 			void					Rotate( const Vector3& eulerAngles );
-			void					Rotate( const float x, const float y, const float z );
+			void					Rotate( const gFloat x, const gFloat y, const gFloat z );
 			void					Translate( const Vector3& displacement );
-			void					Translate( const float x, const float y, const float z );
+			void					Translate( const gFloat x, const gFloat y, const gFloat z );
 			void					TranslateTo( const Vector3& newLocation );
-			void					TranslateTo( const float x, const float y, const float z );
+			void					TranslateTo( const gFloat x, const gFloat y, const gFloat z );
 			void					Scale( const Vector3& scale );
-			void					Scale( const float x, const float y, const float z );
+			void					Scale( const gFloat x, const gFloat y, const gFloat z );
 
 			const Math::Vector3*	Position( void )	const { return position; }
 			const Math::Vector3*	Rotation( void )	const { return rotation; }
@@ -50,9 +50,9 @@ namespace Graphos
 			Math::Vector3*			up;
 			Math::Vector3*			forward;
 
-			Math::Matrix4			RotateX( const float angle ) const;
-			Math::Matrix4			RotateY( const float angle ) const;
-			Math::Matrix4			RotateZ( const float angle ) const;
+			Math::Matrix4			RotateX( const gFloat angle ) const;
+			Math::Matrix4			RotateY( const gFloat angle ) const;
+			Math::Matrix4			RotateZ( const gFloat angle ) const;
 
 			void					UpdateLocalVectors( void );
 		};

@@ -1,8 +1,9 @@
 #include "WindowController.h"
+#include "Win32Controller.h"
 
 using namespace Graphos::Graphics;
 
-IPlatformWindowController* WindowController::Get()
+WindowController* WindowController::Get()
 {
 #if defined( _WIN32 )
 	static Win32Controller wInstance;

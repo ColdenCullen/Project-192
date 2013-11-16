@@ -13,7 +13,7 @@ namespace Graphos
 		public:
 								PointLight( std::string name, 
 											Math::Vector3 initPos = Math::Vector3(),
-											float initFallOffRadius = 1,
+											gFloat initFallOffRadius = 1,
 											Math::Vector4 initColor = Math::Vector4(),
 											GameObject* owner = nullptr )
 											: position( initPos ), fallOffRadius( initFallOffRadius ),
@@ -24,7 +24,7 @@ namespace Graphos
 			void				Draw( Graphics::IShader* shader ) override;
 
 			Math::Vector3		position;
-			float				fallOffRadius;
+			gFloat				fallOffRadius;
 		};
 	}
 

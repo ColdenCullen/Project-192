@@ -2,6 +2,7 @@
 #include "DirectXController.h"
 #include "WindowController.h"
 #include "Config.h"
+#include "Win32Controller.h"
 
 using namespace Graphos::Graphics;
 using namespace Graphos::Utility;
