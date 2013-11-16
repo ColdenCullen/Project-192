@@ -11,12 +11,13 @@ namespace Graphos
 		class PointLight : public AmbientLight
 		{
 		public:
-								PointLight( Math::Vector3 initPos = Math::Vector3(),
+								PointLight( std::string name, 
+											Math::Vector3 initPos = Math::Vector3(),
 											float initFallOffRadius = 1,
 											Math::Vector4 initColor = Math::Vector4(),
 											GameObject* owner = nullptr )
 											: position( initPos ), fallOffRadius( initFallOffRadius ),
-											AmbientLight( initColor, owner ) { }
+											AmbientLight( name, initColor, owner ) { }
 								~PointLight( void ) { }
 
 			void				Update( void ) override;

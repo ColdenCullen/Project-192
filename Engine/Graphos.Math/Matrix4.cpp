@@ -145,9 +145,9 @@ Vector3 Matrix4::operator*( const Vector3& vec ) const
 Vector3 Matrix4::Mul( const Vector3& vec ) const
 {
 	return Vector3(
-		matrix[ 0 ][ 0 ] * vec.x + matrix[ 1 ][ 0 ] * vec.y + matrix[ 2 ][ 0 ] * vec.z,
-		matrix[ 0 ][ 1 ] * vec.x + matrix[ 1 ][ 1 ] * vec.y + matrix[ 2 ][ 1 ] * vec.z,
-		matrix[ 0 ][ 2 ] * vec.x + matrix[ 1 ][ 2 ] * vec.y + matrix[ 2 ][ 2 ] * vec.z
+		matrix[ 0 ][ 0 ] * vec.x + matrix[ 1 ][ 0 ] * vec.y + matrix[ 2 ][ 0 ] * vec.z + matrix[ 3 ][ 0 ],
+		matrix[ 0 ][ 1 ] * vec.x + matrix[ 1 ][ 1 ] * vec.y + matrix[ 2 ][ 1 ] * vec.z + matrix[ 3 ][ 0 ],
+		matrix[ 0 ][ 2 ] * vec.x + matrix[ 1 ][ 2 ] * vec.y + matrix[ 2 ][ 2 ] * vec.z + matrix[ 3 ][ 0 ]
 	);
 }
 
@@ -278,6 +278,21 @@ Matrix4 Matrix4::Inverse( void ) const
 
 	for( int ii = 0; ii < 16; ++ii )
 		toReturn.dataArray[ ii ] *= det;
+
+	return toReturn;
+}
+
+Matrix4 Matrix4::Transpose( void ) const
+{
+	Matrix4 toReturn;
+
+	for( int row = 0; row < 4; row++ )
+	{
+		toReturn.matrix[ row ][ 0 ] = matrix[ 0 ][ row ];
+		toReturn.matrix[ row ][ 1 ] = matrix[ 1 ][ row ];
+		toReturn.matrix[ row ][ 2 ] = matrix[ 2 ][ row ];
+		toReturn.matrix[ row ][ 3 ] = matrix[ 3 ][ row ];
+	}
 
 	return toReturn;
 }

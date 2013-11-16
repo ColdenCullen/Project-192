@@ -11,10 +11,10 @@ namespace Graphos
 		class DirectionalLight : public AmbientLight
 		{
 		public:
-								DirectionalLight( Math::Vector3 initDir = Math::Vector3(),
+								DirectionalLight( std::string name, Math::Vector3 initDir = Math::Vector3(),
 												  Math::Vector4 initColor = Math::Vector4(),
 												  GameObject* owner = nullptr)
-												  : AmbientLight( initColor, owner), 
+												  : AmbientLight( name, initColor, owner), 
 													direction( initDir) { }
 								~DirectionalLight( void ) { }
 

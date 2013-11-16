@@ -222,6 +222,7 @@ void GameObject::Draw( void )
 	// TODO...what did/does this do?...
 	// this SetUniform was removed...needs refactoring?
 	// shader->SetUniform( "shaderTexture", 0 );
+	shader->SetUniformMatrix( "rotationMatrix",transform->RotationMatrix() );
 
 	for( auto component : componentList )
 		component.second->Draw( shader );

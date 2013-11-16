@@ -10,7 +10,7 @@ class Camera1 extends GameObject
         super();
 
         this.Speed = 0.01;
-        this.RotationSpeed = 0.01;
+        this.RotationSpeed = 0.005;
     }
 
     public Update(): void
@@ -42,11 +42,11 @@ class Camera1 extends GameObject
         }
         if( Input.IsKeyDown( Keys.Left ) )
         {
-            this.Transform.Rotate( 0.0, -this.RotationSpeed, 0.0 );
+            this.Transform.Rotate( 0.0, this.RotationSpeed, 0.0 );
         }
         if( Input.IsKeyDown( Keys.Right ) )
         {
-            this.Transform.Rotate( 0.0, this.RotationSpeed, 0.0 );
+            this.Transform.Rotate( 0.0, -this.RotationSpeed, 0.0 );
         }
     }
 }
