@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['script_2ecpp',['Script.cpp',['../_script_8cpp.html',1,'']]],
-  ['script_2eh',['Script.h',['../_script_8h.html',1,'']]],
   ['scriptcontroller_2ecpp',['ScriptController.cpp',['../_script_controller_8cpp.html',1,'']]],
   ['scriptcontroller_2eh',['ScriptController.h',['../_script_controller_8h.html',1,'']]],
   ['scriptedgraphosgame_2ecpp',['ScriptedGraphosGame.cpp',['../_scripted_graphos_game_8cpp.html',1,'']]],

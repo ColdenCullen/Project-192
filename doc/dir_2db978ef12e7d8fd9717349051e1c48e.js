@@ -16,9 +16,9 @@ var dir_2db978ef12e7d8fd9717349051e1c48e =
     [ "ClassMapper.h", "_class_mapper_8h.html", "_class_mapper_8h" ],
     [ "ClassWrapper.h", "_class_wrapper_8h.html", "_class_wrapper_8h" ],
     [ "Enums.h", "_enums_8h.html", "_enums_8h" ],
-    [ "Script.cpp", "_script_8cpp.html", null ],
-    [ "Script.h", "_script_8h.html", [
-      [ "Script", "class_graphos_1_1_core_1_1_script.html", "class_graphos_1_1_core_1_1_script" ]
+    [ "GraphosBehavior.cpp", "_graphos_behavior_8cpp.html", null ],
+    [ "GraphosBehavior.h", "_graphos_behavior_8h.html", [
+      [ "GraphosBehavior", "class_graphos_1_1_core_1_1_graphos_behavior.html", "class_graphos_1_1_core_1_1_graphos_behavior" ]
     ] ],
     [ "ScriptController.cpp", "_script_controller_8cpp.html", "_script_controller_8cpp" ],
     [ "ScriptController.h", "_script_controller_8h.html", [

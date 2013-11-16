@@ -159,11 +159,8 @@ $(document).ready(function(){initNavTree('functions_0x73.html','');});
 : <a class="el" href="class_graphos_1_1_graphics_1_1_window_controller.html#a8bc78ed7cb961e253154e291cb0a51b6">Graphos::Graphics::WindowController</a>
 </li>
 <li>script
-: <a class="el" href="class_graphos_1_1_core_1_1_scripted_graphos_game.html#a6fce383071691b4c49ba51e216caf931">Graphos::Core::ScriptedGraphosGame</a>
-, <a class="el" href="class_graphos_1_1_graphics_1_1_i_shader.html#a5030f15787d151428de735f076d84731">Graphos::Graphics::IShader</a>
-</li>
-<li>Script()
-: <a class="el" href="class_graphos_1_1_core_1_1_script.html#a83b4408b3fef8fbdd6c110fe05f7a21d">Graphos::Core::Script</a>
+: <a class="el" href="class_graphos_1_1_graphics_1_1_i_shader.html#a7ea2c7472402d5eb7ffe941eb1de7d4f">Graphos::Graphics::IShader</a>
+, <a class="el" href="class_graphos_1_1_core_1_1_scripted_graphos_game.html#a7afe7f1bc37001adc92da80ad4f371b3">Graphos::Core::ScriptedGraphosGame</a>
 </li>
 <li>Set()
 : <a class="el" href="class_graphos_1_1_utility_1_1_json_object.html#add5a07ae488825bf21ea7b750cdeb9cd">Graphos::Utility::JsonObject</a>
@@ -173,6 +170,9 @@ $(document).ready(function(){initNavTree('functions_0x73.html','');});
 </li>
 <li>SetData()
 : <a class="el" href="class_graphos_1_1_utility_1_1_config.html#a42b8df68bcea6b39168a8121746441c4">Graphos::Utility::Config</a>
+</li>
+<li>SetInitialValues()
+: <a class="el" href="class_graphos_1_1_core_1_1_graphos_behavior.html#a4b919bbade43581c2710b7686eb02959">Graphos::Core::GraphosBehavior</a>
 </li>
 <li>SetModelMatrix()
 : <a class="el" href="class_graphos_1_1_graphics_1_1_i_shader.html#a565054036ac900146fb1625aa9e92f0c">Graphos::Graphics::IShader</a>
@@ -212,11 +212,11 @@ $(document).ready(function(){initNavTree('functions_0x73.html','');});
 </li>
 <li>Shutdown()
 : <a class="el" href="class_graphos_1_1_core_1_1_content_controller.html#a5e64a5b317bf02815060211fc5930f89">Graphos::Core::ContentController</a>
-, <a class="el" href="class_graphos_1_1_physics_1_1_graphos_motion_state.html#a6d8872d3453f472af6826b02292bc60e">Graphos::Physics::GraphosMotionState</a>
+, <a class="el" href="class_graphos_1_1_physics_1_1_physics_controller.html#a517ff8582e9ff1a62e8d2973f236d9e3">Graphos::Physics::PhysicsController</a>
 , <a class="el" href="class_graphos_1_1_graphics_1_1_open_gl_controller.html#a9e4856bfb82b8dd8ada9c7a58585472b">Graphos::Graphics::OpenGlController</a>
 , <a class="el" href="class_graphos_1_1_graphics_1_1_i_graphics_adapter_controller.html#ac94dfd917017fcb7b0619268dafe8310">Graphos::Graphics::IGraphicsAdapterController</a>
 , <a class="el" href="class_graphos_1_1_core_1_1_game_object.html#a1b625db47fe365ce0e3a8b787714bd67">Graphos::Core::GameObject</a>
-, <a class="el" href="class_graphos_1_1_physics_1_1_physics_controller.html#a517ff8582e9ff1a62e8d2973f236d9e3">Graphos::Physics::PhysicsController</a>
+, <a class="el" href="class_graphos_1_1_physics_1_1_graphos_motion_state.html#a6d8872d3453f472af6826b02292bc60e">Graphos::Physics::GraphosMotionState</a>
 , <a class="el" href="class_graphos_1_1_graphics_1_1_window_controller.html#a874d2473c33cd0f1a96f94b2881bd9ae">Graphos::Graphics::WindowController</a>
 , <a class="el" href="class_graphos_1_1_graphics_1_1_i_shader.html#a79524b4a7431c4c70ab3da790dfa55ea">Graphos::Graphics::IShader</a>
 , <a class="el" href="struct_graphos_1_1_graphics_1_1_gl_shader.html#a2beb92223b102d3b38875ceca8c058bc">Graphos::Graphics::GlShader</a>
@@ -233,7 +233,7 @@ $(document).ready(function(){initNavTree('functions_0x73.html','');});
 , <a class="el" href="class_graphos_1_1_core_1_1_graphos_game.html#a169ba3cd5d05f54e58a97d9a5b6cfdd7">Graphos::Core::GraphosGame</a>
 , <a class="el" href="class_graphos_1_1_core_1_1_asset_controller.html#ac4fa01f752eca9fd62b99e0b49034c7d">Graphos::Core::AssetController</a>
 , <a class="el" href="class_graphos_1_1_core_1_1_awesomium_view.html#ab5d8773e96b11456b3eeb91eabd25923">Graphos::Core::AwesomiumView</a>
-, <a class="el" href="class_graphos_1_1_core_1_1_script.html#a4ed17a00db00020631c4aa3726bc91cb">Graphos::Core::Script</a>
+, <a class="el" href="class_graphos_1_1_core_1_1_graphos_behavior.html#a0c16699f13587202ba4b89f251fccd82">Graphos::Core::GraphosBehavior</a>
 </li>
 <li>SpotLight()
 : <a class="el" href="class_graphos_1_1_core_1_1_spot_light.html#ac48c85e362c0782b3d131f1751644f3a">Graphos::Core::SpotLight</a>
@@ -250,7 +250,7 @@ $(document).ready(function(){initNavTree('functions_0x73.html','');});
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Thu Nov 14 2013 13:37:32 for Graphos by
+    <li class="footer">Generated on Sat Nov 16 2013 14:49:40 for Graphos by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

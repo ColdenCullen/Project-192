@@ -30,8 +30,8 @@ var hierarchy =
         [ "Graphos::Core::PointLight", "class_graphos_1_1_core_1_1_point_light.html", null ]
       ] ],
       [ "Graphos::Core::Camera", "class_graphos_1_1_core_1_1_camera.html", null ],
+      [ "Graphos::Core::GraphosBehavior", "class_graphos_1_1_core_1_1_graphos_behavior.html", null ],
       [ "Graphos::Core::Mesh", "class_graphos_1_1_core_1_1_mesh.html", null ],
-      [ "Graphos::Core::Script", "class_graphos_1_1_core_1_1_script.html", null ],
       [ "Graphos::Core::Texture", "class_graphos_1_1_core_1_1_texture.html", [
         [ "Graphos::Core::AwesomiumView", "class_graphos_1_1_core_1_1_awesomium_view.html", null ]
       ] ],

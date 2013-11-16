@@ -18,7 +18,7 @@ var searchData=
   ['torotationmatrix',['ToRotationMatrix',['../struct_graphos_1_1_math_1_1_quaternion.html#a94fff8b75a878cdfbf76d655ee2e6f3c',1,'Graphos::Math::Quaternion']]],
   ['total_5fsize',['TOTAL_SIZE',['../_input_8h.html#a7d6dd25c7c2cc919a260a1b09143fbf0',1,'Input.h']]],
   ['totalsize',['totalSize',['../struct_graphos_1_1_graphics_1_1_const_buffer.html#a2f4f47607030f8d2f0efc83586f4884a',1,'Graphos::Graphics::ConstBuffer']]],
-  ['transform',['Transform',['../struct_graphos_1_1_math_1_1_transform.html#a2bd04f8338d86c793d3e2dea51a097d0',1,'Graphos::Math::Transform::Transform()'],['../class_graphos_1_1_core_1_1_game_object.html#ac778011b465a1e8d267b1a7595232f30',1,'Graphos::Core::GameObject::transform()']]],
+  ['transform',['transform',['../class_graphos_1_1_core_1_1_game_object.html#ac778011b465a1e8d267b1a7595232f30',1,'Graphos::Core::GameObject::transform()'],['../struct_graphos_1_1_math_1_1_transform.html#a2bd04f8338d86c793d3e2dea51a097d0',1,'Graphos::Math::Transform::Transform()']]],
   ['transform',['Transform',['../struct_graphos_1_1_math_1_1_transform.html',1,'Graphos::Math']]],
   ['transform_2ecpp',['Transform.cpp',['../_transform_8cpp.html',1,'']]],
   ['transform_2eh',['Transform.h',['../_transform_8h.html',1,'']]],

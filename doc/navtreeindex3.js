@@ -1,5 +1,7 @@
 var NAVTREEINDEX3 =
 {
+"struct_graphos_1_1_utility_1_1_input_state.html#ac635e6bad14327bea6ac4ad004e7ce61":[1,0,2,5,4,1],
+"struct_graphos_1_1_utility_1_1_input_state.html#ad0594719306dc804e8d39069a04485a9":[1,0,2,5,4,3],
 "targetver_8h.html":[2,0,0,2,20],
 "targetver_8h_source.html":[2,0,0,2,20],
 "union_graphos_1_1_core_1_1_texture_1_1_texture_i_d.html":[1,0,2,0,10,0],
