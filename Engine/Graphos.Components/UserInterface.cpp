@@ -22,6 +22,7 @@ using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 using namespace Graphos::Utility;
 
+/// Constructor
 UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 {
 	char abspath[ 256 ];
@@ -70,7 +71,6 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 }
 
 /// Destructor
-/// DO NOT CALL
 UserInterface::~UserInterface()
 {
 	if( view )
