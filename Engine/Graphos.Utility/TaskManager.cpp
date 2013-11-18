@@ -4,6 +4,15 @@
 using namespace std;
 using namespace Graphos::Utility;
 
+mutex TaskManager::monitorMutex;
+bool* TaskManager::workerAvailablibility;
+thread* TaskManager::workers;
+deque<TaskManager::Task> TaskManager::tasksWaiting;
+deque<TaskManager::Task> TaskManager::invokeQueue;
+int TaskManager::runningThreads;
+int TaskManager::numThreads;
+thread::id TaskManager::main_thread;
+
 void TaskManager::Initialize( void )
 {	// If no thread count is specified, use system number
 	gUInt systemThreadCount = thread::hardware_concurrency();
@@ -16,6 +25,8 @@ void TaskManager::Initialize( int initThreadCount  )
 {
 	// Assign thread count
 	numThreads = initThreadCount;
+
+	main_thread = this_thread::get_id();
 
 	// Create arrays of workers
 	workers = new thread[ numThreads ];
@@ -35,14 +46,19 @@ void TaskManager::AddTask( Task task )
 		{
 			if( workerAvailablibility[ ii ] )
 			{
-				workers[ ii ] = thread( &TaskManager::ExecuteTask, task, ii );
 				workerAvailablibility[ ii ] = false;
+				workers[ ii ] = thread( &TaskManager::ExecuteTask, task, ii );
 				++runningThreads;
 				break;
 			}
 		}
 	}
 	monitorMutex.unlock();
+}
+
+void TaskManager::Invoke( Task task )
+{
+	invokeQueue.push_back( task );
 }
 
 void TaskManager::ExecuteTask( Task task, int index )
@@ -53,6 +69,11 @@ void TaskManager::ExecuteTask( Task task, int index )
 	// Detach this thread and let it finish
 	if( workers[ index ].joinable() )
 		workers[ index ].detach();
+	else
+	{
+		//_CrtDbgBreak();
+		workers[ index ].join();
+	}
 
 	monitorMutex.lock();
 	if( !tasksWaiting.empty() )
@@ -64,14 +85,21 @@ void TaskManager::ExecuteTask( Task task, int index )
 	}
 	else
 	{	// Else, mark thread as done
-		--runningThreads;
 		workerAvailablibility[ index ] = true;
+		--runningThreads;
+
+		workers[ index ] = thread();// = thread();
 	}
 	monitorMutex.unlock();
 }
 
 void TaskManager::WaitForCompletion( void )
 {
+	for( auto task : invokeQueue )
+	{
+		task();
+	}
+
 	while( runningThreads > 0  ) ;
 }
 
