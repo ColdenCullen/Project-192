@@ -15,7 +15,7 @@
 #include "OutputController.h"
 #include "PhysicsController.h"
 #include "JsonController.h"
-#include "TaskManager.h"
+#include "ThreadManager.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Physics;
@@ -33,7 +33,7 @@ void GraphosGame::Run( void )
 
 	// Init time
 	Time::Initialize();
-	TaskManager::Initialize();
+	ThreadManager::Initialize();
 
 	Start();
 

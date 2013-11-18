@@ -1,19 +1,19 @@
-#include "TaskManager.h"
+#include "ThreadManager.h"
 #include <iostream>
 
 using namespace std;
 using namespace Graphos::Utility;
 
-mutex TaskManager::monitorMutex;
-bool* TaskManager::workerAvailablibility;
-thread* TaskManager::workers;
-deque<TaskManager::Task> TaskManager::tasksWaiting;
-deque<TaskManager::Task> TaskManager::invokeQueue;
-int TaskManager::runningThreads;
-int TaskManager::numThreads;
-thread::id TaskManager::main_thread;
+mutex ThreadManager::monitorMutex;
+bool* ThreadManager::workerAvailablibility;
+thread* ThreadManager::workers;
+deque<ThreadManager::Task> ThreadManager::tasksWaiting;
+deque<ThreadManager::Task> ThreadManager::invokeQueue;
+int ThreadManager::runningThreads;
+int ThreadManager::numThreads;
+thread::id ThreadManager::main_thread;
 
-void TaskManager::Initialize( void )
+void ThreadManager::Initialize( void )
 {	// If no thread count is specified, use system number
 	gUInt systemThreadCount = thread::hardware_concurrency();
 
@@ -21,7 +21,7 @@ void TaskManager::Initialize( void )
 	Initialize( systemThreadCount > 1 ? systemThreadCount - 1 : 1 );
 }
 
-void TaskManager::Initialize( int initThreadCount  )
+void ThreadManager::Initialize( int initThreadCount  )
 {
 	// Assign thread count
 	numThreads = initThreadCount;
@@ -33,7 +33,7 @@ void TaskManager::Initialize( int initThreadCount  )
 	workerAvailablibility = new bool[ numThreads ];
 }
 
-void TaskManager::AddTask( Task task )
+void ThreadManager::AddTask( Task task )
 {
 	monitorMutex.lock();
 	if( runningThreads >= numThreads )
@@ -47,7 +47,7 @@ void TaskManager::AddTask( Task task )
 			if( workerAvailablibility[ ii ] )
 			{
 				workerAvailablibility[ ii ] = false;
-				workers[ ii ] = thread( &TaskManager::ExecuteTask, task, ii );
+				workers[ ii ] = thread( &ThreadManager::ExecuteTask, task, ii );
 				++runningThreads;
 				break;
 			}
@@ -56,12 +56,12 @@ void TaskManager::AddTask( Task task )
 	monitorMutex.unlock();
 }
 
-void TaskManager::Invoke( Task task )
+void ThreadManager::Invoke( Task task )
 {
 	invokeQueue.push_back( task );
 }
 
-void TaskManager::ExecuteTask( Task task, int index )
+void ThreadManager::ExecuteTask( Task task, int index )
 {
 	// Execute task
 	task();
@@ -81,7 +81,7 @@ void TaskManager::ExecuteTask( Task task, int index )
 		auto newTask = tasksWaiting.front();
 		tasksWaiting.pop_front();
 
-		workers[ index ] = thread( &TaskManager::ExecuteTask, newTask, index );
+		workers[ index ] = thread( &ThreadManager::ExecuteTask, newTask, index );
 	}
 	else
 	{	// Else, mark thread as done
@@ -93,7 +93,7 @@ void TaskManager::ExecuteTask( Task task, int index )
 	monitorMutex.unlock();
 }
 
-void TaskManager::WaitForCompletion( void )
+void ThreadManager::WaitForCompletion( void )
 {
 	for( auto task : invokeQueue )
 	{
@@ -103,7 +103,7 @@ void TaskManager::WaitForCompletion( void )
 	while( runningThreads > 0  ) ;
 }
 
-void TaskManager::Shutdown( void )
+void ThreadManager::Shutdown( void )
 {
 	WaitForCompletion();
 

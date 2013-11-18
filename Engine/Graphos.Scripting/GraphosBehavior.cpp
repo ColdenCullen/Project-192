@@ -6,7 +6,7 @@
 #include "OutputController.h"
 #include "GameObjectCollection.h"
 #include "ClassMapper.h"
-#include "TaskManager.h"
+#include "ThreadManager.h"
 
 using namespace v8;
 using namespace std;
@@ -87,12 +87,12 @@ void GraphosBehavior::CallFunction( string name, ... )
 		func->Call( instance, count, vals );
 	};
 
-	if( TaskManager::OnMainThread() )
+	if( ThreadManager::OnMainThread() )
 	{
 		exec();
 	}
 	else
 	{
-		TaskManager::Invoke( exec );
+		ThreadManager::Invoke( exec );
 	}
 }
