@@ -49,7 +49,7 @@ void ShaderController::Initialize( void )
 			continue;
 		}
 
-		shader->script = ScriptController::Get().CreateObjectInstance( shaderName, shader );
+		shader->script = ScriptController::CreateObjectInstance( shaderName, shader );
 
 		shaders[ shaderName ] = shader;
 	}

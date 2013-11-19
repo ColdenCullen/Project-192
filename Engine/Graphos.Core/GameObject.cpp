@@ -96,7 +96,7 @@ GameObject* GameObject::CreateFromJson( JsonObject object )
 	// Add script
 	if( object.TryGet( "Script", component ) )
 	{
-		auto script = ScriptController::Get().CreateObjectInstance( component.Get<string>( "Class" ), obj );
+		auto script = ScriptController::CreateObjectInstance( component.Get<string>( "Class" ), obj );
 
 		if( component.TryGet( "Variables", component ) )
 			script->SetInitialValues( component );

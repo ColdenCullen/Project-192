@@ -40,7 +40,7 @@ void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 		}
 	}
 
-	ScriptController::Get().InitializeObjects( this );
+	ScriptController::InitializeObjects( this );
 }
 
 GameObject* GameObjectCollection::GetObjectById( unsigned int id )

@@ -20,37 +20,16 @@ namespace Graphos
 			static void			SetThread( Utility::Thread* thread );
 			static Thread* const GetThread( void ) { return thisThread; }
 
-			static ScriptController& Get( void )
-			{
-				if( !thisThread )
-				{
-					Utility::OutputController::PrintMessage( OutputType::Warning, "No thread set for Script Controller." );
-				}
-				else if( std::this_thread::get_id() != thisThread->GetId() )
-				{
-					Utility::OutputController::PrintMessage( OutputType::Error, "Calling Script function from incorrect thread." );
-				}
+			static void			Initialize( void );
+			static void			Shutdown( void );
 
-				if( !isolate )
-				{
-					isolate = v8::Isolate::New();
-					isolate->Enter();
-				}
-
-				static ScriptController instance;
-				return instance;
-			}
-
-			void				Initialize( void );
-			void				Shutdown( void );
-
-			void				InitializeObjects( GameObjectCollection* objects );
+			static void			InitializeObjects( GameObjectCollection* objects );
 
 #pragma region CreateObjectInstance
-			GraphosBehavior*	CreateObjectInstance( std::string className );
+			static GraphosBehavior* CreateObjectInstance( std::string className );
 
 			template<typename T>
-			GraphosBehavior*	CreateObjectInstance( std::string className, T* owner )
+			static GraphosBehavior* CreateObjectInstance( std::string className, T* owner )
 			{
 				using namespace v8;
 				using namespace cvv8;
@@ -108,13 +87,13 @@ namespace Graphos
 		private:
 			// v8-y things
 			static v8::Isolate*	isolate;
-			v8::Persistent<v8::Context>
+			static v8::Persistent<v8::Context>
 								context;
-			v8::Persistent<v8::Object>
+			static v8::Persistent<v8::Object>
 								globalObject;
 
 			// Scripts
-			std::vector<GraphosBehavior*>
+			static std::vector<GraphosBehavior*>
 								behaviors;
 
 			static Utility::Thread* thisThread;

@@ -21,6 +21,9 @@ using namespace cvv8;
 
 Thread* ScriptController::thisThread = nullptr;
 Isolate* ScriptController::isolate = nullptr;
+vector<GraphosBehavior*> ScriptController::behaviors;
+Persistent<Object> ScriptController::globalObject;
+Persistent<Context> ScriptController::context;
 
 #pragma region Handlers
 Handle<Value> IsKeyDown( const Arguments& args )
@@ -45,6 +48,9 @@ void ScriptController::Initialize( void )
 {
 	thisThread->Invoke( [&]()
 	{
+		isolate = v8::Isolate::New();
+		isolate->Enter();
+
 		HandleScope handleScope;
 
 		// Create global object template, add function handlers
@@ -132,6 +138,8 @@ void ScriptController::Shutdown( void )
 {
 	thisThread->Stop();
 
+	//isolate->Exit();
+	//isolate->Dispose();
 /*
 	context->Dispose();
 

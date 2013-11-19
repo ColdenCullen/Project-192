@@ -100,10 +100,10 @@ void GraphosGame::Reset( void )
 	delete_s( ui );
 	PhysicsController::Shutdown();
 	AssetController::Shutdown();
-	ScriptController::Get().Shutdown();
+	ScriptController::Shutdown();
 
 	// Restart
-	ScriptController::Get().Initialize();
+	ScriptController::Initialize();
 	AssetController::Initialize();
 	PhysicsController::Initialize();
 	Input::ui = ui = new UserInterface( this );
@@ -130,7 +130,7 @@ void GraphosGame::Start( void )
 	auto scriptThread = ThreadController::ReserveThread();
 	ScriptController::SetThread( scriptThread );
 	//ScriptController::Get().Initialize();
-	scriptThread->Invoke( [&](){ ScriptController::Get().Initialize(); } );
+	scriptThread->Invoke( &ScriptController::Initialize );
 
 	GraphicsController::Initialize();
 	AssetController::Initialize();
@@ -145,7 +145,7 @@ void GraphosGame::Stop( void )
 {
 	// Call child shutdown
 	Shutdown();
-	ScriptController::Get().Shutdown();
+	ScriptController::Shutdown();
 
 	// Shutdown UI and controllers
 	delete_s( ui );

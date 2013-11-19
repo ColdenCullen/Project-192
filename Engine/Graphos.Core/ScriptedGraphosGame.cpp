@@ -9,7 +9,7 @@ using namespace Graphos::Scripting;
 void ScriptedGraphosGame::Initialize( void )
 {
 	CurrentState = GameState::Game;
-	script = ScriptController::Get().CreateObjectInstance<GraphosGame>( "MyGame", this );
+	script = ScriptController::CreateObjectInstance<GraphosGame>( "MyGame", this );
 	script->CallFunction( "Initialize" );
 }
 
