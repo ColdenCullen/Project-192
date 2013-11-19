@@ -1,12 +1,12 @@
 #ifndef __TASK_MANAGER
 #define __TASK_MANAGER
 
-#include <thread>
 #include <deque>
-#include <array>
 #include <mutex>
+#include <string>
+#include <unordered_map>
 
-#include "Thread.h"
+#include "GraphosThread.h"
 
 namespace Graphos
 {
@@ -15,33 +15,33 @@ namespace Graphos
 		class ThreadManager
 		{
 		public:
-
 			static void		Initialize( void );
-			static void		Initialize( int initThreadCount );
+			static void		Initialize( gInt initThreadCount );
 			static void		Shutdown( void );
 
-			static const bool OnMainThread( void )			{ return std::this_thread::get_id() == main_thread; }
-			static const gInt& GetThreadCount( void )		{ return numThreads; }
-			static const gInt& GetActiveThreadCount( void )	{ return runningThreads; }
+			static Thread*	ReserveThread( std::string name = "" );
+			static Thread*	GetReservedThread( std::string name ) { return reservedThreads[ name ]; }
 
 			static void		AddTask( Thread::Task task );
-			static void		Invoke( Thread::Task task );
 			static void		WaitForCompletion( void );
-			static void		ExecuteTask( Thread::Task task, int index );
+
+			static const gBool OnMainThread( void )			{ return std::this_thread::get_id() == main_thread; }
+			static const gInt GetThreadCount( void )		{ return numThreads; }
+			static const gInt GetBusyThreadCount( void );
 
 		private:
+			// Globals
 			static const gInt	DefaultThreadCount = -1;
-
-			static gInt		numThreads;
-			static gInt		runningThreads;
-			static std::deque<Thread::Task>	tasksWaiting;
-
-			static std::deque<Thread::Task> invokeQueue;
-			static std::thread*	workers;
-			static gBool*	workerAvailablibility;
-
-			static std::mutex monitorMutex;
 			static std::thread::id main_thread;
+
+			// For workers
+			static gUInt	numThreads;
+			static std::deque<Thread::Task>	tasksWaiting;
+			static Thread**	workers;
+
+			// For reserved threads
+			static std::unordered_map<std::string, Thread*>
+							reservedThreads;
 
 							ThreadManager( void ) { }
 							ThreadManager( const ThreadManager& );

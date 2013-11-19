@@ -31,10 +31,6 @@ void GraphosGame::Run( void )
 	// Initialize values and controllers
 	quit = false;
 
-	// Init time
-	Time::Initialize();
-	ThreadManager::Initialize();
-
 	Start();
 
 	// Loop until there is a quit message from the window or the user.
@@ -125,12 +121,20 @@ void GraphosGame::Start( void )
 	CurrentState = GameState::Menu;
 	camera = nullptr;
 
+	Time::Initialize();
+	ThreadManager::Initialize();
+
 	JsonController::Initialize();
 	Config::Initialize();
+
+	auto scriptThread = ThreadManager::ReserveThread();
+	ScriptController::SetThread( scriptThread );
+	//ScriptController::Get().Initialize();
+	scriptThread->Invoke( [&](){ ScriptController::Get().Initialize(); } );
+
 	GraphicsController::Initialize();
 	AssetController::Initialize();
 	PhysicsController::Initialize();
-	ScriptController::Get().Initialize();
 
 	Input::ui = ui = new UserInterface( this );
 

@@ -24,7 +24,7 @@
     <ClInclude Include="ThreadManager.h">
       <Filter>Threading</Filter>
     </ClInclude>
-    <ClInclude Include="Thread.h">
+    <ClInclude Include="GraphosThread.h">
       <Filter>Threading</Filter>
     </ClInclude>
   </ItemGroup>
@@ -48,7 +48,7 @@
     <ClCompile Include="ThreadManager.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
-    <ClCompile Include="Thread.cpp">
+    <ClCompile Include="GraphosThread.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
   </ItemGroup>

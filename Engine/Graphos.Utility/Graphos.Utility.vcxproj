@@ -70,7 +70,7 @@
     <ClInclude Include="JsonController.h" />
     <ClInclude Include="JsonObject.h" />
     <ClInclude Include="OutputController.h" />
-    <ClInclude Include="Thread.h" />
+    <ClInclude Include="GraphosThread.h" />
     <ClInclude Include="ThreadManager.h" />
     <ClInclude Include="TimeController.h" />
   </ItemGroup>
@@ -80,7 +80,7 @@
     <ClCompile Include="JsonController.cpp" />
     <ClCompile Include="JsonObject.cpp" />
     <ClCompile Include="OutputController.cpp" />
-    <ClCompile Include="Thread.cpp" />
+    <ClCompile Include="GraphosThread.cpp" />
     <ClCompile Include="ThreadManager.cpp" />
     <ClCompile Include="TimeController.cpp" />
   </ItemGroup>

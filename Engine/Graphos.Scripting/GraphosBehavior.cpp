@@ -7,6 +7,7 @@
 #include "GameObjectCollection.h"
 #include "ClassMapper.h"
 #include "ThreadManager.h"
+#include "ScriptController.h"
 
 using namespace v8;
 using namespace std;
@@ -62,7 +63,7 @@ void GraphosBehavior::Update( void )
 
 void GraphosBehavior::CallFunction( string name, ... )
 {
-	auto exec = [&, name]()
+	ScriptController::GetThread()->Invoke( [&, name]() -> void
 	{
 		auto func = Handle<Function>::Cast( instance->Get( String::New( name.c_str() ) ) );
 
@@ -85,14 +86,5 @@ void GraphosBehavior::CallFunction( string name, ... )
 		*/
 
 		func->Call( instance, count, vals );
-	};
-
-	if( ThreadManager::OnMainThread() )
-	{
-		exec();
-	}
-	else
-	{
-		ThreadManager::Invoke( exec );
-	}
+	} );
 }

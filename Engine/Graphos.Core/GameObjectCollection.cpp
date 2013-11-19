@@ -97,6 +97,8 @@ void GameObjectCollection::ClearObjects( void )
 
 void GameObjectCollection::CallFunction( void (GameObject::*func)( void ) )
 {
-	for( auto iterator = begin( objectList ); iterator != end( objectList ); ++iterator )
-			(iterator->second->*func)();
+	for( auto object : objectList )
+	{
+		(object.second->*func)();
+	}
 }
