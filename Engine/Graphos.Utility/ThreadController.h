@@ -12,7 +12,7 @@ namespace Graphos
 {
 	namespace Utility
 	{
-		class ThreadManager
+		class ThreadController
 		{
 		public:
 			static void		Initialize( void );
@@ -29,10 +29,14 @@ namespace Graphos
 			static const gInt GetThreadCount( void )		{ return numThreads; }
 			static const gInt GetBusyThreadCount( void );
 
+			static void		GlobalLock( void )	{ globalMutex.lock(); }
+			static void		GlobalUnlock( void ){ globalMutex.unlock(); }
+
 		private:
 			// Globals
-			static const gInt	DefaultThreadCount = -1;
+			static const gInt DefaultThreadCount = -1;
 			static std::thread::id main_thread;
+			static std::mutex globalMutex;
 
 			// For workers
 			static gUInt	numThreads;
@@ -43,9 +47,9 @@ namespace Graphos
 			static std::unordered_map<std::string, Thread*>
 							reservedThreads;
 
-							ThreadManager( void ) { }
-							ThreadManager( const ThreadManager& );
-			ThreadManager&	operator=( const ThreadManager& );
+							ThreadController( void ) { }
+							ThreadController( const ThreadController& );
+			ThreadController& operator=( const ThreadController& );
 		};
 	}
 }

@@ -21,10 +21,10 @@
     <ClInclude Include="OutputController.h">
       <Filter>IO</Filter>
     </ClInclude>
-    <ClInclude Include="ThreadManager.h">
+    <ClInclude Include="GraphosThread.h">
       <Filter>Threading</Filter>
     </ClInclude>
-    <ClInclude Include="GraphosThread.h">
+    <ClInclude Include="ThreadController.h">
       <Filter>Threading</Filter>
     </ClInclude>
   </ItemGroup>
@@ -45,10 +45,10 @@
     <ClCompile Include="OutputController.cpp">
       <Filter>IO</Filter>
     </ClCompile>
-    <ClCompile Include="ThreadManager.cpp">
+    <ClCompile Include="GraphosThread.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
-    <ClCompile Include="GraphosThread.cpp">
+    <ClCompile Include="ThreadController.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
   </ItemGroup>

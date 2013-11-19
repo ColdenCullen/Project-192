@@ -15,7 +15,7 @@
 #include "OutputController.h"
 #include "PhysicsController.h"
 #include "JsonController.h"
-#include "ThreadManager.h"
+#include "ThreadController.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Physics;
@@ -122,12 +122,12 @@ void GraphosGame::Start( void )
 	camera = nullptr;
 
 	Time::Initialize();
-	ThreadManager::Initialize();
+	ThreadController::Initialize();
 
 	JsonController::Initialize();
 	Config::Initialize();
 
-	auto scriptThread = ThreadManager::ReserveThread();
+	auto scriptThread = ThreadController::ReserveThread();
 	ScriptController::SetThread( scriptThread );
 	//ScriptController::Get().Initialize();
 	scriptThread->Invoke( [&](){ ScriptController::Get().Initialize(); } );
@@ -145,6 +145,8 @@ void GraphosGame::Stop( void )
 {
 	// Call child shutdown
 	Shutdown();
+
+	ThreadController::Shutdown();
 
 	// Shutdown UI and controllers
 	delete_s( ui );

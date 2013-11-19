@@ -9,7 +9,7 @@
 #include "Input.h"
 #include "Config.h"
 #include "File.h"
-#include "ThreadManager.h"
+#include "ThreadController.h"
 
 using namespace std;
 using namespace Graphos::Core;

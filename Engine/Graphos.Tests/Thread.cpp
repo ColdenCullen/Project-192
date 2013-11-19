@@ -1,7 +1,7 @@
 #include "CppUnitTest.h"
 #include "CppUnitTestAssert.h"
 #include "GraphosThread.h"
-#include "ThreadManager.h"
+#include "ThreadController.h"
 
 using namespace std;
 using namespace Graphos::Utility;

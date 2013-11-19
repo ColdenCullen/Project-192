@@ -7,7 +7,7 @@
 // Controllers used to add components
 #include "OutputController.h"
 #include "ScriptController.h"
-#include "ThreadManager.h"
+#include "ThreadController.h"
 
 using namespace std;
 using namespace Graphos::Core;

@@ -71,7 +71,7 @@
     <ClInclude Include="JsonObject.h" />
     <ClInclude Include="OutputController.h" />
     <ClInclude Include="GraphosThread.h" />
-    <ClInclude Include="ThreadManager.h" />
+    <ClInclude Include="ThreadController.h" />
     <ClInclude Include="TimeController.h" />
   </ItemGroup>
   <ItemGroup>
@@ -81,7 +81,7 @@
     <ClCompile Include="JsonObject.cpp" />
     <ClCompile Include="OutputController.cpp" />
     <ClCompile Include="GraphosThread.cpp" />
-    <ClCompile Include="ThreadManager.cpp" />
+    <ClCompile Include="ThreadController.cpp" />
     <ClCompile Include="TimeController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

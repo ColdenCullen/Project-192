@@ -6,7 +6,7 @@
 #include "OutputController.h"
 #include "GameObjectCollection.h"
 #include "ClassMapper.h"
-#include "ThreadManager.h"
+#include "ThreadController.h"
 #include "ScriptController.h"
 
 using namespace v8;

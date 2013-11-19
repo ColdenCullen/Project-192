@@ -27,6 +27,8 @@ void ScriptedGraphosGame::Draw( void )
 	
 	if( CurrentState == GameState::Menu )
 		ui->Draw();
+
+	while( ScriptController::GetThread()->IsBusy() ) ;
 }
 
 void ScriptedGraphosGame::Shutdown( void )

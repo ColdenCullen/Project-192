@@ -1,5 +1,6 @@
 #include "GraphosThread.h"
 #include "OutputController.h"
+#include "ThreadController.h"
 
 using namespace std;
 using namespace Graphos::Utility;
@@ -24,7 +25,9 @@ void Thread::Invoke( Thread::Task task, gBool sync )
 
 			queuedTasks.push_back( [&]()
 			{
+				//ThreadController::GlobalLock();
 				task();
+				//ThreadController::GlobalUnlock();
 				isDone = true;
 			} );
 
@@ -56,7 +59,9 @@ void Thread::Execute( void )
 			queuedTasks.pop_front();
 			thisMutex.unlock();
 
+			ThreadController::GlobalLock();
 			task();
+			ThreadController::GlobalUnlock();
 		}
 		else
 		{

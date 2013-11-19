@@ -1,17 +1,18 @@
 #include <iostream>
 
-#include "ThreadManager.h"
+#include "ThreadController.h"
 
 using namespace std;
 using namespace Graphos::Utility;
 
-thread::id ThreadManager::main_thread;
-Thread** ThreadManager::workers;
-deque<Thread::Task> ThreadManager::tasksWaiting;
-gUInt ThreadManager::numThreads;
-unordered_map<string, Thread*> ThreadManager::reservedThreads;
+thread::id ThreadController::main_thread;
+mutex ThreadController::globalMutex;
+Thread** ThreadController::workers;
+deque<Thread::Task> ThreadController::tasksWaiting;
+gUInt ThreadController::numThreads;
+unordered_map<string, Thread*> ThreadController::reservedThreads;
 
-void ThreadManager::Initialize( void )
+void ThreadController::Initialize( void )
 {
 	// If no thread count is specified, use system number
 	gUInt systemThreadCount = thread::hardware_concurrency();
@@ -20,7 +21,7 @@ void ThreadManager::Initialize( void )
 	Initialize( systemThreadCount > 1 ? systemThreadCount - 1 : 1 );
 }
 
-void ThreadManager::Initialize( int initThreadCount  )
+void ThreadController::Initialize( int initThreadCount  )
 {
 	// Assign thread count
 	numThreads = initThreadCount;
@@ -31,7 +32,7 @@ void ThreadManager::Initialize( int initThreadCount  )
 	workers = new Thread*[ numThreads ];
 }
 
-Thread* ThreadManager::ReserveThread( std::string name )
+Thread* ThreadController::ReserveThread( std::string name )
 {
 	Thread* thr = new Thread();
 
@@ -41,15 +42,17 @@ Thread* ThreadManager::ReserveThread( std::string name )
 	return thr;
 }
 
-const gInt ThreadManager::GetBusyThreadCount( void )
+const gInt ThreadController::GetBusyThreadCount( void )
 {
 	gInt busyCount = 0;
 	for( gUInt ii = 0; ii < numThreads; ++ii )
 		busyCount += workers[ ii ]->IsBusy();
+	for( auto thread : reservedThreads )
+		busyCount += thread.second->IsBusy();
 	return busyCount;
 }
 
-void ThreadManager::AddTask( Thread::Task task )
+void ThreadController::AddTask( Thread::Task task )
 {
 	if( GetBusyThreadCount() >= numThreads )
 	{
@@ -68,12 +71,12 @@ void ThreadManager::AddTask( Thread::Task task )
 	}
 }
 
-void ThreadManager::WaitForCompletion( void )
+void ThreadController::WaitForCompletion( void )
 {
 	while( GetBusyThreadCount() > 0  ) ;
 }
 
-void ThreadManager::Shutdown( void )
+void ThreadController::Shutdown( void )
 {
 	WaitForCompletion();
 
