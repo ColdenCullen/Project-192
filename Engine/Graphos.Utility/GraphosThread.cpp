@@ -53,14 +53,19 @@ void Thread::Execute( void )
 		if( queuedTasks.size() )
 		{
 			isBusy = true;
-			// Get task
-			thisMutex.lock();
-			auto task = queuedTasks.front();
-			queuedTasks.pop_front();
-			thisMutex.unlock();
 
 			ThreadController::GlobalLock();
-			task();
+			thisMutex.lock();
+
+			while( queuedTasks.size() )
+			{
+				auto task = queuedTasks.front();
+				queuedTasks.pop_front();
+
+				task();
+			}
+
+			thisMutex.unlock();
 			ThreadController::GlobalUnlock();
 		}
 		else
@@ -69,4 +74,10 @@ void Thread::Execute( void )
 			this_thread::yield();
 		}
 	}
+}
+
+void Thread::Stop( void )
+{
+	running = false;
+	queuedTasks.clear();
 }

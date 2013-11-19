@@ -85,7 +85,10 @@ void GameObjectCollection::ClearObjects( void )
 	{
 		for( auto object = begin( objectList ); object != end( objectList ); ++object )
 		{
-			object->second->Shutdown();
+			ScriptController::GetThread()->Invoke( [&](){ object->second->Shutdown(); }, true );
+
+			//ScriptController::Get().GetThread()->WaitFor();
+
 			delete object->second;
 		}
 	}

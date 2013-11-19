@@ -28,12 +28,14 @@ void ScriptedGraphosGame::Draw( void )
 	if( CurrentState == GameState::Menu )
 		ui->Draw();
 
-	while( ScriptController::GetThread()->IsBusy() ) ;
+	ScriptController::GetThread()->WaitFor();
 }
 
 void ScriptedGraphosGame::Shutdown( void )
 {
 	script->CallFunction( "Shutdown" );
+
+	ScriptController::GetThread()->WaitFor();
 
 	delete script;
 }

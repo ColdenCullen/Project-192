@@ -30,6 +30,8 @@ void ThreadController::Initialize( int initThreadCount  )
 
 	// Create arrays of workers
 	workers = new Thread*[ numThreads ];
+	for( gUInt ii = 0; ii < numThreads; ++ii )
+		workers[ ii ] = nullptr;
 }
 
 Thread* ThreadController::ReserveThread( std::string name )
@@ -46,7 +48,7 @@ const gInt ThreadController::GetBusyThreadCount( void )
 {
 	gInt busyCount = 0;
 	for( gUInt ii = 0; ii < numThreads; ++ii )
-		busyCount += workers[ ii ]->IsBusy();
+		busyCount += workers[ ii ] && workers[ ii ]->IsBusy();
 	for( auto thread : reservedThreads )
 		busyCount += thread.second->IsBusy();
 	return busyCount;
@@ -80,7 +82,14 @@ void ThreadController::Shutdown( void )
 {
 	WaitForCompletion();
 
+	GlobalLock();
 	for( gUInt ii = 0; ii < numThreads; ++ii )
+	{
+		if( workers[ ii ] && workers[ ii ]->thisThread.joinable() )
+			workers[ ii ]->thisThread.join();
+
 		delete_s( workers[ ii ] );
+	}
 	delete[] workers;
+	GlobalUnlock();
 }

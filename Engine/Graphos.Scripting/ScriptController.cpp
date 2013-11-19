@@ -45,6 +45,8 @@ void ScriptController::Initialize( void )
 {
 	thisThread->Invoke( [&]()
 	{
+		HandleScope handleScope;
+
 		// Create global object template, add function handlers
 		Handle<ObjectTemplate> globalObjectTemplate = ObjectTemplate::New();
 		//globalObjectTemplate->Set( "include", FunctionTemplate::New( FunctionCallback( IncludeHandler ) ) );
@@ -80,7 +82,7 @@ void ScriptController::Initialize( void )
 		compiled->Run();
 
 		// Get the "global" object
-		globalObject = context->Global();
+		globalObject = Persistent<Object>::New( context->Global() );
 
 		// Bind types
 		ClassMapper::BindGraphosTypes( globalObject );
@@ -96,6 +98,8 @@ GraphosBehavior* ScriptController::CreateObjectInstance( std::string className )
 
 	thisThread->Invoke( [&, className]()
 	{
+		HandleScope handleScope;
+
 		// Create a scope
 		Context::Scope contextScope( context );
 
@@ -126,6 +130,8 @@ void ScriptController::SetThread( Thread* thread )
 
 void ScriptController::Shutdown( void )
 {
+	thisThread->Stop();
+
 /*
 	context->Dispose();
 

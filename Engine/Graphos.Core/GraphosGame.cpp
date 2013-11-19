@@ -145,16 +145,16 @@ void GraphosGame::Stop( void )
 {
 	// Call child shutdown
 	Shutdown();
-
-	ThreadController::Shutdown();
+	ScriptController::Get().Shutdown();
 
 	// Shutdown UI and controllers
 	delete_s( ui );
 	ShaderController::Shutdown();
 	PhysicsController::Shutdown();
 	AssetController::Shutdown();
-	ScriptController::Get().Shutdown();
 	GraphicsController::Shutdown();
+
+	ThreadController::Shutdown();
 }
 
 void GraphosGame::Initialize( void )

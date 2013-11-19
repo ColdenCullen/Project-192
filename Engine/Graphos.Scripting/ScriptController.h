@@ -59,6 +59,8 @@ namespace Graphos
 
 				thisThread->Invoke([&, className, owner]() -> void
 				{
+					HandleScope handleScope;
+
 					// Create a scope
 					Context::Scope contextScope( context );
 
@@ -106,10 +108,9 @@ namespace Graphos
 		private:
 			// v8-y things
 			static v8::Isolate*	isolate;
-			v8::HandleScope		handleScope;
 			v8::Persistent<v8::Context>
 								context;
-			v8::Local<v8::Object>
+			v8::Persistent<v8::Object>
 								globalObject;
 
 			// Scripts
@@ -118,7 +119,7 @@ namespace Graphos
 
 			static Utility::Thread* thisThread;
 
-								ScriptController( void ) : handleScope() { }
+								ScriptController( void ) { } //: handleScope() { }
 								ScriptController( const ScriptController& );
 			void				operator=( const ScriptController& );
 		};
