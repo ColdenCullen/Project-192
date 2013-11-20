@@ -25,9 +25,7 @@ void Thread::Invoke( Thread::Task task, gBool sync )
 
 			queuedTasks.push_back( [&]()
 			{
-				//ThreadController::GlobalLock();
 				task();
-				//ThreadController::GlobalUnlock();
 				isDone = true;
 			} );
 
@@ -47,26 +45,19 @@ void Thread::Execute( void )
 	if( this_thread::get_id() != thisThread.get_id() )
 		OutputController::PrintMessage( OutputType::Error, "Thread::Execute call from invalid thread." );
 
-	while( running )
+	while( running || queuedTasks.size() )
 	{
 		// Wait for tasks
 		if( queuedTasks.size() )
 		{
 			isBusy = true;
 
-			ThreadController::GlobalLock();
 			thisMutex.lock();
-
-			while( queuedTasks.size() )
-			{
-				auto task = queuedTasks.front();
-				queuedTasks.pop_front();
-
-				task();
-			}
-
+			auto task = queuedTasks.front();
+			queuedTasks.pop_front();
 			thisMutex.unlock();
-			ThreadController::GlobalUnlock();
+
+			task();
 		}
 		else
 		{
@@ -80,4 +71,5 @@ void Thread::Stop( void )
 {
 	running = false;
 	queuedTasks.clear();
+	WaitFor();
 }
