@@ -22,11 +22,11 @@ void AssetController::Initialize( void )
 	{
 		name = file->GetFileName().substr( 0, file->GetFileName().find( "." ) );
 
-		if( file->GetLocalPath() == "Meshes/" )
+		if( file->GetDirectory() == CONTENT_PATH "Meshes/" )
 		{
 			ingredientShelf[ name ] = new Mesh( file->GetFullPath() );
 		}
-		else if( file->GetLocalPath() == "Textures/" )
+		else if( file->GetDirectory() == CONTENT_PATH "Textures/" )
 		{
 			ingredientShelf[ name ] = new Texture( file->GetFullPath() );
 		}

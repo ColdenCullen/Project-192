@@ -1,5 +1,8 @@
 #include <memory>
+#include <iostream>
+#include <fstream>
 #include <DirectX/DirectXIncludes.h>
+#include <d3dcommon.h>
 
 #include "DXShader.h"
 #include "GraphicsController.h"
@@ -9,6 +12,7 @@
 #include "Texture.h"
 #include "GameObject.h"
 #include "AmbientLight.h"
+#include "File.h"
 
 using namespace v8;
 using namespace std;
@@ -20,6 +24,61 @@ using namespace DirectX;
 
 #include <d3dcompiler.inl>
 
+class ShaderInclude : public ID3DInclude
+{
+public:
+	ShaderInclude( std::string localDir ) : localDir( localDir ) { }
+
+	STDMETHODIMP Open( D3D_INCLUDE_TYPE IncludeType, LPCSTR pFileName, LPCVOID pParentData, LPCVOID *ppData, UINT *pBytes )
+	{
+		try
+		{
+			string finalPath;
+			switch(IncludeType)
+			{
+			case D3D_INCLUDE_LOCAL:
+				finalPath = localDir + "\\" + pFileName;
+				break;
+			case D3D_INCLUDE_SYSTEM:
+				finalPath = localDir + "\\" + pFileName;
+				break;
+			default:
+				return E_FAIL;
+			}
+
+			ifstream includeFile( finalPath.c_str(), ios::in|ios::binary|ios::ate );
+
+			if( includeFile.is_open() )
+			{
+				long long fileSize = includeFile.tellg();
+				char* buf = new char[ fileSize ];
+				includeFile.seekg( 0, ios::beg );
+				includeFile.read( buf, fileSize );
+				includeFile.close();
+				*ppData = buf;
+				*pBytes = fileSize;
+			}
+			else
+			{
+				return E_FAIL;
+			}
+			return S_OK;
+		}
+		catch(std::exception& e)
+		{
+			return E_FAIL;
+		}
+	}
+	STDMETHODIMP Close( LPCVOID pData )
+	{
+		char* buf = (char*)pData;
+		delete[] buf;
+		return S_OK;
+	}
+
+private:
+	std::string		localDir;
+};
 
 // Requires the compiled shaders (.cso files)
 DXShader::DXShader( string vertexPath, string fragmentPath )
@@ -39,10 +98,11 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	// ---- Load Vertex Shader
 	ID3DBlob* vsb;
 	wstring wVertexPath( vertexPath.begin(), vertexPath.end() );
+	ShaderInclude include( File( vertexPath ).GetDirectory() );
 	//D3DReadFileToBlob( wVertexPath.c_str(), &vsb );
 	result = D3DCompileFromFile( wVertexPath.c_str(),
 								NULL,
-								NULL,
+								&include,
 								"main",
 								"vs_5_0",
 								D3DCOMPILE_ENABLE_STRICTNESS,
@@ -83,7 +143,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	//D3DReadFileToBlob( wPixelPath.c_str(), &psb );
 	result = D3DCompileFromFile( wPixelPath.c_str(),
 								NULL,
-								NULL,
+								&include,
 								"main",
 								"ps_5_0",
 								D3DCOMPILE_ENABLE_STRICTNESS,

@@ -1,9 +1,12 @@
-
+struct AmbientLight
+{
+	float4 color			: COLOR0;
+};
 
 struct DirectionalLight
 {
-	float3 direction;
-	float4 color;
+	float3 direction		: POSITION;
+	float4 color			: COLOR1;
 };
 
 struct VertexShaderInput
@@ -18,5 +21,7 @@ struct VertexToFragment
 	float4 position			: SV_POSITION;
 	float2 uv				: TEXCOORD0;
 	float3 normal			: NORMAL;
-	DirectionalLight light;
+	AmbientLight ambientLight;
+	DirectionalLight dirLight;
 };
+

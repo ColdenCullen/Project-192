@@ -1,33 +1,4 @@
-
-//#include "lightStructs.h"
-
-struct AmbientLight
-{
-	float4 color			: COLOR1;
-};
-
-struct DirectionalLight
-{
-	float3 direction		: POSITION;
-	float4 color			: COLOR0;
-};
-
-struct VertexShaderInput
-{
-	float3 position			: POSITION;
-	float2 uv				: TEXCOORD0;
-	float3 normal			: NORMAL;
-};
-
-struct VertexToFragment
-{
-	float4 position			: SV_POSITION;
-	float2 uv				: TEXCOORD0;
-	float3 normal			: NORMAL;
-	AmbientLight ambientLight;
-	DirectionalLight dirLight;
-};
-
+#include "lightStructs.hlsl"
 
 cbuffer uniforms //: register( b0 )
 {
@@ -35,7 +6,6 @@ cbuffer uniforms //: register( b0 )
 	matrix rotationMatrix;
 	AmbientLight ambientLight;
 };
-
 
 VertexToFragment main( VertexShaderInput input )
 {

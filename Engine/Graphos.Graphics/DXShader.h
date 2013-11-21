@@ -1,11 +1,12 @@
+#ifdef _WIN32
 #ifndef __DXSHADER
 #define __DXSHADER
 
 #include <string>
 #include <unordered_map>
 #include <utility>
-#include "IShader.h"
 #include <DirectX/DirectXIncludes.h>
+#include "IShader.h"
 
 namespace Graphos
 {
@@ -59,3 +60,4 @@ namespace Graphos
 }
 
 #endif//__DXSHADER
+#endif//_WIN32

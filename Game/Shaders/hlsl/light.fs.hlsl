@@ -1,26 +1,5 @@
 
-//#include "lightStructs.hlsl"
-
-struct AmbientLight
-{
-	float4 color			: COLOR1;
-};
-
-struct DirectionalLight
-{
-	float3 direction		: POSITION;
-	float4 color			: COLOR0;
-};
-
-struct VertexToFragment
-{
-	float4 position			: SV_POSITION;
-	float2 uv				: TEXCOORD0;
-	float3 normal			: NORMAL;
-	AmbientLight ambientLight;
-	DirectionalLight dirLight;
-};
-
+#include "lightStructs.hlsl"
 
 Texture2D shaderTexture;
 SamplerState sampleType;
