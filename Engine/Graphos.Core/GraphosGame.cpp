@@ -101,8 +101,10 @@ void GraphosGame::Reset( void )
 	PhysicsController::Shutdown();
 	AssetController::Shutdown();
 	ScriptController::Shutdown();
+	ThreadController::Shutdown();
 
 	// Restart
+	ThreadController::Initialize();
 	ScriptController::Initialize();
 	AssetController::Initialize();
 	PhysicsController::Initialize();
