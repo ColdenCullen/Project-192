@@ -8,6 +8,7 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include "GameObject.h"
+#include "AmbientLight.h"
 
 using namespace v8;
 using namespace std;
@@ -157,6 +158,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	buf->totalSize = 0;
 	buf->AddProperty( "modelViewProj", sizeof(Matrix4) );
 	buf->AddProperty( "rotationMatrix", sizeof(Matrix4) );
+	buf->AddProperty( "ambientLight", AmbientLight::size );
 
 	RegisterConstBuffer( "uniforms", buf );
 	delete buf;
@@ -205,6 +207,11 @@ void DXShader::Shutdown( void )
 void DXShader::Draw( Mesh& mesh ) const 
 {
 	auto deviceContext = AdapterController::Get()->GetDeviceContext().dx;
+
+
+	// TEST TO BE REMOVED
+	Vector4 color( 0.2f, 0.2f, 0.2f, 1.0f );
+	AmbientLight("ambientLight", color, nullptr ).Draw( (IShader*)this );
 
 	SetUniformMatrix( "modelViewProj", *modelViewProjection );
 //	SetUniformMatrix( "modelMatrix", mesh.Owner()->transform->RotationMatrix() );
@@ -310,11 +317,11 @@ void DXShader::SetUniformBuffer( string name, const gByte* value, const size_t s
 	auto it = buffer->meta.find( name );
 
 	if( it == end( buffer->meta ) )
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Invalid name in SetUniform" );
-	if( it->second.second != sizeof( *value )*size )
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Data size mismatch in SetUniformBuffer" );
+		OutputController::PrintMessage( OutputType::Error, "Invalid name in SetUniform" );
+	if( it->second.second != size )
+		OutputController::PrintMessage( OutputType::Error, "Data size mismatch in SetUniformBuffer" );
 	
-	memcpy( buffer->data + it->second.first, value, it->second.second );
+	memcpy( buffer->data + it->second.first, value, size );
 }
 
 void DXShader::SetUniformMatrix( std::string name, const Matrix4& matrix ) const 

@@ -8,6 +8,7 @@
 #include "GraphosGame.h"
 #include "GraphosMotionState.h"
 #include "PhysicsController.h"
+#include "AmbientLight.h"
 
 using namespace std;
 using namespace Graphos::Core;

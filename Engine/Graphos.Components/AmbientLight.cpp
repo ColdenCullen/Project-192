@@ -9,10 +9,10 @@ using namespace Graphos::Graphics;
 using namespace Graphos::Math;
 
 
-AmbientLight::AmbientLight( std::string name, Vector4 initColor, GameObject* owner ) : IComponent( owner ),
+AmbientLight::AmbientLight( std::string name, Vector4 initColor, GameObject* owner )
+	: IComponent( owner ),
 	name( name ),
 	color( initColor ),
-	size( sizeof( Vector4 ) ),
 	buffer( new gByte[size] ),
 	dirty( true ) { }
 
@@ -26,7 +26,7 @@ void AmbientLight::Draw( IShader* shader )
 	if( dirty )
 	{
 		// update buffer
-		memcpy( buffer, &color, size );
+		UpdateBuffer();
 		dirty = false;
 	}
 
@@ -39,3 +39,13 @@ void AmbientLight::Shutdown( void )
 {
 	delete [] buffer; 
 }
+
+/*
+* Implementation 
+*/
+void AmbientLight::UpdateBuffer( void )
+{
+	memcpy( buffer, &color, size );
+}
+
+const gSize AmbientLight::size = sizeof( Vector4 );

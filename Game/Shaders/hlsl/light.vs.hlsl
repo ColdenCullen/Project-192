@@ -1,10 +1,15 @@
 
 //#include "lightStructs.h"
 
+struct AmbientLight
+{
+	float4 color			: COLOR1;
+};
+
 struct DirectionalLight
 {
 	float3 direction		: POSITION;
-	float4 color			: COLOR;
+	float4 color			: COLOR0;
 };
 
 struct VertexShaderInput
@@ -19,7 +24,8 @@ struct VertexToFragment
 	float4 position			: SV_POSITION;
 	float2 uv				: TEXCOORD0;
 	float3 normal			: NORMAL;
-	DirectionalLight light;
+	AmbientLight ambientLight;
+	DirectionalLight dirLight;
 };
 
 
@@ -27,7 +33,7 @@ cbuffer uniforms //: register( b0 )
 {
 	matrix modelViewProj;
 	matrix rotationMatrix;
-	DirectionalLight dirLights[2];
+	AmbientLight ambientLight;
 };
 
 
@@ -39,8 +45,11 @@ VertexToFragment main( VertexShaderInput input )
 	output.uv = input.uv;
 
 	output.normal = normalize( mul( rotationMatrix, float4( input.normal, 1.0f ) ) ).xyz;
-	output.light.color = float4( 1.0, 1.0, 1.0, 1.0 );
-	output.light.direction = float3( -1.0, -1.0, 1.0 );
+
+	output.ambientLight = ambientLight;
+
+	output.dirLight.color = float4( 1.0, 1.0, 1.0, 1.0 );
+	output.dirLight.direction = float3( -1.0, -1.0, 1.0 );
 
 	return output;
 }

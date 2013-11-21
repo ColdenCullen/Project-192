@@ -2,6 +2,7 @@
 
 #include "JsonObject.h"
 #include "Vector3.h"
+#include "Vector4.h"
 
 using namespace v8;
 using namespace std;
@@ -199,6 +200,31 @@ auto JsonObject::Get( string path )							-> Math::Vector3
 			static_cast<float>( root.get( "x", root ).asDouble() ),
 			static_cast<float>( root.get( "y", root ).asDouble() ),
 			static_cast<float>( root.get( "z", root ).asDouble() )
+		);
+}
+
+template<>
+auto JsonObject::Get( string path )							-> Math::Vector4
+{
+	Json::Value root = Get<Json::Value>( path );
+
+	auto x = root.get( "x", Json::nullValue );
+
+	if( x == Json::nullValue )
+	{
+		return Math::Vector4(
+			static_cast<float>( root.get( "r", root ).asDouble() ),
+			static_cast<float>( root.get( "g", root ).asDouble() ),
+			static_cast<float>( root.get( "b", root ).asDouble() ),
+			static_cast<float>( root.get( "a", root ).asDouble() )
+		);
+	}
+
+	return Math::Vector4(
+			static_cast<float>( root.get( "x", root ).asDouble() ),
+			static_cast<float>( root.get( "y", root ).asDouble() ),
+			static_cast<float>( root.get( "z", root ).asDouble() ),
+			static_cast<float>( root.get( "w", root ).asDouble() )
 		);
 }
 #pragma endregion
