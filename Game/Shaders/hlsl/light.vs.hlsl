@@ -1,6 +1,6 @@
+#include "lightStructs.hlsl"
 
-//#include "lightStructs.h"
-
+/*
 struct DirectionalLight
 {
 	float3 direction		: POSITION;
@@ -21,7 +21,7 @@ struct VertexToFragment
 	float3 normal			: NORMAL;
 	DirectionalLight light;
 };
-
+*/
 
 cbuffer uniforms //: register( b0 )
 {
