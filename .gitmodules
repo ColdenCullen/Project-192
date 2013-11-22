@@ -7,3 +7,6 @@
 [submodule "Documentation"]
 	path = Documentation
 	url = git@github.com:ColdenCullen/Project-192.git
+[submodule "ExternalDependencies/submodules/hlslcc"]
+	path = ExternalDependencies/submodules/hlslcc
+	url = git@github.com:James-Jones/HLSLCrossCompiler.git
