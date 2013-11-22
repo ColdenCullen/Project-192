@@ -103,7 +103,6 @@
       <AdditionalIncludeDirectories>..\..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Lib>
-      <OutputFile>$(OutDir)BulletCollision_vs2010.lib</OutputFile>
       <TargetMachine>MachineX86</TargetMachine>
     </Lib>
     <Link>
