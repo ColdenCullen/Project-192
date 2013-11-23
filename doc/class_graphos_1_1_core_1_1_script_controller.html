@@ -120,9 +120,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab4ea0aad405732d9c4075a7f2f00ddc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a728c663909461d3bc0c80139c037462d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_script_controller.html#a728c663909461d3bc0c80139c037462d">Shutdown</a> (void)</td></tr>
 <tr class="separator:a728c663909461d3bc0c80139c037462d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc49978ebde16780ea82f0a0f65b348c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:abc49978ebde16780ea82f0a0f65b348c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_graphos_1_1_core_1_1_script.html">Graphos::Core::Script</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_script_controller.html#abc49978ebde16780ea82f0a0f65b348c">CreateObjectInstance</a> (std::string className, T *owner)</td></tr>
-<tr class="separator:abc49978ebde16780ea82f0a0f65b348c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f85697bcceed468ad5e47cda119ac7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_script_controller.html#a7f85697bcceed468ad5e47cda119ac7f">InitializeObjects</a> (<a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html">GameObjectCollection</a> *objects)</td></tr>
+<tr class="separator:a7f85697bcceed468ad5e47cda119ac7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdda9acc00cd22972d75420c8d9eac31"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_graphos_1_1_core_1_1_graphos_behavior.html">GraphosBehavior</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_script_controller.html#afdda9acc00cd22972d75420c8d9eac31">CreateObjectInstance</a> (std::string className)</td></tr>
+<tr class="separator:afdda9acc00cd22972d75420c8d9eac31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa869c716d999016622d5c117f1d99505"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa869c716d999016622d5c117f1d99505"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="class_graphos_1_1_core_1_1_graphos_behavior.html">GraphosBehavior</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_core_1_1_script_controller.html#aa869c716d999016622d5c117f1d99505">CreateObjectInstance</a> (std::string className, T *owner)</td></tr>
+<tr class="separator:aa869c716d999016622d5c117f1d99505"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -130,7 +134,23 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a072e4b1d8bbc25d98fdfc5b8e4eb2545"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="abc49978ebde16780ea82f0a0f65b348c"></a>
+<a class="anchor" id="afdda9acc00cd22972d75420c8d9eac31"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_graphos_1_1_core_1_1_graphos_behavior.html">GraphosBehavior</a> * ScriptController::CreateObjectInstance </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>className</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa869c716d999016622d5c117f1d99505"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -140,7 +160,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_graphos_1_1_core_1_1_script.html">Graphos::Core::Script</a>* Graphos::Core::ScriptController::CreateObjectInstance </td>
+          <td class="memname"><a class="el" href="class_graphos_1_1_core_1_1_graphos_behavior.html">GraphosBehavior</a>* Graphos::Core::ScriptController::CreateObjectInstance </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>className</em>, </td>
@@ -206,6 +226,22 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
+<a class="anchor" id="a7f85697bcceed468ad5e47cda119ac7f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ScriptController::InitializeObjects </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html">GameObjectCollection</a> *&#160;</td>
+          <td class="paramname"><em>objects</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a728c663909461d3bc0c80139c037462d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -232,7 +268,7 @@ template&lt;typename T &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_graphos.html">Graphos</a></li><li class="navelem"><a class="el" href="namespace_graphos_1_1_core.html">Core</a></li><li class="navelem"><a class="el" href="class_graphos_1_1_core_1_1_script_controller.html">ScriptController</a></li>
-    <li class="footer">Generated on Sat Nov 16 2013 18:04:25 for Graphos by
+    <li class="footer">Generated on Sat Nov 23 2013 17:38:18 for Graphos by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

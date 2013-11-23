@@ -1,7 +1,7 @@
 var struct_graphos_1_1_math_1_1_matrix4 =
 [
     [ "Matrix4", "struct_graphos_1_1_math_1_1_matrix4.html#a82387df968908f91b2f99e623560357c", null ],
-    [ "Matrix4", "struct_graphos_1_1_math_1_1_matrix4.html#a8885c1d6517fd7d5793ce72b8cbdb117", null ],
+    [ "Matrix4", "struct_graphos_1_1_math_1_1_matrix4.html#a3f8a6bbf08e6144136a210ad4d455de9", null ],
     [ "Add", "struct_graphos_1_1_math_1_1_matrix4.html#ab702457864fbaaf7505230799c6ff568", null ],
     [ "Equals", "struct_graphos_1_1_math_1_1_matrix4.html#aa944b6aca531f7e358e50d206b4d2e78", null ],
     [ "Inverse", "struct_graphos_1_1_math_1_1_matrix4.html#a93e4f7f885a9d8bcb40096b8e4867c6b", null ],
@@ -13,7 +13,6 @@ var struct_graphos_1_1_math_1_1_matrix4 =
     [ "operator+", "struct_graphos_1_1_math_1_1_matrix4.html#a1449e1243e73d40f934c1b3328f23d5c", null ],
     [ "operator+=", "struct_graphos_1_1_math_1_1_matrix4.html#a44fb9bcdbfbcb9f4e7ba82f106462cfa", null ],
     [ "operator==", "struct_graphos_1_1_math_1_1_matrix4.html#ab668aea9e3e4dae29595ed2502ebcfaf", null ],
-    [ "Transpose", "struct_graphos_1_1_math_1_1_matrix4.html#a4c0916ff4bfecc65d98cb435d935a2fa", null ],
-    [ "dataArray", "struct_graphos_1_1_math_1_1_matrix4.html#a600c3924a0f11af22f7651922c2add8f", null ],
-    [ "matrix", "struct_graphos_1_1_math_1_1_matrix4.html#a44f9e10a5d0c2a4e70583382bac04517", null ]
+    [ "dataArray", "struct_graphos_1_1_math_1_1_matrix4.html#a4b4f4f442c2db1dbb947633e742912d9", null ],
+    [ "matrix", "struct_graphos_1_1_math_1_1_matrix4.html#aa22f66531c8e751f8e7ce8e4c25555f3", null ]
 ];

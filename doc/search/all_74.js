@@ -17,13 +17,13 @@ var searchData=
   ['titanic_5fcast',['titanic_cast',['../_graphos_global_8h.html#a99ae20c1ea79ff25989ab1c867934700',1,'GraphosGlobal.h']]],
   ['torotationmatrix',['ToRotationMatrix',['../struct_graphos_1_1_math_1_1_quaternion.html#a94fff8b75a878cdfbf76d655ee2e6f3c',1,'Graphos::Math::Quaternion']]],
   ['total_5fsize',['TOTAL_SIZE',['../_input_8h.html#a7d6dd25c7c2cc919a260a1b09143fbf0',1,'Input.h']]],
-  ['totalsize',['totalSize',['../struct_graphos_1_1_graphics_1_1_const_buffer.html#a2f4f47607030f8d2f0efc83586f4884a',1,'Graphos::Graphics::ConstBuffer']]],
-  ['transform',['transform',['../class_graphos_1_1_core_1_1_game_object.html#ac778011b465a1e8d267b1a7595232f30',1,'Graphos::Core::GameObject::transform()'],['../struct_graphos_1_1_math_1_1_transform.html#a2bd04f8338d86c793d3e2dea51a097d0',1,'Graphos::Math::Transform::Transform()']]],
+  ['totalsize',['totalSize',['../struct_graphos_1_1_graphics_1_1_const_buffer.html#ac30845c85ce77266b286bb58fde9a58c',1,'Graphos::Graphics::ConstBuffer']]],
+  ['transform',['Transform',['../struct_graphos_1_1_math_1_1_transform.html#a2bd04f8338d86c793d3e2dea51a097d0',1,'Graphos::Math::Transform::Transform()'],['../class_graphos_1_1_core_1_1_game_object.html#ac778011b465a1e8d267b1a7595232f30',1,'Graphos::Core::GameObject::transform()']]],
   ['transform',['Transform',['../struct_graphos_1_1_math_1_1_transform.html',1,'Graphos::Math']]],
   ['transform_2ecpp',['Transform.cpp',['../_transform_8cpp.html',1,'']]],
   ['transform_2eh',['Transform.h',['../_transform_8h.html',1,'']]],
-  ['translate',['Translate',['../struct_graphos_1_1_math_1_1_transform.html#ab35b07b5fd53be6a2fb07bb2963121a3',1,'Graphos::Math::Transform::Translate(const Vector3 &amp;displacement)'],['../struct_graphos_1_1_math_1_1_transform.html#a4fc909c1d6af127d75eedf86bba7d66a',1,'Graphos::Math::Transform::Translate(const float x, const float y, const float z)']]],
-  ['translateto',['TranslateTo',['../struct_graphos_1_1_math_1_1_transform.html#a7b6046714a6431648635fda0b5bb0308',1,'Graphos::Math::Transform::TranslateTo(const Vector3 &amp;newLocation)'],['../struct_graphos_1_1_math_1_1_transform.html#a21f19d0cfd6e9c786825f11a6ff23d18',1,'Graphos::Math::Transform::TranslateTo(const float x, const float y, const float z)']]],
-  ['transpose',['Transpose',['../struct_graphos_1_1_math_1_1_matrix4.html#a4c0916ff4bfecc65d98cb435d935a2fa',1,'Graphos::Math::Matrix4']]],
-  ['tripleproduct',['TripleProduct',['../struct_graphos_1_1_math_1_1_vector3.html#a7b9157791288020a057bc24ab207c6f3',1,'Graphos::Math::Vector3']]]
+  ['translate',['Translate',['../struct_graphos_1_1_math_1_1_transform.html#ab35b07b5fd53be6a2fb07bb2963121a3',1,'Graphos::Math::Transform::Translate(const Vector3 &amp;displacement)'],['../struct_graphos_1_1_math_1_1_transform.html#abd88d5629c0619c9d4febd651440f109',1,'Graphos::Math::Transform::Translate(const gFloat x, const gFloat y, const gFloat z)']]],
+  ['translateto',['TranslateTo',['../struct_graphos_1_1_math_1_1_transform.html#a7b6046714a6431648635fda0b5bb0308',1,'Graphos::Math::Transform::TranslateTo(const Vector3 &amp;newLocation)'],['../struct_graphos_1_1_math_1_1_transform.html#a2eeb7681f158262fe4d4a086d150cea8',1,'Graphos::Math::Transform::TranslateTo(const gFloat x, const gFloat y, const gFloat z)']]],
+  ['tripleproduct',['TripleProduct',['../struct_graphos_1_1_math_1_1_vector3.html#a7b9157791288020a057bc24ab207c6f3',1,'Graphos::Math::Vector3']]],
+  ['tryget',['TryGet',['../class_graphos_1_1_utility_1_1_json_controller.html#a23de1159647166180113e27ab442f574',1,'Graphos::Utility::JsonController::TryGet()'],['../class_graphos_1_1_utility_1_1_json_object.html#a8a6f383cbe1fe783ed8bb7e6d4ed7249',1,'Graphos::Utility::JsonObject::TryGet()']]]
 ];

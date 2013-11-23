@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['keydown',['KeyDown',['../class_graphos_1_1_utility_1_1_input.html#a371213c9533096c95231f8462efe34ee',1,'Graphos::Utility::Input']]],
-  ['keyevent',['KeyEvent',['../class_graphos_1_1_utility_1_1_input.html#af79a50eeb253ac015175eadb69530da4',1,'Graphos::Utility::Input']]],
-  ['keypress',['KeyPress',['../class_graphos_1_1_core_1_1_user_interface.html#a2b4a775854a8b13368aeecd33ab35acf',1,'Graphos::Core::UserInterface']]],
-  ['keyup',['KeyUp',['../class_graphos_1_1_utility_1_1_input.html#a117be4c3e8689779069e80e4b9de88d3',1,'Graphos::Utility::Input']]]
+  ['keydown',['KeyDown',['../class_graphos_1_1_utility_1_1_input_controller.html#a5e197022e80b92cf1f69f08bbd9153d3',1,'Graphos::Utility::InputController']]],
+  ['keyevent',['KeyEvent',['../class_graphos_1_1_utility_1_1_input_controller.html#a0510c5521b57109384caffc133682ede',1,'Graphos::Utility::InputController']]],
+  ['keypress',['KeyPress',['../class_graphos_1_1_core_1_1_user_interface.html#a38ae44b4f2b3d0f22a6b5dfe62928187',1,'Graphos::Core::UserInterface']]],
+  ['keyup',['KeyUp',['../class_graphos_1_1_utility_1_1_input_controller.html#a34ebf2281473d3a2053a7ccffd3187c0',1,'Graphos::Utility::InputController']]]
 ];

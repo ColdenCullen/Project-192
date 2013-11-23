@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>Graphos: Graphos::Utility::Event&lt; TArgs &gt; Struct Template Reference</title>
+<title>Graphos: Graphos::Utility::Event&lt; TReturn, TArgs &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('struct_graphos_1_1_utility_1_1_event.h
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="struct_graphos_1_1_utility_1_1_event-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Graphos::Utility::Event&lt; TArgs &gt; Struct Template Reference</div>  </div>
+<div class="title">Graphos::Utility::Event&lt; TReturn, TArgs &gt; Struct Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -116,29 +116,29 @@ $(document).ready(function(){initNavTree('struct_graphos_1_1_utility_1_1_event.h
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:ad61908a39dce3f4e24be97a3a5c4d030"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(TArgs)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#ad61908a39dce3f4e24be97a3a5c4d030">Delegate</a></td></tr>
-<tr class="separator:ad61908a39dce3f4e24be97a3a5c4d030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59a9af90c482f9cb6ec4ea3aa0161abf"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; TReturn(TArgs)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#a59a9af90c482f9cb6ec4ea3aa0161abf">Delegate</a></td></tr>
+<tr class="separator:a59a9af90c482f9cb6ec4ea3aa0161abf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac4d703c75990d127c2e007eaa5fb4f59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#ac4d703c75990d127c2e007eaa5fb4f59">AddFunction</a> (<a class="el" href="struct_graphos_1_1_utility_1_1_event.html#ad61908a39dce3f4e24be97a3a5c4d030">Delegate</a> func)</td></tr>
-<tr class="separator:ac4d703c75990d127c2e007eaa5fb4f59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9b186972a8be221c9ff234980a7feec2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#a9b186972a8be221c9ff234980a7feec2">Call</a> (TArgs arguments) const </td></tr>
-<tr class="separator:a9b186972a8be221c9ff234980a7feec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b0e0373223a317a0b056673b3b752ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#a7b0e0373223a317a0b056673b3b752ae">operator+=</a> (<a class="el" href="struct_graphos_1_1_utility_1_1_event.html#ad61908a39dce3f4e24be97a3a5c4d030">Delegate</a> func)</td></tr>
-<tr class="separator:a7b0e0373223a317a0b056673b3b752ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5c3d931854a8311430e62221cfb9b09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#aa5c3d931854a8311430e62221cfb9b09">operator()</a> (TArgs arguments) const </td></tr>
-<tr class="separator:aa5c3d931854a8311430e62221cfb9b09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b2cd2f087334166d76de6f2a72d12db"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#a0b2cd2f087334166d76de6f2a72d12db">AddFunction</a> (<a class="el" href="struct_graphos_1_1_utility_1_1_event.html#a59a9af90c482f9cb6ec4ea3aa0161abf">Delegate</a> func)</td></tr>
+<tr class="separator:a0b2cd2f087334166d76de6f2a72d12db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8effd4ba3e20b28079714917c09767b9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#a8effd4ba3e20b28079714917c09767b9">Call</a> (TArgs arguments) const </td></tr>
+<tr class="separator:a8effd4ba3e20b28079714917c09767b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1b76c696c5e501a8989f0a1150d2622"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#ac1b76c696c5e501a8989f0a1150d2622">operator+=</a> (<a class="el" href="struct_graphos_1_1_utility_1_1_event.html#a59a9af90c482f9cb6ec4ea3aa0161abf">Delegate</a> func)</td></tr>
+<tr class="separator:ac1b76c696c5e501a8989f0a1150d2622"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8032d6b1bdb9c82260a1b1f9caae226f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#a8032d6b1bdb9c82260a1b1f9caae226f">operator()</a> (TArgs arguments) const </td></tr>
+<tr class="separator:a8032d6b1bdb9c82260a1b1f9caae226f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
-<a class="anchor" id="ad61908a39dce3f4e24be97a3a5c4d030"></a>
+<a class="anchor" id="a59a9af90c482f9cb6ec4ea3aa0161abf"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TArgs &gt; </div>
+template&lt;typename TReturn , typename TArgs &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::function&lt;void(TArgs)&gt; <a class="el" href="struct_graphos_1_1_utility_1_1_event.html">Graphos::Utility::Event</a>&lt; TArgs &gt;::<a class="el" href="struct_graphos_1_1_utility_1_1_event.html#ad61908a39dce3f4e24be97a3a5c4d030">Delegate</a></td>
+          <td class="memname">typedef std::function&lt;TReturn(TArgs)&gt; <a class="el" href="struct_graphos_1_1_utility_1_1_event.html">Graphos::Utility::Event</a>&lt; TReturn, TArgs &gt;::<a class="el" href="struct_graphos_1_1_utility_1_1_event.html#a59a9af90c482f9cb6ec4ea3aa0161abf">Delegate</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -146,43 +146,43 @@ template&lt;typename TArgs &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ac4d703c75990d127c2e007eaa5fb4f59"></a>
+<a class="anchor" id="a0b2cd2f087334166d76de6f2a72d12db"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TArgs &gt; </div>
+template&lt;typename TReturn , typename TArgs &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="struct_graphos_1_1_utility_1_1_event.html">Graphos::Utility::Event</a>&lt; TArgs &gt;::AddFunction </td>
+          <td class="memname">virtual void <a class="el" href="struct_graphos_1_1_utility_1_1_event.html">Graphos::Utility::Event</a>&lt; TReturn, TArgs &gt;::AddFunction </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#ad61908a39dce3f4e24be97a3a5c4d030">Delegate</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#a59a9af90c482f9cb6ec4ea3aa0161abf">Delegate</a>&#160;</td>
           <td class="paramname"><em>func</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a9b186972a8be221c9ff234980a7feec2"></a>
+<a class="anchor" id="a8effd4ba3e20b28079714917c09767b9"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TArgs &gt; </div>
+template&lt;typename TReturn , typename TArgs &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="struct_graphos_1_1_utility_1_1_event.html">Graphos::Utility::Event</a>&lt; TArgs &gt;::Call </td>
+          <td class="memname">virtual void <a class="el" href="struct_graphos_1_1_utility_1_1_event.html">Graphos::Utility::Event</a>&lt; TReturn, TArgs &gt;::Call </td>
           <td>(</td>
           <td class="paramtype">TArgs&#160;</td>
           <td class="paramname"><em>arguments</em></td><td>)</td>
@@ -191,24 +191,24 @@ template&lt;typename TArgs &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="aa5c3d931854a8311430e62221cfb9b09"></a>
+<a class="anchor" id="a8032d6b1bdb9c82260a1b1f9caae226f"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TArgs &gt; </div>
+template&lt;typename TReturn , typename TArgs &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="struct_graphos_1_1_utility_1_1_event.html">Graphos::Utility::Event</a>&lt; TArgs &gt;::operator() </td>
+          <td class="memname">virtual void <a class="el" href="struct_graphos_1_1_utility_1_1_event.html">Graphos::Utility::Event</a>&lt; TReturn, TArgs &gt;::operator() </td>
           <td>(</td>
           <td class="paramtype">TArgs&#160;</td>
           <td class="paramname"><em>arguments</em></td><td>)</td>
@@ -217,33 +217,33 @@ template&lt;typename TArgs &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a class="anchor" id="a7b0e0373223a317a0b056673b3b752ae"></a>
+<a class="anchor" id="ac1b76c696c5e501a8989f0a1150d2622"></a>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TArgs &gt; </div>
+template&lt;typename TReturn , typename TArgs &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="struct_graphos_1_1_utility_1_1_event.html">Graphos::Utility::Event</a>&lt; TArgs &gt;::operator+= </td>
+          <td class="memname">virtual void <a class="el" href="struct_graphos_1_1_utility_1_1_event.html">Graphos::Utility::Event</a>&lt; TReturn, TArgs &gt;::operator+= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#ad61908a39dce3f4e24be97a3a5c4d030">Delegate</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html#a59a9af90c482f9cb6ec4ea3aa0161abf">Delegate</a>&#160;</td>
           <td class="paramname"><em>func</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -259,7 +259,7 @@ template&lt;typename TArgs &gt; </div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_graphos.html">Graphos</a></li><li class="navelem"><a class="el" href="namespace_graphos_1_1_utility.html">Utility</a></li><li class="navelem"><a class="el" href="struct_graphos_1_1_utility_1_1_event.html">Event</a></li>
-    <li class="footer">Generated on Sat Nov 16 2013 18:04:25 for Graphos by
+    <li class="footer">Generated on Sat Nov 23 2013 17:38:18 for Graphos by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

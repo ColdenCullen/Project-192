@@ -22,9 +22,6 @@ var dir_8ae46fc8ac56d01f4d19ac6156e92427 =
       [ "AdapterDeviceContext", "union_graphos_1_1_graphics_1_1_i_graphics_adapter_controller_1_1_adapter_device_context.html", "union_graphos_1_1_graphics_1_1_i_graphics_adapter_controller_1_1_adapter_device_context" ],
       [ "AdapterDevice", "union_graphos_1_1_graphics_1_1_i_graphics_adapter_controller_1_1_adapter_device.html", "union_graphos_1_1_graphics_1_1_i_graphics_adapter_controller_1_1_adapter_device" ]
     ] ],
-    [ "IPlatformWindowController.h", "_i_platform_window_controller_8h.html", [
-      [ "IPlatformWindowController", "class_graphos_1_1_graphics_1_1_i_platform_window_controller.html", "class_graphos_1_1_graphics_1_1_i_platform_window_controller" ]
-    ] ],
     [ "IShader.cpp", "_i_shader_8cpp.html", null ],
     [ "IShader.h", "_i_shader_8h.html", [
       [ "ConstBuffer", "struct_graphos_1_1_graphics_1_1_const_buffer.html", "struct_graphos_1_1_graphics_1_1_const_buffer" ],
@@ -46,6 +43,6 @@ var dir_8ae46fc8ac56d01f4d19ac6156e92427 =
     [ "Win32Controller.h", "_win32_controller_8h.html", null ],
     [ "WindowController.cpp", "_window_controller_8cpp.html", null ],
     [ "WindowController.h", "_window_controller_8h.html", [
-      [ "WindowController", "class_graphos_1_1_graphics_1_1_window_controller.html", null ]
+      [ "WindowController", "class_graphos_1_1_graphics_1_1_window_controller.html", "class_graphos_1_1_graphics_1_1_window_controller" ]
     ] ]
 ];

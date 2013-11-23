@@ -10,11 +10,10 @@ var class_graphos_1_1_graphics_1_1_i_shader =
     [ "RegisterConstBuffer", "class_graphos_1_1_graphics_1_1_i_shader.html#a1bdc66e4df37854c3212f41b8028338a", null ],
     [ "SetModelMatrix", "class_graphos_1_1_graphics_1_1_i_shader.html#a565054036ac900146fb1625aa9e92f0c", null ],
     [ "SetProjectionMatrix", "class_graphos_1_1_graphics_1_1_i_shader.html#ae012c000eb4ada163d64269e98243932", null ],
-    [ "SetUniform", "class_graphos_1_1_graphics_1_1_i_shader.html#a5a93f998f5b4b94c64142555b210e80f", null ],
-    [ "SetUniform", "class_graphos_1_1_graphics_1_1_i_shader.html#a23dd9b7b817e3e02479bd4ecfb1ef72d", null ],
-    [ "SetUniformArray", "class_graphos_1_1_graphics_1_1_i_shader.html#ad8941d3bda142aa5ff64770b53925082", null ],
-    [ "SetUniformArray", "class_graphos_1_1_graphics_1_1_i_shader.html#af50cd74aa3d670a2240148b4f3360330", null ],
-    [ "SetUniformBuffer", "class_graphos_1_1_graphics_1_1_i_shader.html#ae044a2658ae25db3ca5e7cfd688dcbca", null ],
+    [ "SetUniform", "class_graphos_1_1_graphics_1_1_i_shader.html#a055814f6e8c821b457c324d9bee01b18", null ],
+    [ "SetUniform", "class_graphos_1_1_graphics_1_1_i_shader.html#a9ca3043e7511fb4048d634a6a1526f65", null ],
+    [ "SetUniformArray", "class_graphos_1_1_graphics_1_1_i_shader.html#acacd3422cf9b58b536d1d8faee287475", null ],
+    [ "SetUniformArray", "class_graphos_1_1_graphics_1_1_i_shader.html#a8ddf3942570cec80e4e8892c8f4229fd", null ],
     [ "SetUniformMatrix", "class_graphos_1_1_graphics_1_1_i_shader.html#a48521d500354f518f6fe62d66043aa36", null ],
     [ "SetViewMatrix", "class_graphos_1_1_graphics_1_1_i_shader.html#a95258c4838829e423b67a90172df4d1f", null ],
     [ "Shutdown", "class_graphos_1_1_graphics_1_1_i_shader.html#a79524b4a7431c4c70ab3da790dfa55ea", null ],
@@ -22,6 +21,6 @@ var class_graphos_1_1_graphics_1_1_i_shader =
     [ "modelMatrix", "class_graphos_1_1_graphics_1_1_i_shader.html#abd5ed8d3b5ac7dbc9eddd614509e4d2f", null ],
     [ "modelViewProjection", "class_graphos_1_1_graphics_1_1_i_shader.html#a19bbd3e9bf040679d95a618a80fcd683", null ],
     [ "projectionMatrix", "class_graphos_1_1_graphics_1_1_i_shader.html#a191f6d7515038a23c89a7ebbd6e50a87", null ],
-    [ "script", "class_graphos_1_1_graphics_1_1_i_shader.html#a5030f15787d151428de735f076d84731", null ],
+    [ "script", "class_graphos_1_1_graphics_1_1_i_shader.html#a7ea2c7472402d5eb7ffe941eb1de7d4f", null ],
     [ "viewMatrix", "class_graphos_1_1_graphics_1_1_i_shader.html#a157f830e249599f17faa2d649300d5f3", null ]
 ];

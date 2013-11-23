@@ -104,13 +104,13 @@ $(document).ready(function(){initNavTree('_class_mapper_8h.html','');});
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">ClassMapper.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_class_wrapper_8h_source.html">ClassWrapper.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_enums_8h_source.html">Enums.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_transform_8h_source.html">Transform.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_game_object_8h_source.html">GameObject.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_mesh_8h_source.html">Mesh.h</a>&quot;</code><br/>
@@ -118,6 +118,10 @@ $(document).ready(function(){initNavTree('_class_mapper_8h.html','');});
 <code>#include &quot;<a class="el" href="_vector3_8h_source.html">Vector3.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_camera_8h_source.html">Camera.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="_i_shader_8h_source.html">IShader.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_game_object_collection_8h_source.html">GameObjectCollection.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_graphos_game_8h_source.html">GraphosGame.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_shader_controller_8h_source.html">ShaderController.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="_window_controller_8h_source.html">WindowController.h</a>&quot;</code><br/>
 </div>
 <p><a href="_class_mapper_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -137,25 +141,23 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a2ed7c8c25d51fe3f06b6199271fc751a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_class_mapper_8h.html#a2ed7c8c25d51fe3f06b6199271fc751a">WRAP_CLASS</a> (<a class="el" href="struct_graphos_1_1_math_1_1_transform.html">Transform</a>,(CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_math_1_1_transform.html">Transform</a> *(void)&gt;)) WRAP_CLASS(<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a></td></tr>
 <tr class="separator:a2ed7c8c25d51fe3f06b6199271fc751a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41fa9073319838fe0a14417f09712681"><td class="memItemLeft" align="right" valign="top">CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_class_mapper_8h.html#a41fa9073319838fe0a14417f09712681">WRAP_CLASS</a> (<a class="el" href="class_graphos_1_1_core_1_1_mesh.html">Mesh</a>,(CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_mesh.html">Mesh</a> *(std::string)&gt;)) WRAP_CLASS(<a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a></td></tr>
-<tr class="separator:a41fa9073319838fe0a14417f09712681"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a649ed3c4e3e4c7de5af15bf851c9d23b"><td class="memItemLeft" align="right" valign="top">CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> <br class="typebreak"/>
-*(void)&gt; CtorForwarder<br class="typebreak"/>
-&lt; <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> *(const <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_class_mapper_8h.html#a649ed3c4e3e4c7de5af15bf851c9d23b">WRAP_CLASS</a> (<a class="el" href="struct_graphos_1_1_math_1_1_matrix4.html">Matrix4</a>,(CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_math_1_1_matrix4.html">Matrix4</a> *(void)&gt;)) WRAP_CLASS(<a class="el" href="class_graphos_1_1_core_1_1_camera.html">Camera</a></td></tr>
-<tr class="separator:a649ed3c4e3e4c7de5af15bf851c9d23b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a753b7b887486ee52452e8c8f64c87648"><td class="memItemLeft" align="right" valign="top">CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> <br class="typebreak"/>
-*(void)&gt; CtorForwarder<br class="typebreak"/>
-&lt; <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> *(const <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> &amp;)&gt;<br class="typebreak"/>
- CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_camera.html">Camera</a> <br class="typebreak"/>
-*(<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_class_mapper_8h.html#a753b7b887486ee52452e8c8f64c87648">WRAP_CLASS</a> (<a class="el" href="struct_graphos_1_1_graphics_1_1_const_buffer.html">ConstBuffer</a>,(CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_graphics_1_1_const_buffer.html">ConstBuffer</a> *(void)&gt;)) WRAP_CLASS(<a class="el" href="class_graphos_1_1_graphics_1_1_i_shader.html">IShader</a></td></tr>
-<tr class="separator:a753b7b887486ee52452e8c8f64c87648"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a0c2ac329018a2146704d69d4be46d664"><td class="memItemLeft" align="right" valign="top">CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_class_mapper_8h.html#a0c2ac329018a2146704d69d4be46d664">CtorForwarder&lt; Vector3 *(void)&gt;</a></td></tr>
-<tr class="separator:a0c2ac329018a2146704d69d4be46d664"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a421f4fef06e3cacf8d47e4aa59157ab6"><td class="memItemLeft" align="right" valign="top">CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_class_mapper_8h.html#a421f4fef06e3cacf8d47e4aa59157ab6">CtorForwarder&lt; Vector3 *(float, float, float)&gt;</a></td></tr>
-<tr class="separator:a421f4fef06e3cacf8d47e4aa59157ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd94db60788ea91634d98592ab6a803"><td class="memItemLeft" align="right" valign="top">CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_class_mapper_8h.html#a4dd94db60788ea91634d98592ab6a803">WRAP_CLASS</a> (<a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html">GameObjectCollection</a>,(CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html">GameObjectCollection</a> *(void)&gt;)) WRAP_CLASS(<a class="el" href="class_graphos_1_1_core_1_1_mesh.html">Mesh</a></td></tr>
+<tr class="separator:a4dd94db60788ea91634d98592ab6a803"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2b50c70d7453b03e712a6ab75e4dd4a"><td class="memItemLeft" align="right" valign="top">CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> <br class="typebreak"/>
+*(void)&gt; CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_mesh.html">Mesh</a> <br class="typebreak"/>
+*(std::string)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_class_mapper_8h.html#ad2b50c70d7453b03e712a6ab75e4dd4a">WRAP_CLASS</a> (<a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a>,(CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> *(void)&gt;, CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> *(gFloat, gFloat, gFloat)&gt;, CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> *(const <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> &amp;)&gt;)) WRAP_CLASS(<a class="el" href="struct_graphos_1_1_math_1_1_matrix4.html">Matrix4</a></td></tr>
+<tr class="separator:ad2b50c70d7453b03e712a6ab75e4dd4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2279e00ce3b882f9478ef53fdfeb8494"><td class="memItemLeft" align="right" valign="top">CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> <br class="typebreak"/>
+*(void)&gt; CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_mesh.html">Mesh</a> <br class="typebreak"/>
+*(std::string)&gt; CtorForwarder<br class="typebreak"/>
+&lt; <a class="el" href="struct_graphos_1_1_math_1_1_matrix4.html">Matrix4</a> *(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_class_mapper_8h.html#a2279e00ce3b882f9478ef53fdfeb8494">WRAP_CLASS</a> (<a class="el" href="class_graphos_1_1_core_1_1_camera.html">Camera</a>,(CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_camera.html">Camera</a> *(<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *)&gt;)) WRAP_CLASS(<a class="el" href="class_graphos_1_1_graphics_1_1_i_shader.html">IShader</a></td></tr>
+<tr class="separator:a2279e00ce3b882f9478ef53fdfeb8494"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1da3df2e1ba6f5a486153a97a03c736c"><td class="memItemLeft" align="right" valign="top">CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> <br class="typebreak"/>
+*(void)&gt; CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_mesh.html">Mesh</a> <br class="typebreak"/>
+*(std::string)&gt; CtorForwarder<br class="typebreak"/>
+&lt; <a class="el" href="struct_graphos_1_1_math_1_1_matrix4.html">Matrix4</a> *(void)&gt;<br class="typebreak"/>
+ CtorForwarder&lt; <a class="el" href="class_graphos_1_1_graphics_1_1_i_shader.html">IShader</a> *(void)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_class_mapper_8h.html#a1da3df2e1ba6f5a486153a97a03c736c">WRAP_CLASS</a> (<a class="el" href="class_graphos_1_1_core_1_1_graphos_game.html">GraphosGame</a>,(CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_graphos_game.html">GraphosGame</a> *(void)&gt;)) WRAP_CLASS(<a class="el" href="class_graphos_1_1_graphics_1_1_window_controller.html">WindowController</a></td></tr>
+<tr class="separator:a1da3df2e1ba6f5a486153a97a03c736c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a class="anchor" id="a2ed7c8c25d51fe3f06b6199271fc751a"></a>
@@ -184,20 +186,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a41fa9073319838fe0a14417f09712681"></a>
+<a class="anchor" id="a4dd94db60788ea91634d98592ab6a803"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a>*( void )&gt; WRAP_CLASS </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_graphos_1_1_core_1_1_mesh.html">Mesh</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html">GameObjectCollection</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">(CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_mesh.html">Mesh</a> *(std::string)&gt;)&#160;</td>
+          <td class="paramtype">(CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_game_object_collection.html">GameObjectCollection</a> *(void)&gt;)&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -210,20 +212,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a649ed3c4e3e4c7de5af15bf851c9d23b"></a>
+<a class="anchor" id="ad2b50c70d7453b03e712a6ab75e4dd4a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a>*( void )&gt; CtorForwarder&lt;<a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a>*( const <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a>&amp; )&gt; WRAP_CLASS </td>
+          <td class="memname">CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a>*( void )&gt; CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_mesh.html">Mesh</a>*( std::string )&gt; WRAP_CLASS </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_graphos_1_1_math_1_1_matrix4.html">Matrix4</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">(CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_math_1_1_matrix4.html">Matrix4</a> *(void)&gt;)&#160;</td>
+          <td class="paramtype">(CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> *(void)&gt;,CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> *(gFloat, gFloat, gFloat)&gt;,CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> *(const <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> &amp;)&gt;)&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -236,20 +238,20 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a753b7b887486ee52452e8c8f64c87648"></a>
+<a class="anchor" id="a2279e00ce3b882f9478ef53fdfeb8494"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a>*( void )&gt; CtorForwarder&lt;<a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a>*( const <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a>&amp; )&gt; CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_camera.html">Camera</a>*( <a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a>* )&gt; WRAP_CLASS </td>
+          <td class="memname">CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a>*( void )&gt; CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_mesh.html">Mesh</a>*( std::string )&gt; CtorForwarder&lt;<a class="el" href="struct_graphos_1_1_math_1_1_matrix4.html">Matrix4</a>*( void )&gt; WRAP_CLASS </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="struct_graphos_1_1_graphics_1_1_const_buffer.html">ConstBuffer</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_graphos_1_1_core_1_1_camera.html">Camera</a>&#160;</td>
           <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">(CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_graphics_1_1_const_buffer.html">ConstBuffer</a> *(void)&gt;)&#160;</td>
+          <td class="paramtype">(CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_camera.html">Camera</a> *(<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a> *)&gt;)&#160;</td>
           <td class="paramname">&#160;</td>
         </tr>
         <tr>
@@ -262,25 +264,26 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a class="anchor" id="a421f4fef06e3cacf8d47e4aa59157ab6"></a>
+<a class="anchor" id="a1da3df2e1ba6f5a486153a97a03c736c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a>*( void )&gt; CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> *(float, float, float)&gt;</td>
+          <td class="memname">CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a>*( void )&gt; CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_mesh.html">Mesh</a>*( std::string )&gt; CtorForwarder&lt;<a class="el" href="struct_graphos_1_1_math_1_1_matrix4.html">Matrix4</a>*( void )&gt; CtorForwarder&lt;<a class="el" href="class_graphos_1_1_graphics_1_1_i_shader.html">IShader</a>*( void )&gt; WRAP_CLASS </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_graphos_1_1_core_1_1_graphos_game.html">GraphosGame</a>&#160;</td>
+          <td class="paramname">, </td>
         </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a0c2ac329018a2146704d69d4be46d664"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
         <tr>
-          <td class="memname">CtorForwarder&lt;<a class="el" href="class_graphos_1_1_core_1_1_game_object.html">GameObject</a>*( void )&gt; CtorForwarder&lt; <a class="el" href="struct_graphos_1_1_math_1_1_vector3.html">Vector3</a> *(void)&gt;</td>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">(CtorForwarder&lt; <a class="el" href="class_graphos_1_1_core_1_1_graphos_game.html">GraphosGame</a> *(void)&gt;)&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -293,7 +296,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_0b6ee6e7e9547e675db4add2e5de97da.html">Engine</a></li><li class="navelem"><a class="el" href="dir_2db978ef12e7d8fd9717349051e1c48e.html">Graphos.Scripting</a></li><li class="navelem"><a class="el" href="_class_mapper_8h.html">ClassMapper.h</a></li>
-    <li class="footer">Generated on Sat Nov 16 2013 18:04:25 for Graphos by
+    <li class="footer">Generated on Sat Nov 23 2013 17:38:17 for Graphos by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

@@ -111,6 +111,9 @@ $(document).ready(function(){initNavTree('class_graphos_1_1_utility_1_1_json_con
 </div><!--header-->
 <div class="contents">
 
+<p>A controller for handling JSON Objects.  
+ <a href="class_graphos_1_1_utility_1_1_json_controller.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_json_controller_8h_source.html">JsonController.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
@@ -118,13 +121,19 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a68f484fb25ae4cebafd36f9451cd17a5"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_utility_1_1_json_controller.html#a68f484fb25ae4cebafd36f9451cd17a5">Initialize</a> (void)</td></tr>
 <tr class="separator:a68f484fb25ae4cebafd36f9451cd17a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac63689098d1ad670dbc605dde41d6d5d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_graphos_1_1_utility_1_1_json_object.html">JsonObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_utility_1_1_json_controller.html#ac63689098d1ad670dbc605dde41d6d5d">Get</a> (std::string path)</td></tr>
+<tr class="memdesc:ac63689098d1ad670dbc605dde41d6d5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the given file.  <a href="#ac63689098d1ad670dbc605dde41d6d5d">More...</a><br/></td></tr>
 <tr class="separator:ac63689098d1ad670dbc605dde41d6d5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23de1159647166180113e27ab442f574"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_utility_1_1_json_controller.html#a23de1159647166180113e27ab442f574">TryGet</a> (std::string path, <a class="el" href="class_graphos_1_1_utility_1_1_json_object.html">JsonObject</a> &amp;val)</td></tr>
+<tr class="memdesc:a23de1159647166180113e27ab442f574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the children of this JSON Object.  <a href="#a23de1159647166180113e27ab442f574">More...</a><br/></td></tr>
 <tr class="separator:a23de1159647166180113e27ab442f574"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f4043dbb4ab2e16f65c3cb331c4f6ea"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_graphos_1_1_utility_1_1_json_object.html">JsonObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_utility_1_1_json_controller.html#a8f4043dbb4ab2e16f65c3cb331c4f6ea">Parse</a> (std::string jsonString)</td></tr>
-<tr class="separator:a8f4043dbb4ab2e16f65c3cb331c4f6ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2aa259704c6b3a65c9ad93c08eadc248"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_graphos_1_1_utility_1_1_json_object.html">JsonObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphos_1_1_utility_1_1_json_controller.html#a2aa259704c6b3a65c9ad93c08eadc248">Parse</a> (std::string jsonString)</td></tr>
+<tr class="memdesc:a2aa259704c6b3a65c9ad93c08eadc248"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the given JSON string.  <a href="#a2aa259704c6b3a65c9ad93c08eadc248">More...</a><br/></td></tr>
+<tr class="separator:a2aa259704c6b3a65c9ad93c08eadc248"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A controller for handling JSON Objects. </p>
+<dl class="section author"><dt>Author</dt><dd>Colden Cullen </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="ac63689098d1ad670dbc605dde41d6d5d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -146,6 +155,22 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets the given file. </p>
+<dl class="section author"><dt>Author</dt><dd>Colden Cullen</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">typename</td><td>T Type of the typename t. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Full pathname of the value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value found. </dd></dl>
 
 </div>
 </div>
@@ -173,7 +198,7 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8f4043dbb4ab2e16f65c3cb331c4f6ea"></a>
+<a class="anchor" id="a2aa259704c6b3a65c9ad93c08eadc248"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -181,7 +206,7 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_graphos_1_1_utility_1_1_json_object.html">JsonObject</a> JsonController::Parse </td>
+          <td class="memname">static <a class="el" href="class_graphos_1_1_utility_1_1_json_object.html">JsonObject</a> Graphos::Utility::JsonController::Parse </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>jsonString</em></td><td>)</td>
@@ -194,6 +219,16 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Parses the given JSON string. </p>
+<dl class="section author"><dt>Author</dt><dd>Colden Cullen</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">jsonString</td><td>The JSON string to parse.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The resulting <a class="el" href="class_graphos_1_1_utility_1_1_json_object.html" title="A JSON object. ">JsonObject</a>. </dd></dl>
 
 </div>
 </div>
@@ -229,6 +264,10 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Gets the children of this JSON Object. </p>
+<dl class="section author"><dt>Author</dt><dd>Colden Cullen</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The children. </dd></dl>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
@@ -241,7 +280,7 @@ Static Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespace_graphos.html">Graphos</a></li><li class="navelem"><a class="el" href="namespace_graphos_1_1_utility.html">Utility</a></li><li class="navelem"><a class="el" href="class_graphos_1_1_utility_1_1_json_controller.html">JsonController</a></li>
-    <li class="footer">Generated on Sat Nov 16 2013 14:49:40 for Graphos by
+    <li class="footer">Generated on Sat Nov 23 2013 17:38:18 for Graphos by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

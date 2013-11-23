@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['name',['name',['../class_graphos_1_1_core_1_1_ambient_light.html#ae4345210258c3db84ad47c36eeef3176',1,'Graphos::Core::AmbientLight']]]
+  ['node',['node',['../class_graphos_1_1_utility_1_1_json_object.html#ab88fcf7dc027f9cbe0e11749b179965d',1,'Graphos::Utility::JsonObject']]]
 ];
