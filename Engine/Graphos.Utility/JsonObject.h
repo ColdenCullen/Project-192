@@ -14,7 +14,7 @@ namespace Graphos
 		class JsonObject
 		{
 		public:
-			JsonObject( Json::Value obj = Json::Value( Json::objectValue ) ) : node( obj ) { }
+			explicit JsonObject( Json::Value obj = Json::Value( Json::objectValue ) ) : node( obj ) { }
 
 			// Get value from settings
 			template<typename T>
@@ -26,7 +26,7 @@ namespace Graphos
 			bool TryGet( std::string path, T& val )
 			{
 				if( path.size() == 0 )
-					return val = node, true;
+					return val = JsonObject( node ).Get<T>( "" ), true;
 
 				std::string left;
 				std::string right = path;
@@ -50,10 +50,10 @@ namespace Graphos
 					currentValue = &( *currentValue )[ left ];
 
 					if( currentValue->isNull() )
-						return val = Json::Value::null, false;
+						return val = T(), false;
 				} while( currentIndex != std::string::npos );
 
-				return val = *currentValue, true;
+				return val = JsonObject( *currentValue ).Get<T>( "" ), true;
 			}
 
 			template<typename T>

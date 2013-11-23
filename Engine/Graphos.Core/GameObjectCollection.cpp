@@ -32,11 +32,11 @@ void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 		if( object.isArray() )
 		{
 			for( gInt ii = 0; ii < object.size(); ++ii )
-				addObj( object[ ii ] );
+				addObj( JsonObject( object[ ii ] ) );
 		}
 		else
 		{
-			addObj( object );
+			addObj( JsonObject( object ) );
 		}
 	}
 
@@ -98,5 +98,5 @@ void GameObjectCollection::ClearObjects( void )
 void GameObjectCollection::CallFunction( void (GameObject::*func)( void ) )
 {
 	for( auto iterator = begin( objectList ); iterator != end( objectList ); ++iterator )
-			(iterator->second->*func)();
+		(iterator->second->*func)();
 }
