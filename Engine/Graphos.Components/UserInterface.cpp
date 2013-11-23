@@ -83,14 +83,14 @@ UserInterface::~UserInterface()
 /// Get input from the mouse
 bool UserInterface::Update( void )
 {
-	Vector2 cursor = Input::GetMousePos();
+	Vector2 cursor = InputController::GetMousePos();
 	view->webView->InjectMouseMove( static_cast<gInt>( cursor.x ), static_cast<gInt>( cursor.y ) );
 
-	if( Input::IsKeyDown( VK_LBUTTON, true ) )
+	if( InputController::IsKeyDown( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseDown( kMouseButton_Left );
 	}
-	else if( Input::IsKeyUp( VK_LBUTTON, true ) )
+	else if( InputController::IsKeyUp( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseUp( kMouseButton_Left );
 	}

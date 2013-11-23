@@ -60,44 +60,188 @@ namespace Graphos
 {
 	namespace Utility
 	{
-		// Struct to store key-states
+		/**
+		 * @struct	InputState
+		 *
+		 * @brief	Struct to store key-states.
+		 *
+		 * @author	Colden Cullen
+		 * @date	11/23/2013
+		 */
 		struct InputState
 		{
 		public:
 			InputState&			operator=( const InputState& other );
 			gBool				operator[]( const unsigned char index );
 
+			/**
+			 * @fn	gBool CheckState( const unsigned char keyCode ) const;
+			 *
+			 * @brief	Check state the state of a key code.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 *
+			 * @param	keyCode	The key code.
+			 *
+			 * @return	The status of the key.
+			 */
 			gBool				CheckState( const unsigned char keyCode ) const;
+
+			/**
+			 * @fn	void SetState( const unsigned char keyCode, const gBool newValue );
+			 *
+			 * @brief	Sets a key's state.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 *
+			 * @param	keyCode 	The key code.
+			 * @param	newValue	The new value.
+			 */
 			void				SetState( const unsigned char keyCode, const gBool newValue );
+
+			/**
+			 * @fn	void Reset( void );
+			 *
+			 * @brief	Resets this object.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 */
 			void				Reset( void );
 		private:
 			uint64_t			bits[ SPLIT ];
 		};
 
-		class Input
+		/**
+		 * @class	InputController
+		 *
+		 * @brief	A controller for handling inputs.
+		 *
+		 * @author	Colden Cullen
+		 * @date	11/23/2013
+		 */
+		class InputController
 		{
 		public:
+
+			/**
+			 * @typedef	Event<void, gUInt> KeyEvent
+			 *
+			 * @brief	Defines an alias representing the key event.
+			 */
 			typedef Event<void, gUInt> KeyEvent;
 
+			/**
+			 * @brief	The user interface.
+			 */
 			static Core::UserInterface* ui;
 
+			/**
+			 * @fn	static void Input::Update( void );
+			 *
+			 * @brief	Updates the current key states.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 */
 			static void			Update( void );
 
-			static void			AddKeyDownUp( KeyEvent::Delegate func );
+			/**
+			 * @fn	static void Input::AddKeyDownUp( KeyEvent::Delegate func );
+			 *
+			 * @brief	Adds a key up event to the keystates.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 *
+			 * @param	func	The function to add.
+			 */
+			static void			AddKeyUpEvent( KeyEvent::Delegate func );
+
+			/**
+			 * @fn	static void Input::AddKeyDownEvent( KeyEvent::Delegate func );
+			 *
+			 * @brief	Adds a key down event to the keystates.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 *
+			 * @param	func	The function.
+			 */
 			static void			AddKeyDownEvent( KeyEvent::Delegate func );
 
+			/**
+			 * @fn	static void Input::KeyDown( gUInt input );
+			 *
+			 * @brief	Sets a key to be down.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 *
+			 * @param	input	The key to set.
+			 */
 			static void			KeyDown( gUInt input );
+
+			/**
+			 * @fn	static void Input::KeyUp( gUInt input );
+			 *
+			 * @brief	Sets a key to be up.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 *
+			 * @param	input	The key to set.
+			 */
 			static void			KeyUp( gUInt input );
 
+			/**
+			 * @fn	static gBool Input::IsKeyDown( gUInt input, const gBool checkPrevious = false );
+			 *
+			 * @brief	Is the key down.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 *
+			 * @param	input		 	The input.
+			 * @param	checkPrevious	(Optional) Whether or not to make sure the key is newly down.
+			 *
+			 * @return	A gBool.
+			 */
 			static gBool		IsKeyDown( gUInt input, const gBool checkPrevious = false );
+
+			/**
+			 * @fn	static gBool Input::IsKeyUp( gUInt input, const gBool checkPrevious = false );
+			 *
+			 * @brief	Is the key up.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 *
+			 * @param	input		 	The input.
+			 * @param	checkPrevious	(Optional) Whether or not to make sure the key is newly down.
+			 *
+			 * @return	A gBool.
+			 */
 			static gBool		IsKeyUp( gUInt input, const gBool checkPrevious = false );
 
+			/**
+			 * @fn	static Math::Vector2 Input::GetMousePos( );
+			 *
+			 * @brief	Gets mouse position on the screen.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 *
+			 * @return	The mouse position.
+			 */
 			static Math::Vector2 GetMousePos( /*Transform& camera, float zPlane*/ );
 
 		private:
-								Input( void ) { }
-								Input( Input& other );
-			void				operator=( Input& other );
+								InputController( void ) { }
+								InputController( InputController& other );
+			void				operator=( InputController& other );
 
 			static KeyEvent		keyDown;
 			static KeyEvent		keyUp;

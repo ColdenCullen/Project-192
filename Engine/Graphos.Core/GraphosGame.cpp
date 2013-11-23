@@ -56,7 +56,7 @@ void GraphosGame::Run( void )
 			Time::Update();
 
 			// Update input
-			Input::Update();
+			InputController::Update();
 
 			// Update physics
 			if( CurrentState == GameState::Game )
@@ -110,7 +110,7 @@ void GraphosGame::Reset( void )
 	ScriptController::Get().Initialize();
 	AssetController::Initialize();
 	PhysicsController::Initialize();
-	Input::ui = ui = new UserInterface( this );
+	InputController::ui = ui = new UserInterface( this );
 
 	Initialize();
 }
@@ -132,7 +132,7 @@ void GraphosGame::Start( void )
 	PhysicsController::Initialize();
 	ScriptController::Get().Initialize();
 
-	Input::ui = ui = new UserInterface( this );
+	InputController::ui = ui = new UserInterface( this );
 
 	Initialize();
 }
