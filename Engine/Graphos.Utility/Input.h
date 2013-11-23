@@ -79,8 +79,6 @@ namespace Graphos
 		public:
 			typedef Event<void, unsigned int> KeyEvent;
 
-			static Core::UserInterface* ui;
-
 			static void			Update( void );
 
 			static void			AddKeyDownUp( KeyEvent::Delegate func );

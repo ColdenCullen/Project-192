@@ -70,10 +70,6 @@ void Input::KeyDown( unsigned int input )
 {
 	stage.SetState( input, true );
 
-	if( ui && input != VK_LBUTTON && input != VK_RBUTTON )
-		//if( IsKeyDown( input, true ) )
-			ui->KeyPress( input );
-
 	keyDown( input );
 }
 
@@ -148,4 +144,3 @@ InputState Input::prevKeyState;
 InputState Input::keyState;
 Input::KeyEvent Input::keyUp;
 Input::KeyEvent Input::keyDown;
-UserInterface* Input::ui;

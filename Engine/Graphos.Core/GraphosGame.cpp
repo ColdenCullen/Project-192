@@ -108,7 +108,7 @@ void GraphosGame::Reset( void )
 	ScriptController::Get().Initialize();
 	AssetController::Initialize();
 	PhysicsController::Initialize();
-	Input::ui = ui = new UserInterface( this );
+	ui = new UserInterface( this );
 
 	Initialize();
 }
@@ -130,7 +130,7 @@ void GraphosGame::Start( void )
 	PhysicsController::Initialize();
 	ScriptController::Get().Initialize();
 
-	Input::ui = ui = new UserInterface( this );
+	ui = new UserInterface( this );
 
 	Initialize();
 }
