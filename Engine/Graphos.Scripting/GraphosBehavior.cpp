@@ -6,6 +6,7 @@
 #include "OutputController.h"
 #include "GameObjectCollection.h"
 #include "ClassMapper.h"
+#include "TaskManager.h"
 
 using namespace v8;
 using namespace std;
@@ -18,7 +19,7 @@ GraphosBehavior::GraphosBehavior( Persistent<Object> instance, GameObject* owner
 	updateFunction = Handle<Function>::Cast( instance->Get( String::New( "Update" ) ) );
 
 	if( !updateFunction->IsFunction() )
-		OutputController::PrintMessage( OutputType::Error, "Invalid Update function." );
+		OutputController::PrintMessage( OutputType::Warning, "Invalid Update function." );
 }
 
 GraphosBehavior::~GraphosBehavior( void )
@@ -56,63 +57,42 @@ void GraphosBehavior::Initialize( GameObjectCollection* objects )
 
 void GraphosBehavior::Update( void )
 {
-	//*
-	//updateFunction->Call( instance, 0, NULL );
 	CallFunction( "OnUpdate" );
-	/*/
-	TryCatch tc;
-	updateFunction->Call( instance, 0, NULL );
-
-	if( tc.HasCaught() )
-	{
-		string exceptionName = string( *String::AsciiValue( tc.Message()->Get()->ToString() ) );
-		string stackTrace = string( *String::AsciiValue( tc.StackTrace()->ToString() ) );
-		string message = string( "An exception has been thrown in JavaScript: " + exceptionName + "\nStack trace:\n" + stackTrace );
-		OutputController::PrintMessage( OutputType::OT_ERROR, message );
-	}
-	//*/
 }
 
 void GraphosBehavior::CallFunction( string name, ... )
 {
-	auto func = Handle<Function>::Cast( instance->Get( String::New( name.c_str() ) ) );
-
-	if( !func->IsFunction() )
-		OutputController::PrintMessage( OutputType::Error, "Invalid " + name + " function." );
-
-	int count = 0;
-	va_list args;
-	va_start( args, count );
-	Handle<Value>* vals;
-	
-	if( count )
+	auto exec = [&, name]()
 	{
-		vals = new Handle<Value>[ count ];
+		auto func = Handle<Function>::Cast( instance->Get( String::New( name.c_str() ) ) );
 
-		for( int ii = 0; ii < count; ++ii )
+		if( !func->IsFunction() )
+			OutputController::PrintMessage( OutputType::Error, "Invalid " + name + " function." );
+
+		int count = 0;
+		Handle<Value>* vals = NULL;
+		/*
+		va_list args;
+		va_start( args, count );
+	
+		if( count )
 		{
-			vals[ ii ] = va_arg( args, Handle<Value> );
+			vals = new Handle<Value>[ count ];
+			for( int ii = 0; ii < count; ++ii )
+				vals[ ii ] = va_arg( args, Handle<Value> );
 		}
+		va_end( args );
+		*/
+
+		func->Call( instance, count, vals );
+	};
+
+	if( TaskManager::OnMainThread() )
+	{
+		exec();
 	}
 	else
 	{
-		vals = NULL;
+		TaskManager::Invoke( exec );
 	}
-
-	va_end( args );
-
-	func->Call( instance, count, vals );
-
-	/*
-	TryCatch tc;
-	func->Call( instance, 0, NULL );
-
-	if( tc.HasCaught() )
-	{
-		string exceptionName = string( *String::AsciiValue( tc.Message()->Get()->ToString() ) );
-		string stackTrace = string( *String::AsciiValue( tc.StackTrace()->ToString() ) );
-		string message = string( "An exception has been thrown in JavaScript: " + exceptionName + "\nStack trace:\n" + stackTrace );
-		OutputController::PrintMessage( OutputType::OT_ERROR, message );
-	}
-	//*/
 }

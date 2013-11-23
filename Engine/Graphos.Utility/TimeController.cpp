@@ -20,7 +20,7 @@ void Time::Update( void )
 
 	if( secondTime.count() >= nano::den )
 	{
-		OutputController::PrintValue( OutputType::Info, "Framerate", (signed int)frameCount );
+		OutputController::PrintValue( OutputType::Info, "Framerate", frameCount );
 		secondTime = nanoseconds::zero();
 		frameCount = 0;
 	}
@@ -35,7 +35,7 @@ void Time::Initialize( void )
 }
 
 // Statics
-unsigned int Time::frameCount;
+gUInt Time::frameCount;
 nanoseconds Time::secondTime;
 nanoseconds Time::totalTime;
 nanoseconds Time::deltaTime;

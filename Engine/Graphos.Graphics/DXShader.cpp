@@ -91,7 +91,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	if( FAILED(result) )
 	{
 		OutputController::PrintMessage( OutputType::Error, "Error compiling fragment shader\n" + fragmentPath );
-		OutputController::PrintMessage( OutputType::Error, (char*)(shaderCompileErrors->GetBufferPointer()) );
+		OutputController::PrintMessage( OutputType::Error, (gChar*)(shaderCompileErrors->GetBufferPointer()) );
 	}
 
 	result = AdapterController::Get()->GetDevice().dx->CreatePixelShader( psb->GetBufferPointer(),
@@ -142,7 +142,7 @@ void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
 	buffer = new DxConstBuffer();
 	buffer->meta = buf->meta;
 	buffer->totalSize = buf->totalSize;
-	buffer->data = new char[ buffer->totalSize ];
+	buffer->data = new gByte[ buffer->totalSize ];
 
 	// ---- Constant Buffer
 	D3D11_BUFFER_DESC cBufferDesc;
@@ -184,7 +184,7 @@ void DXShader::Draw( Mesh& mesh ) const
 	SetUniformMatrix( "modelViewProj", *modelViewProjection );
 	SetUniformMatrix( "modelMatrix", *modelMatrix );
 
-	//float f[32];
+	//gFloat f[32];
 	//memcpy( &f, buffer->data , 128 );
 
 	// update constant buffer on the GPU
@@ -235,14 +235,14 @@ void DXShader::BindTexture( Texture& text ) const
 // Draw should update once on the GPU
 //
 
-void DXShader::SetUniform( string name, const float value ) const
+void DXShader::SetUniform( string name, const gFloat value ) const
 {
 	auto it = buffer->meta.find( name );
 
 	if( it == end( buffer->meta ) )
 		OutputController::PrintMessage( OutputType::Error, "Invalid name in SetUniform" );
 	if( it->second.second != sizeof( value ) )
-		OutputController::PrintMessage( OutputType::Error, "Data size mismatch in SetUniform(float)" );
+		OutputController::PrintMessage( OutputType::Error, "Data size mismatch in SetUniform(gFloat)" );
 
 	memcpy( buffer->data + it->second.first, &value, it->second.second );
 }
@@ -259,14 +259,14 @@ void DXShader::SetUniform( string name, const int value ) const
 	memcpy( buffer->data + it->second.first, &value, it->second.second );
 }
 
-void DXShader::SetUniformArray( string name, const float* value, const int size ) const 
+void DXShader::SetUniformArray( string name, const gFloat* value, const int size ) const 
 {
 	auto it = buffer->meta.find( name );
 
 	if( it == end( buffer->meta ) )
 		OutputController::PrintMessage( OutputType::Error, "Invalid name in SetUniform" );
 	if( it->second.second != sizeof( *value )*size )
-		OutputController::PrintMessage( OutputType::Error, "Data size mismatch in SetUniformArray(float)" );
+		OutputController::PrintMessage( OutputType::Error, "Data size mismatch in SetUniformArray(gFloat)" );
 	
 	memcpy( buffer->data + it->second.first, value, it->second.second );
 }

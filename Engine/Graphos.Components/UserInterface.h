@@ -26,7 +26,7 @@ namespace Graphos
 
 			bool				Update( void );
 			void				Draw( void );
-			void				KeyPress( unsigned int key );
+			void				KeyPress( gUInt key );
 
 		private:
 			float				width;
@@ -42,10 +42,10 @@ namespace Graphos
 			Awesomium::JSObject	graphosGame;
 
 			// GL Mesh data
-			unsigned int		vertexBufferObject;
-			unsigned int		vertexArrayObject;
-			unsigned int		indexBuffer;
-			unsigned int		numElements;
+			gUInt				vertexBufferObject;
+			gUInt				vertexArrayObject;
+			gUInt				indexBuffer;
+			gUInt				numElements;
 
 			//////////////////////////////////////////////////////////////////////////
 			// JS Method Handler
@@ -55,9 +55,9 @@ namespace Graphos
 			public:
 								JavaScriptHandler( UserInterface* owner ) : owner( owner ) { }
 
-				void			OnMethodCall( Awesomium::WebView* caller, unsigned int remoteObjectID, const Awesomium::WebString& methodName, const Awesomium::JSArray& args );
+				void			OnMethodCall( Awesomium::WebView* caller, gUInt remoteObjectID, const Awesomium::WebString& methodName, const Awesomium::JSArray& args );
 				Awesomium::JSValue
-								OnMethodCallWithReturnValue( Awesomium::WebView* caller, unsigned int remoteObjectID, const Awesomium::WebString& methodName, const Awesomium::JSArray& args );
+								OnMethodCallWithReturnValue( Awesomium::WebView* caller, gUInt remoteObjectID, const Awesomium::WebString& methodName, const Awesomium::JSArray& args );
 
 			private:
 				UserInterface*	owner;

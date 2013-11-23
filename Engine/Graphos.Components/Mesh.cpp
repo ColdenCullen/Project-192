@@ -30,7 +30,7 @@ void Mesh::LoadFromFile( string filePath )
 	vector<Vector2> uvs;
 	vector<Vector3> normals;
 
-	vector<float>	outputData;
+	vector<gFloat>	outputData;
 
 	istringstream file( File::ReadFile( filePath ) );
 	string line;
@@ -91,9 +91,9 @@ void Mesh::LoadFromFile( string filePath )
 	numVertices = outputData.size() / 8;  // 8 is num floats per vertex
 	numIndices = numVertices;
 
-	unsigned int* indices = new unsigned int[ numIndices ];
+	gUInt* indices = new unsigned int[ numIndices ];
 
-	for( unsigned int ii = 0; ii < numIndices; ++ii )
+	for( gUInt ii = 0; ii < numIndices; ++ii )
 		indices[ ii ] = ii;
 
 	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
