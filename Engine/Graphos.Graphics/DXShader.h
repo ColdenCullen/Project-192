@@ -14,7 +14,7 @@ namespace Graphos
 		struct DxConstBuffer : public ConstBuffer
 		{
 			DirectX::ID3D11Buffer* vsConstantBuffer;
-			char*			data;
+			gByte*			data;
 
 			DxConstBuffer( void ) : ConstBuffer() { }
 
@@ -37,10 +37,10 @@ namespace Graphos
 			void				Draw( Core::Mesh& mesh ) const override;
 			void				BindTexture( Core::Texture& text ) const override;
 
-			void				SetUniform( std::string name, const float value ) const override;
-			void				SetUniform( std::string name, const int value ) const override;
-			void				SetUniformArray( std::string name, const float* value, const int size ) const override;
-			void				SetUniformArray( std::string name, const int* value, const int size ) const override;
+			void				SetUniform( std::string name, const gFloat value ) const override;
+			void				SetUniform( std::string name, const gInt value ) const override;
+			void				SetUniformArray( std::string name, const gFloat* value, const int size ) const override;
+			void				SetUniformArray( std::string name, const gInt* value, const int size ) const override;
 			void				SetUniformMatrix( std::string name, const Math::Matrix4& matrix ) const override;
 			
 		private:

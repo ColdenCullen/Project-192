@@ -20,7 +20,7 @@ void cvv8::ClassCreator_SetupBindings<IShader>::Initialize( Handle<v8::Object> c
 
 	IShadercc
 		( "destroy", ClassCreator<IShader>::DestroyObjectCallback )
-		( "SetUniform", ConstMethodToInCa<const IShader, void (std::string, const int), &IShader::SetUniform>::Call )
+		( "SetUniform", ConstMethodToInCa<const IShader, void (std::string, const gInt), &IShader::SetUniform>::Call )
 		( "SetUniformMatrix", ConstMethodToInCa<const IShader, void (std::string, const Matrix4&), &IShader::SetUniformMatrix>::Call )
 		;
 

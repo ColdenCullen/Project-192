@@ -27,7 +27,7 @@ WRAP_CLASS(GameObject,(CtorForwarder<GameObject*( void )>))
 WRAP_CLASS(GameObjectCollection,(CtorForwarder<GameObjectCollection*( void )>))
 WRAP_CLASS(Mesh,(CtorForwarder<Mesh*( std::string )>))
 WRAP_CLASS(Vector3,(CtorForwarder<Vector3*( void )>,
-					CtorForwarder<Vector3*( float, float, float )>,
+					CtorForwarder<Vector3*( gFloat, gFloat, gFloat )>,
 					CtorForwarder<Vector3*( const Vector3& )>))
 WRAP_CLASS(Matrix4,(CtorForwarder<Matrix4*( void )>))
 WRAP_CLASS(Camera,(CtorForwarder<Camera*( GameObject* )>))

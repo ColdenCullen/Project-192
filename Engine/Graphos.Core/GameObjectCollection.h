@@ -22,11 +22,11 @@ namespace Graphos
 			unsigned int		CreateObject( std::string name, Graphics::IShader* shader );
 
 			// Access objects
-			GameObject*			GetObjectById( unsigned int id );
+			GameObject*			GetObjectById( gUInt id );
 			GameObject*			GetObjectByName( std::string name );
 
 			// Remove Objects
-			void				RemoveObjectById( unsigned int id );
+			void				RemoveObjectById( gUInt id );
 			void				RemoveObjectByName( std::string name );
 			void				ClearObjects( void );
 
@@ -37,12 +37,12 @@ namespace Graphos
 			void Draw( void ) { CallFunction( &GameObject::Draw ); }
 
 		private:
-			std::unordered_map<unsigned int, GameObject*>
+			std::unordered_map<gUInt, GameObject*>
 								objectList;
-			std::unordered_map<std::string, unsigned int>
+			std::unordered_map<std::string, gUInt>
 								nameMap;
 
-			unsigned int		currentId;
+			gUInt				currentId;
 		};
 	}
 }

@@ -20,7 +20,7 @@ namespace Graphos
 		protected:
 			union TextureID
 			{
-				unsigned int gl;
+				gUInt gl;
 				DirectX::ID3D11ShaderResourceView* dx;
 			} textureId;
 
@@ -36,8 +36,8 @@ namespace Graphos
 			TextureID&			GetTextureId( void ) { return textureId; }
 
 		protected:
-			unsigned int		width;
-			unsigned int		height;
+			gUInt				width;
+			gUInt				height;
 
 		};
 	}

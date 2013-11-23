@@ -25,7 +25,7 @@ using namespace Graphos::Utility;
 /// Constructor
 UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 {
-	char abspath[ 256 ];
+	gChar abspath[ 256 ];
 #ifdef WIN32
 	_fullpath( abspath, Config::GetData<std::string>( "ui.filePath" ).c_str(), MAX_PATH );
 #else
@@ -33,8 +33,8 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 #endif
 
 	// Get dimensions
-	width  = Config::GetData<float>( "display.width" ) * Config::GetData<float>( "ui.scale.x" );
-	height = Config::GetData<float>( "display.height" ) * Config::GetData<float>( "ui.scale.y" );
+	width  = Config::GetData<gUInt>( "display.width" ) * Config::GetData<gUInt>( "ui.scale.x" );
+	height = Config::GetData<gUInt>( "display.height" ) * Config::GetData<gUInt>( "ui.scale.y" );
 
 	// Initialize UI
 	uiObj = new GameObject(ShaderController::GetShader( "texture" ));
@@ -56,17 +56,17 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 
 	// Scale the UI obj
 	uiObj->transform->Scale(
-		width / 2.0f,
-		height / 2.0f,
+		static_cast<gFloat>(width) / 2.0f,
+		static_cast<gFloat>(height) / 2.0f,
 		1.0f
 	);
 
 	// this pushes the top down on Windows, remove this code once problem fixed
 	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL &&
-		!Config::GetData<bool>( "display.fullscreen" ) )
+		!Config::GetData<gBool>( "display.fullscreen" ) )
 		uiObj->transform->Translate( 0.0f, -38.0f, 0.0f );
 
-	Input::AddKeyDownEvent( [&]( unsigned int keyCode )
+	InputController::AddKeyDownEvent( [&]( unsigned int keyCode )
 	{
 		this->KeyPress( keyCode );
 	} );
@@ -88,14 +88,14 @@ UserInterface::~UserInterface()
 /// Get input from the mouse
 bool UserInterface::Update( void )
 {
-	Vector2 cursor = Input::GetMousePos();
-	view->webView->InjectMouseMove( static_cast<int>( cursor.x ), static_cast<int>( cursor.y ) );
+	Vector2 cursor = InputController::GetMousePos();
+	view->webView->InjectMouseMove( static_cast<gInt>( cursor.x ), static_cast<gInt>( cursor.y ) );
 
-	if( Input::IsKeyDown( VK_LBUTTON, true ) )
+	if( InputController::IsKeyDown( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseDown( kMouseButton_Left );
 	}
-	else if( Input::IsKeyUp( VK_LBUTTON, true ) )
+	else if( InputController::IsKeyUp( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseUp( kMouseButton_Left );
 	}
@@ -126,7 +126,7 @@ void UserInterface::KeyPress( unsigned int key )
 	WebKeyboardEvent keyCharEvent;
 	keyCharEvent.type = WebKeyboardEvent::kTypeChar;
 	// Get char
-	char text[ 1 ] = { '1' };
+	gChar text[ 1 ] = { '1' };
 
 #if defined( _WIN32 )
 	text[ 0 ] = MapVirtualKey( key, MAPVK_VK_TO_CHAR );
@@ -146,7 +146,7 @@ void UserInterface::KeyPress( unsigned int key )
 	}
 }
 
-void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, unsigned int remoteObjectID, const WebString& methodName, const JSArray& args )
+void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, gUInt remoteObjectID, const WebString& methodName, const JSArray& args )
 {
 	// If called on GraphosGame
 	if( remoteObjectID == owner->graphosGame.remote_id() )
@@ -176,7 +176,7 @@ void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, unsigned i
 	}
 }
 
-JSValue UserInterface::JavaScriptHandler::OnMethodCallWithReturnValue( WebView* caller, unsigned int remoteObjectID, const WebString& methodName, const JSArray& args )
+JSValue UserInterface::JavaScriptHandler::OnMethodCallWithReturnValue( WebView* caller, gUInt remoteObjectID, const WebString& methodName, const JSArray& args )
 {
 	return JSValue::Undefined();
 }

@@ -12,9 +12,9 @@ namespace Graphos
 		{
 		public:
 								SpotLight( Math::Vector3 initPos = Math::Vector3(),
-											float initInnerAngle = 30,
-											float initOuterAngle = 30,
-											float initFallOffRadius = 1,
+											gFloat initInnerAngle = 30,
+											gFloat initOuterAngle = 30,
+											gFloat initFallOffRadius = 1,
 											Math::Vector3 initDir = Math::Vector3(),
 											Math::Vector4 initColor = Math::Vector4(),
 											GameObject* owner = nullptr )
@@ -27,9 +27,9 @@ namespace Graphos
 			void				Draw( Graphics::IShader* shader ) override;
 
 			Math::Vector3		position;
-			float				innerAngle;
-			float				outerAngle;
-			float				fallOffRadius;
+			gFloat				innerAngle;
+			gFloat				outerAngle;
+			gFloat				fallOffRadius;
 		};
 	}
 

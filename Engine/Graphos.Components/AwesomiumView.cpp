@@ -17,7 +17,7 @@ using namespace Graphos::Graphics;
 using namespace Graphos::Math;
 using namespace Awesomium;
 
-bool AwesomiumView::Initialize( string url, unsigned int width, unsigned int height )
+bool AwesomiumView::Initialize( string url, gUInt width, gUInt height )
 {
 	// Generate a texture to use
 	glGenTextures( 1, &textureId.gl );
@@ -46,7 +46,7 @@ bool AwesomiumView::Initialize( string url, unsigned int width, unsigned int hei
 
 	// Initialize buffer
 	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
-		buffer.gl = new unsigned char[ width * height * 4 ];
+		buffer.gl = new gByte[ width * height * 4 ];
 #if defined( _WIN32 )
 	else if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::DirectX )
 	{

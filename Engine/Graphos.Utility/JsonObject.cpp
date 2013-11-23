@@ -99,7 +99,7 @@ auto JsonObject::Get( std::string path )					-> Handle<Value>
 }
 
 template<>
-auto JsonObject::Get( string path )							-> int
+auto JsonObject::Get( string path )							-> gInt
 {
 	const Json::Value& val = Get<Json::Value>( path );
 
@@ -114,7 +114,7 @@ auto JsonObject::Get( string path )							-> int
 }
 
 template<>
-auto JsonObject::Get( string path )							-> unsigned int
+auto JsonObject::Get( string path )							-> gUInt
 {
 	const Json::Value& val = Get<Json::Value>( path );
 
@@ -129,7 +129,7 @@ auto JsonObject::Get( string path )							-> unsigned int
 }
 
 template<>
-auto JsonObject::Get( string path )							-> float
+auto JsonObject::Get( string path )							-> gFloat
 {
 	const Json::Value& val = Get<Json::Value>( path );
 
@@ -144,7 +144,7 @@ auto JsonObject::Get( string path )							-> float
 }
 
 template<>
-auto JsonObject::Get( string path )							-> bool
+auto JsonObject::Get( string path )							-> gBool
 {
 	const Json::Value& val = Get<Json::Value>( path );
 
@@ -165,7 +165,7 @@ auto JsonObject::Get( string path )							-> std::string
 }
 
 template<>
-auto JsonObject::Get( string path )							-> const char*
+auto JsonObject::Get( string path )							-> const gChar*
 {
 	return Get<Json::Value>( path ).asCString();
 }

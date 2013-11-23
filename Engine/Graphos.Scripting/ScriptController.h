@@ -85,10 +85,6 @@ namespace Graphos
 			}
 		
 		private:
-								ScriptController( void ) : isInitialized( false ), handleScope() { }
-								ScriptController( const ScriptController& );
-			void				operator=( const ScriptController& );
-
 			v8::HandleScope		handleScope;
 			v8::Persistent<v8::Context>
 								context;
@@ -98,7 +94,11 @@ namespace Graphos
 			std::vector<GraphosBehavior*>
 								behaviors;
 
-			bool				isInitialized;
+			gBool				isInitialized;
+
+								ScriptController( void ) : isInitialized( false ), handleScope() { }
+								ScriptController( const ScriptController& );
+			void				operator=( const ScriptController& );
 		};
 	}
 }

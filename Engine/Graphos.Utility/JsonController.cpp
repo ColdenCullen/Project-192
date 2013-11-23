@@ -16,7 +16,7 @@ void JsonController::Initialize( void )
 			auto path = file.GetLocalPath();
 
 			// Replace /s with .s
-			int curInd = string::npos;
+			gInt curInd = string::npos;
 			while( ( curInd = path.find( "/" ) ) != string::npos )
 			{
 				path = path.replace( curInd, 1, 1, '.' );
