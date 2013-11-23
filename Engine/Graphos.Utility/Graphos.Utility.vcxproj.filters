@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Event.h" />
-    <ClInclude Include="TaskManager.h" />
     <ClInclude Include="TimeController.h" />
     <ClInclude Include="JsonController.h">
       <Filter>JSON</Filter>
@@ -22,9 +21,14 @@
     <ClInclude Include="OutputController.h">
       <Filter>IO</Filter>
     </ClInclude>
+    <ClInclude Include="GraphosThread.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadController.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TaskManager.cpp" />
     <ClCompile Include="TimeController.cpp" />
     <ClCompile Include="JsonController.cpp">
       <Filter>JSON</Filter>
@@ -41,6 +45,12 @@
     <ClCompile Include="OutputController.cpp">
       <Filter>IO</Filter>
     </ClCompile>
+    <ClCompile Include="GraphosThread.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadController.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="JSON">
@@ -48,6 +58,9 @@
     </Filter>
     <Filter Include="IO">
       <UniqueIdentifier>{062440a4-96c2-4db9-a2ab-4ea5f6b01882}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threading">
+      <UniqueIdentifier>{774c36f2-1330-4316-b080-df628d914b13}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -70,7 +70,8 @@
     <ClInclude Include="JsonController.h" />
     <ClInclude Include="JsonObject.h" />
     <ClInclude Include="OutputController.h" />
-    <ClInclude Include="TaskManager.h" />
+    <ClInclude Include="GraphosThread.h" />
+    <ClInclude Include="ThreadController.h" />
     <ClInclude Include="TimeController.h" />
   </ItemGroup>
   <ItemGroup>
@@ -79,7 +80,8 @@
     <ClCompile Include="JsonController.cpp" />
     <ClCompile Include="JsonObject.cpp" />
     <ClCompile Include="OutputController.cpp" />
-    <ClCompile Include="TaskManager.cpp" />
+    <ClCompile Include="GraphosThread.cpp" />
+    <ClCompile Include="ThreadController.cpp" />
     <ClCompile Include="TimeController.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

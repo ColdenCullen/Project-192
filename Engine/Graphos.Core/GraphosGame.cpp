@@ -15,7 +15,7 @@
 #include "OutputController.h"
 #include "PhysicsController.h"
 #include "JsonController.h"
-#include "TaskManager.h"
+#include "ThreadController.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Physics;
@@ -30,10 +30,6 @@ void GraphosGame::Run( void )
 
 	// Initialize values and controllers
 	quit = false;
-
-	// Init time
-	Time::Initialize();
-	TaskManager::Initialize();
 
 	Start();
 
@@ -104,10 +100,12 @@ void GraphosGame::Reset( void )
 	delete_s( ui );
 	PhysicsController::Shutdown();
 	AssetController::Shutdown();
-	ScriptController::Get().Shutdown();
+	ScriptController::Shutdown();
+	ThreadController::Shutdown();
 
 	// Restart
-	ScriptController::Get().Initialize();
+	ThreadController::Initialize();
+	ScriptController::Initialize();
 	AssetController::Initialize();
 	PhysicsController::Initialize();
 	Input::ui = ui = new UserInterface( this );
@@ -125,12 +123,20 @@ void GraphosGame::Start( void )
 	CurrentState = GameState::Menu;
 	camera = nullptr;
 
+	Time::Initialize();
+	ThreadController::Initialize();
+
 	JsonController::Initialize();
 	Config::Initialize();
+
+	auto scriptThread = ThreadController::ReserveThread();
+	ScriptController::SetThread( scriptThread );
+	//ScriptController::Get().Initialize();
+	scriptThread->Invoke( &ScriptController::Initialize );
+
 	GraphicsController::Initialize();
 	AssetController::Initialize();
 	PhysicsController::Initialize();
-	ScriptController::Get().Initialize();
 
 	Input::ui = ui = new UserInterface( this );
 
@@ -141,14 +147,16 @@ void GraphosGame::Stop( void )
 {
 	// Call child shutdown
 	Shutdown();
+	ScriptController::Shutdown();
 
 	// Shutdown UI and controllers
 	delete_s( ui );
 	ShaderController::Shutdown();
 	PhysicsController::Shutdown();
 	AssetController::Shutdown();
-	ScriptController::Get().Shutdown();
 	GraphicsController::Shutdown();
+
+	ThreadController::Shutdown();
 }
 
 void GraphosGame::Initialize( void )

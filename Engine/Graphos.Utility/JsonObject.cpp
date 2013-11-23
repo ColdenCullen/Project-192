@@ -61,7 +61,7 @@ auto JsonObject::Get( string path )							-> Json::Value
 template<>
 auto JsonObject::Get( string path )							-> JsonObject
 {
-	return JsonObject( Get<Json::Value>( path ) );
+	return JsonObject( Get<Json::Value&>( path ) );
 }
 
 template<>
@@ -101,7 +101,7 @@ auto JsonObject::Get( std::string path )					-> Handle<Value>
 template<>
 auto JsonObject::Get( string path )							-> gInt
 {
-	const Json::Value& val = Get<Json::Value>( path );
+	const Json::Value& val = Get<Json::Value&>( path );
 
 	if( val.isInt() )
 	{
@@ -116,7 +116,7 @@ auto JsonObject::Get( string path )							-> gInt
 template<>
 auto JsonObject::Get( string path )							-> gUInt
 {
-	const Json::Value& val = Get<Json::Value>( path );
+	const Json::Value& val = Get<Json::Value&>( path );
 
 	if( val.isUInt() )
 	{
@@ -131,7 +131,7 @@ auto JsonObject::Get( string path )							-> gUInt
 template<>
 auto JsonObject::Get( string path )							-> gFloat
 {
-	const Json::Value& val = Get<Json::Value>( path );
+	const Json::Value& val = Get<Json::Value&>( path );
 
 	if( val.isDouble() )
 	{
@@ -146,7 +146,7 @@ auto JsonObject::Get( string path )							-> gFloat
 template<>
 auto JsonObject::Get( string path )							-> gBool
 {
-	const Json::Value& val = Get<Json::Value>( path );
+	const Json::Value& val = Get<Json::Value&>( path );
 
 	if( val.isBool() )
 	{
@@ -161,19 +161,19 @@ auto JsonObject::Get( string path )							-> gBool
 template<>
 auto JsonObject::Get( string path )							-> std::string
 {
-	return Get<Json::Value>( path ).asString();
+	return Get<Json::Value&>( path ).asString();
 }
 
 template<>
 auto JsonObject::Get( string path )							-> const gChar*
 {
-	return Get<Json::Value>( path ).asCString();
+	return Get<Json::Value&>( path ).asCString();
 }
 
 template<>
 auto JsonObject::Get( string path )							-> std::string*
 {
-	Json::Value& node = Get<Json::Value>( path );
+	Json::Value& node = Get<Json::Value&>( path );
 
 	if( node.isArray() )
 	{
@@ -193,7 +193,7 @@ auto JsonObject::Get( string path )							-> std::string*
 template<>
 auto JsonObject::Get( string path )							-> Math::Vector3
 {
-	Json::Value root = Get<Json::Value>( path );
+	Json::Value root = Get<Json::Value&>( path );
 
 	return Math::Vector3(
 			static_cast<float>( root.get( "x", root ).asDouble() ),

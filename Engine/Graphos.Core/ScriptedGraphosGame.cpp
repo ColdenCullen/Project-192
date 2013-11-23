@@ -9,7 +9,7 @@ using namespace Graphos::Scripting;
 void ScriptedGraphosGame::Initialize( void )
 {
 	CurrentState = GameState::Game;
-	script = ScriptController::Get().CreateObjectInstance<GraphosGame>( "MyGame", this );
+	script = ScriptController::CreateObjectInstance<GraphosGame>( "MyGame", this );
 	script->CallFunction( "Initialize" );
 }
 
@@ -27,11 +27,15 @@ void ScriptedGraphosGame::Draw( void )
 	
 	if( CurrentState == GameState::Menu )
 		ui->Draw();
+
+	ScriptController::GetThread()->WaitFor();
 }
 
 void ScriptedGraphosGame::Shutdown( void )
 {
 	script->CallFunction( "Shutdown" );
+
+	ScriptController::GetThread()->WaitFor();
 
 	delete script;
 }

@@ -6,7 +6,8 @@
 #include "OutputController.h"
 #include "GameObjectCollection.h"
 #include "ClassMapper.h"
-#include "TaskManager.h"
+#include "ThreadController.h"
+#include "ScriptController.h"
 
 using namespace v8;
 using namespace std;
@@ -24,7 +25,7 @@ GraphosBehavior::GraphosBehavior( Persistent<Object> instance, GameObject* owner
 
 GraphosBehavior::~GraphosBehavior( void )
 {
-
+	OutputController::PrintMessage(	OutputType::Info, "Killing Script." );
 }
 
 void GraphosBehavior::SetInitialValues( JsonObject initVals )
@@ -50,7 +51,6 @@ void GraphosBehavior::Initialize( GameObjectCollection* objects )
 			toSet = current.Get<Handle<Value>>( "" );
 		}
 
-
 		instance->Set( String::New( val.c_str() ), toSet );
 	}
 }
@@ -62,8 +62,10 @@ void GraphosBehavior::Update( void )
 
 void GraphosBehavior::CallFunction( string name, ... )
 {
-	auto exec = [&, name]()
+	ScriptController::GetThread()->Invoke( [&, name]() -> void
 	{
+		HandleScope handleScope;
+
 		auto func = Handle<Function>::Cast( instance->Get( String::New( name.c_str() ) ) );
 
 		if( !func->IsFunction() )
@@ -85,14 +87,5 @@ void GraphosBehavior::CallFunction( string name, ... )
 		*/
 
 		func->Call( instance, count, vals );
-	};
-
-	if( TaskManager::OnMainThread() )
-	{
-		exec();
-	}
-	else
-	{
-		TaskManager::Invoke( exec );
-	}
+	} );
 }

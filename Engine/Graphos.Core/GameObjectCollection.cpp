@@ -7,7 +7,7 @@
 // Controllers used to add components
 #include "OutputController.h"
 #include "ScriptController.h"
-#include "TaskManager.h"
+#include "ThreadController.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -40,7 +40,7 @@ void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 		}
 	}
 
-	ScriptController::Get().InitializeObjects( this );
+	ScriptController::InitializeObjects( this );
 }
 
 GameObject* GameObjectCollection::GetObjectById( unsigned int id )
@@ -85,7 +85,10 @@ void GameObjectCollection::ClearObjects( void )
 	{
 		for( auto object = begin( objectList ); object != end( objectList ); ++object )
 		{
-			object->second->Shutdown();
+			ScriptController::GetThread()->Invoke( [&](){ object->second->Shutdown(); }, true );
+
+			//ScriptController::Get().GetThread()->WaitFor();
+
 			delete object->second;
 		}
 	}
@@ -97,6 +100,8 @@ void GameObjectCollection::ClearObjects( void )
 
 void GameObjectCollection::CallFunction( void (GameObject::*func)( void ) )
 {
-	for( auto iterator = begin( objectList ); iterator != end( objectList ); ++iterator )
-			(iterator->second->*func)();
+	for( auto object : objectList )
+	{
+		(object.second->*func)();
+	}
 }

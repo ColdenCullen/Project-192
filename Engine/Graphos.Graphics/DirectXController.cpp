@@ -3,6 +3,7 @@
 #include "WindowController.h"
 #include "Config.h"
 #include "Win32Controller.h"
+#include "ThreadController.h"
 
 using namespace Graphos::Graphics;
 using namespace Graphos::Utility;
@@ -209,9 +210,11 @@ void DirectXController::Reload( void )
 void DirectXController::BeginDraw( void )
 {
 	float ClearColor[4] = { 100.0f/255.0f, 149.0f/255.0f, 237.0f/255.0f, 1.0f };
-	// Clear the back buffer        
+	// Clear the back buffer
+	ThreadController::GlobalLock();
 	deviceContext.dx->ClearRenderTargetView( renderTargetView, ClearColor );
 	deviceContext.dx->ClearDepthStencilView( depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0, 0 );
+	ThreadController::GlobalUnlock();
 }
 
 void DirectXController::EndDraw( void )

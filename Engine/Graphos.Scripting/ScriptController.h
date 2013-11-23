@@ -8,6 +8,7 @@
 #include "GameObject.h"
 #include "OutputController.h"
 #include "ClassMapper.h"
+#include "GraphosThread.h"
 
 namespace Graphos
 {
@@ -16,87 +17,88 @@ namespace Graphos
 		class ScriptController
 		{
 		public:
-			void				Initialize( void );
-			void				Shutdown( void );
+			static void			SetThread( Utility::Thread* thread );
+			static Thread* const GetThread( void ) { return thisThread; }
 
-			static ScriptController& Get( void )
-			{
-				static ScriptController instance;
-				return instance;
-			}
+			static void			Initialize( void );
+			static void			Shutdown( void );
 
-			void				InitializeObjects( GameObjectCollection* objects );
+			static void			InitializeObjects( GameObjectCollection* objects );
 
-			GraphosBehavior*	CreateObjectInstance( std::string className );
+#pragma region CreateObjectInstance
+			static GraphosBehavior* CreateObjectInstance( std::string className );
 
 			template<typename T>
-			GraphosBehavior*	CreateObjectInstance( std::string className, T* owner )
+			static GraphosBehavior* CreateObjectInstance( std::string className, T* owner )
 			{
 				using namespace v8;
 				using namespace cvv8;
 
-				if( !isInitialized )
-					Initialize();
+				GraphosBehavior* behavior = nullptr;
 
-				// Create a scope
-				Context::Scope contextScope( context );
-
-				// Get an instance of the class
-				Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
-
-				// Return object
-				if( !ctor.IsEmpty() )
+				thisThread->Invoke([&, className, owner]() -> void
 				{
-					// Create basic gameobject as well as instance of new class
-					auto base = Persistent<Object>::New( CastToJS( owner )->ToObject() );
-					auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
+					HandleScope handleScope;
 
-					if( inst.IsEmpty() )
+					// Create a scope
+					Context::Scope contextScope( context );
+
+					// Get an instance of the class
+					Handle<Function> ctor = Handle<Function>::Cast( globalObject->Get( String::New( className.c_str() ) ) );
+
+					// Return object
+					if( !ctor.IsEmpty() )
 					{
-						OutputController::PrintMessage( OutputType::Error, "THE SHIT DUDE. YOU'RE OBJECT'S (of type " + className + ") EMPTY." );
-						return nullptr;
+						// Create basic gameobject as well as instance of new class
+						auto base = Persistent<Object>::New( CastToJS( owner )->ToObject() );
+						auto inst = ctor->CallAsConstructor( 0, nullptr )->ToObject();
+
+						if( inst.IsEmpty() )
+						{
+							OutputController::PrintMessage( OutputType::Error, "THE SHIT DUDE. YOU'RE OBJECT'S (of type " + className + ") EMPTY." );
+							return;
+						}
+
+						for( unsigned int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
+						{
+							auto name = inst->GetPropertyNames()->Get( ii );
+							if( !base->Has( name->ToString() ) )
+								base->Set( name, inst->Get( name ) );
+						}
+
+						// Return new script
+						if( typeid( T ).hash_code() == typeid( GameObject ).hash_code() )
+							behavior = new GraphosBehavior( base, reinterpret_cast<GameObject*>( owner ) );
+						else
+							behavior = new GraphosBehavior( base );
+
+						behaviors.push_back( behavior );
 					}
-
-					for( unsigned int ii = 0; ii < inst->GetPropertyNames()->Length(); ++ii )
-					{
-						auto name = inst->GetPropertyNames()->Get( ii );
-						if( !base->Has( name->ToString() ) )
-							base->Set( name, inst->Get( name ) );
-					}
-
-					GraphosBehavior* behavior;
-
-					// Return new script
-					if( typeid( T ).hash_code() == typeid( GameObject ).hash_code() )
-						behavior = new GraphosBehavior( base, reinterpret_cast<GameObject*>( owner ) );
 					else
-						behavior = new GraphosBehavior( base );
+					{
+						OutputController::PrintMessage( OutputType::Error, "Invalid Class Name." );
+					}
+				}, true );
 
-					behaviors.push_back( behavior );
-
-					return behavior;
-						
-				}
-				else
-				{
-					OutputController::PrintMessage( OutputType::Error, "Invalid Class Name." );
-					return nullptr;
-				}
+				return behavior;
 			}
+#pragma endregion
 		
 		private:
-			v8::HandleScope		handleScope;
-			v8::Persistent<v8::Context>
+			// v8-y things
+			static v8::Isolate*	isolate;
+			static v8::Persistent<v8::Context>
 								context;
-			v8::Local<v8::Object>
+			static v8::Persistent<v8::Object>
 								globalObject;
 
-			std::vector<GraphosBehavior*>
+			// Scripts
+			static std::vector<GraphosBehavior*>
 								behaviors;
 
-			gBool				isInitialized;
+			static Utility::Thread* thisThread;
 
-								ScriptController( void ) : isInitialized( false ), handleScope() { }
+								ScriptController( void ) { } //: handleScope() { }
 								ScriptController( const ScriptController& );
 			void				operator=( const ScriptController& );
 		};
