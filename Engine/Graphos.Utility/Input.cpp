@@ -48,25 +48,25 @@ void InputState::Reset( void )
 		bits[ ii ] = 0;
 }
 
-void Input::Update( void )
+void InputController::Update( void )
 {
 	prevKeyState = keyState;
 	keyState = stage;
 	//stage.Reset();
 }
 
-void Input::AddKeyDownUp( KeyEvent::Delegate func )
+void InputController::AddKeyUpEvent( KeyEvent::Delegate func )
 {
 	keyUp.AddFunction( func );
 }
 
-void Input::AddKeyDownEvent( KeyEvent::Delegate func )
+void InputController::AddKeyDownEvent( KeyEvent::Delegate func )
 {
 	keyDown.AddFunction( func );
 }
 
 // Called when keys are down
-void Input::KeyDown( unsigned int input )
+void InputController::KeyDown( unsigned int input )
 {
 	stage.SetState( input, true );
 
@@ -78,7 +78,7 @@ void Input::KeyDown( unsigned int input )
 }
 
 // Called when keys are up
-void Input::KeyUp( unsigned int input )
+void InputController::KeyUp( unsigned int input )
 {
 	stage.SetState( input, false );
 
@@ -86,18 +86,18 @@ void Input::KeyUp( unsigned int input )
 }
 
 // Is key down?
-bool Input::IsKeyDown( unsigned int input, const bool checkPrevious )
+bool InputController::IsKeyDown( unsigned int input, const bool checkPrevious )
 {
 	return keyState[ input ] && ( !checkPrevious || !prevKeyState[ input ] );
 }
 
 // Is key up?
-bool Input::IsKeyUp( unsigned int input, const bool checkPrevious )
+bool InputController::IsKeyUp( unsigned int input, const bool checkPrevious )
 {
 	return !keyState[ input ] && ( !checkPrevious || prevKeyState[ input ] );
 }
 
-Vector2 Input::GetMousePos( /*Transform& camera, float zPlane*/ )
+Vector2 InputController::GetMousePos( /*Transform& camera, float zPlane*/ )
 {
 #if defined( _WIN32 )
 	/*
@@ -141,11 +141,11 @@ Vector2 Input::GetMousePos( /*Transform& camera, float zPlane*/ )
 #endif
 }
 
-bool Input::lmbDown;
-bool Input::rmbDown;
-InputState Input::stage;
-InputState Input::prevKeyState;
-InputState Input::keyState;
-Input::KeyEvent Input::keyUp;
-Input::KeyEvent Input::keyDown;
-UserInterface* Input::ui;
+bool InputController::lmbDown;
+bool InputController::rmbDown;
+InputState InputController::stage;
+InputState InputController::prevKeyState;
+InputState InputController::keyState;
+InputController::KeyEvent InputController::keyUp;
+InputController::KeyEvent InputController::keyDown;
+UserInterface* InputController::ui;
