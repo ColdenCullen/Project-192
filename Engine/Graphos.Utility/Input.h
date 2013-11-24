@@ -125,18 +125,12 @@ namespace Graphos
 		class InputController
 		{
 		public:
-
 			/**
 			 * @typedef	Event<void, gUInt> KeyEvent
 			 *
 			 * @brief	Defines an alias representing the key event.
 			 */
 			typedef Event<void, gUInt> KeyEvent;
-
-			/**
-			 * @brief	The user interface.
-			 */
-			static Core::UserInterface* ui;
 
 			/**
 			 * @fn	static void Input::Update( void );

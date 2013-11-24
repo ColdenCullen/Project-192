@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{78B39B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{E1E6740A-79E3-4326-905F-56995EBAE634}"
 	ProjectSection(SolutionItems) = preProject
-		..\Game\Resources\Config\Config.json = ..\Game\Resources\Config\Config.json
+		..\Game\Config\Config.json = ..\Game\Config\Config.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shaders", "Shaders", "{13C4CBF4-109C-4A8B-8A7F-139E88805C21}"

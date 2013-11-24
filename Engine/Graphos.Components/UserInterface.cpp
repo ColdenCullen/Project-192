@@ -66,6 +66,11 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 		!Config::GetData<gBool>( "display.fullscreen" ) )
 		uiObj->transform->Translate( 0.0f, -38.0f, 0.0f );
 
+	InputController::AddKeyDownEvent( [&]( unsigned int keyCode )
+	{
+		this->KeyPress( keyCode );
+	} );
+
 	// Focus for input
 	view->webView->Focus();
 }
