@@ -24,6 +24,15 @@ namespace Graphos
 								UserInterface( GraphosGame* owner );
 								~UserInterface();
 
+			/**
+			 * @fn	bool UserInterface::Update( void );
+			 *
+			 * @brief	Updates the mouse position and click status.
+			 *
+			 * @author	Colden Cullen
+			 *
+			 * @return	true if it succeeds, false if it fails.
+			 */
 			bool				Update( void );
 			void				Draw( void );
 			void				KeyPress( gUInt key );
@@ -53,11 +62,49 @@ namespace Graphos
 			struct JavaScriptHandler : public Awesomium::JSMethodHandler
 			{
 			public:
+
 								JavaScriptHandler( UserInterface* owner ) : owner( owner ) { }
 
-				void			OnMethodCall( Awesomium::WebView* caller, gUInt remoteObjectID, const Awesomium::WebString& methodName, const Awesomium::JSArray& args );
+				/**
+				 * @fn	void OnMethodCall( Awesomium::WebView* caller, gUInt remoteObjectID,
+				 * 		const Awesomium::WebString& methodName, const Awesomium::JSArray& args );
+				 *
+				 * @brief	Handles Javascript function calls.
+				 *
+				 * @author	Colden Cullen
+				 *
+				 * @param [in,out]	caller	If non-null, the caller.
+				 * @param	remoteObjectID	Identifier for the remote object.
+				 * @param	methodName	  	Name of the method.
+				 * @param	args		  	The arguments.
+				 */
+				void			OnMethodCall(	Awesomium::WebView* caller, 
+												gUInt remoteObjectID, 
+												const Awesomium::WebString& methodName, 
+												const Awesomium::JSArray& args );
+
+				/**
+				 * @fn	Awesomium::JSValue OnMethodCallWithReturnValue( Awesomium::WebView* caller,
+				 * 		gUInt remoteObjectID, const Awesomium::WebString& methodName,
+				 * 		const Awesomium::JSArray& args );
+				 *
+				 * @brief	A Javascript function call that allows us to return a variable to JS.
+				 *
+				 * @author	Colden Cullen
+				 *
+				 * @param [in,out]	caller	If non-null, the caller.
+				 * @param	remoteObjectID	Identifier for the remote object.
+				 * @param	methodName	  	Name of the method.
+				 * @param	args		  	The arguments.
+				 *
+				 * @return	Data for the Javascript.
+				 */
+
 				Awesomium::JSValue
-								OnMethodCallWithReturnValue( Awesomium::WebView* caller, gUInt remoteObjectID, const Awesomium::WebString& methodName, const Awesomium::JSArray& args );
+								OnMethodCallWithReturnValue(	Awesomium::WebView* caller, 
+																gUInt remoteObjectID, 
+																const Awesomium::WebString& methodName, 
+																const Awesomium::JSArray& args );
 
 			private:
 				UserInterface*	owner;
