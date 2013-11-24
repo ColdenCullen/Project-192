@@ -22,6 +22,7 @@ using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 using namespace Graphos::Utility;
 
+
 UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 {
 	gChar abspath[ 256 ];
@@ -41,7 +42,7 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	uiObj->AddComponent(uiMesh);
 
 	// Initialize Awesomium view
-	view = new AwesomiumView( abspath, width, height );
+	view = new AwesomiumView( abspath, static_cast<int>( width ), static_cast<int>( height ) );
 	view->webView->set_js_method_handler( new JavaScriptHandler( this ) );
 
 	while( view->webView->IsLoading() )
@@ -65,12 +66,15 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 		!Config::GetData<gBool>( "display.fullscreen" ) )
 		uiObj->transform->Translate( 0.0f, -38.0f, 0.0f );
 
+	InputController::AddKeyDownEvent( [&]( unsigned int keyCode )
+	{
+		this->KeyPress( keyCode );
+	} );
+
 	// Focus for input
 	view->webView->Focus();
 }
 
-/// Destructor
-/// DO NOT CALL
 UserInterface::~UserInterface()
 {
 	if( view )
@@ -80,7 +84,6 @@ UserInterface::~UserInterface()
 	}
 }
 
-/// Get input from the mouse
 bool UserInterface::Update( void )
 {
 	Vector2 cursor = InputController::GetMousePos();
@@ -102,7 +105,9 @@ bool UserInterface::Update( void )
 
 void UserInterface::Draw( void )
 {
-	ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->OrthogonalMatrix() );
+	ShaderController::GetShader( "texture" )->SetViewMatrix( Matrix4::Identity );
+	ShaderController::GetShader( "texture" )
+		->SetProjectionMatrix( WindowController::Get()->OrthogonalMatrix() );
 
 	// Draw Awesomium
 	view->Draw( ShaderController::GetShader( "texture" ) );
@@ -141,7 +146,8 @@ void UserInterface::KeyPress( unsigned int key )
 	}
 }
 
-void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, gUInt remoteObjectID, const WebString& methodName, const JSArray& args )
+void UserInterface::JavaScriptHandler::OnMethodCall
+	( WebView* caller, gUInt remoteObjectID, const WebString& methodName, const JSArray& args )
 {
 	// If called on GraphosGame
 	if( remoteObjectID == owner->graphosGame.remote_id() )
@@ -160,7 +166,8 @@ void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, gUInt remo
 			else if( args[ 1 ].IsInteger() )
 				Config::SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToInteger() );
 			else if( args[ 1 ].IsDouble() )
-				Config::SetData( ToString( args[ 0 ].ToString() ), static_cast<float>( args[ 1 ].ToDouble() ) );
+				Config::SetData( ToString( args[ 0 ].ToString() ), 
+								static_cast<float>( args[ 1 ].ToDouble() ) );
 			else if( args[ 1 ].IsString() )
 				Config::SetData( ToString( args[ 0 ].ToString() ), ToString( args[ 1 ].ToString() ) );
 		}
@@ -171,7 +178,8 @@ void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, gUInt remo
 	}
 }
 
-JSValue UserInterface::JavaScriptHandler::OnMethodCallWithReturnValue( WebView* caller, gUInt remoteObjectID, const WebString& methodName, const JSArray& args )
+JSValue UserInterface::JavaScriptHandler::OnMethodCallWithReturnValue
+	( WebView* caller, gUInt remoteObjectID, const WebString& methodName, const JSArray& args )
 {
 	return JSValue::Undefined();
 }
