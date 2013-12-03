@@ -86,6 +86,11 @@
     <ClCompile Include="Win32Controller.cpp" />
     <ClCompile Include="WindowController.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ExternalDependencies\submodules\hlslcc\mk\libHLSLcc.vcxproj">
+      <Project>{844ff918-0146-43c2-8765-0bd5b27fb689}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
