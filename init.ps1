@@ -13,14 +13,10 @@ function Update-Cmake( $file )
 {
     $content = Get-Content $file
     $match = ".*?INCLUDE\(TestBigEndian\).*?"
-    $replacement =	"set_property( GLOBAL PROPERTY HLSLcc_GUID `"aa6e68b4-fb83-4093-95a5-dddf2b02e198`" )`n" +
-					"set_property( GLOBAL PROPERTY libHLSLcc_GUID `"844FF918-0146-43C2-8765-0BD5B27FB689`" )`n" +
-                    "get_property( exeGUID GLOBAL PROPERTY HLSLcc_GUID )`n" +
-					"get_property( libGUID GLOBAL PROPERTY libHLSLcc_GUID )`n" +
-                    "MESSAGE( STATUS `"Setting exe GUID to: `${exeGUID}`")`n" +
-					"MESSAGE( STATUS `"Setting lib GUID to: `${libGUID}`")`n" +
-                    "SET( HLSLcc_GUID_CMAKE `"`${exeGUID}`" CACHE INTERNAL `"projectGUID`" )`n" +
-                    "SET( libHLSLcc_GUID_CMAKE `"`${libGUID}`" CACHE INTERNAL `"projectGUID`" )`n" +
+    $replacement =	"SET( HLSLcc_GUID_CMAKE `"65CF13E0-F4B4-4A0E-8340-85A1467F6815`" CACHE INTERNAL `"projectGUID`" )`n" +
+                    "SET( libHLSLcc_GUID_CMAKE `"844FF918-0146-43C2-8765-0BD5B27FB689`" CACHE INTERNAL `"projectGUID`" )`n" +
+					"SET( ZERO_CHECK_GUID_CMAKE `"FF5E981C-2EBF-4ED7-BE4B-61C5D57DDF34`" CACHE INTERNAL `"projectGUID`" )`n" +
+					"SET( ALL_BUILD_GUID_CMAKE `"FE11796B-F824-4971-BCD3-90DD4EE4AF02`" CACHE INTERNAL `"projectGUID`" )`n" +
                     "`nINCLUDE(TestBigEndian)"
 
     if( $content -match $match ) {
