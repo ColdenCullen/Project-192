@@ -27,6 +27,4 @@ function Update-Cmake( $file, $guid )
 
 "Updating HLSLcc CMake file..."
 Update-Cmake ([System.IO.Path]::GetFullPath( ".\ExternalDependencies\submodules\hlslcc\mk\CMakeLists.txt" )) "aa6e68b4-fb83-4093-95a5-dddf2b02e198"
-Start-Process ".\ExternalDependencies\tools\cmake\cmake -G `"Visual Studio 11`"" -WorkingDirectory ".\ExternalDependencies\submodules\hlslcc\mk"
-
-pause
+Start-Process -FilePath ".\ExternalDependencies\tools\cmake\bin\cmake" -ArgumentList "-G `"Visual Studio 11`"" -WorkingDirectory ".\ExternalDependencies\submodules\hlslcc\mk" -NoNewWindow -Wait
