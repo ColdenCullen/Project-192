@@ -53,7 +53,7 @@ body {
   transition-delay: 0.5s;
 }
 
-#sub-title {
+.sub-title {
   color: #f1c40f;
   font-size: 4em;
   text-align: center;
@@ -68,7 +68,7 @@ body {
 }
 
 .loaded #game-title,
-.loaded #sub-title {
+.loaded .sub-title {
   -webkit-transform: translateY(0);
   opacity: 1;
 }
@@ -207,6 +207,10 @@ body {
   margin: 0 auto;
 }
 
+.credits-name {
+  font-weight: normal;
+}
+
 /*********************************************************************************/
 /* Checkbox Style                                                                */
 /*********************************************************************************/
@@ -217,7 +221,7 @@ input:focus,
 }
 
 .check {
-  position:relative;
+  position: relative;
   -webkit-appearance: none;
   -moz-appearance: none !important;
   width:40px;
