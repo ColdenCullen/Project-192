@@ -13,7 +13,7 @@
   <body>
     <section id="settings">
       <h1 id="game-title">Settings</h1>
-      <h2 id="sub-title">(scale the UI, I dare you)</h2>
+      <h2 class="sub-title"></h2>
       <div id="wrapper">
         <nav id="nav">
           <a href="index.html">Home</a>
@@ -22,17 +22,17 @@
         </nav>
 
         <div id="settings-form" class="left">
-          <input id="fullscreen" class="check fui-checkbox-unchecked" type="checkbox" onclick="fullscreenChecked()" /><span class="setting-inline">Fullscreen</span><br /><br />
+          <input id="fullscreen" class="check fui-checkbox-unchecked" type="checkbox" onclick="fullscreenChecked()" /><span class="setting-inline">Fullscreen</span><br><br>
 
           <span class="setting-inline">Resolution: </span>
           <input id="screenWidth" class="search" type="number" placeholder="Width" value="test" />
-          <input id="screenHeight" class="search" type="number" placeholder="Height" /><br /><br />
+          <input id="screenHeight" class="search" type="number" placeholder="Height" /><br><br>
 
-          <input id="vsync" class="check" type="checkbox" /><span class="setting-inline">VSync</span><br /><br />
+          <input id="vsync" class="check" type="checkbox" /><span class="setting-inline">VSync</span><br><br>
 
-          <span class="setting-inline">UI Scale</span>
+          <!--<span class="setting-inline">UI Scale</span>
           <input id="uiScaleSlider" type="range" min="0" max="2" value="1" step="0.01" onchange="printValue('uiScaleSlider','uiScaleValue')" />
-          <input id="uiScaleValue" class="search setting-inline" type="number" size="5" step="0.01" min="0" max="100" />
+          <input id="uiScaleValue" class="search setting-inline" type="number" size="5" step="0.01" min="0" max="100" />-->
         </div>
 
         <div id="start-button" class="right">
@@ -50,8 +50,8 @@
       {
         $("#screenWidth").prop('disabled', $('#fullscreen').is(':checked'));
         $("#screenHeight").prop('disabled', $('#fullscreen').is(':checked'));
-        $("#screenWidth").val(screen.width);
-        $("#screenHeight").val(screen.height);
+        //$("#screenWidth").val(screen.width);
+        //$("#screenHeight").val(screen.height);
       }
     </script>
 
