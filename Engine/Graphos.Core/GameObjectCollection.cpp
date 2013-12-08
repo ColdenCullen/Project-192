@@ -7,6 +7,7 @@
 // Controllers used to add components
 #include "OutputController.h"
 #include "ScriptController.h"
+#include "TaskManager.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -31,11 +32,11 @@ void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 		if( object.isArray() )
 		{
 			for( gInt ii = 0; ii < object.size(); ++ii )
-				addObj( object[ ii ] );
+				addObj( JsonObject( object[ ii ] ) );
 		}
 		else
 		{
-			addObj( object );
+			addObj( JsonObject( object ) );
 		}
 	}
 

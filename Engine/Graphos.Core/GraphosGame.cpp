@@ -15,6 +15,7 @@
 #include "OutputController.h"
 #include "PhysicsController.h"
 #include "JsonController.h"
+#include "TaskManager.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Physics;
@@ -30,10 +31,11 @@ void GraphosGame::Run( void )
 	// Initialize values and controllers
 	quit = false;
 
-	Start();
-
 	// Init time
 	Time::Initialize();
+	TaskManager::Initialize();
+
+	Start();
 
 	// Loop until there is a quit message from the window or the user.
 	while( !quit )
@@ -54,7 +56,7 @@ void GraphosGame::Run( void )
 			Time::Update();
 
 			// Update input
-			Input::Update();
+			InputController::Update();
 
 			// Update physics
 			if( CurrentState == GameState::Game )
@@ -108,7 +110,7 @@ void GraphosGame::Reset( void )
 	ScriptController::Get().Initialize();
 	AssetController::Initialize();
 	PhysicsController::Initialize();
-	Input::ui = ui = new UserInterface( this );
+	ui = new UserInterface( this );
 
 	Initialize();
 }
@@ -130,7 +132,7 @@ void GraphosGame::Start( void )
 	PhysicsController::Initialize();
 	ScriptController::Get().Initialize();
 
-	Input::ui = ui = new UserInterface( this );
+	ui = new UserInterface( this );
 
 	Initialize();
 }

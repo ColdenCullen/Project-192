@@ -1,10 +1,8 @@
 #include "AwesomiumView.h"
 
 #include <Awesomium\WebCore.h>
-//#include <Awesomium\WebView.h>
 #include <Awesomium\STLHelpers.h>
 #include "IShader.h"
-//#include <Awesomium/BitmapSurface.h>
 #include "GraphicsController.h"
 #include "AdapterController.h"
 
@@ -61,7 +59,6 @@ bool AwesomiumView::Initialize( string url, gUInt width, gUInt height )
 		textureDesc.MipLevels = 1;
 		textureDesc.MiscFlags = 0;
 		textureDesc.SampleDesc.Count = 1;
-		//desc.SampleDesc.Quality = m_4xMsaaQuality - 1;
 		textureDesc.Usage = D3D11_USAGE_DYNAMIC;
 		textureDesc.Width = width;
 		textureDesc.Height = height;
@@ -71,8 +68,6 @@ bool AwesomiumView::Initialize( string url, gUInt width, gUInt height )
 
 	}
 #endif
-	
-	
 
 	return true;
 }
@@ -95,13 +90,10 @@ void AwesomiumView::Draw( IShader* shader )
 	{
 		shader->BindTexture( *this );
 
-		if( surface )
+		if( surface && surface->is_dirty() )
 		{
-			if( surface->is_dirty() )
-			{
-				// Copy to buffer
-				BufferAwesomiumSurface();
-			}
+			// Copy to buffer
+			BufferAwesomiumSurface();
 		}
 	}
 }
@@ -122,7 +114,7 @@ void AwesomiumView::BufferAwesomiumSurface( void )
 		
 		ID3D11DeviceContext* temp = AdapterController::Get()->GetDeviceContext().dx;
 		temp->Map( buffer.dx, 0, D3D11_MAP_WRITE_DISCARD, 0, &subresource );
-		surface->CopyTo( (byte*)subresource.pData, surface->row_span(), 4, false, false);
+		surface->CopyTo( (byte*)subresource.pData, surface->row_span(), 4, false, false );
 		temp->Unmap( buffer.dx, 0 );
 
 		ReleaseCOMobjMacro( textureId.dx );

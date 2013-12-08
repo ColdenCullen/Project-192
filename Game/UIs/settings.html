@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Beta Balls Alpha</title>
+
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/config.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <section id="settings">
+      <h1 id="game-title">Settings</h1>
+      <h2 id="sub-title">(scale the UI, I dare you)</h2>
+      <div id="wrapper">
+        <nav id="nav">
+          <a href="index.html">Home</a>
+          <a>Settings</a>
+          <a href="credits.html">Credits</a>
+        </nav>
+
+        <div id="settings-form" class="left">
+          <input id="fullscreen" class="check fui-checkbox-unchecked" type="checkbox" onclick="fullscreenChecked()" /><span class="setting-inline">Fullscreen</span><br /><br />
+
+          <span class="setting-inline">Resolution: </span>
+          <input id="screenWidth" class="search" type="number" placeholder="Width" value="test" />
+          <input id="screenHeight" class="search" type="number" placeholder="Height" /><br /><br />
+
+          <input id="vsync" class="check" type="checkbox" /><span class="setting-inline">VSync</span><br /><br />
+
+          <span class="setting-inline">UI Scale</span>
+          <input id="uiScaleSlider" type="range" min="0" max="2" value="1" step="0.01" onchange="printValue('uiScaleSlider','uiScaleValue')" />
+          <input id="uiScaleValue" class="search setting-inline" type="number" size="5" step="0.01" min="0" max="100" />
+        </div>
+
+        <div id="start-button" class="right">
+          <a id="start-game" onclick="updateConfig();">Apply</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add a loaded tag to body -->
+    <script>$(window).load(function(){$("body").addClass("loaded");});</script>
+
+    <!--fullscreenChecked-->
+    <script type="text/javascript">
+      function fullscreenChecked() 
+      {
+        $("#screenWidth").prop('disabled', $('#fullscreen').is(':checked'));
+        $("#screenHeight").prop('disabled', $('#fullscreen').is(':checked'));
+        $("#screenWidth").val(screen.width);
+        $("#screenHeight").val(screen.height);
+      }
+    </script>
+
+    <!--printValue-->
+    <script type="text/javascript">
+      function printValue(sliderID, textbox) {
+        var x = document.getElementById(textbox);
+        var y = document.getElementById(sliderID);
+        x.value = y.value;
+      }
+
+      jQuery(window).load = function() { printValue('uiScaleSlider', 'uiScaleValue'); }
+    </script>
+
+  </body>
+</html>

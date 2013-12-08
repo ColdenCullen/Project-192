@@ -96,7 +96,7 @@ File::File( string filePath )
 
 	auto endOfPath = filePath.find_last_of( "\\/" );
 	fileName = filePath.substr( endOfPath + 1 );
-	extension = fileName.substr( fileName.find_last_of( '.' ) );
+//	extension = fileName.substr( fileName.find_last_of( '.' ) );
 	directory = filePath.substr( 0, endOfPath + 1 );
 	fullPath = abspath;
 	localPath = filePath;
