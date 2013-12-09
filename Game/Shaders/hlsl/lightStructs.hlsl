@@ -5,8 +5,17 @@ struct AmbientLight
 
 struct DirectionalLight
 {
-	float3 direction		: POSITION;
 	float4 color			: COLOR1;
+	float3 direction		: POSITION;
+};
+
+struct PointLight
+{
+	float4 color			: COLOR2;
+	// float 4 for proper buffering with openGL
+	float3 position			: POSITION;
+	float1 fallOffRadius	: PSIZE; // not sure what this should be
+
 };
 
 struct VertexShaderInput

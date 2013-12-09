@@ -12,17 +12,25 @@ namespace Graphos
 		{
 		public:
 								PointLight( std::string name, 
-											Math::Vector3 initPos = Math::Vector3(),
-											gFloat initFallOffRadius = 1,
-											Math::Vector4 initColor = Math::Vector4(),
-											GameObject* owner = nullptr )
-											: position( initPos ), fallOffRadius( initFallOffRadius ),
-											AmbientLight( name, initColor, owner ) { }
+											Math::Vector3 initPos,
+											gFloat initFallOffRadius,
+											Math::Vector4 initColor,
+											GameObject* owner = nullptr );
 								~PointLight( void ) { }
 
-			void				Update( void ) override;
+			// Must be duplicated due to static size
 			void				Draw( Graphics::IShader* shader ) override;
 
+			Math::Vector3		GetPosition( void ) { return position; }
+			void				SetPosition( const Math::Vector3& value ) { dirty = true; position = value; }
+			gFloat				GetFalloffRadius( void ) { return fallOffRadius; }
+			void				GetFalloffRadius( const gFloat value ) { dirty = true; fallOffRadius = value; }
+
+			const static gSize size;
+			
+		protected:
+
+			virtual void		UpdateBuffer( void ) override;
 			Math::Vector3		position;
 			gFloat				fallOffRadius;
 		};

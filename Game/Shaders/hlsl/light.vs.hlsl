@@ -5,6 +5,7 @@ cbuffer uniforms //: register( b0 )
 	matrix modelViewProj;
 	matrix rotationMatrix;
 	AmbientLight ambientLight;
+	DirectionalLight dirLight;
 };
 
 VertexToFragment main( VertexShaderInput input )
@@ -18,8 +19,8 @@ VertexToFragment main( VertexShaderInput input )
 
 	output.ambientLight = ambientLight;
 
-	output.dirLight.color = float4( 1.0, 1.0, 1.0, 1.0 );
-	output.dirLight.direction = float3( -1.0, -1.0, 1.0 );
+	output.dirLight.color = dirLight.color;//float4( 1.0, 1.0, 1.0, 1.0 );
+	output.dirLight.direction = dirLight.direction;//float3( -1.0, -1.0, 1.0 );
 
 	return output;
 }

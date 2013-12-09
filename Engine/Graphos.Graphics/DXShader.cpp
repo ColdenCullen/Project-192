@@ -12,6 +12,7 @@
 #include "Texture.h"
 #include "GameObject.h"
 #include "AmbientLight.h"
+#include "DirectionalLight.h"
 #include "File.h"
 
 using namespace v8;
@@ -219,6 +220,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	buf->AddProperty( "modelViewProj", sizeof(Matrix4) );
 	buf->AddProperty( "rotationMatrix", sizeof(Matrix4) );
 	buf->AddProperty( "ambientLight", AmbientLight::size );
+	buf->AddProperty( "dirLight", DirectionalLight::size );
 
 	RegisterConstBuffer( "uniforms", buf );
 	delete buf;
@@ -272,6 +274,10 @@ void DXShader::Draw( Mesh& mesh ) const
 	// TEST TO BE REMOVED
 	Vector4 color( 0.2f, 0.2f, 0.2f, 1.0f );
 	AmbientLight("ambientLight", color, nullptr ).Draw( (IShader*)this );
+
+	color = Vector4( 1.0f );
+	Vector3 dir( -1.0, -1.0, 1.0 );
+	DirectionalLight("dirLight", dir, color, nullptr).Draw( (IShader*)this );
 
 	SetUniformMatrix( "modelViewProj", *modelViewProjection );
 //	SetUniformMatrix( "modelMatrix", mesh.Owner()->transform->RotationMatrix() );
