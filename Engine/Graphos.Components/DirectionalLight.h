@@ -11,7 +11,8 @@ namespace Graphos
 		class DirectionalLight : public AmbientLight
 		{
 		public:
-								DirectionalLight( std::string name, Math::Vector3 initDir,
+								// w of initDir should be 0 for direction
+								DirectionalLight( std::string name, Math::Vector4 initDir,
 												  Math::Vector4 initColor,
 												  GameObject* owner);
 								~DirectionalLight( void ) { }
@@ -19,15 +20,15 @@ namespace Graphos
 			// Must be duplicated due to static size
 			virtual void		Draw( Graphics::IShader* shader ) override;
 
-			Math::Vector3		GetDirection( void ) { return direction; }
-			void				SetDirection( const Math::Vector3& value ) { dirty = true; direction = value; }
+			Math::Vector4		GetDirection( void ) { return direction; }
+			void				SetDirection( const Math::Vector4& value ) { dirty = true; direction = value; }
 
 			const static gSize size;
 
 		protected:
 
 			virtual void		UpdateBuffer( void ) override;
-			Math::Vector3		direction;
+			Math::Vector4		direction;
 		};
 	}
 

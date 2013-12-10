@@ -14,6 +14,7 @@
 #include "AmbientLight.h"
 #include "DirectionalLight.h"
 #include "File.h"
+#include "PointLight.h"
 
 using namespace v8;
 using namespace std;
@@ -273,11 +274,19 @@ void DXShader::Draw( Mesh& mesh ) const
 
 	// TEST TO BE REMOVED
 	Vector4 color( 0.2f, 0.2f, 0.2f, 1.0f );
-	AmbientLight("ambientLight", color, nullptr ).Draw( (IShader*)this );
+	AmbientLight tempAmb("ambientLight", color, nullptr );
+	tempAmb.Draw( (IShader*)this );
+	tempAmb.Shutdown();
 
 	color = Vector4( 1.0f );
-	Vector3 dir( -1.0, -1.0, 1.0 );
-	DirectionalLight("dirLight", dir, color, nullptr).Draw( (IShader*)this );
+	// w is 0.0 because it is a direction, not a position
+	Vector4 dir( -1.0, -1.0, 1.0, 0.0 );
+	DirectionalLight tempDir("dirLight", dir, color, nullptr);
+	tempDir.Draw( (IShader*)this );
+	tempDir.Shutdown();
+
+	PointLight testPoint( "pointLight", Vector4(1,2,3,4), 11,12,13,14, Vector4(5,6,7,8));
+
 
 	SetUniformMatrix( "modelViewProj", *modelViewProjection );
 //	SetUniformMatrix( "modelMatrix", mesh.Owner()->transform->RotationMatrix() );
