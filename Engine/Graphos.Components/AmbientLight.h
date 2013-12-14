@@ -15,23 +15,28 @@ namespace Graphos
 		{
 		public:
 								AmbientLight( std::string name,
-											Math::Vector4 initColor = Math::Vector4(), 
+											Math::Vector4 initColor = Math::Vector4(),
 											GameObject* owner = nullptr );
 									
 								~AmbientLight( void ) { }
 
-			virtual void		Update( void ) override;
+			void				Update( void ) override;
 			virtual void		Draw( Graphics::IShader* shader ) override;
-			virtual void		Shutdown( void ) override;
+			void				Shutdown( void ) override;
 
 			std::string			GetName( void ) { return name; }
 			Math::Vector4		GetColor( void  ) { return color; }
-			void				SetColor( const Math::Vector4& value ) { color = value; }
+			void				SetColor( const Math::Vector4& value ) { dirty = true; color = value; }
 
 			const static gSize	size;
 
 		protected:
-			
+								// Constructor for other lights to be created
+								// as these must pass up their size or it's butt
+								AmbientLight( std::string name,
+											Math::Vector4 initColor,
+											gSize childSize,
+											GameObject* owner = nullptr );
 			virtual void		UpdateBuffer( void );
 			std::string			name;
 			Math::Vector4		color;

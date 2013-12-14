@@ -16,6 +16,13 @@ AmbientLight::AmbientLight( std::string name, Vector4 initColor, GameObject* own
 	buffer( new gByte[size] ),
 	dirty( true ) { }
 
+AmbientLight::AmbientLight( std::string name, Vector4 initColor, gSize childSize, GameObject* owner )
+	: IComponent( owner ),
+	name( name ),
+	color( initColor ),
+	buffer( new gByte[childSize] ),
+	dirty( true ) { }
+
 void AmbientLight::Update( void )
 {
 
@@ -29,7 +36,7 @@ void AmbientLight::Draw( IShader* shader )
 		UpdateBuffer();
 		dirty = false;
 	}
-
+ 
 	// set buffer in the shader
 	shader->SetUniformBuffer( name, buffer, size );
 

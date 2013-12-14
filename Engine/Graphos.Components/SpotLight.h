@@ -2,35 +2,42 @@
 #define __SPOT_LIGHT
 
 #include "DirectionalLight.h"
+#include "PointLight.h"
 
 namespace Graphos
 {
 	namespace Core
 	{
 
-		class SpotLight : public DirectionalLight
+		class SpotLight : public DirectionalLight, public PointLight
 		{
 		public:
 								SpotLight( std::string name, 
-											Math::Vector3 initPos = Math::Vector3(),
-											gFloat initInnerAngle = 30,
-											gFloat initOuterAngle = 30,
-											gFloat initFallOffRadius = 1,
-											Math::Vector3 initDir = Math::Vector3(),
-											Math::Vector4 initColor = Math::Vector4(),
-											GameObject* owner = nullptr )
-											: position( initPos ), innerAngle( initInnerAngle ),
-											outerAngle( initOuterAngle ), fallOffRadius( initFallOffRadius ),
-											DirectionalLight( name, initDir, initColor, owner ) { }
+											Math::Vector4 initPos,
+											gFloat initInnerAngle,
+											gFloat initOuterAngle,
+											gFloat initRange,
+											gFloat initConstAttenuation,
+											gFloat initLinearAttenuation,
+											gFloat initQuadAttenuation,
+											Math::Vector4 initDir,
+											Math::Vector4 initColor,
+											GameObject* owner ) : DirectionalLight(name,initDir,initColor,owner),
+											PointLight(name,initPos,initRange,initConstAttenuation,initLinearAttenuation,initQuadAttenuation,initColor,owner){};
 								~SpotLight( void ) { }
 
-			void				Update( void ) override;
+			// Must be duplicated due to static size
 			void				Draw( Graphics::IShader* shader ) override;
 
-			Math::Vector3		position;
+
+			const static gSize size;
+
+		protected:
+			virtual void		UpdateBuffer( void ) override;
+
 			gFloat				innerAngle;
 			gFloat				outerAngle;
-			gFloat				fallOffRadius;
+
 		};
 	}
 
