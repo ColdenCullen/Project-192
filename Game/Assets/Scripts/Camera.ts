@@ -26,11 +26,11 @@ class Camera1 extends Camera
 
         if( Input.IsKeyDown( Keys.Up ) )
         {
-            this.Transform.Rotate( this.RotationSpeed, 0.0, 0.0 );
+            this.Transform.Rotate( 1.0, 0.0, 0.0, this.RotationSpeed );
         }
         if( Input.IsKeyDown( Keys.Down ) )
         {
-            this.Transform.Rotate( -this.RotationSpeed, 0.0, 0.0 );
+            this.Transform.Rotate( 1.0, 0.0, 0.0, -this.RotationSpeed );
         }
         if( Input.IsKeyDown( Keys.Left ) )
         {
