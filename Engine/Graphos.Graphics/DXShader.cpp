@@ -285,7 +285,7 @@ void DXShader::Draw( Mesh& mesh ) const
 	tempDir.Draw( (IShader*)this );
 	tempDir.Shutdown();
 
-	PointLight testPoint( "pointLight", Vector4(1,2,3,4), 11,12,13,14, Vector4(5,6,7,8));
+	//PointLight testPoint( "pointLight", Vector4(1,2,3,4), 11,12,13,14, Vector4(5,6,7,8));
 
 
 	SetUniformMatrix( "modelViewProj", *modelViewProjection );

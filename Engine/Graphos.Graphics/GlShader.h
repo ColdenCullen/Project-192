@@ -31,10 +31,7 @@ namespace Graphos
 			void				SetUniform( std::string name, const int value ) const override;
 			void				SetUniformArray( std::string name, const gFloat* value, const int size ) const override;
 			void				SetUniformArray( std::string name, const int* value, const int size ) const override;
-			void				SetUniformBuffer( std::string name, const gByte* value, const size_t size ) const override 
-			{
-				Utility::OutputController::PrintMessage(Utility::OutputType::Warning, "SetUniformBuffer not implemented in GlShader");
-			}
+			void				SetUniformBuffer( std::string name, const gByte* value, const size_t size ) const override;
 			void				SetUniformMatrix( std::string name, const Math::Matrix4& matrix ) const;
 
 		private:

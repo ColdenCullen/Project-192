@@ -3,13 +3,12 @@
 // Structs
 struct DirectionalLight
 {
-	vec3 direction;
 	vec4 color;
+	vec3 direction; // really a vec4 because OpenGL
 };
 
-struct PointLight
+struct AmbientLight
 {
-	vec3 position;
 	vec4 color;
 };
 
@@ -22,12 +21,12 @@ in vec3 iNormal;
 out vec3 fPosition;
 out vec2 fUV;
 out vec3 fNormal;
-out DirectionalLight fDirLights[2];
+
 
 // Uniforms
 uniform mat4 uModelViewProjection;
 uniform mat4 uModelMatrix;
-uniform DirectionalLight uDirLights[2];
+
 
 void main( void )
 {
@@ -36,6 +35,6 @@ void main( void )
 
 	fUV = iUV;
 	fNormal = normalize( transpose(uModelMatrix) * vec4( iNormal, 1.0f ) ).xyz;
-	fDirLights[0].direction = vec3( -1.0, -1.0f, 1.0f );
-	fDirLights[0].color = vec4( 1.0, 1.0, 1.0, 1.0 );
+	//fDirLights[0].direction = vec3( -1.0, -1.0f, 1.0f );
+	//fDirLights[0].color = vec4( 1.0, 1.0, 1.0, 1.0 );
 }
