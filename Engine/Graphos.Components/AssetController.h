@@ -5,6 +5,7 @@
 #include <string>
 
 #include "IComponent.h"
+#include "OutputController.h"
 
 namespace Graphos
 {
@@ -21,7 +22,12 @@ namespace Graphos
 			static typename std::enable_if<std::is_base_of<IComponent, T>::value, T*>::type
 								GetContent( std::string name )
 			{
-				return dynamic_cast<T*>( ingredientShelf[ name ] );
+				auto ret = dynamic_cast<T*>( ingredientShelf[ name ] );
+
+				if( !ret )
+					OutputController::PrintMessage( OutputType::Error, string( "Attempt to find " ) + name + " failed." );
+
+				return ret;
 			}
 
 		private:

@@ -6,9 +6,9 @@ class light extends IShader
 
     Draw(): void
     {
-        this.SetUniform( "shaderTexture", 0 );
-        this.SetUniformMatrix( "modelViewProjection", this.ModelViewProjectionMatrix );
-        this.SetUniformMatrix( "modelMatrix", this.ModelMatrix );
+        this.SetUniform( "uShaderTexture", 0 );
+        this.SetUniformMatrix( "uModelViewProjection", this.ModelViewProjectionMatrix );
+        this.SetUniformMatrix( "uModelMatrix", this.ModelMatrix );
     }
 }
 
@@ -18,7 +18,7 @@ class texture extends IShader
 
     Draw(): void
     {
-        this.SetUniform( "shaderTexture", 0 );
-        this.SetUniformMatrix( "modelViewProjection", this.ModelViewProjectionMatrix );
+        this.SetUniform( "uShaderTexture", 0 );
+        this.SetUniformMatrix( "uModelViewProjection", this.ModelViewProjectionMatrix );
     }
 }

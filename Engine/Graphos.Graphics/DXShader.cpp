@@ -1,5 +1,8 @@
 #include <memory>
+#include <iostream>
+#include <fstream>
 #include <DirectX/DirectXIncludes.h>
+#include <d3dcommon.h>
 
 #include "DXShader.h"
 #include "GraphicsController.h"
@@ -7,6 +10,11 @@
 #include "OutputController.h"
 #include "Mesh.h"
 #include "Texture.h"
+#include "GameObject.h"
+#include "AmbientLight.h"
+#include "DirectionalLight.h"
+#include "File.h"
+#include "PointLight.h"
 
 using namespace v8;
 using namespace std;
@@ -15,6 +23,64 @@ using namespace Graphos::Math;
 using namespace Graphos::Graphics;
 using namespace Graphos::Utility;
 using namespace DirectX;
+
+#include <d3dcompiler.inl>
+
+class ShaderInclude : public ID3DInclude
+{
+public:
+	ShaderInclude( std::string localDir ) : localDir( localDir ) { }
+
+	STDMETHODIMP Open( D3D_INCLUDE_TYPE IncludeType, LPCSTR pFileName, LPCVOID pParentData, LPCVOID *ppData, UINT *pBytes )
+	{
+		try
+		{
+			string finalPath;
+			switch(IncludeType)
+			{
+			case D3D_INCLUDE_LOCAL:
+				finalPath = localDir + "\\" + pFileName;
+				break;
+			case D3D_INCLUDE_SYSTEM:
+				finalPath = localDir + "\\" + pFileName;
+				break;
+			default:
+				return E_FAIL;
+			}
+
+			ifstream includeFile( finalPath.c_str(), ios::in|ios::binary|ios::ate );
+
+			if( includeFile.is_open() )
+			{
+				long long fileSize = includeFile.tellg();
+				char* buf = new char[ fileSize ];
+				includeFile.seekg( 0, ios::beg );
+				includeFile.read( buf, fileSize );
+				includeFile.close();
+				*ppData = buf;
+				*pBytes = fileSize;
+			}
+			else
+			{
+				return E_FAIL;
+			}
+			return S_OK;
+		}
+		catch(std::exception& e)
+		{
+			return E_FAIL;
+		}
+	}
+	STDMETHODIMP Close( LPCVOID pData )
+	{
+		char* buf = (char*)pData;
+		delete[] buf;
+		return S_OK;
+	}
+
+private:
+	std::string		localDir;
+};
 
 // Requires the compiled shaders (.cso files)
 DXShader::DXShader( string vertexPath, string fragmentPath )
@@ -34,10 +100,11 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	// ---- Load Vertex Shader
 	ID3DBlob* vsb;
 	wstring wVertexPath( vertexPath.begin(), vertexPath.end() );
+	ShaderInclude include( File( vertexPath ).GetDirectory() );
 	//D3DReadFileToBlob( wVertexPath.c_str(), &vsb );
 	result = D3DCompileFromFile( wVertexPath.c_str(),
 								NULL,
-								NULL,
+								&include,
 								"main",
 								"vs_5_0",
 								D3DCOMPILE_ENABLE_STRICTNESS,
@@ -70,9 +137,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	{
 		OutputController::PrintMessage( OutputType::Error, "Failed to create input layout." );
 	}
-	// release unneeded buffers
-	ReleaseCOMobjMacro( vsb );
-	ReleaseCOMobjMacro( shaderCompileErrors );
+	
 
 	// ---- Load Pixel Shader
 	ID3DBlob* psb;
@@ -80,7 +145,7 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 	//D3DReadFileToBlob( wPixelPath.c_str(), &psb );
 	result = D3DCompileFromFile( wPixelPath.c_str(),
 								NULL,
-								NULL,
+								&include,
 								"main",
 								"ps_5_0",
 								D3DCOMPILE_ENABLE_STRICTNESS,
@@ -103,9 +168,25 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 		OutputController::PrintMessage( OutputType::Error, "Failed to create fragment shader." );
 	}
 
-	// release unneeded buffers
-	ReleaseCOMobjMacro( psb );
-	ReleaseCOMobjMacro( shaderCompileErrors );
+	// get constant buffer variables
+	ID3D11ShaderReflection* vsReflection = nullptr;
+	D3D11Reflect( vsb->GetBufferPointer(), vsb->GetBufferSize(), &vsReflection );
+	D3D11_SHADER_BUFFER_DESC vsShaderBufferDesc;
+	vsReflection->GetConstantBufferByName( "uniforms" )->GetDesc( &vsShaderBufferDesc );
+	vsShaderBufferDesc.Name;
+	UINT numVariables = vsShaderBufferDesc.Variables;
+	ID3D11ShaderReflectionVariable* var2 = vsReflection->GetConstantBufferByName( "uniforms" )->GetVariableByIndex( 2 );
+	
+	D3D11_SHADER_VARIABLE_DESC var2Desc;
+	var2->GetDesc( &var2Desc );
+	var2Desc.Name;
+	var2Desc.Size;
+
+	ID3D11ShaderReflectionType* var2Type = var2->GetType();
+	var2Type->GetMemberTypeByIndex(0);
+	
+
+	
 
 	// ---- Create Sampler State
 	D3D11_SAMPLER_DESC samplerDesc;
@@ -129,12 +210,21 @@ DXShader::DXShader( string vertexPath, string fragmentPath )
 		OutputController::PrintMessage( OutputType::Error, "Failed to create sampler state." );
 	}
 
+	// release unneeded buffers
+	ReleaseCOMobjMacro( psb );
+	ReleaseCOMobjMacro( vsb );
+	ReleaseCOMobjMacro( shaderCompileErrors );
+
 	// TEMPORARY BUFFER TO BE REMOVED FROM C++ SIDE
 	auto buf = new ConstBuffer;
 	buf->totalSize = 0;
 	buf->AddProperty( "modelViewProj", sizeof(Matrix4) );
-	buf->AddProperty( "modelMatrix", sizeof(Matrix4) );
+	buf->AddProperty( "rotationMatrix", sizeof(Matrix4) );
+	buf->AddProperty( "ambientLight", AmbientLight::size );
+	buf->AddProperty( "dirLight", DirectionalLight::size );
+
 	RegisterConstBuffer( "uniforms", buf );
+	delete buf;
 }
 
 void DXShader::RegisterConstBuffer( string name, ConstBuffer* buf )
@@ -181,11 +271,25 @@ void DXShader::Draw( Mesh& mesh ) const
 {
 	auto deviceContext = AdapterController::Get()->GetDeviceContext().dx;
 
-	SetUniformMatrix( "modelViewProj", *modelViewProjection );
-	SetUniformMatrix( "modelMatrix", *modelMatrix );
 
-	//gFloat f[32];
-	//memcpy( &f, buffer->data , 128 );
+	// TEST TO BE REMOVED
+	Vector4 color( 0.2f, 0.2f, 0.2f, 1.0f );
+	AmbientLight tempAmb("ambientLight", color, nullptr );
+	tempAmb.Draw( (IShader*)this );
+	tempAmb.Shutdown();
+
+	color = Vector4( 1.0f );
+	// w is 0.0 because it is a direction, not a position
+	Vector4 dir( -1.0, -1.0, 1.0, 0.0 );
+	DirectionalLight tempDir("dirLight", dir, color, nullptr);
+	tempDir.Draw( (IShader*)this );
+	tempDir.Shutdown();
+
+	//PointLight testPoint( "pointLight", Vector4(1,2,3,4), 11,12,13,14, Vector4(5,6,7,8));
+
+
+	SetUniformMatrix( "modelViewProj", *modelViewProjection );
+//	SetUniformMatrix( "modelMatrix", mesh.Owner()->transform->RotationMatrix() );
 
 	// update constant buffer on the GPU
 	deviceContext->UpdateSubresource( buffer->vsConstantBuffer,
@@ -281,6 +385,18 @@ void DXShader::SetUniformArray( string name, const int* value, const int size ) 
 		OutputController::PrintMessage( OutputType::Error, "Data size mismatch in SetUniformArray(int)" );
 	
 	memcpy( buffer->data + it->second.first, value, it->second.second );
+}
+
+void DXShader::SetUniformBuffer( string name, const gByte* value, const size_t size) const
+{
+	auto it = buffer->meta.find( name );
+
+	if( it == end( buffer->meta ) )
+		OutputController::PrintMessage( OutputType::Error, "Invalid name in SetUniform" );
+	if( it->second.second != size )
+		OutputController::PrintMessage( OutputType::Error, "Data size mismatch in SetUniformBuffer" );
+	
+	memcpy( buffer->data + it->second.first, value, size );
 }
 
 void DXShader::SetUniformMatrix( std::string name, const Matrix4& matrix ) const 
