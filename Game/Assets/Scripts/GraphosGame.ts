@@ -3,14 +3,18 @@
 class MyGame extends GraphosGame
 {
     objects: GameObjectCollection;
+    ballsFired: int;
+    ballsOut: int;
+    shootyBall: GameObject;
 
     public Initialize(): void
     {
         log( "Initializing" );
 
         this.objects = new GameObjectCollection();
-
         this.objects.LoadObjects( "" );
+
+        //this.shootyBall = this.objects.FindObject("ShootyBall");
 
         log( this.Camera );
     }
@@ -25,6 +29,7 @@ class MyGame extends GraphosGame
 			        if( Input.IsKeyDown( Keys.F1 ) )
                         this.CurrentState = GameState.Menu;
 
+                    this.UpdateGame();
                     this.objects.Update();
                     break;
                 }
@@ -49,15 +54,15 @@ class MyGame extends GraphosGame
 
     public Draw(): void
     {
-        ShaderController.GetShader( "texture" ).ViewMatrix = this.Camera.ViewMatrix;
-        ShaderController.GetShader( "texture" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
-        ShaderController.GetShader( "light" ).ViewMatrix = this.Camera.ViewMatrix;
-        ShaderController.GetShader( "light" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
-
         switch( this.CurrentState )
         {
             case GameState.Game:
                 {
+                    ShaderController.GetShader( "texture" ).ViewMatrix = this.Camera.ViewMatrix;
+                    ShaderController.GetShader( "texture" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
+                    ShaderController.GetShader( "light" ).ViewMatrix = this.Camera.ViewMatrix;
+                    ShaderController.GetShader( "light" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
+                    
                     this.objects.Draw();
                     break;
                 }
@@ -65,6 +70,24 @@ class MyGame extends GraphosGame
                 {
                     break;
                 }
+        }
+    }
+
+    public UpdateGame(): void 
+    {   
+        // shoot a ball if space is pressed
+        if ( Input.IsKeyDown( Keys.Space ) ) 
+        {
+            //this.shootyBall.Reset();
+            ballsFired++;
+        }
+
+        // count the number of balls out of the pit
+        ballsOut = 0;
+        for (var obj in this.objects)
+        {
+            if (obj.y < 0)
+                ballsOut++;
         }
     }
 
