@@ -46,6 +46,9 @@ void cvv8::ClassCreator_SetupBindings<Vector3>::Initialize( Handle<v8::Object> c
 	// Set static methods
 	Handle<Function> ctor( Vector3cc.CtorFunction() );
 	ctor->Set( String::New( "TripleProduct" ), FunctionTemplate::New( FunctionToInCa<Vector3 (const Vector3&, const Vector3&, const Vector3&), &Vector3::TripleProduct>::Call )->GetFunction() );
+	ctor->SetAccessor( String::New( "Right" ), VarToAccessors<const Vector3, &Vector3::Right>::Get );
+	ctor->SetAccessor( String::New( "Up" ), VarToAccessors<const Vector3, &Vector3::Up>::Get );
+	ctor->SetAccessor( String::New( "Forward" ),VarToAccessors<const Vector3, &Vector3::Forward>::Get );
 
 	Vector3cc.AddClassTo( TypeName<Vector3>::Value, target );
 };
