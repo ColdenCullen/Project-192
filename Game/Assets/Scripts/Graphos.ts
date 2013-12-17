@@ -17,25 +17,6 @@ declare class Vector3
     public Multiply( other: number ): Vector3;
 
     public static TripleProduct( a: Vector3, b: Vector3, c: Vector3 ): Vector3;
-
-    public static Right: Vector3;
-    public static Up: Vector3;
-    public static Forward: Vector3;
-}
-
-declare class Quaternion
-{
-    public x: Number;
-    public y: Number;
-    public z: Number;
-
-    constructor();
-    constructor( x: number, y: number, z: number, w: number );
-    constructor( axis: Vector3, angle: number );
-    constructor( other: Vector3 );
-
-    public Equals( other: Vector3 ): boolean;
-    public Multiply( other: Quaternion ): Vector3;
 }
 
 declare class Matrix4
@@ -50,16 +31,14 @@ declare class Matrix4
 declare class Transform
 {
     public Position: Vector3;
-    public Rotation: Quaternion;
+    public Rotation: Vector3;
     //public Scale: Vector3;
     public Right: Vector3;
     public Up: Vector3;
     public Forward: Vector3;
 
     public Rotate(rotation: Vector3): void;
-    public Rotate( x: number, y: number, z: number ): void;
-    public Rotate( rotation: Quaternion ): void;
-    public Rotate( x: number, y: number, z: number, w: number ): void;
+    public Rotate(x: number, y: number, z: number): void;
     public Translate(displacement: Vector3): void;
     public Translate(x: number, y: number, z: number): void;
     public Scale(scale: Vector3): void;

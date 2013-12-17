@@ -9,7 +9,7 @@
 		"Class": "Camera1",
 		"Variables": {
 			"Speed": 0.01,
-			"RotationSpeed": 0.05
+			"RotationSpeed": 0.005
 		}
 	},
 

@@ -24,12 +24,12 @@ void cvv8::ClassCreator_SetupBindings<Transform>::Initialize( Handle<v8::Object>
 		( "destroy", ClassCreator<Transform>::DestroyObjectCallback )
 		( "Rotate",
 			PredicatedInCaDispatcher<CVV8_TYPELIST((
-				PredicatedInCa<
-					ArgAt_IsA<0, const Quaternion&>,
-					MethodToInCa<Transform, void (const Quaternion&), &Transform::Rotate>>,
-				PredicatedInCa<
-					Argv_Length<4>,
-					MethodToInCa<Transform, void (const gFloat, const gFloat, const gFloat, const gFloat), &Transform::Rotate>>,
+			/*PredicatedInCa<
+			ArgAt_IsA<0, const Quaternion&>,
+			MethodToInCa<Transform, void (const Quaternion&), &Transform::Rotate>>,
+			PredicatedInCa<
+			Argv_Length<4>,
+			MethodToInCa<Transform, void (const gFloat, const gFloat, const gFloat, const gFloat), &Transform::Rotate>>,*/
 				PredicatedInCa<
 					ArgAt_IsA<0, const Vector3&>,
 					MethodToInCa<Transform, void (const Vector3&), &Transform::Rotate>>,
@@ -64,7 +64,7 @@ void cvv8::ClassCreator_SetupBindings<Transform>::Initialize( Handle<v8::Object>
 			ConstMethodToGetter<const Transform, const Vector3* (void), &Transform::Position>::Get,
 			ThrowingSetter::Set )
 		( "Rotation",
-			ConstMethodToGetter<const Transform, const Quaternion* (void), &Transform::Rotation>::Get,
+			ConstMethodToGetter<const Transform, const Vector3* (void), &Transform::Rotation>::Get,
 			ThrowingSetter::Set )
 		/*( "Scale",
 			ConstMethodToGetter<const Transform, const Vector3* (void), &Transform::Scale>::Get,
