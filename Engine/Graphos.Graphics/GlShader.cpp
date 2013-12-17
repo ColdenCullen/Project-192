@@ -4,6 +4,9 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include "OutputController.h"
+#include "DirectionalLight.h"
+#include "AmbientLight.h"
+
 
 #define MIN(x,y) (x < y ? x : y)
 
@@ -148,6 +151,19 @@ void GlShader::Draw( Mesh& mesh ) const
 {
 	glUseProgram( programID );
 
+	// TEST TO BE REMOVED
+	Vector4 color( 0.2f, 0.2f, 0.2f, 1.0f );
+	AmbientLight tempAmb("ambientLight", color, nullptr );
+	tempAmb.Draw( (IShader*)this );
+	tempAmb.Shutdown();
+
+	color = Vector4( 1.0f );
+	// w is 0.0 because it is a direction, not a position
+	Vector4 dir( -1.0, -1.0, 1.0, 0.0 );
+	DirectionalLight tempDir("dirLight", dir, color, nullptr);
+	tempDir.Draw( (IShader*)this );
+	tempDir.Shutdown();
+
 	script->CallFunction( "Draw" );
 
 	glBindVertexArray( mesh.GetGlVao() );
@@ -205,4 +221,14 @@ void GlShader::SetUniformMatrix( std::string name, const Matrix4& matrix ) const
 
 	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
 		glUniformMatrix4fv( currentUniform->second, 1, false, matrix.dataArray );
+}
+
+void GlShader::SetUniformBuffer( std::string name, const gByte* value, const size_t size ) const
+{
+	auto currentUniform = uniforms.find( name );
+	//if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
+	//	glUniform1fv( currentUniform->second, size/4, (gFloat*)(value) );
+
+	//auto loc = glGetUniformLocation( programID, name.c_str() );
+	//glUniform1fv( loc, size / 4, (gFloat*)value );
 }

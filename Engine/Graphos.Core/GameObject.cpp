@@ -8,6 +8,7 @@
 #include "GraphosGame.h"
 #include "GraphosMotionState.h"
 #include "PhysicsController.h"
+#include "AmbientLight.h"
 
 using namespace std;
 using namespace Graphos::Core;
@@ -117,6 +118,7 @@ void GameObject::Update( void )
 void GameObject::Draw( void )
 {
 	shader->SetModelMatrix( transform->WorldMatrix() );
+	shader->SetUniformMatrix( "rotationMatrix",transform->RotationMatrix() );
 
 	for( auto component : componentList )
 		component.second->Draw( shader );

@@ -29,8 +29,12 @@ namespace Graphos
 			void					Scale( const Vector3& scale );
 			void					Scale( const gFloat x, const gFloat y, const gFloat z );
 
+			void					Pitch( const gFloat angle );
+			void					Yaw( const gFloat angle );
+			void					Roll( const gFloat angle );
+
 			const Math::Vector3*	Position( void )	const { return position; }
-			const Math::Vector3*	Rotation( void )	const { return rotation; }
+			const Math::Quaternion*	Rotation( void )	const { return rotation; }
 			const Math::Vector3*	Scale( void )		const { return scale; }
 			Math::Matrix4&			WorldMatrix( void );
 			const Math::Matrix4		RotationMatrix( void ) const;
@@ -43,16 +47,12 @@ namespace Graphos
 			Math::Matrix4			matrix;
 
 			Math::Vector3*			position;
-			Math::Vector3*			rotation;
+			Math::Quaternion*		rotation;
 			Math::Vector3*			scale;
 
 			Math::Vector3*			right;
 			Math::Vector3*			up;
 			Math::Vector3*			forward;
-
-			Math::Matrix4			RotateX( const gFloat angle ) const;
-			Math::Matrix4			RotateY( const gFloat angle ) const;
-			Math::Matrix4			RotateZ( const gFloat angle ) const;
 
 			void					UpdateLocalVectors( void );
 		};

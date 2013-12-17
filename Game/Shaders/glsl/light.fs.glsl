@@ -3,30 +3,36 @@
 // Structs
 struct DirectionalLight
 {
-	vec3 direction;
+	vec4 color;
+	vec3 direction; // really a vec4 because OpenGL
+};
+
+struct AmbientLight
+{
 	vec4 color;
 };
 
 // In variables
-in vec2 uv;
-in vec3 normal;
-in DirectionalLight light;
+in vec3 fPosition;
+in vec2 fUV;
+in vec3 fNormal;
 
 // Uniforms
-uniform sampler2D shaderTexture;
+uniform sampler2D uShaderTexture;
+uniform AmbientLight ambientLight = AmbientLight( vec4(.2,.2,.2,1.0) );
+uniform DirectionalLight dirLight = DirectionalLight( vec4(1.0,1.0,1.0,1.0),vec3( -1.0, -1.0, 1.0 ) );
 
 void main( void )
 {
-	vec4 texDiffuse = texture( shaderTexture, uv );
+	vec4 texDiffuse = texture( uShaderTexture, fUV );
+	vec4 texAmbient = texDiffuse;
 
 	//*
-	float ndotl = clamp( dot( normal, -light.direction ), 0.0f, 1.0f );
+	float ndotl = clamp( dot( fNormal, -dirLight.direction ), 0.0f, 1.0f );
 
-	vec4 color = light.color * ndotl;
 
-	color = color * texDiffuse;
-
-	gl_FragColor = vec4( color.xyz, 1.0f );
+	gl_FragColor = ( dirLight.color * ndotl * texDiffuse )
+					+ (ambientLight.color * texAmbient );
 	/*/
 	gl_FragColor = texDiffuse;
 	//*/
