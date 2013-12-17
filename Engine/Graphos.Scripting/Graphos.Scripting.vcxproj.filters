@@ -53,9 +53,6 @@
       <Filter>Class Creators\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="GraphosBehavior.cpp" />
-    <ClCompile Include="CC-Quaternion.cpp">
-      <Filter>Class Creators\Math</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Class Creators">

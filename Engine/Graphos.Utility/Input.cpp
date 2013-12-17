@@ -3,7 +3,7 @@
 #include "Config.h"
 #include "Win32Controller.h"
 
-#define BIT_AT_KEY_STATE( pos ) ( 1i64 << ( pos % SIZE ) )
+#define BIT_AT_KEY_STATE( pos ) ( 1 << ( pos % SIZE ) )
 
 using namespace std;
 using namespace Graphos::Core;

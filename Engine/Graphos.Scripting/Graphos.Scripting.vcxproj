@@ -69,7 +69,6 @@
     <ClCompile Include="CC-IShader.cpp" />
     <ClCompile Include="CC-Matrix4.cpp" />
     <ClCompile Include="CC-Mesh.cpp" />
-    <ClCompile Include="CC-Quaternion.cpp" />
     <ClCompile Include="CC-ShaderController.cpp" />
     <ClCompile Include="CC-Texture.cpp" />
     <ClCompile Include="CC-Time.cpp" />
