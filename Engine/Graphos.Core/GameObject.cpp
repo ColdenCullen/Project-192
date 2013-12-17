@@ -73,24 +73,31 @@ GameObject* GameObject::CreateFromJson( JsonObject object )
 			obj->transform->Rotate( currentTransform.Get<Vector3>( "" ) );
 	}
 
-	// Set physics Rigid Body object
-	if(  object.TryGet( "Physics", component ) )
+	// Set physics rigid body object
+	if( object.TryGet( "Physics", component ) )
 	{
 		auto gms = new GraphosMotionState( obj );
-		gFloat mass;
-		gFloat restitution;
-		gFloat friction;
-		gFloat rollingFriction;
 
-		mass = component.Get<gFloat>( "Mass" );
-		// TODO: Make these optional
+		PhysicsController::PhysicsConfig physConfig;
 
-		restitution = component.Get<gFloat>( "Restitution" );
-		friction = component.Get<gFloat>( "Friction" );
-		rollingFriction = component.Get<gFloat>( "RollingFriction" );
+		physConfig.mass = component.Get<gFloat>( "Mass" );
 
-		PhysicsController::CreatePhysicsObject( gms, mass, restitution, friction, rollingFriction );
+		// Optional Settings
+		gFloat physicsSetting;
 
+		if( component.TryGet( "Friction", physicsSetting ) )
+			physConfig.friction = physicsSetting;
+		if( component.TryGet( "RollingFriction", physicsSetting ) )
+			physConfig.rollingFriction = physicsSetting;
+		if( component.TryGet( "Restitution", physicsSetting ) )
+			physConfig.restitution = physicsSetting;
+
+		// Create our new object and add it to the simulation
+		Physics::PhysicsController::CreatePhysicsObject( gms, &physConfig );
+
+		// TODO: Cleanup physConfig
+
+		// Link the physics sim to our graphics object
 		obj->AddComponent( gms );
 	}
 
@@ -118,7 +125,7 @@ void GameObject::Update( void )
 void GameObject::Draw( void )
 {
 	shader->SetModelMatrix( transform->WorldMatrix() );
-	shader->SetUniformMatrix( "rotationMatrix",transform->RotationMatrix() );
+	shader->SetUniformMatrix( "rotationMatrix", transform->RotationMatrix() );
 
 	for( auto component : componentList )
 		component.second->Draw( shader );
