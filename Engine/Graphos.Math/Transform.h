@@ -8,6 +8,10 @@
 
 namespace Graphos
 {
+	namespace Physics
+	{
+		class GraphosMotionState;
+	}
 	namespace Math
 	{
 		struct Transform
@@ -55,6 +59,8 @@ namespace Graphos
 			Math::Vector3*			forward;
 
 			void					UpdateLocalVectors( void );
+
+			friend class			Graphos::Physics::GraphosMotionState;
 		};
 	}
 }
