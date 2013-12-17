@@ -3,9 +3,8 @@
 class MyGame extends GraphosGame
 {
     objects: GameObjectCollection;
-    ballsFired: int;
-    ballsOut: int;
     shootyBall: GameObject;
+    ballsFired: number;
 
     public Initialize(): void
     {
@@ -14,7 +13,7 @@ class MyGame extends GraphosGame
         this.objects = new GameObjectCollection();
         this.objects.LoadObjects( "" );
 
-        //this.shootyBall = this.objects.FindObject("ShootyBall");
+        this.shootyBall = this.objects.GetObjectByName("ShootyBall");
 
         log( this.Camera );
     }
@@ -78,16 +77,9 @@ class MyGame extends GraphosGame
         // shoot a ball if space is pressed
         if ( Input.IsKeyDown( Keys.Space ) ) 
         {
-            //this.shootyBall.Reset();
-            ballsFired++;
-        }
-
-        // count the number of balls out of the pit
-        ballsOut = 0;
-        for (var obj in this.objects)
-        {
-            if (obj.y < 0)
-                ballsOut++;
+            //guys its fine
+            this.shootyBall.Transform.Translate( this.shootyBall.Transform.Position.Multiply(-1) );
+            this.ballsFired++;
         }
     }
 
