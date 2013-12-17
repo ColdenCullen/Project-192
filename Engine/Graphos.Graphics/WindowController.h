@@ -22,8 +22,8 @@ namespace Graphos
 			virtual void		CloseWindow( void ) { }
 
 			// Getters
-			unsigned int		GetWidth( void )	{ return width; }
-			unsigned int		GetHeight( void )	{ return height; }
+			gUInt				GetWidth( void )	{ return width; }
+			gUInt				GetHeight( void )	{ return height; }
 
 			Math::Matrix4&		PerspectiveMatrix( void ) { return perspectiveMatrix; }
 			Math::Matrix4&		OrthogonalMatrix( void ) { return orthogonalMatrix; }
@@ -31,8 +31,8 @@ namespace Graphos
 								WindowController( void ) { }
 
 		protected:
-			unsigned int		width, screenWidth;
-			unsigned int		height, screenHeight;
+			gUInt				width, screenWidth;
+			gUInt				height, screenHeight;
 			bool				fullScreen;
 
 			Math::Matrix4		perspectiveMatrix;

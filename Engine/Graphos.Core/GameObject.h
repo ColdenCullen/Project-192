@@ -61,7 +61,7 @@ namespace Graphos
 			}
 
 		private:
-			std::unordered_map<size_t, IComponent*>
+			std::unordered_map<gSize, IComponent*>
 								componentList;
 
 			Graphics::IShader*	shader;

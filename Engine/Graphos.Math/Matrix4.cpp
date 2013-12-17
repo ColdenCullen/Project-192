@@ -59,7 +59,7 @@ Matrix4 Matrix4::Add( const Matrix4& other ) const
 
 Matrix4& Matrix4::operator*=( const Matrix4& other )
 {
-	float result[ 16 ];
+	gFloat result[ 16 ];
 
 	// Perform multiply, store in result
 	result[ 0 ] = ( dataArray[ 0 ] * other.dataArray[ 0 ] ) + ( dataArray[ 1 ] * other.dataArray[ 4 ] ) + ( dataArray[ 2 ] * other.dataArray[ 8 ] ) + ( dataArray[ 3 ] * other.dataArray[ 12 ] );
@@ -111,7 +111,7 @@ bool Matrix4::Equals( const Matrix4& other ) const
 	return true;
 }
 
-Matrix4 Matrix4::BuildPerspective( const float fov, const float screenAspect, const float near, const float depth )
+Matrix4 Matrix4::BuildPerspective( const gFloat fov, const gFloat screenAspect, const gFloat near, const gFloat depth )
 {
 	Matrix4 toReturn = Matrix4::Identity;
 
@@ -125,7 +125,7 @@ Matrix4 Matrix4::BuildPerspective( const float fov, const float screenAspect, co
 	return toReturn;
 }
 
-Matrix4 Matrix4::BuildOrthogonal( const float width, const float height, const float near, const float far )
+Matrix4 Matrix4::BuildOrthogonal( const gFloat width, const gFloat height, const gFloat near, const gFloat far )
 {
 	Matrix4 toReturn = Matrix4::Identity;
 
@@ -155,7 +155,7 @@ Vector3 Matrix4::Mul( const Vector3& vec ) const
 Matrix4 Matrix4::Inverse( void ) const
 {
 	Matrix4 toReturn;
-	float det;
+	gFloat det;
 
 	toReturn.dataArray[ 0 ] = dataArray[ 5 ]  * dataArray[ 10 ] * dataArray[ 15 ] - 
 		dataArray[ 5 ]  * dataArray[ 11 ] * dataArray[ 14 ] - 

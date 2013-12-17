@@ -31,10 +31,10 @@ void cvv8::ClassCreator_SetupBindings<WindowController>::Initialize( Handle<v8::
 	AccessorAdder Vector3acc( WindowControllercc.Prototype() );
 	Vector3acc
 		( "Width",
-			MethodToGetter<WindowController, unsigned int( void ), &WindowController::GetWidth>::Get,
+			MethodToGetter<WindowController, gUInt( void ), &WindowController::GetWidth>::Get,
 			ThrowingSetter::Set )
 		( "Height",
-			MethodToGetter<WindowController, unsigned int( void ), &WindowController::GetHeight>::Get,
+			MethodToGetter<WindowController, gUInt( void ), &WindowController::GetHeight>::Get,
 			ThrowingSetter::Set )
 		( "PerspectiveMatrix",
 			MethodToGetter<WindowController, Matrix4&( void ), &WindowController::PerspectiveMatrix>::Get,

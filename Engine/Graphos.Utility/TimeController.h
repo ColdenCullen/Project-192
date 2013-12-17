@@ -9,13 +9,61 @@ namespace Graphos
 {
 	namespace Utility
 	{
+		/**
+		 * @class	Time
+		 *
+		 * @brief	Handles keeping track of time.
+		 *
+		 * @author	Colden Cullen
+		 * @date	11/23/2013
+		 */
 		class Time
 		{
 		public:
+
+			/**
+			 * @fn	static void Time::Initialize( void );
+			 *
+			 * @brief	Initializes the time controller to keep track of time.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 */
 			static void			Initialize( void );
+
+			/**
+			 * @fn	static void Time::Update( void );
+			 *
+			 * @brief	Updates the times.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 */
 			static void			Update( void );
-			static const float	GetDeltaTime( void ) { return static_cast<float>( deltaTime.count() ) / std::nano::den; }
-			static const float	GetTotalTime( void ) { return static_cast<float>( totalTime.count() ) / std::nano::den; }
+
+			/**
+			 * @fn	static const gFloat Time::GetDeltaTime( void )
+			 *
+			 * @brief	Gets delta time.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 *
+			 * @return	The delta time.
+			 */
+			static const gFloat	GetDeltaTime( void ) { return static_cast<gFloat>( deltaTime.count() ) / std::nano::den; }
+
+			/**
+			 * @fn	static const gFloat Time::GetTotalTime( void )
+			 *
+			 * @brief	Gets total run time.
+			 *
+			 * @author	Colden Cullen
+			 * @date	11/23/2013
+			 *
+			 * @return	The total run time.
+			 */
+			static const gFloat	GetTotalTime( void ) { return static_cast<gFloat>( totalTime.count() ) / std::nano::den; }
 
 		private:
 			static std::chrono::high_resolution_clock::time_point
@@ -26,7 +74,7 @@ namespace Graphos
 								deltaTime;
 			static std::chrono::nanoseconds
 								totalTime;
-			static unsigned int	frameCount;
+			static gUInt		frameCount;
 
 			static std::chrono::nanoseconds
 								secondTime;

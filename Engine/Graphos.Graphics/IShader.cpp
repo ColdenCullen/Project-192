@@ -43,22 +43,22 @@ void IShader::SetUniformMatrix( std::string name, const Matrix4& matrix ) const
 	throw exception( "Not implemented!" );
 }
 
-void IShader::SetUniformArray( std::string name, const int* value, const int size ) const
+void IShader::SetUniformArray( std::string name, const gInt* value, const gInt size ) const
 {
 	throw exception( "Not implemented!" );
 }
 
-void IShader::SetUniformArray( std::string name, const float* value, const int size ) const
+void IShader::SetUniformArray( std::string name, const gFloat* value, const gInt size ) const
 {
 	throw exception( "Not implemented!" );
 }
 
-void IShader::SetUniform( std::string name, const int value ) const
+void IShader::SetUniform( std::string name, const gInt value ) const
 {
 	throw exception( "Not implemented!" );
 }
 
-void IShader::SetUniform( std::string name, const float value ) const
+void IShader::SetUniform( std::string name, const gFloat value ) const
 {
 	throw exception( "Not implemented!" );
 }

@@ -46,8 +46,8 @@ GameObject* GameObject::CreateFromJson( JsonObject object )
 		obj->AddComponent(
 			new AwesomiumView(
 				component.Get<string>( "url" ),
-				component.Get<unsigned int>( "width" ),
-				component.Get<unsigned int>( "height" )
+				component.Get<gUInt>( "width" ),
+				component.Get<gUInt>( "height" )
 			)
 		);
 
@@ -76,19 +76,19 @@ GameObject* GameObject::CreateFromJson( JsonObject object )
 	if(  object.TryGet( "Physics", component ) )
 	{
 		auto gms = new GraphosMotionState( obj );
+		gFloat mass;
+		gFloat restitution;
+		gFloat friction;
+		gFloat rollingFriction;
 
-		PhysicsController::PhysicsConfig physConfig;
-
-		physConfig.mass = component.Get<float>( "Mass" );
-
+		mass = component.Get<gFloat>( "Mass" );
 		// TODO: Make these optional
-		physConfig.restitution = component.Get<float>( "Restitution" );
-		physConfig.friction = component.Get<float>( "Friction" );
-		physConfig.rollingFriction = component.Get<float>( "RollingFriction" );
 
-		PhysicsController::CreatePhysicsObject( gms, &physConfig );
+		restitution = component.Get<gFloat>( "Restitution" );
+		friction = component.Get<gFloat>( "Friction" );
+		rollingFriction = component.Get<gFloat>( "RollingFriction" );
 
-		// TODO: Cleanup physConfig
+		PhysicsController::CreatePhysicsObject( gms, mass, restitution, friction, rollingFriction );
 
 		obj->AddComponent( gms );
 	}

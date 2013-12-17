@@ -21,26 +21,26 @@ namespace Graphos
 		{
 		private:
 			// shared
-			unsigned int		numVertices;
-			unsigned int		numIndices;
+			gUInt				numVertices;
+			gUInt				numIndices;
 
 			union VertexBuffer
 			{
-				unsigned int			gl;
+				gUInt					gl;
 				DirectX::ID3D11Buffer*  dx;
 			} vertexBuffer;
 
 			union IndexBuffer
 			{
-				unsigned int			gl;
+				gUInt					gl;
 				DirectX::ID3D11Buffer*  dx;
 			} indexBuffer;
 
 			// GL
-			unsigned int		vertexArrayObject;
+			gUInt				vertexArrayObject;
 
 		public:
-			static unsigned int GetVertexSize( void ) { return sizeof(float) * 8; }
+			static gUInt		GetVertexSize( void ) { return sizeof(gFloat) * 8; }
 								Mesh( void ) { }
 								Mesh( std::string filePath ) { LoadFromFile( filePath ); }
 
@@ -53,9 +53,9 @@ namespace Graphos
 			VertexBuffer&		GetVertexBuffer( void ) { return vertexBuffer; }
 			IndexBuffer&		GetIndexBuffer( void )	{ return indexBuffer; }
 
-			unsigned int 		GetNumVertices( void ) const { return numVertices; }
-			unsigned int		GetNumIndices( void ) const { return numIndices; }
-			unsigned int		GetGlVao( void ) const { return vertexArrayObject; }
+			gUInt		 		GetNumVertices( void ) const { return numVertices; }
+			gUInt				GetNumIndices( void ) const { return numIndices; }
+			gUInt				GetGlVao( void ) const { return vertexArrayObject; }
 			
 		};
 	}

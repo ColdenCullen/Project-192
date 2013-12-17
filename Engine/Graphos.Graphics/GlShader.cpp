@@ -175,7 +175,7 @@ void GlShader::SetUniformArray( string name, const int* value, const int size ) 
 		glUniform1iv( currentUniform->second, size, value );
 }
 
-void GlShader::SetUniformArray( string name, const float* value, const int size ) const 
+void GlShader::SetUniformArray( string name, const gFloat* value, const int size ) const 
 { 
 	auto currentUniform = uniforms.find( name );
 
@@ -191,7 +191,7 @@ void GlShader::SetUniform( string name, const int value ) const
 		glUniform1i( currentUniform->second, value );
 }
 
-void GlShader::SetUniform( string name, const float value ) const 
+void GlShader::SetUniform( string name, const gFloat value ) const 
 {
 	auto currentUniform = uniforms.find( name );
 

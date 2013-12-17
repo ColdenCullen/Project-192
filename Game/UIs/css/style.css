@@ -41,7 +41,7 @@ body {
 #game-title {
   color: #f1c40f;
   font-size: 9em;
-  line-height: 0.8;
+  line-height: 0.9;
   text-align: center;
   margin: 0;
 
@@ -52,8 +52,8 @@ body {
   -webkit-transition-delay: 0.5s;
   transition-delay: 0.5s;
 }
-/* poop */
-#sub-title {
+
+.sub-title {
   color: #f1c40f;
   font-size: 4em;
   text-align: center;
@@ -67,8 +67,8 @@ body {
   transition-delay: 0.6s;
 }
 
-.loaded .active #game-title,
-.loaded .active #sub-title {
+.loaded #game-title,
+.loaded .sub-title {
   -webkit-transform: translateY(0);
   opacity: 1;
 }
@@ -92,6 +92,24 @@ body {
 
 .loaded #start-button {
   font-size: 1.25em;
+}
+
+#settings-form {
+  width: 50%;
+}
+
+#settings-form,
+#developer-list {
+  opacity: 0;
+  -webkit-transition: 0.4s opacity;
+  transition: 0.4s opacity;
+  -webkit-transition-delay: 1.0s;
+  transition-delay: 1.0s;
+}
+
+.loaded #settings-form,
+.loaded #developer-list {
+  opacity: 1;
 }
 
 #start-game {
@@ -120,6 +138,20 @@ body {
 .loaded #start-game {
   font-size: 3em;
 }
+
+.left {
+	float: left;
+	display: block;
+}
+
+.right {
+	float: right;
+	display: block;
+}
+
+/*********************************************************************************/
+/* Navigation                                                                    */
+/*********************************************************************************/
 
 #nav {
   display: block;
@@ -175,14 +207,131 @@ body {
   margin: 0 auto;
 }
 
-/*********************************************************************************/
-/* Sections                                                                      */
-/*********************************************************************************/
-
-section {
-  display: none;
+.credits-name {
+  font-weight: normal;
 }
 
-.active {
-  display: block;
+/*********************************************************************************/
+/* Checkbox Style                                                                */
+/*********************************************************************************/
+textarea:focus,
+input:focus, 
+.check:focus {
+    outline: 0;
 }
+
+.check {
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none !important;
+  width:40px;
+  height:40px;
+  -webkit-border-radius:6px;
+     -moz-border-radius:6px;
+          border-radius:6px;
+  font:2em 'Source Sans Pro';
+  text-align:center;
+  transition: all .15s ease-in-out;
+  -webkit-transition: all .15s ease-in-out;
+  background: #BA0000;
+  vertical-align: middle;
+}
+
+.check:after {
+  position:absolute;
+  top:9px;
+  left:8px;
+  content:"";
+  background:url('../images/tick-sprite.png');
+  width:22px;
+  height:22px;
+}
+
+.check:checked {
+  transition: all .15s ease-in-out;
+  -moz-transition: all .15s ease-in-out;
+  -webkit-transition: all .15s ease-in-out;
+  background: #2980B9;
+}
+
+.check:checked:after {
+  position:absolute;
+  top:9px;
+  left:6px;
+  content:"";       
+  background:url('../images/tick-sprite.png');
+  background-position:-20px;
+  width:22px;
+  height:22px;
+}
+
+/*********************************************************************************/
+/* Textbox Style                                                                 */
+/*********************************************************************************/
+.search {
+  padding: 3px 10px;
+  width: 100px;
+  display: inline-block;
+  margin-bottom: 10px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  color: #FFF;
+  outline: none;
+  background: #2980B9;
+  border: 2px solid #34495E;
+  transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -webkit-transition: all .3s ease-in-out;
+}
+
+  .search:focus {
+    color: #FFF;
+    background: #3498DB;
+  }
+
+  .search:disabled {
+    color: #BBB;
+    background: #555;
+    border: 2px solid #222;
+  }
+
+  .search::-webkit-input-placeholder {
+     color: #FFF;
+  }
+
+  .search:-moz-placeholder { 
+     color: #FFF;
+  }
+
+  .search::-moz-placeholder {
+     color: #FFF;
+  }
+
+  .search:-ms-input-placeholder {  
+     color: #FFF;
+  }
+
+/*********************************************************************************/
+/* Range Style                                                                   */
+/*********************************************************************************/
+input[type='range'] {
+  position: relative;
+  width:300px;
+  -webkit-appearance: none;
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+          border-radius: 10px;
+  background: #34495E;
+  height: 20px;
+}
+
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    background-color: #2980B9;
+    height: 20px;
+    width: 20px;
+  }

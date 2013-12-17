@@ -29,7 +29,7 @@ void Transform::Rotate( const Quaternion& rotation )
 	//matrix *= rotation.ToRotationMatrix();
 }
 
-void Transform::Rotate( const float x, const float y, const float z, const float w )
+void Transform::Rotate( const gFloat x, const gFloat y, const gFloat z, const gFloat w )
 {
 	// For future reference
 	//Rotate( Quaternion( x, y, z, angle ) );
@@ -52,7 +52,7 @@ void Transform::Rotate( const float x, const float y, const float z, const float
 	UpdateLocalVectors();
 }
 
-void Transform::Rotate( const float x, const float y, const float z )
+void Transform::Rotate( const gFloat x, const gFloat y, const gFloat z )
 {
 	Vector3 oldCoord = *position;
 
@@ -76,7 +76,7 @@ void Transform::Rotate( const Vector3& eulerAngles )
 	Rotate( eulerAngles.x, eulerAngles.y, eulerAngles.z );
 }
 
-void Transform::Translate( const float x, const float y, const float z )
+void Transform::Translate( const gFloat x, const gFloat y, const gFloat z )
 {
 	matrix.matrix[ 3 ][ 0 ] += x;
 	matrix.matrix[ 3 ][ 1 ] += y;
@@ -92,7 +92,7 @@ void Transform::Translate( const Vector3& displacement )
 	Translate( displacement.x, displacement.y, displacement.z );
 }
 
-void Graphos::Math::Transform::TranslateTo( const float x, const float y, const float z )
+void Graphos::Math::Transform::TranslateTo( const gFloat x, const gFloat y, const gFloat z )
 {
 	matrix.matrix[ 3 ][ 0 ] = x;
 	matrix.matrix[ 3 ][ 1 ] = y;
@@ -108,7 +108,7 @@ void Graphos::Math::Transform::TranslateTo( const Vector3& newLocation )
 	TranslateTo( newLocation.x, newLocation.y, newLocation.z );
 }
 
-void Transform::Scale( const float x, const float y, const float z )
+void Transform::Scale( const gFloat x, const gFloat y, const gFloat z )
 {
 	Matrix4 scaleMatrix = Matrix4::Identity;
 
@@ -128,7 +128,7 @@ void Transform::Scale( const Vector3& scale )
 	Scale( scale.x, scale.y, scale.z );
 }
 
-Matrix4 Transform::RotateX( const float angle ) const
+Matrix4 Transform::RotateX( const gFloat angle ) const
 {
 	Matrix4 newTrans = Matrix4::Identity;
 
@@ -140,7 +140,7 @@ Matrix4 Transform::RotateX( const float angle ) const
 	return newTrans;
 }
 
-Matrix4 Transform::RotateY( const float angle ) const
+Matrix4 Transform::RotateY( const gFloat angle ) const
 {
 	Matrix4 newTrans = Matrix4::Identity;
 
@@ -152,7 +152,7 @@ Matrix4 Transform::RotateY( const float angle ) const
 	return newTrans;
 }
 
-Matrix4 Transform::RotateZ( const float angle ) const
+Matrix4 Transform::RotateZ( const gFloat angle ) const
 {
 	Matrix4 newTrans = Matrix4::Identity;
 

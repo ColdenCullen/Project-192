@@ -32,7 +32,7 @@ namespace Graphos
 			UserInterface*		ui;
 	
 		private:
-			bool				quit;
+			gBool				quit;
 
 			void				Start( void );
 			void				Stop( void );
