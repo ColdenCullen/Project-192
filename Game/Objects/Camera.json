@@ -8,8 +8,8 @@
 	"Script": {
 		"Class": "Camera1",
 		"Variables": {
-			"test": 32,
-			"test1": "o:Cube"
+			"Speed": 0.01,
+			"RotationSpeed": 0.005
 		}
 	},
 
@@ -17,7 +17,7 @@
 		"Position": {
 			"x": 0.0,
 			"y": 0.0,
-			"z": 0.0
+			"z": -10.0
 		},
 		"Rotation": {
 			"x": 0.0,

@@ -75,12 +75,17 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	view->webView->Focus();
 }
 
+/// Destructor
 UserInterface::~UserInterface()
 {
+	uiObj->Shutdown();
+	delete_s( uiObj );
+	uiMesh->Shutdown();
+	delete_s( uiMesh );
 	if( view )
 	{
 		view->Shutdown();
-		delete view;
+		delete_s( view );
 	}
 }
 

@@ -18,8 +18,8 @@ namespace Graphos
 			#pragma endregion
 			
 			Vector4( const gFloat values[ 4 ] ) : x( values[ 0 ] ), y( values[ 1 ] ), z( values[ 2 ] ), w( values[ 3 ] ) { }
-			Vector4( gFloat x = 0.0f, gFloat y = 0.0f, gFloat z = 0.0f, gFloat w = 0.0f ) : x( x ), y( y ), z( z ), w( w ) { }
-			Vector4( gFloat value ) : x( value ), y( value ), z( value ), w( value ) { }
+			Vector4( gFloat x, gFloat y, gFloat z, gFloat w ) : x( x ), y( y ), z( z ), w( w ) { }
+			Vector4( gFloat value = 0.0f ) : x( value ), y( value ), z( value ), w( value ) { }
 			Vector4( const Vector4& other ) : x( other.x ), y( other.y ), z( other.z ), w( other.w ) { }
 
 			gFloat operator[]( const int index ) const

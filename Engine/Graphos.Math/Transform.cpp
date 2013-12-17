@@ -145,8 +145,8 @@ Matrix4 Transform::RotateY( const gFloat angle ) const
 	Matrix4 newTrans = Matrix4::Identity;
 
 	newTrans.matrix[ 0 ][ 0 ] = cos( angle );
-	newTrans.matrix[ 0 ][ 2 ] = -sin( angle );
-	newTrans.matrix[ 2 ][ 0 ] = sin( angle );
+	newTrans.matrix[ 0 ][ 2 ] = sin( angle );
+	newTrans.matrix[ 2 ][ 0 ] = -sin( angle );
 	newTrans.matrix[ 2 ][ 2 ] = cos( angle );
 
 	return newTrans;
@@ -172,15 +172,16 @@ Matrix4& Transform::WorldMatrix()
 
 const Matrix4 Transform::RotationMatrix( void ) const
 {
-	Matrix4 x = RotateZ( rotation->z ) * RotateX( rotation->x ) * RotateY( rotation->y );
+	//Matrix4 x = RotateZ( rotation->z ) * RotateX( rotation->x ) * RotateY( rotation->y );
 	return RotateZ( rotation->z ) * RotateX( rotation->x ) * RotateY( rotation->y );
 }
 
 void Transform::UpdateLocalVectors( void )
 {
-	*right = RotationMatrix() * *right;
-	*up = RotationMatrix() * *up;
-	*forward = RotationMatrix() * *forward;
+	//Matrix4 temp = RotationMatrix().Transpose();
+	*forward = RotationMatrix() * Vector3::Forward;
+	*right = RotationMatrix() * Vector3::Right;
+	*up = RotationMatrix() * Vector3::Up;
 }
 
 

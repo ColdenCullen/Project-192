@@ -71,7 +71,7 @@ File::FileList File::ScanDir( string dirPath )
 				}
 				else if( ent->d_type == DT_REG )
 				{
-					files.push_back( File( dirPath, currentLocal, ent->d_name) );
+					files.push_back( File( current + ent->d_name) );
 				}
 			}	
 		}
@@ -84,41 +84,20 @@ File::FileList File::ScanDir( string dirPath )
 }
 #pragma endregion
 
-#pragma region Not Static
 File::File( string filePath )
-{
-	auto endOfPath = filePath.find_last_of( "\\/" );
-
-	// If there is no (back)slash, then filePath is the name
-	if( endOfPath == string::npos )
-		Initialize( "", filePath, filePath );
-	// Else, get the path
-	else
-		Initialize( filePath.substr( 0, endOfPath + 1 ), filePath.substr( endOfPath + 1 ), filePath.substr( endOfPath + 1 ) );
-}
-
-File::File( string path, string name )
-{
-	Initialize( path, name, name );
-}
-
-File::File( std::string path, std::string localPath, std::string name )
-{
-	Initialize( path, localPath, name );
-}
-
-void File::Initialize( string path, string lp, string name )
 {
 	// Get full path
 	char abspath[ 256 ];
 #ifdef WIN32
-	_fullpath( abspath, ( path + lp ).c_str(), MAX_PATH );
+	_fullpath( abspath, ( filePath ).c_str(), MAX_PATH );
 #else
-	realpath( path.c_str(), abspath );
+	realpath( filePath.c_str(), abspath );
 #endif
 
-	localPath = lp;
+	auto endOfPath = filePath.find_last_of( "\\/" );
+	fileName = filePath.substr( endOfPath + 1 );
+//	extension = fileName.substr( fileName.find_last_of( '.' ) );
+	directory = filePath.substr( 0, endOfPath + 1 );
 	fullPath = abspath;
-	fileName = name;
+	localPath = filePath;
 }
-#pragma endregion

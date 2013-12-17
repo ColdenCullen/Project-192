@@ -3,30 +3,38 @@
 // Structs
 struct DirectionalLight
 {
-	vec3 direction;
+	vec4 color;
+	vec3 direction; // really a vec4 because OpenGL
+};
+
+struct AmbientLight
+{
 	vec4 color;
 };
 
 // Input variables
-in vec3 inPosition;
-in vec2 inUV;
-in vec3 inNormal;
+in vec3 iPosition;
+in vec2 iUV;
+in vec3 iNormal;
 
 // Output variables
-out vec2 uv;
-out vec3 normal;
-out DirectionalLight light;
+out vec3 fPosition;
+out vec2 fUV;
+out vec3 fNormal;
+
 
 // Uniforms
-uniform mat4 modelViewProjection;
-uniform mat4 modelMatrix;
+uniform mat4 uModelViewProjection;
+uniform mat4 uModelMatrix;
+
 
 void main( void )
 {
-	gl_Position = modelViewProjection * vec4( inPosition, 1.0f );
+	gl_Position = uModelViewProjection * vec4( iPosition, 1.0f );
+	fPosition = gl_Position.xyz;
 
-	uv = inUV;
-	normal = normalize( transpose(modelMatrix) * vec4( inNormal, 1.0f ) ).xyz;
-	light.direction = vec3( -1.0, -1.0f, 1.0f );
-	light.color = vec4( 1.0, 1.0, 1.0, 1.0 );
+	fUV = iUV;
+	fNormal = normalize( transpose(uModelMatrix) * vec4( iNormal, 1.0f ) ).xyz;
+	//fDirLights[0].direction = vec3( -1.0, -1.0f, 1.0f );
+	//fDirLights[0].color = vec4( 1.0, 1.0, 1.0, 1.0 );
 }
