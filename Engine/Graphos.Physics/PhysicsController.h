@@ -31,7 +31,10 @@ namespace Graphos
 				gFloat				friction;
 				gFloat				rollingFriction;
 
-				PhysicsConfig() : mass( 0.0f ), restitution( 1.0f ), friction( 0.5f ), rollingFriction( 0.4f ) {};
+				PhysicsConfig() :	mass( 0.0f ),
+									restitution( 1.0f ),
+									friction( 0.5f ),
+									rollingFriction( 0.4f ){};
 			};
 
 			static void				Initialize( void );
@@ -46,7 +49,9 @@ namespace Graphos
 				return instance;
 			}
 
-			static void StepPhysics( float timeStep, int maxSubSteps=1, float fixedTimeStep=(1.f/60.f) );
+			static void				StepPhysics(	float timeStep,
+													int maxSubSteps=1,
+													float fixedTimeStep=(1.f/60.f) );
 
 
 
@@ -60,15 +65,15 @@ namespace Graphos
 			static btVector3		ToBulletVec3( const Math::Vector3& );
 
 			static btDefaultCollisionConfiguration* 
-								collisionConfiguration;
+									collisionConfiguration;
 			static btCollisionDispatcher* 
-								dispatcher;
+									dispatcher;
 			static btBroadphaseInterface* 
-								overlappingPairCache;
+									overlappingPairCache;
 			static btSequentialImpulseConstraintSolver* 
-								solver;
+									solver;
 			static btDiscreteDynamicsWorld* 
-								dynamicsWorld;
+									dynamicsWorld;
 
 			//static vector<btRigidBody>
 								

@@ -17,7 +17,7 @@ void PhysicsController::Initialize( void )
 
 	// Set up physics logic
 	collisionConfiguration = new btDefaultCollisionConfiguration();
-	dispatcher = new	btCollisionDispatcher( collisionConfiguration );
+	dispatcher = new btCollisionDispatcher( collisionConfiguration );
 	overlappingPairCache = new btDbvtBroadphase();
 	solver = new btSequentialImpulseConstraintSolver;
 	dynamicsWorld = new btDiscreteDynamicsWorld(	dispatcher,
@@ -94,18 +94,26 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsCon
 	btCollisionShape* colShape = nullptr;
 	btVector3 colDimensions = ToBulletVec3( physConfig->collisionDimensions );
 
+	printf("dimension x: %f\n", colDimensions.x() );
+
+	// Determine collision shape
 	switch( physConfig->collisionShape )
 	{
 		case G_CUBE:
 			colShape = new btBoxShape( colDimensions );
+			//static_cast<btBoxShape *>(colShape)->setLocalScaling( colDimensions );
 			break;
 		case G_SPHERE:
-			colShape = new btSphereShape( colDimensions.getX() );
+			colShape = new btSphereShape( colDimensions.x() );
+			//static_cast<btSphereShape *>(colShape)->setUnscaledRadius( colDimensions.getX() );
 			break;
 		default:
-			colShape = new btBoxShape( btVector3( 1.0f, 1.0f, 1.0f ) );
+			colShape = new btBoxShape( colDimensions );
+			//static_cast<btBoxShape *>(colShape)->setLocalScaling( colDimensions );
 			break;
 	}
+
+
 
 	//
 	// Set properties of collision shape
@@ -116,7 +124,7 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsCon
 	//
 	// Set inertia
 	//
-	btVector3 localInertia(		physConfig->initialInertia.x, 
+	btVector3 localInertia(		physConfig->initialInertia.x,
 								physConfig->initialInertia.y, 
 								physConfig->initialInertia.z );
 	colShape->calculateLocalInertia( physConfig->mass, localInertia );
@@ -135,9 +143,20 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsCon
 
 	btRigidBody* body = new btRigidBody( rbInfo );
 
+
+	printf("size x: %f\n", static_cast<btBoxShape *>(colShape)->getHalfExtentsWithMargin().x() );
+	printf("size y: %f\n", static_cast<btBoxShape *>(colShape)->getHalfExtentsWithMargin().y() );
+	printf("size z: %f\n", static_cast<btBoxShape *>(colShape)->getHalfExtentsWithMargin().z() );
+	
+	printf("default box x pos: %f\n", body->getCenterOfMassPosition().x() );
+	printf("default box y pos: %f\n", body->getCenterOfMassPosition().y() );
+	printf("default box z pos: %f\n", body->getCenterOfMassPosition().z() );
+
+	
+
 	// 5. Set properties of the rigid body
-	btTransform startTransform;
-	startTransform.setIdentity();
+	//btTransform startTransform;
+	//startTransform.setIdentity();
 
 	//body->setCenterOfMassTransform(startTransform);
 	body->setAngularFactor( btVector3( 1.0f, 1.0f, 1.0f ) );
@@ -147,6 +166,8 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsCon
 	body->setFriction( physConfig->friction );
 	body->setRollingFriction( physConfig->rollingFriction );
 	body->forceActivationState( DISABLE_DEACTIVATION );
+
+	//body->applyCentralForce( btVector3( 0, 2000, 0 ) );
 
 	// 6. Add created rigid body to the world
 	dynamicsWorld->addRigidBody( body );

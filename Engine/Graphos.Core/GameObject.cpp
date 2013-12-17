@@ -73,29 +73,63 @@ GameObject* GameObject::CreateFromJson( JsonObject object )
 			obj->transform->Rotate( currentTransform.Get<Vector3>( "" ) );
 	}
 
-	// Set physics rigid body object
+	// Add physics to the object
 	if( object.TryGet( "Physics", component ) )
 	{
+
+		// Build a motion state for discussion between physics and graphics
 		auto gms = new GraphosMotionState( obj );
 
+		// physConfig holds options read in from JSON
 		PhysicsController::PhysicsConfig physConfig;
 
+
+		// Mass is a required setting for physics objects
 		physConfig.mass = component.Get<gFloat>( "Mass" );
 
-		// Optional Settings
+		//
+		// Look for optional settings
+		//
 		gFloat physicsSetting;
 
+		// Friction
 		if( component.TryGet( "Friction", physicsSetting ) )
 			physConfig.friction = physicsSetting;
+		// Rolling Friction
 		if( component.TryGet( "RollingFriction", physicsSetting ) )
 			physConfig.rollingFriction = physicsSetting;
+		// Restitution
 		if( component.TryGet( "Restitution", physicsSetting ) )
 			physConfig.restitution = physicsSetting;
 
+		// Initial Inertia
+		JsonObject inertiaObject;
+		if( component.TryGet( "InitialInertia", inertiaObject ) )
+		{
+			
+			inertiaObject.TryGet( "x", physConfig.initialInertia.x );
+			inertiaObject.TryGet( "y", physConfig.initialInertia.y );
+			inertiaObject.TryGet( "z", physConfig.initialInertia.z );
+			
+		}
+
+		// Collision Shape
+		physConfig.collisionDimensions.x = 1.0f;
+		physConfig.collisionDimensions.y = 1.0f;
+		physConfig.collisionDimensions.z = 1.0f;
+		JsonObject bodyDimenObject;
+		if( component.TryGet( "BodyDimensions", bodyDimenObject ) )
+		{
+
+			bodyDimenObject.TryGet( "x", physConfig.collisionDimensions.x );
+			bodyDimenObject.TryGet( "y", physConfig.collisionDimensions.y );
+			bodyDimenObject.TryGet( "z", physConfig.collisionDimensions.z );
+		}
+		
+		//physConfig.collisionShape = PhysicsController::G_SPHERE;
+
 		// Create our new object and add it to the simulation
 		Physics::PhysicsController::CreatePhysicsObject( gms, &physConfig );
-
-		// TODO: Cleanup physConfig
 
 		// Link the physics sim to our graphics object
 		obj->AddComponent( gms );
