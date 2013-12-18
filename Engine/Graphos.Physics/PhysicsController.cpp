@@ -87,7 +87,7 @@ void PhysicsController::StepPhysics( float timeStep, int maxSubSteps, float fixe
 // Sends Physics Controller construction information to construct a rigid body
 // @param gms A GraphosMotionState to link the render and physics objects
 // @param physConfig A struct containing the construction information
-void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsConfig* physConfig )
+void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsConfig* physConfig, Vector3* shootVec )
 {
 
 	// Set collision Shape
@@ -172,6 +172,12 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsCon
 
 	// 6. Add created rigid body to the world
 	dynamicsWorld->addRigidBody( body );
+
+	if( shootVec )
+	{
+		btVector3 forceDir = ToBulletVec3( *shootVec );
+		body->applyCentralForce( forceDir );
+	}
 
 }
 
