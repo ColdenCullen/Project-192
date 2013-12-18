@@ -24,7 +24,7 @@ using namespace Graphos::Graphics;
  * @author	Daniel Jost
  * @date	12/18/2013
  */
-void GameObject::MakeShootyBall( void )
+void GameObject::MakeShootyBall( Vector3* cameraForward )
 {
 	AddComponent( AssetController::GetContent<Texture>( "balls" ) );
 	AddComponent( AssetController::GetContent<Mesh>( "Ball" ) );
@@ -35,7 +35,7 @@ void GameObject::MakeShootyBall( void )
 	things.restitution = 0.5f;
 	things.friction = 0.4f;
 	things.rollingFriction = 0.0f;
-	PhysicsController::CreatePhysicsObject( gms, &things );
+	PhysicsController::CreatePhysicsObject( gms, &things, cameraForward );
 	AddComponent( gms );
 }
 

@@ -10,6 +10,7 @@
 #include "IComponent.h"
 #include "Transform.h"
 #include "ShaderController.h"
+#include "Vector3.h"
 
 namespace Graphos
 {
@@ -27,7 +28,7 @@ namespace Graphos
 			// Factory for creating game objects from json
 			static GameObject*	CreateFromJson( Utility::JsonObject object );
 
-			void				MakeShootyBall( void );
+			void				MakeShootyBall( Math::Vector3* cameraForward );
 
 			// Shutdown memory
 			void				Shutdown( void );

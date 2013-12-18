@@ -93,7 +93,7 @@ class GameObject
 {
     // Transform object
     public Transform: Transform;
-    public MakeShootyBall(): void { }
+    public MakeShootyBall( camForward: Vector3 ): void { }
 
     // DO NOT OVERRIDE
     public Update(): void { }

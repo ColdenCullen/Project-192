@@ -5,12 +5,14 @@ class MyGame extends GraphosGame
     objects: GameObjectCollection;
     shootyBall: GameObject;
     ballsFired: number;
+    ballMagnitude: number;
 
     public Initialize(): void
     {
         log( "Initializing" );
 
         this.ballsFired = 0;
+        this.ballMagnitude = 4000;
 
         this.objects = new GameObjectCollection();
         this.objects.LoadObjects( "" );
@@ -77,7 +79,7 @@ class MyGame extends GraphosGame
     public UpdateGame(): void 
     {   
         // shoot a ball if space is pressed
-        if ( Input.IsKeyDown( Keys.Space, true ) ) 
+        if ( Input.IsKeyDown( Keys.Space, true ) )
         {
             // delete the old ball and make a new one
             //this.objects.RemoveObjectByName("ShootyBall");
@@ -98,7 +100,13 @@ class MyGame extends GraphosGame
             //this.shootyBall.
 
             // shooty the ball
-            this.shootyBall.MakeShootyBall();
+            this.shootyBall.MakeShootyBall(
+                this.objects
+                    .GetObjectByName( "Camera1" )
+                    .Transform
+                    .Forward
+                    .Multiply( this.ballMagnitude )
+                );
 
             log("Balls Fired: " + this.ballsFired);
 

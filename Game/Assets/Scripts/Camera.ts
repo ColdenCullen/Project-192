@@ -12,7 +12,7 @@ class Camera1 extends GameObject
         {
             this.Transform.Translate( this.Transform.Up.Multiply( this.Speed ) );
         }
-        if( Input.IsKeyDown( Keys.S ) && this.Transform.Position.y > -3.75 )
+        if( Input.IsKeyDown( Keys.S ) && this.Transform.Position.y > -3 )
         {
             this.Transform.Translate( this.Transform.Up.Multiply( this.Speed ).Inverse );
         }
