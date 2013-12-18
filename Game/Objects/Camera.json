@@ -16,7 +16,7 @@
 	"Transform": {
 		"Position": {
 			"x": 0.0,
-			"y": 0.0,
+			"y": 10.0,
 			"z": -30.0
 		},
 		"Rotation": {
