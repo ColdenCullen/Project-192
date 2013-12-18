@@ -12,28 +12,45 @@ void Graphos::Physics::GraphosMotionState::Shutdown( void )
 
 void Graphos::Physics::GraphosMotionState::getWorldTransform( btTransform& worldTrans ) const
 {
+	// Save current scale
+	Math::Vector3 tempScale = *owner->transform->Scale();
 
-	/*
-	btVector3* tempVec3 = new btVector3(	owner->transform->Position()->x,
-		owner->transform->Position()->y,
-		owner->transform->Position()->z);
-	worldTrans.setOrigin( *tempVec3 );
-	*/
+	// Revert to unit scale
+	owner->transform->Scale( 1.0f/tempScale.x, 1.0f/tempScale.y, 1.0f/tempScale.z );
+
+	// Send matrix
 	worldTrans.setFromOpenGLMatrix( owner->transform->WorldMatrix().dataArray );
 
-
+	// Revert from unit scale back to saved scale
+	owner->transform->Scale( tempScale.x, tempScale.y, tempScale.z );
 }
 
 void Graphos::Physics::GraphosMotionState::setWorldTransform( const btTransform& worldTrans )
 {
-	/*
-	// Update position of object
-	btVector3 tempOrigin = worldTrans.getOrigin();
-	owner->transform->TranslateTo( tempOrigin.x(), tempOrigin.y(), tempOrigin.z() );
-	*/
-	// TODO: Update position/rotation/scale
-	// TODO: FIX FOR RUNTIME SCALING
+	// Save current scale
+	Math::Vector3 tempScale = *owner->transform->Scale();
+
+	// Revert to unit scale
+	owner->transform->Scale( 1.0f/tempScale.x, 1.0f/tempScale.y, 1.0f/tempScale.z );
+
+	// Get matrix from Bullet
 	worldTrans.getOpenGLMatrix( owner->transform->WorldMatrix().dataArray );
 
-	// TODO: Rotation via Quaternions
+	// Revert from unit scale back to saved scale
+	owner->transform->Scale( tempScale.x, tempScale.y, tempScale.z );
+
+	// Save rotations
+	*owner->transform->rotation = worldTrans.getRotation();
+	//btQuaternion wT = worldTrans.getRotation();
+	//owner->transform->rotation->x = worldTrans.getRotation().x();
+	//owner->transform->rotation->y = worldTrans.getRotation().y();
+	//owner->transform->rotation->z = worldTrans.getRotation().z();
+
+	// Save positions
+	// TODO: Make access times not suck
+	owner->transform->position->x = worldTrans.getOrigin().x();
+	owner->transform->position->y = worldTrans.getOrigin().y();
+	owner->transform->position->z = worldTrans.getOrigin().z();
+
+
 }
