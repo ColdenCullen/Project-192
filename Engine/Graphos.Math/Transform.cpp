@@ -7,7 +7,7 @@ using namespace Graphos::Math;
 
 Transform::Transform( void ) :
 	parent( nullptr ), matrix( Matrix4::Identity ), 
-	position( new Vector3( 0.0f, 0.0f, 0.0f ) ), rotation( new Vector3( 0.0f, 0.0f, 0.0f ) ), scale( new Vector3( 1.0f, 1.0f, 1.0f ) ),
+	position( new Vector3( 0.0f, 0.0f, 0.0f ) ), rotation( new btQuaternion( 0.0f, 0.0f, 0.0f ) ), scale( new Vector3( 1.0f, 1.0f, 1.0f ) ),
 	right( new Vector3( Vector3::Right ) ), up( new Vector3( Vector3::Up ) ), forward( new Vector3( Vector3::Forward ) ) { }
 
 Transform::~Transform( void )
@@ -20,55 +20,99 @@ Transform::~Transform( void )
 	delete_s( forward );
 }
 
-void Transform::Rotate( const Quaternion& rotation )
-{
-	Rotate( rotation.x, rotation.y, rotation.z, rotation.w );
 
-	// For future reference
-	//this->rotation *= rotation;
-	//matrix *= rotation.ToRotationMatrix();
+// Convert to multiply-able rotation matrix
+// DONE
+Matrix4 Transform::ToRotationMatrix( const btQuaternion * quat ) const
+{
+	gFloat x = quat->x();
+	gFloat y = quat->y();
+	gFloat z = quat->z();
+	gFloat w = quat->w();
+
+	return Matrix4(
+		(pow(w,2)+pow(x,2)-pow(y,2)-pow(z,2)), (2.0f*x*y-2.0f*w*z), (2.0f*x*z+2.0f*w*y), 0.0f,
+		(2.0f*x*y+2.0f*w*z), (pow(w,2)-pow(x,2)+pow(y,2)-pow(z,2)), (2.0f*y*z-2.0f*w*x), 0.0f,
+		(2.0f*x*z-2.0f*w*y), (2.0f*y*z+2.0f*w*x), (pow(w,2)-pow(x,2)-pow(y,2)+pow(z,2)), 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	);
+
 }
 
-void Transform::Rotate( const gFloat x, const gFloat y, const gFloat z, const gFloat w )
+
+
+void Transform::Rotate( const btQuaternion& rotation, bool global )
 {
-	// For future reference
-	//Rotate( Quaternion( x, y, z, angle ) );
-
 	Vector3 oldCoord = *position;
-
 	Translate( -oldCoord );
 
-	//TODO: Make better
-	if( z != 0.0f ) matrix *= RotateZ( z );
-	if( x != 0.0f ) matrix *= RotateX( x );
-	if( y != 0.0f ) matrix *= RotateY( y );
 
-	rotation->x += x;
-	rotation->y += y;
-	rotation->z += z;
+
+	/*
+	btVector3 rotAxis = rotation.getAxis();
+	//btVector4 newAxis = btVector4( rotAxis.x(), rotAxis.y(), rotAxis.z(), 1 );
+	//btQuaternion rotInverse = this->rotation->inverse();
+	//Matrix4 rotMat = ToRotationMatrix( &rotInverse );
+	btMatrix3x3 bRotMat = btMatrix3x3( this->rotation->inverse() );
+
+	btVector3 newAxis = btVector3( bRotMat.tdotx( rotAxis ), bRotMat.tdoty( rotAxis ), bRotMat.tdotz( rotAxis ) );
+
+	btQuaternion tempQuat = btQuaternion( newAxis, rotation.getAngle() );
+	//tempQuat.normalize();
+	//tempQuat.inverse();
+	/*
+	tempQuat.setX( rotation.x() * sinf( rotation.w() / 2 ) );
+	tempQuat.setY( rotation.y() * sinf( rotation.w() / 2 ) );
+	tempQuat.setZ( rotation.z() * sinf( rotation.w() / 2 ) );
+	tempQuat.setW( cosf( rotation.w() / 2 ) );
+	/
+	tempQuat.setX( rotation.x() * rotation.w() );
+	tempQuat.setY( rotation.y() * rotation.w() );
+	tempQuat.setZ( rotation.z() * rotation.w() );
+	tempQuat.setW( rotation.w() );
+	*/
+
+	btQuaternion tempQuat = rotation;
+	
+
+
+	//*this->rotation *= rotation;
+	//*this->rotation = rotation * (*this->rotation).getAxis() * tempRotation;
+	//*this->rotation->normalize();
+	//*this->rotation = tempQuat * (*this->rotation);
+	if( global )
+	{
+		*this->rotation = (*this->rotation) * tempQuat;
+	}
+	else
+	{
+		*this->rotation = tempQuat * (*this->rotation);
+	}
+
+
+	//matrix = ToRotationMatrix( &tempQuat ) * matrix;
+	matrix = matrix * ToRotationMatrix( &tempQuat );
 
 	Translate( oldCoord );
 
 	UpdateLocalVectors();
+}
+
+void Transform::Rotate( const gFloat x, const gFloat y, const gFloat z, const gFloat w, bool global )
+{
+
+	Rotate( btQuaternion( btVector3( x, y, z ), w * M_PI / 180 ), global );
+	
 }
 
 void Transform::Rotate( const gFloat x, const gFloat y, const gFloat z )
 {
-	Vector3 oldCoord = *position;
+	btQuaternion newQuat;
+	newQuat.setEuler( x, y, z );
+	//newQuat.inverse();
 
-	Translate( -oldCoord );
+	Rotate( newQuat, false );
 
-	if( z != 0.0f ) matrix *= RotateZ( z * M_PI / 180 );
-	if( x != 0.0f ) matrix *= RotateX( x * M_PI / 180 );
-	if( y != 0.0f ) matrix *= RotateY( y * M_PI / 180 );
-	
-	rotation->x += x;
-	rotation->y += y;
-	rotation->z += z;
-
-	Translate( oldCoord );
-
-	UpdateLocalVectors();
 }
 
 void Transform::Rotate( const Vector3& eulerAngles )
@@ -128,42 +172,6 @@ void Transform::Scale( const Vector3& scale )
 	Scale( scale.x, scale.y, scale.z );
 }
 
-Matrix4 Transform::RotateX( const gFloat angle ) const
-{
-	Matrix4 newTrans = Matrix4::Identity;
-
-	newTrans.matrix[ 1 ][ 1 ] = cos( angle );
-	newTrans.matrix[ 1 ][ 2 ] = -sin( angle );
-	newTrans.matrix[ 2 ][ 1 ] = sin( angle );
-	newTrans.matrix[ 2 ][ 2 ] = cos( angle );
-
-	return newTrans;
-}
-
-Matrix4 Transform::RotateY( const gFloat angle ) const
-{
-	Matrix4 newTrans = Matrix4::Identity;
-
-	newTrans.matrix[ 0 ][ 0 ] = cos( angle );
-	newTrans.matrix[ 0 ][ 2 ] = sin( angle );
-	newTrans.matrix[ 2 ][ 0 ] = -sin( angle );
-	newTrans.matrix[ 2 ][ 2 ] = cos( angle );
-
-	return newTrans;
-}
-
-Matrix4 Transform::RotateZ( const gFloat angle ) const
-{
-	Matrix4 newTrans = Matrix4::Identity;
-
-	newTrans.matrix[ 0 ][ 0 ] = cos( angle );
-	newTrans.matrix[ 0 ][ 1 ] = -sin( angle );
-	newTrans.matrix[ 1 ][ 0 ] = sin( angle );
-	newTrans.matrix[ 1 ][ 1 ] = cos( angle );
-
-	return newTrans;
-}
-
 Matrix4& Transform::WorldMatrix()
 {
 	if( parent != nullptr ) return parent->WorldMatrix() * matrix;
@@ -173,15 +181,44 @@ Matrix4& Transform::WorldMatrix()
 const Matrix4 Transform::RotationMatrix( void ) const
 {
 	//Matrix4 x = RotateZ( rotation->z ) * RotateX( rotation->x ) * RotateY( rotation->y );
-	return RotateZ( rotation->z ) * RotateX( rotation->x ) * RotateY( rotation->y );
+	//return RotateZ( rotation->z ) * RotateX( rotation->x ) * RotateY( rotation->y );
+
+	return ToRotationMatrix( rotation );
 }
 
+// Changes up, forward and right vectors
 void Transform::UpdateLocalVectors( void )
 {
+	gFloat qx = rotation->x();
+	gFloat qy = rotation->y();
+	gFloat qz = rotation->z();
+	gFloat qw = rotation->w();
+
+	// Derive the local axis vectors from the orientation quaternion.
+	*right = Vector3(
+		1.0f - 2.0f * (qy * qy + qz * qz),
+		2.0f * (qx * qy - qw * qz),
+		2.0f * (qx * qz + qw * qy) );
+
+	*up = Vector3(
+		2.0f * (qx * qy + qw * qz),
+		1.0f - 2.0f * (qx * qx + qz * qz),
+		2.0f * (qy * qz - qw * qx) );
+
+	*forward = Vector3(
+		2.0f * (qx * qz - qw * qy),
+		2.0f * (qy * qz + qw * qx),
+		1.0f - 2.0f * (qx * qx + qy * qy) );
+
+
+	/*
+	// Derive the local axis vectors 
+
 	//Matrix4 temp = RotationMatrix().Transpose();
 	*forward = RotationMatrix() * Vector3::Forward;
 	*right = RotationMatrix() * Vector3::Right;
 	*up = RotationMatrix() * Vector3::Up;
+	*/
 }
 
 

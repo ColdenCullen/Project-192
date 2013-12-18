@@ -40,16 +40,17 @@ void Graphos::Physics::GraphosMotionState::setWorldTransform( const btTransform&
 	owner->transform->Scale( tempScale.x, tempScale.y, tempScale.z );
 
 	// Save rotations
-	// TODO: Make access times not suck
-	owner->transform->rotation->x = worldTrans.getRotation().x();
-	owner->transform->rotation->y = worldTrans.getRotation().y();
-	owner->transform->rotation->z = worldTrans.getRotation().z();
-	owner->transform->rotation->w = worldTrans.getRotation().w();
+	*owner->transform->rotation = worldTrans.getRotation();
+	//btQuaternion wT = worldTrans.getRotation();
+	//owner->transform->rotation->x = worldTrans.getRotation().x();
+	//owner->transform->rotation->y = worldTrans.getRotation().y();
+	//owner->transform->rotation->z = worldTrans.getRotation().z();
 
 	// Save positions
 	// TODO: Make access times not suck
 	owner->transform->position->x = worldTrans.getOrigin().x();
 	owner->transform->position->y = worldTrans.getOrigin().y();
 	owner->transform->position->z = worldTrans.getOrigin().z();
+
 
 }

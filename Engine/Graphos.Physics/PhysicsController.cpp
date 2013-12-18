@@ -94,7 +94,8 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsCon
 	btCollisionShape* colShape = nullptr;
 	btVector3 colDimensions = ToBulletVec3( physConfig->collisionDimensions );
 
-	printf("dimension x: %f\n", colDimensions.x() );
+	
+	//printf("dimension x: %f\n", colDimensions.x() );
 
 	// Determine collision shape
 	switch( physConfig->collisionShape )
@@ -143,7 +144,7 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsCon
 
 	btRigidBody* body = new btRigidBody( rbInfo );
 
-
+	/*
 	printf("size x: %f\n", static_cast<btBoxShape *>(colShape)->getHalfExtentsWithMargin().x() );
 	printf("size y: %f\n", static_cast<btBoxShape *>(colShape)->getHalfExtentsWithMargin().y() );
 	printf("size z: %f\n", static_cast<btBoxShape *>(colShape)->getHalfExtentsWithMargin().z() );
@@ -151,7 +152,7 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsCon
 	printf("default box x pos: %f\n", body->getCenterOfMassPosition().x() );
 	printf("default box y pos: %f\n", body->getCenterOfMassPosition().y() );
 	printf("default box z pos: %f\n", body->getCenterOfMassPosition().z() );
-
+	*/
 	
 
 	// 5. Set properties of the rigid body
