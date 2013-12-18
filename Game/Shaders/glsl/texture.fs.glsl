@@ -1,18 +1,17 @@
 #version 400
 
 // In vars
-in vec2 texCoord;
+in vec2 fUV;
 
 // Uniform vars
-uniform sampler2D shaderTexture;
+uniform sampler2D uShaderTexture;
 
 // Shader code
 void main( void )
 {
-	vec4 textureColor;
-
+	vec4 color;
 	// Sample pixel color from texture using the sampler
-	textureColor = texture( shaderTexture, texCoord );
+	color = texture( uShaderTexture, fUV );
 
-	gl_FragColor = textureColor;
+	gl_FragColor = color;
 }

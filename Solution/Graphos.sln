@@ -105,19 +105,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "neon", "neon", "{CE1C2385-D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hlsl", "hlsl", "{B8D27C56-2806-4868-A436-09F172A87E83}"
 	ProjectSection(SolutionItems) = preProject
-		..\Game\Resources\Shaders\hlsl\light.fs.hlsl = ..\Game\Resources\Shaders\hlsl\light.fs.hlsl
-		..\Game\Resources\Shaders\hlsl\light.vs.hlsl = ..\Game\Resources\Shaders\hlsl\light.vs.hlsl
-		..\Game\Resources\Shaders\hlsl\lightStructs.hlsl = ..\Game\Resources\Shaders\hlsl\lightStructs.hlsl
-		..\Game\Resources\Shaders\hlsl\texture.fs.hlsl = ..\Game\Resources\Shaders\hlsl\texture.fs.hlsl
-		..\Game\Resources\Shaders\hlsl\texture.vs.hlsl = ..\Game\Resources\Shaders\hlsl\texture.vs.hlsl
+		..\Game\Shaders\hlsl\light.fs.hlsl = ..\Game\Shaders\hlsl\light.fs.hlsl
+		..\Game\Shaders\hlsl\light.vs.hlsl = ..\Game\Shaders\hlsl\light.vs.hlsl
+		..\Game\Shaders\hlsl\lightStructs.hlsl = ..\Game\Shaders\hlsl\lightStructs.hlsl
+		..\Game\Shaders\hlsl\texture.fs.hlsl = ..\Game\Shaders\hlsl\texture.fs.hlsl
+		..\Game\Shaders\hlsl\texture.vs.hlsl = ..\Game\Shaders\hlsl\texture.vs.hlsl
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "glsl", "glsl", "{1F6885C7-2894-4493-8338-15079AC10EB1}"
 	ProjectSection(SolutionItems) = preProject
-		..\Game\Resources\Shaders\glsl\light.fs.glsl = ..\Game\Resources\Shaders\glsl\light.fs.glsl
-		..\Game\Resources\Shaders\glsl\light.vs.glsl = ..\Game\Resources\Shaders\glsl\light.vs.glsl
-		..\Game\Resources\Shaders\glsl\texture.fs.glsl = ..\Game\Resources\Shaders\glsl\texture.fs.glsl
-		..\Game\Resources\Shaders\glsl\texture.vs.glsl = ..\Game\Resources\Shaders\glsl\texture.vs.glsl
+		..\Game\Shaders\glsl\light.fs.glsl = ..\Game\Shaders\glsl\light.fs.glsl
+		..\Game\Shaders\glsl\light.vs.glsl = ..\Game\Shaders\glsl\light.vs.glsl
+		..\Game\Shaders\glsl\texture.fs.glsl = ..\Game\Shaders\glsl\texture.fs.glsl
+		..\Game\Shaders\glsl\texture.vs.glsl = ..\Game\Shaders\glsl\texture.vs.glsl
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphos.Utility", "..\Engine\Graphos.Utility\Graphos.Utility.vcxproj", "{5D9174DC-FE98-4D01-B470-954BFF4AF2B4}"

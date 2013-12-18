@@ -22,9 +22,10 @@ void JsonController::Initialize( void )
 				path = path.replace( curInd, 1, 1, '.' );
 			}
 
-			string fileName = file.GetFileName().substr( 0, file.GetFileName().size() - 5 );
+			// Get path without resources and .json
+			path = path.substr( 0, path.size() - 5 ).substr( 10 );
 
-			root.Set( path + fileName, Parse( file.GetContents() ).node );
+			root.Set( path, Parse( file.GetContents() ).node );
 		}
 	}
 }

@@ -39,6 +39,7 @@ declare class Transform
 
     public Rotate(rotation: Vector3): void;
     public Rotate(x: number, y: number, z: number): void;
+	public Rotate(x: number, y: number, z: number, w: number, global: boolean): void;
     public Translate(displacement: Vector3): void;
     public Translate(x: number, y: number, z: number): void;
     public Scale(scale: Vector3): void;

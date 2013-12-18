@@ -1,11 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="UserInterface.h" />
     <ClInclude Include="AssetController.h" />
-    <ClInclude Include="AwesomiumView.h" />
     <ClInclude Include="DirectionalLight.h">
       <Filter>Lights</Filter>
     </ClInclude>
@@ -18,15 +14,25 @@
     <ClInclude Include="AmbientLight.h">
       <Filter>Lights</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h" />
     <ClInclude Include="IComponent.h" />
+    <ClInclude Include="Camera.h">
+      <Filter>Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="AwesomiumView.h">
+      <Filter>Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface.h">
+      <Filter>Drawable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="AssetController.cpp" />
-    <ClCompile Include="AwesomiumView.cpp" />
-    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="DirectionalLight.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
@@ -39,11 +45,28 @@
     <ClCompile Include="AmbientLight.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="AwesomiumView.cpp">
+      <Filter>Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface.cpp">
+      <Filter>Drawable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Lights">
       <UniqueIdentifier>{38c02f7c-5a04-429f-aab4-9a4a2f78e9fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Drawable">
+      <UniqueIdentifier>{9db0bf03-d196-4314-8068-cfd55ef045f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

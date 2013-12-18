@@ -6,6 +6,7 @@
 #include <Gl/GLIncludes.h>
 #include "Matrix4.h"
 #include "IShader.h"
+#include "OutputController.h"
 
 namespace Graphos
 {
@@ -30,6 +31,7 @@ namespace Graphos
 			void				SetUniform( std::string name, const int value ) const override;
 			void				SetUniformArray( std::string name, const gFloat* value, const int size ) const override;
 			void				SetUniformArray( std::string name, const int* value, const int size ) const override;
+			void				SetUniformBuffer( std::string name, const gByte* value, const size_t size ) const override;
 			void				SetUniformMatrix( std::string name, const Math::Matrix4& matrix ) const;
 
 		private:

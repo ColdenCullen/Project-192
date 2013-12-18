@@ -1,4 +1,5 @@
 [
+	
 	{
 		"Name": "Cube",
 	
@@ -42,8 +43,123 @@
 	
 		"Shader": "light",
 
+		"Script": {
+			"Class": "RotatyThing",
+			"Variables": {
+				"Speed": 0.01,
+				"RotationSpeed": 0.05
+			}
+		},
+
 		"Texture": {
 			"Name": "Poop"
+		},
+
+		"Mesh": {
+			"Name": "Cube"
+		},
+
+		"Transform": {
+			"Position": {
+				"x": 0.0,
+				"y": -2.0,
+				"z": 7.0
+			},
+			"Rotation": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"Scale": {
+				"x": 1.0,
+				"y": 1.0,
+				"z": 1.0
+			}
+		}
+	},
+	{
+		"Name": "Cube3",
+	
+		"Shader": "light",
+
+		"Texture": {
+			"Name": "white"
+		},
+
+		"Mesh": {
+			"Name": "Cube"
+		},
+
+		"Physics": {
+			"Mass": 0.0,
+			"Restitution": 0.5,
+			"Friction": 0.4,
+			"RollingFriction": 0.0
+		},
+
+		"Transform": {
+			"Position": {
+				"x": 7.0,
+				"y": -2.0,
+				"z": 0.0
+			},
+			"Rotation": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"Scale": {
+				"x": 1.0,
+				"y": 1.0,
+				"z": 1.0
+			}
+		}
+	},
+	{
+		"Name": "Cube4",
+	
+		"Shader": "light",
+
+		"Texture": {
+			"Name": "balls"
+		},
+
+		"Mesh": {
+			"Name": "Cube"
+		},
+
+		"Physics": {
+			"Mass": 0.0,
+			"Restitution": 0.5,
+			"Friction": 0.4,
+			"RollingFriction": 0.0
+		},
+
+		"Transform": {
+			"Position": {
+				"x": -7.0,
+				"y": -2.0,
+				"z": 0.0
+			},
+			"Rotation": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"Scale": {
+				"x": 1.0,
+				"y": 1.0,
+				"z": 1.0
+			}
+		}
+	},
+	{
+		"Name": "Cube5",
+	
+		"Shader": "light",
+
+		"Texture": {
+			"Name": "white"
 		},
 
 		"Mesh": {
@@ -61,7 +177,45 @@
 			"Position": {
 				"x": 0.0,
 				"y": -2.0,
-				"z": 7.0
+				"z": -7.0
+			},
+			"Rotation": {
+				"x": 0,
+				"y": 0,
+				"z": 0
+			},
+			"Scale": {
+				"x": 1.0,
+				"y": 1.0,
+				"z": 1.0
+			}
+		}
+	},
+	{
+		"Name": "Cube6",
+	
+		"Shader": "light",
+
+		"Texture": {
+			"Name": "white"
+		},
+
+		"Mesh": {
+			"Name": "Cube"
+		},
+
+		"Physics": {
+			"Mass": 0.0,
+			"Restitution": 0.5,
+			"Friction": 0.4,
+			"RollingFriction": 0.0
+		},
+
+		"Transform": {
+			"Position": {
+				"x": 4.0,
+				"y": 2.0,
+				"z": -1.0
 			},
 			"Rotation": {
 				"x": 0,

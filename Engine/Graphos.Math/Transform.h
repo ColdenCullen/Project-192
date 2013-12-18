@@ -2,12 +2,17 @@
 #define __TRANSFORM
 
 // Includes
+#include "btBulletDynamicsCommon.h"
 #include "Quaternion.h"
 #include "Vector3.h"
 #include "Matrix4.h"
 
 namespace Graphos
 {
+	namespace Physics
+	{
+		class GraphosMotionState;
+	}
 	namespace Math
 	{
 		struct Transform
@@ -18,8 +23,8 @@ namespace Graphos
 									Transform( void );
 									~Transform( void );
 
-			void					Rotate( const Quaternion& rotation );
-			void					Rotate( const gFloat x, const gFloat y, const gFloat z, const gFloat w );
+			void					Rotate( const btQuaternion& rotation, bool global);
+			void					Rotate( const gFloat x, const gFloat y, const gFloat z, const gFloat w, bool global );
 			void					Rotate( const Vector3& eulerAngles );
 			void					Rotate( const gFloat x, const gFloat y, const gFloat z );
 			void					Translate( const Vector3& displacement );
@@ -30,7 +35,7 @@ namespace Graphos
 			void					Scale( const gFloat x, const gFloat y, const gFloat z );
 
 			const Math::Vector3*	Position( void )	const { return position; }
-			const Math::Vector3*	Rotation( void )	const { return rotation; }
+			const btQuaternion*		Rotation( void )	const { return rotation; }
 			const Math::Vector3*	Scale( void )		const { return scale; }
 			Math::Matrix4&			WorldMatrix( void );
 			const Math::Matrix4		RotationMatrix( void ) const;
@@ -39,22 +44,23 @@ namespace Graphos
 			const Math::Vector3*	GetUp( void )		const { return up; }
 			const Math::Vector3*	GetForward( void )	const { return forward; }
 
+			Math::Matrix4			ToRotationMatrix( const btQuaternion * quat ) const;
+
 		private:
 			Math::Matrix4			matrix;
 
 			Math::Vector3*			position;
-			Math::Vector3*			rotation;
+			btQuaternion*			rotation;
 			Math::Vector3*			scale;
 
 			Math::Vector3*			right;
 			Math::Vector3*			up;
 			Math::Vector3*			forward;
-
-			Math::Matrix4			RotateX( const gFloat angle ) const;
-			Math::Matrix4			RotateY( const gFloat angle ) const;
-			Math::Matrix4			RotateZ( const gFloat angle ) const;
+			
 
 			void					UpdateLocalVectors( void );
+
+			friend class			Graphos::Physics::GraphosMotionState;
 		};
 	}
 }

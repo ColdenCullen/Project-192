@@ -86,7 +86,7 @@ namespace Graphos
 			 *
 			 * @return	The full path of the file.
 			 */
-			const std::string	GetFullPath( void ) const	{ return fullPath + fileName; }
+			const std::string	GetFullPath( void ) const	{ return fullPath; }
 
 			/**
 			 * @fn	const std::string GetLocalPath( void ) const
@@ -99,6 +99,8 @@ namespace Graphos
 			 * @return	The local path of the file.
 			 */
 			const std::string	GetLocalPath( void ) const	{ return localPath; }
+
+			const std::string	GetDirectory( void ) const	{ return directory; }
 
 			/**
 			 * @fn	const std::string GetContents( void ) const
@@ -115,6 +117,7 @@ namespace Graphos
 		private:
 			std::string			fullPath;
 			std::string			localPath;
+			std::string			directory;
 			std::string			fileName;
 
 			void				Initialize( std::string p, std::string lp, std::string n );

@@ -39,15 +39,15 @@ namespace Graphos
 			Graphics::IShader*	GetShader( void ) const { return shader; }
 			void				SetShader( std::string newName ) { shader = Graphics::ShaderController::GetShader( newName ); }
 
-			// Add ingredient of type T
+			// Add component of type T
 			template<class T>
 			typename std::enable_if<std::is_base_of<IComponent, T>::value, void>::type
-								AddComponent( T* newIngredient )
+								AddComponent( T* newComponent )
 			{
-				componentList[ typeid(T).hash_code() ] = newIngredient;
+				componentList[ typeid(T).hash_code() ] = newComponent;
 			}
 
-			// Get ingredient of type T
+			// Get component of type T
 			template<class T>
 			typename std::enable_if<std::is_base_of<IComponent, T>::value, T*>::type
 								GetComponent( void )
