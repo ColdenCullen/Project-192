@@ -89,7 +89,7 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -127,7 +127,7 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -165,7 +165,7 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -203,7 +203,7 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -241,7 +241,7 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -279,12 +279,12 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
 			"BodyDimensions": {
-				"x": 7.5,
+				"x": 3.5,
 				"y": 1.0,
 				"z": 1.0
 			}
@@ -317,12 +317,12 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
 			"BodyDimensions": {
-				"x": 7.5,
+				"x": 3.5,
 				"y": 1.0,
 				"z": 1.0
 			}
@@ -355,12 +355,12 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
 			"BodyDimensions": {
-				"x": 7.5,
+				"x": 3.5,
 				"y": 1.0,
 				"z": 1.0
 			}
@@ -393,12 +393,12 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
 			"BodyDimensions": {
-				"x": 7.5,
+				"x": 3.5,
 				"y": 1.0,
 				"z": 1.0
 			}
@@ -431,7 +431,7 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -469,7 +469,7 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -507,7 +507,7 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -545,7 +545,7 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -583,12 +583,12 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
 			"BodyDimensions": {
-				"x": 7.5,
+				"x": 3.5,
 				"y": 1.0,
 				"z": 1.0
 			}
@@ -621,12 +621,12 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
 			"BodyDimensions": {
-				"x": 7.5,
+				"x": 3.5,
 				"y": 1.0,
 				"z": 1.0
 			}
@@ -659,12 +659,12 @@
 		},
 
 		"Physics": {
-			"Mass": 0.0,
+			"Mass": 10.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
 			"BodyDimensions": {
-				"x": 7.5,
+				"x": 3.5,
 				"y": 1.0,
 				"z": 1.0
 			}
