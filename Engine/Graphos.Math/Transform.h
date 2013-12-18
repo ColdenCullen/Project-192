@@ -27,6 +27,7 @@ namespace Graphos
 			void					Rotate( const gFloat x, const gFloat y, const gFloat z, const gFloat w, bool global );
 			void					Rotate( const Vector3& eulerAngles );
 			void					Rotate( const gFloat x, const gFloat y, const gFloat z );
+			void					RotateTo( const btQuaternion& rotation );
 			void					Translate( const Vector3& displacement );
 			void					Translate( const gFloat x, const gFloat y, const gFloat z );
 			void					TranslateTo( const Vector3& newLocation );

@@ -28,19 +28,19 @@ void Graphos::Physics::GraphosMotionState::getWorldTransform( btTransform& world
 void Graphos::Physics::GraphosMotionState::setWorldTransform( const btTransform& worldTrans )
 {
 	// Save current scale
-	Math::Vector3 tempScale = *owner->transform->Scale();
+	//Math::Vector3 tempScale = *owner->transform->Scale();
 
 	// Revert to unit scale
-	owner->transform->Scale( 1.0f/tempScale.x, 1.0f/tempScale.y, 1.0f/tempScale.z );
+	//owner->transform->Scale( 1.0f/tempScale.x, 1.0f/tempScale.y, 1.0f/tempScale.z );
 
 	// Get matrix from Bullet
-	worldTrans.getOpenGLMatrix( owner->transform->WorldMatrix().dataArray );
+	//worldTrans.getOpenGLMatrix( owner->transform->WorldMatrix().dataArray );
 
 	// Revert from unit scale back to saved scale
-	owner->transform->Scale( tempScale.x, tempScale.y, tempScale.z );
+	//owner->transform->Scale( tempScale.x, tempScale.y, tempScale.z );
 
 	// Save rotations
-	*owner->transform->rotation = worldTrans.getRotation();
+	owner->transform->RotateTo(worldTrans.getRotation());
 	//btQuaternion wT = worldTrans.getRotation();
 	//owner->transform->rotation->x = worldTrans.getRotation().x();
 	//owner->transform->rotation->y = worldTrans.getRotation().y();
@@ -48,9 +48,7 @@ void Graphos::Physics::GraphosMotionState::setWorldTransform( const btTransform&
 
 	// Save positions
 	// TODO: Make access times not suck
-	owner->transform->position->x = worldTrans.getOrigin().x();
-	owner->transform->position->y = worldTrans.getOrigin().y();
-	owner->transform->position->z = worldTrans.getOrigin().z();
+	owner->transform->TranslateTo( worldTrans.getOrigin().x(), worldTrans.getOrigin().y(), worldTrans.getOrigin().z() );
 
 
 }

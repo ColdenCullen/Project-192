@@ -110,6 +110,14 @@ void Graphos::Math::Transform::TranslateTo( const Vector3& newLocation )
 	TranslateTo( newLocation.x, newLocation.y, newLocation.z );
 }
 
+void Graphos::Math::Transform::RotateTo( const btQuaternion& rotation )
+{
+	auto oldRotInv = this->rotation->inverse();
+	matrix *= ToRotationMatrix( &oldRotInv );
+	matrix *= ToRotationMatrix( &rotation );
+	*this->rotation = rotation;
+}
+
 void Transform::Scale( const gFloat x, const gFloat y, const gFloat z )
 {
 	Matrix4 scaleMatrix = Matrix4::Identity;
