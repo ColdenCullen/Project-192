@@ -60,12 +60,12 @@ class RotatyThing extends GameObject
         if( Input.IsKeyDown( Keys.Up ) )
         {
             //this.Transform.Rotate( this.RotationSpeed, 0.0, 0.0 );
-			this.Transform.Rotate( 1.0, 0.0, 0.0, -this.RotationSpeed, false );
+			this.Transform.Rotate( 1.0, 0.0, 0.0, this.RotationSpeed, false );
         }
         if( Input.IsKeyDown( Keys.Down ) )
         {
             //this.Transform.Rotate( -this.RotationSpeed, 0.0, 0.0 );
-			this.Transform.Rotate( 1.0, 0.0, 0.0, this.RotationSpeed, false );
+			this.Transform.Rotate( 1.0, 0.0, 0.0, -this.RotationSpeed, false );
         }
         if( Input.IsKeyDown( Keys.Left ) )
         {

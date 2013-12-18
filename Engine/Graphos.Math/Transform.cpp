@@ -20,7 +20,6 @@ Transform::~Transform( void )
 	delete_s( forward );
 }
 
-
 // Convert to multiply-able rotation matrix
 // DONE
 Matrix4 Transform::ToRotationMatrix( const btQuaternion * quat ) const
@@ -36,59 +35,22 @@ Matrix4 Transform::ToRotationMatrix( const btQuaternion * quat ) const
 		(2.0f*x*z-2.0f*w*y), (2.0f*y*z+2.0f*w*x), (pow(w,2)-pow(x,2)-pow(y,2)+pow(z,2)), 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f
 	);
-
 }
-
-
 
 void Transform::Rotate( const btQuaternion& rotation, bool global )
 {
 	Vector3 oldCoord = *position;
 	Translate( -oldCoord );
 
-
-
-	/*
-	btVector3 rotAxis = rotation.getAxis();
-	//btVector4 newAxis = btVector4( rotAxis.x(), rotAxis.y(), rotAxis.z(), 1 );
-	//btQuaternion rotInverse = this->rotation->inverse();
-	//Matrix4 rotMat = ToRotationMatrix( &rotInverse );
-	btMatrix3x3 bRotMat = btMatrix3x3( this->rotation->inverse() );
-
-	btVector3 newAxis = btVector3( bRotMat.tdotx( rotAxis ), bRotMat.tdoty( rotAxis ), bRotMat.tdotz( rotAxis ) );
-
-	btQuaternion tempQuat = btQuaternion( newAxis, rotation.getAngle() );
-	//tempQuat.normalize();
-	//tempQuat.inverse();
-	/*
-	tempQuat.setX( rotation.x() * sinf( rotation.w() / 2 ) );
-	tempQuat.setY( rotation.y() * sinf( rotation.w() / 2 ) );
-	tempQuat.setZ( rotation.z() * sinf( rotation.w() / 2 ) );
-	tempQuat.setW( cosf( rotation.w() / 2 ) );
-	/
-	tempQuat.setX( rotation.x() * rotation.w() );
-	tempQuat.setY( rotation.y() * rotation.w() );
-	tempQuat.setZ( rotation.z() * rotation.w() );
-	tempQuat.setW( rotation.w() );
-	*/
-
-	btQuaternion tempQuat = rotation;
-	
-
-
-	//*this->rotation *= rotation;
-	//*this->rotation = rotation * (*this->rotation).getAxis() * tempRotation;
-	//*this->rotation->normalize();
-	//*this->rotation = tempQuat * (*this->rotation);
 	if( global )
 	{
-		*this->rotation = (*this->rotation) * tempQuat;
-		matrix = matrix * ToRotationMatrix( &tempQuat );
+		*this->rotation = (*this->rotation) * rotation;
+		matrix = matrix * ToRotationMatrix( &rotation );
 	}
 	else
 	{
-		*this->rotation = tempQuat * (*this->rotation);
-		matrix = ToRotationMatrix( &tempQuat ) * matrix;
+		*this->rotation = rotation * (*this->rotation);
+		matrix = ToRotationMatrix( &rotation ) * matrix;
 	}
 
 	Translate( oldCoord );
@@ -98,9 +60,7 @@ void Transform::Rotate( const btQuaternion& rotation, bool global )
 
 void Transform::Rotate( const gFloat x, const gFloat y, const gFloat z, const gFloat w, bool global )
 {
-
 	Rotate( btQuaternion( btVector3( x, y, z ), w * M_PI / 180 ), global );
-	
 }
 
 void Transform::Rotate( const gFloat x, const gFloat y, const gFloat z )
@@ -178,9 +138,6 @@ Matrix4& Transform::WorldMatrix()
 
 const Matrix4 Transform::RotationMatrix( void ) const
 {
-	//Matrix4 x = RotateZ( rotation->z ) * RotateX( rotation->x ) * RotateY( rotation->y );
-	//return RotateZ( rotation->z ) * RotateX( rotation->x ) * RotateY( rotation->y );
-
 	return ToRotationMatrix( rotation );
 }
 
@@ -207,16 +164,6 @@ void Transform::UpdateLocalVectors( void )
 		2.0f * (qx * qz - qw * qy),
 		2.0f * (qy * qz + qw * qx),
 		1.0f - 2.0f * (qx * qx + qy * qy) );
-
-
-	/*
-	// Derive the local axis vectors 
-
-	//Matrix4 temp = RotationMatrix().Transpose();
-	*forward = RotationMatrix() * Vector3::Forward;
-	*right = RotationMatrix() * Vector3::Right;
-	*up = RotationMatrix() * Vector3::Up;
-	*/
 }
 
 
