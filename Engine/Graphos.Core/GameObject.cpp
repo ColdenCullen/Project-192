@@ -85,24 +85,65 @@ GameObject* GameObject::CreateFromJson( JsonObject object )
 			obj->transform->Rotate( currentTransform.Get<Vector3>( "" ) );
 	}
 
-	// Set physics Rigid Body object
-	if(  object.TryGet( "Physics", component ) )
+	// Add physics to the object
+	if( object.TryGet( "Physics", component ) )
 	{
+
+		// Build a motion state for discussion between physics and graphics
 		auto gms = new GraphosMotionState( obj );
-		gFloat mass;
-		gFloat restitution;
-		gFloat friction;
-		gFloat rollingFriction;
 
-		mass = component.Get<gFloat>( "Mass" );
-		// TODO: Make these optional
+		// physConfig holds options read in from JSON
+		PhysicsController::PhysicsConfig physConfig;
 
-		restitution = component.Get<gFloat>( "Restitution" );
-		friction = component.Get<gFloat>( "Friction" );
-		rollingFriction = component.Get<gFloat>( "RollingFriction" );
 
-		PhysicsController::CreatePhysicsObject( gms, mass, restitution, friction, rollingFriction );
+		// Mass is a required setting for physics objects
+		physConfig.mass = component.Get<gFloat>( "Mass" );
 
+		//
+		// Look for optional settings
+		//
+		gFloat physicsSetting;
+
+		// Friction
+		if( component.TryGet( "Friction", physicsSetting ) )
+			physConfig.friction = physicsSetting;
+		// Rolling Friction
+		if( component.TryGet( "RollingFriction", physicsSetting ) )
+			physConfig.rollingFriction = physicsSetting;
+		// Restitution
+		if( component.TryGet( "Restitution", physicsSetting ) )
+			physConfig.restitution = physicsSetting;
+
+		// Initial Inertia
+		JsonObject inertiaObject;
+		if( component.TryGet( "InitialInertia", inertiaObject ) )
+		{
+			
+			inertiaObject.TryGet( "x", physConfig.initialInertia.x );
+			inertiaObject.TryGet( "y", physConfig.initialInertia.y );
+			inertiaObject.TryGet( "z", physConfig.initialInertia.z );
+			
+		}
+
+		// Collision Shape
+		physConfig.collisionDimensions.x = 1.0f;
+		physConfig.collisionDimensions.y = 1.0f;
+		physConfig.collisionDimensions.z = 1.0f;
+		JsonObject bodyDimenObject;
+		if( component.TryGet( "BodyDimensions", bodyDimenObject ) )
+		{
+
+			bodyDimenObject.TryGet( "x", physConfig.collisionDimensions.x );
+			bodyDimenObject.TryGet( "y", physConfig.collisionDimensions.y );
+			bodyDimenObject.TryGet( "z", physConfig.collisionDimensions.z );
+		}
+		
+		//physConfig.collisionShape = PhysicsController::G_SPHERE;
+
+		// Create our new object and add it to the simulation
+		Physics::PhysicsController::CreatePhysicsObject( gms, &physConfig );
+
+		// Link the physics sim to our graphics object
 		obj->AddComponent( gms );
 	}
 
@@ -130,7 +171,7 @@ void GameObject::Update( void )
 void GameObject::Draw( void )
 {
 	shader->SetModelMatrix( transform->WorldMatrix() );
-	shader->SetUniformMatrix( "rotationMatrix",transform->RotationMatrix() );
+	shader->SetUniformMatrix( "rotationMatrix", transform->RotationMatrix() );
 
 	for( auto component : componentList )
 		component.second->Draw( shader );
