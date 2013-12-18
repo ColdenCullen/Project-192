@@ -10,6 +10,8 @@ class MyGame extends GraphosGame
     {
         log( "Initializing" );
 
+        this.ballsFired = 0;
+
         this.objects = new GameObjectCollection();
         this.objects.LoadObjects( "" );
 
@@ -79,20 +81,26 @@ class MyGame extends GraphosGame
         {
             // delete the old ball and make a new one
             //this.objects.RemoveObjectByName("ShootyBall");
-            this.objects.CreateObject( "ShootyBall", ShaderController.GetShader( "light" ) );
-            this.shootyBall = this.objects.GetObjectByName( "ShootyBall" );
-            this.shootyBall.MakeShootyBall();
+            this.objects.CreateObject( ( "ShootyBall" + this.ballsFired ), ShaderController.GetShader( "light" ) );
+            this.shootyBall = this.objects.GetObjectByName( "ShootyBall" + this.ballsFired );
+
             // move ball to origin
-            this.shootyBall.Transform.Translate( this.shootyBall.Transform.Position.Inverse );
+            //this.shootyBall.Transform.Translate( this.shootyBall.Transform.Position.Inverse );
+
+            // scale it
+            this.shootyBall.Transform.Scale( 20.0, 20.0, 20.0 );
 
             // move ball to camera
             this.shootyBall.Transform.Translate( this.Camera.Owner.Transform.Position );
-            this.shootyBall.Transform.Translate( 0, 0, 5 );
+            this.shootyBall.Transform.Translate( 0, 0, 18 );
 
             // give the ball a force
             //this.shootyBall.
 
-            log(this.shootyBall.Transform.Position.y);
+            // shooty the ball
+            this.shootyBall.MakeShootyBall();
+
+            log("Balls Fired: " + this.ballsFired);
 
             this.ballsFired++;
         }

@@ -8,19 +8,19 @@ class Camera1 extends GameObject
     public OnUpdate(): void
     {
         // This moves the camera around on a 2D plane
-        if( Input.IsKeyDown( Keys.W ) )
+        if( Input.IsKeyDown( Keys.W ) && this.Transform.Position.y < 30 )
         {
             this.Transform.Translate( this.Transform.Up.Multiply( this.Speed ) );
         }
-        if( Input.IsKeyDown( Keys.S ) )
+        if( Input.IsKeyDown( Keys.S ) && this.Transform.Position.y > -3.75 )
         {
             this.Transform.Translate( this.Transform.Up.Multiply( this.Speed ).Inverse );
         }
-        if( Input.IsKeyDown( Keys.A ) )
+        if( Input.IsKeyDown( Keys.A ) && this.Transform.Position.x > -99 )
         {
             this.Transform.Translate( this.Transform.Right.Multiply( this.Speed ).Inverse );
         }
-        if( Input.IsKeyDown( Keys.D ) )
+        if( Input.IsKeyDown( Keys.D ) && this.Transform.Position.x < 99 )
         {
             this.Transform.Translate( this.Transform.Right.Multiply( this.Speed ) );
         }

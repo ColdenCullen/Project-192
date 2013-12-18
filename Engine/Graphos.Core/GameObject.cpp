@@ -16,16 +16,27 @@ using namespace Graphos::Math;
 using namespace Graphos::Physics;
 using namespace Graphos::Graphics;
 
+/**
+ * @fn	void GameObject::MakeShootyBall( void )
+ *
+ * @brief	Makes shooty ball. Sorry.
+ *
+ * @author	Daniel Jost
+ * @date	12/18/2013
+ */
 void GameObject::MakeShootyBall( void )
 {
 	AddComponent( AssetController::GetContent<Texture>( "balls" ) );
-	AddComponent( AssetController::GetContent<Mesh>( "Cube" ) );
+	AddComponent( AssetController::GetContent<Mesh>( "Ball" ) );
 	
 	auto gms = new GraphosMotionState( this );
-	PhysicsController::CreatePhysicsObject( gms, 3.0f, 0.5f, 0.4f, 0.0f );
+	PhysicsController::PhysicsConfig things;
+	things.mass = 3.0f;
+	things.restitution = 0.5f;
+	things.friction = 0.4f;
+	things.rollingFriction = 0.0f;
+	PhysicsController::CreatePhysicsObject( gms, &things );
 	AddComponent( gms );
-
-	transform->Translate( 1.5f, 5.0f, -1.0f );
 }
 
 GameObject* GameObject::CreateFromJson( JsonObject object )
