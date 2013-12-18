@@ -13,31 +13,34 @@ void Graphos::Physics::GraphosMotionState::Shutdown( void )
 void Graphos::Physics::GraphosMotionState::getWorldTransform( btTransform& worldTrans ) const
 {
 	// Save current scale
-	Math::Vector3 tempScale = *owner->transform->Scale();
+	//Math::Vector3 tempScale = *owner->transform->Scale();
 
 	// Revert to unit scale
-	owner->transform->Scale( 1.0f/tempScale.x, 1.0f/tempScale.y, 1.0f/tempScale.z );
+	//owner->transform->Scale( 1.0f/tempScale.x, 1.0f/tempScale.y, 1.0f/tempScale.z );
 
 	// Send matrix
-	worldTrans.setFromOpenGLMatrix( owner->transform->WorldMatrix().dataArray );
+	//worldTrans.setFromOpenGLMatrix( owner->transform->WorldMatrix().dataArray );
+	worldTrans.setRotation( *owner->transform->Rotation() );
+	Math::Vector3 pos = *owner->transform->Position();
+	worldTrans.setOrigin( btVector3( pos.x, pos.y, pos.z ) );
 
 	// Revert from unit scale back to saved scale
-	owner->transform->Scale( tempScale.x, tempScale.y, tempScale.z );
+	//owner->transform->Scale( tempScale.x, tempScale.y, tempScale.z );
 }
 
 void Graphos::Physics::GraphosMotionState::setWorldTransform( const btTransform& worldTrans )
 {
 	// Save current scale
-	Math::Vector3 tempScale = *owner->transform->Scale();
+	//Math::Vector3 tempScale = *owner->transform->Scale();
 
 	// Revert to unit scale
-	owner->transform->Scale( 1.0f/tempScale.x, 1.0f/tempScale.y, 1.0f/tempScale.z );
+	//owner->transform->Scale( 1.0f/tempScale.x, 1.0f/tempScale.y, 1.0f/tempScale.z );
 
 	// Get matrix from Bullet
 	worldTrans.getOpenGLMatrix( owner->transform->WorldMatrix().dataArray );
 
 	// Revert from unit scale back to saved scale
-	owner->transform->Scale( tempScale.x, tempScale.y, tempScale.z );
+	//owner->transform->Scale( tempScale.x, tempScale.y, tempScale.z );
 
 	// Save rotations
 	*owner->transform->rotation = worldTrans.getRotation();
