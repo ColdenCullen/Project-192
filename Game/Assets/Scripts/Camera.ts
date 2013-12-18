@@ -51,7 +51,7 @@ class Camera1 extends Camera
 
 class RotatyThing extends GameObject
 {
-	/*
+	//*
     Speed: number;
     RotationSpeed: number;
 

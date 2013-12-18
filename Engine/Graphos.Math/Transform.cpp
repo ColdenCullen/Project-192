@@ -83,15 +83,13 @@ void Transform::Rotate( const btQuaternion& rotation, bool global )
 	if( global )
 	{
 		*this->rotation = (*this->rotation) * tempQuat;
+		matrix = matrix * ToRotationMatrix( &tempQuat );
 	}
 	else
 	{
 		*this->rotation = tempQuat * (*this->rotation);
+		matrix = ToRotationMatrix( &tempQuat ) * matrix;
 	}
-
-
-	//matrix = ToRotationMatrix( &tempQuat ) * matrix;
-	matrix = matrix * ToRotationMatrix( &tempQuat );
 
 	Translate( oldCoord );
 
