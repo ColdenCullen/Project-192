@@ -23,14 +23,13 @@ void cvv8::ClassCreator_SetupBindings<GameObjectCollection>::Initialize( Handle<
 		( "destroy", ClassCreator<GameObjectCollection>::DestroyObjectCallback )
 		( "LoadObjects", MethodToInCa<GameObjectCollection, void( std::string ), &GameObjectCollection::LoadObjects>::Call )
 		( "ClearObjects", MethodToInCa<GameObjectCollection, void( void ), &GameObjectCollection::ClearObjects>::Call )
-		//( "CreateObject", MethodToInCa<GameObjectCollection, gUInt( std::string, IShader* ), &GameObjectCollection::CreateObject>::Call )
+		( "CreateObject", MethodToInCa<GameObjectCollection, gUInt( std::string, IShader* ), &GameObjectCollection::CreateObject>::Call )
 		( "GetObjectById", MethodToInCa<GameObjectCollection, GameObject*( gUInt ), &GameObjectCollection::GetObjectById>::Call )
 		( "GetObjectByName", MethodToInCa<GameObjectCollection, GameObject*( std::string ), &GameObjectCollection::GetObjectByName>::Call )
 		( "RemoveObjectById", MethodToInCa<GameObjectCollection, void( gUInt ), &GameObjectCollection::RemoveObjectById>::Call )
 		( "RemoveObjectByName", MethodToInCa<GameObjectCollection, void( std::string ), &GameObjectCollection::RemoveObjectByName>::Call )
 		( "Update", MethodToInCa<GameObjectCollection, void( void ), &GameObjectCollection::Update>::Call )
 		( "Draw", MethodToInCa<GameObjectCollection, void( void ), &GameObjectCollection::Draw>::Call )
-		//( "Draw", MethodToInCa<GameObject, void (void), &GameObject::Draw>::Call )
 		;
 
 	//AccessorAdder GameObjectCollectionacc( GameObjectCollectioncc.Prototype() );

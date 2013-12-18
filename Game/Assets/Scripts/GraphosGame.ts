@@ -75,10 +75,25 @@ class MyGame extends GraphosGame
     public UpdateGame(): void 
     {   
         // shoot a ball if space is pressed
-        if ( Input.IsKeyDown( Keys.Space ) ) 
+        if ( Input.IsKeyDown( Keys.Space, true ) ) 
         {
-            //guys its fine
-            this.shootyBall.Transform.Translate( this.shootyBall.Transform.Position.Multiply(-1) );
+            // delete the old ball and make a new one
+            //this.objects.RemoveObjectByName("ShootyBall");
+            this.objects.CreateObject( "ShootyBall", ShaderController.GetShader( "light" ) );
+            this.shootyBall = this.objects.GetObjectByName( "ShootyBall" );
+            this.shootyBall.MakeShootyBall();
+            // move ball to origin
+            this.shootyBall.Transform.Translate( this.shootyBall.Transform.Position.Inverse );
+
+            // move ball to camera
+            this.shootyBall.Transform.Translate( this.Camera.Owner.Transform.Position );
+            this.shootyBall.Transform.Translate( 0, 0, 5 );
+
+            // give the ball a force
+            //this.shootyBall.
+
+            log(this.shootyBall.Transform.Position.y);
+
             this.ballsFired++;
         }
     }

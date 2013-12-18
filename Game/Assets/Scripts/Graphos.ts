@@ -92,6 +92,7 @@ class GameObject
 {
     // Transform object
     public Transform: Transform;
+    public MakeShootyBall(): void { }
 
     // DO NOT OVERRIDE
     public Update(): void { }
@@ -104,9 +105,10 @@ class GameObject
     public OnShutdown(): void { }
 }
 
-class Camera extends GameObject
+declare class Camera
 {
     public ViewMatrix: Matrix4;
+    public Owner: GameObject;
 }
 
 declare class GameObjectCollection
@@ -147,14 +149,15 @@ enum GameState
 
 declare class Time
 {
-    public static DeltaTime: number;
-    public static TotalTime: number;
+    public DeltaTime(): number;
+    public TotalTime(): number;
 }
 
 // Interface that allows GameObjects to check for input
 declare class Input
 {
     public static IsKeyDown( key: number ): boolean;
+    public static IsKeyDown( key: number, checkDown: boolean ): boolean;
 }
 
 // Print function

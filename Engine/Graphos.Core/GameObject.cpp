@@ -16,6 +16,18 @@ using namespace Graphos::Math;
 using namespace Graphos::Physics;
 using namespace Graphos::Graphics;
 
+void GameObject::MakeShootyBall( void )
+{
+	AddComponent( AssetController::GetContent<Texture>( "balls" ) );
+	AddComponent( AssetController::GetContent<Mesh>( "Cube" ) );
+	
+	auto gms = new GraphosMotionState( this );
+	PhysicsController::CreatePhysicsObject( gms, 3.0f, 0.5f, 0.4f, 0.0f );
+	AddComponent( gms );
+
+	transform->Translate( 1.5f, 5.0f, -1.0f );
+}
+
 GameObject* GameObject::CreateFromJson( JsonObject object )
 {
 	JsonObject component;

@@ -43,6 +43,13 @@ void GameObjectCollection::LoadObjects( string assetPath /* = "" */ )
 	ScriptController::Get().InitializeObjects( this );
 }
 
+unsigned int GameObjectCollection::CreateObject( std::string name, IShader* shader )
+{
+	objectList[ currentId ] = new GameObject( shader );
+	nameMap[ name ] = currentId;
+	return currentId++;
+}
+
 GameObject* GameObjectCollection::GetObjectById( unsigned int id )
 {
 	auto it = objectList.find( id );
@@ -76,7 +83,14 @@ void GameObjectCollection::RemoveObjectByName( string name )
 	auto it = nameMap.find( name );
 
 	if( it != end( nameMap ) )
-		objectList.erase( it->second );
+	{
+		gUInt id = nameMap[ name ];
+		nameMap.erase( name );
+
+		delete objectList[ id ];
+
+		objectList.erase( id );
+	}
 }
 
 void GameObjectCollection::ClearObjects( void )

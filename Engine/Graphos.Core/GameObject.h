@@ -27,6 +27,8 @@ namespace Graphos
 			// Factory for creating game objects from json
 			static GameObject*	CreateFromJson( Utility::JsonObject object );
 
+			void				MakeShootyBall( void );
+
 			// Shutdown memory
 			void				Shutdown( void );
 

@@ -17,7 +17,32 @@ void cvv8::ClassCreator_SetupBindings<Time>::Initialize( Handle<v8::Object> cons
 		return;
 	}
 
+	target->SetAccessor( String::New( "DeltaTime" ),
+						FunctionToGetter<const gFloat(void), &Time::GetDeltaTime>::Get,
+		  				ThrowingSetter::Set );
+	target->SetAccessor( String::New( "TotalTime" ),
+		  				FunctionToGetter<const gFloat(void), &Time::GetTotalTime>::Get,
+		  				ThrowingSetter::Set );
+
+	/*Timecc
+		( "DeltaTime",
+			FunctionToInCa<const gFloat( void ), &getDeltaTime>::Call )
+		( "TotalTime",
+			FunctionToInCa<const gFloat(void), &getTotalTime>::Call )
+		;*/
+
+	/*AccessorAdder Timeacc( Timecc.Prototype() );
+	Timeacc
+		( "DeltaTime",
+			FunctionToGetter<const gFloat( void ), &getDeltaTime>::Get,
+			ThrowingSetter::Set )
+		( "TotalTime",
+			FunctionToGetter<const gFloat(void), &getTotalTime>::Get,
+			ThrowingSetter::Set )
+		;*/
+
 	// Set static methods
+	/*
 	Handle<Object> ctor( Timecc.CtorFunction() );
 	ctor->SetAccessor( String::New( "DeltaTime" ),
 						FunctionToGetter<const gFloat(void), &Time::GetDeltaTime>::Get,
@@ -25,6 +50,7 @@ void cvv8::ClassCreator_SetupBindings<Time>::Initialize( Handle<v8::Object> cons
 	ctor->SetAccessor( String::New( "TotalTime" ),
 						FunctionToGetter<const gFloat(void), &Time::GetTotalTime>::Get,
 						ThrowingSetter::Set );
+	*/
 
 	Timecc.AddClassTo( TypeName<Time>::Value, target );
 };

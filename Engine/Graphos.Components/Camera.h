@@ -19,6 +19,8 @@ namespace Graphos
 			void				Shutdown( void );
 			Math::Matrix4*		GetViewMatrix( void ) { return viewMatrix; }
 
+			GameObject* const	Owner( void ) const { return owner; }
+
 			const Math::Matrix4*
 								GetViewMatrix( void ) const { return viewMatrix; }
 

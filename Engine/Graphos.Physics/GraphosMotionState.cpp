@@ -33,6 +33,9 @@ void Graphos::Physics::GraphosMotionState::setWorldTransform( const btTransform&
 	*/
 	// TODO: Update position/rotation/scale
 	// TODO: FIX FOR RUNTIME SCALING
+	
+	while( !owner );
+
 	worldTrans.getOpenGLMatrix( owner->transform->WorldMatrix().dataArray );
 
 	// TODO: Rotation via Quaternions
