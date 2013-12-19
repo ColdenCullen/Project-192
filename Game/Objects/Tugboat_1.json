@@ -99,7 +99,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -137,7 +137,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -175,7 +175,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -213,7 +213,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -251,7 +251,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -289,7 +289,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -327,7 +327,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -365,7 +365,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -403,7 +403,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -441,7 +441,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -479,7 +479,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -517,7 +517,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -555,7 +555,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -593,7 +593,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -631,7 +631,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,
@@ -669,7 +669,7 @@
 		},
 
 		"Physics": {
-			"Mass": 10.0,
+			"Mass": 20.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
 			"RollingFriction": 0.0,

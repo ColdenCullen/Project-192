@@ -8,7 +8,7 @@
 	"Script": {
 		"Class": "Camera1",
 		"Variables": {
-			"Speed": 0.25,
+			"Speed": 0.20,
 			"RotationSpeed": 0.005
 		}
 	},
