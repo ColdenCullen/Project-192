@@ -14,3 +14,6 @@ Run the init PowerShell script, the Game/init.bat script until there are no erro
 
 ### Issue Management
 [GitHub](https://github.com/ColdenCullen/Project-192/issues?state=open)
+
+### External Libraries
+[Bullet Physics](http://bulletphysics.org/wordpress/)
