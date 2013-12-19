@@ -17,3 +17,4 @@ Run the init PowerShell script, the Game/init.bat script until there are no erro
 
 ### External Libraries
 [Bullet Physics](http://bulletphysics.org/wordpress/)
+[Google V8](https://developers.google.com/v8/)
