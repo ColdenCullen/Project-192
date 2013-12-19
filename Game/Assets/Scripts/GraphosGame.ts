@@ -12,7 +12,7 @@ class MyGame extends GraphosGame
         log( "Initializing" );
 
         this.ballsFired = 0;
-        this.ballMagnitude = 4000;
+        this.ballMagnitude = 250000;
 
         this.objects = new GameObjectCollection();
         this.objects.LoadObjects( "" );
@@ -94,7 +94,7 @@ class MyGame extends GraphosGame
 
             // move ball to camera
             this.shootyBall.Transform.Translate( this.Camera.Owner.Transform.Position );
-            this.shootyBall.Transform.Translate( 0, 0, 18 );
+            this.shootyBall.Transform.Translate( 0, 0, 10 );
 
             // give the ball a force
             //this.shootyBall.

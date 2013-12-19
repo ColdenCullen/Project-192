@@ -16,7 +16,12 @@
 			"Mass": 0.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
-			"RollingFriction": 0.0
+			"RollingFriction": 0.0,
+			"BodyDimensions": {
+				"x": 100.0,
+				"y": 1.0,
+				"z": 100.0
+			}
 		},
 
 		"Transform": {
@@ -54,7 +59,12 @@
 			"Mass": 0.0,
 			"Restitution": 0.5,
 			"Friction": 0.4,
-			"RollingFriction": 0.0
+			"RollingFriction": 0.0,
+			"BodyDimensions": {
+				"x": 20.0,
+				"y": 1.0,
+				"z": 10.0
+			}
 		},
 
 		"Transform": {

@@ -31,12 +31,12 @@ void GameObject::MakeShootyBall( Vector3* cameraForward )
 	
 	auto gms = new GraphosMotionState( this );
 	PhysicsController::PhysicsConfig things;
-	things.mass = 3.0f;
+	things.mass = 30.0f;
 	things.restitution = 0.0f;
 	things.friction = 0.4f;
 	things.rollingFriction = 0.2f;
 	things.collisionShape = PhysicsController::G_SPHERE;
-	things.collisionDimensions.x = 0.035f;
+	things.collisionDimensions.x = 0.55f;
 	things.collisionDimensions.y = 1.0f;
 	things.collisionDimensions.z = 1.0f;
 	PhysicsController::CreatePhysicsObject( gms, &things, cameraForward );

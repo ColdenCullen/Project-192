@@ -112,9 +112,25 @@ void Graphos::Math::Transform::TranslateTo( const Vector3& newLocation )
 
 void Graphos::Math::Transform::RotateTo( const btQuaternion& rotation )
 {
-	auto oldRotInv = this->rotation->inverse();
-	matrix *= ToRotationMatrix( &oldRotInv );
+	//auto oldRotInv = *this->rotation;
+	//auto oldRotInv = this->rotation->inverse();
+	//matrix *= ToRotationMatrix( &oldRotInv );
+	//matrix = ToRotationMatrix( &oldRotInv ) * matrix;
+	//this->rotation->slerp( rotation, 1 );
+
+	matrix = Matrix4::Identity;
+
+	TranslateTo( *position );
+
+	auto oldScale = *scale;
+	delete_s( scale );
+	scale = new Vector3( 1.0f, 1.0f, 1.0f );
+	Scale( oldScale );
+
+	*this->rotation = rotation;
 	matrix *= ToRotationMatrix( &rotation );
+
+	//matrix = ToRotationMatrix( &rotation ) * matrix;
 	*this->rotation = rotation;
 }
 
