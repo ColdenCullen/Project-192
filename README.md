@@ -9,12 +9,6 @@ Run the init PowerShell script, the Game/init.bat script until there are no erro
 ### Coding Style
 [GitHub Wiki Page](https://github.com/ColdenCullen/Project-192/wiki/Coding-Standards)
 
-### Project Management
-[Trello](https://trello.com/board/project-192/518da698f1ec727821001426)
-
-### Issue Management
-[GitHub](https://github.com/ColdenCullen/Project-192/issues?state=open)
-
 ### External Libraries
 [Bullet Physics](http://bulletphysics.org/wordpress/)
 
