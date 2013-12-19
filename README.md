@@ -4,7 +4,7 @@ Project-192
 Project 192, a joint GGP-DSA2 project.
 
 ## To Build and Run
-Run the init PowerShell script, the Game/init.bat script until there are no errors, and then run Game/build.bat. From there, you should be good to open and run the solution.
+Run the init PowerShell script, the Game/init.bat script until there are no errors, and then run Game/build.bat. Inside Visual Studio, make sure that Graphos.Core is the startup project, and that it's working directory is `$(OutDir)`. From there, you should be good to run the solution.
 
 ### Coding Style
 [GitHub Wiki Page](https://github.com/ColdenCullen/Project-192/wiki/Coding-Standards)
