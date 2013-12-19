@@ -3,14 +3,21 @@
 class MyGame extends GraphosGame
 {
     objects: GameObjectCollection;
+    shootyBall: GameObject;
+    ballsFired: number;
+    ballMagnitude: number;
 
     public Initialize(): void
     {
         log( "Initializing" );
 
-        this.objects = new GameObjectCollection();
+        this.ballsFired = 0;
+        this.ballMagnitude = 250000;
 
+        this.objects = new GameObjectCollection();
         this.objects.LoadObjects( "" );
+
+        this.shootyBall = this.objects.GetObjectByName("ShootyBall");
 
         log( this.Camera );
     }
@@ -25,6 +32,7 @@ class MyGame extends GraphosGame
 			        if( Input.IsKeyDown( Keys.F1 ) )
                         this.CurrentState = GameState.Menu;
 
+                    this.UpdateGame();
                     this.objects.Update();
                     break;
                 }
@@ -49,15 +57,15 @@ class MyGame extends GraphosGame
 
     public Draw(): void
     {
-        ShaderController.GetShader( "texture" ).ViewMatrix = this.Camera.ViewMatrix;
-        ShaderController.GetShader( "texture" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
-        ShaderController.GetShader( "light" ).ViewMatrix = this.Camera.ViewMatrix;
-        ShaderController.GetShader( "light" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
-
         switch( this.CurrentState )
         {
             case GameState.Game:
                 {
+                    ShaderController.GetShader( "texture" ).ViewMatrix = this.Camera.ViewMatrix;
+                    ShaderController.GetShader( "texture" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
+                    ShaderController.GetShader( "light" ).ViewMatrix = this.Camera.ViewMatrix;
+                    ShaderController.GetShader( "light" ).ProjectionMatrix = WindowController.Get().PerspectiveMatrix;
+                    
                     this.objects.Draw();
                     break;
                 }
@@ -65,6 +73,44 @@ class MyGame extends GraphosGame
                 {
                     break;
                 }
+        }
+    }
+
+    public UpdateGame(): void 
+    {   
+        // shoot a ball if space is pressed
+        if ( Input.IsKeyDown( Keys.Space, true ) )
+        {
+            // delete the old ball and make a new one
+            //this.objects.RemoveObjectByName("ShootyBall");
+            this.objects.CreateObject( ( "ShootyBall" + this.ballsFired ), ShaderController.GetShader( "light" ) );
+            this.shootyBall = this.objects.GetObjectByName( "ShootyBall" + this.ballsFired );
+
+            // move ball to origin
+            //this.shootyBall.Transform.Translate( this.shootyBall.Transform.Position.Inverse );
+
+            // scale it
+            this.shootyBall.Transform.Scale( 20.0, 20.0, 20.0 );
+
+            // move ball to camera
+            this.shootyBall.Transform.Translate( this.Camera.Owner.Transform.Position );
+            this.shootyBall.Transform.Translate( 0, 0, 10 );
+
+            // give the ball a force
+            //this.shootyBall.
+
+            // shooty the ball
+            this.shootyBall.MakeShootyBall(
+                this.objects
+                    .GetObjectByName( "Camera1" )
+                    .Transform
+                    .Forward
+                    .Multiply( this.ballMagnitude )
+                );
+
+            log("Balls Fired: " + this.ballsFired);
+
+            this.ballsFired++;
         }
     }
 

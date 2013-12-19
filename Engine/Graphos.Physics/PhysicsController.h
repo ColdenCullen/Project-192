@@ -41,7 +41,8 @@ namespace Graphos
 			static void				Shutdown( void );
 
 			static void				CreatePhysicsObject(	GraphosMotionState* gms,
-															PhysicsConfig* physConfig );
+															PhysicsConfig* physConfig,
+															Math::Vector3* shootVec = NULL);
 
 			static PhysicsController& Get( void )
 			{

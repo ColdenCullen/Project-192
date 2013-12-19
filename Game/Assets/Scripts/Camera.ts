@@ -1,83 +1,47 @@
 /// <reference path="Graphos.ts" />
 
-class Camera1 extends Camera
+class Camera1 extends GameObject
 {
     Speed: number;
-    RotationSpeed: number;
+    //RotationSpeed: number;
 
     public OnUpdate(): void
     {
-	//*
-        if( Input.IsKeyDown( Keys.W ) )
+        // This moves the camera around on a 2D plane
+        if( Input.IsKeyDown( Keys.W ) && this.Transform.Position.y < 30 )
         {
-            this.Transform.Translate( this.Transform.Forward.Multiply( this.Speed ) );
+            this.Transform.Translate( this.Transform.Up.Multiply( this.Speed ) );
         }
-        if( Input.IsKeyDown( Keys.S ) )
+        if( Input.IsKeyDown( Keys.S ) && this.Transform.Position.y > -3 )
         {
-            this.Transform.Translate( this.Transform.Forward.Multiply( this.Speed ).Inverse );
+            this.Transform.Translate( this.Transform.Up.Multiply( this.Speed ).Inverse );
         }
-        if( Input.IsKeyDown( Keys.A ) )
+        if( Input.IsKeyDown( Keys.A ) && this.Transform.Position.x > -99 )
         {
             this.Transform.Translate( this.Transform.Right.Multiply( this.Speed ).Inverse );
         }
-        if( Input.IsKeyDown( Keys.D ) )
+        if( Input.IsKeyDown( Keys.D ) && this.Transform.Position.x < 99 )
         {
             this.Transform.Translate( this.Transform.Right.Multiply( this.Speed ) );
         }
 
+        /*
         if( Input.IsKeyDown( Keys.Up ) )
         {
-            //this.Transform.Rotate( this.RotationSpeed, 0.0, 0.0 );
-			this.Transform.Rotate( 1.0, 0.0, 0.0, this.RotationSpeed, false );
+            this.Transform.Rotate( this.RotationSpeed, 0.0, 0.0 );
         }
         if( Input.IsKeyDown( Keys.Down ) )
         {
-            //this.Transform.Rotate( -this.RotationSpeed, 0.0, 0.0 );
-			this.Transform.Rotate( 1.0, 0.0, 0.0, -this.RotationSpeed, false );
+            this.Transform.Rotate( -this.RotationSpeed, 0.0, 0.0 );
         }
         if( Input.IsKeyDown( Keys.Left ) )
         {
-            //this.Transform.Rotate( 0.0, this.RotationSpeed, 0.0 );
-			this.Transform.Rotate( 0.0, 1.0, 0.0, this.RotationSpeed, true );
+            this.Transform.Rotate( 0.0, this.RotationSpeed, 0.0 );
         }
         if( Input.IsKeyDown( Keys.Right ) )
         {
-            //this.Transform.Rotate( 0.0, -this.RotationSpeed, 0.0 );
-            this.Transform.Rotate( 0.0, 1.0, 0.0, -this.RotationSpeed, true );
+            this.Transform.Rotate( 0.0, -this.RotationSpeed, 0.0 );
         }
-	//*/
+        */
     }
 }
-
-class RotatyThing extends GameObject
-{
-	//*
-    Speed: number;
-    RotationSpeed: number;
-
-    public OnUpdate(): void
-    {
-        if( Input.IsKeyDown( Keys.Up ) )
-        {
-            //this.Transform.Rotate( this.RotationSpeed, 0.0, 0.0 );
-			this.Transform.Rotate( 1.0, 0.0, 0.0, this.RotationSpeed, false );
-        }
-        if( Input.IsKeyDown( Keys.Down ) )
-        {
-            //this.Transform.Rotate( -this.RotationSpeed, 0.0, 0.0 );
-			this.Transform.Rotate( 1.0, 0.0, 0.0, -this.RotationSpeed, false );
-        }
-        if( Input.IsKeyDown( Keys.Left ) )
-        {
-            //this.Transform.Rotate( 0.0, this.RotationSpeed, 0.0 );
-			this.Transform.Rotate( 0.0, 1.0, 0.0, this.RotationSpeed, true );
-        }
-        if( Input.IsKeyDown( Keys.Right ) )
-        {
-            //this.Transform.Rotate( 0.0, -this.RotationSpeed, 0.0 );
-			this.Transform.Rotate( 0.0, 1.0, 0.0, -this.RotationSpeed, true );
-        }
-    }
-	//*/
-}
-

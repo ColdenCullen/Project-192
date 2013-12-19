@@ -110,6 +110,28 @@ void Graphos::Math::Transform::TranslateTo( const Vector3& newLocation )
 	TranslateTo( newLocation.x, newLocation.y, newLocation.z );
 }
 
+void Graphos::Math::Transform::RotateTo( const btQuaternion& rotation )
+{	
+	// Save old data
+	Vector3 oldScale = *scale;
+	Vector3 oldPosition = *position;
+
+	// Reset matrix
+	matrix = Matrix4::Identity;
+
+	// Translate
+	TranslateTo( *position );
+
+	// Revert scale to unit and then scale
+	scale = new Vector3( 1.0f, 1.0f, 1.0f );
+	Scale( oldScale );
+
+	// Rotate
+	*this->rotation = rotation;
+	matrix *= ToRotationMatrix( &rotation ).Inverse();
+
+}
+
 void Transform::Scale( const gFloat x, const gFloat y, const gFloat z )
 {
 	Matrix4 scaleMatrix = Matrix4::Identity;

@@ -13,16 +13,16 @@
 	},
 	"graphics" : 
 	{
-		"Adapter": "OpenGL",
+		"Adapter": "DirectX",
 		"backfaceculling" : true,
-		"vsync" : false
+		"vsync" : true
 	},
 	"physics" : 
 	{
 		"gravity" : 
 		{
 			"x" : 0.0,
-			"y" : -20.0,
+			"y" : -60.0,
 			"z" : 0.0
 		}
 	},

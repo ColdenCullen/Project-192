@@ -8,16 +8,16 @@
 	"Script": {
 		"Class": "Camera1",
 		"Variables": {
-			"Speed": 0.01,
-			"RotationSpeed": 0.05
+			"Speed": 0.20,
+			"RotationSpeed": 0.005
 		}
 	},
 
 	"Transform": {
 		"Position": {
 			"x": 0.0,
-			"y": 0.0,
-			"z": -10.0
+			"y": 10.0,
+			"z": -30.0
 		},
 		"Rotation": {
 			"x": 0.0,

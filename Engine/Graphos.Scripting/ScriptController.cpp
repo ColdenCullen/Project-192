@@ -21,7 +21,9 @@ using namespace cvv8;
 #pragma region Handlers
 Handle<Value> IsKeyDown( const Arguments& args )
 {
-	return Boolean::New( InputController::IsKeyDown( args[ 0 ]->Int32Value() ) );
+	bool checkDown = args.Length() > 1 && args[ 1 ]->IsBoolean() ? args[ 1 ]->BooleanValue() : false;
+
+	return Boolean::New( InputController::IsKeyDown( args[ 0 ]->Int32Value(), checkDown ) );
 }
 
 Handle<Value> PrintHandler( const Arguments& args )

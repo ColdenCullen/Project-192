@@ -27,9 +27,12 @@ void cvv8::ClassCreator_SetupBindings<Camera>::Initialize( Handle<v8::Object> co
 		( "ViewMatrix",
 			MethodToGetter<Camera, Matrix4*( void ), &Camera::GetViewMatrix>::Get,
 			ThrowingSetter::Set )
+		( "Owner",
+			ConstMethodToGetter<const Camera, GameObject* const ( void ), &Camera::Owner>::Get,
+			ThrowingSetter::Set )
 		;
 
-	// Set static methos
+	// Set static methods
 	Handle<Function> ctor( Cameracc.CtorFunction() );
 
 	Cameracc.AddClassTo( TypeName<Camera>::Value, target );	
