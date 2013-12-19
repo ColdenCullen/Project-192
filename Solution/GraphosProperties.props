@@ -6,7 +6,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <OutDir>$(RootDir)Output\Final\$(Configuration)\</OutDir>
-    <IntDir>$(RootDir)Output\Intermediary\$(Configuration)\</IntDir>
+    <IntDir>$(RootDir)Output\Intermediary\$(Configuration)\$(ProjectName)\</IntDir>
     <IncludePath>$(RootDir)ExternalDependencies\include;$(RootDir)ExternalDependencies\submodules\bullet;$(RootDir)ExternalDependencies\submodules\v8\include;$(RootDir)ExternalDependencies\submodules\v8convert\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(RootDir)ExternalDependencies\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>$(RootDir)ExternalDependencies\bin;$(ExecutablePath)</ExecutablePath>
