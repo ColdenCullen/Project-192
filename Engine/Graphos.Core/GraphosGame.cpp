@@ -1,6 +1,5 @@
 #include <vector>
 #include <string>
-#include <json/json.h>
 #include <cstdlib>
 
 #include "GraphosGame.h"
@@ -15,10 +14,13 @@
 #include "Config.h"
 #include "OutputController.h"
 #include "PhysicsController.h"
+#include "JsonController.h"
+#include "TaskManager.h"
 
 using namespace Graphos::Core;
 using namespace Graphos::Physics;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 
 void GraphosGame::Run( void )
 {
@@ -29,10 +31,11 @@ void GraphosGame::Run( void )
 	// Initialize values and controllers
 	quit = false;
 
-	Start();
-
 	// Init time
 	Time::Initialize();
+	TaskManager::Initialize();
+
+	Start();
 
 	// Loop until there is a quit message from the window or the user.
 	while( !quit )
@@ -53,7 +56,7 @@ void GraphosGame::Run( void )
 			Time::Update();
 
 			// Update input
-			Input::Update();
+			InputController::Update();
 
 			// Update physics
 			if( CurrentState == GameState::Game )
@@ -90,6 +93,7 @@ void GraphosGame::Run( void )
 
 void GraphosGame::Reset( void )
 {
+	JsonController::Initialize();
 	Config::Initialize();
 	GraphicsController::Reload();
 
@@ -106,7 +110,7 @@ void GraphosGame::Reset( void )
 	ScriptController::Get().Initialize();
 	AssetController::Initialize();
 	PhysicsController::Initialize();
-	Input::ui = ui = new UserInterface( this );
+	ui = new UserInterface( this );
 
 	Initialize();
 }
@@ -121,17 +125,14 @@ void GraphosGame::Start( void )
 	CurrentState = GameState::Menu;
 	camera = nullptr;
 
+	JsonController::Initialize();
 	Config::Initialize();
-
 	GraphicsController::Initialize();
-
 	AssetController::Initialize();
-
 	PhysicsController::Initialize();
-
 	ScriptController::Get().Initialize();
 
-	Input::ui = ui = new UserInterface( this );
+	ui = new UserInterface( this );
 
 	Initialize();
 }
@@ -150,4 +151,24 @@ void GraphosGame::Stop( void )
 	GraphicsController::Shutdown();
 }
 
-Camera* Graphos::Core::GraphosGame::camera;
+void GraphosGame::Initialize( void )
+{
+	throw std::exception( "Do not create an instance of GraphosGame!" );
+}
+
+void GraphosGame::Update( void )
+{
+	throw std::exception( "Do not create an instance of GraphosGame!" );
+}
+
+void GraphosGame::Draw( void )
+{
+	throw std::exception( "Do not create an instance of GraphosGame!" );
+}
+
+void GraphosGame::Shutdown( void )
+{
+	throw std::exception( "Do not create an instance of GraphosGame!" );
+}
+
+Camera* GraphosGame::camera;

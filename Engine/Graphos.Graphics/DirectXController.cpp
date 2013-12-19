@@ -2,9 +2,10 @@
 #include "DirectXController.h"
 #include "WindowController.h"
 #include "Config.h"
+#include "Win32Controller.h"
 
-using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 using namespace DirectX;
 
 void DirectXController::Initialize( void )

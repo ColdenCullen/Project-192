@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "OpenGlController.h"
 #include "WindowController.h"
+#include "Win32Controller.h"
 #include "Config.h"
 
 using namespace std;
-using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 using namespace OpenGL;
 
 void OpenGlController::Initialize( void )
@@ -14,8 +15,8 @@ void OpenGlController::Initialize( void )
 
 	WindowController::Get()->OpenWindow();
 
-	unsigned int formatCount;
-	int pixelFormat[1];
+	gUInt formatCount;
+	gInt pixelFormat[1];
 	PIXELFORMATDESCRIPTOR pixelFormatDescriptor;
 
 	// Get device context

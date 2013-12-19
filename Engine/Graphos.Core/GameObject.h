@@ -5,11 +5,12 @@
 #include <string>
 #include <unordered_map>
 #include <type_traits>
-#include <json\json.h>
 
+#include "JsonObject.h"
 #include "IComponent.h"
 #include "Transform.h"
 #include "ShaderController.h"
+#include "Vector3.h"
 
 namespace Graphos
 {
@@ -25,7 +26,9 @@ namespace Graphos
 			GameObject( Graphics::IShader* shader ) : shader( shader ), transform( new Math::Transform ) { }
 
 			// Factory for creating game objects from json
-			static GameObject*	CreateFromJson( Json::Value object );
+			static GameObject*	CreateFromJson( Utility::JsonObject object );
+
+			void				MakeShootyBall( Math::Vector3* cameraForward );
 
 			// Shutdown memory
 			void				Shutdown( void );
@@ -39,15 +42,15 @@ namespace Graphos
 			Graphics::IShader*	GetShader( void ) const { return shader; }
 			void				SetShader( std::string newName ) { shader = Graphics::ShaderController::GetShader( newName ); }
 
-			// Add ingredient of type T
+			// Add component of type T
 			template<class T>
 			typename std::enable_if<std::is_base_of<IComponent, T>::value, void>::type
-								AddComponent( T* newIngredient )
+								AddComponent( T* newComponent )
 			{
-				componentList[ typeid(T).hash_code() ] = newIngredient;
+				componentList[ typeid(T).hash_code() ] = newComponent;
 			}
 
-			// Get ingredient of type T
+			// Get component of type T
 			template<class T>
 			typename std::enable_if<std::is_base_of<IComponent, T>::value, T*>::type
 								GetComponent( void )
@@ -61,7 +64,7 @@ namespace Graphos
 			}
 
 		private:
-			std::unordered_map<size_t, IComponent*>
+			std::unordered_map<gSize, IComponent*>
 								componentList;
 
 			Graphics::IShader*	shader;

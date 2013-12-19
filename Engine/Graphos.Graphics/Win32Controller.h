@@ -4,13 +4,13 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
-#include "IPlatformWindowController.h"
+#include "WindowController.h"
 
 namespace Graphos
 {
 	namespace Graphics
 	{
-		class Win32Controller : public IPlatformWindowController
+		class Win32Controller : public WindowController
 		{
 		public:
 			static Win32Controller*	Get();
@@ -25,8 +25,10 @@ namespace Graphos
 
 			HWND				GetHWnd( void ) { return hWnd; }
 
-		private:
 								Win32Controller( void ) { }
+
+		private:
+								//Win32Controller( void ) { }
 								Win32Controller( Win32Controller& );
 			Win32Controller&	operator=( const Win32Controller& );
 

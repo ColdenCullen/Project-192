@@ -1,51 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptController.h" />
-    <ClInclude Include="ClassWrapper.h">
-      <Filter>Class Wrapers</Filter>
-    </ClInclude>
-    <ClInclude Include="NativeToJSMap_Graphos.h" />
     <ClInclude Include="ClassMapper.h" />
+    <ClInclude Include="Enums.h">
+      <Filter>Class Creators</Filter>
+    </ClInclude>
+    <ClInclude Include="ClassWrapper.h">
+      <Filter>Class Creators</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphosBehavior.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ScriptController.cpp" />
-    <ClCompile Include="Script.cpp" />
-    <ClCompile Include="CC-Transform.cpp">
-      <Filter>Class Wrapers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-Vector3.cpp">
-      <Filter>Class Wrapers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-GameObject.cpp">
-      <Filter>Class Wrapers</Filter>
-    </ClCompile>
     <ClCompile Include="CC-Mesh.cpp">
-      <Filter>Class Wrapers</Filter>
+      <Filter>Class Creators\Components</Filter>
     </ClCompile>
     <ClCompile Include="CC-Texture.cpp">
-      <Filter>Class Wrapers</Filter>
-    </ClCompile>
-    <ClCompile Include="CC-Time.cpp">
-      <Filter>Class Wrapers</Filter>
+      <Filter>Class Creators\Components</Filter>
     </ClCompile>
     <ClCompile Include="CC-Camera.cpp">
-      <Filter>Class Wrapers</Filter>
+      <Filter>Class Creators\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-GameObject.cpp">
+      <Filter>Class Creators\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-GraphosGame.cpp">
+      <Filter>Class Creators\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Time.cpp">
+      <Filter>Class Creators\Utility</Filter>
     </ClCompile>
     <ClCompile Include="CC-Matrix4.cpp">
-      <Filter>Class Wrapers</Filter>
+      <Filter>Class Creators\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Transform.cpp">
+      <Filter>Class Creators\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-Vector3.cpp">
+      <Filter>Class Creators\Math</Filter>
     </ClCompile>
     <ClCompile Include="CC-IShader.cpp">
-      <Filter>Class Wrapers</Filter>
+      <Filter>Class Creators\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="CC-ConstBuffer.cpp">
-      <Filter>Class Wrapers</Filter>
+    <ClCompile Include="CC-GameObjectCollection.cpp">
+      <Filter>Class Creators\Core</Filter>
     </ClCompile>
+    <ClCompile Include="CC-ShaderController.cpp">
+      <Filter>Class Creators\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="CC-WindowController.cpp">
+      <Filter>Class Creators\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphosBehavior.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Class Wrapers">
+    <Filter Include="Class Creators">
       <UniqueIdentifier>{82ee8070-4f75-43b8-ad10-81d56c4040de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class Creators\Core">
+      <UniqueIdentifier>{86249606-c1c9-4aa5-afd0-d6fabe95a93c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class Creators\Components">
+      <UniqueIdentifier>{25d644f9-b2fc-466c-9504-dd78a94f319f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class Creators\Utility">
+      <UniqueIdentifier>{1e464c17-c85f-45cb-9e75-8507e1009469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class Creators\Math">
+      <UniqueIdentifier>{4b847c4a-a621-4251-9702-9bb4c10044c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Class Creators\Graphics">
+      <UniqueIdentifier>{7f3c1adf-140f-462b-b010-d03b8264d00d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

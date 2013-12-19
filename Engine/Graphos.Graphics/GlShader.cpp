@@ -4,6 +4,9 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include "OutputController.h"
+#include "DirectionalLight.h"
+#include "AmbientLight.h"
+
 
 #define MIN(x,y) (x < y ? x : y)
 
@@ -11,6 +14,7 @@ using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 using namespace OpenGL;
 
 GlShader::GlShader( std::string vertexPath, std::string fragmentPath )
@@ -91,7 +95,7 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 	glGetShaderiv( vertexShaderID, GL_COMPILE_STATUS, &compileStatus );
 	if( compileStatus != GL_TRUE )
 	{
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Compilation errors on vertex shader." );
+		OutputController::PrintMessage( OutputType::Error, "Compilation errors on vertex shader." );
 
 		GLint maxLength = 256;
 		glGetShaderiv( vertexShaderID, GL_INFO_LOG_LENGTH, &maxLength );
@@ -100,14 +104,14 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 		std::vector<GLchar> infoLog( maxLength );
 		glGetShaderInfoLog( vertexShaderID, maxLength, &maxLength, &infoLog[0] );
 
-		OutputController::PrintMessage( OutputType::OT_ERROR, string( "\n" ) + string( &infoLog[0] ) );
+		OutputController::PrintMessage( OutputType::Error, string( "\n" ) + string( &infoLog[0] ) );
 	}
 
 	glCompileShader( fragmentShaderID );
 	glGetShaderiv( fragmentShaderID, GL_COMPILE_STATUS, &compileStatus );
 	if( compileStatus != GL_TRUE )
 	{
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Compilation errors on fragment shader." );
+		OutputController::PrintMessage( OutputType::Error, "Compilation errors on fragment shader." );
 
 		GLint maxLength = 256;
 		glGetShaderiv( fragmentShaderID, GL_INFO_LOG_LENGTH, &maxLength );
@@ -116,7 +120,7 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 		std::vector<GLchar> infoLog( maxLength );
 		glGetShaderInfoLog( fragmentShaderID, maxLength, &maxLength, &infoLog[0] );
 
-		OutputController::PrintMessage( OutputType::OT_ERROR, string( "\n" ) + string( &infoLog[0] ) );
+		OutputController::PrintMessage( OutputType::Error, string( "\n" ) + string( &infoLog[0] ) );
 	}
 
 	// Attach shaders to program
@@ -130,7 +134,7 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 	glGetProgramiv( programID, GL_LINK_STATUS, &compileStatus );
 	if( compileStatus != GL_TRUE )
 	{
-		OutputController::PrintMessage( OutputType::OT_ERROR, "Error linking shader program." );
+		OutputController::PrintMessage( OutputType::Error, "Error linking shader program." );
 
 		GLint maxLength = 256;
 		glGetShaderiv( programID, GL_INFO_LOG_LENGTH, &maxLength );
@@ -139,13 +143,26 @@ void GlShader::Compile( string vertexBody, string fragmentBody )
 		std::vector<GLchar> infoLog( maxLength );
 		glGetProgramInfoLog( programID, maxLength, &maxLength, &infoLog[0] );
 
-		OutputController::PrintMessage( OutputType::OT_ERROR, string( "\n" ) + string( &infoLog[0] ) );
+		OutputController::PrintMessage( OutputType::Error, string( "\n" ) + string( &infoLog[0] ) );
 	}
 }
 
 void GlShader::Draw( Mesh& mesh ) const
 {
 	glUseProgram( programID );
+
+	// TEST TO BE REMOVED
+	Vector4 color( 0.2f, 0.2f, 0.2f, 1.0f );
+	AmbientLight tempAmb("ambientLight", color, nullptr );
+	tempAmb.Draw( (IShader*)this );
+	tempAmb.Shutdown();
+
+	color = Vector4( 1.0f );
+	// w is 0.0 because it is a direction, not a position
+	Vector4 dir( -1.0, -1.0, 1.0, 0.0 );
+	DirectionalLight tempDir("dirLight", dir, color, nullptr);
+	tempDir.Draw( (IShader*)this );
+	tempDir.Shutdown();
 
 	script->CallFunction( "Draw" );
 
@@ -174,7 +191,7 @@ void GlShader::SetUniformArray( string name, const int* value, const int size ) 
 		glUniform1iv( currentUniform->second, size, value );
 }
 
-void GlShader::SetUniformArray( string name, const float* value, const int size ) const 
+void GlShader::SetUniformArray( string name, const gFloat* value, const int size ) const 
 { 
 	auto currentUniform = uniforms.find( name );
 
@@ -190,7 +207,7 @@ void GlShader::SetUniform( string name, const int value ) const
 		glUniform1i( currentUniform->second, value );
 }
 
-void GlShader::SetUniform( string name, const float value ) const 
+void GlShader::SetUniform( string name, const gFloat value ) const 
 {
 	auto currentUniform = uniforms.find( name );
 
@@ -204,4 +221,14 @@ void GlShader::SetUniformMatrix( std::string name, const Matrix4& matrix ) const
 
 	if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
 		glUniformMatrix4fv( currentUniform->second, 1, false, matrix.dataArray );
+}
+
+void GlShader::SetUniformBuffer( std::string name, const gByte* value, const size_t size ) const
+{
+	auto currentUniform = uniforms.find( name );
+	//if( currentUniform != end( uniforms ) && currentUniform->second != -1 )
+	//	glUniform1fv( currentUniform->second, size/4, (gFloat*)(value) );
+
+	//auto loc = glGetUniformLocation( programID, name.c_str() );
+	//glUniform1fv( loc, size / 4, (gFloat*)value );
 }

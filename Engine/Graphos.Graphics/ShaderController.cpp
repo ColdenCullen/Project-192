@@ -13,6 +13,7 @@
 using namespace std;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 
 void ShaderController::Initialize( void )
 {
@@ -23,7 +24,7 @@ void ShaderController::Initialize( void )
 		string fileName = file.GetFileName();
 
 		if( fileName.size() < 8 )
-			OutputController::PrintMessage( OutputType::OT_WARNING, "File not valid shader file: " + file.GetFileName() );
+			OutputController::PrintMessage( OutputType::Warning, "File not valid shader file: " + file.GetFileName() );
 
 		string shaderName = fileName.substr( 0, fileName.size() - 8 );
 

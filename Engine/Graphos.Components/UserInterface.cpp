@@ -20,10 +20,12 @@ using namespace Graphos;
 using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
+
 
 UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 {
-	char abspath[ 256 ];
+	gChar abspath[ 256 ];
 #ifdef WIN32
 	_fullpath( abspath, Config::GetData<std::string>( "ui.filePath" ).c_str(), MAX_PATH );
 #else
@@ -31,8 +33,8 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 #endif
 
 	// Get dimensions
-	width  = Config::GetData<unsigned int>( "display.width" ) * Config::GetData<unsigned int>( "ui.scale.x" );
-	height = Config::GetData<unsigned int>( "display.height" ) * Config::GetData<unsigned int>( "ui.scale.y" );
+	width  = Config::GetData<gUInt>( "display.width" ) * Config::GetData<gUInt>( "ui.scale.x" );
+	height = Config::GetData<gUInt>( "display.height" ) * Config::GetData<gUInt>( "ui.scale.y" );
 
 	// Initialize UI
 	uiObj = new GameObject(ShaderController::GetShader( "texture" ));
@@ -40,7 +42,7 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 	uiObj->AddComponent(uiMesh);
 
 	// Initialize Awesomium view
-	view = new AwesomiumView( abspath, width, height );
+	view = new AwesomiumView( abspath, static_cast<int>( width ), static_cast<int>( height ) );
 	view->webView->set_js_method_handler( new JavaScriptHandler( this ) );
 
 	while( view->webView->IsLoading() )
@@ -54,42 +56,49 @@ UserInterface::UserInterface( GraphosGame* owner ) : owner( owner )
 
 	// Scale the UI obj
 	uiObj->transform->Scale(
-		static_cast<float>(width) / 2.0f,
-		static_cast<float>(height) / 2.0f,
+		static_cast<gFloat>(width) / 2.0f,
+		static_cast<gFloat>(height) / 2.0f,
 		1.0f
 	);
 
 	// this pushes the top down on Windows, remove this code once problem fixed
 	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL &&
-		!Config::GetData<bool>( "display.fullscreen" ) )
+		!Config::GetData<gBool>( "display.fullscreen" ) )
 		uiObj->transform->Translate( 0.0f, -38.0f, 0.0f );
+
+	InputController::AddKeyDownEvent( [&]( unsigned int keyCode )
+	{
+		this->KeyPress( keyCode );
+	} );
 
 	// Focus for input
 	view->webView->Focus();
 }
 
 /// Destructor
-/// DO NOT CALL
 UserInterface::~UserInterface()
 {
+	uiObj->Shutdown();
+	delete_s( uiObj );
+	uiMesh->Shutdown();
+	delete_s( uiMesh );
 	if( view )
 	{
 		view->Shutdown();
-		delete view;
+		delete_s( view );
 	}
 }
 
-/// Get input from the mouse
 bool UserInterface::Update( void )
 {
-	Vector2 cursor = Input::GetMousePos();
-	view->webView->InjectMouseMove(cursor.x, cursor.y);
+	Vector2 cursor = InputController::GetMousePos();
+	view->webView->InjectMouseMove( static_cast<gInt>( cursor.x ), static_cast<gInt>( cursor.y ) );
 
-	if( Input::IsKeyDown( VK_LBUTTON, true ) )
+	if( InputController::IsKeyDown( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseDown( kMouseButton_Left );
 	}
-	else if( Input::IsKeyUp( VK_LBUTTON, true ) )
+	else if( InputController::IsKeyUp( VK_LBUTTON, true ) )
 	{
 		view->webView->InjectMouseUp( kMouseButton_Left );
 	}
@@ -101,7 +110,9 @@ bool UserInterface::Update( void )
 
 void UserInterface::Draw( void )
 {
-	ShaderController::GetShader( "texture" )->SetProjectionMatrix( WindowController::Get()->OrthogonalMatrix() );
+	ShaderController::GetShader( "texture" )->SetViewMatrix( Matrix4::Identity );
+	ShaderController::GetShader( "texture" )
+		->SetProjectionMatrix( WindowController::Get()->OrthogonalMatrix() );
 
 	// Draw Awesomium
 	view->Draw( ShaderController::GetShader( "texture" ) );
@@ -120,7 +131,7 @@ void UserInterface::KeyPress( unsigned int key )
 	WebKeyboardEvent keyCharEvent;
 	keyCharEvent.type = WebKeyboardEvent::kTypeChar;
 	// Get char
-	char text[ 1 ] = { '1' };
+	gChar text[ 1 ] = { '1' };
 
 #if defined( _WIN32 )
 	text[ 0 ] = MapVirtualKey( key, MAPVK_VK_TO_CHAR );
@@ -140,7 +151,8 @@ void UserInterface::KeyPress( unsigned int key )
 	}
 }
 
-void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, unsigned int remoteObjectID, const WebString& methodName, const JSArray& args )
+void UserInterface::JavaScriptHandler::OnMethodCall
+	( WebView* caller, gUInt remoteObjectID, const WebString& methodName, const JSArray& args )
 {
 	// If called on GraphosGame
 	if( remoteObjectID == owner->graphosGame.remote_id() )
@@ -159,7 +171,8 @@ void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, unsigned i
 			else if( args[ 1 ].IsInteger() )
 				Config::SetData( ToString( args[ 0 ].ToString() ), args[ 1 ].ToInteger() );
 			else if( args[ 1 ].IsDouble() )
-				Config::SetData( ToString( args[ 0 ].ToString() ), static_cast<float>( args[ 1 ].ToDouble() ) );
+				Config::SetData( ToString( args[ 0 ].ToString() ), 
+								static_cast<float>( args[ 1 ].ToDouble() ) );
 			else if( args[ 1 ].IsString() )
 				Config::SetData( ToString( args[ 0 ].ToString() ), ToString( args[ 1 ].ToString() ) );
 		}
@@ -170,7 +183,8 @@ void UserInterface::JavaScriptHandler::OnMethodCall( WebView* caller, unsigned i
 	}
 }
 
-JSValue UserInterface::JavaScriptHandler::OnMethodCallWithReturnValue( WebView* caller, unsigned int remoteObjectID, const WebString& methodName, const JSArray& args )
+JSValue UserInterface::JavaScriptHandler::OnMethodCallWithReturnValue
+	( WebView* caller, gUInt remoteObjectID, const WebString& methodName, const JSArray& args )
 {
 	return JSValue::Undefined();
 }

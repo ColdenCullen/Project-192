@@ -1,11 +1,12 @@
+#ifdef _WIN32
 #ifndef __DXSHADER
 #define __DXSHADER
 
 #include <string>
 #include <unordered_map>
 #include <utility>
-#include "IShader.h"
 #include <DirectX/DirectXIncludes.h>
+#include "IShader.h"
 
 namespace Graphos
 {
@@ -13,15 +14,15 @@ namespace Graphos
 	{
 		struct DxConstBuffer : public ConstBuffer
 		{
-			DirectX::ID3D11Buffer* vsConsantBuffer;
-			char*			data;
+			DirectX::ID3D11Buffer* vsConstantBuffer;
+			gByte*			data;
 
 			DxConstBuffer( void ) : ConstBuffer() { }
 
 			~DxConstBuffer( void )
 			{
 				delete[] data;
-				ReleaseCOMobjMacro( vsConsantBuffer );
+				ReleaseCOMobjMacro( vsConstantBuffer );
 			}
 		};
 
@@ -37,10 +38,11 @@ namespace Graphos
 			void				Draw( Core::Mesh& mesh ) const override;
 			void				BindTexture( Core::Texture& text ) const override;
 
-			void				SetUniform( std::string name, const float value ) const override;
-			void				SetUniform( std::string name, const int value ) const override;
-			void				SetUniformArray( std::string name, const float* value, const int size ) const override;
-			void				SetUniformArray( std::string name, const int* value, const int size ) const override;
+			void				SetUniform( std::string name, const gFloat value ) const override;
+			void				SetUniform( std::string name, const gInt value ) const override;
+			void				SetUniformArray( std::string name, const gFloat* value, const int size ) const override;
+			void				SetUniformArray( std::string name, const gInt* value, const int size ) const override;
+			void				SetUniformBuffer( std::string name, const gByte* value, const size_t size ) const override;
 			void				SetUniformMatrix( std::string name, const Math::Matrix4& matrix ) const override;
 			
 		private:
@@ -58,3 +60,4 @@ namespace Graphos
 }
 
 #endif//__DXSHADER
+#endif//_WIN32

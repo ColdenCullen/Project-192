@@ -1,0 +1,337 @@
+@charset 'UTF-8';
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  src: url('../fonts/SourceSansPro.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Track';
+  src: url('../fonts/Track.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*********************************************************************************/
+/* Basic                                                                         */
+/*********************************************************************************/
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+
+  /* This hides the highlighting on double click */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+body {
+  background: #162B3F;
+/*background: transparent;*/
+  color: white;
+  font-family: 'Source Sans Pro', 'Track', sans-serif;
+}
+
+#game-title {
+  color: #f1c40f;
+  font-size: 9em;
+  line-height: 0.9;
+  text-align: center;
+  margin: 0;
+
+  opacity: 0;
+  -webkit-transform: translateY(-20px);
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  -webkit-transition-delay: 0.5s;
+  transition-delay: 0.5s;
+}
+
+.sub-title {
+  color: #f1c40f;
+  font-size: 4em;
+  text-align: center;
+  margin: 0 0 0.3em 0;
+
+  opacity: 0;
+  -webkit-transform: translateY(-20px);
+  -webkit-transition: 0.5s all;
+  transition: 0.5s all;
+  -webkit-transition-delay: 0.6s;
+  transition-delay: 0.6s;
+}
+
+.loaded #game-title,
+.loaded .sub-title {
+  -webkit-transform: translateY(0);
+  opacity: 1;
+}
+
+#wrapper {
+  width: 800px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+}
+
+#start-button {
+  display: inline-block;
+  width: 50%;
+  font-size: 0;
+  -webkit-transition: 0.4s font-size;
+  transition: 0.4s font-size;
+  -webkit-transition-delay: 1.0s;
+  transition-delay: 1.0s;
+}
+
+.loaded #start-button {
+  font-size: 1.25em;
+}
+
+#settings-form {
+  width: 50%;
+}
+
+#settings-form,
+#developer-list {
+  opacity: 0;
+  -webkit-transition: 0.4s opacity;
+  transition: 0.4s opacity;
+  -webkit-transition-delay: 1.0s;
+  transition-delay: 1.0s;
+}
+
+.loaded #settings-form,
+.loaded #developer-list {
+  opacity: 1;
+}
+
+#start-game {
+  border-radius: 100%;
+  width: 4.5em;
+  height: 4.5em;
+  line-height: 4.5em;
+  text-align: center;
+  padding: 0;
+  position: relative;
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  outline: 0;
+  -webkit-transition: 0.4s background;
+  transition: 0.4s background;
+}
+
+#start-game:hover {
+  background: #3498db;
+}
+
+.loaded #start-game {
+  font-size: 3em;
+}
+
+.left {
+	float: left;
+	display: block;
+}
+
+.right {
+	float: right;
+	display: block;
+}
+
+/*********************************************************************************/
+/* Navigation                                                                    */
+/*********************************************************************************/
+
+#nav {
+  display: block;
+  width: 100%;
+  margin-bottom: 1em;
+  opacity: 0;
+  -webkit-transform: translateY(-20px);
+  -webkit-transition: 0.4s all;
+  transition: 0.4s all;
+  -webkit-transition-delay: 0.7s;
+  transition-delay: 0.7s;
+}
+
+.loaded #nav {
+  -webkit-transform: translateY(0);
+  opacity: 1;
+}
+
+#nav a {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  width: 200px;
+  cursor: pointer;
+  margin: 0 auto 0.5em auto;
+  font-size: 2em;
+  text-decoration: none;
+  -webkit-transition: 0.1s color;
+  transition: 0.1s color;
+}
+
+#nav a:hover {
+  color: #3498db;
+}
+
+/*********************************************************************************/
+/* Credits                                                                       */
+/*********************************************************************************/
+
+.developer {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 24.8%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.developer .photo {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.credits-name {
+  font-weight: normal;
+}
+
+/*********************************************************************************/
+/* Checkbox Style                                                                */
+/*********************************************************************************/
+textarea:focus,
+input:focus, 
+.check:focus {
+    outline: 0;
+}
+
+.check {
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none !important;
+  width:40px;
+  height:40px;
+  -webkit-border-radius:6px;
+     -moz-border-radius:6px;
+          border-radius:6px;
+  font:2em 'Source Sans Pro';
+  text-align:center;
+  transition: all .15s ease-in-out;
+  -webkit-transition: all .15s ease-in-out;
+  background: #BA0000;
+  vertical-align: middle;
+}
+
+.check:after {
+  position:absolute;
+  top:9px;
+  left:8px;
+  content:"";
+  background:url('../images/tick-sprite.png');
+  width:22px;
+  height:22px;
+}
+
+.check:checked {
+  transition: all .15s ease-in-out;
+  -moz-transition: all .15s ease-in-out;
+  -webkit-transition: all .15s ease-in-out;
+  background: #2980B9;
+}
+
+.check:checked:after {
+  position:absolute;
+  top:9px;
+  left:6px;
+  content:"";       
+  background:url('../images/tick-sprite.png');
+  background-position:-20px;
+  width:22px;
+  height:22px;
+}
+
+/*********************************************************************************/
+/* Textbox Style                                                                 */
+/*********************************************************************************/
+.search {
+  padding: 3px 10px;
+  width: 100px;
+  display: inline-block;
+  margin-bottom: 10px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  color: #FFF;
+  outline: none;
+  background: #2980B9;
+  border: 2px solid #34495E;
+  transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -webkit-transition: all .3s ease-in-out;
+}
+
+  .search:focus {
+    color: #FFF;
+    background: #3498DB;
+  }
+
+  .search:disabled {
+    color: #BBB;
+    background: #555;
+    border: 2px solid #222;
+  }
+
+  .search::-webkit-input-placeholder {
+     color: #FFF;
+  }
+
+  .search:-moz-placeholder { 
+     color: #FFF;
+  }
+
+  .search::-moz-placeholder {
+     color: #FFF;
+  }
+
+  .search:-ms-input-placeholder {  
+     color: #FFF;
+  }
+
+/*********************************************************************************/
+/* Range Style                                                                   */
+/*********************************************************************************/
+input[type='range'] {
+  position: relative;
+  width:300px;
+  -webkit-appearance: none;
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+          border-radius: 10px;
+  background: #34495E;
+  height: 20px;
+}
+
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    background-color: #2980B9;
+    height: 20px;
+    width: 20px;
+  }

@@ -21,7 +21,7 @@ void cvv8::ClassCreator_SetupBindings<Matrix4>::Initialize( Handle<v8::Object> c
 		( "destroy", ClassCreator<Matrix4>::DestroyObjectCallback )
 		( "Mul", ConstMethodToInCa<const Matrix4, Matrix4 (const Matrix4&), &Matrix4::Mul>::Call )
 		( "Add", ConstMethodToInCa<const Matrix4, Matrix4 (const Matrix4&), &Matrix4::Add>::Call )
-		( "Equals", ConstMethodToInCa<const Matrix4, bool (const Matrix4&), &Matrix4::Equals>::Call )
+		( "Equals", ConstMethodToInCa<const Matrix4, gBool (const Matrix4&), &Matrix4::Equals>::Call )
 		( "Mul", ConstMethodToInCa<const Matrix4, Vector3 (const Vector3&), &Matrix4::Mul>::Call )
 		;
 

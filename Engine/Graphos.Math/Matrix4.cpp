@@ -59,7 +59,7 @@ Matrix4 Matrix4::Add( const Matrix4& other ) const
 
 Matrix4& Matrix4::operator*=( const Matrix4& other )
 {
-	float result[ 16 ];
+	gFloat result[ 16 ];
 
 	// Perform multiply, store in result
 	result[ 0 ] = ( dataArray[ 0 ] * other.dataArray[ 0 ] ) + ( dataArray[ 1 ] * other.dataArray[ 4 ] ) + ( dataArray[ 2 ] * other.dataArray[ 8 ] ) + ( dataArray[ 3 ] * other.dataArray[ 12 ] );
@@ -111,7 +111,7 @@ bool Matrix4::Equals( const Matrix4& other ) const
 	return true;
 }
 
-Matrix4 Matrix4::BuildPerspective( const float fov, const float screenAspect, const float near, const float depth )
+Matrix4 Matrix4::BuildPerspective( const gFloat fov, const gFloat screenAspect, const gFloat near, const gFloat depth )
 {
 	Matrix4 toReturn = Matrix4::Identity;
 
@@ -125,7 +125,7 @@ Matrix4 Matrix4::BuildPerspective( const float fov, const float screenAspect, co
 	return toReturn;
 }
 
-Matrix4 Matrix4::BuildOrthogonal( const float width, const float height, const float near, const float far )
+Matrix4 Matrix4::BuildOrthogonal( const gFloat width, const gFloat height, const gFloat near, const gFloat far )
 {
 	Matrix4 toReturn = Matrix4::Identity;
 
@@ -145,9 +145,9 @@ Vector3 Matrix4::operator*( const Vector3& vec ) const
 Vector3 Matrix4::Mul( const Vector3& vec ) const
 {
 	return Vector3(
-		matrix[ 0 ][ 0 ] * vec.x + matrix[ 1 ][ 0 ] * vec.y + matrix[ 2 ][ 0 ] * vec.z,
-		matrix[ 0 ][ 1 ] * vec.x + matrix[ 1 ][ 1 ] * vec.y + matrix[ 2 ][ 1 ] * vec.z,
-		matrix[ 0 ][ 2 ] * vec.x + matrix[ 1 ][ 2 ] * vec.y + matrix[ 2 ][ 2 ] * vec.z
+		matrix[ 0 ][ 0 ] * vec.x + matrix[ 1 ][ 0 ] * vec.y + matrix[ 2 ][ 0 ] * vec.z + matrix[ 3 ][ 0 ],
+		matrix[ 0 ][ 1 ] * vec.x + matrix[ 1 ][ 1 ] * vec.y + matrix[ 2 ][ 1 ] * vec.z + matrix[ 3 ][ 0 ],
+		matrix[ 0 ][ 2 ] * vec.x + matrix[ 1 ][ 2 ] * vec.y + matrix[ 2 ][ 2 ] * vec.z + matrix[ 3 ][ 0 ]
 	);
 }
 
@@ -155,7 +155,7 @@ Vector3 Matrix4::Mul( const Vector3& vec ) const
 Matrix4 Matrix4::Inverse( void ) const
 {
 	Matrix4 toReturn;
-	float det;
+	gFloat det;
 
 	toReturn.dataArray[ 0 ] = dataArray[ 5 ]  * dataArray[ 10 ] * dataArray[ 15 ] - 
 		dataArray[ 5 ]  * dataArray[ 11 ] * dataArray[ 14 ] - 
@@ -278,6 +278,21 @@ Matrix4 Matrix4::Inverse( void ) const
 
 	for( int ii = 0; ii < 16; ++ii )
 		toReturn.dataArray[ ii ] *= det;
+
+	return toReturn;
+}
+
+Matrix4 Matrix4::Transpose( void ) const
+{
+	Matrix4 toReturn;
+
+	for( int row = 0; row < 4; row++ )
+	{
+		toReturn.matrix[ row ][ 0 ] = matrix[ 0 ][ row ];
+		toReturn.matrix[ row ][ 1 ] = matrix[ 1 ][ row ];
+		toReturn.matrix[ row ][ 2 ] = matrix[ 2 ][ row ];
+		toReturn.matrix[ row ][ 3 ] = matrix[ 3 ][ row ];
+	}
 
 	return toReturn;
 }

@@ -16,25 +16,33 @@ namespace Graphos
 		{
 		public:
 
+			enum CollisionShape {
+				G_SPHERE,
+				G_CUBE
+			};
+
 			struct PhysicsConfig 
 			{
-				float				mass;
-				float				restitution;
-				float				friction;
-				float				rollingFriction;
+				CollisionShape		collisionShape;
+				Math::Vector3		collisionDimensions;
+				Math::Vector3		initialInertia;
+				gFloat				mass;
+				gFloat				restitution;
+				gFloat				friction;
+				gFloat				rollingFriction;
 
-				PhysicsConfig() : mass( 0.0 ), restitution( 1.0 ), friction( 0.5 ), rollingFriction( 0.4 ) {};
+				PhysicsConfig() :	mass( 0.0f ),
+									restitution( 1.0f ),
+									friction( 0.5f ),
+									rollingFriction( 0.4f ){};
 			};
 
 			static void				Initialize( void );
 			static void				Shutdown( void );
 
-			// TODO: Send in collision shape
-			static void				CreatePhysicsObject(	GraphosMotionState* gms, 
-															const float mass, 
-															const float restitution, 
-															const float friction,
-															const float rollingFriction );
+			static void				CreatePhysicsObject(	GraphosMotionState* gms,
+															PhysicsConfig* physConfig,
+															Math::Vector3* shootVec = NULL);
 
 			static PhysicsController& Get( void )
 			{
@@ -42,24 +50,31 @@ namespace Graphos
 				return instance;
 			}
 
-			static void StepPhysics( float timeStep, int maxSubSteps=1, float fixedTimeStep=(1.f/60.f) );
+			static void				StepPhysics(	float timeStep,
+													int maxSubSteps=1,
+													float fixedTimeStep=(1.f/60.f) );
+
+
+
 
 		private:
-								PhysicsController( void ) { }
-								PhysicsController( const PhysicsController& );
+									PhysicsController( void ) { }
+									PhysicsController( const PhysicsController& );
 
-			void				operator=( const PhysicsController& );
+			void					operator=( const PhysicsController& );
+
+			static btVector3		ToBulletVec3( const Math::Vector3& );
 
 			static btDefaultCollisionConfiguration* 
-								collisionConfiguration;
+									collisionConfiguration;
 			static btCollisionDispatcher* 
-								dispatcher;
+									dispatcher;
 			static btBroadphaseInterface* 
-								overlappingPairCache;
+									overlappingPairCache;
 			static btSequentialImpulseConstraintSolver* 
-								solver;
+									solver;
 			static btDiscreteDynamicsWorld* 
-								dynamicsWorld;
+									dynamicsWorld;
 
 			//static vector<btRigidBody>
 								

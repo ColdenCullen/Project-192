@@ -1,11 +1,12 @@
 #ifndef __GAME_OBJECT_COLLECTION
 #define __GAME_OBJECT_COLLECTION
 
-#include "GameObject.h"
-#include "IShader.h"
-
 #include <string>
 #include <unordered_map>
+
+#include "OutputController.h"
+#include "GameObject.h"
+#include "IShader.h"
 
 namespace Graphos
 {
@@ -15,30 +16,33 @@ namespace Graphos
 		{
 		public:
 			// Load object from resources folder
-			void				LoadObjects( std::string assetPath );
+			void				LoadObjects( std::string assetPath = "" );
 
 			// Add object
 			unsigned int		CreateObject( std::string name, Graphics::IShader* shader );
 
 			// Access objects
-			GameObject*			GetObjectById( unsigned int id );
+			GameObject*			GetObjectById( gUInt id );
 			GameObject*			GetObjectByName( std::string name );
 
 			// Remove Objects
-			void				RemoveObjectById( unsigned int id );
+			void				RemoveObjectById( gUInt id );
 			void				RemoveObjectByName( std::string name );
 			void				ClearObjects( void );
 
 			// Per-object operations
 			void				CallFunction( void (GameObject::*func)( void ) );
 
+			void Update( void ) { CallFunction( &GameObject::Update ); }
+			void Draw( void ) { CallFunction( &GameObject::Draw ); }
+
 		private:
-			std::unordered_map<unsigned int, GameObject*>
+			std::unordered_map<gUInt, GameObject*>
 								objectList;
-			std::unordered_map<std::string, unsigned int>
+			std::unordered_map<std::string, gUInt>
 								nameMap;
 
-			unsigned int		currentId;
+			gUInt				currentId;
 		};
 	}
 }

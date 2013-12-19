@@ -2,6 +2,20 @@
 #define __GRAPHOS_GLOBAL
 // Code that can be accessed from anywhere
 
+#include <cstdint>
+
+// Type declarations
+#define MAP_TYPE( GTYPE, CTYPE ) typedef CTYPE GTYPE
+
+MAP_TYPE( gChar,	char );
+MAP_TYPE( gUChar,	unsigned char );
+MAP_TYPE( gByte,	std::uint8_t );
+MAP_TYPE( gInt,		std::int32_t );
+MAP_TYPE( gUInt,	std::uint32_t );
+MAP_TYPE( gFloat,	float );
+MAP_TYPE( gBool,	bool );
+MAP_TYPE( gSize,	size_t );
+
 /// <summary>
 /// Titanic_casts the specified pointer.
 /// </summary>

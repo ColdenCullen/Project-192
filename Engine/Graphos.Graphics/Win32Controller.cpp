@@ -21,9 +21,9 @@
 #define GWS_FULLSCREEN ( WS_POPUP | WS_SYSMENU )
 #define GWS_WINDOWED ( WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU )
 
-using namespace Graphos::Core;
 using namespace Graphos::Math;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 
 LRESULT CALLBACK WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam );
 
@@ -150,27 +150,27 @@ LRESULT CALLBACK WndProc( HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam 
 		break;
 		// If key down, send it to input
 	case WM_KEYDOWN:
-		Input::KeyDown( (unsigned int)wParam );
+		InputController::KeyDown( (unsigned int)wParam );
 		return 0;
 		// If key up, send it to input
 	case WM_KEYUP:
-		Input::KeyUp( (unsigned int)wParam );
+		InputController::KeyUp( (unsigned int)wParam );
 		return 0;
 		// On Mouse Event
 	case WM_RBUTTONDOWN:
-		Input::KeyDown( VK_RBUTTON );
+		InputController::KeyDown( VK_RBUTTON );
 		return 0;
 		// On Mouse Event
 	case WM_RBUTTONUP:
-		Input::KeyUp( VK_RBUTTON );
+		InputController::KeyUp( VK_RBUTTON );
 		return 0;
 		// On Mouse Event
 	case WM_LBUTTONDOWN:
-		Input::KeyDown( VK_LBUTTON );
+		InputController::KeyDown( VK_LBUTTON );
 		return 0;
 		// On Mouse Event
 	case WM_LBUTTONUP:
-		Input::KeyUp( VK_LBUTTON );
+		InputController::KeyUp( VK_LBUTTON );
 		return 0;
 		// If no change, send to default windows handler
 	default:

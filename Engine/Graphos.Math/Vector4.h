@@ -17,12 +17,12 @@ namespace Graphos
 			const static Vector4 Forward;
 			#pragma endregion
 			
-			Vector4( const float values[ 4 ] ) : x( values[ 0 ] ), y( values[ 1 ] ), z( values[ 2 ] ), w( values[ 3 ] ) { }
-			Vector4( float x = 0.0f, float y = 0.0f, float z = 0.0f, float w = 0.0f ) : x( x ), y( y ), z( z ), w( w ) { }
-			Vector4( float value ) : x( value ), y( value ), z( value ), w( value ) { }
+			Vector4( const gFloat values[ 4 ] ) : x( values[ 0 ] ), y( values[ 1 ] ), z( values[ 2 ] ), w( values[ 3 ] ) { }
+			Vector4( gFloat x, gFloat y, gFloat z, gFloat w ) : x( x ), y( y ), z( z ), w( w ) { }
+			Vector4( gFloat value = 0.0f ) : x( value ), y( value ), z( value ), w( value ) { }
 			Vector4( const Vector4& other ) : x( other.x ), y( other.y ), z( other.z ), w( other.w ) { }
 
-			float operator[]( const int index ) const
+			gFloat operator[]( const int index ) const
 			{
 				return *( &x + index );
 			}
@@ -98,29 +98,29 @@ namespace Graphos
 			}
 
 			// Rotate
-			inline Vector4 Rotate( const float xDeg, const float yDeg, const float zDeg, const float wDeg )
+			inline Vector4 Rotate( const gFloat xDeg, const gFloat yDeg, const gFloat zDeg, const gFloat wDeg )
 			{
 				return Vector4( x * cos( zDeg ) - y * sin( zDeg ), x * sin( zDeg ) - y * cos( zDeg ), z, w );
 			}
 
 			// Dot product
-			inline float Dot( const Vector4& other ) const
+			inline gFloat Dot( const Vector4& other ) const
 			{
 				return ( x * other.x ) + ( y * other.y ) + ( z * other.z ) + ( w * other.w );
 			}
 			// Dot product
-			inline float operator*( const Vector4& other ) const
+			inline gFloat operator*( const Vector4& other ) const
 			{
 				return Dot( other );
 			}
 
 			// Multiply by scaler
-			inline Vector4 operator*( const float other ) const
+			inline Vector4 operator*( const gFloat other ) const
 			{
 				return Vector4( x * other, y * other, z * other, w * other );
 			}
 			// Multiply by scaler
-			Vector4& operator*=( const float other )
+			Vector4& operator*=( const gFloat other )
 			{
 				x *= other;
 				y *= other;
@@ -131,11 +131,11 @@ namespace Graphos
 			}
 
 			// Divide by scalar
-			inline Vector4 operator/( const float other ) const
+			inline Vector4 operator/( const gFloat other ) const
 			{
 				return Vector4( x / other, y / other, z / other, w / other );
 			}
-			Vector4& operator/=( const float other )
+			Vector4& operator/=( const gFloat other )
 			{
 				x /= other;
 				y /= other;
@@ -146,13 +146,13 @@ namespace Graphos
 			}
 
 			// Conversion function
-			operator float()
+			operator gFloat()
 			{
 				return Magnitude();
 			}
 			
 			// Magnitude
-			inline float Magnitude( void ) const
+			inline gFloat Magnitude( void ) const
 			{
 				return sqrt( ( x * x ) + ( y * y ) + ( z * z ) + ( w * w ) );
 			}
@@ -160,7 +160,7 @@ namespace Graphos
 			// Normalize
 			Vector4 Normalize( void ) const
 			{
-				float mag = Magnitude();
+				gFloat mag = Magnitude();
 
 				return Vector4( x / mag, y / mag, z / mag, w / mag );
 			}
@@ -169,11 +169,11 @@ namespace Graphos
 			{
 				struct 
 				{
-					float x, y, z, w;
+					gFloat x, y, z, w;
 				};
 				struct 
 				{
-					float r, g, b, a;
+					gFloat r, g, b, a;
 				};
 			};
 		};

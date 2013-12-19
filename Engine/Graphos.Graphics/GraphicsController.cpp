@@ -6,8 +6,8 @@
 
 #include "WindowController.h"
 
-using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 
 void GraphicsController::Initialize( void )
 {

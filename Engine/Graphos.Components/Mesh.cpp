@@ -18,6 +18,7 @@ using namespace std;
 using namespace Graphos::Math;
 using namespace Graphos::Core;
 using namespace Graphos::Graphics;
+using namespace Graphos::Utility;
 using namespace DirectX;
 using namespace OpenGL;
 
@@ -29,7 +30,7 @@ void Mesh::LoadFromFile( string filePath )
 	vector<Vector2> uvs;
 	vector<Vector3> normals;
 
-	vector<float>	outputData;
+	vector<gFloat>	outputData;
 
 	istringstream file( File::ReadFile( filePath ) );
 	string line;
@@ -90,9 +91,9 @@ void Mesh::LoadFromFile( string filePath )
 	numVertices = outputData.size() / 8;  // 8 is num floats per vertex
 	numIndices = numVertices;
 
-	unsigned int* indices = new unsigned int[ numIndices ];
+	gUInt* indices = new unsigned int[ numIndices ];
 
-	for( unsigned int ii = 0; ii < numIndices; ++ii )
+	for( gUInt ii = 0; ii < numIndices; ++ii )
 		indices[ ii ] = ii;
 
 	if( GraphicsController::GetActiveAdapter() == GraphicsAdapter::OpenGL )
@@ -148,7 +149,7 @@ void Mesh::LoadFromFile( string filePath )
 		initialVertexData.pSysMem = &outputData[0];
 		result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &vbDesc, &initialVertexData, &vertexBuffer.dx );
 		if( FAILED(result) )
-			OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to init dx vertex buffer" );
+			OutputController::PrintMessage( OutputType::Error, "Failed to init dx vertex buffer" );
 
 		// Create the index buffer
 		D3D11_BUFFER_DESC ibDesc;
@@ -164,7 +165,7 @@ void Mesh::LoadFromFile( string filePath )
 		initialIndexData.pSysMem = indices;
 		result = AdapterController::Get()->GetDevice().dx->CreateBuffer( &ibDesc, &initialIndexData, &indexBuffer.dx );
 		if( FAILED(result) )
-			OutputController::PrintMessage( OutputType::OT_ERROR, "Failed to init dx index buffer" );
+			OutputController::PrintMessage( OutputType::Error, "Failed to init dx index buffer" );
 
 	}
 #endif//_WIN32

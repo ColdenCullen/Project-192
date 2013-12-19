@@ -3,8 +3,8 @@ Project-192
 
 Project 192, a joint GGP-DSA2 project.
 
-### External Dependencies
-[Download external binaries](https://www.dropbox.com/s/r88lvsu6rzb5kfj/Project-192.zip)
+## To Build and Run
+Run the init PowerShell script, the Game/init.bat script until there are no errors, and then run Game/build.bat. From there, you should be good to open and run the solution.
 
 ### Coding Style
 [GitHub Wiki Page](https://github.com/ColdenCullen/Project-192/wiki/Coding-Standards)
@@ -14,3 +14,12 @@ Project 192, a joint GGP-DSA2 project.
 
 ### Issue Management
 [GitHub](https://github.com/ColdenCullen/Project-192/issues?state=open)
+
+### External Libraries
+[Bullet Physics](http://bulletphysics.org/wordpress/)
+
+[Google V8](https://developers.google.com/v8/)
+
+[V8 Convert](http://code.google.com/p/v8-juice/wiki/V8Convert)
+
+[Awesomium](http://www.awesomium.com/)

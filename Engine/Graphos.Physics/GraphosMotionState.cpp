@@ -12,28 +12,24 @@ void Graphos::Physics::GraphosMotionState::Shutdown( void )
 
 void Graphos::Physics::GraphosMotionState::getWorldTransform( btTransform& worldTrans ) const
 {
+	// No need to scale here!
 
-	/*
-	btVector3* tempVec3 = new btVector3(	owner->transform->Position()->x,
-		owner->transform->Position()->y,
-		owner->transform->Position()->z);
-	worldTrans.setOrigin( *tempVec3 );
-	*/
-	worldTrans.setFromOpenGLMatrix( owner->transform->WorldMatrix().dataArray );
+	// Send rotation
+	worldTrans.setRotation( *owner->transform->Rotation() );
 
+	// Send position
+	Math::Vector3 pos = *owner->transform->Position();
+	worldTrans.setOrigin( btVector3( pos.x, pos.y, pos.z ) );
 
 }
 
 void Graphos::Physics::GraphosMotionState::setWorldTransform( const btTransform& worldTrans )
 {
-	/*
-	// Update position of object
-	btVector3 tempOrigin = worldTrans.getOrigin();
-	owner->transform->TranslateTo( tempOrigin.x(), tempOrigin.y(), tempOrigin.z() );
-	*/
-	// TODO: Update position/rotation/scale
-	// TODO: FIX FOR RUNTIME SCALING
-	worldTrans.getOpenGLMatrix( owner->transform->WorldMatrix().dataArray );
+	// No need to scale here!
 
-	// TODO: Rotation via Quaternions
+	// Save rotations
+	owner->transform->RotateTo(worldTrans.getRotation());
+
+	// Save positions
+	owner->transform->TranslateTo( worldTrans.getOrigin().x(), worldTrans.getOrigin().y(), worldTrans.getOrigin().z() );
 }
