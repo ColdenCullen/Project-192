@@ -94,23 +94,17 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsCon
 	btCollisionShape* colShape = nullptr;
 	btVector3 colDimensions = ToBulletVec3( physConfig->collisionDimensions );
 
-	
-	//printf("dimension x: %f\n", colDimensions.x() );
-
 	// Determine collision shape
 	switch( physConfig->collisionShape )
 	{
 		case G_CUBE:
 			colShape = new btBoxShape( colDimensions );
-			//static_cast<btBoxShape *>(colShape)->setLocalScaling( colDimensions );
 			break;
 		case G_SPHERE:
 			colShape = new btSphereShape( colDimensions.x() );
-			//static_cast<btSphereShape *>(colShape)->setUnscaledRadius( colDimensions.getX() );
 			break;
 		default:
 			colShape = new btBoxShape( colDimensions );
-			//static_cast<btBoxShape *>(colShape)->setLocalScaling( colDimensions );
 			break;
 	}
 
@@ -131,33 +125,12 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsCon
 	colShape->calculateLocalInertia( physConfig->mass, localInertia );
 
 
-
-	// 3. Create motions state for rigid body
-	//btDefaultMotionState* myMotionState = new btDefaultMotionState(btTransform(btQuaternion(0, 0, 0, 1),btVector3(0.0f, 0.0f, 0.0f)));
-
-
-
 	// 4. Create rigid body
 	btRigidBody::btRigidBodyConstructionInfo rbInfo( physConfig->mass, gms, colShape, localInertia );
 	rbInfo.m_angularSleepingThreshold = btScalar( 0.0f );
 	rbInfo.m_linearSleepingThreshold = btScalar( 0.0f );
 
 	btRigidBody* body = new btRigidBody( rbInfo );
-
-	
-	printf("size x: %f\n", static_cast<btBoxShape *>(colShape)->getHalfExtentsWithMargin().x() );
-	printf("size y: %f\n", static_cast<btBoxShape *>(colShape)->getHalfExtentsWithMargin().y() );
-	printf("size z: %f\n", static_cast<btBoxShape *>(colShape)->getHalfExtentsWithMargin().z() );
-	
-	printf("default box x pos: %f\n", body->getCenterOfMassPosition().x() );
-	printf("default box y pos: %f\n", body->getCenterOfMassPosition().y() );
-	printf("default box z pos: %f\n", body->getCenterOfMassPosition().z() );
-	
-	
-
-	// 5. Set properties of the rigid body
-	//btTransform startTransform;
-	//startTransform.setIdentity();
 
 	//body->setCenterOfMassTransform(startTransform);
 	body->setAngularFactor( btVector3( 1.0f, 1.0f, 1.0f ) );
@@ -168,16 +141,17 @@ void PhysicsController::CreatePhysicsObject( GraphosMotionState* gms, PhysicsCon
 	body->setRollingFriction( physConfig->rollingFriction );
 	body->forceActivationState( DISABLE_DEACTIVATION );
 
-	//body->applyCentralForce( btVector3( 0, 2000, 0 ) );
+	//body->applyCentralForce( btVector3( 0, 0, 250000 ) );
+	body->activate( true );
+
+	if( shootVec != nullptr )
+	{
+		//body->applyCentralForce( ToBulletVec3( *shootVec ) );
+		body->applyCentralImpulse( ToBulletVec3( *shootVec ) );
+	}
 
 	// 6. Add created rigid body to the world
 	dynamicsWorld->addRigidBody( body );
-
-	if( shootVec )
-	{
-		btVector3 forceDir = ToBulletVec3( *shootVec );
-		body->applyCentralForce( forceDir );
-	}
 
 }
 

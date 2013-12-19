@@ -36,10 +36,11 @@ void GameObject::MakeShootyBall( Vector3* cameraForward )
 	things.friction = 0.4f;
 	things.rollingFriction = 0.2f;
 	things.collisionShape = PhysicsController::G_SPHERE;
-	things.collisionDimensions.x = 0.55f;
+	things.collisionDimensions.x = 0.7f;
 	things.collisionDimensions.y = 1.0f;
 	things.collisionDimensions.z = 1.0f;
-	PhysicsController::CreatePhysicsObject( gms, &things, cameraForward );
+	Vector3 forceVec = Vector3( 0.0f, 0.0f, 7000.0f );
+	PhysicsController::CreatePhysicsObject( gms, &things, &forceVec );
 	this->AddComponent( gms );
 }
 
